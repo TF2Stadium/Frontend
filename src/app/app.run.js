@@ -1,13 +1,10 @@
 (function() {
   'use strict';
 
-  angular
-    .module('frontend')
-    .run(runBlock);
+  angular.module('teamplaytf').run(runBlock);
 
   /** @ngInject */
   function runBlock($log) {
-
     $log.debug('runBlock end');
   }
 

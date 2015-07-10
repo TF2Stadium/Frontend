@@ -1,0 +1,9 @@
+<div class="container">
+  <ul>
+    <li ng-repeat="message in messages">
+      {{message.content}}
+    </li>
+  </ul>
+  <input type="text" ng-model="new">
+  <button ng-click="main.sendMessage()">Send</button>
+</div>

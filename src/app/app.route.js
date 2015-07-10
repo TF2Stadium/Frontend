@@ -1,16 +1,14 @@
 (function() {
   'use strict';
 
-  angular
-    .module('frontend')
-    .config(routeConfig);
+  angular.module('teamplaytf').config(routeConfig);
 
   /** @ngInject */
   function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'app/main/main.html',
+        templateUrl: 'app/components/main/main.html',
         controller: 'MainController',
         controllerAs: 'main'
       });
