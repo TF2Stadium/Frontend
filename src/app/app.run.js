@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('teamplaytf').run(runBlock);
+  angular.module('teamplay').run(runBlock);
 
   /** @ngInject */
   function runBlock($log) {

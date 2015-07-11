@@ -2,15 +2,22 @@
   'use strict';
 
   angular
-    .module('teamplaytf')
+    .module('teamplay')
     .controller('MainController', MainController);
 
   /** @ngInject */
-  function MainController($timeout) {
+  function MainController($timeout, Websocket) {
+    console.log(Websocket);
     var vm = this;
 
+    vm.messages = [];
+
+    Websocket.on('chatreceive', function(data) {
+      vm.messages.push(data);
+    });
+
     vm.sendMessage = function() {
-      alert("hello");
+      Websocket.emit('chatpost', vm.chatmessage);
     }
   }
 })();

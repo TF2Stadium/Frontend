@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('teamplaytf').config(routeConfig);
+  angular.module('teamplay').config(routeConfig);
 
   /** @ngInject */
   function routeConfig($stateProvider, $urlRouterProvider) {

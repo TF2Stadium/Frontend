@@ -1,9 +1,9 @@
 <div class="container">
   <ul>
-    <li ng-repeat="message in messages">
-      {{message.content}}
+    <li ng-repeat="message in main.messages">
+      {{message}}
     </li>
   </ul>
-  <input type="text" ng-model="new">
+  <input type="text" ng-model="main.chatmessage">
   <button ng-click="main.sendMessage()">Send</button>
 </div>
