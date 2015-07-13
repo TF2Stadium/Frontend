@@ -6,11 +6,11 @@
   /** @ngInject */
   function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('home', {
+      .state('lobbies', {
         url: '/',
-        templateUrl: 'app/components/main/main.html',
-        controller: 'MainController',
-        controllerAs: 'main'
+        templateUrl: 'app/components/lobbies/lobbies.html',
+        controller: 'LobbiesController',
+        controllerAs: 'lobbies'
       });
 
     $urlRouterProvider.otherwise('/');

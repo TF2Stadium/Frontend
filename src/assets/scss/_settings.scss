@@ -1,2 +1,26 @@
 $row-width: 1200px;
-$body-bg: #fff !default;
+
+/*======================================
+              COLOR SETTINGS
+ =======================================*/
+
+$body-bg:     #eeeeee !default;
+$main-color:  #99cdff !default;
+
+$grey-medium: #9a9a9a;
+$grey-light:  #e1e1e1;
+
+/*======================================
+              BUTTONS
+ ======================================= */
+
+$button-border-color: $grey-light;
+
+
+/*======================================
+              WIDTH SETTINGS
+ ======================================= */
+
+$width-content: 830px;
+$width-split: 20px;
+$width-chat: $width-content - $width-content - $width-split;

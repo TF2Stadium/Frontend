@@ -23,8 +23,31 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <header id="header-main">
+      <nav id="nav-bar">
+        <div class="row">
+          <div class="small-12 medium-7 columns">
+            <h1>TeamPlay.TF</h1>
+          </div>
+          <div class="hide-for-small-only medium-5 columns" id="nav-buttons">
+            <ul class="button-group right">
+              <li><a href="#" class="button">Rules</a></li>
+              <li><a href="#" class="button">Forums</a></li>
+              <li id="steam-login"><a href="#" class="button">Sign in through Steam</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      <div class="row">
+        <div class="alert-box warning text-center" id="notification" data-alert>
+          We are going down for a maintenance at 21:30 CEST for about 1 hour!
+        </div>
+      </div>
+    </header>
+    <div class="row">
+      <div ui-view></div>
+    </div>
 
-    <div ui-view></div>
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->

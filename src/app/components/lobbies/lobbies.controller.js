@@ -3,10 +3,10 @@
 
   angular
     .module('teamplay')
-    .controller('MainController', MainController);
+    .controller('LobbiesController', LobbiesController);
 
   /** @ngInject */
-  function MainController($timeout, Websocket) {
+  function LobbiesController($timeout, Websocket) {
     console.log(Websocket);
     var vm = this;
 
