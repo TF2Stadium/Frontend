@@ -3,7 +3,8 @@
 
   angular
     .module('teamplay')
-    .controller('LobbiesController', LobbiesController);
+    .controller('LobbiesController', LobbiesController)
+    .controller('LobbyController', LobbyController);;
 
   /** @ngInject */
   function LobbiesController($timeout, Websocket) {
@@ -19,5 +20,10 @@
     vm.sendMessage = function() {
       Websocket.emit('chatpost', vm.chatmessage);
     }
+  }
+
+  /** @ngInject */
+  function LobbyController($timeout, Websocket) {
+    var vm = this;
   }
 })();
