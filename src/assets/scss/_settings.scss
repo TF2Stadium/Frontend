@@ -1,14 +1,23 @@
 $row-width: 1200px;
+$font-family: 'Adelle', 'Roboto', sans-serif;
 
 /*======================================
               COLOR SETTINGS
  =======================================*/
+$blue-medium: #99ccff;
+$blue-light:  #ccccff;
+
+$magenta-medium: #ff9999;
+
+$grey-hard:   #666666;
+$grey-medium: #999999;
+$grey-light:  #e1e1e1;
 
 $body-bg:     #eeeeee !default;
-$main-color:  #99cdff !default;
+$main-color:  $blue-medium !default;
 
-$grey-medium: #9a9a9a;
-$grey-light:  #e1e1e1;
+$alert-color: $magenta-medium;
+
 
 /*======================================
               BUTTONS
@@ -18,9 +27,62 @@ $button-border-color: $grey-light;
 
 
 /*======================================
-              WIDTH SETTINGS
+              BOXES
  ======================================= */
 
-$width-content: 830px;
+$border-grey: 1px solid #e2e2e2;
+$border-grey: none;
+
+$shadow-close: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+$shadow-close-inset: inset 0 2px 5px 0 rgba(0, 0, 0, 0.16);
+$shadow-medium: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15);
+$shadow-far: 0 4px 10px 0 rgba(0, 0, 0, 0.16);
+
+@mixin clickable-close {
+  box-shadow: $shadow-close;
+  transition: all .3s ease-out;
+  
+  &:hover {
+    box-shadow: $shadow-medium;  
+  }
+}
+
+@mixin clickable-medium {
+  box-shadow: $shadow-medium;
+  transition: box-shadow .3s ease-out;
+  
+  &:hover {
+    box-shadow: $shadow-far;  
+  }
+}
+
+/* FOR TESTING PURPOSES
+$shadow-close: none;
+$shadow-medium: none;
+$shadow-far: none;
+*/
+
+/*======================================
+              SIZE SETTINGS
+ ======================================= */
+
+//Nav bar
+$padding-navbar: 7px;
+$height-navbar: 50px;
+$height-navbar-buttons: $height-navbar - $padding-navbar*2;
+
+//Header
+$height-header: $height-navbar + 140px;
+
+//Class buttons
+$width-class-buttons: 50px;
+$height-class-buttons: 50px;
+
+
+$full-width: 1200px;
+$width-content: 850px;
 $width-split: 20px;
-$width-chat: $width-content - $width-content - $width-split;
+$width-left-sidebar: 175px;
+$width-chat: $full-width - $width-content - $width-split;
+$width-lobby-info: $width-content - $width-left-sidebar;
+$width-lobby-state: $width-lobby-info - ($width-class-buttons + 8px)*9 - 32px;

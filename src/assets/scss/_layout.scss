@@ -1,11 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
 
 body {
-  font-family: 'Roboto', sans-serif;
+  font-family: $font-family;
 }
 
 .alert-box {
-  margin-left: 175px;
+  margin-left: $width-left-sidebar;
 }
 
 /* ==================================
@@ -14,12 +14,13 @@ body {
 
 #header-main {
   width: 100%;
-  height: 270px;
-  margin-bottom:15px;
+  height: $height-header;
+  margin-bottom:20px;
 
-  background: url(../assets/img/header-bg.jpg);
+  background: url(../assets/img/asset1.jpg);
   background-position: center;
   background-size: cover;
+  box-shadow: $shadow-far;
 
   .columns {
     padding: 0;
@@ -27,59 +28,71 @@ body {
   }
 
   #nav-bar {
-    height: 70px;
+    height: $height-navbar;
     line-height: 70px;
     background: #fff;
+    box-shadow: $shadow-far;
 
     h1 {
-      font-size: 2.7em;
+      font-size: 2em;
       color: $grey-medium;
-      padding-left: 175px;
+      padding-left: $width-left-sidebar;
+      font-family: 'Roboto';
     }
 
     .button-group {
-      margin-top:15px;
+      padding-right: 120px;
+      position: relative;
+      //width: $width-chat;
 
       li {
-        margin:0 5px;
-        border: 1px solid $grey-light;
-        box-shadow: 2px 2px 2px $grey-light;
-        width: 100px;
-
+        @include clickable-close;
+        margin: $padding-navbar 3px 0;
+        border: $border-grey;
+        width: ($width-chat - 121px)/2 - 3px*2; //3 buttons minus the margins
+        height: $height-navbar-buttons;
+        
+        &:first-child {
+          margin-left: 0;  
+        }
+        
+        &:last-child {
+          margin-right: 0;  
+        }
+          
         a {
           display: block;
           width: 100%;
           height: 100%;
           margin: 0;
-          padding: 12px 0;
-          background: none;
-          color: $grey-medium;
+          padding: 11px 0;
+          font-family: $font-family;
+          font-size: .8em;
         }
       }
 
       #steam-login {
-        width: 114px;
+        position: absolute;
         height: 43px;
-        position: relative;
-        top:-14px;
+        width: 114px;
+        right: 0;
+        top: -$padding-navbar + 3px;
 
         background:url(../assets/img/steam-login.png);
-        border: 0;
         box-shadow: none;
 
         a {
           font-size: 0;
+          background: none;
         }
       }
     }
   }
 
   #notification {
-    width: 655px;
-    height: 40px;
-    line-height: 10px;
+    width: $width-lobby-info;
     position: relative;
-    top: 140px;
+    top: 75px;
   }
 }
 
@@ -89,10 +102,11 @@ body {
 
 #chat {
   background: #ffffff;
-  border: 1px solid #e2e2e2;
+  border: border-grey;
+  box-shadow: $shadow-close;
   padding: 15px;
-  margin-top: -100px;
-  width: 350px;
+  margin-top: -20px -($height-header - $height-navbar - 75px);
+  width: $width-chat;
 
   ul {
     padding:0 0 0.6rem;
@@ -102,6 +116,7 @@ body {
     > li {
       padding: 0.1rem 0;
       color: #aaaaaa;
+      font-size: 0.8em;
 
       span {
         font-weight: bold;
@@ -114,6 +129,7 @@ body {
     width: 100%;
     height: 50px;
     resize: none;
+    box-shadow: $shadow-close-inset;
   }
 }
 
@@ -122,6 +138,6 @@ body {
    ================================== */
 
 #content-main {
-  width: 830px;
+  width: $width-content;
   padding: 0;
 }

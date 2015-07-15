@@ -1,8 +1,185 @@
-button {
-  background: #9accff;
+.button {
+  background: #fff;  
+  color: $grey-medium;
+  font-weight: bold;
+  transition: all .3s ease-out;
 }
 
-button:focus,
-button:hover {
-  background: #cde7fe;
+.button:focus,
+.button:hover {
+  background: #fff;
+  color: $grey-medium;
+}
+
+.alert-box {
+  @include clickable-close;
+  height: 40px;
+  line-height: 10px;
+  background: $main-color;
+  border: none;
+  margin-bottom: 12px;
+    
+    &.alert-box.warning {
+      background-color: $alert-color;
+    }
+    
+    &:hover {
+      color: #fff;
+    }
+    
+    .close {
+      opacity: 1;
+      color: #fff;
+    }
+}
+
+.class-button {
+  @include clickable-close;
+  width: $width-class-buttons;
+  height: $height-class-buttons;
+  float: left;
+  border: $border-grey;
+  box-shadow: $shadow-close;
+  margin-right: 8px;
+  border-radius: 2px;
+  overflow: hidden;
+  background-size: $height-class-buttons;
+  
+  a:hover {
+    span {
+      height: $height-class-buttons;
+    }
+  }
+  
+ span {
+    display: block;
+    height: 7px;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.1s ease-out;
+
+    &:after {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      transition: .2s ease;
+      background-size: 50px;
+    }
+    &:before {
+      content: "";
+      height: 100%;
+      width: 100%;
+      position: absolute;
+      transition: all 0.1s ease-out;
+    }
+  }
+  
+  &.lobby-icon-scout {
+    background-image:url(../assets/img/class/classicon-scout.png);
+    
+    span:after {
+      background-image: url(../assets/img/class/classicon-scout-white.png);
+    }   
+  }
+
+  &.lobby-icon-soldier {
+    background-image:url(../assets/img/class/classicon-soldier.png);
+    
+    span:after {
+      background-image: url(../assets/img/class/classicon-soldier-white.png);
+    }
+  }
+
+  &.lobby-icon-pyro {
+    background-image:url(../assets/img/class/classicon-pyro.png);
+    
+    span:after {
+      background-image: url(../assets/img/class/classicon-pyro-white.png);
+    }
+  }
+
+  &.lobby-icon-demoman {
+    background-image:url(../assets/img/class/classicon-demoman.png);
+    
+    span:after {
+      background-image: url(../assets/img/class/classicon-demoman-white.png);
+    }
+  }
+
+  &.lobby-icon-heavy {
+    background-image:url(../assets/img/class/classicon-heavy.png);
+    
+    span:after {
+      background-image: url(../assets/img/class/classicon-heavy-white.png);
+    }
+  }
+
+  &.lobby-icon-engineer {
+    background-image:url(../assets/img/class/classicon-engineer.png);
+    
+    span:after {
+      background-image: url(../assets/img/class/classicon-engineer-white.png);
+    }
+  }
+
+  &.lobby-icon-medic {
+    background-image:url(../assets/img/class/classicon-medic.png);
+    
+    span:after {
+      background-image: url(../assets/img/class/classicon-medic-white.png);
+    }
+  }
+
+  &.lobby-icon-sniper {
+    background-image:url(../assets/img/class/classicon-sniper.png);
+    
+    span:after {
+      background-image: url(../assets/img/class/classicon-sniper-white.png);
+    }
+  }
+
+  &.lobby-icon-spy {
+    background-image:url(../assets/img/class/classicon-spy.png);
+    
+    span:after {
+      background-image: url(../assets/img/class/classicon-spy-white.png);
+    }
+  }
+  
+  .lobby-icon-join-half {
+    float: left;
+    width: 50%; 
+    
+    &.lobby-icon-join-red {  
+      span::after{
+        background-position: -25px 0;
+      }
+    }
+  }
+
+  .lobby-icon-join-blue {
+    span:before {
+      background: #9cf;
+    }
+  }
+
+  .lobby-icon-join-red {
+    span:before {
+      background: #f99;
+    }
+  }
+  
+  .lobby-icon-join {
+    display: block;
+    height: $height-class-buttons;
+    float:left;
+    width: 100%;
+  }
+
+  .lobby-icon-join-half {
+    float: left;
+    width: 50%;
+  }
 }
