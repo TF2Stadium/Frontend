@@ -3,15 +3,15 @@
   .lobby {
     width: 100%;
     height: 90px;
-    margin: 0 0 10px;
+    margin: 0 0 12px;
     background: #fff;
-    border: 1px solid $grey-light;
-    box-shadow: 3px 3px 3px $grey-light;
+    border: $border-grey;
+    box-shadow: $shadow-close;
     color: $grey-medium;
 
     .lobby-image {
       height: 100%;
-      width: 175px;
+      width: $width-left-sidebar;
       background: $main-color;
       background: url(../assets/img/header-bg.jpg);
       background-size: cover;
@@ -28,119 +28,20 @@
       }
 
       span:first-child {
-        margin-top: 40px;
+        margin-top: 33px;
       }
     }
 
     .lobby-info {
       height: 100%;
-      width: 652px;
-      padding: 0 .5em;
+      width: $width-lobby-info;
+      padding: 0 1em;
 
       .lobby-classes {
         float: left;
         list-style: none;
         padding: 0;
         margin: 20px 0 0;
-
-        li {
-          width: 50px;
-          height: 50px;
-          float: left;
-          border: 1px solid $grey-light;
-          box-shadow: 1px 1px 3px $grey-light;
-          margin-right: 4px;
-          background-size: contain;
-          overflow: hidden;
-
-          a {
-            span {
-              display: block;
-              width: 100%;
-              height: 100%;
-              position: relative;
-              top: 50px;
-              opacity: 0.7;
-
-              transition: .2s ease;
-            }
-
-            &:hover {
-              span {
-                top: 0;
-              }
-            }
-          }
-
-          .lobby-icon-join {
-            display: block;
-            height: 48px;
-            float:left;
-            width: 100%;
-          }
-
-          .lobby-icon-join-half {
-            float: left;
-            width: 50%;
-          }
-
-          .lobby-icon-join-blue {
-            border-bottom: 3px solid #2b55b7;
-
-            span {
-              background: #2b55b7;
-            }
-          }
-
-          .lobby-icon-join-red {
-            border-bottom: 3px solid #B60D0D;
-
-            span {
-              background: #B60D0D;
-            }
-          }
-
-
-          &.lobby-icon-scout {
-            background-image:url(../assets/img/class/classicon-scout.png);
-          }
-
-          &.lobby-icon-soldier {
-            background-image:url(../assets/img/class/classicon-soldier.png);
-          }
-
-          &.lobby-icon-pyro {
-            background-image:url(../assets/img/class/classicon-pyro.png);
-          }
-
-          &.lobby-icon-demoman {
-            background-image:url(../assets/img/class/classicon-demoman.png);
-          }
-
-          &.lobby-icon-heavy {
-            background-image:url(../assets/img/class/classicon-heavy.png);
-          }
-
-          &.lobby-icon-engineer {
-            background-image:url(../assets/img/class/classicon-engineer.png);
-          }
-
-          &.lobby-icon-medic {
-            background-image:url(../assets/img/class/classicon-medic.png);
-          }
-
-          &.lobby-icon-sniper {
-            background-image:url(../assets/img/class/classicon-sniper.png);
-          }
-
-          &.lobby-icon-spy {
-            background-image:url(../assets/img/class/classicon-spy.png);
-          }
-
-          &:last-child {
-            margin: 0;
-          }
-        }
 
         li:last-child {
           margin: 0;
@@ -149,7 +50,7 @@
 
       .lobby-state {
         float:left;
-        width: 145px;
+        width: $width-lobby-state;
 
 
         .lobby-players {
@@ -157,9 +58,8 @@
           float:left;
           font-size: 1.3em;
           margin-left: 15px;
-          padding-top:20px;
           span {
-            font-size: 1.6em;
+            font-size: 2.8em;
             letter-spacing: -.1em;
           }
         }
@@ -201,8 +101,8 @@
       height: 100px;
 
       background: $white;
-      border: 1px solid $grey-light;
-      box-shadow: 3px 3px 3px $grey-light;
+      border: $border-grey;
+      box-shadow: shadow-medium;
     }
   }
 }
