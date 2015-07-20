@@ -16,8 +16,8 @@
           },
           "commentbox": {
             templateUrl: 'app/components/commentbox/commentbox.html',
-            controller: 'LobbiesController',
-            controllerAs: 'lobbies'            
+            controller: 'CommentBoxController',
+            controllerAs: 'commentbox'            
           }
         }
         
