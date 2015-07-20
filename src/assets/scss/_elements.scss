@@ -12,7 +12,6 @@
 }
 
 .alert-box {
-  @include clickable-close;
   height: 40px;
   line-height: 10px;
   background: $main-color;
@@ -34,16 +33,14 @@
 }
 
 .class-button {
-  @include clickable-close;
-  width: $width-class-buttons;
-  height: $height-class-buttons;
+  min-width: $width-class-buttons;
+  min-height: $height-class-buttons;
   float: left;
-  border: $border-grey;
-  box-shadow: $shadow-close;
-  margin-right: 8px;
-  border-radius: 2px;
   overflow: hidden;
   background-size: $height-class-buttons;
+  padding: 0;
+  margin: 0 8px 0 0;
+  flex: 1;
   
   a:hover {
     span {
@@ -64,6 +61,7 @@
       height: 100%;
       width: 100%;
       position: absolute;
+      left: 0;
       transition: .2s ease;
       background-size: 50px;
     }
@@ -72,6 +70,7 @@
       height: 100%;
       width: 100%;
       position: absolute;
+      left: 0;
       transition: all 0.1s ease-out;
     }
   }

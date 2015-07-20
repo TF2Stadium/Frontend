@@ -9,7 +9,8 @@
     'ngSanitize',
     'ui.router',
     'mm.foundation',
-    'btford.socket-io'
+    'btford.socket-io',
+    'ngMaterial'
   ]);
 
   angular.module('teamplay.services', []);

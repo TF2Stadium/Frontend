@@ -8,9 +8,19 @@
     $stateProvider
       .state('lobbies', {
         url: '/',
-        templateUrl: 'app/components/lobbies/lobbies.html',
-        controller: 'LobbiesController',
-        controllerAs: 'lobbies'
+        views: {
+          "lobbies": {
+            templateUrl: 'app/components/lobbies/lobbies.html',
+            controller: 'LobbiesController',
+            controllerAs: 'lobbies'  
+          },
+          "commentbox": {
+            templateUrl: 'app/components/commentbox/commentbox.html',
+            controller: 'CommentBoxController',
+            controllerAs: 'commentbox'            
+          }
+        }
+        
       })
       .state('lobbies-view', {
         url: '/lobbies/{lobbyID}',

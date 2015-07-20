@@ -1,0 +1,55 @@
+#chat {
+  background-color: $white;
+  padding: 15px;
+  margin-top: -20px -($height-header - $height-navbar - 75px);
+  width: $width-chat;
+  
+  md-tab-content::-webkit-scrollbar {
+    width: 4px !important;
+  }
+  
+  md-tab-content::-webkit-scrollbar-track {
+    background-color: #eee !important;
+  }
+  
+  md-tab-content::-webkit-scrollbar-thumb {
+    background-color: #ccc !important;
+  }
+  
+  md-tabs {
+    height: 500px;
+    margin-bottom: 10px;
+  }
+  
+  md-tabs-content-wrapper {
+    margin-top: 20px;
+    margin-right: 5px;
+  }
+  
+  .player-name {
+    min-width: 0;
+    min-height: 18px;
+    margin: 0 0 0 -20px;
+    line-height: 18px;
+    text-transform: none;
+    font-size: 1em;
+    
+    span {
+      font-weight: bold;
+      color: #5c5c5c;
+    }
+  }
+
+  ul {
+    padding:0px 5px 0 20px;
+    margin:0;
+    list-style: none;
+
+    > li {
+      padding: 3px 0;
+      line-height: 18px;
+      color: #aaaaaa;
+      font-size: 0.8em;
+    }
+  }
+}
