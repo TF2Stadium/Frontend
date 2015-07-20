@@ -5,6 +5,7 @@
     <title>frontend</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
+    <link href='http://fonts.googleapis.com/css?family=Lato|Bitter|Montserrat|Slabo+27px|Oswald|Raleway|Source+Sans+Pro|PT+Sans|ubuntu|Open+sans' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -23,30 +24,33 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <header id="header-main">
-      <nav id="nav-bar">
-        <div class="row">
-          <div class="small-12 medium-7 columns">
-            <h1>teamplay.tf</h1>
+    <header class="md-whiteframe-z2" id="header-main">
+      <md-toolbar class="md-bg md-whiteframe-z2" id="header-toolbar">      
+        <div id="header-toolbar-content">
+          <div flex>
+            <md-button class="toolbar-button" id="header-title">tf2stadium</md-button>
           </div>
-          <div class="hide-for-small-only medium-5 columns" id="nav-buttons">
-            <ul class="button-group right">
-              <li><a href="#" class="button">Rules</a></li>
-              <li><a href="#" class="button">Forums</a></li>
-              <li id="steam-login"><a href="#" class="button">Sign in through Steam</a></li>
-            </ul>
+          <div class="toolbar-buttons">
+            <div >
+              <md-button class="toolbar-button">Forums</md-button>
+            </div>
+            <div >
+              <md-button class="toolbar-button">Rules</md-button>
+            </div>
+            <div >
+              <md-button class="toolbar-button">FAQ</md-button>
+            </div>
+            <div >
+              <md-button class="toolbar-button">Login</md-button>
+            </div>
           </div>
         </div>
-      </nav>
-      <div class="row">
-        <div class="alert-box warning text-center" id="notification" data-alert>
-          We are going down for a maintenance at 21:30 CEST for about 1 hour!
-        </div>
-      </div>
+      </md-toolbar>
     </header>
-    <div class="row">
-      <div ui-view></div>
-    </div>
+    <content layout="row" layout-align="center">
+        <div ui-view="lobbies"></div>
+        <div ui-view="commentbox"></div>
+    </content>
 
 
     <!-- build:js(src) scripts/vendor.js -->
