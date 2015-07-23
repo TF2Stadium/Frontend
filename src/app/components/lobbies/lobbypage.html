@@ -1,0 +1,78 @@
+<div ng-init="lobbyInformation={
+              type: 'hl',
+              map: 'pl_upward',  
+              classes: [
+                {classname: 'scout', slots:{
+                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''}
+                }},
+                {classname: 'scout', slots:{
+                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''},
+                    red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'25'}
+                }},
+                {classname: 'soldier', slots:{
+                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'234'}
+                }},
+                {classname: 'soldier', slots:{
+                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''}
+                }},
+                {classname: 'demoman', slots:{
+                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''}
+                }},
+                {classname: 'medic', slots:{
+                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''}
+                }},
+              ],
+              currentSlotsTaken: 9,
+              region: 'eu',
+              mumbleRequired: true,
+              rules:'UGC',
+              serverLocation: 'Germany',
+              spectators: [
+                {name:'Spectator 1'},
+                {name:'Another spec'}
+              ]
+          }"
+     
+     layout="row" layout-align="space-between start">
+  <md-list class="md-whiteframe-z1" id="spectators">
+    <md-list-item  ng-repeat="spectator in lobbyInformation.spectators"
+                  ng-click="null()">
+      <span>{{spectator.name}}</span>
+    </md-list-item>
+  </md-list>
+  <ul flex id="slots">
+    <li ng-repeat="class in lobbyInformation.classes"
+        class="class-row">
+      <md-button ng-switch="slot.id"
+                 ng-repeat="slot in class.slots"
+                 flex class="slot-button"
+                 ng-class="slot.id=='' ? 'md-raised' : ''">
+        <!--  If slot.id set, show flat button with player info
+              If it's not set, show raised button -->
+        <div ng-switch-when=""></div>
+        <div ng-switch-default flex class="slot-info">
+          <div flex><span class="slot-playername">{{slot.name}}</span></div>
+          <div class="slot-misc">
+            <div><span>{{slot.reliability}}%</span><span> reliability</span></div>
+            <div flex></div>
+            <div><span>{{slot.lobbiesPlayed}}</span><span> lobbies</span></div>
+            <div flex></div>
+            <div><span>{{slot.hoursPlayed}}</span><span> hours</span></div>
+          </div>
+        </div>
+        <div ng-switch-default class="slot-avatar"></div>
+      </md-button>
+      
+      <div class="md-whiteframe-z2 class-button">
+        <md-button class="lobby-icon-{{class.classname}}"
+                   ng-class="class.slots.blu.id=='' || class.slots.red.id=='' ? 'md-raised' : ''">
+        </md-button>
+      </div>
+    </li>
+  </ul>
+</div>

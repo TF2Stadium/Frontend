@@ -1,60 +1,51 @@
-.button {
-  background: #fff;  
-  color: $grey-medium;
-  font-weight: bold;
-  transition: all .3s ease-out;
-}
-
-.button:focus,
-.button:hover {
-  background: #fff;
-  color: $grey-medium;
-}
-
-.alert-box {
-  height: 40px;
-  line-height: 10px;
-  background: $main-color;
-  border: none;
-  margin-bottom: 12px;
-    
-    &.alert-box.warning {
-      background-color: $alert-color;
-    }
-    
-    &:hover {
-      color: #fff;
-    }
-    
-    .close {
-      opacity: 1;
-      color: #fff;
-    }
-}
-
 .class-button {
   min-width: $width-class-buttons;
+  max-width: $width-class-buttons;
   min-height: $height-class-buttons;
-  float: left;
   overflow: hidden;
   background-size: $height-class-buttons;
   padding: 0;
-  margin: 0 8px 0 0;
-  flex: 1;
+  @include flex(row, space-between, stretch);
+  justify-content: space-around;
+  align-items: center;
+  border-radius: 3px;
+  margin: 0px;
   
-  a:hover {
-    span {
-      height: $height-class-buttons;
+  .md-button {
+    min-width: $width-class-buttons/2;
+    min-height: $height-class-buttons;
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    border-radius: 0;
+    
+    &:only-child {
+      min-width: 50px; //only way for it to work in IE
+    }    
+    
+    &:nth-child(2) {
+      background-position: -$width-class-buttons/2 0;
+      
+      span::after{
+        background-position: -$width-class-buttons/2 0;  
+      }
+    }
+  
+    &:hover {
+      span {
+        height:50px;
+      }
     }
   }
   
- span {
+  span {
     display: block;
-    height: 7px;
     width: 100%;
-    position: relative;
+    position: absolute;
+    top: 0;
     overflow: hidden;
     transition: all 0.1s ease-out;
+    height: 4px;
 
     &:after {
       content: "";
@@ -63,8 +54,9 @@
       position: absolute;
       left: 0;
       transition: .2s ease;
-      background-size: 50px;
+      background-size: $width-class-buttons;
     }
+    
     &:before {
       content: "";
       height: 100%;
@@ -75,38 +67,15 @@
     }
   }
   
-  .lobby-icon-join-half {
-    float: left;
-    width: 50%; 
-    
-    &.lobby-icon-join-red {  
-      span::after{
-        background-position: -25px 0;
-      }
-    }
-  }
-
-  .lobby-icon-join-blue {
+  .blue {
     span:before {
-      background: #9cf;
-    }
-  }
-
-  .lobby-icon-join-red {
-    span:before {
-      background: #f99;
+      background-color: #9cf;
     }
   }
   
-  .lobby-icon-join {
-    display: block;
-    height: $height-class-buttons;
-    float:left;
-    width: 100%;
-  }
-
-  .lobby-icon-join-half {
-    float: left;
-    width: 50%;
+  .red {
+    span:before {
+      background-color: #f99;
+    }
   }
 }

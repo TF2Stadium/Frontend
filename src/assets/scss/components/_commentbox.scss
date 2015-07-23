@@ -1,8 +1,6 @@
 #chat {
-  background-color: $white;
-  padding: 15px;
-  margin-top: -20px -($height-header - $height-navbar - 75px);
-  width: $width-chat;
+  
+  //Setting for the chat scrollbar
   
   md-tab-content::-webkit-scrollbar {
     width: 4px !important;
@@ -16,12 +14,12 @@
     background-color: #ccc !important;
   }
   
-  md-tabs {
-    height: 500px;
+  .chat-tabs {
     margin-bottom: 10px;
   }
   
   md-tabs-content-wrapper {
+    //not pretty to overwrite a directive :(
     margin-top: 20px;
     margin-right: 5px;
   }

@@ -1,0 +1,42 @@
+@keyframes lobbyExpand {
+  0% {
+    width: 175px;
+    margin-left: 175px;
+    border-radius: 45px;
+    
+    &.lobby-main {
+      opacity: 0 !important;
+    }
+  }
+  
+  50% {
+    border-radius: 45px;    
+  }
+  
+  100% {
+    width: 100%;
+    margin-left: 0px;
+    border-radius: 3px;
+  }
+}
+
+@keyframes opacity {
+  from {opacity: 0}
+  to {opacity: 1};
+}
+
+//ignore this, just looks cool
+ng-include { 
+  @for $i from 1 to 10 {
+    &:nth-child(#{$i}) {
+
+      .lobby-row{
+        animation-delay: $i*.05s;
+        .lobby-image, .lobby-main {
+          animation-delay: .4+$i*.05s;
+        }
+      }
+    }
+  }
+}
+    

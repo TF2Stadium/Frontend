@@ -1,4 +1,3 @@
-$row-width: 1200px;
 $font-family: 'open sans', 'Roboto', sans-serif;
 
 /*======================================
@@ -42,71 +41,21 @@ $icon-large-dimensions: 50px;
 $icon-small-dimensions: 30px;
 
 $full-width: 1200px;
-$width-content: 850px;
+$width-content: 830px;
 $width-split: 20px;
 $width-left-sidebar: 175px;
-$width-chat: $full-width - $width-content;
+$width-chat: $full-width - $width-content - $width-split;
 $width-lobby-info: $width-content - $width-left-sidebar;
 $width-lobby-state: $width-lobby-info - ($width-class-buttons + 8px)*9 - 32px;
 $height-lobby: 90px;
 
 
-
 /*======================================
             FLEXBOX MIXINS
  ======================================= */
-@mixin flex-centered {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;  
-}
-
-@mixin flex-row-spaced-centered {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;  
-}
-
-@mixin flex-row-spaced-end {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-end;  
-}
-
-@mixin flex-row-spaced-stretch {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
-}
-
-@mixin flex-row-spaced-start {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: flex-start;  
-}
-
-@mixin flex-column-start-stretch {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;  
-}
-
-@mixin flex-column-centered-end {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;  
-}
-
-@mixin flex-column-centered-end {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-end;  
+@mixin flex ($flex-direction, $justify-content, $align-items) {
+  display: flex;
+  flex-direction: $flex-direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
 }

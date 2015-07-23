@@ -5,7 +5,6 @@
     <title>frontend</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
-    <link href='http://fonts.googleapis.com/css?family=Lato|Bitter|Montserrat|Slabo+27px|Oswald|Raleway|Source+Sans+Pro|PT+Sans|ubuntu|Open+sans' rel='stylesheet' type='text/css'>
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -41,14 +40,14 @@
               <md-button class="toolbar-button">FAQ</md-button>
             </div>
             <div >
-              <md-button class="toolbar-button">Login</md-button>
+              <md-button class="toolbar-button steam-login">Login</md-button>
             </div>
           </div>
         </div>
       </md-toolbar>
     </header>
     <content layout="row" layout-align="center">
-        <div ui-view="lobbies"></div>
+        <div ui-view="lobbies" id="lobby-list"></div>
         <div ui-view="commentbox"></div>
     </content>
 

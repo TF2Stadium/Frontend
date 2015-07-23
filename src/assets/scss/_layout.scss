@@ -1,12 +1,8 @@
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,300,500,700);
+@import url(http://fonts.googleapis.com/css?family=Lato|Bitter|Montserrat|Slabo+27px|Oswald|Raleway|Source+Sans+Pro|PT+Sans|ubuntu|Open+sans);
 
 body {
   font-family: $font-family;
-  background: #eee;
-}
-
-.alert-box {
-  margin-left: $width-left-sidebar;
+  background: $body-bg;
 }
 
 /* ==================================
@@ -23,12 +19,12 @@ body {
   background-size: cover;  
   
   #header-toolbar {    
-    @include flex-centered;
+    @include flex (row, center, center);
     background-color: $white;
     min-height: $height-navbar;
     
     #header-toolbar-content {
-      @include flex-centered;
+      @include flex (row, center, center);
       width: $full-width;
     }
   } 
@@ -38,6 +34,15 @@ body {
     min-width: 0px; //for consistent spacing between buttons
     padding: 3px 20px;
     margin: 0 2px;
+    flex: 1;
+    
+    &.steam-login {
+      width: 154px;
+      background: url(../assets/img/steam-login-small.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      font-size: 0;
+    }
   }
   
   #header-title {
@@ -47,6 +52,22 @@ body {
   }
   
   .toolbar-buttons {
-    @include flex-row-spaced-end;
+    @include flex (row, center, center);
   }
+}
+
+#lobby-list {  
+  margin-right: $width-split;
+  @include flex (column, flex-start, stretch);
+  width: $width-content;
+}
+
+#chat {
+  background-color: $white;
+  padding: 15px;
+  //next line makes the chat be at a consistent height,
+  //no matter what the header height is
+  margin-top: -$width-split -($height-header - $height-navbar - 75px);
+  width: $width-chat;
+  min-height: 500px;
 }
