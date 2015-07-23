@@ -6,7 +6,7 @@
   /** @ngInject */
   function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('lobbies', {
+      .state('main-page', {
         url: '/',
         views: {
           "lobbies": {
@@ -22,12 +22,21 @@
         }
         
       })
-      .state('lobbies-view', {
-        url: '/lobbies/{lobbyID}',
-        templateUrl: 'app/components/lobbies/lobby.html',
-        controller: 'LobbyController',
-        controllerAs: 'lobby'
-      });
+      .state('lobby-page', {
+        url: '/lobby/{lobbyID}',
+        views: {
+          "lobbies": {
+            templateUrl: 'app/components/lobbies/lobbypage.html',
+            controller: 'LobbiesController',
+            controllerAs: 'lobbies'  
+          },
+          "commentbox": {
+            templateUrl: 'app/components/commentbox/commentbox.html',
+            controller: 'CommentBoxController',
+            controllerAs: 'commentbox'            
+          }
+        }
+    });
 
     $urlRouterProvider.otherwise('/');
   }

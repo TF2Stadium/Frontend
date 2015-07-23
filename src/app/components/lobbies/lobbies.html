@@ -1,114 +1,42 @@
-<section id="lobby-list">
-  <md-card md-ink-ripple class="lobby md-whiteframe-z2 md-clickable">
-    <div class="lobby-image">
-      <div class="black-tint"></div>
-      <span class="lobby-type">hl</span>
-      <span class="lobby-map">cp_process</span>
-    </div>
-    <div flex class="lobby-main">
-      <div flex class="lobby-classes">
-        <div flex>
-          <md-button flex class="md-raised class-button lobby-icon-scout">
-            <a href="#" class="lobby-icon-join-blue lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-            <a href="#" class="lobby-icon-join-red lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-          </md-button>
-        </div>
-        <div flex>
-          <md-button flex class="md-raised class-button lobby-icon-soldier">
-            <a href="#" class="lobby-icon-join-blue lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-            <a href="#" class="lobby-icon-join-red lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-          </md-button>
-        </div>
-        <div flex>
-          <md-button flex class="md-raised class-button lobby-icon-pyro">
-            <a href="#" class="lobby-icon-join-blue lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-            <a href="#" class="lobby-icon-join-red lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-          </md-button>
-        </div>
-        <div flex>
-          <md-button flex class="md-raised class-button lobby-icon-demoman">
-            <a href="#" class="lobby-icon-join-blue lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-            <a href="#" class="lobby-icon-join-red lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-          </md-button>
-        </div>
-        <div flex>
-          <md-button flex class="md-raised class-button lobby-icon-heavy">
-            <a href="#" class="lobby-icon-join-blue lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-            <a href="#" class="lobby-icon-join-red lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-          </md-button>
-        </div>
-        <div flex>
-          <md-button flex class="md-raised class-button lobby-icon-engineer">
-            <a href="#" class="lobby-icon-join-blue lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-            <a href="#" class="lobby-icon-join-red lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-          </md-button>
-        </div>
-        <div flex>
-          <md-button flex class="md-raised class-button lobby-icon-medic">
-            <a href="#" class="lobby-icon-join-blue lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-            <a href="#" class="lobby-icon-join-red lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-          </md-button>
-        </div>
-        <div flex>
-          <md-button flex class="md-raised class-button lobby-icon-sniper">
-            <a href="#" class="lobby-icon-join-blue lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-            <a href="#" class="lobby-icon-join-red lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-          </md-button>
-        </div>
-        <div flex>
-          <md-button flex class="md-raised class-button lobby-icon-spy">
-            <a href="#" class="lobby-icon-join-blue lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-            <a href="#" class="lobby-icon-join-red lobby-icon-join lobby-icon-join-half">
-              <span></span>
-            </a>
-          </md-button>
-        </div>
-      </div>
-      <div class="lobby-players">
-          <span>18</span>/12
-      </div>
-      <div class="lobby-info">
-        <span flex class="lobby-mumble">
-          <i class="fa fa-microphone-slash"></i>
-        </span>
-        <span flex class="lobby-location">
-
-        </span>
-      </div>
-    </div>
-  </md-card>
-</section>
+<div ng-init="lobbies=[{
+                  type: 'hl',
+                  map: 'pl_upward',  
+                  slots: [
+                    {class:'scout', blue:true, red:false},
+                    {class:'soldier', blue:true, red:false},
+                    {class:'pyro', blue:true, red:true},
+                    {class:'demoman', blue:false, red:false},
+                    {class:'heavy', blue:true, red:false},
+                    {class:'engineer', blue:true, red:true},
+                    {class:'medic', blue:true, red:true},
+                    {class:'sniper', blue:true, red:false},
+                    {class:'spy', blue:false, red:false}
+                  ],
+                  currentSlotsTaken: 9,
+                  region: 'eu',
+                  mumbleRequired: true,
+                  rules:'UGC',
+                  serverLocation: 'Germany'
+                  },
+                    
+                    {
+                  type: '6s',
+                  map: 'cp_process_final',  
+                  slots: [
+                    {class:'scout', blue:false, red:false},
+                    {class:'scout', blue:false, red:false},
+                    {class:'soldier', blue:true, red:false},
+                    {class:'soldier', blue:false, red:false},
+                    {class:'demoman', blue:true, red:false},
+                    {class:'medic', blue:true, red:true}
+                  ],
+                  currentSlotsTaken: 8,
+                  region: 'eu',
+                  mumbleRequired: false,
+                  rules:'ETF2L',
+                  serverLocation: 'France'
+                  }]">
+  <ng-include ng-repeat="lobby in lobbies track by $index"
+              onload="lobbyInformation=lobby"
+              src="'app/components/lobbies/lobby-row.html'"></ng-include>
+</div>

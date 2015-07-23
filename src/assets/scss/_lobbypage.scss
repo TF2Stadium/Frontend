@@ -1,0 +1,86 @@
+#slots {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  
+  span {    
+    font-size: 11px;
+    text-transform: none;
+  }
+  
+  .class-row {
+    @include flex (row, space-between, center);
+  
+    .slot-button {  
+      @include flex (row, space-between, flex-start);
+      padding: 0;
+      min-height: $height-class-buttons;
+
+      &:nth-child(2) {
+        flex-direction: row-reverse;
+        order: 3;
+
+        .slot-info {
+          align-items: flex-start;
+        }
+
+        .slot-misc {
+          flex-direction: row-reverse;
+        }
+      }
+    }
+
+    .slot-playername {
+      min-height: 30px;
+      font-size: 22px;
+    }
+
+    .slot-avatar {
+      width: 50px;
+      height: 50px;
+      background: url(../assets/img/avatar.jpg);
+      //todo: include this programatically with {{avatarUrl}}
+      background-size: cover;
+      background-position: center;
+      border-radius: 3px;
+    }
+
+
+    .slot-info {
+      @include flex (column, flex-end, flex-end);
+      height: 50px;
+      margin: 0 10px;
+    }
+
+    .slot-misc {
+      @include flex (row, space-between, flex-end);
+      height: 20px;
+      width: 100%;
+      color: $grey-medium;
+
+      span:nth-child(even) {
+        color: $grey-light; 
+      }
+    }
+  }
+}
+
+#spectators {
+  width: $width-left-sidebar;
+  margin-right: 20px;
+  padding: 0;
+
+  md-list-item {
+    min-height: 36px;
+    background-color: #fff;
+    border: 1px solid #eee;
+
+    .md-list-item-inner {
+      min-height: 36px;
+    }
+  }
+}
+
+.md-button {
+  line-height: normal !important; //otherwise can't multiline inside md-button
+}
