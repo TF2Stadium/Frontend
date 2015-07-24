@@ -1,7 +1,7 @@
 (function() {
   'use strict';
 
-  angular.module('teamplay.services').factory('Websocket', Websocket);
+  angular.module('tf2stadium.services').factory('Websocket', Websocket);
 
   /** @ngInject */
   function Websocket(socketFactory)

@@ -2,12 +2,12 @@
   'use strict';
 
   angular
-    .module('teamplay')
-    .controller('LobbiesController', LobbiesController)
-    .controller('LobbyController', LobbyController);;
+    .module('tf2stadium')
+    .controller('LobbyListController', LobbyListController)
+    .controller('LobbyPageController', LobbyPageController);;
 
   /** @ngInject */
-  function LobbiesController($timeout, Websocket) {
+  function LobbyListController($timeout, Websocket) {
     console.log(Websocket);
     var vm = this;
 
@@ -23,7 +23,7 @@
   }
 
   /** @ngInject */
-  function LobbyController($timeout, Websocket) {
+  function LobbyPageController($timeout, Websocket) {
     var vm = this;
   }
 })();
