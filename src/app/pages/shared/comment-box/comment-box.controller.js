@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('teamplay')
+    .module('tf2stadium')
     .controller('CommentBoxController', CommentBoxController);
 
   /** @ngInject */

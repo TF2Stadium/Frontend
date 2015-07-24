@@ -1,23 +1,23 @@
 (function() {
   'use strict';
 
-  angular.module('teamplay').config(routeConfig);
+  angular.module('tf2stadium').config(routeConfig);
 
   /** @ngInject */
   function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
-      .state('main-page', {
+      .state('lobby-list', {
         url: '/',
         views: {
-          "lobbies": {
-            templateUrl: 'app/components/lobbies/lobbies.html',
-            controller: 'LobbiesController',
-            controllerAs: 'lobbies'  
+          "content": {
+            templateUrl: 'app/pages/lobby/list/lobby-list.html',
+            controller: 'LobbyListController',
+            controllerAs: 'lobbyList'  
           },
           "commentbox": {
-            templateUrl: 'app/components/commentbox/commentbox.html',
+            templateUrl: 'app/pages/shared/comment-box/comment-box.html',
             controller: 'CommentBoxController',
-            controllerAs: 'commentbox'            
+            controllerAs: 'commentBox'            
           }
         }
         
@@ -25,13 +25,13 @@
       .state('lobby-page', {
         url: '/lobby/{lobbyID}',
         views: {
-          "lobbies": {
-            templateUrl: 'app/components/lobbies/lobbypage.html',
-            controller: 'LobbiesController',
-            controllerAs: 'lobbies'  
+          "content": {
+            templateUrl: 'app/pages/lobby/page/lobby-page.html',
+            controller: 'LobbyPageController',
+            controllerAs: 'lobbyPage'  
           },
           "commentbox": {
-            templateUrl: 'app/components/commentbox/commentbox.html',
+            templateUrl: 'app/pages/shared/comment-box/comment-box.html',
             controller: 'CommentBoxController',
             controllerAs: 'commentbox'            
           }

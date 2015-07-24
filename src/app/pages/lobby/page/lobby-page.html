@@ -3,27 +3,27 @@
               map: 'pl_upward',  
               classes: [
                 {classname: 'scout', slots:{
-                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    blu: {name:'Crayboff', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
                     red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''}
                 }},
                 {classname: 'scout', slots:{
                     blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''},
-                    red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'25'}
+                    red: {name:'Schalla', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'25'}
                 }},
                 {classname: 'soldier', slots:{
-                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
-                    red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'234'}
+                    blu: {name:'Capu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    red: {name:'Other player', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'234'}
                 }},
                 {classname: 'soldier', slots:{
-                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    blu: {name:'Masternoob', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
                     red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''}
                 }},
                 {classname: 'demoman', slots:{
-                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''},
                     red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''}
                 }},
                 {classname: 'medic', slots:{
-                    blu: {name:'Blu', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
+                    blu: {name:'Gibusvision', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
                     red: {name:'Red', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:''}
                 }},
               ],
@@ -68,7 +68,7 @@
         <div ng-switch-default class="slot-avatar"></div>
       </md-button>
       
-      <div class="md-whiteframe-z2 class-button">
+      <div class="class-button">
         <md-button class="lobby-icon-{{class.classname}}"
                    ng-class="class.slots.blu.id=='' || class.slots.red.id=='' ? 'md-raised' : ''">
         </md-button>

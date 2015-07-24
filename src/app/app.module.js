@@ -1,8 +1,8 @@
 (function() {
   'use strict';
 
-  angular.module('teamplay', [
-    'teamplay.services',
+  angular.module('tf2stadium', [
+    'tf2stadium.services',
     'ngAnimate',
     'ngCookies',
     'ngTouch',
@@ -13,6 +13,6 @@
     'ngMaterial'
   ]);
 
-  angular.module('teamplay.services', []);
+  angular.module('tf2stadium.services', []);
 
 })();

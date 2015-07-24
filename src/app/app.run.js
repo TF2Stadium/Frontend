@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   
-  angular.module('teamplay').run(runBlock);
+  angular.module('tf2stadium').run(runBlock);
   
   /** @ngInject */
   function runBlock($log) {

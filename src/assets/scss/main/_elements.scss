@@ -2,12 +2,12 @@
   min-width: $width-class-buttons;
   max-width: $width-class-buttons;
   min-height: $height-class-buttons;
-  overflow: hidden;
   background-size: $height-class-buttons;
   padding: 0;
   @include flex(row, space-between, stretch);
   justify-content: space-around;
   align-items: center;
+  overflow: hidden;
   border-radius: 3px;
   margin: 0px;
   
@@ -16,8 +16,8 @@
     min-height: $height-class-buttons;
     padding: 0;
     margin: 0;
-    background-size: cover;
     border-radius: 0;
+    background-size: cover;
     
     &:only-child {
       min-width: 50px; //only way for it to work in IE
