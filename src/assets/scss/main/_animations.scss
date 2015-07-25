@@ -1,4 +1,4 @@
-@keyframes lobbyExpand {
+/* @keyframes lobbyExpand {
   0% {
     width: 175px;
     margin-left: 175px;
@@ -28,7 +28,9 @@
 //ignore this, just looks cool
 ng-include { 
   @for $i from 1 to 10 {
-    &:nth-child(#{$i}) {
+    
+// Change i to $i when uncommenting, for some reason it won't compile if you comment the $i
+//&:nth-child(#{i}) {
 
       .lobby-row{
         animation-delay: $i*.05s;
@@ -40,3 +42,4 @@ ng-include {
   }
 }
     
+*/

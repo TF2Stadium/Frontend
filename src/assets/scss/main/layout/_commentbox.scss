@@ -1,21 +1,10 @@
 #chat {
-  
-  //Setting for the chat scrollbar
-  
-  md-tab-content::-webkit-scrollbar {
-    width: 4px !important;
-  }
-  
-  md-tab-content::-webkit-scrollbar-track {
-    background-color: #eee !important;
-  }
-  
-  md-tab-content::-webkit-scrollbar-thumb {
-    background-color: #ccc !important;
+  md-tab-content {
+    @include scrollbars;
   }
   
   .chat-tabs {
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
   
   md-tabs-content-wrapper {
@@ -26,9 +15,9 @@
   
   .player-name {
     min-width: 0;
-    min-height: 18px;
+    min-height: $line-height-commentbox;
     margin: 0 0 0 -20px;
-    line-height: 18px;
+    line-height: 1.5;
     text-transform: none;
     font-size: 1em;
     
@@ -43,9 +32,9 @@
     margin:0;
     list-style: none;
 
-    > li {
+    li {
       padding: 3px 0;
-      line-height: 18px;
+      line-height: 1.6;
       color: #aaaaaa;
       font-size: 0.8em;
     }

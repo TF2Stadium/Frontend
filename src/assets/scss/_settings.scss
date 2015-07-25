@@ -12,9 +12,10 @@ $grey-hard:   #666666;
 $grey-medium: #999999;
 $grey-light:  #bbbbbb;
 
-$white: #fff;
+$white:       #fff;
 
 $body-bg:     #eeeeee !default;
+$header-bg:   $white;
 $main-color:  $blue-medium !default;
 
 $alert-color: $magenta-medium;
@@ -41,13 +42,16 @@ $icon-large-dimensions: 50px;
 $icon-small-dimensions: 30px;
 
 $full-width: 1200px;
-$width-content: 830px;
+$width-content: 850px;
 $width-split: 20px;
 $width-left-sidebar: 175px;
-$width-chat: $full-width - $width-content - $width-split;
+$width-chat: $full-width - $width-content;
 $width-lobby-info: $width-content - $width-left-sidebar;
 $width-lobby-state: $width-lobby-info - ($width-class-buttons + 8px)*9 - 32px;
 $height-lobby: 90px;
+
+$font-size-commentbox: 24px;
+$line-height-commentbox: 18px;
 
 
 /*======================================
@@ -58,4 +62,23 @@ $height-lobby: 90px;
   flex-direction: $flex-direction;
   justify-content: $justify-content;
   align-items: $align-items;
+}
+
+
+/*======================================
+            SCROLLBARS
+ ======================================= */
+
+@mixin scrollbars {  
+  &::-webkit-scrollbar {
+    width: 4px !important;
+  }
+  
+  &::-webkit-scrollbar-track {
+    background-color: #eee !important;
+  }
+  
+  &::-webkit-scrollbar-thumb {
+    background-color: #ccc !important;
+  }
 }
