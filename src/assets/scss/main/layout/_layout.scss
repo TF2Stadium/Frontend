@@ -1,6 +1,7 @@
 @import url(http://fonts.googleapis.com/css?family=Lato|Bitter|Montserrat|Slabo+27px|Oswald|Raleway|Source+Sans+Pro|PT+Sans|ubuntu|Open+sans);
 
 body {
+  @include flex (column, flex-start, center);
   font-family: $font-family;
   background: $body-bg;
 }
@@ -9,65 +10,86 @@ body {
                 HEADER
    ================================== */
 
-#header-main {
+#header {
   width: 100%;
   height: $height-header;
   margin-bottom: 20px;
 
   background: url(../assets/img/header-bg.jpg);
-  background-position: center;
+  background-position: 50% 55%;
   background-size: cover;  
   
-  #header-toolbar {    
-    @include flex (row, center, center);
-    background-color: $white;
-    min-height: $height-navbar;
-    
-    #header-toolbar-content {
-      @include flex (row, center, center);
-      width: $full-width;
-    }
-  } 
-  
-  .toolbar-button {
+  .md-button {
     color: #888;
     min-width: 0px; //for consistent spacing between buttons
     padding: 3px 20px;
     margin: 0 2px;
-    flex: 1;
+  }
+  
+  .toolbar-buttons {
+    @include flex (row, center, center);
     
-    &.steam-login {
+    .steam-login {
       width: 154px;
-      background: url(../assets/img/steam-login-small.png);
+      background-image: url(../assets/img/steam-login-small.png);
       background-repeat: no-repeat;
       background-position: center;
       font-size: 0;
     }
   }
-  
-  #header-title {
-    font-size: 1.5em;
-    margin: 0 0 0 $width-left-sidebar;
-    font-family: Norwester; //testing
-  }
-  
-  .toolbar-buttons {
+}
+
+#header-toolbar {    
+  @include flex (row, center, center);
+  background-color: $header-bg;
+  min-height: $height-navbar;
+
+  .header-toolbar-content {
     @include flex (row, center, center);
+    width: $full-width;
   }
 }
 
-#lobby-list {  
-  margin-right: $width-split;
+#header-title {
+  width: 260px; //=image width + 10
+  height: 42px; //same as toolbar buttons
+  margin-left: $width-left-sidebar - 102px;
+  background-image: url(../assets/img/header-title.png);
+  background-size: auto 36px; //simulate padding for background
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ==================================
+                CONTENT
+   ================================== */
+
+content {
+  @include flex (row, space-between, stretch);
+}
+
+#main-content {  
   @include flex (column, flex-start, stretch);
   width: $width-content;
+  
+  md-content {
+    @include scrollbars;
+    padding-right: 4px;
+    margin-right: 12px;
+  }
+  
+}
+
+md-content {
+  background: none;
 }
 
 #chat {
-  background-color: $white;
-  padding: 15px;
+  width: $width-chat;
   //next line makes the chat be at a consistent height,
   //no matter what the header height is
   margin-top: -$width-split -($height-header - $height-navbar - 75px);
-  width: $width-chat;
   min-height: 500px;
+  background-color: $white;
+  padding: 15px;
 }

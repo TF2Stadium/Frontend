@@ -1,6 +1,7 @@
 <md-card md-ink-ripple class="lobby-row md-whiteframe-z2 md-clickable">
-  <div class="lobby-image background-4k-{{lobbyInformation.map}}">
-    <div class="black-tint"></div>
+  <div class="lobby-image tinted">
+    <!-- todo: make several options for quality (4k, large, small -->
+    <img class="fill-parent" src="/assets/img/maps/{{lobbyInformation.map}}-4k.jpeg"></img>
     <span class="lobby-type">{{lobbyInformation.type}}</span>
     <span class="lobby-map">{{lobbyInformation.map}}</span>
   </div>
