@@ -1,27 +1,15 @@
 <!-- The next div is needed to fix a bug regarding flexbox, min-height and IE -->
 <div layout="column">
-  <div id="chat" layout="column">
+  <div id="chat" layout="column" ng-controller="CommentBoxController as ctrl">
     <md-tabs class="chat-tabs" md-dynamic-height="false" flex layout="column" md-stretch-tabs="always">
       <md-tab>
         <md-tab-label>Chat</md-tab-label>
         <md-tab-body>
           <md-content>
             <ul>
-              <li>
-                <md-button class="chat-player-name">Gamer5000:</md-button>
-                Ok, I'll play medic!
-              </li>
-              <li>
-                <md-button class="chat-player-name">Loveclop:</md-button>
-                LF Prem Team
-              </li>
-              <li>
-                <md-button class="chat-player-name">Loren:</md-button>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-              </li>        
-              <li>
-                <md-button class="chat-player-name">Loren:</md-button>
-                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+              <li ng-repeat="message in ctrl.mainChatMessages track by $index">
+                <md-button class="player-name">{{message.user.name}}:</md-button>
+                {{message.message}}
               </li>
             </ul>
           </md-content>
