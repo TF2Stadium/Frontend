@@ -54,6 +54,7 @@
                  ng-class="slot.id=='' ? 'md-raised' : ''">
         <!--  If slot.id set, show flat button with player info
               If it's not set, show raised button -->
+        <div class="firefox-bug-container">
         <div ng-switch-when=""></div>
         <div ng-switch-default flex class="slot-info">
           <div flex><span class="slot-playername">{{slot.name}}</span></div>
@@ -66,6 +67,7 @@
           </div>
         </div>
         <div ng-switch-default class="slot-avatar"></div>
+          </div>
       </md-button>
       
       <div class="class-button">

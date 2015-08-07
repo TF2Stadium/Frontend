@@ -36,7 +36,23 @@
             controllerAs: 'commentbox'            
           }
         }
-    });
+      })
+      .state('settings', {
+        url: '/settings',
+        views: {
+          "content": {
+            templateUrl: 'app/pages/settings/settings.html',
+            controller: 'SettingsController',
+            controllerAs: 'settings'  
+          },
+          "commentbox": {
+            templateUrl: 'app/pages/shared/comment-box/comment-box.html',
+            controller: 'CommentBoxController',
+            controllerAs: 'commentBox'            
+          }
+        }
+        
+      });
 
     $urlRouterProvider.otherwise('/');
   }

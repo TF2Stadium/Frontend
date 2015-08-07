@@ -1,3 +1,5 @@
+* { min-width:1px; min-height:0 }
+
 #slots {
   padding: 0;
   margin: 0;
@@ -49,12 +51,16 @@
       background-position: center;
       border-radius: 3px;
     }
-
+    
+    .firefox-bug-container {
+      @include flex (row, space-between, flex-start);
+    }
 
     .slot-info {
       @include flex (column, flex-end, flex-end);
       height: 50px;
       margin: 0 10px;
+      min-width: 0;
     }
 
     .slot-misc {
