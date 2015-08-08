@@ -4,6 +4,8 @@ body {
   @include flex (column, flex-start, center);
   font-family: $font-family;
   background: $body-bg;
+  overflow-y: auto !important; 
+  //angular adds overflow-y:scroll when activating md-select for some reason
 }
 
 /* ==================================
@@ -78,10 +80,6 @@ content {
     margin-right: 12px;
   }
   
-}
-
-md-content {
-  background: none;
 }
 
 #chat {
