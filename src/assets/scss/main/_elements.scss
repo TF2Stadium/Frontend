@@ -1,81 +1,90 @@
+/* ==================================
+      CLASS AND JOIN CLASS BUTTONS
+   ================================== */
+
 .class-button {
-  min-width: $width-class-buttons;
-  max-width: $width-class-buttons;
-  min-height: $height-class-buttons;
-  background-size: $height-class-buttons;
-  padding: 0;
   @include flex(row, space-between, stretch);
-  justify-content: space-around;
-  align-items: center;
+  width: $class-button-width;
+  min-width: $class-button-width; //override md-button
+  min-height: $class-button-height;
+  background-size: $class-button-height;
   overflow: hidden;
   border-radius: 3px;
+  padding: 0;
   margin: 0px;
-  
-  .md-button {
-    min-width: $width-class-buttons/2;
-    min-height: $height-class-buttons;
-    padding: 0;
-    margin: 0;
-    border-radius: 0;
-    background-size: cover;
-    
-    &:only-child {
-      min-width: 50px; //only way for it to work in IE
-    }    
-    
-    &:nth-child(2) {
-      background-position: -$width-class-buttons/2 0;
-      
-      span::after{
-        background-position: -$width-class-buttons/2 0;  
-      }
-    }
-  
-    &:hover {
-      span {
-        height:50px;
-      }
-    }
-  }
+}
+
+.join-slot {
+  min-width: $class-button-width/2;
+  min-height: $class-button-height;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
   
   span {
-    display: block;
-    width: 100%;
-    position: absolute;
-    top: 0;
+    @extend .fill-width;
+    height: 10%;
     overflow: hidden;
     transition: all 0.1s ease-out;
-    height: 4px;
 
-    &:after {
+    &:before, &:after {
+      @extend .fill-parent;
       content: "";
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      transition: .2s ease;
-      background-size: $width-class-buttons;
+      background-size: $class-button-width;
     }
-    
-    &:before {
-      content: "";
-      height: 100%;
-      width: 100%;
-      position: absolute;
-      left: 0;
-      transition: all 0.1s ease-out;
+  }
+
+  &:only-child {
+    min-width: 50px; //only way for it to work in IE
+  }    
+
+  &:nth-child(2) {
+    background-position: -$class-button-width/2 0;
+
+    span::after{
+      background-position: -$class-button-width/2 0;  
     }
+  }
+
+  &:hover > span {
+    height: $class-button-height;
   }
   
-  .blue {
-    span:before {
-      background-color: #9cf;
-    }
+  &.blue > span:before {
+    background-color: #9cf;
   }
   
-  .red {
-    span:before {
-      background-color: #f99;
-    }
+  &.red > span:before {
+    background-color: #f99;
   }
+}
+
+.slot-button {
+  
+}
+
+
+/* ==================================
+      TOOLBAR STEAM LOGIN BUTTON
+   ================================== */  
+      
+.steam-login {
+  width: 154px;
+
+  //Don't show text, instead use steam's button
+  background: {
+    image: url(../assets/img/steam-login-small.png);
+    repeat: no-repeat;
+    position: center;
+  }
+  font-size: 0;
+}
+
+/* ==================================
+                OTHERS
+   ================================== */  
+
+//https://github.com/philipwalton/flexbugs#9-button-elements-cant-be-flex-containers
+.firefox-bug-container {
+  width: 100%;
 }

@@ -1,0 +1,123 @@
+* {
+  min-width:1px;
+  min-height:0;
+  box-sizing: border-box
+}
+
+html, body {
+  background: $body-bg;
+}
+
+body {
+  @include flex (column, flex-start, center);
+  overflow-y: auto !important; 
+  //angular adds overflow-y:scroll when activating md-select for some reason
+}
+
+/* ==================================
+                HEADER
+   ================================== */
+
+#header {
+  @include flex (column, center, center);
+  @extend .md-whiteframe-z2;
+  width: 100%;
+}
+
+#header-toolbar {    
+  @include flex (row, center, center);
+  @extend .md-whiteframe-z2;
+  background-color: $header-bg;
+  min-height: $navbar-height;
+
+  .header-toolbar-content {
+    @include flex (row, center, center);
+    width: $full-width;
+  }
+}
+
+#header-title {
+  width: 260px; //=image width + 10
+  height: 42px; //same as toolbar buttons
+  background: {
+    image: url(../assets/img/header-title.png);
+    size: auto 36px; //simulate padding for background
+    repeat: no-repeat;
+    position: center;
+  }
+}
+
+.toolbar-buttons {
+  @include flex (row, center, center);
+  
+  .md-button {
+    color: #888;
+    min-width: 0px; //for consistent spacing between buttons
+    padding: 3px 20px;
+    margin: 0 2px;
+  }
+}
+
+.header-image {    
+  height: $header-image-height;
+  width: 100%;
+  opacity: .5;
+  background: {
+    image: url(../assets/img/header-bg.jpg);
+    position: 50% 55%;
+    size: cover;
+  }
+}
+
+#fab {
+  width: $full-width;
+  margin-left: 0;
+  height: 0; //black magic
+  button {
+    margin: $header-height - $navbar-height 0 0 5px;
+    transform: translateY(-120%);
+  }
+}
+
+#commentbox {
+  width: $commentbox-width;
+  margin-left: $content-width;
+  height: 0; //black magic
+}
+
+/* ==================================
+                CONTENT
+   ================================== */
+
+content {
+  @include flex (row, space-between, stretch);
+  width: $content-width;
+  margin-right: $commentbox-width;
+}
+
+#left-sidebar {
+  min-width: initial;
+}
+
+#main-content {
+  @include scrollbars;
+  width: 100%;
+  //This divides the padding into padding + margin
+  //That way, when scrollbars appear, they are next to the content
+  padding-right: $padding-medium / 2 - 3px;  
+  margin-right: $padding-medium / 2 + 3px;
+  //to show the shadows, needed because of the overflow:auto
+  padding-left: 5px;
+  background: transparent;
+}
+
+#chat {
+  width: $commentbox-width;
+  //next line makes the chat be at a consistent height,
+  //no matter what the header height is
+  margin-top: $commentbox-top;
+  min-height: $commentbox-height;
+  background-color: $white;
+  padding: $padding-medium;
+  z-index: 1;
+}

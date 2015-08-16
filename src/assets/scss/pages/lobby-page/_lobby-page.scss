@@ -1,97 +1,99 @@
-* { min-width:1px; min-height:0 }
+.lobby-page-content {
+  @include flex (row, flex-start, flex-start);
+}
 
-#slots {
-  padding: 0;
-  margin: 0;
-  
-  span {    
-    font-size: 11px;
-    text-transform: none;
-  }
-  
-  .class-row {
-    @include flex (row, space-between, center);
-  
-    .slot-button {  
-      @include flex (row, space-between, flex-start);
-      padding: 0;
-      min-height: $height-class-buttons;
-
-      /*
-      Makes the second slot-button created in the html go
-      on the right side of the row and reverses the
-      layout so the whole row appears symmetrical
-      */
-      &:nth-child(2) {
-        flex-direction: row-reverse;
-        order: 3;
-
-        .slot-info {
-          align-items: flex-start;
-        }
-
-        .slot-misc {
-          flex-direction: row-reverse;
-        }
-      }
-    }
-
-    .slot-playername {
-      min-height: 30px;
-      font-size: 22px;
-    }
-
-    .slot-avatar {
-      width: 50px;
-      height: 50px;
-      background: url(../assets/img/avatar.jpg);
-      //todo: include this programatically with {{avatarUrl}}
-      background-size: cover;  
-      background-repeat: no-repeat;
-      background-position: center;
-      border-radius: 3px;
-    }
-    
-    .firefox-bug-container {
-      @include flex (row, space-between, flex-start);
-    }
-
-    .slot-info {
-      @include flex (column, flex-end, flex-end);
-      height: 50px;
-      margin: 0 10px;
-      min-width: 0;
-    }
-
-    .slot-misc {
-      @include flex (row, space-between, flex-end);
-      height: 20px;
-      width: 100%;
-      color: $grey-medium;
-
-      //makes "hours", "reliability"... stand out less
-      span:nth-child(even) {
-        color: $grey-light; 
-      }
-    }
-  }
-
+#slots {  
   .md-button {
     line-height: normal !important; //otherwise can't multiline inside md-button
     border-radius: 3px; //overriding .class-button .md-button
   }
-  
-  .class-button {
-    overflow: initial;
-  }
 }
 
 #spectators {
-  width: $width-left-sidebar;
-  margin-right: 20px;
-  padding: 8px 0 0;
+  width: $left-sidebar-width;
+  //Substract 5px to the margin-right to compensate for the
+  //padding-left 5px in #main-content due to shadow
+  margin: $padding-medium $padding-medium - 5px 0 0;
+  padding: 0;
 
   md-list-item {
     background-color: #fff;
+  }
+}
+
+.class-row {
+  @include flex (row, space-between, stretch);
+  height: $class-button-height;
+  margin: $padding-small 0 0;
+  
+  &:first-child {
+    margin-top: $padding-medium;
+  }
+  
+  //Nesting required
+  .class-button {
+    margin: 0 $padding-small;
+  }
+}
+
+.slot-button {
+  @include flex (row, space-between, flex-start);
+  padding: 0;
+  margin: 0;
+  height: 100%;
+
+  /*
+  Makes the second slot-button created in the html go
+  on the right side of the row and reverses the
+  layout so the whole row appears symmetrical
+  */
+  &:nth-child(2) {
+    flex-direction: row-reverse;
+    order: 3;
+
+    .firefox-bug-container {
+      flex-direction: row-reverse;
+    }
+
+    .slot-info {
+      align-items: flex-start;
+    }
+
+    .slot-misc {
+      flex-direction: row-reverse;
+    }
+  }
+}
+
+.firefox-bug-container {
+  @include flex (row, space-between, stretch);
+}
+
+.slot-info {
+  @include flex (column, flex-end, flex-end);
+  height: 100%;
+  margin: 0 $padding-small;
+  min-width: 0;
+}
+
+.slot-playername {
+  min-height: 60%;
+  font-size: 22px;
+}
+.slot-avatar {
+  width: auto;
+  height: 100%;
+  border-radius: 3px;
+}
+
+.slot-misc {
+  @include flex (row, space-between, flex-end);
+  height: 40%;
+  width: 100%;
+  color: $grey-medium;
+
+  //makes "hours", "reliability"... stand out less
+  span:nth-child(even) {
+    color: $grey-light; 
   }
 }

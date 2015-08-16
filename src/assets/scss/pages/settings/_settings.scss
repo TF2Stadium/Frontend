@@ -1,0 +1,12 @@
+#settings-wrapper {
+  //padding: $padding-medium $padding-big $padding-big !important;
+}
+
+.settings-section {
+  @include flex (column, flex-start, stretch);
+  flex-wrap: wrap;
+  @extend .md-whiteframe-z2;  
+  padding: 0 $padding-medium $padding-medium!important;
+  margin-top: $padding-medium;  
+  background: white;
+}

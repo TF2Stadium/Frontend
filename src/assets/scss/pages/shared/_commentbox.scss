@@ -1,0 +1,31 @@
+#chat {
+  @extend .md-whiteframe-z2;
+  
+  md-tab-content {
+    @include scrollbars;
+  }  
+  
+  md-tabs-content-wrapper {
+    margin-top: $padding-medium;
+  }  
+
+  ul {
+    padding: 0 $padding-small 0 $padding-medium;
+    margin: 0;
+    list-style: none;
+  }
+  
+  li {
+    padding: 3px 0;
+  }
+}
+
+.chat-tabs {
+  margin-bottom: $padding-small;
+}
+
+.chat-player-name {
+  min-width: 0;
+  min-height: $commentbox-lineheight;
+  margin: 0 0 0 $padding-medium*-1;
+}
