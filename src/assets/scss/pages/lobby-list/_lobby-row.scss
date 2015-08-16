@@ -1,100 +1,75 @@
 .lobby-row {
-  height: 90px;
-  margin: 0 0 12px;
-  color: $grey-medium;
   @include flex (row, space-between, stretch);
+  @extend .md-whiteframe-z2;
+  height: $lobby-card-height;
+  margin:  0 0 $padding-small 0;
   cursor: pointer;
-  overflow: hidden;
   position: relative; //so the ripple doesn't fill the whole page
 
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   
-  /* Animation stuff
-  width: 90px;
-  animation: lobbyExpand .4s 1 forwards;
-  margin-left: 175px;
-  border-radius: 45px;*/
-
-  &:hover {
-    background-color: #f5f5f5;
+  &:first-child {
+    margin-top: $padding-medium;
   }
   
-  .lobby-image {
-    @include flex (column, center, flex-end);
-    width: $width-left-sidebar;
-    position: relative; //needed for the ripple positioning
-    background: #000;
-
-    /* Animation stuff
-    animation: opacity .4s 1 forwards;
-    opacity: 0;*/
-
-    span {
-      padding-right: 20px;
-      color: #fff;
-      z-index: 1; //on top of the image
-    }
+  &:hover {
+    background-color: $hover-white;
   }
+}
 
-  .lobby-main {
-    @include flex (row, space-between, center);
-    /* Animation stuff
-    animation: opacity .4s 1 forwards;
-    opacity: 0;*/
-    padding: 0 20px;
-    overflow: hidden;
+.lobby-image {
+  @include flex (column, center, flex-end);
+  position: relative; //needed for the ripple positioning
+  width: $left-sidebar-width;
+  background: black;
 
-    .lobby-classes {
-      @include flex (row, space-around, center);
-    }
+  span {
+    padding-right: $padding-medium;
+    color: white;
+    z-index: 1; //on top of the image
+  }
+}
 
-    .lobby-info {
-      @include flex (column, space-around, stretch);
-      width: 80px;
-      height: 60px;
-      margin-left: 10px;
-    }
+.lobby-main {
+  @include flex (row, space-between, center);
+  padding: 0 $padding-medium;
+}
 
-    .lobby-mumble {
-      text-align: center;
-      padding: 0 10px;
-    }
-    
-    .lobby-ruleset {
-      text-align:right;
-    }
-    
-    .lobby-info-row {
-      @include flex (row, flex-start, flex-start);
-      
-      height: 30px;
-      line-height: 30px;
-      
-      &.top {
-        font-size: 1.5em; 
-        font-family: 'Oswald';
-        span {
-          color: $grey-hard;
-        }
 
-        span:nth-child(2) {
-          font-size: .8em;
-          color: $grey-light;
-          line-height: 36px;
-        }
-      }
-    }
-    
-    .lobby-location {
-      align-self: flex-end;
-      //todo: make classes for each flag
-      background: url(../assets/img/flag-eu.png);
-      height: 30px;
-      min-width: 30px;
-      background-size: contain;
-      background-repeat: no-repeat;
-      background-position: right bottom;
-      margin-bottom: 3px;
-    }
+.lobby-classes {
+  @include flex (row, space-around, center);
+}
+
+.lobby-info {
+  @include flex (column, space-around, stretch);
+  width: $lobby-info-width;
+  height: $lobby-info-height;
+  margin-left: $padding-small;
+}
+
+.lobby-mumble {
+  text-align: center;
+  padding: 0 $padding-small;
+}
+
+.lobby-ruleset {
+  text-align:right;
+}
+
+.lobby-info-row {
+  @include flex (row, flex-start, flex-start);
+  height: 50%;
+}
+
+
+.lobby-location {
+  height: 100%;
+  min-width: 30px;
+  //todo: make classes for each flag
+  background: {
+    image: url(../assets/img/flag-eu.png);
+    size: contain;
+    repeat: no-repeat;
+    position: center;
   }
 }

@@ -34,6 +34,16 @@
             templateUrl: 'app/pages/shared/comment-box/comment-box.html',
             controller: 'CommentBoxController',
             controllerAs: 'commentbox'            
+          },
+          "header": {
+            templateUrl: 'app/pages/lobby/page/header.html',
+            controller: 'HeaderController',
+            controllerAs: 'header'            
+          },
+          "leftSidebar": {
+            templateUrl: 'app/pages/lobby/page/spectators.html',
+            controller: 'SpectatorsController',
+            controllerAs: 'spectators'            
           }
         }
       })

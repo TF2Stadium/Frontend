@@ -1,0 +1,73 @@
+/* ==================================
+                GLOBAL
+   ================================== */
+
+@import url(http://fonts.googleapis.com/css?family=Lato|Bitter|Montserrat|Slabo+27px|Oswald|Raleway|Source+Sans+Pro|PT+Sans|ubuntu|Open+sans);
+
+html { 
+  font-family: $font-family-text;
+  line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-header;
+  font-weight: normal;
+}
+
+.chat-player-name {
+  line-height: 1.6;
+  text-transform: none;
+  font-size: 1em;
+
+  span {
+    font-weight: bold;
+    color: $grey-hard;
+  }
+}
+
+#chat li {
+  line-height: 1.6;
+  color: $grey-light;
+  font-size: 0.8em;
+}
+
+.lobby-image {
+  font-size: .9rem;
+}
+
+
+/* ==================================
+            LOBBY LIST
+   ================================== */
+
+.lobby-row {
+  color: $grey-medium;
+}
+
+.lobby-info-players {
+  color: $grey-hard;
+}
+
+.lobby-info-maxplayers {
+  font-size: .8em;
+  color: $grey-light;
+} 
+
+.lobby-info-row {
+  line-height: $lobby-info-height/2;
+
+  &.top {
+    font-size: 1.5em; 
+    font-family: 'Oswald';
+  }
+}
+
+
+/* ==================================
+            LOBBY PAGE
+   ================================== */
+
+.slot-button {
+  font-size: 11px;
+  text-transform: none;
+}

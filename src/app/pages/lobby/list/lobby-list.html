@@ -1,312 +1,61 @@
-<md-content ng-init="lobbies=[{
-                  type: 'hl',
-                  map: 'pl_upward',  
-                  slots: [
-                    {class:'scout', blue:true, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'pyro', blue:true, red:true},
-                    {class:'demoman', blue:false, red:false},
-                    {class:'heavy', blue:true, red:false},
-                    {class:'engineer', blue:true, red:true},
-                    {class:'medic', blue:true, red:true},
-                    {class:'sniper', blue:true, red:false},
-                    {class:'spy', blue:false, red:false}
-                  ],
-                  currentSlotsTaken: 9,
-                  region: 'eu',
-                  mumbleRequired: true,
-                  rules:'UGC',
-                  serverLocation: 'Germany'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  },
-                    
-                    {
-                  type: '6s',
-                  map: 'cp_process_final',  
-                  slots: [
-                    {class:'scout', blue:false, red:false},
-                    {class:'scout', blue:false, red:false},
-                    {class:'soldier', blue:true, red:false},
-                    {class:'soldier', blue:false, red:false},
-                    {class:'demoman', blue:true, red:false},
-                    {class:'medic', blue:true, red:true}
-                  ],
-                  currentSlotsTaken: 8,
-                  region: 'eu',
-                  mumbleRequired: false,
-                  rules:'ETF2L',
-                  serverLocation: 'France'
-                  }]">
-  <ng-include ng-repeat="lobby in lobbies track by $index"
-              onload="lobbyInformation=lobby"
-              src="'app/pages/lobby/list/lobby-row.html'"></ng-include>
-</md-content>
+<md-card ng-repeat="lobbyInformation in lobbyList.lobbies"
+         md-ink-ripple class="lobby-row">
+  <div class="lobby-image tinted">
+    <!-- todo: make several options for quality (4k, large, small -->
+    <img class="fill-parent" src="/assets/img/maps/{{::lobbyInformation.map}}-4k.jpeg">
+    <span class="lobby-type">{{::lobbyInformation.type}}</span>
+    <span class="lobby-map">{{::lobbyInformation.map}}</span>
+  </div>
+  <div flex class="lobby-main">
+    <div flex class="lobby-classes">
+      <div ng-repeat="slot in lobbyInformation.slots track by $index"
+           class="class-button lobby-icon-{{::slot.class}}"
+           ng-class="slot.blue || slot.red ? 'md-whiteframe-z2' : ''">
+        <md-button ng-if="slot.blue" class="join-slot blue">
+          <md-tooltip>
+            Join BLU {{::slot.class}}
+          </md-tooltip>
+          <span></span>
+        </md-button>        
+        <md-button ng-if="slot.red" class="join-slot red">
+          <md-tooltip>
+            Join Red {{::slot.class}}
+          </md-tooltip>
+          <span></span>
+        </md-button>
+      </div>
+    </div>
+    <div class="lobby-info">
+      <div class="lobby-info-row top">
+        <span class="lobby-info-players">{{::lobbyInformation.currentSlotsTaken}}</span>
+        <span class="lobby-info-maxplayers">/{{::lobbyInformation.slots.length*2}}</span>
+        <div flex></div>
+        <span class="lobby-location flag-{{::lobbyInformation.region}}">
+          <md-tooltip md-direction="top">
+            Server located in {{::lobbyInformation.serverLocation}}
+          </md-tooltip>
+        </span>
+      </div>
+      <div class="lobby-info-row">
+        <span ng-if="lobbyInformation.mumbleRequired" class="lobby-mumble">
+          <i class="fa fa-microphone"></i>
+          <md-tooltip>
+            Mumble mandatory
+          </md-tooltip>
+        </span>        
+        <span ng-if="!lobbyInformation.mumbleRequired" class="lobby-mumble">
+          <i class="fa fa-microphone-slash"></i>
+          <md-tooltip>
+            Mumble not mandatory
+          </md-tooltip>
+        </span>
+        <span flex class="lobby-ruleset">
+          {{::lobbyInformation.rules}}
+          <md-tooltip>
+            {{::lobbyInformation.rules}} rules and whitelist
+          </md-tooltip>
+        </span>
+      </div>
+    </div>
+  </div>
+</md-card>

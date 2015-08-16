@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>TF2Stadium</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=1200">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
     <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
@@ -23,31 +23,29 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <header class="md-whiteframe-z2" id="header">
-      <md-toolbar class="md-bg md-whiteframe-z2" id="header-toolbar">      
+    <header id="header">
+      <md-toolbar id="header-toolbar">      
         <div class="header-toolbar-content">
-          <md-button id="header-title"></md-button>
+          <md-button href="/#/" id="header-title"></md-button>
           <div flex></div>
           <div class="toolbar-buttons">
-            <div >
-              <md-button >Forums</md-button>
-            </div>
-            <div >
-              <md-button >Rules</md-button>
-            </div>
-            <div >
-              <md-button >FAQ</md-button>
-            </div>
-            <div >
-              <md-button class="steam-login">Login</md-button>
-            </div>
+            <md-button href="/#/lobby/example">Lobby page</md-button>
+            <md-button href="/#/settings">Settings</md-button>
+            <md-button class="steam-login">Login</md-button>
           </div>
         </div>
       </md-toolbar>
+      <div id="fab">
+        <md-button aria-label="twitter" class="md-fab md-raised md-warn">
+          +
+        </md-button>
+      </div>          
+      <div ui-view="commentbox" id="commentbox"></div>
+      <div ui-view="header-image" class="header-image"></div>
     </header>
     <content flex>
-        <div flex ui-view="content" id="main-content"></div>
-        <div ui-view="commentbox"></div>
+      <div ui-view="leftSidebar" id="left-sidebar"></div>
+      <md-content ui-view="content" id="main-content"></md-content>
     </content>
 
 
