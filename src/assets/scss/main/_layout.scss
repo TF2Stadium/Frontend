@@ -37,13 +37,12 @@ body {
 }
 
 #header-title {
-  width: 260px; //=image width + 10
-  height: 42px; //same as toolbar buttons
-  background: {
-    image: url(../assets/img/header-title.png);
-    size: auto 36px; //simulate padding for background
-    repeat: no-repeat;
-    position: center;
+  @include flex (row, center, center);
+  height: 42px;
+  
+  img {
+    padding: 3px;
+    height: 100%;
   }
 }
 
