@@ -39,13 +39,13 @@
           </div>
         </div>
       </md-toolbar>
+      <div ui-view="commentbox" id="commentbox"></div>
+      <div ui-view="header-image" class="header-image"></div>      
       <div id="fab">
-        <md-button aria-label="twitter" class="md-fab md-raised md-warn">
+        <md-button class="md-fab md-raised md-primary">
           +
         </md-button>
-      </div>          
-      <div ui-view="commentbox" id="commentbox"></div>
-      <div ui-view="header-image" class="header-image"></div>
+      </div>
     </header>
     <content flex>
       <div ui-view="leftSidebar" id="left-sidebar"></div>

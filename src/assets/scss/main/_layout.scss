@@ -77,8 +77,8 @@ body {
   margin-left: 0;
   height: 0; //black magic
   button {
-    margin: $header-height - $navbar-height 0 0 5px;
-    transform: translateY(-120%);
+    margin: 0 0 0 5px;
+    transform: translate(-0%, -50%);
   }
 }
 
