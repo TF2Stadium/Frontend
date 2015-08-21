@@ -42,8 +42,8 @@
           },
           "leftSidebar": {
             templateUrl: 'app/pages/lobby/page/spectators.html',
-            controller: 'SpectatorsController',
-            controllerAs: 'spectators'            
+            controller: 'LobbyPageController',
+            controllerAs: 'lobbyPage'            
           }
         }
       })
