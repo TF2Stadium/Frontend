@@ -35,15 +35,15 @@
             controller: 'CommentBoxController',
             controllerAs: 'commentbox'            
           },
-          "header": {
+          "headerText": {
             templateUrl: 'app/pages/lobby/page/header.html',
-            controller: 'HeaderController',
-            controllerAs: 'header'            
+            controller: 'LobbyPageController',
+            controllerAs: 'lobbyPage'            
           },
           "leftSidebar": {
             templateUrl: 'app/pages/lobby/page/spectators.html',
-            controller: 'SpectatorsController',
-            controllerAs: 'spectators'            
+            controller: 'LobbyPageController',
+            controllerAs: 'lobbyPage'            
           }
         }
       })

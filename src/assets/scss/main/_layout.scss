@@ -22,6 +22,7 @@ body {
   @include flex (column, center, center);
   @extend .md-whiteframe-z2;
   width: 100%;
+  background: #000;
 }
 
 #header-toolbar {    
@@ -37,31 +38,37 @@ body {
 }
 
 #header-title {
-  width: 260px; //=image width + 10
-  height: 42px; //same as toolbar buttons
-  background: {
-    image: url(../assets/img/header-title.png);
-    size: auto 36px; //simulate padding for background
-    repeat: no-repeat;
-    position: center;
+  @include flex (row, center, center);
+  height: $navbar-buttons-height;
+  margin: 0;
+  
+  img {
+    padding: 3px;
+    height: 100%;
   }
 }
 
 .toolbar-buttons {
   @include flex (row, center, center);
+  height: $navbar-buttons-height;
   
   .md-button {
+    @include flex (row, center, center);
+    height: 100%;
     color: #888;
     min-width: 0px; //for consistent spacing between buttons
-    padding: 3px 20px;
+    padding: 0 20px;
     margin: 0 2px;
   }
 }
 
-.header-image {    
+.header-info {
+  @include flex (column, center, center);
   height: $header-image-height;
   width: 100%;
-  opacity: .5;
+  transition: .3s height ease-out;
+  position: relative;
+  
   background: {
     image: url(../assets/img/header-bg.jpg);
     position: 50% 55%;
@@ -69,13 +76,25 @@ body {
   }
 }
 
+.header-image {
+  width: 100%;
+  height: 100%;
+  opacity: .5;
+}
+
+.header-text {
+  width: $full-width;
+  z-index: 1;
+  padding: 0 $commentbox-width 0 $left-sidebar-width;
+}
+
 #fab {
   width: $full-width;
   margin-left: 0;
   height: 0; //black magic
   button {
-    margin: $header-height - $navbar-height 0 0 5px;
-    transform: translateY(-120%);
+    margin: 0 0 0 5px;
+    transform: translate(-0%, -50%);
   }
 }
 

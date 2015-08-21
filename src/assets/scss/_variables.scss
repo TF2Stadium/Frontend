@@ -10,6 +10,7 @@ $font-family-header:      'Bitter', sans-serif;
               COLOR SETTINGS
  =======================================*/
 
+$blue-hard:               #4b9cd4;
 $blue-medium:             #99ccff;
 $blue-light:              #ccccff;
 
@@ -25,6 +26,7 @@ $hover-white:             #f5f5f5;
 $body-bg:                 #eeeeee;
 $header-bg:               $white;
 $main-color:              $blue-medium;
+$secondary-color:         $blue-hard;
 
 $alert-color:             $magenta-medium;
 
@@ -34,13 +36,14 @@ $alert-color:             $magenta-medium;
  ======================================= */
 
 //Nav bar
-$navbar-padding:          7px;
+$navbar-padding:          4px;
 $navbar-height:           50px;
 $navbar-buttons-height:   $navbar-height - $navbar-padding * 2;
 
 //Header
 $header-image-height:     140px;
 $header-height:           $header-image-height + $navbar-height;
+$header-lobbypage-height: 200px;
 
 //Commentbox
 $commentbox-top:          75px;

@@ -26,7 +26,11 @@
     <header id="header">
       <md-toolbar id="header-toolbar">      
         <div class="header-toolbar-content">
-          <md-button href="/#/" id="header-title"></md-button>
+          <md-button href="/#/" id="header-title">
+            <span>TF2</span>
+            <img src="/assets/img/logo.png">
+            <span>STADIUM</span>
+          </md-button>
           <div flex></div>
           <div class="toolbar-buttons">
             <md-button href="/#/lobby/example">Lobby page</md-button>
@@ -35,13 +39,15 @@
           </div>
         </div>
       </md-toolbar>
+      <div ui-view="commentbox" id="commentbox"></div>
+      <div class="header-info {{$root.currentState.name}}">
+        <div ui-view="headerText" class="header-text"></div>
+      </div>      
       <div id="fab">
-        <md-button aria-label="twitter" class="md-fab md-raised md-warn">
+        <md-button class="md-fab md-raised md-primary">
           +
         </md-button>
-      </div>          
-      <div ui-view="commentbox" id="commentbox"></div>
-      <div ui-view="header-image" class="header-image"></div>
+      </div>
     </header>
     <content flex>
       <div ui-view="leftSidebar" id="left-sidebar"></div>
