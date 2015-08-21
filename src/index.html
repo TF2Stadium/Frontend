@@ -40,7 +40,9 @@
         </div>
       </md-toolbar>
       <div ui-view="commentbox" id="commentbox"></div>
-      <div ui-view="header-image" class="header-image"></div>      
+      <div class="header-info {{$root.currentState.name}}">
+        <div ui-view="headerText" class="header-text"></div>
+      </div>      
       <div id="fab">
         <md-button class="md-fab md-raised md-primary">
           +

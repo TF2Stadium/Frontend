@@ -1,1 +1,12 @@
-asdf
+<div class="lobbypage-text"
+     ng-init="lobbyInfo=lobbyPage.lobbyInformation">
+  <span class="lobbypage-map">{{lobbyInfo.map}}</span>
+  <div class="left">
+    <span class="lobbypage-rules">{{lobbyInfo.type}}, {{lobbyInfo.rules}} rules</span>
+    <span class="lobbypage-leader">Leader: {{lobbyInfo.owner}}</span>
+  </div>
+  <div class="right">
+    <span class="lobbypage-mumble">Mumble {{lobbyInfo.mumbleRequired ? '': 'not '}}required</span>
+    <span class="lobbypage-region">{{lobbyInfo.region}}</span>
+  </div>
+</div>

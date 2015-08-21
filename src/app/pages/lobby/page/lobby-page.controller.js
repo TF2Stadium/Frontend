@@ -45,6 +45,7 @@
         mumbleRequired: true,
         rules:'UGC',
         serverLocation: 'Germany',
+        owner: 'Lobby leader',
         spectators: [
           {name:'Spectator 1'},
           {name:'Another spec'}
