@@ -10,5 +10,6 @@
         prefix: '',
         ioSocket: io.connect('http://localhost:8080')
       });
+
   }
 })();
