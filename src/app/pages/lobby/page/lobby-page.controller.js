@@ -53,20 +53,4 @@
     };
   }
   
-  /** @ngInject */
-  function HeaderController($timeout, Websocket) {
-  }
-  
-  /** @ngInject */
-  function SpectatorsController($timeout, Websocket) {
-    var vm = this;
-    
-    vm.spectators = [
-        {name: 1},
-        {name: 2},
-        {name: 3},
-        {name: 4}
-      ];
-  }
-  
 })();
