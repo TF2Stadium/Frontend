@@ -3,9 +3,7 @@
 
   angular
     .module('tf2stadium')
-    .controller('LobbyPageController', LobbyPageController)
-    .controller('HeaderController', HeaderController)
-    .controller('SpectatorsController', SpectatorsController);
+    .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
   function LobbyPageController() {
