@@ -20,7 +20,16 @@
             controllerAs: 'commentBox'            
           }
         }
-        
+      })
+      .state('lobby-create', {
+        url: '/create',
+        views: {
+          "content": {
+            templateUrl: 'app/pages/lobby/create/lobby-create.html',
+            controller: 'LobbyCreateController',
+            controllerAs: 'lobbyCreate'
+          }
+        }
       })
       .state('lobby-page', {
         url: '/lobby/{lobbyID}',
@@ -61,7 +70,6 @@
             controllerAs: 'commentBox'            
           }
         }
-        
       });
 
     $urlRouterProvider.otherwise('/');
