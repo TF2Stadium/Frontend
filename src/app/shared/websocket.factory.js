@@ -5,11 +5,11 @@
   angular.module('tf2stadium.services').factory('Websocket', Websocket);
 
   /** @ngInject */
-  function Websocket(socketFactory)
+  function Websocket(socketFactory, Config)
   {
       return socketFactory({
         prefix: '',
-        ioSocket: io.connect('http://localhost:8080')
+        ioSocket: io.connect(Config.endpoints.websocket)
       });
   }
 })();

@@ -5,3 +5,4 @@ bower_components/
 .tmp/
 dist/
 src/assets/img/maps
+src/app/app.config.js
