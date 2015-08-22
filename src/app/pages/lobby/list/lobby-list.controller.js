@@ -27,9 +27,15 @@
         }
       });
     };
-
+    var secondrun = 4;
     Websocket.on('lobbyListData', function(data) {
-      vm.lobbies = JSON.parse(data).lobbies;
+      if(secondrun==4) {
+        vm.lobbies = JSON.parse(data).lobbies;
+        console.log(vm.lobbies);
+      } else if(secondrun==0) {
+        vm.lobbies[1].classes[2].blu.steamid="sadasdsa";
+      }
+      secondrun = secondrun-1;
     });
   }
 })();

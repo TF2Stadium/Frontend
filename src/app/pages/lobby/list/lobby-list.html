@@ -1,23 +1,22 @@
-<md-card ng-repeat="lobbyInformation in lobbyList.lobbies"
-         md-ink-ripple class="lobby-row">
+<md-card ng-repeat="lobbyInformation in lobbyList.lobbies" class="lobby-row no-animate">
   <div class="lobby-image tinted">
     <!-- todo: make several options for quality (4k, large, small -->
-    <img class="fill-parent" src="/assets/img/maps/{{::lobbyInformation.map}}-4k.jpeg">
+    <img class="fill-parent" src="/assets/img/maps/4k/{{::lobbyInformation.map}}.jpeg">
     <span class="lobby-type">{{::lobbyInformation.type}}</span>
     <span class="lobby-map">{{::lobbyInformation.map}}</span>
   </div>
   <div flex class="lobby-main">
     <div flex class="lobby-classes">
-      <div ng-repeat="slot in lobbyInformation.slots track by $index"
+      <div ng-repeat="slot in lobbyInformation.classes track by $index"
            class="class-button lobby-icon-{{::slot.class}}"
-           ng-class="slot.blue || slot.red ? 'md-whiteframe-z2' : ''">
-        <md-button ng-if="slot.blue" class="join-slot blue">
+           ng-class="!slot.blue.steamid || !slot.red.steamid ? 'md-whiteframe-z2' : ''">
+        <md-button ng-if="!slot.blue.steamid" class="join-slot blue" ng-click="lobbyList.join(lobbyInformation.id, 'blu', slot.class)">
           <md-tooltip>
             Join BLU {{::slot.class}}
           </md-tooltip>
           <span></span>
         </md-button>        
-        <md-button ng-if="slot.red" class="join-slot red">
+        <md-button ng-if="!slot.red.steamid" class="join-slot red" ng-click="lobbyList.join(lobbyInformation.id, 'red', slot.class)">
           <md-tooltip>
             Join Red {{::slot.class}}
           </md-tooltip>
@@ -27,8 +26,8 @@
     </div>
     <div class="lobby-info">
       <div class="lobby-info-row top">
-        <span class="lobby-info-players">{{::lobbyInformation.currentSlotsTaken}}</span>
-        <span class="lobby-info-maxplayers">/{{::lobbyInformation.slots.length*2}}</span>
+        <span class="lobby-info-players">{{::lobbyInformation.players}}</span>
+        <span class="lobby-info-maxplayers">/{{::lobbyInformation.maxPlayers}}</span>
         <div flex></div>
         <span class="lobby-location flag-{{::lobbyInformation.region}}">
           <md-tooltip md-direction="top">
