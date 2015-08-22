@@ -1,3 +1,4 @@
+/* globals io */
 (function() {
   'use strict';
 
@@ -10,6 +11,5 @@
         prefix: '',
         ioSocket: io.connect('http://localhost:8080')
       });
-
   }
 })();
