@@ -26,15 +26,15 @@
     <header id="header">
       <md-toolbar id="header-toolbar">      
         <div class="header-toolbar-content">
-          <md-button href="/#/" id="header-title">
+          <md-button ui-sref="lobby-list" id="header-title">
             <span>TF2</span>
             <img src="/assets/img/logo.png">
             <span>STADIUM</span>
           </md-button>
           <div flex></div>
           <div class="toolbar-buttons">
-            <md-button href="/#/lobby/example">Lobby page</md-button>
-            <md-button href="/#/settings">Settings</md-button>
+            <md-button ui-sref="lobby-page">Lobby page</md-button>
+            <md-button ui-sref="settings">Settings</md-button>
             <md-button class="steam-login">Login</md-button>
           </div>
         </div>
@@ -44,7 +44,7 @@
         <div ui-view="headerText" class="header-text"></div>
       </div>      
       <div id="fab">
-        <md-button class="md-fab md-raised md-primary">
+        <md-button ui-sref="lobby-create" class="md-fab md-raised md-primary">
           +
         </md-button>
       </div>
