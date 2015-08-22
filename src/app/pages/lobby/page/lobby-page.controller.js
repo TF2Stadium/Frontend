@@ -6,6 +6,16 @@
     .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
+  function LobbyPageController($timeout, Websocket) {
+    var vm = this;
+
+    Websocket.on('lobbyData', function(data) {
+      vm.lobbyData = JSON.parse(data);
+      console.log(vm.lobbyData);
+    });
+  }
+
+  /**
   function LobbyPageController() {
     var vm = this;
     
@@ -49,6 +59,6 @@
           {name:'Another spec'}
         ]
     };
-  }
+  }*/
   
 })();

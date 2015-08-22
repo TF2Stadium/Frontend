@@ -5,9 +5,10 @@
 
   app.filter('reverse', reverse);
 
+  /** @ngInject */
   function reverse(){
     return function(items) {
       return items.slice().reverse();
     };
-  };
-});
+  }
+})();

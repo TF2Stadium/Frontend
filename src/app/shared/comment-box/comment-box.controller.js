@@ -18,7 +18,7 @@
 
     vm.sendMessage = function() {
       //Websocket.emit('chatpost');
-    }
+    };
   }
   
 })();

@@ -8,7 +8,7 @@
     $log.debug('runBlock end');
     
     $rootScope.$on('$stateChangeStart',
-    function(event, toState, toParams, fromState, fromParams){
+    function(event, toState){
       $rootScope.currentState = toState;
     });
   }

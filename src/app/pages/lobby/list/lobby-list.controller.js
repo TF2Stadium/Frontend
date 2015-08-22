@@ -21,26 +21,15 @@
       Websocket.emit('lobbyJoin', JSON.stringify(lobbyData), function(data) {
         var response = JSON.parse(data);
 
-        if (response.success == true) {
+        if (response.success === true) {
           console.log(response);
           $state.go('lobby-page', {'lobbyID': lobby});
         }
       });
-    }
+    };
 
     Websocket.on('lobbyListData', function(data) {
       vm.lobbies = JSON.parse(data).lobbies;
     });
-  }
-
-  /** @ngInject */
-  function LobbyPageController($timeout, Websocket) {
-    var vm = this;
-    var lobbyData;
-
-    Websocket.on('lobbyData', function(data) {
-      var lobbyData = JSON.parse(data);
-      console.log(lobbyData);
-    })
   }
 })();

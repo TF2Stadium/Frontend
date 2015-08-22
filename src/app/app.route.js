@@ -15,7 +15,7 @@
             controllerAs: 'lobbyList'  
           },
           "commentbox": {
-            templateUrl: 'app/pages/shared/comment-box/comment-box.html',
+            templateUrl: 'app/shared/comment-box/comment-box.html',
             controller: 'CommentBoxController',
             controllerAs: 'commentBox'            
           }
@@ -45,7 +45,7 @@
             controllerAs: 'lobbyPage'  
           },
           "commentbox": {
-            templateUrl: 'app/pages/shared/comment-box/comment-box.html',
+            templateUrl: 'app/shared/comment-box/comment-box.html',
             controller: 'CommentBoxController',
             controllerAs: 'commentbox'            
           },
@@ -70,7 +70,7 @@
             controllerAs: 'settings'  
           },
           "commentbox": {
-            templateUrl: 'app/pages/shared/comment-box/comment-box.html',
+            templateUrl: 'app/shared/comment-box/comment-box.html',
             controller: 'CommentBoxController',
             controllerAs: 'commentBox'            
           }

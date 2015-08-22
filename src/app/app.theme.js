@@ -17,5 +17,4 @@
       .accentPalette('lightBluePalette');
   }
 
-
-});
+})();

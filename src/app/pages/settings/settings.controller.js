@@ -1,14 +1,12 @@
 (function() {
   'use strict';
   
-  console.log(123);
-  
   angular
     .module('tf2stadium')
     .controller('SettingsController', SettingsController);
 
   /** @ngInject */
-  function SettingsController($scope) {
+  function SettingsController() {
     var vm = this;
     
     vm.userSettings = {
