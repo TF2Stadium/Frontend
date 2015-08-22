@@ -91,7 +91,7 @@ body {
   width: $full-width;
   margin-left: 0;
   height: 0; //black magic
-  button {
+  .md-button {
     margin: 0 0 0 5px;
     transform: translate(-0%, -50%);
   }
