@@ -89,3 +89,40 @@
   width: 100%;
   height: 100%;
 }
+
+/* ==================================
+          COMMENTBOX TAGS
+   ================================== */
+
+#chat li {
+  
+  //In order from low priority to high priority to appear
+  $chatBadges: (donator contributor staff);
+  
+  @each $badge in $chatBadges {
+    &.#{$badge}:before {
+      content: "";
+      width: 20px;
+      height: 20px;
+      margin-bottom: -5px;
+      display: inline-block;
+      background: {
+        size: contain;
+        repeat: no-repeat;
+        position: center;
+        image: url(../assets/img/badges/#{$badge}.png);
+      }
+    }
+  }
+  
+  &.super-contributor:before {
+    width: 40px;
+  }
+  
+  &.alert {
+    &, span {
+      color: white;
+      background-color: $main-color;
+    }
+  }
+}
