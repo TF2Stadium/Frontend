@@ -12,6 +12,8 @@
   "globals": {
     "angular": false,
     "inject": false,
-    "module": false
+    "module": false,
+    "io": false,
+    "console": false
   }
 }
