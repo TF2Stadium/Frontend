@@ -17,8 +17,15 @@
     });
 
     vm.sendMessage = function() {
-      //Websocket.emit('chatpost');
+      var message = {
+        message: vm.messageBox,
+        room: 0
+      }
+      vm.messageBox = '';
+      Websocket.emit('chatSend', JSON.stringify(message), function(data) {
+        var response = JSON.parse(data);
+        console.log(response);
+      });
     };
   }
-  
 })();
