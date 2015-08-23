@@ -20,22 +20,16 @@
 
       Websocket.emit('lobbyJoin', JSON.stringify(lobbyData), function(data) {
         var response = JSON.parse(data);
-
+        console.log(response);
         if (response.success === true) {
-          console.log(response);
           $state.go('lobby-page', {'lobbyID': lobby});
         }
       });
     };
-    var secondrun = 4;
+
     Websocket.on('lobbyListData', function(data) {
-      if(secondrun==4) {
-        vm.lobbies = JSON.parse(data).lobbies;
-        console.log(vm.lobbies);
-      } else if(secondrun==0) {
-        vm.lobbies[1].classes[2].blu.steamid="sadasdsa";
-      }
-      secondrun = secondrun-1;
+      vm.lobbies = JSON.parse(data).lobbies;
+      console.log(vm.lobbies[1]);
     });
   }
 })();
