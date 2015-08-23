@@ -28,6 +28,11 @@
             templateUrl: 'app/pages/lobby/create/lobby-create.html',
             controller: 'LobbyCreateController',
             controllerAs: 'lobbyCreate'
+          },
+          "commentbox": {
+            templateUrl: 'app/pages/shared/comment-box/comment-box.html',
+            controller: 'CommentBoxController',
+            controllerAs: 'commentBox'            
           }
         }
       })
