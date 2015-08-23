@@ -1,0 +1,45 @@
+<div id="settings-wrapper" ng-init="lobbySettingsList = lobbyCreate.lobbySettingsList;
+                                    lobbySettings = lobbyCreate.lobbySettings">
+  <div class="settings-section">
+    <code style="display: block; padding: 8px;">{{lobbySettings | json}}</code>
+    <md-input-container>
+      <label>Server</label>
+      <input type="text" ng-model="lobbySettings.server"/>
+    </md-input-container>
+    <md-input-container>
+      <label>RCON password</label>
+      <input type="text" ng-model="lobbySettings.rconPassword"/>
+    </md-input-container>
+      <md-select ng-model="lobbySettings.region"
+                 placeholder="Choose region">
+        <md-option ng-value="region"
+                   ng-repeat="region in lobbySettingsList.regions">
+          {{region}}
+        </md-option>
+      </md-select>
+    <md-select ng-model="lobbySettings.format"
+               placeholder="Choose format">
+      <md-option ng-value="format"
+                 ng-repeat="format in lobbySettingsList.formats">
+        {{format}}
+      </md-option>
+    </md-select>
+    <md-select ng-model="lobbySettings.map"
+               placeholder="Choose map">
+      <md-option ng-value="map"
+                 ng-repeat="map in lobbySettingsList.maps">
+        {{map}}
+      </md-option>
+    </md-select>
+    <md-select ng-model="lobbySettings.ruleset"
+               placeholder="Choose ruleset">
+      <md-option ng-value="ruleset"
+                 ng-repeat="ruleset in lobbySettingsList.rulesets">
+        {{ruleset}}
+      </md-option>
+    </md-select>
+    <md-checkbox ng-model="lobbySettings.mumbleRequired">
+      Mumble required
+    </md-checkbox>
+  </div>
+</div>
