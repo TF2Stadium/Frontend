@@ -80,15 +80,6 @@
   font-size: 0;
 }
 
-/* ==================================
-                OTHERS
-   ================================== */  
-
-//https://github.com/philipwalton/flexbugs#9-button-elements-cant-be-flex-containers
-.firefox-bug-container {
-  width: 100%;
-  height: 100%;
-}
 
 /* ==================================
           COMMENTBOX TAGS
@@ -125,4 +116,33 @@
       background-color: $main-color;
     }
   }
+}
+
+
+/* ==================================
+            NOTIFICATIONS
+   ================================== */
+
+.notification {
+  @include flex (row, center, center);
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  margin: 0;
+  
+  span {
+    width: $content-width;
+    margin-right: 350px;
+  }
+}
+
+
+/* ==================================
+                OTHERS
+   ================================== */  
+
+//https://github.com/philipwalton/flexbugs#9-button-elements-cant-be-flex-containers
+.firefox-bug-container {
+  width: 100%;
+  height: 100%;
 }

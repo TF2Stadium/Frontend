@@ -22,6 +22,7 @@ body {
   @extend .md-whiteframe-z2;
   width: 100%;
   background: #000;
+  z-index: 1000;
 }
 
 #header-toolbar {    
@@ -112,13 +113,32 @@ body {
    ================================== */
 
 content {
-  @include flex (row, space-between, stretch);
+  @include flex (column, flex-start, center);
+  width: 100%;
+}
+
+#notifications {
+  @include flex (column, flex-start, center);
+  flex-shrink: 0;
+  @extend .md-whiteframe-z2;
+  width: 100%;
+  background: #fff;
+  z-index: 100;
+  
+  &.hidden {
+    margin-bottom: 20px;
+  }
+}
+
+#page-content {
+  @include flex (row, initial, initial);
   width: $content-width;
   margin-right: $commentbox-width;
 }
-
+  
 #left-sidebar {
   min-width: initial;
+  padding-top: $padding-medium;
 }
 
 #main-content {
