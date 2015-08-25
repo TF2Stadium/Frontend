@@ -50,8 +50,17 @@
       </div>
     </header>
     <content flex>
-      <div ui-view="leftSidebar" id="left-sidebar"></div>
-      <md-content flex ui-view="content" id="main-content"></md-content>
+      <div id="notifications" ng-init="notifications=[1, 2, 3, 4, 5]"
+             ng-class="notifications.length == 0 ? 'hidden' : ''">
+        <md-button class="notification"
+             ng-repeat="notification in notifications">
+          notification message
+        </md-button>
+      </div>
+      <div flex id="page-content">
+        <div ui-view="leftSidebar" id="left-sidebar"></div>
+        <md-content flex ui-view="content" id="main-content"></md-content>
+      </div>
     </content>
 
 
