@@ -21,12 +21,7 @@ h1, h2, h3, h4, h5, h6 {
 
 #header-title > span {
   font-family: Norwester;
-  color: $main-color;
   font-size: 36px;
-  
-  &:nth-child(3) {
-    color: $secondary-color;
-  }
 }
 
 .chat-player-name {
@@ -34,12 +29,10 @@ h1, h2, h3, h4, h5, h6 {
   text-transform: none;
   font-size: 1em;
   font-weight: bold;
-  color: $grey-hard;
 }
 
 #chat li {
   line-height: 1.6;
-  color: $grey-light;
   font-size: 0.8em;
 }
 
@@ -52,17 +45,8 @@ h1, h2, h3, h4, h5, h6 {
             LOBBY LIST
    ================================== */
 
-.lobby-row {
-  color: $grey-medium;
-}
-
-.lobby-info-players {
-  color: $grey-hard;
-}
-
 .lobby-info-maxplayers {
   font-size: .8em;
-  color: $grey-light;
 } 
 
 .lobby-info-row {
@@ -78,10 +62,6 @@ h1, h2, h3, h4, h5, h6 {
 /* ==================================
             LOBBY PAGE
    ================================== */
-
-.lobbypage-text {
-  color: #fff;
-}
 
 .lobbypage-map {
   font-size: 4rem;

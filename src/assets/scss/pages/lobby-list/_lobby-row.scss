@@ -11,10 +11,6 @@
   &:first-child {
     margin-top: $padding-medium;
   }
-  
-  &:hover {
-    background-color: $hover-white;
-  }
 }
 
 .lobby-image {
@@ -25,7 +21,6 @@
 
   span {
     padding-right: $padding-medium;
-    color: white;
     z-index: 1; //on top of the image
   }
 }

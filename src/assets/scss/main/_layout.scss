@@ -3,10 +3,6 @@
   box-sizing: border-box
 }
 
-html, body {
-  background: $body-bg;
-}
-
 body {
   @include flex (column, flex-start, center);
   overflow-y: auto !important; 
@@ -25,10 +21,9 @@ body {
   z-index: 1000;
 }
 
-#header-toolbar {    
+#header-toolbar {
   @include flex (row, center, center);
   @extend .md-whiteframe-z2;
-  background-color: $header-bg;
   min-height: $navbar-height;
 
   .header-toolbar-content {
@@ -55,7 +50,6 @@ body {
   .md-button {
     @include flex (row, center, center);
     height: 100%;
-    color: #888;
     min-width: 0px; //for consistent spacing between buttons
     padding: 0 20px;
     margin: 0 2px;
@@ -159,7 +153,6 @@ content {
   //no matter what the header height is
   margin-top: $commentbox-top;
   min-height: $commentbox-height;
-  background-color: $white;
   padding: $padding-medium;
   z-index: 10;
 }

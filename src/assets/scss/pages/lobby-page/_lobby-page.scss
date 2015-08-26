@@ -15,7 +15,6 @@
   z-index: 1;
   height: 200px;
   padding: 0 $padding-medium;
-  color: #fff;
   
   & > div {    
     @include flex (column, space-between, stretch);
@@ -48,10 +47,6 @@
   //padding-left 5px in #main-content due to shadow
   margin: $padding-medium $padding-medium - 5px 0 0;
   padding: 0;
-
-  md-list-item {
-    background-color: #fff;
-  }
 }
 
 .class-row {
@@ -123,10 +118,4 @@
   @include flex (row, space-between, flex-end);
   height: 40%;
   width: 100%;
-  color: $grey-medium;
-
-  //makes "hours", "reliability"... stand out less
-  span:nth-child(even) {
-    color: $grey-light; 
-  }
 }

@@ -1,0 +1,108 @@
+//NORMALIZING COLORS
+md-content {
+  background-color: initial;
+}
+
+.md-button {
+}
+
+.md-raised, .md-raised {
+  color: rgba(255,255,255,0.87);
+  background-color: rgb(250,250,250);
+}
+
+a.md-button.md-raised:not([disabled]):hover,
+.md-button.md-raised:not([disabled]):hover {
+    background-color: rgb(250,250,250);
+}
+
+md-card {
+  background-color: initial;
+}
+
+md-list-item {
+  color: initial;
+}
+
+//LAYOUT
+html, body {
+  background: $body-bg;
+}
+
+#header-toolbar {
+  background-color: $header-bg;
+}
+
+#notifications {  
+  background: #fff;
+}
+
+.toolbar-buttons .md-button {
+  color: #888;
+}
+
+#chat {
+  background-color: $white;
+}
+
+//TYPOGRAPHY
+
+#header-title > span {
+  color: $main-color;
+  
+  &:nth-child(3) {
+    color: $secondary-color;
+  }
+}
+
+.chat-player-name {
+  color: $grey-hard;
+}
+
+#chat li {
+  color: $grey-light;
+}
+
+.lobby-row {
+  color: $grey-medium;
+}
+
+.lobby-info-players {
+  color: $grey-hard;
+}
+
+.lobby-info-maxplayers {
+  color: $grey-light;
+}
+
+.lobbypage-text {
+  color: white;
+}
+
+//LOBBY-ROW
+.lobby-row:hover {
+  background-color: $hover-white;
+}
+
+.lobby-image span {
+  color: white;
+}
+
+
+//LOBBYPAGE
+.lobbypage-text {
+  color: white;
+}
+
+#spectators md-list-item {
+  background-color: white;
+}
+
+.slot-misc {
+  color: $grey-medium;
+
+  //makes "hours", "reliability"... stand out less  
+  span:nth-child(even) {
+    color: $grey-light; 
+  }
+}
