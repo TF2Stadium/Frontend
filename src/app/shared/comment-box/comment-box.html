@@ -8,7 +8,7 @@
           <md-content>
             <ul>
               <li ng-repeat="message in ctrl.mainChatMessages track by $index">
-                <md-button class="player-name">{{message.user.name}}:</md-button>
+                <md-button class="chat-player-name">{{message.user.name}}:</md-button>
                 {{message.message}}
               </li>
             </ul>
