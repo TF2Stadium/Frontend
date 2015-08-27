@@ -1,6 +1,7 @@
 $themes-list: (
   theme-map: (
     selector:             'default-theme',
+    type:                 'light',
     main-color:           $blue-medium,
     secondary-color:      $blue-hard,
     body-background:      $white-dirty,
@@ -12,6 +13,7 @@ $themes-list: (
   ),
   theme-map-dark: (
     selector:             'dark-theme',
+    type:                 'dark',
     main-color:           $blue-medium,
     secondary-color:      $blue-hard,
     body-background:      $grey-dark,
@@ -32,6 +34,11 @@ $themes-list: (
   $secondary-color:       themeVar(secondary-color);
   $body-color:            themeVar(body-background);
   $sheet-color:           lighten($body-color, 6.5%);
+  @if themeVar(type) == 'light' {    
+    $hover-color:           lighten($body-color, 3.25%);
+  } @else {
+    $hover-color:           lighten($sheet-color, 3.25%);
+  }
   $header-color:          themeVar(header-background);
   $text-color-hard:       themeVar(text-color-hard);
   $text-color-medium:     themeVar(text-color-medium);
@@ -89,9 +96,8 @@ $themes-list: (
       background-color: $sheet-color;
     }
 
-    a.md-button.md-raised:not([disabled]):hover,
-    .md-button.md-raised:not([disabled]):hover {
-      background-color: $sheet-color;
+    .md-button:hover {
+      background-color: $hover-color !important;
     }
 
     md-checkbox .md-icon {
@@ -155,7 +161,7 @@ $themes-list: (
     //LOBBY-ROW
 
     .lobby-row:hover {
-      background-color: darken($sheet-color, 4%);
+      background-color: $hover-color;
     }
 
     //LOBBYPAGE
