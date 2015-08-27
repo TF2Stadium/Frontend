@@ -8,7 +8,7 @@
     </md-input-container>
     <md-input-container>
       <label>RCON password</label>
-      <input type="text" ng-model="lobbySettings.rconPassword"/>
+      <input type="text" ng-model="lobbySettings.rconpwd"/>
     </md-input-container>
       <md-select ng-model="lobbySettings.region"
                  placeholder="Choose region">
@@ -17,21 +17,21 @@
           {{region}}
         </md-option>
       </md-select>
-    <md-select ng-model="lobbySettings.format"
+    <md-select ng-model="lobbySettings.type"
                placeholder="Choose format">
       <md-option ng-value="format"
                  ng-repeat="format in lobbySettingsList.formats">
         {{format}}
       </md-option>
     </md-select>
-    <md-select ng-model="lobbySettings.map"
+    <md-select ng-model="lobbySettings.mapName"
                placeholder="Choose map">
       <md-option ng-value="map"
                  ng-repeat="map in lobbySettingsList.maps">
         {{map}}
       </md-option>
     </md-select>
-    <md-select ng-model="lobbySettings.ruleset"
+    <md-select ng-model="lobbySettings.whitelist"
                placeholder="Choose ruleset">
       <md-option ng-value="ruleset"
                  ng-repeat="ruleset in lobbySettingsList.rulesets">
@@ -41,5 +41,8 @@
     <md-checkbox ng-model="lobbySettings.mumbleRequired">
       Mumble required
     </md-checkbox>
+    <md-button ng-click="lobbyCreate.create()">
+      Create
+    </md-button>
   </div>
 </div>
