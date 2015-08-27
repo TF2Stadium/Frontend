@@ -39,32 +39,19 @@ $themes-list: (
   $shadow-multiplier:     themeVar(shadow-multiplier);
 
 
-
   body.#{themeVar(selector)} {
     
     background: $body-color;
     color: $text-color-medium;
 
+
     /*======================================
                   INITIALIZING
      =======================================*/
+
     md-content {
       background-color: $sheet-color;
       color: $text-color-medium;
-    }
-
-    .md-button {
-      color: $text-color-medium;
-    }
-
-    .md-raised, .md-raised {
-      color: $text-color-hard;
-      background-color: $sheet-color;
-    }
-
-    a.md-button.md-raised:not([disabled]):hover,
-    .md-button.md-raised:not([disabled]):hover {
-        background-color: $sheet-color;
     }
 
     md-card {
@@ -93,9 +80,23 @@ $themes-list: (
       }
     }
 
+    .md-button {
+      color: $text-color-medium;
+    }
+
+    .md-raised {
+      color: $text-color-hard;
+      background-color: $sheet-color;
+    }
+
+    a.md-button.md-raised:not([disabled]):hover,
+    .md-button.md-raised:not([disabled]):hover {
+      background-color: $sheet-color;
+    }
+
 
     /*======================================
-                  LAYOUT
+                    LAYOUT
      =======================================*/
 
     #header-toolbar {
@@ -103,7 +104,7 @@ $themes-list: (
     }
 
     #notifications {  
-      background: $sheet-color;
+      background-color: $sheet-color;
     }
 
     .toolbar-buttons .md-button {
@@ -114,10 +115,10 @@ $themes-list: (
       background-color: $sheet-color;
     }
 
+
     /*======================================
                   TYPOGRAPHY
      =======================================*/
-
 
     h1, h2, h3, h4, h5, h6 {
       color: $text-color-hard;
@@ -143,24 +144,13 @@ $themes-list: (
       color: $text-color-light;
     }
 
-    .lobbypage-text {
-      color: white;
-    }
-
     //LOBBY-ROW
+
     .lobby-row:hover {
       background-color: darken($sheet-color, 4%);
     }
 
-    .lobby-image span {
-      color: white;
-    }
-
-
     //LOBBYPAGE
-    .lobbypage-text {
-      color: white;
-    }
 
     #spectators md-list-item {
       background-color: $sheet-color;
@@ -175,19 +165,41 @@ $themes-list: (
       color: $text-color-light;
     }
 
+
+    /*======================================
+                FIXED COLORS
+     =======================================*/
+
+    //LOBBYPAGE
+
+    .lobbypage-text {
+      color: white;
+    }
+
+    //LOBBY-ROW
+
+    .lobby-image span {
+      color: white;
+    }
+
+
+    /*======================================
+                  OTHERS
+     =======================================*/
+
     .md-whiteframe-z1 {
       background-color: $sheet-color;
       border-radius: 3px;
-      box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14*$shadow-multiplier),
-                  0px 2px 2px 0px rgba(0, 0, 0, 0.098*$shadow-multiplier),
-                  0px 1px 5px 0px rgba(0, 0, 0, 0.084*$shadow-multiplier); }
+      box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
+                  0px 2px 2px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
+                  0px 1px 5px  0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
 
     .md-whiteframe-z2 {
       background-color: $sheet-color;
       border-radius: 3px;
-      box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.14*$shadow-multiplier),
-                  0 4px 5px 0 rgba(0, 0, 0, 0.098*$shadow-multiplier),
-                  0 1px 10px 0 rgba(0, 0, 0, 0.084*$shadow-multiplier); }
+      box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
+                  0px 4px 5px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
+                  0px 1px 10px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
 
   }
 }
