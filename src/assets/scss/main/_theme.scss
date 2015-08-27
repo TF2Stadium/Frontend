@@ -94,6 +94,14 @@ $themes-list: (
       background-color: $sheet-color;
     }
 
+    md-checkbox .md-icon {
+      border-color: inherit;
+    }
+
+    md-input-container .md-input {
+      border-color: inherit;
+    }
+
 
     /*======================================
                     LAYOUT
