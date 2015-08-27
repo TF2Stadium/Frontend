@@ -10,5 +10,5 @@ angular.module('tf2stadium')
   $mdThemingProvider.definePalette('lightBluePalette', lightBlueMap);
   $mdThemingProvider.theme('default')
     .primaryPalette('darkBluePalette')
-    .accentPalette('lightBluePalette').dark();
+    .accentPalette('lightBluePalette');
 });
