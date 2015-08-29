@@ -11,10 +11,11 @@
   </div>
   <div class="settings-section" ng-controller="ThemeController">
     <h1>Theme</h1>
-    <md-radio-group ng-model="currentTheme">
+    <md-radio-group ng-controller="ThemeController"
+                    ng-model="currentTheme"
+                    ng-change="setCurrentTheme(currentTheme)">
       <md-radio-button  ng-value="theme"
-                        ng-repeat="theme in themes"
-                        ng-click="setCurrentTheme(theme)">
+                        ng-repeat="theme in themes">
         {{theme.name}}
       </md-radio-button>
     </md-radio-group>

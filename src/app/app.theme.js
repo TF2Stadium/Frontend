@@ -23,7 +23,7 @@
       {name: "TF2Stadium Dark", selector: "dark-theme"}
     ]
 
-    var currentTheme = themes[0];
+    var currentTheme = themes[1];
 
     return {
       getThemes: function() {
@@ -37,13 +37,13 @@
   angular.module('tf2stadium')
   .controller('ThemeController', ['$scope', 'themeService', function($scope, themeService) {
 
-    console.log ('Starting ThemeController');
     $scope.themes = themeService.getThemes();
     $scope.currentTheme = themeService.currentTheme;
 
     $scope.setCurrentTheme = function(theme) {
       themeService.currentTheme = theme;
     }
+    
     $scope.getCurrentTheme = function() {
       return themeService.currentTheme;
     }
