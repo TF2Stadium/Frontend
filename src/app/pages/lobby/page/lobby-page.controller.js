@@ -6,22 +6,40 @@
     .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
-  function LobbyPageController($timeout, Websocket) {
+  function LobbyPageController($scope, LobbyService, Websocket) {
     var vm = this;
 
-    Websocket.on('lobbyData', function(data) {
-      vm.lobbyData = JSON.parse(data);
-      console.log(vm.lobbyData);
+    vm.lobbyInformation = LobbyService.getActive();
+
+    LobbyService.subscribeActive($scope, function(){
+      vm.lobbyInformation = LobbyService.getActive();
+      console.log(vm.lobbyInformation);
     });
+
+    vm.join = function (lobby, team, position) {
+      var lobbyData = {
+        'id': lobby,
+        'team': team,
+        'class': position
+      };
+
+      Websocket.emit('lobbyJoin', JSON.stringify(lobbyData), function(data) {
+        var response = JSON.parse(data);
+        //ToDo: Error Handling
+        if (response.success === true) {
+        }
+      });
+    };
+
   }
 
   /**
   function LobbyPageController() {
     var vm = this;
-    
+
     vm.lobbyInformation={
         type: 'hl',
-        map: 'pl_upward',  
+        map: 'pl_upward',
         classes: [
           {classname: 'scout', slots:{
               blu: {name:'Crayboff', hoursPlayed:123, lobbiesPlayed:123, reliability:99, id:'1234'},
@@ -60,5 +78,5 @@
         ]
     };
   }*/
-  
+
 })();

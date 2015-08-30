@@ -9,6 +9,7 @@
   {
     Websocket.on("lobbyListData", function (data) {
       factory.lobbyList = JSON.parse(data).lobbies;
+      console.log(factory.lobbyList);
       factory.notifyList();
     });
 
