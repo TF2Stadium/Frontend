@@ -1,5 +1,5 @@
 <div id="slots">
-  <div ng-repeat="class in lobbyPage.lobbyInformation.classes" class="class-row">
+  <div ng-repeat="class in lobbyPage.lobbyInformation.classes track by class.class" class="class-row">
     <md-button aria-label="Join Blu {{class.class}}" flex class="slot-button" ng-click="lobbyPage.join(lobbyPage.lobbyInformation.id, 'blu', class.class)" ng-class="!class.blu.player ? 'md-raised' : ''">
       <!--  If slot.id set, show flat button with player info
             If it's not set, show raised button -->
