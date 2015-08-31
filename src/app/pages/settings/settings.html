@@ -1,41 +1,12 @@
-<div id="settings-wrapper" ng-init="userSettings = settings.userSettings">
-  <div class="settings-section">
-    <h1>Regions</h1>
-    <md-checkbox ng-repeat="region in userSettings.regions track by $index"
-               ng-model="userSettings.regions[$index].selected"
-               aria-label="{{region}}">
-      {{region.name}}
+<div id="settings-wrapper" ng-init="settingsList = settings.settingsList">
+  <div  class="settings-section"
+        ng-repeat="(keyName, settingsGroup) in settingsList">
+    <h1>{{keyName | capitalize}}</h1>
+    <md-checkbox  ng-repeat="field in settingsGroup track by field.id"
+                  ng-model="field.selected"
+                  aria-label="{{field}}"
+                  ng-change="settings.saveSetting(field.id, field.selected)">
+      {{field.name}}
     </md-checkbox>
-  </div>
-  
-  <div class="settings-section">
-    <h1>Formats</h1>
-    <md-checkbox ng-repeat="format in userSettings.formats track by $index"
-                 ng-model="userSettings.formats[$index].selected"
-                 aria-label="{{format}}">
-      {{format.name}}
-    </md-checkbox>
-  </div>
-  
-  <div class="settings-section">
-    <h1>Gamemodes</h1>
-    <md-checkbox ng-repeat="gamemode in userSettings.gamemodes track by $index"
-                 ng-model="userSettings.gamemodes[$index].selected"
-                 aria-label="{{gamemode}}">
-      {{gamemode.name}}
-    </md-checkbox>
-  </div>
-  
-  <div class="settings-section">
-    <h1>Mumble</h1>
-    <md-checkbox ng-model="userSettings.mumbleRequiredOnly">
-      Mumble required
-    </md-checkbox>
-  </div>
-  
-  <div class="settings-section">
-    <h1>Volume</h1>
-    <md-slider md-discrete ng-model="userSettings.volume" step="1" min="1" max="100">
-    </md-slider>
   </div>
 </div>

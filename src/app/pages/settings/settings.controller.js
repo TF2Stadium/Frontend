@@ -5,29 +5,47 @@
   
   angular
     .module('tf2stadium')
-    .controller('SettingsController', SettingsController);
+    .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsController($scope) {
+  function SettingsPageController(Settings) {
     var vm = this;
     
-    vm.userSettings = {
-      regions: [
-        {name: "Europe", selected: true},
-        {name: "North America", selected: false},
-        {name: "Asia", selected: true}
-      ],
-      formats: [
-        {name: '6v6', selected: false},
-        {name: 'Highlander', selected: true}
-      ],
-      gamemodes: [
-        {name: 'Control Points', selected: false},
-        {name: 'Payload', selected: true}
-      ],
-      mumbleRequiredOnly: true,
-      volume: 57
-    };
+    vm.settingsList = Settings.getSettingsList();
+
+    /*
+      Iterates through all the settings in the list and compares
+      them to the stored settings.
+
+      If a user setting exists for that element, it gets updated.
+      If it doesn't, it defaults to true.
+    */
+    var populateSettings = function() {
+
+      for (var settingsGroupKey in vm.settingsList) {
+        var settingsGroup = vm.settingsList[settingsGroupKey];
+
+        for (var fieldKey in settingsGroup) {
+          if (userSettings.hasOwnProperty(fieldKey)) {
+            //The backend sends a string, so it can't be assigned directly to the value
+            settingsGroup[fieldKey].selected = ("true" == userSettings[fieldKey]);
+          } else {
+            settingsGroup[fieldKey].selected = true;
+          }
+        }
+      }
+    }
+
+    var userSettings = {};
+
+    Settings.loadSettings(function(response) {
+      userSettings = response.data;
+      populateSettings();
+    });
+
+    vm.saveSetting = function(key, value) {
+      Settings.set(key, value);
+    }
   }
   
 })();

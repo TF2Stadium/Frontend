@@ -66,7 +66,7 @@
         views: {
           "content": {
             templateUrl: 'app/pages/settings/settings.html',
-            controller: 'SettingsController',
+            controller: 'SettingsPageController',
             controllerAs: 'settings'  
           },
           "commentbox": {
