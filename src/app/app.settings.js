@@ -34,6 +34,24 @@
     var settings = {"test": "init"};
     console.log('Setting test initialized: ' + settings['test']);
 
+    var settingsList = {
+      regions: {
+        eu:             {id: 'eu',         name: 'Europe'},
+        na:             {id: 'na',         name: 'NorthAmerica'},
+        as:             {id: 'as',         name: 'Asia'},
+        aus:            {id: 'aus',        name: 'Australia'}
+      },
+      formats: {
+        sixes:          {id: 'sixes',      name: '6v6'},
+        highlander:     {id: 'highlander', name: 'Highlander'}
+      },
+      gamemodes: {
+        cp:             {id: 'cp',         name: 'Control Points'},
+        pl:             {id: 'pl',         name: 'Payload'}
+      },
+      mumbleRequiredOnly: false,
+      volume: 57
+    };
 
     /*
       Creates the service with all the functions accessible
@@ -68,6 +86,10 @@
         callback(settings[key]);
 
         return settings[key];
+      }
+
+      settingsService.getSettingsList = function() {
+        return settingsList;
       }
 
       /*
