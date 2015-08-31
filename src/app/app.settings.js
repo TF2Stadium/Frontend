@@ -51,7 +51,7 @@
         settings[key] = value;
 
         Websocket.emit('playerSettingsSet',
-          JSON.stringify({key: key, value: value}),
+          JSON.stringify({key: key.toString(), value: value.toString()}),
           function(data) {
             var response = JSON.parse(data);
             if (response.success) {
@@ -62,7 +62,11 @@
         );
       }
 
-      settingsService.get = function(key) {
+      settingsService.get = function(key, callback) {
+
+        callback = callback || angular.noop;
+        callback(settings[key]);
+
         return settings[key];
       }
 
