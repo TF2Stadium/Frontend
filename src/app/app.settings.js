@@ -49,8 +49,9 @@
         cp:             {id: 'cp',         name: 'Control Points'},
         pl:             {id: 'pl',         name: 'Payload'}
       },
-      mumbleRequiredOnly: false,
-      volume: 57
+      mumble: {
+        mumble:         {id: 'mumble',     name: 'Mumble'}
+      }
     };
 
     /*
