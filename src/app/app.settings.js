@@ -7,11 +7,13 @@
   .config(SettingsConfigBlock)
   .run(SettingsRunBlock);
 
+  //Executed at config phase
   /** @ngInject */
   function SettingsConfigBlock(SettingsProvider) {
     SettingsProvider.settings["test"] = "config";
   }
 
+  //Executed at run phase
   /** @ngInject */
   function SettingsRunBlock(Websocket, Settings) {
     console.log('Setting test after config: ' + Settings.get("test"));
@@ -20,6 +22,7 @@
     Settings.loadSettings();
   }
 
+  //Provider configuration
   /** @ngInject */
   function Settings() {
     console.log('Starting Settings');
@@ -27,6 +30,11 @@
     var settings = {"test": "init"};
     console.log('Setting test initialized: ' + settings['test']);
 
+
+    /*
+        Creates the service with all the functions accessible
+        during and after the runBlock
+    */
     var settingsService = function(Websocket) {
 
       settingsService.set = function(key, value) {
@@ -63,6 +71,13 @@
 
       return settingsService;
     };
+
+    /*
+        Creates the service with all the objects and functions
+        accessible ONLY DURING config phase.
+
+        $get returns the service object
+    */
 
     var settingsProvider = {
       settings: settings,
