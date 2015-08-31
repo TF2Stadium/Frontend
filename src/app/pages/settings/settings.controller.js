@@ -5,10 +5,10 @@
   
   angular
     .module('tf2stadium')
-    .controller('SettingsController', SettingsController);
+    .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsController($scope) {
+  function SettingsPageController($scope) {
     var vm = this;
     
     vm.userSettings = {
