@@ -10,8 +10,7 @@
   //Executed at config phase
   /** @ngInject */
   function SettingsConfigBlock(SettingsProvider) {
-    SettingsProvider.settings["test"] = "config";
-    
+
     SettingsProvider.constants["settingsList"] = {
       regions: {
         eu:             {id: 'eu',         name: 'Europe'},
@@ -41,14 +40,6 @@
   //Executed at run phase
   /** @ngInject */
   function SettingsRunBlock(Websocket, Settings) {
-    console.log('Setting test after config: ' + Settings.get("test"));
-    Settings.set("test", "runBlock", function() {
-      console.log('Callback from set!');
-    });
-    console.log('Setting test after runblock: ' + Settings.get("test"));
-    Settings.loadSettings(function() {
-      console.log('Callback from loadSettings!');
-    });
   }
 
   //Provider configuration
@@ -58,10 +49,9 @@
 
     var settingsProvider = {}
 
-    settingsProvider.settings = {"test": "init"};
-    console.log('Setting test initialized: ' + settingsProvider.settings['test']);
+    settingsProvider.settings = {};
 
-    settingsProvider.constants = {"test": "init"};  
+    settingsProvider.constants = {};  
 
     /*
       Creates the service with all the functions accessible
