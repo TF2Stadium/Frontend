@@ -6,30 +6,38 @@
     .controller('CommentBoxController', CommentBoxController);
 
   /** @ngInject */
-  function CommentBoxController (Websocket) {
+  function CommentBoxController ($scope, ChatService, LobbyService) {
     var vm = this;
 
-    vm.mainChatMessages = [];
+    vm.messages = [];
+    vm.currentTab = 0;
+    vm.joinedLobby = false;
 
-    Websocket.on('chatReceive', function(data) {
-      var message = JSON.parse(data);
+    ChatService.subscribe($scope, function() {
+      vm.messages = ChatService.getMessages();
+    });
+
+    LobbyService.subscribeActive($scope, function(event) {
+      vm.joinedLobby = LobbyService.getActive().id;
     });
 
     vm.sendMessage = function() {
 
-      var message = {
-        message: vm.messageBox,
-        room: 0
-      };
+      if (vm.messageBox == "" || event.keyCode != 13) {
+        return false;
+      }
 
-      vm.messageBox = '';
+      var room = 0;
 
-      Websocket.emit('chatSend', JSON.stringify(message), function(data) {
-        var response = JSON.parse(data);
+      if (vm.currentTab != 0) {
+        room = vm.joinedLobby;
+      }
 
-      });
+      ChatService.send(vm.messageBox, room);
 
-      return false;
+      vm.messageBox = null;
+      event.preventDefault();
+
     };
   }
 })();

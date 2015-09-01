@@ -1,13 +1,13 @@
 <!-- The next div is needed to fix a bug regarding flexbox, min-height and IE -->
 <div layout="column">
   <div id="chat" layout="column" ng-controller="CommentBoxController as ctrl">
-    <md-tabs class="chat-tabs" md-dynamic-height="false" flex layout="column" md-stretch-tabs="always">
+    <md-tabs class="chat-tabs" md-selected="ctrl.currentTab" md-dynamic-height="false" flex layout="column" md-stretch-tabs="always">
       <md-tab>
         <md-tab-label>Chat</md-tab-label>
         <md-tab-body>
           <md-content>
             <ul>
-              <li ng-repeat="message in ctrl.mainChatMessages track by $index">
+              <li ng-repeat="message in ctrl.messages[0] track by $index">
                 <md-button class="chat-player-name">{{message.user.name}}:</md-button>
                 {{message.message}}
               </li>
@@ -17,25 +17,17 @@
         </md-tab-body>
       </md-tab>
 
-      <md-tab>
+      <md-tab disabled>
         <md-tab-label>Lobby chat</md-tab-label>
         <md-tab-body>
           <md-content>
             <ul>
-              <li>
-                <md-button class="chat-player-name">Gamer5000:</md-button>
-                Please, can you go scout?
-              </li>
-              <li>
-                <md-button class="chat-player-name">Loveclop:</md-button>
-                LF new TF2Center project
-              </li>
-              <li>
-                <md-button class="chat-player-name">Not MasterNoob:</md-button>
-                MasterNoob is a pretty cool guy
+              <li ng-repeat="message in ctrl.messages[ctrl.joinedLobby] track by $index">
+                <md-button class="chat-player-name">{{message.user.name}}:</md-button>
+                {{message.message}}
               </li>
             </ul>
-          </md-content>        
+          </md-content>
         </md-tab-body>
 
       </md-tab>
@@ -65,8 +57,8 @@
       </md-tab>
     </md-tabs>
     <md-input-container>
-      <label for="message">Type your message</label>
-      <textarea name="message" ng-keypress="$event.keyCode == 13 && ctrl.sendMessage()" ng-model="ctrl.messageBox"></textarea>
+      <label for="chatbox-message">Type your message</label>
+      <textarea id="chatbox-message" name="message" ng-keydown="ctrl.sendMessage($event)" ng-model="ctrl.messageBox"></textarea>
     </md-input-container>
   </div>
 </div>

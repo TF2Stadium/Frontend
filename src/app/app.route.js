@@ -4,7 +4,7 @@
   angular.module('tf2stadium').config(routeConfig);
 
   /** @ngInject */
-  function routeConfig($stateProvider, $urlRouterProvider) {
+  function routeConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('lobby-list', {
         url: '/',
@@ -12,12 +12,7 @@
           "content": {
             templateUrl: 'app/pages/lobby/list/lobby-list.html',
             controller: 'LobbyListController',
-            controllerAs: 'lobbyList'  
-          },
-          "commentbox": {
-            templateUrl: 'app/shared/comment-box/comment-box.html',
-            controller: 'CommentBoxController',
-            controllerAs: 'commentBox'            
+            controllerAs: 'lobbyList'
           }
         }
       })
@@ -28,11 +23,6 @@
             templateUrl: 'app/pages/lobby/create/lobby-create.html',
             controller: 'LobbyCreateController',
             controllerAs: 'lobbyCreate'
-          },
-          "commentbox": {
-            templateUrl: 'app/pages/shared/comment-box/comment-box.html',
-            controller: 'CommentBoxController',
-            controllerAs: 'commentBox'            
           }
         }
       })
@@ -42,22 +32,17 @@
           "content": {
             templateUrl: 'app/pages/lobby/page/lobby-page.html',
             controller: 'LobbyPageController',
-            controllerAs: 'lobbyPage'  
-          },
-          "commentbox": {
-            templateUrl: 'app/shared/comment-box/comment-box.html',
-            controller: 'CommentBoxController',
-            controllerAs: 'commentbox'            
+            controllerAs: 'lobbyPage'
           },
           "headerText": {
             templateUrl: 'app/pages/lobby/page/header.html',
             controller: 'LobbyPageController',
-            controllerAs: 'lobbyPage'            
+            controllerAs: 'lobbyPage'
           },
           "leftSidebar": {
             templateUrl: 'app/pages/lobby/page/spectators.html',
             controller: 'LobbyPageController',
-            controllerAs: 'lobbyPage'            
+            controllerAs: 'lobbyPage'
           }
         }
       })
@@ -67,12 +52,7 @@
           "content": {
             templateUrl: 'app/pages/settings/settings.html',
             controller: 'SettingsController',
-            controllerAs: 'settings'  
-          },
-          "commentbox": {
-            templateUrl: 'app/shared/comment-box/comment-box.html',
-            controller: 'CommentBoxController',
-            controllerAs: 'commentBox'            
+            controllerAs: 'settings'
           }
         }
       });
