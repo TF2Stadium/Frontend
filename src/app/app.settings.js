@@ -54,6 +54,10 @@
       }
     };
 
+    var constants = {
+      settingsList: settingsList
+    }
+
     /*
       Creates the service with all the functions accessible
       during and after the run phase.
@@ -89,8 +93,9 @@
         return settings[key];
       }
 
-      settingsService.getSettingsList = function() {
-        return settingsList;
+      settingsService.getConstants = function(key) {
+        console.log (constants)
+        return constants[key];
       }
 
       /*
