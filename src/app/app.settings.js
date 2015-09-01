@@ -11,6 +11,31 @@
   /** @ngInject */
   function SettingsConfigBlock(SettingsProvider) {
     SettingsProvider.settings["test"] = "config";
+    
+    SettingsProvider.constants["settingsList"] = {
+      regions: {
+        eu:             {id: 'eu',         name: 'Europe'},
+        na:             {id: 'na',         name: 'NorthAmerica'},
+        as:             {id: 'as',         name: 'Asia'},
+        aus:            {id: 'aus',        name: 'Australia'}
+      },
+      formats: {
+        sixes:          {id: 'sixes',      name: '6v6'},
+        highlander:     {id: 'highlander', name: 'Highlander'}
+      },
+      gamemodes: {
+        cp:             {id: 'cp',         name: 'Control Points'},
+        pl:             {id: 'pl',         name: 'Payload'}
+      },
+      mumble: {
+        mumble:         {id: 'mumble',     name: 'Mumble'}
+      }
+    };
+
+    SettingsProvider.constants.themesList = {
+      light:  {name: "TF2Stadium", selector: "default-theme", id: "0"},
+      dark:   {name: "TF2Stadium Dark", selector: "dark-theme", id: "1"}
+    }
   }
 
   //Executed at run phase
@@ -31,41 +56,19 @@
   function Settings() {
     console.log('Starting Settings');
 
-    var settings = {"test": "init"};
-    console.log('Setting test initialized: ' + settings['test']);
+    var settingsProvider = {}
 
-    var constants = {};
+    settingsProvider.settings = {"test": "init"};
+    console.log('Setting test initialized: ' + settingsProvider.settings['test']);
 
-    constants.settingsList = {
-      regions: {
-        eu:             {id: 'eu',         name: 'Europe'},
-        na:             {id: 'na',         name: 'NorthAmerica'},
-        as:             {id: 'as',         name: 'Asia'},
-        aus:            {id: 'aus',        name: 'Australia'}
-      },
-      formats: {
-        sixes:          {id: 'sixes',      name: '6v6'},
-        highlander:     {id: 'highlander', name: 'Highlander'}
-      },
-      gamemodes: {
-        cp:             {id: 'cp',         name: 'Control Points'},
-        pl:             {id: 'pl',         name: 'Payload'}
-      },
-      mumble: {
-        mumble:         {id: 'mumble',     name: 'Mumble'}
-      }
-    };
-
-    constants.themesList = {
-      light:  {name: "TF2Stadium", selector: "default-theme", id: "0"},
-      dark:   {name: "TF2Stadium Dark", selector: "dark-theme", id: "1"}
-    }
+    settingsProvider.constants = {"test": "init"};  
 
     /*
       Creates the service with all the functions accessible
       during and after the run phase.
     */
     var settingsService = function(Websocket) {
+      var settings = settingsProvider.settings;
 
       /*
         Saves a setting into the service and into the backend and
@@ -73,8 +76,9 @@
       */
       settingsService.set = function(key, value, callback) {
 
+
         callback = callback || angular.noop;
-        settings[key] = value;
+        settingsProvider.settings[key] = value;
 
         Websocket.emit('playerSettingsSet',
           JSON.stringify({key: key, value: value}),
@@ -91,14 +95,13 @@
       settingsService.get = function(key, callback) {
 
         callback = callback || angular.noop;
-        callback(settings[key]);
+        callback(settingsProvider.settings[key]);
 
-        return settings[key];
+        return settingsProvider.settings[key];
       }
 
       settingsService.getConstants = function(key) {
-        console.log (constants)
-        return constants[key];
+        return settingsProvider.constants[key];
       }
 
       /*
@@ -114,7 +117,7 @@
           function(data) {
             var response = JSON.parse(data);
             if (response.success) {
-              settings = response.data;
+              settingsProvider.settings = response.data;
               console.log('Settings loaded correctly! ---> ' + JSON.stringify(response.data));
             }
             callback(response);
@@ -125,18 +128,14 @@
       return settingsService;
     };
 
+
     /*
       Creates the service with all the objects and functions
       accessible ONLY DURING config phase.
 
       $get returns the service object.
     */
-
-    var settingsProvider = {
-      settings: settings,
-      $get: settingsService
-    }
-
+    settingsProvider.$get = settingsService;
     return settingsProvider;
   }
 
