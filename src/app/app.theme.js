@@ -25,11 +25,7 @@
 
     var themeService = {};
 
-    var themes = {
-      "light":  {name: "TF2Stadium", selector: "default-theme", id: "0"},
-      "dark":   {name: "TF2Stadium Dark", selector: "dark-theme", id: "1"}
-    }
-
+    var themes = Settings.getConstants('themesList');
     var currentTheme = {};
 
     themeService.notifyChanged = function() {

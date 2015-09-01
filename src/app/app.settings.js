@@ -34,7 +34,9 @@
     var settings = {"test": "init"};
     console.log('Setting test initialized: ' + settings['test']);
 
-    var settingsList = {
+    var constants = {};
+
+    constants.settingsList = {
       regions: {
         eu:             {id: 'eu',         name: 'Europe'},
         na:             {id: 'na',         name: 'NorthAmerica'},
@@ -54,8 +56,9 @@
       }
     };
 
-    var constants = {
-      settingsList: settingsList
+    constants.themesList = {
+      light:  {name: "TF2Stadium", selector: "default-theme", id: "0"},
+      dark:   {name: "TF2Stadium Dark", selector: "dark-theme", id: "1"}
     }
 
     /*
