@@ -10,31 +10,8 @@
   //Executed at config phase
   /** @ngInject */
   function SettingsConfigBlock(SettingsProvider) {
-    SettingsProvider.settings["test"] = "config";
-  }
 
-  //Executed at run phase
-  /** @ngInject */
-  function SettingsRunBlock(Websocket, Settings) {
-    console.log('Setting test after config: ' + Settings.get("test"));
-    Settings.set("test", "runBlock", function() {
-      console.log('Callback from set!');
-    });
-    console.log('Setting test after runblock: ' + Settings.get("test"));
-    Settings.loadSettings(function() {
-      console.log('Callback from loadSettings!');
-    });
-  }
-
-  //Provider configuration
-  /** @ngInject */
-  function Settings() {
-    console.log('Starting Settings');
-
-    var settings = {"test": "init"};
-    console.log('Setting test initialized: ' + settings['test']);
-
-    var settingsList = {
+    SettingsProvider.constants["settingsList"] = {
       regions: {
         eu:             {id: 'eu',         name: 'Europe'},
         na:             {id: 'na',         name: 'NorthAmerica'},
@@ -54,11 +31,34 @@
       }
     };
 
+    SettingsProvider.constants.themesList = {
+      light:  {name: "TF2Stadium", selector: "default-theme", id: "0"},
+      dark:   {name: "TF2Stadium Dark", selector: "dark-theme", id: "1"}
+    }
+  }
+
+  //Executed at run phase
+  /** @ngInject */
+  function SettingsRunBlock(Websocket, Settings) {
+  }
+
+  //Provider configuration
+  /** @ngInject */
+  function Settings() {
+    console.log('Starting Settings');
+
+    var settingsProvider = {}
+
+    settingsProvider.settings = {};
+
+    settingsProvider.constants = {};  
+
     /*
       Creates the service with all the functions accessible
       during and after the run phase.
     */
     var settingsService = function(Websocket) {
+      var settings = settingsProvider.settings;
 
       /*
         Saves a setting into the service and into the backend and
@@ -66,11 +66,12 @@
       */
       settingsService.set = function(key, value, callback) {
 
+
         callback = callback || angular.noop;
-        settings[key] = value;
+        settingsProvider.settings[key] = value;
 
         Websocket.emit('playerSettingsSet',
-          JSON.stringify({key: key.toString(), value: value.toString()}),
+          JSON.stringify({key: key, value: value}),
           function(data) {
             var response = JSON.parse(data);
             if (response.success) {
@@ -84,13 +85,13 @@
       settingsService.get = function(key, callback) {
 
         callback = callback || angular.noop;
-        callback(settings[key]);
+        callback(settingsProvider.settings[key]);
 
-        return settings[key];
+        return settingsProvider.settings[key];
       }
 
-      settingsService.getSettingsList = function() {
-        return settingsList;
+      settingsService.getConstants = function(key) {
+        return settingsProvider.constants[key];
       }
 
       /*
@@ -106,7 +107,7 @@
           function(data) {
             var response = JSON.parse(data);
             if (response.success) {
-              settings = response.data;
+              settingsProvider.settings = response.data;
               console.log('Settings loaded correctly! ---> ' + JSON.stringify(response.data));
             }
             callback(response);
@@ -117,18 +118,14 @@
       return settingsService;
     };
 
+
     /*
       Creates the service with all the objects and functions
       accessible ONLY DURING config phase.
 
       $get returns the service object.
     */
-
-    var settingsProvider = {
-      settings: settings,
-      $get: settingsService
-    }
-
+    settingsProvider.$get = settingsService;
     return settingsProvider;
   }
 

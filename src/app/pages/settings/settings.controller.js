@@ -11,7 +11,7 @@
   function SettingsPageController(Settings) {
     var vm = this;
     
-    vm.settingsList = Settings.getSettingsList();
+    vm.settingsList = Settings.getConstants('settingsList');
 
     /*
       Iterates through all the settings in the list and compares
@@ -44,7 +44,7 @@
     });
 
     vm.saveSetting = function(key, value) {
-      Settings.set(key, value);
+      Settings.set(key, value.toString());
     }
   }
   
