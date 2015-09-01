@@ -7,7 +7,7 @@
   .config(SettingsConfigBlock)
   .run(SettingsRunBlock);
 
-  //Executed at config phase
+
   /** @ngInject */
   function SettingsConfigBlock(SettingsProvider) {
 
@@ -34,8 +34,7 @@
     SettingsProvider.constants.themesList = {
       light:  {name: "TF2Stadium", selector: "default-theme"},
       dark:   {name: "TF2Stadium Dark", selector: "dark-theme"}
-    }
-
+    };
 
     function setDefaultValues() {
       SettingsProvider.settings.currentTheme = 'default-theme';
@@ -55,12 +54,10 @@
     setDefaultValues();
   }
 
-  //Executed at run phase
   /** @ngInject */
   function SettingsRunBlock(Websocket, Settings) {
   }
 
-  //Provider configuration
   /** @ngInject */
   function Settings() {
     console.log('Starting Settings');
@@ -69,7 +66,7 @@
 
     settingsProvider.settings = {};
 
-    settingsProvider.constants = {};  
+    settingsProvider.constants = {};
 
     /*
       Creates the service with all the functions accessible
@@ -98,7 +95,7 @@
             callback(response);
           }
         );
-      }
+      };
 
       settingsService.get = function(key, callback) {
 
@@ -106,11 +103,11 @@
         callback(settingsProvider.settings[key]);
 
         return settingsProvider.settings[key];
-      }
+      };
 
       settingsService.getConstants = function(key) {
         return settingsProvider.constants[key];
-      }
+      };
 
       /*
         Loads all settings, saves them into the service in case of success and
@@ -133,7 +130,7 @@
             callback(response);
           }
         );
-      }
+      };
 
       return settingsService;
     };
