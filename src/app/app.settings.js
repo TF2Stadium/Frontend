@@ -11,7 +11,7 @@
   /** @ngInject */
   function SettingsConfigBlock(SettingsProvider) {
 
-    SettingsProvider.constants["settingsList"] = {
+    SettingsProvider.constants.settingsList = {
       regions: {
         eu:             {id: 'eu',         name: 'Europe'},
         na:             {id: 'na',         name: 'NorthAmerica'},
@@ -32,9 +32,27 @@
     };
 
     SettingsProvider.constants.themesList = {
-      light:  {name: "TF2Stadium", selector: "default-theme", id: "0"},
-      dark:   {name: "TF2Stadium Dark", selector: "dark-theme", id: "1"}
+      light:  {name: "TF2Stadium", selector: "default-theme"},
+      dark:   {name: "TF2Stadium Dark", selector: "dark-theme"}
     }
+
+
+    function setDefaultValues() {
+      SettingsProvider.settings.currentTheme = 'default-theme';
+
+      /*
+        Defaults every value found in the settingsList to true.
+        It gets overwritten with the loaded settings in the SettingsRunBlock
+      */
+      for (var settingsGroupKey in SettingsProvider.constants.settingsList) {
+        var settingsGroup = SettingsProvider.constants.settingsList[settingsGroupKey];
+        for (var setting in settingsGroup) {
+          SettingsProvider.settings[setting] = true;
+        }
+      }
+    }
+
+    setDefaultValues();
   }
 
   //Executed at run phase
@@ -107,8 +125,10 @@
           function(data) {
             var response = JSON.parse(data);
             if (response.success) {
-              settingsProvider.settings = response.data;
-              console.log('Settings loaded correctly! ---> ' + JSON.stringify(response.data));
+              for (var setting in response.data) {
+                settingsProvider.settings[setting] = response.data[setting];
+              }
+              console.log('Settings loaded correctly! ---> ' + JSON.stringify(settingsProvider.settings));
             }
             callback(response);
           }

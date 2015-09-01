@@ -26,49 +26,28 @@
     var themeService = {};
 
     var themes = Settings.getConstants('themesList');
-    var currentTheme = {};
-
-    themeService.notifyChanged = function() {
-      $rootScope.$emit('theme-change');
-    }
-
-    themeService.subscribeList = function(scope, callback) {
-      var handler = $rootScope.$on('theme-change', callback);
-      scope.$on('$destroy', handler);
-    }
 
     themeService.getThemes = function() {
       return themes;
     }
 
     themeService.getCurrentTheme = function() {
-      return currentTheme;
+      return $rootScope.currentTheme;
     }
 
     themeService.setCurrentTheme = function(theme) {
-      if (currentTheme != theme) {
-        Settings.set('currentTheme', JSON.stringify(theme));
+      $rootScope.currentTheme = theme;
+        Settings.set('currentTheme', theme, function(response) {
+          console.log(response)
+        });
+
+      if ($rootScope.currentTheme != theme) {
       }
-      currentTheme = theme;
-      themeService.notifyChanged();
     }
 
-    /*
-      Gets the user currentTheme setting and then iterates through 
-      the themes list to see if there's a themeId match.
-      
-      If there is, it gets the object from the list and notifies the controllers.
-    */
     Settings.loadSettings(function() {
       Settings.get('currentTheme', function(response) {
-        var savedTheme = JSON.parse (response);
-        for (var themeKey in themes) {
-          var theme = themes[themeKey];
-          if (theme.id == savedTheme.id) {
-            currentTheme = theme;
-            themeService.notifyChanged();
-          }         
-        }
+        $rootScope.currentTheme = response;
       })
     });
 
@@ -81,19 +60,15 @@
   .controller('ThemeController', ThemeController);
 
   /** @ngInject */
-  function ThemeController(ThemeService, $scope) {
+  function ThemeController(ThemeService) {
 
     var vm = this;
+    vm.themes = ThemeService.getThemes();    
 
-    ThemeService.subscribeList($scope, function() {
-      vm.currentTheme = ThemeService.getCurrentTheme();      
-    });
-
-    vm.themes = ThemeService.getThemes();
-
-    vm.setCurrentTheme = function(theme) {
+    vm.saveCurrentTheme = function(theme) {
       ThemeService.setCurrentTheme(theme);
     }
+    
   };
 
 })();
