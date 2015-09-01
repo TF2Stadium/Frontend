@@ -18,13 +18,14 @@
     <!-- css files will be automatically insert here -->
     <!-- endinject -->
     <!-- endbuild -->
+
   </head>
-  <body class="{{$root.currentTheme}}">
+  <body class="{{$root.currentTheme ? $root.currentTheme : 'dark-theme'}}">
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <header id="header">
-      <md-toolbar id="header-toolbar">      
+      <md-toolbar id="header-toolbar">
         <div class="header-toolbar-content">
           <md-button ui-sref="lobby-list" id="header-title">
             <span>TF2</span>
@@ -35,14 +36,14 @@
           <div class="toolbar-buttons">
             <md-button ui-sref="lobby-page">Lobby page</md-button>
             <md-button ui-sref="settings">Settings</md-button>
-            <md-button class="steam-login">Login</md-button>
+            <md-button ng-href="{{config.endpoints.api}}/startLogin" class="steam-login">Login</md-button>
           </div>
         </div>
       </md-toolbar>
-      <div ui-view="commentbox" id="commentbox"></div>
+      <ng-include id="commentbox" src="'/app/shared/comment-box/comment-box.html'"></ng-include>
       <div class="header-info {{$root.currentState.name}}">
         <div ui-view="headerText" class="header-text"></div>
-      </div>      
+      </div>
       <div id="fab">
         <md-button ui-sref="lobby-create" class="md-fab md-raised md-primary">
           +

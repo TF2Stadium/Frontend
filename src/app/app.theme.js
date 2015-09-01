@@ -1,10 +1,10 @@
 (function() {
   'use strict';
 
+
   angular.module('tf2stadium')
   .config(ThemeConfig)
   .factory('ThemeService', ThemeService)
-  .controller('ThemeController', ThemeController);
 
   /** @ngInject */
   function ThemeConfig($mdThemingProvider) {
@@ -21,8 +21,9 @@
       .accentPalette('lightBluePalette');
   }
 
+
   /** @ngInject */
-  function ThemeService(Websocket, $rootScope, Settings) {
+  function ThemeService($rootScope, Settings) {
 
     var themeService = {};
 
@@ -53,19 +54,6 @@
     });
 
     return themeService;
-
-  }
-
-
-  /** @ngInject */
-  function ThemeController(ThemeService) {
-
-    var vm = this;
-    vm.themes = ThemeService.getThemes();
-
-    vm.saveCurrentTheme = function(theme) {
-      ThemeService.setCurrentTheme(theme);
-    }
 
   }
 

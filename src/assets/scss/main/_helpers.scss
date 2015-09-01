@@ -46,6 +46,11 @@
   left: 0;
 }
 
+.no-animate {
+  -webkit-transition: none !important;
+  transition: none !important;
+}
+
 //possible button state
 .pressed {
   box-shadow: inset rgba(0, 0, 0, 0.258824) 0px 1px 3px 0px;

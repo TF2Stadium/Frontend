@@ -8,7 +8,6 @@
     'ngTouch',
     'ngSanitize',
     'ui.router',
-    'mm.foundation',
     'btford.socket-io',
     'ngMaterial'
   ]);

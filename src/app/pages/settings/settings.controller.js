@@ -1,8 +1,6 @@
 (function() {
   'use strict';
-  
-  console.log(123);
-  
+
   angular
     .module('tf2stadium')
     .controller('SettingsPageController', SettingsPageController);
@@ -10,7 +8,7 @@
   /** @ngInject */
   function SettingsPageController(Settings) {
     var vm = this;
-    
+
     vm.settingsList = Settings.getConstants('settingsList');
 
     /*
@@ -47,5 +45,5 @@
       Settings.set(key, value.toString());
     }
   }
-  
+
 })();

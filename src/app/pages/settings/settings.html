@@ -1,7 +1,7 @@
 <div id="settings-wrapper">
   <div class="settings-section">
     <h1>Theme</h1>
-    <md-radio-group ng-controller="ThemeController as ctrl"
+    <md-radio-group
                     ng-model="$root.currentTheme"
                     ng-change="ctrl.saveCurrentTheme($root.currentTheme)">
       <md-radio-button  ng-value="theme.selector"

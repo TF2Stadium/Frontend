@@ -1,8 +1,7 @@
-<div class="lobbypage-text"
-     ng-init="lobbyInfo=lobbyPage.lobbyInformation">
-  <span class="lobbypage-map">{{lobbyInfo.map}}</span>
+<div class="lobbypage-text">
+  <span class="lobbypage-map">{{lobbyPage.lobbyInformation.map}}</span>
   <div class="left">
-    <span class="lobbypage-rules">{{lobbyInfo.type}}, {{lobbyInfo.rules}} rules</span>
+    <span class="lobbypage-rules">{{lobbyPage.lobbyInformation.type}}, {{lobbyInfo.rules}} rules</span>
     <span class="lobbypage-leader">Leader: {{lobbyInfo.owner}}</span>
   </div>
   <div class="right">
