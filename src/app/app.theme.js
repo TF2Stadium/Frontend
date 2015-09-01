@@ -16,78 +16,88 @@
       .accentPalette('lightBluePalette');
   });
 
-  angular.module('tf2stadium').factory('ThemeService', ThemeService);
+  angular
+  .module('tf2stadium')
+  .factory('ThemeService', ThemeService);
 
   /** @ngInject */
-  function ThemeService(Websocket) {
+  function ThemeService(Websocket, $rootScope, Settings) {
 
     var themeService = {};
 
-    themeService.themes = [
-      {name: "TF2Stadium", selector: "default-theme", id: "0"},
-      {name: "TF2Stadium Dark", selector: "dark-theme", id: "1"}
-    ]
-
-    themeService.currentTheme = themeService.themes[0];
-
-    themeService.readThemeSettings = function() {
-      Websocket.emit('playerSettingsGet',
-        JSON.stringify({key: 'theme'}),
-        function(data) {
-          var response = JSON.parse(data);
-          for (var i=0; i < themeService.themes.length; i++) {
-            var theme = themeService.themes[i];
-            if (theme.id == response.data.theme) {
-              themeService.currentTheme = theme;
-            }
-          }
-        }
-      );
+    var themes = {
+      "light":  {name: "TF2Stadium", selector: "default-theme", id: "0"},
+      "dark":   {name: "TF2Stadium Dark", selector: "dark-theme", id: "1"}
     }
 
-    themeService.saveThemeSettings = function() {
-      Websocket.emit('playerSettingsSet',
-        JSON.stringify({key: 'theme', value: themeService.currentTheme.id}),
-        function(data) {
-          var response = JSON.parse(data);
-          console.log(response)
-        }
-      );
+    var currentTheme = {};
+
+    themeService.notifyChanged = function() {
+      $rootScope.$emit('theme-change');
+    }
+
+    themeService.subscribeList = function(scope, callback) {
+      var handler = $rootScope.$on('theme-change', callback);
+      scope.$on('$destroy', handler);
+    }
+
+    themeService.getThemes = function() {
+      return themes;
+    }
+
+    themeService.getCurrentTheme = function() {
+      return currentTheme;
     }
 
     themeService.setCurrentTheme = function(theme) {
-      themeService.currentTheme = theme;
-      themeService.saveThemeSettings();
+      if (currentTheme != theme) {
+        Settings.set('currentTheme', JSON.stringify(theme));
+      }
+      currentTheme = theme;
+      themeService.notifyChanged();
     }
 
-    themeService.readThemeSettings();
+    /*
+      Gets the user currentTheme setting and then iterates through 
+      the themes list to see if there's a themeId match.
+      
+      If there is, it gets the object from the list and notifies the controllers.
+    */
+    Settings.loadSettings(function() {
+      Settings.get('currentTheme', function(response) {
+        var savedTheme = JSON.parse (response);
+        for (var themeKey in themes) {
+          var theme = themes[themeKey];
+          if (theme.id == savedTheme.id) {
+            currentTheme = theme;
+            themeService.notifyChanged();
+          }         
+        }
+      })
+    });
 
     return themeService;
 
   }
 
-  angular.module('tf2stadium')
-  .controller('ThemeController', ['$scope', 'ThemeService', function($scope, themeService) {
+  angular
+  .module('tf2stadium')
+  .controller('ThemeController', ThemeController);
 
-    $scope.themes = themeService.themes;
+  /** @ngInject */
+  function ThemeController(ThemeService, $scope) {
 
-    $scope.$watch(
-      function() {
-        return themeService.currentTheme;
-      },
-      function() {
-        $scope.currentTheme = themeService.currentTheme;
-      }
-    );
+    var vm = this;
 
-    $scope.setCurrentTheme = function(theme) {
-      themeService.setCurrentTheme(theme);
+    ThemeService.subscribeList($scope, function() {
+      vm.currentTheme = ThemeService.getCurrentTheme();      
+    });
+
+    vm.themes = ThemeService.getThemes();
+
+    vm.setCurrentTheme = function(theme) {
+      ThemeService.setCurrentTheme(theme);
     }
-    
-    $scope.getCurrentTheme = function() {
-      return themeService.currentTheme;
-    }
-
-  }]);
+  };
 
 })();

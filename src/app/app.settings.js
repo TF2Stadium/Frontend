@@ -70,7 +70,7 @@
         settings[key] = value;
 
         Websocket.emit('playerSettingsSet',
-          JSON.stringify({key: key.toString(), value: value.toString()}),
+          JSON.stringify({key: key, value: value}),
           function(data) {
             var response = JSON.parse(data);
             if (response.success) {

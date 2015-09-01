@@ -1,4 +1,15 @@
 <div id="settings-wrapper" ng-init="settingsList = settings.settingsList">
+  <div class="settings-section">
+    <h1>Theme</h1>
+    <md-radio-group ng-controller="ThemeController as ctrl"
+                    ng-model="ctrl.currentTheme"
+                    ng-change="ctrl.setCurrentTheme(ctrl.currentTheme)">
+      <md-radio-button  ng-value="theme"
+                        ng-repeat="theme in ctrl.themes track by theme.id">
+        {{theme.name}}
+      </md-radio-button>
+    </md-radio-group>
+  </div>
   <div  class="settings-section"
         ng-repeat="(keyName, settingsGroup) in settingsList">
     <h1>{{keyName | capitalize}}</h1>
@@ -8,16 +19,5 @@
                   ng-change="settings.saveSetting(field.id, field.selected)">
       {{field.name}}
     </md-checkbox>
-  </div>
-  <div class="settings-section" ng-controller="ThemeController">
-    <h1>Theme</h1>
-    <md-radio-group ng-controller="ThemeController"
-                    ng-model="currentTheme"
-                    ng-change="setCurrentTheme(currentTheme)">
-      <md-radio-button  ng-value="theme"
-                        ng-repeat="theme in themes">
-        {{theme.name}}
-      </md-radio-button>
-    </md-radio-group>
   </div>
 </div>
