@@ -32,8 +32,8 @@
     };
 
     SettingsProvider.constants.themesList = {
-      light:  {name: "TF2Stadium", selector: "default-theme", id: "0"},
-      dark:   {name: "TF2Stadium Dark", selector: "dark-theme", id: "1"}
+      light:  {name: "TF2Stadium", selector: "default-theme"},
+      dark:   {name: "TF2Stadium Dark", selector: "dark-theme"}
     }
   }
 
