@@ -13,7 +13,6 @@
 
     Websocket.on('chatReceive', function(data) {
       var message = JSON.parse(data);
-      vm.mainChatMessages.push(message);
     });
 
     vm.sendMessage = function() {
