@@ -17,11 +17,12 @@
       ],
       formats: [
         '6v6',
-        'Highlander'
+        'highlander'
       ],
       rulesets: [
         'UGC',
-        'ETF2L'
+        'ETF2L',
+        3966
       ],
       maps: [
         'cp_process',
@@ -30,13 +31,19 @@
     };
     
     vm.lobbySettings = {
-      server: '',
-      rconPassword: '',
-      region: '',
-      format: '',
-      map: '',
-      ruleset: '',
-      mumbleRequired: '',
+      server: 'tf2stadium.com:27031',
+      rconpwd: '',
+      type: 'highlander',
+      mapName: 'koth_viaduct',
+      whitelist: '3966',
+      mumbleRequired: false,
     };
+
+    vm.create = function() {
+      Websocket.emit ('lobbyCreate', JSON.stringify(vm.lobbySettings), function(data) {
+        var response = JSON.parse(data);
+        console.log(response);
+      });
+    }
   }
 })();

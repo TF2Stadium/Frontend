@@ -4,7 +4,7 @@
   angular.module('tf2stadium').config(routeConfig);
 
   /** @ngInject */
-  function routeConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+  function routeConfig($stateProvider, $urlRouterProvider) {
     $stateProvider
       .state('lobby-list', {
         url: '/',
