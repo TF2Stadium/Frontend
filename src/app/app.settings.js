@@ -117,6 +117,8 @@
         callback = callback || angular.noop;
         settings[key] = value;
 
+        localStorage.setItem(key, value);
+
         Websocket.emit('playerSettingsSet',
           //Backend only accepts strings!
           JSON.stringify({key: key.toString(), value: value.toString()}),
