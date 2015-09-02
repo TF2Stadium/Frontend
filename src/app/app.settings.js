@@ -132,7 +132,7 @@
 
         if (!alreadyLoadedFromBackend) {
           syncWithBackend(function(response) {
-            callback(response.data[key]);
+            callback(settingsProvider.settings[key]);
           });
         }
 
