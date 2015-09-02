@@ -5,7 +5,7 @@
 
   /** @ngInject */
 
-  function runBlock($log, $rootScope, Config) {
+  function runBlock($log, $rootScope, Config, ThemeService) {
     $log.debug('runBlock end');
 
     $rootScope.$on('$stateChangeStart',

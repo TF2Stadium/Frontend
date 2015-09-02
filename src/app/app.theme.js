@@ -49,11 +49,9 @@
       if ($rootScope.currentTheme !== theme) {
       }
     };
-
-    Settings.loadSettings(function() {
-      Settings.get('currentTheme', function(response) {
-        $rootScope.currentTheme = response;
-      });
+    
+    $rootScope.currentTheme = Settings.get('currentTheme', function(response) {
+      $rootScope.currentTheme = response;
     });
 
     return themeService;

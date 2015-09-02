@@ -67,64 +67,10 @@
       during and after the run phase.
     */
     var settingsService = function(Websocket) {
-      
+
+      //Private properties
       var settings = settingsProvider.settings;
       var alreadyLoadedFromBackend = false;
-
-      /*
-        Saves a setting into the service and into the backend and
-        fires an optional callback with the response from the backend as an argument.
-      */
-      settingsService.set = function(key, value, callback) {
-
-        callback = callback || angular.noop;
-        settingsProvider.settings[key] = value;
-
-        Websocket.emit('playerSettingsSet',
-          //Backend only accepts strings!
-          JSON.stringify({key: key.toString(), value: value.toString()}),
-          function(data) {
-            var response = JSON.parse(data);
-            if (response.success) {
-              console.log('Setting "' + key + '" saved correctly on the backend!');
-            } else {
-              console.log('Error setting key ' + key + ' with value ' + value + '. Reason: ' + response.message);
-            }
-            callback(response);
-          }
-        );
-      };
-
-      settingsService.get = function(key, callback) {
-
-        if (!alreadyLoadedFromBackend) {
-          syncWithBackend(callback);
-        }
-
-        return settingsProvider.settings[key];
-      };
-
-      settingsService.getConstants = function(key) {
-        return settingsProvider.constants[key];
-      };
-
-      /*
-        Loads all settings, saves them into the service in case of success and
-        fires an optional callback with the response from the backend as an argument.
-      */
-      settingsService.loadSettings = function(callback) {
-
-        for(var setting in localStorage) {
-          settings[setting] = localStorage.getItem(setting);
-        }
-
-        if (!alreadyLoadedFromBackend) {
-          syncWithBackend (callback);
-        }
-
-        return settings;
-      };
-
       var syncWithBackend = function(callback) {
 
         callback = callback || angular.noop;
@@ -154,6 +100,62 @@
           }
         );
       }
+
+      /*
+        Saves a setting into the service and into the backend and
+        fires an optional callback with the response from the backend as an argument.
+      */
+      settingsService.set = function(key, value, callback) {
+
+        callback = callback || angular.noop;
+        settingsProvider.settings[key] = value;
+
+        Websocket.emit('playerSettingsSet',
+          //Backend only accepts strings!
+          JSON.stringify({key: key.toString(), value: value.toString()}),
+          function(data) {
+            var response = JSON.parse(data);
+            if (response.success) {
+              console.log('Setting "' + key + '" saved correctly on the backend!');
+            } else {
+              console.log('Error setting key ' + key + ' with value ' + value + '. Reason: ' + response.message);
+            }
+            callback(response);
+          }
+        );
+      };
+
+      settingsService.get = function(key, callback) {
+
+        if (!alreadyLoadedFromBackend) {
+          syncWithBackend(function(response) {
+            callback(response.data[key]);
+          });
+        }
+
+        return settingsProvider.settings[key];
+      };
+
+      settingsService.getConstants = function(key) {
+        return settingsProvider.constants[key];
+      };
+
+      /*
+        Loads all settings, saves them into the service in case of success and
+        fires an optional callback with the response from the backend as an argument.
+      */
+      settingsService.getSettings = function(callback) {
+
+        for(var setting in localStorage) {
+          settings[setting] = localStorage.getItem(setting);
+        }
+
+        if (!alreadyLoadedFromBackend) {
+          syncWithBackend (callback);
+        }
+
+        return settings;
+      };
 
       return settingsService;
     };
