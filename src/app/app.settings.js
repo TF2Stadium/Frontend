@@ -101,7 +101,7 @@
               alreadyLoadedFromBackend = true;
               console.log('Settings loaded correctly! ---> ' + JSON.stringify(settingsProvider.settings));
             } else {
-              console.log('nooooooooooooooooooo')
+              console.log('There was a problem with the request ---> ' + response.message);
             }
             callback();
           }
