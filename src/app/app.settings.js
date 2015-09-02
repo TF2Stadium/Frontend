@@ -44,7 +44,7 @@
       for (var settingsGroupKey in SettingsProvider.constants.settingsList) {
         var settingsGroup = SettingsProvider.constants.settingsList[settingsGroupKey];
         for (var setting in settingsGroup) {
-          SettingsProvider.settings[setting] = "true";
+          SettingsProvider.settings[setting] = true;
         }
       }
     }

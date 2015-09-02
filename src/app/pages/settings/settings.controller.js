@@ -24,12 +24,7 @@
         var settingsGroup = vm.settingsList[settingsGroupKey];
 
         for (var fieldKey in settingsGroup) {
-          if (userSettings.hasOwnProperty(fieldKey)) {
-            //The backend sends a string, so it can't be assigned directly to the value
-            settingsGroup[fieldKey].selected = ("true" === userSettings[fieldKey]);
-          } else {
-            settingsGroup[fieldKey].selected = true;
-          }
+          settingsGroup[fieldKey].selected = userSettings[fieldKey];
         }
       }
     };
