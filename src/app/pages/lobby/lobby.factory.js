@@ -1,4 +1,3 @@
-/* globals io */
 (function() {
   'use strict';
 
@@ -50,6 +49,6 @@
       $rootScope.$emit('lobby-active-updated');
     };
 
-    return factory
+    return factory;
   }
 })();

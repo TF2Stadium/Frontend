@@ -1,11 +1,9 @@
 (function() {
   'use strict';
 
-  angular
-  .module('tf2stadium')
-  .provider('Settings', Settings)
-  .config(SettingsConfigBlock)
-  .run(SettingsRunBlock);
+  var app = angular.module('tf2stadium');
+  app.provider('Settings', Settings);
+  app.config(SettingsConfigBlock);
 
 
   /** @ngInject */
@@ -55,14 +53,10 @@
   }
 
   /** @ngInject */
-  function SettingsRunBlock(Websocket, Settings) {
-  }
-
-  /** @ngInject */
   function Settings() {
     console.log('Starting Settings');
 
-    var settingsProvider = {}
+    var settingsProvider = {};
 
     settingsProvider.settings = {};
 
@@ -74,6 +68,7 @@
     */
     var settingsService = function(Websocket) {
       var settings = settingsProvider.settings;
+      console.log(settings);
 
       /*
         Saves a setting into the service and into the backend and

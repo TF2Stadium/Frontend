@@ -26,13 +26,13 @@
         for (var fieldKey in settingsGroup) {
           if (userSettings.hasOwnProperty(fieldKey)) {
             //The backend sends a string, so it can't be assigned directly to the value
-            settingsGroup[fieldKey].selected = ("true" == userSettings[fieldKey]);
+            settingsGroup[fieldKey].selected = ("true" === userSettings[fieldKey]);
           } else {
             settingsGroup[fieldKey].selected = true;
           }
         }
       }
-    }
+    };
 
     var userSettings = {};
 
@@ -43,7 +43,7 @@
 
     vm.saveSetting = function(key, value) {
       Settings.set(key, value.toString());
-    }
+    };
   }
 
 })();

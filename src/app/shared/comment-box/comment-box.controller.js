@@ -17,19 +17,19 @@
       vm.messages = ChatService.getMessages();
     });
 
-    LobbyService.subscribeActive($scope, function(event) {
+    LobbyService.subscribeActive($scope, function() {
       vm.joinedLobby = LobbyService.getActive().id;
     });
 
-    vm.sendMessage = function() {
+    vm.sendMessage = function(event) {
 
-      if (vm.messageBox == "" || event.keyCode != 13) {
+      if (vm.messageBox === "" || event.keyCode !== 13) {
         return false;
       }
 
       var room = 0;
 
-      if (vm.currentTab != 0) {
+      if (vm.currentTab !== 0) {
         room = vm.joinedLobby;
       }
 

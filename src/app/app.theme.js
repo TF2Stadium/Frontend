@@ -2,18 +2,21 @@
   'use strict';
 
 
-  angular.module('tf2stadium')
-  .config(ThemeConfig)
-  .factory('ThemeService', ThemeService)
+  var app = angular.module('tf2stadium');
+  app.config(ThemeConfig);
+  app.factory('ThemeService', ThemeService);
 
   /** @ngInject */
   function ThemeConfig($mdThemingProvider) {
+
     var darkBlueMap = $mdThemingProvider.extendPalette('light-blue', {
       '500': '4b9cd4'
     });
+
     var lightBlueMap = $mdThemingProvider.extendPalette('light-blue', {
       '500': '99ccff'
     });
+
     $mdThemingProvider.definePalette('darkBluePalette', darkBlueMap);
     $mdThemingProvider.definePalette('lightBluePalette', lightBlueMap);
     $mdThemingProvider.theme('default')
@@ -40,17 +43,17 @@
     themeService.setCurrentTheme = function(theme) {
       $rootScope.currentTheme = theme;
         Settings.set('currentTheme', theme, function(response) {
-          console.log(response)
+          console.log(response);
         });
 
-      if ($rootScope.currentTheme != theme) {
+      if ($rootScope.currentTheme !== theme) {
       }
     };
 
     Settings.loadSettings(function() {
       Settings.get('currentTheme', function(response) {
         $rootScope.currentTheme = response;
-      })
+      });
     });
 
     return themeService;

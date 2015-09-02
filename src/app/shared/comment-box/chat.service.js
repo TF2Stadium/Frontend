@@ -1,4 +1,3 @@
-/* globals io */
 (function() {
   'use strict';
 
@@ -10,11 +9,11 @@
     Websocket.on("chatReceive", function (data) {
       var message = JSON.parse(data);
 
-      if (message.room == -1) {
+      if (message.room === -1) {
         message.room = 0;
       }
 
-      if (typeof factory.messages[message.room]  === "undefined") {
+      if (typeof factory.messages[message.room] === "undefined") {
         factory.messages[message.room] = [];
       }
 
@@ -57,6 +56,6 @@
     };
 
 
-    return factory
+    return factory;
   }
 })();

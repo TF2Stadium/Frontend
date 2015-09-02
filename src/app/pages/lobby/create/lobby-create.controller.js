@@ -8,7 +8,7 @@
   /** @ngInject */
   function LobbyCreateController($timeout, Websocket) {
     var vm = this;
-    
+
     vm.lobbySettingsList = {
       regions: [
         "Europe",
@@ -29,14 +29,14 @@
         'koth_viaduct'
       ]
     };
-    
+
     vm.lobbySettings = {
       server: 'tf2stadium.com:27031',
       rconpwd: '',
       type: 'highlander',
       mapName: 'koth_viaduct',
       whitelist: '3966',
-      mumbleRequired: false,
+      mumbleRequired: false
     };
 
     vm.create = function() {
@@ -44,6 +44,6 @@
         var response = JSON.parse(data);
         console.log(response);
       });
-    }
+    };
   }
 })();
