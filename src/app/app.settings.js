@@ -67,7 +67,9 @@
       during and after the run phase.
     */
     var settingsService = function(Websocket) {
+      
       var settings = settingsProvider.settings;
+      var alreadyLoadedFromBackend = false;
 
       /*
         Saves a setting into the service and into the backend and
@@ -95,8 +97,9 @@
 
       settingsService.get = function(key, callback) {
 
-        callback = callback || angular.noop;
-        callback(settingsProvider.settings[key]);
+        if (!alreadyLoadedFromBackend) {
+          syncWithBackend(callback);
+        }
 
         return settingsProvider.settings[key];
       };
@@ -111,11 +114,20 @@
       */
       settingsService.loadSettings = function(callback) {
 
-        callback = callback || angular.noop;
-
         for(var setting in localStorage) {
           settings[setting] = localStorage.getItem(setting);
         }
+
+        if (!alreadyLoadedFromBackend) {
+          syncWithBackend (callback);
+        }
+
+        return settings;
+      };
+
+      var syncWithBackend = function(callback) {
+
+        callback = callback || angular.noop;
 
         Websocket.emit('playerSettingsGet',
           JSON.stringify({key: ''}),
@@ -133,17 +145,15 @@
                   value = (value === 'true');
                 }
                 localStorage.setItem(setting, value);
-                settingsProvider.settings[setting] = value;
-                
+                settingsProvider.settings[setting] = value;                
               }
+              alreadyLoadedFromBackend = true;
               console.log('Settings loaded correctly! ---> ' + JSON.stringify(settingsProvider.settings));
             }
             callback(response);
           }
         );
-
-        return settings;
-      };  
+      }
 
       return settingsService;
     };

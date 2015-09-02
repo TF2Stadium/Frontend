@@ -39,6 +39,7 @@
     userSettings = Settings.loadSettings(function(response) {
       userSettings = response.data;
       populateSettings();
+      Settings.loadSettings();
     });
     populateSettings();
 
