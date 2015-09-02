@@ -9,7 +9,12 @@
   function SettingsPageController(Settings) {
     var vm = this;
 
-    vm.settingsList = Settings.getConstants('settingsList');
+    vm.themesList = Settings.getConstants('themesList');
+    vm.settingsList = Settings.getConstants('settingsList');    
+
+    vm.saveSetting = function(key, value) {
+      Settings.set(key, value);
+    };
 
     /*
       Iterates through all the settings in the list and compares
@@ -18,28 +23,19 @@
       If a user setting exists for that element, it gets updated.
       If it doesn't, it defaults to true.
     */
-    var populateSettings = function() {
-
+    var populateSettings = function(userSettings) {
       for (var settingsGroupKey in vm.settingsList) {
         var settingsGroup = vm.settingsList[settingsGroupKey];
-
         for (var fieldKey in settingsGroup) {
           settingsGroup[fieldKey].selected = userSettings[fieldKey];
         }
       }
     };
 
-    var userSettings = {};
-
-    userSettings = Settings.getSettings(function(response) {
-      userSettings = response.data;
-      populateSettings();
+    var userSettings = Settings.getSettings(function(response) {
+      populateSettings(response);
     });
-    populateSettings();
-
-    vm.saveSetting = function(key, value) {
-      Settings.set(key, value);
-    };
+    populateSettings(userSettings);
   }
 
 })();

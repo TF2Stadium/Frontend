@@ -71,9 +71,14 @@
       //Private properties
       var settings = settingsProvider.settings;
       var alreadyLoadedFromBackend = false;
+
       var syncWithBackend = function(callback) {
-        alreadyLoadedFromBackend = true;
         callback = callback || angular.noop;
+
+        if (alreadyLoadedFromBackend) {
+          callback();
+          return;
+        }
 
         Websocket.emit('playerSettingsGet',
           JSON.stringify({key: ''}),
@@ -91,13 +96,14 @@
                   value = (value === 'true');
                 }
                 localStorage.setItem(setting, value);
-                settingsProvider.settings[setting] = value;                
+                settings[setting] = value;
               }
+              alreadyLoadedFromBackend = true;
               console.log('Settings loaded correctly! ---> ' + JSON.stringify(settingsProvider.settings));
             } else {
-              alreadyLoadedFromBackend = false;
+              console.log('nooooooooooooooooooo')
             }
-            callback(response);
+            callback();
           }
         );
       }
@@ -109,7 +115,7 @@
       settingsService.set = function(key, value, callback) {
 
         callback = callback || angular.noop;
-        settingsProvider.settings[key] = value;
+        settings[key] = value;
 
         Websocket.emit('playerSettingsSet',
           //Backend only accepts strings!
@@ -129,14 +135,11 @@
       settingsService.get = function(key, callback) {
 
         callback = callback || angular.noop;
+        settingsService.getSettings(function() {
+          callback(settings[key]);
+        });
 
-        if (!alreadyLoadedFromBackend) {
-          syncWithBackend(function(response) {
-            callback(settingsProvider.settings[key]);
-          });
-        }
-
-        return settingsProvider.settings[key];
+        return settings[key];
       };
 
       settingsService.getConstants = function(key) {
@@ -153,9 +156,9 @@
           settings[setting] = localStorage.getItem(setting);
         }
 
-        if (!alreadyLoadedFromBackend) {
-          syncWithBackend (callback);
-        }
+        syncWithBackend (function() {
+          callback(settings)
+        });
 
         return settings;
       };
