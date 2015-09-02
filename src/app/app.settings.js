@@ -67,8 +67,46 @@
       during and after the run phase.
     */
     var settingsService = function(Websocket) {
+
+      //Private properties
       var settings = settingsProvider.settings;
-      console.log(settings);
+      var alreadyLoadedFromBackend = false;
+
+      var syncWithBackend = function(callback) {
+        callback = callback || angular.noop;
+
+        if (alreadyLoadedFromBackend) {
+          callback();
+          return;
+        }
+
+        Websocket.emit('playerSettingsGet',
+          JSON.stringify({key: ''}),
+          function(data) {
+            var response = JSON.parse(data);
+            if (response.success) {
+              for (var setting in response.data) {
+                var value = response.data[setting];
+                /*
+                  The backend can only store strings, so we need to convert them
+                  to booleans if they are one.
+                  It could be an actual string, so we have to check for both true and false.
+                */
+                if (value === 'true' || value === 'false') {
+                  value = (value === 'true');
+                }
+                localStorage.setItem(setting, value);
+                settings[setting] = value;
+              }
+              alreadyLoadedFromBackend = true;
+              console.log('Settings loaded correctly! ---> ' + JSON.stringify(settingsProvider.settings));
+            } else {
+              console.log('There was a problem with the request ---> ' + response.message);
+            }
+            callback();
+          }
+        );
+      }
 
       /*
         Saves a setting into the service and into the backend and
@@ -76,16 +114,20 @@
       */
       settingsService.set = function(key, value, callback) {
 
-
         callback = callback || angular.noop;
-        settingsProvider.settings[key] = value;
+        settings[key] = value;
+
+        localStorage.setItem(key, value);
 
         Websocket.emit('playerSettingsSet',
-          JSON.stringify({key: key, value: value}),
+          //Backend only accepts strings!
+          JSON.stringify({key: key.toString(), value: value.toString()}),
           function(data) {
             var response = JSON.parse(data);
             if (response.success) {
               console.log('Setting "' + key + '" saved correctly on the backend!');
+            } else {
+              console.log('Error setting key ' + key + ' with value ' + value + '. Reason: ' + response.message);
             }
             callback(response);
           }
@@ -95,9 +137,11 @@
       settingsService.get = function(key, callback) {
 
         callback = callback || angular.noop;
-        callback(settingsProvider.settings[key]);
+        settingsService.getSettings(function() {
+          callback(settings[key]);
+        });
 
-        return settingsProvider.settings[key];
+        return settings[key];
       };
 
       settingsService.getConstants = function(key) {
@@ -108,23 +152,17 @@
         Loads all settings, saves them into the service in case of success and
         fires an optional callback with the response from the backend as an argument.
       */
-      settingsService.loadSettings = function(callback) {
+      settingsService.getSettings = function(callback) {
 
-        callback = callback || angular.noop;
+        for(var setting in localStorage) {
+          settings[setting] = localStorage.getItem(setting);
+        }
 
-        Websocket.emit('playerSettingsGet',
-          JSON.stringify({key: ''}),
-          function(data) {
-            var response = JSON.parse(data);
-            if (response.success) {
-              for (var setting in response.data) {
-                settingsProvider.settings[setting] = response.data[setting];
-              }
-              console.log('Settings loaded correctly! ---> ' + JSON.stringify(settingsProvider.settings));
-            }
-            callback(response);
-          }
-        );
+        syncWithBackend (function() {
+          callback(settings)
+        });
+
+        return settings;
       };
 
       return settingsService;

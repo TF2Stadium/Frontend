@@ -1,11 +1,10 @@
 <div id="settings-wrapper">
   <div class="settings-section">
     <h1>Theme</h1>
-    <md-radio-group
-                    ng-model="$root.currentTheme"
-                    ng-change="ctrl.saveCurrentTheme($root.currentTheme)">
+    <md-radio-group ng-model="$root.currentTheme"
+                    ng-change="settings.saveSetting('currentTheme', $root.currentTheme)">
       <md-radio-button  ng-value="theme.selector"
-                        ng-repeat="theme in ctrl.themes track by theme.selector">
+                        ng-repeat="theme in settings.themesList track by theme.selector">
         {{theme.name}}
       </md-radio-button>
     </md-radio-group>
