@@ -72,7 +72,7 @@
       var settings = settingsProvider.settings;
       var alreadyLoadedFromBackend = false;
       var syncWithBackend = function(callback) {
-
+        alreadyLoadedFromBackend = true;
         callback = callback || angular.noop;
 
         Websocket.emit('playerSettingsGet',
@@ -93,8 +93,9 @@
                 localStorage.setItem(setting, value);
                 settingsProvider.settings[setting] = value;                
               }
-              alreadyLoadedFromBackend = true;
               console.log('Settings loaded correctly! ---> ' + JSON.stringify(settingsProvider.settings));
+            } else {
+              alreadyLoadedFromBackend = false;
             }
             callback(response);
           }
@@ -126,6 +127,8 @@
       };
 
       settingsService.get = function(key, callback) {
+
+        callback = callback || angular.noop;
 
         if (!alreadyLoadedFromBackend) {
           syncWithBackend(function(response) {
