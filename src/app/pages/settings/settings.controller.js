@@ -36,13 +36,14 @@
 
     var userSettings = {};
 
-    Settings.loadSettings(function(response) {
+    userSettings = Settings.loadSettings(function(response) {
       userSettings = response.data;
       populateSettings();
     });
+    populateSettings();
 
     vm.saveSetting = function(key, value) {
-      Settings.set(key, value.toString());
+      Settings.set(key, value);
     };
   }
 

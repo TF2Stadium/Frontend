@@ -44,7 +44,7 @@
       for (var settingsGroupKey in SettingsProvider.constants.settingsList) {
         var settingsGroup = SettingsProvider.constants.settingsList[settingsGroupKey];
         for (var setting in settingsGroup) {
-          SettingsProvider.settings[setting] = true;
+          SettingsProvider.settings[setting] = "true";
         }
       }
     }
@@ -68,7 +68,6 @@
     */
     var settingsService = function(Websocket) {
       var settings = settingsProvider.settings;
-      console.log(settings);
 
       /*
         Saves a setting into the service and into the backend and
@@ -76,16 +75,18 @@
       */
       settingsService.set = function(key, value, callback) {
 
-
         callback = callback || angular.noop;
         settingsProvider.settings[key] = value;
 
         Websocket.emit('playerSettingsSet',
-          JSON.stringify({key: key, value: value}),
+          //Backend only accepts strings!
+          JSON.stringify({key: key.toString(), value: value.toString()}),
           function(data) {
             var response = JSON.parse(data);
             if (response.success) {
               console.log('Setting "' + key + '" saved correctly on the backend!');
+            } else {
+              console.log('Error setting key ' + key + ' with value ' + value + '. Reason: ' + response.message);
             }
             callback(response);
           }
@@ -112,20 +113,37 @@
 
         callback = callback || angular.noop;
 
+        for(var setting in localStorage) {
+          settings[setting] = localStorage.getItem(setting);
+        }
+
         Websocket.emit('playerSettingsGet',
           JSON.stringify({key: ''}),
           function(data) {
             var response = JSON.parse(data);
             if (response.success) {
               for (var setting in response.data) {
-                settingsProvider.settings[setting] = response.data[setting];
+                var value = response.data[setting];
+                /*
+                  The backend can only store strings, so we need to convert them
+                  to booleans if they are one.
+                  It could be an actual string, so we have to check for both true and false.
+                */
+                if (value === 'true' || value === 'false') {
+                  value = (value === 'true');
+                }
+                localStorage.setItem(setting, value);
+                settingsProvider.settings[setting] = value;
+                
               }
               console.log('Settings loaded correctly! ---> ' + JSON.stringify(settingsProvider.settings));
             }
             callback(response);
           }
         );
-      };
+
+        return settings;
+      };  
 
       return settingsService;
     };
