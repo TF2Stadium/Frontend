@@ -9,14 +9,16 @@
       </md-radio-button>
     </md-radio-group>
   </div>
-  <div  class="settings-section"
-        ng-repeat="(keyName, settingsGroup) in settings.settingsList">
-    <h1>{{keyName | capitalize}}</h1>
-    <md-checkbox  ng-repeat="field in settingsGroup track by field.id"
-                  ng-model="field.selected"
-                  aria-label="{{field}}"
-                  ng-change="settings.saveSetting(field.id, field.selected)">
-      {{field.name}}
-    </md-checkbox>
+  <div  class="settings-section">
+    <h1>Filters</h1>
+    <div  ng-repeat="(keyName, settingsGroup) in settings.filters">
+      <h2>{{keyName | capitalize}}</h2>
+      <md-checkbox  ng-repeat="(key, field) in settingsGroup track by key"
+                    ng-model="field.selected"
+                    aria-label="{{field}}"
+                    ng-change="settings.saveSetting(key, field.selected)">
+        {{field.name}}
+      </md-checkbox>
+    </div>
   </div>
 </div>

@@ -9,23 +9,25 @@
   /** @ngInject */
   function SettingsConfigBlock(SettingsProvider) {
 
-    SettingsProvider.constants.settingsList = {
+    SettingsProvider.constants.filters = {
       regions: {
-        eu:             {id: 'eu',         name: 'Europe'},
-        na:             {id: 'na',         name: 'NorthAmerica'},
-        as:             {id: 'as',         name: 'Asia'},
-        aus:            {id: 'aus',        name: 'Australia'}
+        regionEU:             {name: 'Europe'},
+        regionNA:             {name: 'North America'},
+        regionSA:             {name: 'South America'},
+        regionAS:             {name: 'Asia'},
+        regionAUS:            {name: 'Australia'},
+        regionRU:             {name: 'Russia'},
+        regionAF:             {name: 'Africa'}
       },
       formats: {
-        sixes:          {id: 'sixes',      name: '6v6'},
-        highlander:     {id: 'highlander', name: 'Highlander'}
+        formatSIXES:          {name: '6v6'},
+        formatHL:             {name: 'Highlander'}
       },
       gamemodes: {
-        cp:             {id: 'cp',         name: 'Control Points'},
-        pl:             {id: 'pl',         name: 'Payload'}
-      },
-      mumble: {
-        mumble:         {id: 'mumble',     name: 'Mumble'}
+        gamemodeCP:           {name: 'Control Points'},
+        gamemodePL:           {name: 'Payload'},
+        gamemodeKOTH:         {name: 'King of the hill'},
+        gamemodeOTHERS:       {name: 'Other gamemodes'},
       }
     };
 
@@ -38,11 +40,11 @@
       SettingsProvider.settings.currentTheme = 'default-theme';
 
       /*
-        Defaults every value found in the settingsList to true.
+        Defaults every value found in the filters to true.
         It gets overwritten with the loaded settings in the SettingsRunBlock
       */
-      for (var settingsGroupKey in SettingsProvider.constants.settingsList) {
-        var settingsGroup = SettingsProvider.constants.settingsList[settingsGroupKey];
+      for (var settingsGroupKey in SettingsProvider.constants.filters) {
+        var settingsGroup = SettingsProvider.constants.filters[settingsGroupKey];
         for (var setting in settingsGroup) {
           SettingsProvider.settings[setting] = true;
         }
