@@ -42,26 +42,15 @@
 
     var vm = this;
 
-    /*
-      Since ngClass can't execute functions, we need to
-      have a count property to check if it's empty.
-    */
-    var updateCount = function() {
-      vm.count = Object.keys(vm.notifications).length;
-    }
-
     vm.remove = function(id) {
       Notifications.remove(id);
-      updateCount();
     }
 
     vm.add = function(message, level) {
       Notifications.add(message, level);
-      updateCount();
     }
 
     vm.notifications = Notifications.getNotifications();
-    updateCount();
 
   }
 

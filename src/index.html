@@ -58,8 +58,7 @@
         </md-button>
       </div>
     </header>
-    <aside id="notifications" ng-controller="NotificationsController as vm"
-                              ng-class="vm.count === 0 ? 'hidden' : ''">
+    <aside id="notifications" ng-controller="NotificationsController as vm">
       <md-button class="notification"
            ng-repeat="(id, notification) in vm.notifications track by id"
            ng-click=vm.remove(id)>
