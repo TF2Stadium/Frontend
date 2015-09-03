@@ -66,6 +66,7 @@
       Creates the service with all the functions accessible
       during and after the run phase.
     */
+    /** @ngInject */
     var settingsService = function(Websocket) {
 
       //Private properties
