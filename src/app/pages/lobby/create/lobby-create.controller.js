@@ -2,14 +2,17 @@
   'use strict';
 
   angular
-    .module('tf2stadium')
-    .controller('LobbyCreateController', LobbyCreateController);
+  .module('tf2stadium')
+  .factory('LobbyCreateService', LobbyCreateService)
+  .controller('LobbyCreateController', LobbyCreateController);
+
 
   /** @ngInject */
-  function LobbyCreateController($timeout, Websocket) {
-    var vm = this;
+  function LobbyCreateService($timeout, Websocket) {
 
-    vm.lobbySettingsList = {
+    var lobbyCreateService = {};
+
+    var lobbySettingsList = {
       regions: [
         "Europe",
         "North America",
@@ -24,11 +27,40 @@
         'ETF2L',
         3966
       ],
+      leagues: [
+        'UGC',
+        'ETF2L'
+      ],
       maps: [
         'cp_process',
         'koth_viaduct'
       ]
-    };
+    }
+
+    lobbyCreateService.create = function(lobbySettings) {
+      console.log(lobbySettings)
+      Websocket.emit('lobbyCreate',
+        JSON.stringify(lobbySettings),
+        function(data) {
+          var response = JSON.parse(data);
+          console.log(response);
+        }
+      );
+    }
+
+    lobbyCreateService.getSettingsList = function() {
+      return lobbySettingsList;
+    }
+
+    return lobbyCreateService;
+  }
+
+  /** @ngInject */
+  function LobbyCreateController(LobbyCreateService) {
+
+    var vm = this;
+
+    vm.lobbySettingsList = LobbyCreateService.getSettingsList();
 
     vm.lobbySettings = {
       server: 'tf2stadium.com:27031',
@@ -36,14 +68,12 @@
       type: 'highlander',
       mapName: 'koth_viaduct',
       whitelist: '3966',
-      mumbleRequired: false
+      mumbleRequired: false,
+      league: 'etf2l'
     };
 
     vm.create = function() {
-      Websocket.emit ('lobbyCreate', JSON.stringify(vm.lobbySettings), function(data) {
-        var response = JSON.parse(data);
-        console.log(response);
-      });
+      LobbyCreateService.create(vm.lobbySettings);
     };
   }
 })();
