@@ -39,7 +39,6 @@
     "gulp-replace": "~0.5.3",
     "http-proxy-middleware": "~0.0.5",
     "jshint-stylish": "~2.0.0",
-    "karma": "~0.12.36",
     "merge-stream": "~0.1.7",
     "require-dir": "~0.3.0"
   },
