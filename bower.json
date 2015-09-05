@@ -1,5 +1,9 @@
 {
-  "name": "frontend",
+  "name": "TF2Stadium-Frontend",
+  "description": "Frontend server component for the TF2Stadium project",
+  "license": "GPL-3.0",
+  "repository": "https://github.com/TF2Stadium/Frontend",
+  "readme": "readme.md",
   "version": "0.0.0",
   "dependencies": {
     "angular-animate": "~1.4.0",
