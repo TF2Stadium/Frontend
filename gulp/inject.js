@@ -35,7 +35,7 @@ gulp.task('inject', ['scripts', 'styles'], function () {
     .pipe(gulp.dest(path.join(conf.paths.tmp, '/serve')));
 });
 
-gulp.task('build:inject', ['build:scripts', 'build:styles'], function () {
+gulp.task('build:inject', ['build:styles'], function () {
   var injectStyles = gulp.src([
     path.join(conf.paths.tmp, '/serve/app/**/*.css'),
     path.join('!' + conf.paths.tmp, '/serve/app/vendor.css')

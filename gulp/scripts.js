@@ -16,8 +16,3 @@ gulp.task('scripts', function () {
     .pipe(browserSync.reload({ stream: true }))
     .pipe($.size())
 });
-
-gulp.task('build:scripts', function () {
-  return gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
-    .pipe($.size())
-});
