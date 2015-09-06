@@ -59,9 +59,37 @@
             }
           }
         },
+        maps: {
+          key: 'map',
+          options: {
+            'sixes': [
+              'cp_badlands',
+              'cp_granary',
+              'cp_process',
+              'cp_snakewater',
+              'cp_gullywash',
+              'cp_metalworks',
+              'cp_sunshine',
+              'koth_viaduct_pro'
+            ],
+            'highlander': [
+              'pl_upward',
+              'pl_badwater',
+              'pl_borneo',
+              'pl_swiftwater',
+              'pl_barnblitz_pro',
+              'cp_steel',
+              'koth_viaduct_pro',
+              'koth_lakeside',
+              'koth_ramjam',
+              'cp_process',
+              'cp_gullywash',
+              'cp_sunshine'
+            ]
+          }
+        },
         rulesets: ['UGC','ETF2L',3966],
-        leagues: ['UGC','ETF2L'],
-        maps: ['cp_process','koth_viaduct']
+        leagues: ['UGC','ETF2L']
       }
 
       lobbyCreateService.create = function(lobbySettings) {
