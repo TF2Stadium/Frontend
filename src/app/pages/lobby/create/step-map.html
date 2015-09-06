@@ -1,5 +1,6 @@
 <div  class="settings-section"
-      ng-repeat="map in lobbyCreate.lobbySettingsList.maps.options[lobbyCreate.lobbySettings.type]"
-      ng-click="lobbyCreate.select(lobbyCreate.lobbySettingsList.maps.key, map)">
-  <h1>{{::map}}</h1>
+      ng-repeat="(mapName, map) in lobbyCreate.lobbySettingsList.maps.options"
+      ng-click="lobbyCreate.select(lobbyCreate.lobbySettingsList.maps.key, mapName)"
+      ng-show="map[lobbyCreate.lobbySettings.type]">
+  <h1>{{::mapName}}</h1>
 </div>

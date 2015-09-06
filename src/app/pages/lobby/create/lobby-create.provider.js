@@ -41,7 +41,6 @@
     var lobbyCreateService = function(Websocket) {
 
       var lobbySettingsList = {
-        regions: ["Europe","North America","Asia"],
         formats: {
           key: 'type',
           options: {
@@ -62,30 +61,57 @@
         maps: {
           key: 'map',
           options: {
-            'sixes': [
-              'cp_badlands',
-              'cp_granary',
-              'cp_process',
-              'cp_snakewater',
-              'cp_gullywash',
-              'cp_metalworks',
-              'cp_sunshine',
-              'koth_viaduct_pro'
-            ],
-            'highlander': [
-              'pl_upward',
-              'pl_badwater',
-              'pl_borneo',
-              'pl_swiftwater',
-              'pl_barnblitz_pro',
-              'cp_steel',
-              'koth_viaduct_pro',
-              'koth_lakeside',
-              'koth_ramjam',
-              'cp_process',
-              'cp_gullywash',
-              'cp_sunshine'
-            ]
+            cp_badlands: {
+              sixes: true
+            },
+            cp_granary: {
+              sixes: true
+            },
+            cp_process: {
+              sixes: true
+            },
+            cp_snakewater: {
+              sixes: true
+            },
+            cp_gullywash: {
+              sixes: true,
+              highlander: true
+            },
+            cp_metalworks: {
+              sixes: true
+            },
+            cp_sunshine: {
+              sixes: true,
+              highlander: true
+            },
+            koth_viaduct_pro: {
+              sixes: true,
+              highlander: true
+            },
+            pl_upward: {
+              highlander: true
+            },
+            pl_badwater: {
+              highlander: true
+            },
+            pl_borneo: {
+              highlander: true
+            },
+            pl_swiftwater: {
+              highlander: true
+            },
+            pl_barnblitz_pro: {
+              highlander: true
+            },
+            cp_steel: {
+              highlander: true
+            },
+            koth_lakeside: {
+              highlander: true
+            },
+            koth_ramjam: {
+              highlander: true
+            }
           }
         },
         leagues: {
@@ -103,18 +129,15 @@
             },
             esea: {
               name: 'ESEA',
-              sixes: true,
-              highlander: false
+              sixes: true
             },
             ozfortress: {
               name: 'ozfortress',
-              sixes: true,
-              highlander: false
+              sixes: true
             },
             asia: {
               name: 'AsiaFortress',
-              sixes: true,
-              highlander: false
+              sixes: true
             }
           }
         },
