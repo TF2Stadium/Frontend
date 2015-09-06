@@ -3,5 +3,7 @@
     <code style="display: block; padding: 8px;">{{lobbyCreate.lobbySettings | json}}</code>
   </div>
 
-  <div ui-view="wizard-step"></div>
+  <div ui-view="wizard-step">
+    <md-button ng-click="lobbyCreate.goToNext()">Create a new lobby</md-button>
+  </div>
 </div>

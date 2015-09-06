@@ -107,18 +107,52 @@
               highlander: false
             },
             ozfortress: {
-              name: 'OZFORT',
+              name: 'ozfortress',
               sixes: true,
               highlander: false
             },
             asia: {
-              name: 'ASIA',
+              name: 'AsiaFortress',
               sixes: true,
               highlander: false
             }
           }
         },
-        rulesets: ['UGC','ETF2L',3966]
+        whitelists: {
+          key: 'whitelist',
+          options: {
+            '3250': {
+              name: 'ETF2L Highlander (Season 8)',
+              league: 'etf2l',
+              format: 'highlander'
+            },
+            '3951': {
+              name: 'UGC Highlander (Season 16)',
+              league: 'ugc',
+              format: 'highlander'
+            },
+            '3771': {
+              name: 'UGC Highlander (Season 16)',
+              league: 'ugc',
+              format: '4v4'
+            },
+            '3688': {
+              name: 'ESEA 6v6 (Season 19)',
+              league: 'esea',
+              format: 'sixes'
+            },
+            '4034': {
+              name: 'ozfortress 6v6 (OWL 14)',
+              league: 'ozfortress',
+              format: 'sixes'
+            },
+            '3872': {
+              name: 'AsiaFortress 6v6 (Season 9)',
+              league: 'asia',
+              format: 'sixes'
+            }            
+          }
+        }
       }
 
       lobbyCreateService.create = function(lobbySettings) {

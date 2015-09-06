@@ -5,7 +5,7 @@
   app.controller('LobbyCreateController', LobbyCreateController);
 
   /** @ngInject */
-  function LobbyCreateController(LobbyCreate, $state, $rootScope) {
+  function LobbyCreateController(LobbyCreate, $state) {
 
     var vm = this;
 
@@ -33,18 +33,6 @@
       stateParent = state[0];
       nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stateName) + 1];
       $state.go(stateParent + '.' + nextStepState);
-    }
-
-    $rootScope.$on('$stateChangeSuccess',
-      function(event, toState){
-        if (toState.name === 'lobby-create') {
-          vm.goToNext();
-        }
-      }
-    );
-    
-    if ($state.current.name !== 'lobby-create') {
-      $state.go('lobby-create');
     }
   }
 
