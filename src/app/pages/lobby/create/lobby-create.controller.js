@@ -1,66 +1,16 @@
 (function() {
   'use strict';
 
-  angular
-  .module('tf2stadium')
-  .factory('LobbyCreateService', LobbyCreateService)
-  .controller('LobbyCreateController', LobbyCreateController);
-
+  var app = angular.module('tf2stadium');
+  app.controller('LobbyCreateController', LobbyCreateController);
 
   /** @ngInject */
-  function LobbyCreateService($timeout, Websocket) {
-
-    var lobbyCreateService = {};
-
-    var lobbySettingsList = {
-      regions: [
-        "Europe",
-        "North America",
-        "Asia"
-      ],
-      formats: [
-        '6v6',
-        'highlander'
-      ],
-      rulesets: [
-        'UGC',
-        'ETF2L',
-        3966
-      ],
-      leagues: [
-        'UGC',
-        'ETF2L'
-      ],
-      maps: [
-        'cp_process',
-        'koth_viaduct'
-      ]
-    }
-
-    lobbyCreateService.create = function(lobbySettings) {
-      console.log(lobbySettings)
-      Websocket.emit('lobbyCreate',
-        JSON.stringify(lobbySettings),
-        function(data) {
-          var response = JSON.parse(data);
-          console.log(response);
-        }
-      );
-    }
-
-    lobbyCreateService.getSettingsList = function() {
-      return lobbySettingsList;
-    }
-
-    return lobbyCreateService;
-  }
-
-  /** @ngInject */
-  function LobbyCreateController(LobbyCreateService) {
+  function LobbyCreateController(LobbyCreate, $state) {
 
     var vm = this;
 
-    vm.lobbySettingsList = LobbyCreateService.getSettingsList();
+    vm.lobbySettingsList = LobbyCreate.getSettingsList();
+    vm.wizardSteps = LobbyCreate.getSteps();
 
     vm.lobbySettings = {
       server: 'tf2stadium.com:27031',
@@ -73,7 +23,17 @@
     };
 
     vm.create = function() {
-      LobbyCreateService.create(vm.lobbySettings);
+      LobbyCreate.create(vm.lobbySettings);
     };
+
+    vm.goToNext = function() {
+      var state, stateName, stateParent, nextStepState;
+      state = $state.current.name.split('.');
+      stateName = state[1];
+      stateParent = state[0];
+      nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stateName) + 1];
+      $state.go(stateParent + '.' + nextStepState);
+    }
   }
+
 })();
