@@ -1,7 +1,7 @@
 <div  class="settings-section"
-      ng-repeat="(keyName, whitelist) in lobbyCreate.lobbySettingsList.whitelists.options"
-      ng-click="lobbyCreate.select(lobbyCreate.lobbySettingsList.whitelists.key, keyName)"
-      ng-show="whitelist.format==lobbyCreate.lobbySettings.type
-            && whitelist.league==lobbyCreate.lobbySettings.league">
+      ng-repeat="(keyName, whitelist) in lobbyCreate.whitelists.options track by keyName"
+      ng-click="lobbyCreate.select(lobbyCreate.whitelists.key, keyName)"
+      ng-show="whitelist.format==lobbyCreate.lobbySettings[lobbyCreate.formats.key]
+            && whitelist.league==lobbyCreate.lobbySettings[lobbyCreate.leagues.key]">
   <h1>{{::whitelist.name}}</h1>
 </div>

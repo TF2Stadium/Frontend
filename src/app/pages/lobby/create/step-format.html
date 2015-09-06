@@ -1,5 +1,5 @@
 <div  class="md-clickable settings-section"
-      ng-repeat="(value, format) in lobbyCreate.lobbySettingsList.formats.options"
-      ng-click="lobbyCreate.select(lobbyCreate.lobbySettingsList.formats.key, value)">
+      ng-repeat="(value, format) in lobbyCreate.formats.options track by value"
+      ng-click="lobbyCreate.select(lobbyCreate.formats.key, value)">
   <h1>{{::format.name}}</h1>
 </div>

@@ -9,7 +9,10 @@
 
     var vm = this;
 
-    vm.lobbySettingsList = LobbyCreate.getSettingsList();
+    var lobbySettingsList = LobbyCreate.getSettingsList();
+    for (var key in lobbySettingsList) {
+      vm[key] = lobbySettingsList[key];
+    };
     vm.wizardSteps = LobbyCreate.getSteps();
 
     vm.lobbySettings = {
