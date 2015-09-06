@@ -42,7 +42,23 @@
 
       var lobbySettingsList = {
         regions: ["Europe","North America","Asia"],
-        formats: ['6v6','highlander'],
+        formats: {
+          key: 'type',
+          options: {
+            'sixes': {
+              name: '6v6'
+            },
+            'highlander': {
+              name: 'Highlander'
+            },
+            '4v4': {
+              name: '4v4'
+            },
+            'ultiduo': {
+              name: 'Ultiduo'
+            }
+          }
+        },
         rulesets: ['UGC','ETF2L',3966],
         leagues: ['UGC','ETF2L'],
         maps: ['cp_process','koth_viaduct']

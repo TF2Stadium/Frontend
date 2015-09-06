@@ -5,7 +5,7 @@
   app.controller('LobbyCreateController', LobbyCreateController);
 
   /** @ngInject */
-  function LobbyCreateController(LobbyCreate, $state) {
+  function LobbyCreateController(LobbyCreate, $state, $rootScope) {
 
     var vm = this;
 
@@ -14,17 +14,17 @@
 
     vm.lobbySettings = {
       server: 'tf2stadium.com:27031',
-      rconpwd: '',
-      type: 'highlander',
-      mapName: 'koth_viaduct',
-      whitelist: '3966',
-      mumbleRequired: false,
-      league: 'etf2l'
+      rconpwd: ''
     };
 
     vm.create = function() {
       LobbyCreate.create(vm.lobbySettings);
     };
+
+    vm.select = function(key, value) {
+      vm.lobbySettings[key] = value;
+      vm.goToNext();
+    }
 
     vm.goToNext = function() {
       var state, stateName, stateParent, nextStepState;
@@ -33,6 +33,18 @@
       stateParent = state[0];
       nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stateName) + 1];
       $state.go(stateParent + '.' + nextStepState);
+    }
+
+    $rootScope.$on('$stateChangeSuccess',
+      function(event, toState){
+        if (toState.name === 'lobby-create') {
+          vm.goToNext();
+        }
+      }
+    );
+    
+    if ($state.current.name !== 'lobby-create') {
+      $state.go('lobby-create');
     }
   }
 

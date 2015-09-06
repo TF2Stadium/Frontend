@@ -1,0 +1,5 @@
+<div  class="md-clickable settings-section"
+      ng-repeat="(value, format) in lobbyCreate.lobbySettingsList.formats.options"
+      ng-click="lobbyCreate.select(lobbyCreate.lobbySettingsList.formats.key, value)">
+  <h1>{{::format.name}}</h1>
+</div>
