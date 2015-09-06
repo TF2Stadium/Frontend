@@ -88,8 +88,37 @@
             ]
           }
         },
-        rulesets: ['UGC','ETF2L',3966],
-        leagues: ['UGC','ETF2L']
+        leagues: {
+          key: 'league',
+          options: {
+            etf2l: {
+              name: 'ETF2L',
+              sixes: true,
+              highlander: true
+            },
+            ugc: {
+              name: 'UGC',
+              sixes: true,
+              highlander: true
+            },
+            esea: {
+              name: 'ESEA',
+              sixes: true,
+              highlander: false
+            },
+            ozfortress: {
+              name: 'OZFORT',
+              sixes: true,
+              highlander: false
+            },
+            asia: {
+              name: 'ASIA',
+              sixes: true,
+              highlander: false
+            }
+          }
+        },
+        rulesets: ['UGC','ETF2L',3966]
       }
 
       lobbyCreateService.create = function(lobbySettings) {

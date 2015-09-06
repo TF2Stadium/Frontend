@@ -1,0 +1,6 @@
+<div  class="settings-section"
+      ng-repeat="(keyName, league) in lobbyCreate.lobbySettingsList.leagues.options"
+      ng-click="lobbyCreate.select(lobbyCreate.lobbySettingsList.leagues.key, keyName)"
+      ng-show="league[lobbyCreate.lobbySettings.type]">
+  <h1>{{::league.name}}</h1>
+</div>
