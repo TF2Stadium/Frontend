@@ -1,9 +1,11 @@
-<div id="settings-wrapper">
+
   <div class="settings-section">
     <code style="display: block; padding: 8px;">{{lobbyCreate.lobbySettings | json}}</code>
   </div>
 
-  <div ui-view="wizard-step">
+  <md-grid-list ui-view="wizard-step" id="wizard"
+        md-cols="12"
+        md-row-height="1:1"
+        md-gutter="12px">
     <md-button ng-click="lobbyCreate.goToNext()">Create a new lobby</md-button>
-  </div>
-</div>
+  </md-grid-list>

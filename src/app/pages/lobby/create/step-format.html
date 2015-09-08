@@ -1,5 +1,13 @@
-<div  class="md-clickable settings-section"
-      ng-repeat="(value, format) in lobbyCreate.formats.options track by value"
-      ng-click="lobbyCreate.select(lobbyCreate.formats.key, value)">
-  <h1>{{::format.name}}</h1>
-</div>
+<md-grid-tile md-ink-ripple class="card-format"
+      md-colspan="{{format.important ? 6 : 6}}"
+      md-rowspan="{{format.important ? 4 : 2}}"
+      ng-repeat="format in lobbyCreate.formats.options | orderBy:'important'"
+      ng-click="lobbyCreate.select(lobbyCreate.formats.key, format.key)">
+  <img src="/assets/img/formats/{{::format.key}}.jpg">
+  <div class="circle-container">
+    <div class="circle"></div>
+  </div>
+  <div class="tile-description">
+    <span>{{::format.name}}</span>
+  </div>
+</md-grid-tile>

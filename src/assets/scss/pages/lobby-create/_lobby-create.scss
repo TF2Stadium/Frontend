@@ -1,0 +1,112 @@
+#wizard {
+  margin-top: $padding-medium;
+}
+
+md-grid-tile {
+  position: relative;
+  cursor: pointer;
+  background: #000 !important;
+
+  &.important {
+    width: 50%;
+  }
+
+  &.card-format:hover {
+
+    .tile-description {
+      transform: scale(1.5) translateY(0);
+      color: #9cf;
+    }
+
+    .shutter-top {
+      transform: translateY(0);
+    }
+
+    .shutter-bottom {
+      transform: translateY(0);
+    }
+
+    .circle:after {
+      transform: scale(1.5);
+    }
+  }
+
+  img {
+    top: 0;
+    opacity: .7;
+    width: 120%;
+    transition: all .1s ease-out;
+  }
+}
+
+.circle {
+  @extend .fill-parent;
+  @include flex(row, center, center);
+
+  &:after {
+    content:"";
+    width: 100%;
+    padding-bottom: 100%; //makes the height equal to the width
+    background: #fff;
+    border-radius: 1000px;
+    transition: all .2s ease-out;
+    transform-origin: 50% 50%;
+    transform: scale(.001);
+  }
+}
+
+
+/*======================================
+                FORMATS
+ =======================================*/
+
+.card-format {
+  @extend .md-whiteframe-z2;
+  overflow: hidden;
+}
+
+.tile-description {
+  @include flex(column, center, center);
+  font-family: montserrat;
+  font-weight: bold;
+  color: #fff;
+  font-size: 30px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateY(35%);
+  transition: all .2s ease-out;
+  padding: $padding-small;
+}
+
+
+/*======================================
+                  MAPS
+ =======================================*/
+
+.card-map {
+  @extend .md-whiteframe-z2;
+  overflow: hidden;
+}
+
+
+/*======================================
+                LEAGUES
+ =======================================*/
+
+.card-league {
+  @extend .md-whiteframe-z2;
+  overflow: hidden;
+}
+
+
+/*======================================
+              WHITELISTS
+ =======================================*/
+
+.card-whitelist {
+  @extend .md-whiteframe-z2;
+  overflow: hidden;
+}

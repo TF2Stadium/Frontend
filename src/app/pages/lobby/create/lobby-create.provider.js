@@ -43,20 +43,29 @@
       var lobbySettingsList = {
         formats: {
           key: 'type',
-          options: {
-            'sixes': {
-              name: '6v6'
-            },
-            'highlander': {
-              name: 'Highlander'
-            },
-            '4v4': {
+          options: [
+            {
+              key: 'sixes',
+              name: '6v6',
+              important: true
+            },{
+              key: 'highlander',
+              name: 'Highlander',
+              important: true
+            },{
+              key: '4v4',
               name: '4v4'
-            },
-            'ultiduo': {
+            },{
+              key: 'ultiduo',
               name: 'Ultiduo'
+            },{
+              key: 'arena-respawn',
+              name: 'Arena:Respawn'
+            },{
+              key: 'bball',
+              name: 'Bball'
             }
-          }
+          ]
         },
         maps: {
           key: 'map',
