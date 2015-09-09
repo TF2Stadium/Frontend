@@ -1,6 +1,13 @@
-<div  class="settings-section"
-      ng-repeat="(mapName, map) in lobbyCreate.maps.options track by mapName"
-      ng-click="lobbyCreate.select(lobbyCreate.maps.key, mapName)"
-      ng-show="map[lobbyCreate.lobbySettings[lobbyCreate.formats.key]]">
-  <h1>{{::mapName}}</h1>
-</div>
+<md-grid-tile md-ink-ripple class="card-format"
+      md-colspan="{{map.important ? 6 : 6}}"
+      md-rowspan="{{map.important ? 4 : 2}}"
+      ng-repeat="map in lobbyCreate.maps.options | orderBy:'important'"
+      ng-click="lobbyCreate.select(lobbyCreate.maps.key, map)"
+      ng-if="map[lobbyCreate.lobbySettings[lobbyCreate.formats.key]]">
+  <img src="/assets/img/maps/{{::map.name}}-4k.jpeg">
+  <div class="circle"></div>
+  <div class="tile-description">
+    <span>
+  {{::map.name}}</span>
+  </div>
+</md-grid-tile>

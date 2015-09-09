@@ -69,59 +69,61 @@
         },
         maps: {
           key: 'map',
-          options: {
-            cp_badlands: {
+          options: [
+            {
+              name: 'cp_badlands',
               sixes: true
-            },
-            cp_granary: {
+            },{
+              name: 'cp_granary',
               sixes: true
-            },
-            cp_process: {
+            },{
+              name: 'cp_process_final',
+              important: true,
               sixes: true
-            },
-            cp_snakewater: {
+            },{
+              name: 'cp_snakewater',
               sixes: true
-            },
-            cp_gullywash: {
+            },{
+              name: 'cp_gullywash',
               sixes: true,
               highlander: true
-            },
-            cp_metalworks: {
+            },{
+              name: 'cp_metalworks',
               sixes: true
-            },
-            cp_sunshine: {
+            },{
+              name: 'cp_sunshine',
               sixes: true,
               highlander: true
-            },
-            koth_viaduct_pro: {
+            },{
+              name: 'koth_viaduct_pro',
               sixes: true,
               highlander: true
-            },
-            pl_upward: {
+            },{
+              name: 'pl_upward',
               highlander: true
-            },
-            pl_badwater: {
+            },{
+              name: 'pl_badwater',
               highlander: true
-            },
-            pl_borneo: {
+            },{
+              name: 'pl_borneo',
               highlander: true
-            },
-            pl_swiftwater: {
+            },{
+              name: 'pl_swiftwater',
               highlander: true
-            },
-            pl_barnblitz_pro: {
+            },{
+              name: 'pl_barnblitz_pro',
               highlander: true
-            },
-            cp_steel: {
+            },{
+              name: 'cp_steel',
               highlander: true
-            },
-            koth_lakeside: {
+            },{
+              name: 'koth_lakeside',
               highlander: true
-            },
-            koth_ramjam: {
+            },{
+              name: 'koth_ramjam',
               highlander: true
             }
-          }
+          ]
         },
         leagues: {
           key: 'league',
