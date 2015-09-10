@@ -1,6 +1,12 @@
-<div  class="settings-section"
-      ng-repeat="(keyName, league) in lobbyCreate.leagues.options track by keyName"
-      ng-click="lobbyCreate.select(lobbyCreate.leagues.key, keyName)"
-      ng-show="league[lobbyCreate.lobbySettings[lobbyCreate.formats.key]]">
-  <h1>{{::league.name}}</h1>
-</div>
+<md-grid-tile md-ink-ripple class="card-format"
+      md-colspan="{{league.important ? 6 : 6}}"
+      md-rowspan="{{league.important ? 4 : 2}}"
+      ng-repeat="league in lobbyCreate.leagues.options"
+      ng-click="lobbyCreate.select(lobbyCreate.leagues.key, map)"
+      ng-if="league[lobbyCreate.lobbySettings[lobbyCreate.formats.key]]">
+  <div class="circle"></div>
+  <div class="tile-description">
+    <span>
+  {{::league.name}}</span>
+  </div>
+</md-grid-tile>
