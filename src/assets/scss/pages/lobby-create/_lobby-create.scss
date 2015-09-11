@@ -1,29 +1,21 @@
 #wizard {
-  margin-top: $padding-medium;
+  margin: $padding-medium 0;
 }
 
 md-grid-tile {
   position: relative;
   cursor: pointer;
-  background: #000 !important;
-
-  &.important {
-    width: 50%;
-  }
 
   &.card-format:hover {
 
+    background: #f5f5f5;
+
     .tile-description {
-      transform: scale(1.5) translateY(0);
+      transform: translateY(0);
+    }
+
+    .image ~ .tile-description {
       color: #9cf;
-    }
-
-    .shutter-top {
-      transform: translateY(0);
-    }
-
-    .shutter-bottom {
-      transform: translateY(0);
     }
 
     .circle:after {
@@ -31,24 +23,44 @@ md-grid-tile {
     }
   }
 
-  img {
-    top: 0;
-    opacity: .7;
-    width: 120%;
+  .image {
+    @extend .fill-parent;
     transition: all .1s ease-out;
+    background: {
+      size: cover;
+      position: 50% 20%;
+      repeat: no-repeat;
+    }
+
+    &:after {
+      @extend .fill-parent;
+      content: "";
+      background: #000;
+      opacity: .15;
+    }
+  }
+
+  .image ~ .tile-description {
+    transform: translateY(calc(50% - 30px));
+    color: #fff;
+  }
+
+  .image ~ .circle {
+    opacity: 1;
   }
 }
 
 .circle {
   @extend .fill-parent;
   @include flex(row, center, center);
+  opacity: 0; //gets overridden by .image~circle
 
   &:after {
     content:"";
     width: 100%;
     padding-bottom: 100%; //makes the height equal to the width
     background: #fff;
-    border-radius: 1000px;
+    border-radius: 50%;
     transition: all .2s ease-out;
     transform-origin: 50% 50%;
     transform: scale(.001);
@@ -67,46 +79,9 @@ md-grid-tile {
 
 .tile-description {
   @include flex(column, center, center);
+  @extend .fill-parent;
   font-family: montserrat;
   font-weight: bold;
-  color: #fff;
-  font-size: 30px;
-  height: 100%;
-  width: 100%;
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  transform: translateY(35%);
+  font-size: 20px;
   transition: all .2s ease-out;
-  padding: $padding-small;
-}
-
-
-/*======================================
-                  MAPS
- =======================================*/
-
-.card-map {
-  @extend .md-whiteframe-z2;
-  overflow: hidden;
-}
-
-
-/*======================================
-                LEAGUES
- =======================================*/
-
-.card-league {
-  @extend .md-whiteframe-z2;
-  overflow: hidden;
-}
-
-
-/*======================================
-              WHITELISTS
- =======================================*/
-
-.card-whitelist {
-  @extend .md-whiteframe-z2;
-  overflow: hidden;
 }
