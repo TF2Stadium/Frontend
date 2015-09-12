@@ -15,7 +15,14 @@
       It also makes sense to add them in this separate file
       because they're nested states
     */
-    LobbyCreateProvider.wizardSteps = ['format', 'map', 'league', 'whitelist', 'mumble'];
+    LobbyCreateProvider.wizardSteps = [
+      'format',
+      'map',
+      'league',
+      'whitelist',
+      'mumble',
+      'confirm'
+    ];
 
     for (var i = 0; i < LobbyCreateProvider.wizardSteps.length; i++) {
       var stepName = LobbyCreateProvider.wizardSteps[i];
@@ -43,149 +50,176 @@
       var lobbySettingsList = {
         formats: {
           key: 'type',
+          title: 'Format',
           options: [
             {
-              key: 'sixes',
-              name: '6v6',
+              value: 'sixes',
+              title: '6v6',
               important: true
             },{
-              key: 'highlander',
-              name: 'Highlander',
+              value: 'highlander',
+              title: 'Highlander',
               important: true
             },{
-              key: '4v4',
-              name: '4v4'
+              value: '4v4',
+              title: '4v4'
             },{
-              key: 'ultiduo',
-              name: 'Ultiduo'
+              value: 'ultiduo',
+              title: 'Ultiduo'
             },{
-              key: 'arena-respawn',
-              name: 'Arena:Respawn'
+              value: 'arena-respawn',
+              title: 'Arena:Respawn'
             },{
-              key: 'bball',
-              name: 'Bball'
+              value: 'bball',
+              title: 'Bball'
             }
           ]
         },
         maps: {
-          key: 'map',
+          key: 'mapName',
+          title: 'Map',
           options: [
             {
-              name: 'cp_badlands',
+              value: 'cp_badlands',
               sixes: true
             },{
-              name: 'cp_granary',
+              value: 'cp_granary',
               sixes: true
             },{
-              name: 'cp_process_final',
+              value: 'cp_process_final',
               important: true,
               sixes: true
             },{
-              name: 'cp_snakewater',
+              value: 'cp_snakewater',
               sixes: true
             },{
-              name: 'cp_gullywash',
+              value: 'cp_gullywash',
               sixes: true,
               highlander: true
             },{
-              name: 'cp_metalworks',
+              value: 'cp_metalworks',
               sixes: true
             },{
-              name: 'cp_sunshine',
+              value: 'cp_sunshine',
               sixes: true,
               highlander: true
             },{
-              name: 'koth_viaduct_pro',
+              value: 'koth_viaduct_pro',
               sixes: true,
+              highlander: true,
+              important: true
+            },{
+              value: 'pl_upward',
               highlander: true
             },{
-              name: 'pl_upward',
+              value: 'pl_badwater',
               highlander: true
             },{
-              name: 'pl_badwater',
+              value: 'pl_borneo',
               highlander: true
             },{
-              name: 'pl_borneo',
+              value: 'pl_swiftwater',
               highlander: true
             },{
-              name: 'pl_swiftwater',
+              value: 'pl_barnblitz_pro',
               highlander: true
             },{
-              name: 'pl_barnblitz_pro',
+              value: 'cp_steel',
               highlander: true
             },{
-              name: 'cp_steel',
+              value: 'koth_lakeside',
               highlander: true
             },{
-              name: 'koth_lakeside',
-              highlander: true
-            },{
-              name: 'koth_ramjam',
+              value: 'koth_ramjam',
               highlander: true
             }
           ]
         },
         leagues: {
           key: 'league',
-          options: {
-            etf2l: {
-              name: 'ETF2L',
+          title: 'League',
+          options: [
+            {
+              value: 'etf2l',
+              title: 'ETF2L',
+              description: 'Brief description of the ETF2L rules.',
               sixes: true,
               highlander: true
-            },
-            ugc: {
-              name: 'UGC',
+            },{
+              value: 'ugc',
+              title: 'UGC',
+              description: 'Brief description of the UGC rules.',
               sixes: true,
               highlander: true
-            },
-            esea: {
-              name: 'ESEA',
+            },{
+              value: 'esea',
+              title: 'ESEA',
+              description: 'Brief description of the ESEA rules.',
               sixes: true
-            },
-            ozfortress: {
-              name: 'ozfortress',
+            },{
+              value: 'ozfortress',
+              title: 'ozfortress',
+              description: 'Brief description of the ozfortress rules.',
               sixes: true
-            },
-            asia: {
-              name: 'AsiaFortress',
+            },{
+              value: 'asia',
+              title: 'AsiaFortress',
+              description: 'Brief description of the AsiaFortress rules.',
               sixes: true
             }
-          }
+          ]
         },
         whitelists: {
           key: 'whitelist',
-          options: {
-            '3250': {
-              name: 'ETF2L Highlander (Season 8)',
+          title: 'Whitelist',
+          options: [
+            {
+              value: 3250,
+              title: 'ETF2L Highlander (Season 8)',
               league: 'etf2l',
               format: 'highlander'
-            },
-            '3951': {
-              name: 'UGC Highlander (Season 16)',
+            },{
+              value: 3951,
+              title: 'UGC Highlander (Season 16)',
               league: 'ugc',
               format: 'highlander'
-            },
-            '3771': {
-              name: 'UGC Highlander (Season 16)',
+            },{
+              value: 3771,
+              title: 'UGC Highlander (Season 16)',
               league: 'ugc',
               format: '4v4'
-            },
-            '3688': {
-              name: 'ESEA 6v6 (Season 19)',
+            },{
+              value: 3688,
+              title: 'ESEA 6v6 (Season 19)',
               league: 'esea',
               format: 'sixes'
-            },
-            '4034': {
-              name: 'ozfortress 6v6 (OWL 14)',
+            },{
+              value: 4034,
+              title: 'ozfortress 6v6 (OWL 14)',
               league: 'ozfortress',
               format: 'sixes'
-            },
-            '3872': {
-              name: 'AsiaFortress 6v6 (Season 9)',
+            },{
+              value: 3872,
+              title: 'AsiaFortress 6v6 (Season 9)',
               league: 'asia',
               format: 'sixes'
             }            
-          }
+          ]
+        },
+        mumble: {
+          key: 'mumbleRequired',
+          title: 'Mumble required',
+          options: [
+            {
+              value: true,
+              title: 'Mumble required',
+              description: 'All participants will need to join the mumble channel.',
+            },{
+              value: false,
+              title: 'Mumble not required',
+              description: 'Participants will join the mumble only if they want to do so.',
+            }         
+          ]
         }
       }
 
