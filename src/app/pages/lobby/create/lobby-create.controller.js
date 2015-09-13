@@ -20,12 +20,15 @@
       rconpwd: ''
     };
 
+    vm.lobbySummary = {};
+
     vm.create = function() {
       LobbyCreate.create(vm.lobbySettings);
     };
 
-    vm.select = function(key, value) {
-      vm.lobbySettings[key] = value;
+    vm.select = function(field, option) {
+      vm.lobbySettings[field.key] = option.value;
+      vm.lobbySummary[field.title] = option.title || option.value;
       vm.goToNext();
     }
 
