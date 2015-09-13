@@ -1,12 +1,10 @@
-<md-grid-tile md-ink-ripple class="card-format"
-      md-colspan="{{league.important ? 6 : 6}}"
-      md-rowspan="{{league.important ? 4 : 2}}"
-      ng-repeat="league in lobbyCreate.leagues.options"
-      ng-click="lobbyCreate.select(lobbyCreate.leagues.key, map)"
-      ng-if="league[lobbyCreate.lobbySettings[lobbyCreate.formats.key]]">
-  <div class="circle"></div>
-  <div class="tile-description">
-    <span>
-  {{::league.name}}</span>
+<md-grid-tile md-ink-ripple class="tile-card"
+  md-colspan="12" md-rowspan="1"
+  ng-repeat="league in lobbyCreate.leagues.options"
+  ng-click="lobbyCreate.select(lobbyCreate.leagues, league)"
+  ng-if="league[lobbyCreate.lobbySettings[lobbyCreate.formats.key]]">
+  <div class="tile-text">
+    <span>{{::league.title}}</span>
+    <span>{{::league.description}}</span>
   </div>
 </md-grid-tile>

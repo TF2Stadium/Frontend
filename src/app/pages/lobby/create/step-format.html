@@ -1,13 +1,9 @@
-<md-grid-tile md-ink-ripple class="card-format"
-      md-colspan="{{format.important ? 6 : 6}}"
-      md-rowspan="{{format.important ? 4 : 2}}"
-      ng-repeat="format in lobbyCreate.formats.options | orderBy:'important'"
-      ng-click="lobbyCreate.select(lobbyCreate.formats.key, format.key)">
-  <img src="/assets/img/formats/{{::format.key}}.jpg">
-  <div class="circle-container">
-    <div class="circle"></div>
-  </div>
-  <div class="tile-description">
-    <span>{{::format.name}}</span>
+<md-grid-tile md-ink-ripple class="tile-card"
+  md-colspan="{{format.important ? 8 : 4}}" md-rowspan="{{format.important ? 4 : 2}}"
+  ng-repeat="format in lobbyCreate.formats.options | orderBy:'title'"
+  ng-click="lobbyCreate.select(lobbyCreate.formats, format)">
+  <div class="tile-image" style="background-image: url(/assets/img/formats/{{::format.value}}.jpg)"></div>
+  <div class="tile-text">
+    <span>{{::format.title}}</span>
   </div>
 </md-grid-tile>

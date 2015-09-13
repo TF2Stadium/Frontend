@@ -1,11 +1,8 @@
-
-  <div class="settings-section">
-    <code style="display: block; padding: 8px;">{{lobbyCreate.lobbySettings | json}}</code>
-  </div>
-
-  <md-grid-list ui-view="wizard-step" id="wizard"
-        md-cols="12"
-        md-row-height="1:1"
-        md-gutter="12px">
-    <md-button ng-click="lobbyCreate.goToNext()">Create a new lobby</md-button>
-  </md-grid-list>
+<md-grid-list ui-view="wizard-step" id="wizard"
+  md-cols="12"  md-row-height="1:1" md-gutter="12px">
+  <md-grid-tile md-ink-ripple class="tile-card"
+    md-colspan="12" md-rowspan="1"
+    ng-click="lobbyCreate.goToNext()">
+    <span>Create a new lobby</span>
+  </md-grid-tile>
+</md-grid-list>

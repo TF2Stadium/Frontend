@@ -1,7 +1,10 @@
-<div  class="settings-section"
-      ng-repeat="(keyName, whitelist) in lobbyCreate.whitelists.options track by keyName"
-      ng-click="lobbyCreate.select(lobbyCreate.whitelists.key, keyName)"
-      ng-show="whitelist.format==lobbyCreate.lobbySettings[lobbyCreate.formats.key]
-            && whitelist.league==lobbyCreate.lobbySettings[lobbyCreate.leagues.key]">
-  <h1>{{::whitelist.name}}</h1>
-</div>
+<md-grid-tile md-ink-ripple class="tile-card"
+  md-colspan="12" md-rowspan="1"
+  ng-repeat="whitelist in lobbyCreate.whitelists.options"
+  ng-click="lobbyCreate.select(lobbyCreate.whitelists, whitelist)"
+  ng-if="whitelist.format==lobbyCreate.lobbySettings[lobbyCreate.formats.key]
+         && whitelist.league==lobbyCreate.lobbySettings[lobbyCreate.leagues.key]">
+  <div class="tile-text">
+    <span>{{::whitelist.title}}</span>
+  </div>
+</md-grid-tile>
