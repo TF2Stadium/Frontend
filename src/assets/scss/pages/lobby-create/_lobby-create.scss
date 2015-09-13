@@ -2,58 +2,49 @@
   margin: $padding-medium 0;
 }
 
-md-grid-tile {
-  position: relative;
+md-grid-tile.tile-card {
+  @extend .md-whiteframe-z2;
   cursor: pointer;
+  overflow: hidden;
+  transition: background-color .2s ease-out;
 
-  &.card-format:hover {
+  &:hover {
+    background-color: #f5f5f5 !important;
 
-    background: #f5f5f5;
-
-    .tile-description {
+    .tile-text {
       transform: translateY(0);
     }
 
-    .image ~ .tile-description {
+    .tile-image ~ .tile-text {
       color: #9cf;
     }
 
-    .circle:after {
+    .tile-image:after {
       transform: scale(1.5);
     }
   }
-
-  .image {
-    @extend .fill-parent;
-    transition: all .1s ease-out;
-    background: {
-      size: cover;
-      position: 50% 20%;
-      repeat: no-repeat;
-    }
-
-    &:after {
-      @extend .fill-parent;
-      content: "";
-      background: #000;
-      opacity: .15;
-    }
-  }
-
-  .image ~ .tile-description {
-    transform: translateY(calc(50% - 30px));
-    color: #fff;
-  }
-
-  .image ~ .circle {
-    opacity: 1;
-  }
 }
 
-.circle {
-  @extend .fill-parent;
+.tile-card-mumble .tile-text {
+  padding: $padding-big;
+}
+
+.tile-image {
   @include flex(row, center, center);
-  opacity: 0; //gets overridden by .image~circle
+  @extend .fill-parent;
+  transition: all .1s ease-out;
+  background: {
+    size: cover;
+    position: 50% 20%;
+    repeat: no-repeat;
+  }
+
+  &:before {
+    @extend .fill-parent;
+    content: "";
+    background: #000;
+    opacity: .15;
+  }
 
   &:after {
     content:"";
@@ -65,23 +56,22 @@ md-grid-tile {
     transform-origin: 50% 50%;
     transform: scale(.001);
   }
+
+  & ~ .tile-text {
+    transform: translateY(calc(50% - 30px));
+    color: #fff;
+  }
 }
 
-
-/*======================================
-                FORMATS
- =======================================*/
-
-.card-format {
-  @extend .md-whiteframe-z2;
-  overflow: hidden;
-}
-
-.tile-description {
+.tile-text {
   @include flex(column, center, center);
   @extend .fill-parent;
-  font-family: montserrat;
-  font-weight: bold;
-  font-size: 20px;
+  text-align: center;
   transition: all .2s ease-out;
+
+  .title {
+    font-family: montserrat;
+    font-weight: bold;
+    font-size: 20px;    
+  }
 }
