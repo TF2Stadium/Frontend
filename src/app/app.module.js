@@ -4,9 +4,6 @@
   angular.module('tf2stadium', [
     'tf2stadium.services',
     'ngAnimate',
-    'ngCookies',
-    'ngTouch',
-    'ngSanitize',
     'ui.router',
     'btford.socket-io',
     'ngMaterial'

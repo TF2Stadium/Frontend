@@ -5,7 +5,26 @@ var gulp = require('gulp');
 var conf = require('./conf');
 
 var $ = require('gulp-load-plugins')({
-  pattern: ['gulp-*', 'main-bower-files', 'uglify-save-license', 'del']
+  pattern: [
+    'gulp-angular-templatecache',
+    'gulp-csso',
+    'gulp-filter',
+    'gulp-flatten',
+    'gulp-inject',
+    'gulp-load-plugins',
+    'gulp-minify-html',
+    'gulp-ng-annotate',
+    'gulp-rev',
+    'gulp-rev-replace',
+    'gulp-size',
+    'gulp-sass',
+    'gulp-sourcemaps',
+    'gulp-uglify',
+    'gulp-useref',
+    'gulp-util', 
+    'main-bower-files',
+    'uglify-save-license',
+    'del']
 });
 
 gulp.task('partials', function () {
@@ -25,7 +44,7 @@ gulp.task('partials', function () {
     .pipe(gulp.dest(conf.paths.tmp + '/partials/'));
 });
 
-gulp.task('html', ['inject', 'partials'], function () {
+gulp.task('html', ['build:inject', 'partials'], function () {
   var partialsInjectFile = gulp.src(path.join(conf.paths.tmp, '/partials/templateCacheHtml.js'), { read: false });
   var partialsInjectOptions = {
     starttag: '<!-- inject:partials -->',
@@ -90,4 +109,8 @@ gulp.task('clean', function (done) {
   $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
 });
 
-gulp.task('build', ['html', 'fonts', 'other']);
+gulp.task('build-after-cleaned', ['html', 'fonts', 'other']);
+
+gulp.task('build', ['clean'], function () {
+  gulp.start('build-after-cleaned');
+});
