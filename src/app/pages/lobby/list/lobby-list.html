@@ -1,4 +1,4 @@
-<md-card ng-repeat="lobbyInformation in lobbyList.lobbies track by lobbyInformation.id" class="lobby-row no-animate">
+<md-card md-ink-ripple ng-repeat="lobbyInformation in lobbyList.lobbies track by lobbyInformation.id" class="lobby-row">
   <div class="lobby-image tinted">
     <!-- todo: make several options for quality (4k, large, small -->
     <img class="fill-parent" ng-src="/assets/img/maps/4k/{{::lobbyInformation.map}}-4k.jpeg">
