@@ -15,7 +15,7 @@
             <div><span>{{class.blu.player.gameHours}}</span><span> hours</span></div>
           </div>
         </div>
-        <img ng-if="class.blu.player" src="{{class.blu.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+        <img ng-if="class.blu.player" ng-src="{{class.blu.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
       </div>
     </md-button>
 
@@ -34,7 +34,7 @@
             <div><span>{{class.red.player.gameHours}}</span><span> hours</span></div>
           </div>
         </div>
-        <img ng-if="class.red.player" src="{{class.red.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+        <img ng-if="class.red.player" ng-src="{{class.red.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
       </div>
     </md-button>
 

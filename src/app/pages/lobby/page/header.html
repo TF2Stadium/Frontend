@@ -1,11 +1,11 @@
 <div class="lobbypage-text">
   <span class="lobbypage-map">{{lobbyPage.lobbyInformation.map}}</span>
   <div class="left">
-    <span class="lobbypage-rules">{{lobbyPage.lobbyInformation.type}}, {{lobbyInfo.rules}} rules</span>
-    <span class="lobbypage-leader">Leader: {{lobbyInfo.owner}}</span>
+    <span class="lobbypage-rules">{{lobbyPage.lobbyInformation.type}} // Whitelist: #{{lobbyPage.lobbyInformation.whitelistId}}</span>
+    <span class="lobbypage-leader">Leader: {{lobbyPage.lobbyInformation.leader.name}}</span>
   </div>
   <div class="right">
     <span class="lobbypage-mumble">Mumble {{lobbyInfo.mumbleRequired ? '': 'not '}}required</span>
-    <span class="lobbypage-region">{{lobbyInfo.region}}</span>
+    <span class="lobbypage-region">{{lobbyPage.lobbyInformation.region}}</span>
   </div>
 </div>
