@@ -1,5 +1,5 @@
 #chat {
-  @extend .md-whiteframe-z2;
+  @extend .sheet;
   
   md-tab-content {
     @include scrollbars;

@@ -1,9 +1,8 @@
 .lobby-row {
   @include flex (row, space-between, stretch);
-  @extend .md-whiteframe-z2;
+  @extend .sheet, .clickable;
   height: $lobby-card-height;
   margin:  0 0 $padding-small 0;
-  cursor: pointer;
   position: relative; //so the ripple doesn't fill the whole page
 
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);

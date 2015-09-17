@@ -2,11 +2,21 @@
                 GLOBAL
    ================================== */
 
-@import url(http://fonts.googleapis.com/css?family=Lato|Bitter|Montserrat|Slabo+27px|Oswald|Raleway|Source+Sans+Pro|PT+Sans|ubuntu|Open+sans);
+@import url(http://fonts.googleapis.com/css?family=Montserrat|Oswald);
 
 @font-face {
     font-family: Norwester;
     src: url(/assets/fonts/norwester.otf);
+}
+
+@font-face {
+    font-family: KelsonSansLight;
+    src: url(/assets/fonts/KelsonSansLight.otf);
+}
+
+@font-face {
+    font-family: FiraSansLight;
+    src: url(/assets/fonts/FiraSansLight.otf);
 }
 
 html { 
