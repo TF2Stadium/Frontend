@@ -36,7 +36,15 @@
           <div class="toolbar-buttons">
             <md-button ui-sref="lobby-page">Lobby page</md-button>
             <md-button ui-sref="settings">Settings</md-button>
-            <md-button ng-href="{{config.endpoints.api}}/startLogin" class="steam-login">Login</md-button>
+            <md-button ng-if="$root.userProfile.steamid" ui-sref="settings">
+              {{::$root.userProfile.name}}
+              <img ng-src="{{::$root.userProfile.avatar}}">
+            </md-button>
+            <md-button ng-if="$root.userProfile && !$root.userProfile.steamid"
+              ng-href="{{config.endpoints.api}}/startLogin"
+              class="steam-login">
+              Login
+            </md-button>
           </div>
         </div>
       </md-toolbar>
