@@ -23,18 +23,18 @@
         'class': position
       };
 
-      Websocket.emitJSON('lobbyJoin', JSON.stringify(lobbyData), function(data) {
+      Websocket.emitJSON('lobbyJoin', lobbyData, function(data) {
         //ToDo: Error Handling
         if (data.success !== true) {
         }
       });
     };
 
-    Websocket.on('lobbyReadyUp', function(data) {
+    Websocket.onJSON('lobbyReadyUp', function(data) {
       console.log(data);
     });
 
-    Websocket.on('lobbyStart', function(data) {
+    Websocket.onJSON('lobbyStart', function(data) {
       console.log(data);
     });
 
