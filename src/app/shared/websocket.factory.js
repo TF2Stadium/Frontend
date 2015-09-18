@@ -7,9 +7,26 @@
   /** @ngInject */
   function Websocket(socketFactory, Config)
   {
-      return socketFactory({
-        prefix: '',
-        ioSocket: io.connect(Config.endpoints.websocket)
+    var factory = socketFactory({
+      prefix: '',
+      ioSocket: io.connect(Config.endpoints.websocket)
+    });
+
+    factory.onJSON = function(name, callback) {
+      factory.on(name, function (data) {
+        var json = JSON.parse(data);
+        callback(json);
       });
+    };
+
+    factory.emitJSON = function(name, data, callback) {
+      var json = JSON.stringify(data);
+      factory.emit(name, json, function(json){
+        var data = JSON.parse(json);
+        callback(data);
+      });
+    };
+
+    return factory;
   }
 })();

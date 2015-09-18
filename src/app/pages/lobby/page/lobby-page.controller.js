@@ -23,10 +23,9 @@
         'class': position
       };
 
-      Websocket.emit('lobbyJoin', JSON.stringify(lobbyData), function(data) {
-        var response = JSON.parse(data);
+      Websocket.emitJSON('lobbyJoin', JSON.stringify(lobbyData), function(data) {
         //ToDo: Error Handling
-        if (response.success !== true) {
+        if (data.success !== true) {
         }
       });
     };

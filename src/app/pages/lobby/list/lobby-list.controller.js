@@ -6,7 +6,7 @@
     .controller('LobbyListController', LobbyListController);
 
   /** @ngInject */
-  function LobbyListController($scope, Websocket, LobbyService, $state) {
+  function LobbyListController($scope, Websocket, LobbyService, $state, $mdToast) {
     var vm = this;
 
     vm.lobbies=LobbyService.getList();
@@ -18,10 +18,12 @@
         'class': position
       };
 
-      Websocket.emit('lobbyJoin', JSON.stringify(lobbyData), function(data) {
-        var response = JSON.parse(data);
-        if (response.success === true) {
+      Websocket.emitJSON('lobbyJoin', lobbyData, function(data) {
+
+        if (data.success === true) {
           $state.go('lobby-page', {'lobbyID': lobby});
+        } else {
+          $mdToast.showSimple(data.message);
         }
       });
     };

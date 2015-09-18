@@ -6,15 +6,15 @@
   /** @ngInject */
   function LobbyService(Websocket, $rootScope)
   {
-    Websocket.on("lobbyListData", function (data) {
-      factory.lobbyList = JSON.parse(data).lobbies;
+    Websocket.onJSON("lobbyListData", function (data) {
+      factory.lobbyList = data.lobbies;
       console.log(factory.lobbyList);
       factory.notifyList();
     });
 
-    Websocket.on("lobbyData", function (data) {
-      factory.lobbyActive = JSON.parse(data);
-      console.log(JSON.parse(data));
+    Websocket.onJSON("lobbyData", function (data) {
+      factory.lobbyActive = data;
+      console.log(data);
       factory.notifyActive();
     });
 
