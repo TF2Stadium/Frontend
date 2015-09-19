@@ -5,7 +5,7 @@
 
 body {
   @include flex (column, flex-start, center);
-  overflow-y: auto !important; 
+  overflow-y: auto !important;
   //angular adds overflow-y:scroll when activating md-select for some reason
 }
 
@@ -18,7 +18,7 @@ body {
   @extend .sheet, .flat;
   width: 100%;
   background: #000;
-  z-index: 1000;
+  z-index: 50;
 }
 
 #header-toolbar {
@@ -36,7 +36,7 @@ body {
   @include flex (row, center, center);
   height: $navbar-buttons-height;
   margin: 0;
-  
+
   img {
     padding: 3px;
     height: 100%;
@@ -46,7 +46,7 @@ body {
 .toolbar-buttons {
   @include flex (row, center, center);
   height: $navbar-buttons-height;
-  
+
   .md-button {
     @include flex (row, center, center);
     height: 100%;
@@ -62,7 +62,7 @@ body {
   width: 100%;
   transition: .3s height ease-out;
   position: relative;
-  
+
   background: {
     image: url(../assets/img/header-bg.jpg);
     position: 50% 55%;
@@ -116,8 +116,8 @@ content {
   flex-shrink: 0;
   @extend .sheet, .flat;
   width: 100%;
-  z-index: 100;
-  
+  z-index: 20;
+
   &.hidden {
     margin-bottom: 20px;
   }
@@ -128,7 +128,7 @@ content {
   width: $content-width;
   margin-right: $commentbox-width;
 }
-  
+
 #left-sidebar {
   min-width: initial;
   padding-top: $padding-medium;
@@ -139,7 +139,7 @@ content {
   width: 100%;
   //This divides the padding into padding + margin
   //That way, when scrollbars appear, they are next to the content
-  padding-right: $padding-medium / 2 - 3px;  
+  padding-right: $padding-medium / 2 - 3px;
   margin-right: $padding-medium / 2 + 3px;
   //to show the shadows, needed because of the overflow:auto
   padding-left: 5px;
