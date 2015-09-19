@@ -21,6 +21,7 @@
       'league',
       'whitelist',
       'mumble',
+      'server',
       'confirm'
     ];
 
@@ -230,6 +231,18 @@
           function(data) {
             var response = JSON.parse(data);
             console.log(response);
+          }
+        );
+      }
+
+      lobbyCreateService.verifyServer = function(address, password, callback) {
+        callback = callback || angular.noop;
+        
+        Websocket.emit('verifyServer',
+          JSON.stringify({server: address, rconpwd: password}),
+          function(data) {
+            var response = JSON.parse(data);
+            callback(response.success);
           }
         );
       }

@@ -21,10 +21,22 @@
     };
 
     vm.lobbySummary = {};
+    vm.verifyServer = false;
 
     vm.create = function() {
       LobbyCreate.create(vm.lobbySettings);
     };
+
+    vm.verifyServer = function(address, password) {
+      LobbyCreate.verifyServer (
+        vm.lobbySettings.server, 
+        vm.lobbySettings.rconpwd, 
+        function(verified) {
+          vm.verifiedServer = verified;
+          vm.verifyServerError = !verified;
+        }
+      );
+    }
 
     vm.select = function(field, option) {
       vm.lobbySettings[field.key] = option.value;

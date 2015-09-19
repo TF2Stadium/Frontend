@@ -1,3 +1,7 @@
+/*======================================
+              GENERAL STEPS
+ =======================================*/
+
 #wizard {
   margin: $padding-medium 0;
 }
@@ -75,3 +79,63 @@ md-grid-tile.tile-card {
     font-size: 20px;    
   }
 }
+
+
+/*======================================
+              SERVER STEP
+ =======================================*/
+
+ .tile-form {
+   @include flex(column, flex-start, stretch);
+   padding: $padding-medium;
+   position: relative;
+ }
+
+ .server-form {
+   @include flex(column, center, center);
+   @extend .md-whiteframe-z2;
+   padding: $padding-medium;
+   z-index: 1;
+ }
+
+ .server-verify-message {
+   @include flex(column, center, center);
+   @extend .md-whiteframe-z2;
+   padding: $padding-medium;
+
+   img {
+     height: 100px;
+     width: 100px;
+     padding: $padding-small;
+   }
+
+   span {
+     padding: $padding-small;    
+   }
+
+   &.ng-enter {
+     transition: all .2s .2s ease-out;
+   }
+
+   &.ng-leave {
+     transition: all .2s ease-out;
+   }
+
+   &.ng-animate {
+     position: absolute;
+     right: $padding-medium;
+     left: $padding-medium;
+   }
+
+   &.ng-enter,
+   &.ng-leave.ng-leave-active {
+     transform: translateY(-100%);
+     opacity: 0;
+   }
+
+   &.ng-enter.ng-enter-active,
+   &.ng-leave {
+     transform: translateY(0);
+     opacity: 1;
+   }
+ }
