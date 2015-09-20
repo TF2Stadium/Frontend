@@ -27,8 +27,9 @@
 
     for (var i = 0; i < LobbyCreateProvider.wizardSteps.length; i++) {
       var stepName = LobbyCreateProvider.wizardSteps[i];
-      $stateProvider.state('lobby-create.' + stepName, {
+      $stateProvider.state(stepName, {
         url: '/' + stepName,
+        parent: 'lobby-create',
         views: {
           "wizard-step": {
             templateUrl: 'app/pages/lobby/create/step-' + stepName + '.html'
@@ -237,7 +238,7 @@
 
       lobbyCreateService.verifyServer = function(address, password, callback) {
         callback = callback || angular.noop;
-        
+
         Websocket.emit('verifyServer',
           JSON.stringify({server: address, rconpwd: password}),
           function(data) {

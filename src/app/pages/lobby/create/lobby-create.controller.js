@@ -45,12 +45,10 @@
     }
 
     vm.goToNext = function() {
-      var state, stateName, stateParent, nextStepState;
-      state = $state.current.name.split('.');
-      stateName = state[1];
-      stateParent = state[0];
-      nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stateName) + 1];
-      $state.go(stateParent + '.' + nextStepState);
+      var stepState, nextStepState;
+      stepState = $state.current.name;
+      nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stepState) + 1];
+      $state.go(nextStepState);
     }
   }
 
