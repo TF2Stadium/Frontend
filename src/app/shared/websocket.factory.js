@@ -14,7 +14,13 @@
 
     factory.onJSON = function(name, callback) {
       factory.on(name, function (data) {
-        var json = JSON.parse(data);
+
+        var json = {};
+
+        if (typeof(json) !== "undefined" && data !== "") {
+          json = JSON.parse(data);
+        }
+
         callback(json);
       });
     };
