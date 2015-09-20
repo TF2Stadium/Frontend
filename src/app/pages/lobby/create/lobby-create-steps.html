@@ -1,0 +1,12 @@
+<div id="wizard-steps">
+  <h1 class="steps-title">
+    Steps
+  </h1>
+  <ul class="steps">
+    <li class="step"
+      ng-class="{'active' : $root.currentState.name==step}"
+      ng-repeat="step in wizardSteps.steps">
+      {{step}}
+    </li>
+  </ul>  
+</div>

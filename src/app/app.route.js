@@ -23,6 +23,11 @@
             templateUrl: 'app/pages/lobby/create/lobby-create.html',
             controller: 'LobbyCreateController',
             controllerAs: 'lobbyCreate'
+          },
+          "leftSidebar": {
+            templateUrl: 'app/pages/lobby/create/lobby-create-steps.html',
+            controller: 'WizardStepsController',
+            controllerAs: 'wizardSteps'
           }
         }
       })
