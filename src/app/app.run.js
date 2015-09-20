@@ -5,7 +5,7 @@
 
   /** @ngInject */
 
-  function runBlock($log, $rootScope, Config, ThemeService, User) {
+  function runBlock(Config, User, $log, $state, $rootScope) {
 
     $log.debug('runBlock end');
 
