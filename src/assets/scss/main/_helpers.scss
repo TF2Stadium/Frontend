@@ -21,7 +21,7 @@
 //use on an element with an img child
 .tinted {
   background: #000;
-  
+
   img {
     opacity: .8;
   }
@@ -55,7 +55,7 @@
 .pressed {
   box-shadow: inset rgba(0, 0, 0, 0.258824) 0px 1px 3px 0px;
   background: #f5f5f5;
-  opacity: .8;  
+  opacity: .8;
 }
 
 .sheet {
@@ -69,4 +69,16 @@
   &.clickable {
     cursor: pointer;
   }
+}
+
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-right {
+  text-align: right;
 }
