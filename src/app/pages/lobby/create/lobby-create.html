@@ -1,48 +1,8 @@
-<div id="settings-wrapper" ng-init="lobbySettingsList = lobbyCreate.lobbySettingsList;
-                                    lobbySettings = lobbyCreate.lobbySettings">
-  <div class="settings-section">
-    <code style="display: block; padding: 8px;">{{lobbySettings | json}}</code>
-    <md-input-container>
-      <label>Server</label>
-      <input type="text" ng-model="lobbySettings.server"/>
-    </md-input-container>
-    <md-input-container>
-      <label>RCON password</label>
-      <input type="text" ng-model="lobbySettings.rconpwd"/>
-    </md-input-container>
-      <md-select ng-model="lobbySettings.region"
-                 placeholder="Choose region">
-        <md-option ng-value="region"
-                   ng-repeat="region in lobbySettingsList.regions">
-          {{region}}
-        </md-option>
-      </md-select>
-    <md-select ng-model="lobbySettings.type"
-               placeholder="Choose format">
-      <md-option ng-value="format"
-                 ng-repeat="format in lobbySettingsList.formats">
-        {{format}}
-      </md-option>
-    </md-select>
-    <md-select ng-model="lobbySettings.mapName"
-               placeholder="Choose map">
-      <md-option ng-value="map"
-                 ng-repeat="map in lobbySettingsList.maps">
-        {{map}}
-      </md-option>
-    </md-select>
-    <md-select ng-model="lobbySettings.whitelist"
-               placeholder="Choose ruleset">
-      <md-option ng-value="ruleset"
-                 ng-repeat="ruleset in lobbySettingsList.rulesets">
-        {{ruleset}}
-      </md-option>
-    </md-select>
-    <md-checkbox ng-model="lobbySettings.mumbleRequired">
-      Mumble required
-    </md-checkbox>
-    <md-button ng-click="lobbyCreate.create()">
-      Create
-    </md-button>
-  </div>
-</div>
+<md-grid-list ui-view="wizard-step" id="wizard"
+  md-cols="12"  md-row-height="1:1.2" md-gutter="12px">
+  <md-grid-tile md-ink-ripple class="tile-card"
+    md-colspan="12" md-rowspan="1"
+    ng-click="lobbyCreate.goToNext()">
+    <span>Create a new lobby</span>
+  </md-grid-tile>
+</md-grid-list>

@@ -1,0 +1,178 @@
+/*======================================
+              GENERAL STEPS
+ =======================================*/
+
+#wizard {
+  margin: $padding-medium 0;
+}
+
+md-grid-tile.tile-card {
+  @extend .md-whiteframe-z2;
+  cursor: pointer;
+  overflow: hidden;
+  transition: background-color .2s ease-out;
+
+  &:hover {
+    background-color: #f5f5f5 !important;
+
+    .tile-text {
+      transform: translateY(0);
+    }
+
+    .tile-image ~ .tile-text {
+      color: #9cf;
+    }
+
+    .tile-image:after {
+      transform: scale(1.5);
+    }
+  }
+}
+
+.tile-card-mumble .tile-text {
+  padding: $padding-big;
+}
+
+.tile-image {
+  @include flex(row, center, center);
+  @extend .fill-parent;
+  transition: all .1s ease-out;
+  background: {
+    size: cover;
+    position: 50% 20%;
+    repeat: no-repeat;
+  }
+
+  &:before {
+    @extend .fill-parent;
+    content: "";
+    background: #000;
+    opacity: .15;
+  }
+
+  &:after {
+    content:"";
+    width: 100%;
+    padding-bottom: 100%; //makes the height equal to the width
+    background: #fff;
+    border-radius: 50%;
+    transition: all .2s ease-out;
+    transform-origin: 50% 50%;
+    transform: scale(.001);
+  }
+
+  & ~ .tile-text {
+    transform: translateY(calc(50% - 30px));
+    color: #fff;
+  }
+}
+
+.tile-text {
+  @include flex(column, center, center);
+  @extend .fill-parent;
+  text-align: center;
+  transition: all .2s ease-out;
+
+  .title {
+    font-family: montserrat;
+    font-weight: bold;
+    font-size: 20px;    
+  }
+}
+
+
+/*======================================
+              SERVER STEP
+ =======================================*/
+
+ .tile-form {
+   @include flex(column, flex-start, stretch);
+   position: relative;
+ }
+
+ .server-form {
+   @include flex(column, center, center);
+   @extend .md-whiteframe-z2;
+   padding: $padding-medium;
+   z-index: 1;
+ }
+
+ .server-verify-message {
+   @include flex(column, center, center);
+   @extend .md-whiteframe-z2;
+   padding: $padding-medium;
+
+   img {
+     height: 100px;
+     width: 100px;
+     padding: $padding-small;
+   }
+
+   span {
+     padding: $padding-small;    
+   }
+
+   &.ng-enter {
+     transition: all .2s .2s ease-out;
+   }
+
+   &.ng-leave {
+     transition: all .2s ease-out;
+   }
+
+   &.ng-animate {
+     position: absolute;
+     right: 0;
+     left: 0;
+   }
+
+   &.ng-enter,
+   &.ng-leave.ng-leave-active {
+     transform: translateY(-100%);
+     opacity: 0;
+   }
+
+   &.ng-enter.ng-enter-active,
+   &.ng-leave {
+     transform: translateY(0);
+     opacity: 1;
+   }
+ }
+
+
+/*======================================
+             WIZARD STEPS
+=======================================*/
+
+#wizard-steps {
+  @include flex(column, flex-start, stretch);
+  width: $left-sidebar-width;
+  //Substract 5px to the margin-right to compensate for the
+  //padding-left 5px in #main-content due to shadow
+  margin: 0 $padding-medium - 5px 0 0;
+  padding: 0;
+}
+
+.steps {
+  list-style-type: none;
+}
+
+.steps-title {
+  margin: 0;
+}
+
+.step {
+  display: block;
+  text-align: left;
+  transition: background-color .3s ease-out;
+
+  &.active {
+    font-weight: bold;
+    color: #fff !important;
+    background: $main-color;
+
+    &:hover {
+      background: lighten($main-color, 3.25%) !important;
+    }
+  }
+}

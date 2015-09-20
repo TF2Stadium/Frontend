@@ -1,0 +1,9 @@
+<md-grid-tile md-ink-ripple class="tile-card"
+  md-colspan="{{format.important ? 8 : 4}}" md-rowspan="{{format.important ? 4 : 2}}"
+  ng-repeat="format in lobbyCreate.formats.options | orderBy:'title'"
+  ng-click="lobbyCreate.select(lobbyCreate.formats, format)">
+  <div class="tile-image" style="background-image: url(/assets/img/formats/{{::format.value}}.jpg)"></div>
+  <div class="tile-text">
+    <span>{{::format.title}}</span>
+  </div>
+</md-grid-tile>

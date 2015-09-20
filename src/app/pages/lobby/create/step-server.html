@@ -1,0 +1,33 @@
+<div class="tile-form">
+  <div class="server-form"><h2>Server information</h2>
+    <md-input-container md-no-float>
+      <input ng-model="lobbyCreate.lobbySettings.server"
+        ng-change="lobbyCreate.verifiedServer=false"
+        placeholder="Server address">
+    </md-input-container>
+    <md-input-container md-no-float>
+      <input ng-model="lobbyCreate.lobbySettings.rconpwd"
+        ng-change="lobbyCreate.verifiedServer=false"
+        placeholder="Server RCON password">
+    </md-input-container>
+    <md-button ng-class="{'md-raised md-primary' : !lobbyCreate.verifiedServer}"
+      ng-click="lobbyCreate.verifyServer(serverAdress, serverPassword)">
+      Verify server
+    </md-button>
+  </div>
+  <div class="server-verify-message"
+    ng-if="lobbyCreate.verifyServerError">
+    <span>:(</span>
+    <span>Something is wrong with that server.</span>
+    <span>Please check the address and password and try again.</span>
+  </div>
+  <div class="server-verify-message"
+    ng-if="lobbyCreate.verifiedServer">
+    <img src="/assets/img/tick.png">
+    <span>The server is ready to be configured and used</span>
+    <md-button class="md-raised md-primary"
+      ng-click="lobbyCreate.goToNext()">
+      Confirm your settings
+    </md-button>
+  </div>
+</div>

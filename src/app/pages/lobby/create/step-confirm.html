@@ -1,0 +1,9 @@
+<md-grid-tile md-colspan="12" md-rowspan="1"
+  ng-repeat="(key, setting) in lobbyCreate.lobbySummary">
+  {{key}}: {{setting}}
+</md-grid-tile>
+<md-grid-tile md-ink-ripple class="tile-card"
+  md-colspan="12" md-rowspan="1"
+  ng-click="lobbyCreate.create()">
+  <span>My settings are correct, create the lobby!</span>
+</md-grid-tile>
