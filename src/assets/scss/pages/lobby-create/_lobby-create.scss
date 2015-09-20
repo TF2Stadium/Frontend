@@ -87,7 +87,6 @@ md-grid-tile.tile-card {
 
  .tile-form {
    @include flex(column, flex-start, stretch);
-   padding: $padding-medium;
    position: relative;
  }
 
@@ -123,8 +122,8 @@ md-grid-tile.tile-card {
 
    &.ng-animate {
      position: absolute;
-     right: $padding-medium;
-     left: $padding-medium;
+     right: 0;
+     left: 0;
    }
 
    &.ng-enter,
@@ -159,14 +158,21 @@ md-grid-tile.tile-card {
 }
 
 .steps-title {
-  text-align: center;
   margin: 0;
 }
 
 .step {
-  padding: $padding-small/2;
+  display: block;
+  text-align: left;
+  transition: background-color .3s ease-out;
 
   &.active {
     font-weight: bold;
+    color: #fff !important;
+    background: $main-color;
+
+    &:hover {
+      background: lighten($main-color, 3.25%) !important;
+    }
   }
 }

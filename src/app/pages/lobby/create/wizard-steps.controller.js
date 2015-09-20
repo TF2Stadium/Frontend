@@ -5,10 +5,14 @@
   app.controller('WizardStepsController', WizardStepsController);
 
   /** @ngInject */
-  function WizardStepsController(LobbyCreate, $state) {
+  function WizardStepsController(LobbyCreate, $rootScope) {
 
     var vm = this;
     vm.steps = LobbyCreate.getSteps();
+
+    vm.isEnabled = function(step) {
+      return vm.steps.indexOf(step) <= vm.steps.indexOf($rootScope.currentState.name);
+    }
 
   }
 

@@ -2,11 +2,13 @@
   <h1 class="steps-title">
     Steps
   </h1>
-  <ul class="steps">
-    <li class="step"
+  <div class="steps">
+    <md-button class="step"
       ng-class="{'active' : $root.currentState.name==step}"
-      ng-repeat="step in wizardSteps.steps">
+      ng-repeat="step in wizardSteps.steps"
+      ui-sref="{{step}}"
+      ng-disabled="!wizardSteps.isEnabled(step)">
       {{step}}
-    </li>
-  </ul>  
+    </md-button>
+  </div>  
 </div>
