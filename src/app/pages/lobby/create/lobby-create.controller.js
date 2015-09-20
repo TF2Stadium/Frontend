@@ -1,49 +1,57 @@
 (function() {
   'use strict';
 
-  angular
-    .module('tf2stadium')
-    .controller('LobbyCreateController', LobbyCreateController);
+  var app = angular.module('tf2stadium');
+  app.controller('LobbyCreateController', LobbyCreateController);
 
   /** @ngInject */
-  function LobbyCreateController($timeout, Websocket) {
+  function LobbyCreateController(LobbyCreate, $state) {
+
     var vm = this;
 
-    vm.lobbySettingsList = {
-      regions: [
-        "Europe",
-        "North America",
-        "Asia"
-      ],
-      formats: [
-        '6v6',
-        'highlander'
-      ],
-      rulesets: [
-        'UGC',
-        'ETF2L',
-        3966
-      ],
-      maps: [
-        'cp_process',
-        'koth_viaduct'
-      ]
+    var lobbySettingsList = LobbyCreate.getSettingsList();
+    for (var key in lobbySettingsList) {
+      vm[key] = lobbySettingsList[key];
     };
+    vm.wizardSteps = LobbyCreate.getSteps();
 
     vm.lobbySettings = {
       server: 'tf2stadium.com:27031',
-      rconpwd: '',
-      type: 'highlander',
-      mapName: 'koth_viaduct',
-      whitelist: '3966',
-      mumbleRequired: false
+      rconpwd: ''
     };
 
+    vm.lobbySummary = {};
+    vm.verifyServer = false;
+
     vm.create = function() {
-      Websocket.emit ('lobbyCreate', JSON.stringify(vm.lobbySettings), function(data) {
-        var response = JSON.parse(data);
-        console.log(response);
+      LobbyCreate.create(vm.lobbySettings, function(response) {
+        $state.go('lobby-page', {lobbyID: response.id})
       });
     };
+
+    vm.verifyServer = function(address, password) {
+      LobbyCreate.verifyServer (
+        vm.lobbySettings.server, 
+        vm.lobbySettings.rconpwd, 
+        function(verified) {
+          vm.verifiedServer = verified;
+          vm.verifyServerError = !verified;
+        }
+      );
+    }
+
+    vm.select = function(field, option) {
+      vm.lobbySettings[field.key] = option.value;
+      vm.lobbySummary[field.title] = option.title || option.value;
+      vm.goToNext();
+    }
+
+    vm.goToNext = function() {
+      var stepState, nextStepState;
+      stepState = $state.current.name;
+      nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stepState) + 1];
+      $state.go(nextStepState);
+    }
   }
+
 })();

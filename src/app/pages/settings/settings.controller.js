@@ -10,7 +10,7 @@
     var vm = this;
 
     vm.themesList = Settings.getConstants('themesList');
-    vm.settingsList = Settings.getConstants('settingsList');    
+    vm.filters = Settings.getConstants('filters');
 
     vm.saveSetting = function(key, value) {
       Settings.set(key, value);
@@ -24,8 +24,8 @@
       If it doesn't, it defaults to true.
     */
     var populateSettings = function(userSettings) {
-      for (var settingsGroupKey in vm.settingsList) {
-        var settingsGroup = vm.settingsList[settingsGroupKey];
+      for (var settingsGroupKey in vm.filters) {
+        var settingsGroup = vm.filters[settingsGroupKey];
         for (var fieldKey in settingsGroup) {
           settingsGroup[fieldKey].selected = userSettings[fieldKey];
         }
