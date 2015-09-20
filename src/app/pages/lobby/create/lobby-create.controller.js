@@ -24,7 +24,9 @@
     vm.verifyServer = false;
 
     vm.create = function() {
-      LobbyCreate.create(vm.lobbySettings);
+      LobbyCreate.create(vm.lobbySettings, function(response) {
+        $state.go('lobby-page', {lobbyID: response.id})
+      });
     };
 
     vm.verifyServer = function(address, password) {

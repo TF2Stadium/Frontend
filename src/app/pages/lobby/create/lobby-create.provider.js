@@ -225,13 +225,14 @@
         }
       }
 
-      lobbyCreateService.create = function(lobbySettings) {
-        console.log(lobbySettings)
+      lobbyCreateService.create = function(lobbySettings, callback) {
+        callback = callback || angular.noop;
+
         Websocket.emit('lobbyCreate',
           JSON.stringify(lobbySettings),
           function(data) {
             var response = JSON.parse(data);
-            console.log(response);
+            callback(response.data);
           }
         );
       }
