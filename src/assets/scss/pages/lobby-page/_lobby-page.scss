@@ -49,6 +49,16 @@
   padding: 0;
 }
 
+.classes-title {
+  @include flex (row, center, stretch);
+  height: $class-button-height;
+  margin: $padding-small 0 0;
+
+  h1 {
+    margin: 0 $class-button-width/2 + $padding-medium;
+  }
+}
+
 .class-row {
   @include flex (row, space-between, stretch);
   height: $class-button-height;
