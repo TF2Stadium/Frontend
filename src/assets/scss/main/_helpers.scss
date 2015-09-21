@@ -59,11 +59,11 @@
 }
 
 .sheet {
-  @extend .md-whiteframe-z2;
+  @extend %md-whiteframe-z2;
   transition: box-shadow .2s ease-out;
 
   &:not(.flat):hover {
-    @extend .md-whiteframe-z3;
+    @extend %md-whiteframe-z3;
   }
 
   &.clickable {
