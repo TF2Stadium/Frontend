@@ -11,7 +11,7 @@
     vm.steps = LobbyCreate.getSteps();
 
     vm.isEnabled = function(step) {
-      return vm.steps.indexOf(step) <= vm.steps.indexOf($rootScope.currentState.name);
+      return vm.steps.indexOf(step) <= vm.steps.indexOf($rootScope.currentState);
     }
 
   }

@@ -11,7 +11,7 @@
 
     $rootScope.$on('$stateChangeStart',
       function(event, toState, toParams, fromState) {
-        $rootScope.currentState = toState;
+        $rootScope.currentState = toState.name;
 
         //Forbid direct navigation to children states
         if (!fromState.name && toState.parent) {
