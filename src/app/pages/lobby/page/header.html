@@ -1,11 +1,16 @@
 <div class="lobbypage-text">
   <span class="lobbypage-map">{{::lobbyPage.lobbyInformation.map}}</span>
   <div class="left">
-    <span class="lobbypage-rules">{{::lobbyPage.lobbyInformation.type}} // Whitelist: #{{::lobbyPage.lobbyInformation.whitelistId}}</span>
+    <span class="lobbypage-rules">{{::lobbyPage.lobbyInformation.type}}, whitelist 
+      <a target="_blank" 
+        href="http://whitelist.tf/{{::lobbyPage.lobbyInformation.whitelistId}}">
+        #{{::lobbyPage.lobbyInformation.whitelistId}}
+      </a>
+    </span>
     <span class="lobbypage-leader">Leader: {{::lobbyPage.lobbyInformation.leader.name}}</span>
   </div>
   <div class="right">
-    <span class="lobbypage-mumble">Mumble {{::lobbyInfo.mumbleRequired ? '': 'not '}}required</span>
+    <span class="lobbypage-mumble">Mumble {{::lobbyPage.lobbyInformation.mumbleRequired ? '': 'not '}}required</span>
     <span class="lobbypage-region">{{::lobbyPage.lobbyInformation.region}}</span>
   </div>
 </div>
