@@ -94,7 +94,7 @@
 }
 
 .firefox-bug-container {
-  @include flex (row, space-between, stretch);
+  @include flex (row, space-between, center);
 }
 
 .slot-info {
@@ -105,9 +105,10 @@
 }
 
 .slot-playername {
+  max-width: 100%;
   min-height: 60%;
-  font-size: 22px;
 }
+
 .slot-avatar {
   width: auto;
   height: 100%;

@@ -48,7 +48,7 @@ md-grid-tile.tile-card {
     @extend .fill-parent;
     content: "";
     background: #000;
-    opacity: .15;
+    opacity: .25;
   }
 
   &:after {
@@ -73,12 +73,6 @@ md-grid-tile.tile-card {
   @extend .fill-parent;
   text-align: center;
   transition: all .2s ease-out;
-
-  .title {
-    font-family: montserrat;
-    font-weight: bold;
-    font-size: 20px;    
-  }
 }
 
 
@@ -168,7 +162,6 @@ md-grid-tile.tile-card {
   transition: background-color .3s ease-out;
 
   &.active {
-    font-weight: bold;
     color: #fff !important;
     background: $main-color;
 
