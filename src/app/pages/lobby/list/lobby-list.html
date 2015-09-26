@@ -9,7 +9,7 @@
     <div flex class="lobby-classes">
       <div ng-repeat="slot in lobbyInformation.classes track by $index"
            class="class-button lobby-icon-{{::slot.class}}"
-           ng-class="!slot.blu.player || !slot.red.player ? 'md-whiteframe-z2' : ''">
+           ng-class="{'sheet' : !slot.blu.player || !slot.red.player}">
         <md-button ng-if="!slot.blu.player" class="join-slot blue" ng-click="lobbyList.join(lobbyInformation.id, 'blu', slot.class)">
           <md-tooltip>
             Join BLU {{::slot.class}}
