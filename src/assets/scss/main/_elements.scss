@@ -85,10 +85,14 @@
           COMMENTBOX TAGS
    ================================== */
 
-#chat li {
+#chat .message {
   
   //In order from low priority to high priority to appear
-  $chatBadges: (donator contributor staff);
+  $chatBadges: (donator contributor moderator administrator);
+
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow: hidden;
   
   @each $badge in $chatBadges {
     &.#{$badge}:before {
