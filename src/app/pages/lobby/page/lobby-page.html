@@ -1,43 +1,32 @@
 <div id="slots">
+  <div class="classes-title">
+    <h1>Blu</h1>
+    <h1>Red</h1>
+  </div>
   <div ng-repeat="class in lobbyPage.lobbyInformation.classes track by class.class" class="class-row">
-    <md-button aria-label="Join Blu {{class.class}}" flex class="slot-button" ng-click="lobbyPage.join(lobbyPage.lobbyInformation.id, 'blu', class.class)" ng-class="!class.blu.player ? 'md-raised' : ''">
+    <md-button flex ng-repeat="(key, slot) in class track by key"
+      ng-if="key!='class'"
+      aria-label="Join {{key}} {{class.class}}"
+      class="slot-button"
+      ng-click="lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)"
+      ng-class="{'md-raised' : !slot.player}">
       <!--  If slot.id set, show flat button with player info
             If it's not set, show raised button -->
       <div flex class="firefox-bug-container">
-        <div ng-if="!class.blu.player"></div>
-        <div ng-if="class.blu.player" flex class="slot-info">
-          <div flex><span class="slot-playername">{{class.blu.player.name}}</span></div>
+        <div ng-if="!slot.player"></div>
+        <div ng-if="slot.player" flex class="slot-info">
+          <span class="slot-playername">{{slot.player.name}}</span>
           <div class="slot-misc">
             <div><span>XX%</span><span> reliability</span></div>
             <div flex></div>
-            <div><span>{{class.blu.player.lobbiesPlayed}}</span><span> lobbies</span></div>
+            <div><span>{{slot.player.lobbiesPlayed}}</span><span> lobbies</span></div>
             <div flex></div>
-            <div><span>{{class.blu.player.gameHours}}</span><span> hours</span></div>
+            <div><span>{{slot.player.gameHours}}</span><span> hours</span></div>
           </div>
         </div>
-        <img ng-if="class.blu.player" ng-src="{{class.blu.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+        <img ng-if="slot.player" ng-src="{{slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
       </div>
     </md-button>
-
-    <md-button aria-label="Join Red {{class.class}}" flex class="slot-button" ng-class="!class.red.player ? 'md-raised' : ''" ng-click="lobbyPage.join(lobbyPage.lobbyInformation.id, 'red', class.class)">
-      <!--  If slot.id set, show flat button with player info
-            If it's not set, show raised button -->
-      <div flex class="firefox-bug-container">
-        <div ng-if="!class.red.player"></div>
-        <div ng-if="class.red.player" flex class="slot-info">
-          <div flex><span class="slot-playername">{{class.red.player.name}}</span></div>
-          <div class="slot-misc">
-            <div><span>XX%</span><span> reliability</span></div>
-            <div flex></div>
-            <div><span>{{class.red.player.lobbiesPlayed}}</span><span> lobbies</span></div>
-            <div flex></div>
-            <div><span>{{class.red.player.gameHours}}</span><span> hours</span></div>
-          </div>
-        </div>
-        <img ng-if="class.red.player" ng-src="{{class.red.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
-      </div>
-    </md-button>
-
     <div class="class-button lobby-icon-{{class.class}}">
     </div>
   </div>

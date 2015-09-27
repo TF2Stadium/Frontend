@@ -6,12 +6,11 @@
         <md-tab-label>Chat</md-tab-label>
         <md-tab-body>
           <md-content>
-            <ul>
-              <li ng-repeat="message in ctrl.messages[0] track by $index">
-                <md-button class="chat-player-name">{{message.player.name}}:</md-button>
-                {{message.message}}
-              </li>
-            </ul>
+            <div ng-repeat="message in ctrl.messages[0] track by $index"
+                ng-class="['message', message.player.tags]">
+              <md-button class="chat-player-name">{{::message.player.name}}:</md-button>
+              {{::message.message}}
+            </div>
           </md-content>
 
         </md-tab-body>

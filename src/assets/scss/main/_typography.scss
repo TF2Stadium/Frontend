@@ -2,7 +2,7 @@
                 GLOBAL
    ================================== */
 
-@import url(http://fonts.googleapis.com/css?family=Montserrat|Oswald);
+@import url(http://fonts.googleapis.com/css?family=Montserrat:700);
 
 @font-face {
     font-family: Norwester;
@@ -27,6 +27,10 @@ html {
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-header;
   font-weight: normal;
+}
+
+a {
+  color: inherit;
 }
 
 #header-title > span {
@@ -64,7 +68,7 @@ h1, h2, h3, h4, h5, h6 {
 
   &.top {
     font-size: 1.5em; 
-    font-family: 'Oswald';
+    font-family: Kelson Sans;
   }
 }
 
@@ -74,10 +78,29 @@ h1, h2, h3, h4, h5, h6 {
    ================================== */
 
 .lobbypage-map {
+  font-family: $font-family-header;
+  font-weight: bold; 
   font-size: 4rem;
 }
 
 .slot-button {
   font-size: 11px;
   text-transform: none;
+}
+
+.slot-playername {
+  font-size: 18px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+/* ==================================
+            CREATE PAGE
+   ================================== */
+
+.tile-text .title {
+  font-family: montserrat;
+  font-weight: bold;
+  font-size: 20px;
 }

@@ -5,13 +5,13 @@
 
   /** @ngInject */
 
-  function runBlock(Config, User, $log, $state, $rootScope) {
+  function runBlock(Config, User, ThemeService, $log, $state, $rootScope) {
 
     $log.debug('runBlock end');
 
     $rootScope.$on('$stateChangeStart',
       function(event, toState, toParams, fromState) {
-        $rootScope.currentState = toState;
+        $rootScope.currentState = toState.name;
 
         //Forbid direct navigation to children states
         if (!fromState.name && toState.parent) {

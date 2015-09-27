@@ -53,6 +53,10 @@ body {
     min-width: 0px; //for consistent spacing between buttons
     padding: 0 20px;
     margin: 0 2px;
+
+    img {
+      padding-left: $padding-small;
+    }
   }
 }
 
@@ -131,7 +135,6 @@ content {
 
 #left-sidebar {
   min-width: initial;
-  padding-top: $padding-medium;
 }
 
 #main-content {
