@@ -7,12 +7,23 @@
   app.controller('NotificationsController', NotificationsController);
 
   /** @ngInject */
-  function Notifications() {
+  function Notifications($mdToast, $document) {
 
     var notificationsService = {};
 
     var notifications = {};
     var id = 0;
+
+    var toastDefault = {
+      templateUrl: '/app/shared/notifications/toast.html',
+      message: 'Default',
+      controller: 'ToastController',
+      controllerAs: 'toast',
+      bindToController: true,
+      error: false,
+      parent: $document[0].querySelector('#toasts'),
+      hideDelay: 3000
+    }
 
     notificationsService.add = function(message, level) {
       notifications[id] = {message: message, level: level};
@@ -31,6 +42,15 @@
 
     notificationsService.getNotifications = function() {
       return notifications;
+    }
+
+    notificationsService.toast = function(options) {
+      for (var key in toastDefault) {
+        if (!options[key]) {
+          options[key] = toastDefault[key];
+        }
+      }
+      $mdToast.show(options);
     }
 
     return notificationsService;

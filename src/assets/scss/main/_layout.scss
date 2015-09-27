@@ -25,6 +25,7 @@ body {
   @include flex (row, center, center);
   @extend .sheet;
   min-height: $navbar-height;
+  z-index: 100;
 
   .header-toolbar-content {
     @include flex (row, center, center);
@@ -66,6 +67,7 @@ body {
   width: 100%;
   transition: .3s height ease-out;
   position: relative;
+  z-index: 1;
 
   background: {
     image: url(../assets/img/header-bg.jpg);
@@ -94,6 +96,13 @@ body {
     margin: 0 0 0 5px;
     transform: translate(-0%, -50%);
   }
+}
+
+#toasts {
+  width: $commentbox-width;
+  margin-left: $content-width;
+  height: 0; //black magic
+  z-index: 70;
 }
 
 #commentbox {
