@@ -125,6 +125,12 @@ content {
   &.hidden {
     margin-bottom: 20px;
   }
+
+  &.empty ~ content {    
+    #left-sidebar, md-content {
+      padding-top: $padding-medium;
+    }
+  }
 }
 
 #page-content {

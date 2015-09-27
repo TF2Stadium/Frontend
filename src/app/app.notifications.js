@@ -50,6 +50,10 @@
       Notifications.add(message, level);
     }
 
+    vm.isEmpty = function() {
+      return Object.keys(vm.notifications).length < 1;
+    }
+
     vm.notifications = Notifications.getNotifications();
 
   }

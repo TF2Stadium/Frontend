@@ -58,11 +58,12 @@
         </md-button>
       </div>
     </header>
-    <aside id="notifications" ng-controller="NotificationsController as vm">
+    <aside id="notifications" ng-controller="NotificationsController as vm"
+      ng-class="{'empty' : vm.isEmpty()}">
       <md-button class="notification"
            ng-repeat="(id, notification) in vm.notifications track by id"
            ng-click=vm.remove(id)>
-        {{notification.message}}
+        {{::notification.message}}
       </md-button>
     </aside>
     <content flex>
