@@ -41,13 +41,13 @@
           },
           "headerText": {
             templateUrl: 'app/pages/lobby/page/header.html',
-            controller: 'LobbyPageController',
-            controllerAs: 'lobbyPage'
+            controller: 'LobbyPageHeaderController',
+            controllerAs: 'header'
           },
           "leftSidebar": {
             templateUrl: 'app/pages/lobby/page/spectators.html',
-            controller: 'LobbyPageController',
-            controllerAs: 'lobbyPage'
+            controller: 'LobbyPageSpectatorsController',
+            controllerAs: 'spectators'
           }
         }
       })
