@@ -83,10 +83,9 @@
           return;
         }
 
-        Websocket.emit('playerSettingsGet',
-          JSON.stringify({key: ''}),
-          function(data) {
-            var response = JSON.parse(data);
+        Websocket.emitJSON('playerSettingsGet',
+          {key: ''},
+          function(response) {
             if (response.success) {
               for (var setting in response.data) {
                 var value = response.data[setting];
@@ -122,11 +121,10 @@
 
         localStorage.setItem(key, value);
 
-        Websocket.emit('playerSettingsSet',
+        Websocket.emitJSON('playerSettingsSet',
           //Backend only accepts strings!
-          JSON.stringify({key: key.toString(), value: value.toString()}),
-          function(data) {
-            var response = JSON.parse(data);
+          {key: key.toString(), value: value.toString()},
+          function(response) {
             if (response.success) {
               console.log('Setting "' + key + '" saved correctly on the backend!');
             } else {
