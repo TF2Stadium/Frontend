@@ -14,7 +14,7 @@
           ng-if="!slot.player && team!='class'"
           ng-class="['join-slot', team]" ng-click="lobbyList.join(lobbyInformation.id, team, class.class)">
           <md-tooltip>
-            Join {{team}} {{::slot.class}}
+            Join {{::team}} {{::class.class}} slot
           </md-tooltip>
           <span></span>
         </md-button>
