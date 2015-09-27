@@ -21,7 +21,9 @@
       Websocket.emitJSON('lobbyJoin', lobbyData, function(data) {
 
         if (data.success === true) {
-          $state.go('lobby-page', {'lobbyID': lobby});
+          //Removed because the link in lobby-row will
+          //redirect to the lobby page no matter what
+          //$state.go('lobby-page', {'lobbyID': lobby});
         } else {
           $mdToast.showSimple(data.message);
         }
