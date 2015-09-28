@@ -1,4 +1,5 @@
-<md-card md-ink-ripple ng-repeat="lobbyInformation in lobbyList.lobbies track by lobbyInformation.id" class="lobby-row">
+<a md-ink-ripple ng-repeat="lobbyInformation in lobbyList.lobbies track by lobbyInformation.id" class="lobby-row"
+  ui-sref="lobby-page({lobbyID : lobbyInformation.id})">
   <div class="lobby-image tinted">
     <!-- todo: make several options for quality (4k, large, small -->
     <img class="fill-parent" ng-src="/assets/img/maps/4k/{{::lobbyInformation.map}}-4k.jpeg">
@@ -7,18 +8,14 @@
   </div>
   <div flex class="lobby-main">
     <div flex class="lobby-classes">
-      <div ng-repeat="slot in lobbyInformation.classes track by $index"
-           class="class-button lobby-icon-{{::slot.class}}"
-           ng-class="{'sheet' : !slot.blu.player || !slot.red.player}">
-        <md-button ng-if="!slot.blu.player" class="join-slot blue" ng-click="lobbyList.join(lobbyInformation.id, 'blu', slot.class)">
+      <div ng-repeat="class in lobbyInformation.classes track by $index"
+           class="class-button lobby-icon-{{::class.class}}"
+           ng-class="{'sheet' : !class.blu.player || !class.red.player}">
+        <md-button ng-repeat="(team, slot) in class"
+          ng-if="!slot.player && team!='class'"
+          ng-class="['join-slot', team]" ng-click="lobbyList.join(lobbyInformation.id, team, class.class)">
           <md-tooltip>
-            Join BLU {{::slot.class}}
-          </md-tooltip>
-          <span></span>
-        </md-button>
-        <md-button ng-if="!slot.red.player" class="join-slot red" ng-click="lobbyList.join(lobbyInformation.id, 'red', slot.class)">
-          <md-tooltip>
-            Join Red {{::slot.class}}
+            Join {{::team}} {{::class.class}} slot
           </md-tooltip>
           <span></span>
         </md-button>
@@ -57,4 +54,4 @@
       </div>
     </div>
   </div>
-</md-card>
+</a>

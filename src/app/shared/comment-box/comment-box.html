@@ -1,63 +1,35 @@
 <!-- The next div is needed to fix a bug regarding flexbox, min-height and IE -->
 <div layout="column">
-  <div id="chat" layout="column" ng-controller="CommentBoxController as ctrl">
-    <md-tabs class="chat-tabs" md-selected="ctrl.currentTab" md-dynamic-height="false" flex layout="column" md-stretch-tabs="always">
+  <div id="chat" layout="column" ng-controller="CommentBoxController as commentBox">
+    <md-tabs flex class="chat-tabs" md-selected="commentBox.currentTab" md-stretch-tabs="always">
       <md-tab>
         <md-tab-label>Chat</md-tab-label>
         <md-tab-body>
           <md-content>
-            <div ng-repeat="message in ctrl.messages[0] track by $index"
+            <div ng-repeat="message in commentBox.messages[0] track by $index"
                 ng-class="['message', message.player.tags]">
               <md-button class="chat-player-name">{{::message.player.name}}:</md-button>
               {{::message.message}}
             </div>
           </md-content>
-
         </md-tab-body>
       </md-tab>
-
-      <md-tab disabled>
+      <md-tab ng-if="commentBox.joinedLobby">
         <md-tab-label>Lobby chat</md-tab-label>
         <md-tab-body>
           <md-content>
-            <ul>
-              <li ng-repeat="message in ctrl.messages[ctrl.joinedLobby] track by $index">
-                <md-button class="chat-player-name">{{message.player.name}}:</md-button>
-                {{message.message}}
-              </li>
-            </ul>
+            <div ng-repeat="message in commentBox.messages[commentBox.joinedLobby] track by $index"
+                ng-class="['message', message.player.tags]">
+              <md-button class="chat-player-name">{{::message.player.name}}:</md-button>
+              {{::message.message}}
+            </div>
           </md-content>
-        </md-tab-body>
-
-      </md-tab>
-
-        <md-tab>
-        <md-tab-label>Friends</md-tab-label>
-        <md-tab-body>
-          <md-list>
-            <md-list-item>
-              <span>Friend 1</span>
-            </md-list-item>
-
-            <md-list-item>
-              <span>Friend 2</span>
-            </md-list-item>
-            <md-list-item>
-              <span>Friend 3</span>
-            </md-list-item>
-            <md-list-item>
-              <span>Friend 4</span>
-            </md-list-item>
-            <md-list-item>
-              <span>Friend 5</span>
-            </md-list-item>
-          </md-list>
         </md-tab-body>
       </md-tab>
     </md-tabs>
     <md-input-container>
       <label for="chatbox-message">Type your message</label>
-      <textarea id="chatbox-message" name="message" ng-keydown="ctrl.sendMessage($event)" ng-model="ctrl.messageBox"></textarea>
+      <textarea id="chatbox-message" name="message" ng-keydown="commentBox.sendMessage($event)" ng-model="commentBox.messageBox"></textarea>
     </md-input-container>
   </div>
 </div>

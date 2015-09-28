@@ -1,5 +1,4 @@
 .lobby-page.header-info {
-  height: $header-lobbypage-height;
   background-image: url(../assets/img/maps/4k/cp_process_final-4k.jpeg);
   &:after {
     @extend .fill-parent;
@@ -13,7 +12,6 @@
   @include flex (row, space-between, center);
   flex-wrap: wrap;
   z-index: 1;
-  height: 200px;
   padding: 0 $padding-medium;
   
   & > div {    

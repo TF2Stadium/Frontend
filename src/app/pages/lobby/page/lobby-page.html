@@ -12,9 +12,8 @@
       ng-class="{'md-raised' : !slot.player}">
       <!--  If slot.id set, show flat button with player info
             If it's not set, show raised button -->
-      <div flex class="firefox-bug-container">
-        <div ng-if="!slot.player"></div>
-        <div ng-if="slot.player" flex class="slot-info">
+      <div flex class="firefox-bug-container" ng-if="slot.player" >
+        <div flex class="slot-info">
           <span class="slot-playername">{{slot.player.name}}</span>
           <div class="slot-misc">
             <div><span>XX%</span><span> reliability</span></div>
@@ -24,7 +23,7 @@
             <div><span>{{slot.player.gameHours}}</span><span> hours</span></div>
           </div>
         </div>
-        <img ng-if="slot.player" ng-src="{{slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+        <img ng-src="{{slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
       </div>
     </md-button>
     <div class="class-button lobby-icon-{{class.class}}">

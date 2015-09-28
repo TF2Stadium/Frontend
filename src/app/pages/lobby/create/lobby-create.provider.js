@@ -228,10 +228,9 @@
       lobbyCreateService.create = function(lobbySettings, callback) {
         callback = callback || angular.noop;
 
-        Websocket.emit('lobbyCreate',
-          JSON.stringify(lobbySettings),
-          function(data) {
-            var response = JSON.parse(data);
+        Websocket.emitJSON('lobbyCreate',
+          lobbySettings,
+          function(response) {
             callback(response.data);
           }
         );
@@ -240,10 +239,9 @@
       lobbyCreateService.verifyServer = function(address, password, callback) {
         callback = callback || angular.noop;
 
-        Websocket.emit('verifyServer',
-          JSON.stringify({server: address, rconpwd: password}),
-          function(data) {
-            var response = JSON.parse(data);
+        Websocket.emitJSON('serverVerify',
+          {server: address, rconpwd: password},
+          function(response) {
             callback(response.success);
           }
         );

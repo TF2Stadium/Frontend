@@ -1,8 +1,7 @@
 <h1 class="spectators-title">Spectators</h1>
-<md-list class="sheet" id="spectators"
-         ng-init="spectators=lobbyPage.lobbyInformation.spectators">
-  <md-list-item  ng-repeat="spectator in spectators"
+<md-list class="sheet" id="spectators">
+  <md-list-item  ng-repeat="spectator in spectators.spectators"
                 ng-click="null()">
-    <span>{{spectator.name}}</span>
+    <span>{{::spectator.name}}</span>
   </md-list-item>
 </md-list>

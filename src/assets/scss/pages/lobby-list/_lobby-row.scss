@@ -4,6 +4,7 @@
   height: $lobby-card-height;
   margin:  0 0 $padding-small 0;
   position: relative; //so the ripple doesn't fill the whole page
+  text-decoration: none;
 
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   
