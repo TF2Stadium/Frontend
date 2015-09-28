@@ -43,7 +43,7 @@ $header-image-height:     180px;
 $header-height:           $header-image-height + $navbar-height;
 
 //Commentbox
-$commentbox-top:          75px;
+$commentbox-top:          80px;
 $commentbox-height:       500px;
 $commentbox-fontsize:     24px;
 $commentbox-lineheight:   18px;
@@ -72,6 +72,10 @@ $lobby-info-width:        $content-width - $left-sidebar-width;
 $lobby-state-width:       $lobby-info-width - ($class-button-width + 8px) * 9 - 32px;
 $lobby-info-width:        80px;
 $lobby-info-height:       60px;
+
+//Toasts
+$toast-height:            50px;
+$toast-top:               ($commentbox-top - $toast-height) / 2;
 
 
 /*======================================

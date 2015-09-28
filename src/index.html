@@ -48,6 +48,7 @@
           </div>
         </div>
       </md-toolbar>
+      <div id="toasts"></div>
       <ng-include id="commentbox" src="'app/shared/comment-box/comment-box.html'"></ng-include>
       <div class="header-info {{$root.currentState}}">
         <div ui-view="headerText" class="header-text"></div>
@@ -58,11 +59,12 @@
         </md-button>
       </div>
     </header>
-    <aside id="notifications" ng-init="notifications=[1]"
-           ng-class="notifications.length == 0 ? 'hidden' : ''">
+    <aside id="notifications" ng-controller="NotificationsController as vm"
+      ng-class="{'empty' : vm.isEmpty()}">
       <md-button class="notification"
-           ng-repeat="notification in notifications">
-        notification message
+           ng-repeat="(id, notification) in vm.notifications track by id"
+           ng-click=vm.remove(id)>
+        {{::notification.message}}
       </md-button>
     </aside>
     <content flex>

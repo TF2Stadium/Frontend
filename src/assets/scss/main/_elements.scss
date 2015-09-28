@@ -142,6 +142,32 @@
 
 
 /* ==================================
+                TOASTS
+   ================================== */
+
+.toast {
+  @include flex (row, center, center);
+  height: $toast-height;
+  width: 100%;
+  margin: 0;
+  margin-top: $toast-top;
+  transition: all .15s ease-out;
+
+  &.ng-leave {
+    transition: all .15s ease-out;
+  }
+
+  &.ng-enter, &.ng-leave.ng-leave-active {
+    transform: translateY(- $toast-top - $toast-height);
+  }
+
+  &.ng.enter.ng-enter-active, &.ng-leave {
+    transform: translateY(0);
+  }
+}
+
+
+/* ==================================
                 OTHERS
    ================================== */  
 

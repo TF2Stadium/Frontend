@@ -6,7 +6,7 @@
     .controller('LobbyListController', LobbyListController);
 
   /** @ngInject */
-  function LobbyListController($scope, Websocket, LobbyService, $state, $mdToast) {
+  function LobbyListController($scope, Websocket, LobbyService, $state, Notifications) {
     var vm = this;
 
     vm.lobbies=LobbyService.getList();
@@ -25,7 +25,8 @@
           //redirect to the lobby page no matter what
           //$state.go('lobby-page', {'lobbyID': lobby});
         } else {
-          $mdToast.showSimple(data.message);
+          Notifications.toast({message: data.message, error: true});
+          console.log(data)
         }
       });
     };

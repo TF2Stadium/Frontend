@@ -25,6 +25,7 @@ body {
   @include flex (row, center, center);
   @extend .sheet;
   min-height: $navbar-height;
+  z-index: 100;
 
   .header-toolbar-content {
     @include flex (row, center, center);
@@ -66,6 +67,7 @@ body {
   width: 100%;
   transition: .3s height ease-out;
   position: relative;
+  z-index: 1;
 
   background: {
     image: url(../assets/img/header-bg.jpg);
@@ -96,6 +98,13 @@ body {
   }
 }
 
+#toasts {
+  width: $commentbox-width;
+  margin-left: $content-width;
+  height: 0; //black magic
+  z-index: 70;
+}
+
 #commentbox {
   width: $commentbox-width;
   margin-left: $content-width;
@@ -124,6 +133,12 @@ content {
 
   &.hidden {
     margin-bottom: 20px;
+  }
+
+  &.empty ~ content {    
+    #left-sidebar, md-content {
+      padding-top: $padding-medium;
+    }
   }
 }
 
