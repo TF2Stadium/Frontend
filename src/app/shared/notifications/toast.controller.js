@@ -10,7 +10,7 @@
 
     vm.hide = function() {
       $mdToast.hide();
-    }
+    };
     
   }
 

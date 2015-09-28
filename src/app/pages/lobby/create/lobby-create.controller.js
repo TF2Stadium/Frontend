@@ -12,7 +12,7 @@
     var lobbySettingsList = LobbyCreate.getSettingsList();
     for (var key in lobbySettingsList) {
       vm[key] = lobbySettingsList[key];
-    };
+    }
     vm.wizardSteps = LobbyCreate.getSteps();
 
     vm.lobbySettings = {
@@ -25,11 +25,11 @@
 
     vm.create = function() {
       LobbyCreate.create(vm.lobbySettings, function(response) {
-        $state.go('lobby-page', {lobbyID: response.id})
+        $state.go('lobby-page', {lobbyID: response.id});
       });
     };
 
-    vm.verifyServer = function(address, password) {
+    vm.verifyServer = function() {
       LobbyCreate.verifyServer (
         vm.lobbySettings.server, 
         vm.lobbySettings.rconpwd, 
@@ -38,20 +38,20 @@
           vm.verifyServerError = !verified;
         }
       );
-    }
+    };
 
     vm.select = function(field, option) {
       vm.lobbySettings[field.key] = option.value;
       vm.lobbySummary[field.title] = option.title || option.value;
       vm.goToNext();
-    }
+    };
 
     vm.goToNext = function() {
       var stepState, nextStepState;
       stepState = $state.current.name;
       nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stepState) + 1];
       $state.go(nextStepState);
-    }
+    };
   }
 
 })();

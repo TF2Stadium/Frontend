@@ -108,7 +108,7 @@
             callback();
           }
         );
-      }
+      };
 
       /*
         Saves a setting into the service and into the backend and
@@ -160,7 +160,7 @@
         }
 
         syncWithBackend (function() {
-          callback(settings)
+          callback(settings);
         });
 
         return settings;

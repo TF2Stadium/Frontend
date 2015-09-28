@@ -26,7 +26,7 @@
       });
       return userProfile;
       
-    }
+    };
 
     var getProfileFromBackend = function(callback) {
       callback = callback || angular.noop;
@@ -42,7 +42,7 @@
           callback();
         }
       );
-    }
+    };
 
     return userService;
 

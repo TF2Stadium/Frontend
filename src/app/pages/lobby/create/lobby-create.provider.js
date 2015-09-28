@@ -2,7 +2,7 @@
   'use strict';
 
   var app = angular.module('tf2stadium');
-  app.config(LobbyCreateConfig)
+  app.config(LobbyCreateConfig);
   app.provider('LobbyCreate', LobbyCreate);
 
   /** @ngInject */
@@ -223,7 +223,7 @@
             }         
           ]
         }
-      }
+      };
 
       lobbyCreateService.create = function(lobbySettings, callback) {
         callback = callback || angular.noop;
@@ -234,7 +234,7 @@
             callback(response.data);
           }
         );
-      }
+      };
 
       lobbyCreateService.verifyServer = function(address, password, callback) {
         callback = callback || angular.noop;
@@ -245,18 +245,18 @@
             callback(response.success);
           }
         );
-      }
+      };
 
       lobbyCreateService.getSettingsList = function() {
         return lobbySettingsList;
-      }
+      };
 
       lobbyCreateService.getSteps = function() {
         return lobbyCreateProvider.wizardSteps;
-      }
+      };
 
       return lobbyCreateService;
-    }
+    };
 
     lobbyCreateProvider.$get = lobbyCreateService;
 

@@ -12,7 +12,7 @@
 
     vm.isEnabled = function(step) {
       return vm.steps.indexOf(step) <= vm.steps.indexOf($rootScope.currentState);
-    }
+    };
 
   }
 

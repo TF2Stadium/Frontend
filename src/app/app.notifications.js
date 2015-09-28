@@ -23,26 +23,26 @@
       error: false,
       parent: $document[0].querySelector('#toasts'),
       hideDelay: 3000
-    }
+    };
 
     notificationsService.add = function(message, level) {
       notifications[id] = {message: message, level: level};
       id++;
-    }
+    };
 
     notificationsService.remove = function(id) {
       delete notifications[id];
-    }
+    };
 
     notificationsService.clearNotifications = function() {
       for (var notificationKey in notifications) {
         delete notifications[notificationKey];
       }
-    }
+    };
 
     notificationsService.getNotifications = function() {
       return notifications;
-    }
+    };
 
     notificationsService.toast = function(options) {
       for (var key in toastDefault) {
@@ -51,7 +51,7 @@
         }
       }
       $mdToast.show(options);
-    }
+    };
 
     return notificationsService;
 
@@ -64,15 +64,15 @@
 
     vm.remove = function(id) {
       Notifications.remove(id);
-    }
+    };
 
     vm.add = function(message, level) {
       Notifications.add(message, level);
-    }
+    };
 
     vm.isEmpty = function() {
       return Object.keys(vm.notifications).length < 1;
-    }
+    };
 
     vm.notifications = Notifications.getNotifications();
 

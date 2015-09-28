@@ -1,11 +1,11 @@
 (function() {
   'use strict';
 
-  var app = angular.module('tf2stadium')
+  var app = angular.module('tf2stadium');
   app.controller('LobbyPageHeaderController', LobbyPageHeaderController);
 
   /** @ngInject */
-  function LobbyPageHeaderController($scope, LobbyService, Websocket) {
+  function LobbyPageHeaderController($scope, LobbyService) {
     var vm = this;
 
     vm.lobbyInformation = LobbyService.getActive();
