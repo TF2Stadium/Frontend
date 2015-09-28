@@ -16,13 +16,13 @@ gulp.task('styles', function () {
   };
 
   var injectFiles = gulp.src([
-    path.join(conf.paths.src, '/assets/scss/**/*.scss'),
-    path.join('!' + conf.paths.src, '/assets/scss/app.scss')
+    path.join(conf.paths.src, '/scss/**/*.scss'),
+    path.join('!' + conf.paths.src, '/scss/app.scss')
   ], { read: false });
 
   var injectOptions = {
     transform: function(filePath) {
-      filePath = filePath.replace(conf.paths.src + '/assets/sass/', '');
+      filePath = filePath.replace(conf.paths.src + '/sass/', '');
       return '@import "' + filePath + '";';
     },
     starttag: '// injector',
@@ -32,7 +32,7 @@ gulp.task('styles', function () {
 
 
   return gulp.src([
-    path.join(conf.paths.src, '/assets/scss/app.scss')
+    path.join(conf.paths.src, '/scss/app.scss')
   ])
     .pipe($.inject(injectFiles, injectOptions))
     .pipe(wiredep(_.extend({}, conf.wiredep)))
@@ -50,13 +50,13 @@ gulp.task('build:styles', function () {
   };
 
   var injectFiles = gulp.src([
-    path.join(conf.paths.src, '/assets/scss/**/*.scss'),
-    path.join('!' + conf.paths.src, '/assets/scss/app.scss')
+    path.join(conf.paths.src, '/scss/**/*.scss'),
+    path.join('!' + conf.paths.src, '/scss/app.scss')
   ], { read: false });
 
   var injectOptions = {
     transform: function(filePath) {
-      filePath = filePath.replace(conf.paths.src + '/assets/sass/', '');
+      filePath = filePath.replace(conf.paths.src + '/sass/', '');
       return '@import "' + filePath + '";';
     },
     starttag: '// injector',
@@ -66,7 +66,7 @@ gulp.task('build:styles', function () {
 
 
   return gulp.src([
-    path.join(conf.paths.src, '/assets/scss/app.scss')
+    path.join(conf.paths.src, '/scss/app.scss')
   ])
     .pipe($.inject(injectFiles, injectOptions))
     .pipe(wiredep(_.extend({}, conf.wiredep)))
