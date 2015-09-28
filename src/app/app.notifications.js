@@ -15,7 +15,7 @@
     var id = 0;
 
     var toastDefault = {
-      templateUrl: '/app/shared/notifications/toast.html',
+      templateUrl: 'app/shared/notifications/toast.html',
       message: 'Default',
       controller: 'ToastController',
       controllerAs: 'toast',
