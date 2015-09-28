@@ -17,11 +17,17 @@
       '500': '99ccff'
     });
 
+    var lightRedMap = $mdThemingProvider.extendPalette('red', {
+      '500': 'ff9999'
+    });
+
     $mdThemingProvider.definePalette('darkBluePalette', darkBlueMap);
     $mdThemingProvider.definePalette('lightBluePalette', lightBlueMap);
+    $mdThemingProvider.definePalette('lightRedPalette', lightRedMap);
     $mdThemingProvider.theme('default')
       .primaryPalette('darkBluePalette')
-      .accentPalette('lightBluePalette');
+      .accentPalette('lightBluePalette')
+      .warnPalette('lightRedPalette');
   }
 
 
