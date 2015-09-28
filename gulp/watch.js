@@ -15,8 +15,8 @@ gulp.task('watch', ['inject'], function () {
   gulp.watch([path.join(conf.paths.src, '/*.html'), 'bower.json'], ['inject']);
 
   gulp.watch([
-    path.join(conf.paths.src, '/assets/scss/**/*.css'),
-    path.join(conf.paths.src, '/assets/scss/**/*.scss')
+    path.join(conf.paths.src, '/scss/**/*.css'),
+    path.join(conf.paths.src, '/scss/**/*.scss')
   ], function(event) {
     if(isOnlyChange(event)) {
       gulp.start('styles');
