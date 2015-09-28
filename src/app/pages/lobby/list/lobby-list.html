@@ -1,8 +1,6 @@
 <a md-ink-ripple ng-repeat="lobbyInformation in lobbyList.lobbies track by lobbyInformation.id" class="lobby-row"
   ui-sref="lobby-page({lobbyID : lobbyInformation.id})">
-  <div class="lobby-image tinted">
-    <!-- todo: make several options for quality (4k, large, small -->
-    <img class="fill-parent" ng-src="/assets/img/maps/4k/{{::lobbyInformation.map}}-4k.jpeg">
+  <div class="lobby-image" style="background-image:url(/assets/img/maps/4k/{{::lobbyInformation.map}}.jpeg)">
     <span class="lobby-type">{{::lobbyInformation.type}}</span>
     <span class="lobby-map">{{::lobbyInformation.map}}</span>
   </div>

@@ -15,9 +15,19 @@
 
 .lobby-image {
   @include flex (column, center, flex-end);
-  position: relative; //needed for the ripple positioning
   width: $left-sidebar-width;
-  background: black;
+  position: relative;
+  background: {
+    color: #000;
+    size: cover;
+  }
+
+  &:before {
+    @extend .fill-parent;
+    content: "";    
+    background: #000;
+    opacity: .4;
+  }
 
   span {
     padding-right: $padding-medium;
