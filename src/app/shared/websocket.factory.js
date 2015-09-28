@@ -5,8 +5,7 @@
   angular.module('tf2stadium.services').factory('Websocket', Websocket);
 
   /** @ngInject */
-  function Websocket(socketFactory, Config)
-  {
+  function Websocket(socketFactory, Config, Notifications) {
     var factory = socketFactory({
       prefix: '',
       ioSocket: io.connect(Config.endpoints.websocket)
@@ -31,6 +30,9 @@
       
       factory.emit(name, json, function(json) {
         var data = JSON.parse(json);
+        if (!data.success) {
+          Notifications.toast({message: data.message, error: true});
+        }
         callback(data);
       });
 

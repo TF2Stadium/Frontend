@@ -6,29 +6,21 @@
     .controller('LobbyListController', LobbyListController);
 
   /** @ngInject */
-  function LobbyListController($scope, Websocket, LobbyService, $state, Notifications) {
+  function LobbyListController($scope, Websocket, LobbyService) {
     var vm = this;
 
     vm.lobbies=LobbyService.getList();
 
     vm.join = function (lobby, team, position) {
-      var lobbyData = {
-        'id': lobby,
-        'team': team,
-        'class': position
-      };
 
-      Websocket.emitJSON('lobbyJoin', lobbyData, function(data) {
-
-        if (data.success === true) {
-          //Removed because the link in lobby-row will
-          //redirect to the lobby page no matter what
-          //$state.go('lobby-page', {'lobbyID': lobby});
-        } else {
-          Notifications.toast({message: data.message, error: true});
-          console.log(data)
+      Websocket.emitJSON('lobbyJoin',
+        {
+          'id': lobby,
+          'team': team,
+          'class': position          
         }
-      });
+      );
+
     };
 
     LobbyService.subscribeList($scope, function (){
