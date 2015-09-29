@@ -101,6 +101,10 @@
       flex-direction: row-reverse;
     }
   }
+
+  md-checkbox {
+    margin: 0;
+  }
 }
 
 .firefox-bug-container {
@@ -126,7 +130,11 @@
 }
 
 .slot-misc {
-  @include flex (row, space-between, flex-end);
+  @include flex (row, flex-end, flex-end);
   height: 40%;
   width: 100%;
+
+  div {
+    padding: 0 5px;
+  }
 }
