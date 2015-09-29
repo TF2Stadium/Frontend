@@ -150,11 +150,21 @@
   height: $toast-height;
   width: 100%;
   margin: 0;
+  left: 0 !important;
+  bottom: 0 !important;
   margin-top: $toast-top;
-  transition: all .15s ease-out;
+  position: relative;
 
-  &.ng-leave {
-    transition: all .15s ease-out;
+  &.info {
+    background-color: #9cf;
+  }
+
+  &.warn {
+    background-color: #f99;
+  }
+
+  &.ng-animate {
+    transition: all .3s ease-out;
   }
 
   &.ng-enter, &.ng-leave.ng-leave-active {

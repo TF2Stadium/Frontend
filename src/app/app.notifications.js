@@ -22,7 +22,7 @@
       bindToController: true,
       error: false,
       parent: $document[0].querySelector('#toasts'),
-      hideDelay: 3000
+      hideDelay: 300000
     };
 
     notificationsService.add = function(message, level) {
