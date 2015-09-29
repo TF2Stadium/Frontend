@@ -155,14 +155,6 @@
   margin-top: $toast-top;
   position: relative;
 
-  &.info {
-    background-color: #9cf;
-  }
-
-  &.warn {
-    background-color: #f99;
-  }
-
   &.ng-animate {
     transition: all .3s ease-out;
   }
