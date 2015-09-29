@@ -216,16 +216,5 @@ $themes-list: (
                   0px 6px 10px 0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
                   0px 1px 18px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
 
-    
-    .toast {
-      &.info {
-        background-color: $main-color;
-      }
-
-      &.warn {
-        background-color: #f66;
-      }
-    }
-
   }
 }
