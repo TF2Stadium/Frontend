@@ -7,14 +7,13 @@
     .controller('LobbyPageReadyDialog', LobbyPageReadyDialog);
 
   /** @ngInject */
-  function LobbyPageController($scope, LobbyService, Websocket, $mdDialog) {
+  function LobbyPageController($scope, LobbyService, Websocket) {
     var vm = this;
 
     vm.lobbyInformation = LobbyService.getActive();
 
     LobbyService.subscribeActive($scope, function(){
       vm.lobbyInformation = LobbyService.getActive();
-      console.log(vm.lobbyInformation);
     });
 
     vm.join = function (lobby, team, position) {
@@ -31,26 +30,11 @@
       });
     };
 
-    Websocket.onJSON('lobbyReadyUp', function(data) {
-      $mdDialog.show({
-        templateUrl: 'lobbypage-readyup.html.tpl',
-        controller: 'LobbyPageReadyDialog',
-        controllerAs: 'dialog'
-      })
-      .then(function(response) {
-        if (response === "ready") {
-          Websocket.emit("playerReady");
-        } else {
-          var payload = {
-            "id": vm.lobbyInformation.id
-          };
-          Websocket.emitJSON("lobbyKick", payload);
-        }
-      });
+    LobbyService.subscribe('lobby-ready-up', $scope, function(){
+      vm.inReadyUp = true;      
     });
 
-    Websocket.onJSON('lobbyStart', function(data) {
-      console.log(data);
+    LobbyService.subscribe('lobby-start', $scope, function(){
       alert("STARTED");
     });
 

@@ -4,20 +4,7 @@
   angular.module('tf2stadium.services').factory('LobbyService', LobbyService);
 
   /** @ngInject */
-  function LobbyService(Websocket, $rootScope)
-  {
-    Websocket.onJSON("lobbyListData", function (data) {
-      factory.lobbyList = data.lobbies;
-      console.log(factory.lobbyList);
-      factory.notifyList();
-    });
-
-    Websocket.onJSON("lobbyData", function (data) {
-      factory.lobbyActive = data;
-      console.log(data);
-      factory.notifyActive();
-    });
-
+  function LobbyService(Websocket, $rootScope, $mdDialog) {
     var factory = {};
 
     factory.lobbyList = {};
@@ -32,10 +19,6 @@
       scope.$on('$destroy', handler);
     };
 
-    factory.notifyList = function() {
-      $rootScope.$emit('lobby-list-updated');
-    };
-
     factory.getActive = function() {
       return factory.lobbyActive;
     };
@@ -45,9 +28,41 @@
       scope.$on('$destroy', handler);
     };
 
-    factory.notifyActive = function() {
+    factory.subscribe = function(request, scope, callback) {
+      var handler = $rootScope.$on(request, callback);
+      scope.$on('$destroy', handler);
+    }
+
+    Websocket.onJSON('lobbyReadyUp', function(data) {
+      $rootScope.$emit('lobby-ready-up');
+      $mdDialog.show({
+        templateUrl: 'lobbypage-readyup.html.tpl',
+        controller: 'LobbyPageReadyDialog',
+        controllerAs: 'dialog'
+      })
+      .then(function(response) {
+        if (response === "ready") {
+          Websocket.emit('playerReady');
+        } else {
+          Websocket.emit('lobbyKick', factory.lobbyActive.id);
+        }
+      });
+    });
+
+    Websocket.onJSON('lobbyStart', function(data) {
+      console.log('lobbyStart');
+      $rootScope.$emit('lobby-start');
+    });
+
+    Websocket.onJSON('lobbyListData', function(data) {
+      factory.lobbyList = data.lobbies;
+      $rootScope.$emit('lobby-list-updated');
+    });
+
+    Websocket.onJSON('lobbyData', function(data) {
+      factory.lobbyActive = data;
       $rootScope.$emit('lobby-active-updated');
-    };
+    });
 
     return factory;
   }
