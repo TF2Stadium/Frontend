@@ -18,6 +18,8 @@
         var json = {};
         if (typeof(json) !== "undefined" && data !== "") {
           json = JSON.parse(data);
+          console.log('Received ' + name);
+          console.log(json);
         }
         callback(json);
       });
@@ -25,11 +27,14 @@
     };
 
     factory.emitJSON = function(name, data, callback) {
+      console.log('Sent ' + name);
       callback = callback || angular.noop;
       var json = JSON.stringify(data);
       
       factory.emit(name, json, function(json) {
         var data = JSON.parse(json);
+        console.log('Response to ' + name);        
+        console.log(data);
         if (!data.success) {
           Notifications.toast({message: data.message, error: true});
         }
@@ -40,4 +45,5 @@
 
     return factory;
   }
+  
 })();
