@@ -64,19 +64,6 @@
       $rootScope.$emit('lobby-active-updated');
     });
 
-    $mdDialog.show({
-      templateUrl: 'app/shared/notifications/ready-up.html',
-      controller: 'ReadyUpDialogController',
-      controllerAs: 'dialog'
-    })
-      .then(function(response) {
-        if (response === 'ready') {
-          Websocket.emitJSON('playerReady', {});
-        } else {
-          Websocket.emitJSON('lobbyKick', {id : factory.lobbyActive.id});
-        }
-      });
-
     return factory;
   }
 
