@@ -31,10 +31,9 @@
     var getProfileFromBackend = function(callback) {
       callback = callback || angular.noop;
 
-      Websocket.emit('playerProfile',
-        JSON.stringify({steamid: ''}), //current user
-        function(data) {
-          var response = JSON.parse(data);
+      Websocket.emitJSON('playerProfile',
+        {steamid: ''}, //current user
+        function(response) {
           if (response.success) {
             userProfile = response.data;
             alreadyLoadedFromBackend = true;
