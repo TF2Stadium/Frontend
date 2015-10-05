@@ -36,15 +36,15 @@
     Websocket.onJSON('lobbyReadyUp', function(data) {
       $rootScope.$emit('lobby-ready-up');
       $mdDialog.show({
-        templateUrl: 'lobbypage-readyup.html.tpl',
-        controller: 'LobbyPageReadyDialog',
+        templateUrl: 'app/shared/notifications/ready-up.html',
+        controller: 'ReadyUpDialogController',
         controllerAs: 'dialog'
       })
       .then(function(response) {
-        if (response === "ready") {
-          Websocket.emit('playerReady');
+        if (response === 'ready') {
+          Websocket.emitJSON('playerReady', {});
         } else {
-          Websocket.emit('lobbyKick', factory.lobbyActive.id);
+          Websocket.emitJSON('lobbyKick', {id : factory.lobbyActive.id});
         }
       });
     });
@@ -64,6 +64,20 @@
       $rootScope.$emit('lobby-active-updated');
     });
 
+    $mdDialog.show({
+      templateUrl: 'app/shared/notifications/ready-up.html',
+      controller: 'ReadyUpDialogController',
+      controllerAs: 'dialog'
+    })
+      .then(function(response) {
+        if (response === 'ready') {
+          Websocket.emitJSON('playerReady', {});
+        } else {
+          Websocket.emitJSON('lobbyKick', {id : factory.lobbyActive.id});
+        }
+      });
+
     return factory;
   }
+
 })();

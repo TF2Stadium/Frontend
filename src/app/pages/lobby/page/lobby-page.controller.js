@@ -3,8 +3,7 @@
 
   angular
     .module('tf2stadium')
-    .controller('LobbyPageController', LobbyPageController)
-    .controller('LobbyPageReadyDialog', LobbyPageReadyDialog);
+    .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
   function LobbyPageController($scope, LobbyService, Websocket) {
@@ -39,33 +38,5 @@
     });
 
   }
-
-  function LobbyPageReadyDialog($mdDialog, $timeout) {
-    var vm = this;
-
-    vm.seconds = 0;
-    vm.limit = 30;
-
-    vm.increaseCounter = function(){
-      vm.seconds++;
-      timer = $timeout(vm.increaseCounter,1000);
-
-      if (vm.seconds > vm.limit) {
-        $mdDialog.hide('leave');
-      }
-    };
-
-    var timer = $timeout(vm.increaseCounter,1000);
-
-    vm.ready = function () {
-      $mdDialog.hide('ready');
-    };
-
-    vm.leave = function () {
-      $mdDialog.hide('leave');
-    };
-
-  }
-
 
 })();

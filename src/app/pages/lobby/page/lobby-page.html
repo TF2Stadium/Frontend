@@ -29,28 +29,3 @@
     </div>
   </div>
 </div>
-
-<script type="text/ng-template" id="lobbypage-readyup.html.tpl">
-  <md-dialog aria-label="Mango (Fruit)">
-    <form>
-      <md-dialog-content style="width:400px;height:200px; ">
-        <div>
-          <md-progress-linear md-mode="determinate" value="{{(100/dialog.limit)*dialog.seconds}}"></md-progress-linear>
-          <h2 class="text-center">Are you ready?</h2>
-          <p>
-            Please ready up, if you dont ready up in the next 30 seconds you will be removed from the queue.
-          </p>
-        </div>
-      </md-dialog-content>
-      <div class="md-actions" layout="row">
-        <md-button class="md-raised md-primary" ng-click="dialog.ready()" >
-          Ready!
-        </md-button>
-        <span flex></span>
-        <md-button class="md-raised md-warn" ng-click="dialog.leave()" style="margin-right:20px;" >
-          Leave!
-        </md-button>
-      </div>
-    </form>
-  </md-dialog>
-</script>
