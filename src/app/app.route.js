@@ -39,7 +39,7 @@
             controller: 'LobbyPageController',
             controllerAs: 'lobbyPage'
           },
-          "headerText": {
+          "headerInfo": {
             templateUrl: 'app/pages/lobby/page/header.html',
             controller: 'LobbyPageHeaderController',
             controllerAs: 'header'

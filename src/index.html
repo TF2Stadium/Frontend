@@ -49,9 +49,7 @@
       </md-toolbar>
       <div id="toasts"></div>
       <ng-include id="commentbox" src="'app/shared/comment-box/comment-box.html'"></ng-include>
-      <div class="header-info {{$root.currentState}}">
-        <div ui-view="headerText" class="header-text"></div>
-      </div>
+      <div ui-view="headerInfo" class="header-info"></div>
       <div id="fab">
         <md-button ui-sref="lobby-create" class="md-fab md-raised md-primary">
           +

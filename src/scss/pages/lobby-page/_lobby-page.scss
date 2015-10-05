@@ -8,6 +8,23 @@
   }
 }
 
+.header-image {
+  @include flex (column, center, center);
+  width: 100%;
+  height: 100%;
+  background: {
+    size: cover;
+    position: center;
+  }
+
+  &:after {
+    @extend .fill-parent;
+    content: "";
+    background: #000;
+    opacity: .2;
+  }
+}
+
 .lobbypage-text {
   @include flex (row, space-between, center);
   flex-wrap: wrap;

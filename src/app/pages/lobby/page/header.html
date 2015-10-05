@@ -1,16 +1,20 @@
-<div class="lobbypage-text">
-  <span class="lobbypage-map">{{::header.lobbyInformation.map}}</span>
-  <div class="left">
-    <span class="lobbypage-rules">{{::header.lobbyInformation.type}}, whitelist 
-      <a target="_blank" 
-        href="http://whitelist.tf/{{::header.lobbyInformation.whitelistId}}">
-        #{{::header.lobbyInformation.whitelistId}}
-      </a>
-    </span>
-    <span class="lobbypage-leader">Leader: {{::header.lobbyInformation.leader.name}}</span>
-  </div>
-  <div class="right">
-    <span class="lobbypage-mumble">Mumble {{::header.lobbyInformation.mumbleRequired ? '': 'not '}}required</span>
-    <span class="lobbypage-region">{{::header.lobbyInformation.region}}</span>
+<div class="header-image" style="background-image:url(assets/img/maps/4k/{{::header.lobbyInformation.map}}.jpg)">
+  <div class="header-text">
+    <div class="lobbypage-text">
+      <span class="lobbypage-map">{{::header.lobbyInformation.map}}</span>
+      <div class="left">
+        <span class="lobbypage-rules">{{::header.lobbyInformation.type}}, whitelist 
+          <a target="_blank" 
+            href="http://whitelist.tf/{{::header.lobbyInformation.whitelistId}}">
+            #{{::header.lobbyInformation.whitelistId}}
+          </a>
+        </span>
+        <span class="lobbypage-leader">Leader: {{::header.lobbyInformation.leader.name}}</span>
+      </div>
+      <div class="right">
+        <span class="lobbypage-mumble">Mumble {{::header.lobbyInformation.mumbleRequired ? '': 'not '}}required</span>
+        <span class="lobbypage-region">{{::header.lobbyInformation.region}}</span>
+      </div>
+    </div>
   </div>
 </div>
