@@ -33,6 +33,15 @@
       scope.$on('$destroy', handler);
     }
 
+    factory.kick = function(lobbyID, steamID, banFromLobby) {
+      Websocket.emitJSON('lobbyKick',
+        {
+          id: lobbyID,
+          steamid: steamID,
+          ban: banFromLobby
+        });
+    }
+
     Websocket.onJSON('lobbyReadyUp', function(data) {
       $rootScope.$emit('lobby-ready-up');
       $mdDialog.show({

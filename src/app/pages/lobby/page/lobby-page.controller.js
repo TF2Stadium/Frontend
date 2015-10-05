@@ -33,6 +33,14 @@
       window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };
 
+    vm.kick = function(playerSummary) {
+      LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, false);
+    };
+
+    vm.ban = function(playerSummary) {
+      LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, true);
+    };
+
     LobbyService.subscribe('lobby-ready-up', $scope, function(){
       vm.inReadyUp = true;      
     });
