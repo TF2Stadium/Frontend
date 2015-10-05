@@ -29,6 +29,10 @@
       });
     };
 
+    vm.goToProfile = function(steamId) {
+      window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
+    };
+
     LobbyService.subscribe('lobby-ready-up', $scope, function(){
       vm.inReadyUp = true;      
     });

@@ -51,6 +51,8 @@
 
 #slots {  
   .md-button {
+    width: 100%;
+    height: 100%;
     line-height: normal !important; //otherwise can't multiline inside md-button
     border-radius: 3px; //overriding .class-button .md-button
   }
@@ -91,17 +93,11 @@
   }
 }
 
-.slot-button {
-  @include flex (row, space-between, flex-start);
+.slot-button-container {
   padding: 0;
   margin: 0;
   height: 100%;
-
-  /*
-  Makes the second slot-button created in the html go
-  on the right side of the row and reverses the
-  layout so the whole row appears symmetrical
-  */
+  
   &:nth-child(2) {
     flex-direction: row-reverse;
     order: 3;
@@ -121,7 +117,14 @@
 
   md-checkbox {
     margin: 0;
-  }
+  }  
+}
+
+.slot-button {
+  @include flex (row, space-between, flex-start);
+  padding: 0;
+  margin: 0;
+  height: 100%;
 }
 
 .firefox-bug-container {
