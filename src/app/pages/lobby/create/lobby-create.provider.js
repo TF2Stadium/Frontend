@@ -74,6 +74,9 @@
             },{
               value: 'bball',
               title: 'Bball'
+            },{
+              value: 'debug',
+              title: 'Debug'
             }
           ]
         },

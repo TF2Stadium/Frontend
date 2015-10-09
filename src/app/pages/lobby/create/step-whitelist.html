@@ -3,7 +3,8 @@
   ng-repeat="whitelist in lobbyCreate.whitelists.options"
   ng-click="lobbyCreate.select(lobbyCreate.whitelists, whitelist)"
   ng-if="whitelist.format==lobbyCreate.lobbySettings[lobbyCreate.formats.key]
-         && whitelist.league==lobbyCreate.lobbySettings[lobbyCreate.leagues.key]">
+         && whitelist.league==lobbyCreate.lobbySettings[lobbyCreate.leagues.key]
+         || lobbyCreate.lobbySettings[lobbyCreate.formats.key]=='debug'">
   <div class="tile-text">
     <span>{{::whitelist.title}}</span>
   </div>

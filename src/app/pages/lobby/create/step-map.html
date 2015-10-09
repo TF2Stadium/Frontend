@@ -2,7 +2,7 @@
   md-colspan="{{map.important ? 6 : 6}}"  md-rowspan="{{map.important ? 4 : 2}}"
   ng-repeat="map in lobbyCreate.maps.options | orderBy:'important'"
   ng-click="lobbyCreate.select(lobbyCreate.maps, map)"
-  ng-if="map[lobbyCreate.lobbySettings[lobbyCreate.formats.key]]">
+  ng-if="map[lobbyCreate.lobbySettings[lobbyCreate.formats.key]] || lobbyCreate.lobbySettings[lobbyCreate.formats.key]=='debug'">
   <div class="tile-image" style="background-image: url(/assets/img/maps/{{::map.value}}-4k.jpeg)"></div>
   <div class="tile-text">
     <span class="title">{{::map.value}}</span>
