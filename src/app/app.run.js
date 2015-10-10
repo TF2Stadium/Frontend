@@ -5,7 +5,7 @@
 
   /** @ngInject */
 
-  function runBlock(Config, User, ThemeService, $log, $state, $rootScope) {
+  function runBlock(Config, User, ThemeService, $log, $state, $rootScope, LobbyService, Notifications) {
 
     $log.debug('runBlock end');
 
@@ -18,8 +18,21 @@
           event.preventDefault();
           $state.go(toState.parent, toParams);
         }
+
+        if (toState.name == 'lobby-page'
+            && ( angular.equals({}, LobbyService.getActive()) || LobbyService.getActive().id != toParams.lobbyID) ) {
+          Notifications.toast({message: "Can't spectate lobby " + toParams.lobbyID, error: true});
+          event.preventDefault();
+          $state.go('lobby-list');
+        }
       }
     );
+
+    $rootScope.$on('lobby-active-updated', function() {
+      if (angular.equals({}, LobbyService.getActive()) && $rootScope.currentState=='lobby-page') {
+        $state.go('lobby-list');
+      }
+    });
 
     User.getProfile(function(profile) {
         $rootScope.userProfile = profile;
