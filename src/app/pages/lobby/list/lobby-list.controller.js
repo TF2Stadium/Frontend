@@ -11,7 +11,9 @@
 
     vm.lobbies=LobbyService.getList();
 
-    vm.join = function (lobby, team, position) {
+    vm.join = function (lobby, team, position, event) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
       LobbyService.join(lobby, team, position);
     };
 
