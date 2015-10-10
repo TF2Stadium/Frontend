@@ -12,15 +12,7 @@
     vm.lobbies=LobbyService.getList();
 
     vm.join = function (lobby, team, position) {
-
-      Websocket.emitJSON('lobbyJoin',
-        {
-          'id': lobby,
-          'team': team,
-          'class': position          
-        }
-      );
-
+      LobbyService.join(lobby, team, position);
     };
 
     LobbyService.subscribeList($scope, function (){

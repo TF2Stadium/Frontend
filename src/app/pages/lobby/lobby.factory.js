@@ -4,7 +4,7 @@
   angular.module('tf2stadium.services').factory('LobbyService', LobbyService);
 
   /** @ngInject */
-  function LobbyService(Websocket, $rootScope, $mdDialog) {
+  function LobbyService(Websocket, $rootScope, $state, $mdDialog) {
     var factory = {};
 
     factory.lobbyList = {};
@@ -40,7 +40,24 @@
           steamid: steamID,
           ban: banFromLobby
         });
-    }
+    };
+
+    factory.join = function(lobby, team, position) {
+      var payload = {
+        'id': lobby,
+        'team': team,
+        'class': position          
+      };
+
+      Websocket.emitJSON('lobbyJoin', payload, function(response) {
+        if (response.success) {
+          var handler = $rootScope.$on('lobby-active-updated', function() {
+            $state.go('lobby-page', {lobbyID: lobby});
+            handler();
+          });
+        }
+      });      
+    };    
 
     Websocket.onJSON('lobbyReadyUp', function(data) {
       $rootScope.$emit('lobby-ready-up');
