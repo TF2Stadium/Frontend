@@ -15,7 +15,7 @@
         <!--  If slot.id set, show flat button with player info
               If it's not set, show raised button -->
         <div flex class="firefox-bug-container" ng-if="slot.player">
-          <md-checkbox ng-checked="slot.ready" aria-label="Player ready" ng-if="lobbyPage.inReadyUp"></md-checkbox>
+          <md-checkbox ng-checked="slot.ready" aria-label="Player ready" ng-if="lobbyPage.lobbyInformation.state==2"></md-checkbox>
           <div flex class="slot-info">
             <span class="slot-playername">{{slot.player.name}}</span>
             <div class="slot-misc">

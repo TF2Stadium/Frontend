@@ -41,10 +41,6 @@
       LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, true);
     };
 
-    LobbyService.subscribe('lobby-ready-up', $scope, function(){
-      vm.inReadyUp = true;      
-    });
-
     LobbyService.subscribe('lobby-start', $scope, function(){
       alert("STARTED");
     });
