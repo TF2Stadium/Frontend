@@ -16,17 +16,7 @@
     });
 
     vm.join = function (lobby, team, position) {
-      var lobbyData = {
-        'id': lobby,
-        'team': team,
-        'class': position
-      };
-
-      Websocket.emitJSON('lobbyJoin', lobbyData, function(data) {
-        //ToDo: Error Handling
-        if (data.success !== true) {
-        }
-      });
+      LobbyService.join(lobby, team, position);
     };
 
     vm.goToProfile = function(steamId) {
