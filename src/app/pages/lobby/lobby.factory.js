@@ -54,14 +54,19 @@
         'class': position          
       };
 
+      //We could receive lobbyData before we receive the response to lobbyJoin,
+      //so the $on event might never be fired.
+      var handler = $rootScope.$on('lobby-active-updated', function() {
+        $state.go('lobby-page', {lobbyID: lobby});
+        handler();
+      });
+
+      //If we are not allowed to join the lobby, there's no need to listen for updates
       Websocket.emitJSON('lobbyJoin', payload, function(response) {
-        if (response.success) {
-          var handler = $rootScope.$on('lobby-active-updated', function() {
-            $state.go('lobby-page', {lobbyID: lobby});
-            handler();
-          });
+        if (!response.success) {
+          handler();
         }
-      });      
+      });
     };
 
     factory.joinTF2Server = function() {
@@ -102,6 +107,7 @@
 
     Websocket.onJSON('lobbyData', function(data) {
       factory.lobbyActive = data;
+      console.log('zxcvzxcvzxcvzxcv')
       $rootScope.$emit('lobby-active-updated');
     });
 
