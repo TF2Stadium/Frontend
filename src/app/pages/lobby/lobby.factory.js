@@ -9,6 +9,11 @@
 
     factory.lobbyList = {};
     factory.lobbyActive = {};
+    factory.lobbyJoinInformation = {};
+
+    factory.getLobbyJoinInformation = function() {
+      return factory.lobbyJoinInformation;
+    };
 
     factory.getList = function() {
       return factory.lobbyList;
@@ -57,7 +62,15 @@
           });
         }
       });      
-    };    
+    };
+
+    factory.joinTF2Server = function() {
+      window.open('steam://connect/' + factory.lobbyJoinInformation.game.host + '/' + factory.lobbyJoinInformation.password, '_self');
+    };
+
+    factory.joinMumbleServer = function() {
+      //TODO
+    };
 
     Websocket.onJSON('lobbyReadyUp', function(data) {
       $rootScope.$emit('lobby-ready-up');
@@ -76,7 +89,9 @@
     });
 
     Websocket.onJSON('lobbyStart', function(data) {
-      console.log('lobbyStart');
+      factory.lobbyJoinInformation = data;
+      $state.go('lobby-page', {lobbyID: factory.lobbyActive.id});
+      factory.joinTF2Server();
       $rootScope.$emit('lobby-start');
     });
 

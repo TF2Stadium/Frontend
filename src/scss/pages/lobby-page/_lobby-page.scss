@@ -17,7 +17,7 @@
     position: center;
   }
 
-  &:after {
+  &:before {
     @extend .fill-parent;
     content: "";
     background: #000;
@@ -47,6 +47,10 @@
 
 .lobby-page-content {
   @include flex (row, flex-start, flex-start);
+}
+
+#lobby-join-information {
+  text-align: center;
 }
 
 #slots {  

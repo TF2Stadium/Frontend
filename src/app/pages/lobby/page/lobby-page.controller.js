@@ -10,9 +10,14 @@
     var vm = this;
 
     vm.lobbyInformation = LobbyService.getActive();
+    vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
 
     LobbyService.subscribeActive($scope, function(){
       vm.lobbyInformation = LobbyService.getActive();
+    });
+
+    LobbyService.subscribe('lobby-start', $scope, function(){
+      vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
     });
 
     vm.join = function (lobby, team, position) {
@@ -31,9 +36,13 @@
       LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, true);
     };
 
-    LobbyService.subscribe('lobby-start', $scope, function(){
-      alert("STARTED");
-    });
+    vm.joinTF2Server = function() {
+      LobbyService.joinTF2Server();
+    }
+
+    vm.joinMumbleServer = function() {
+      LobbyService.joinMumbleServer();
+    }
 
   }
 
