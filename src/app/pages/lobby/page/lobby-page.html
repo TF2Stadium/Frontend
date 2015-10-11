@@ -14,7 +14,7 @@
       ng-repeat="(key, slot) in class track by key"
       ng-if="key!='class'"
       class="slot-button-container">
-      <md-button aria-label="Join {{key}} {{class.class}}"
+      <md-button aria-label="Join {{::key}} {{::class.class}}"
         ng-click="slot.player ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)"
         ng-class="{'md-raised' : !slot.player}"
         class="slot-button">
@@ -23,14 +23,13 @@
         <div flex class="firefox-bug-container" ng-if="slot.player">
           <md-checkbox ng-checked="slot.ready" aria-label="Player ready" ng-if="lobbyPage.lobbyInformation.state==2"></md-checkbox>
           <div flex class="slot-info">
-            <span class="slot-playername">{{slot.player.name}}</span>
+            <span class="slot-playername">{{::slot.player.name}}</span>
             <div class="slot-misc">
-              <div><span>XX%</span><span> reliability</span></div>
-              <div><span>{{slot.player.lobbiesPlayed}}</span><span> lobbies</span></div>
-              <div><span>{{slot.player.gameHours}}</span><span> hr</span></div>
+              <div><span>{{::slot.player.lobbiesPlayed}}</span><span> lobbies</span></div>
+              <div><span>{{::slot.player.gameHours}}</span><span> hr</span></div>
             </div>
           </div>
-          <img ng-src="{{slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+          <img ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
         </div>
       </md-button>
       <md-menu-content width="4">
@@ -56,8 +55,6 @@
         </md-menu-item>
       </md-menu-content>
     </md-menu>
-    
-    <div class="class-button lobby-icon-{{class.class}}">
-    </div>
+    <div class="class-button lobby-icon-{{::class.class}}"></div>
   </div>
 </div>
