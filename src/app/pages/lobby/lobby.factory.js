@@ -107,7 +107,6 @@
 
     Websocket.onJSON('lobbyData', function(data) {
       factory.lobbyActive = data;
-      console.log('zxcvzxcvzxcvzxcv')
       $rootScope.$emit('lobby-active-updated');
     });
 
