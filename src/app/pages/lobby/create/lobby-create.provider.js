@@ -88,28 +88,28 @@
               value: 'cp_badlands',
               sixes: true
             },{
-              value: 'cp_granary',
+              value: 'cp_granary_pro_b10',
               sixes: true
             },{
               value: 'cp_process_final',
               important: true,
               sixes: true
             },{
-              value: 'cp_snakewater',
+              value: 'cp_snakewater_final1',
               sixes: true
             },{
-              value: 'cp_gullywash',
+              value: 'cp_gullywash_final1',
               sixes: true,
               highlander: true
             },{
-              value: 'cp_metalworks',
+              value: 'cp_metalworks_rc5',
               sixes: true
             },{
-              value: 'cp_sunshine',
+              value: 'cp_sunshine_rc7',
               sixes: true,
               highlander: true
             },{
-              value: 'koth_viaduct_pro',
+              value: 'koth_pro_viaduct_rc4',
               sixes: true,
               highlander: true,
               important: true
@@ -123,19 +123,19 @@
               value: 'pl_borneo',
               highlander: true
             },{
-              value: 'pl_swiftwater',
+              value: 'pl_swiftwater_ugc',
               highlander: true
             },{
-              value: 'pl_barnblitz_pro',
+              value: 'pl_barnblitz_pro6',
               highlander: true
             },{
               value: 'cp_steel',
               highlander: true
             },{
-              value: 'koth_lakeside',
+              value: 'koth_lakeside_final',
               highlander: true
             },{
-              value: 'koth_ramjam',
+              value: 'koth_ramjam_rc1',
               highlander: true
             }
           ]
