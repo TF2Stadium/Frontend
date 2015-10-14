@@ -6,10 +6,30 @@
 
   /** @ngInject */
   function Websocket(socketFactory, Config, Notifications) {
+
+    var connected = false;
     var factory = socketFactory({
       prefix: '',
       ioSocket: io.connect(Config.endpoints.websocket)
     });
+
+    factory.on('connect', function() {
+      console.log('Websocket connection resolved');
+      connected = true;
+    });
+
+    var emitJSON = function(name, json, callback) {
+      console.log('Sent ' + name);
+      factory.emit(name, json, function(json) {
+        var data = JSON.parse(json);
+        console.log('Response to ' + name);
+        console.log(data);
+        if (!data.success) {
+          Notifications.toast({message: data.message, error: true});
+        }
+        callback(data);
+      });
+    }
 
     factory.onJSON = function(name, callback) {
       callback = callback || angular.noop;
@@ -27,19 +47,16 @@
     };
 
     factory.emitJSON = function(name, data, callback) {
-      console.log('Sent ' + name);
       callback = callback || angular.noop;
       var json = JSON.stringify(data);
       
-      factory.emit(name, json, function(json) {
-        var data = JSON.parse(json);
-        console.log('Response to ' + name);        
-        console.log(data);
-        if (!data.success) {
-          Notifications.toast({message: data.message, error: true});
-        }
-        callback(data);
-      });
+      if (connected) {
+        emitJSON(name, json, callback);
+      } else {
+        factory.on('connect', function() {
+          emitJSON(name, json, callback);          
+        });
+      }
 
     };
 
