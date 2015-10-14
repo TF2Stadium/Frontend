@@ -3,7 +3,7 @@
   ng-repeat="map in lobbyCreate.maps.options | orderBy:'important'"
   ng-click="lobbyCreate.select(lobbyCreate.maps, map)"
   ng-if="map[lobbyCreate.lobbySettings[lobbyCreate.formats.key]] || lobbyCreate.lobbySettings[lobbyCreate.formats.key]=='debug'">
-  <div class="tile-image" style="background-image: url(/assets/img/maps/{{::map.value}}-4k.jpeg)"></div>
+  <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/maps/lobby-create/' + map.value + '.jpg)'}"></div>
   <div class="tile-text">
     <span class="title">{{::map.value}}</span>
   </div>
