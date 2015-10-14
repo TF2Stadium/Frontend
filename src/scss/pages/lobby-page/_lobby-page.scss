@@ -1,13 +1,3 @@
-.lobby-page.header-info {
-  background-image: url(../assets/img/maps/4k/cp_process_final-4k.jpeg);
-  &:after {
-    @extend .fill-parent;
-    content: "";
-    background: #000;
-    opacity: .4;
-  }
-}
-
 .header-image {
   @include flex (column, center, center);
   width: 100%;
