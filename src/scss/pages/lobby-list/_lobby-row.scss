@@ -3,6 +3,7 @@
   @extend .sheet, .clickable;
   height: $lobby-card-height;
   margin:  0 0 $padding-small 0;
+  overflow: hidden;
   position: relative; //so the ripple doesn't fill the whole page
   text-decoration: none;
 
