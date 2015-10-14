@@ -13,8 +13,8 @@
       ioSocket: io.connect(Config.endpoints.websocket)
     });
 
-    factory.on('connect', function() {
-      console.log('Websocket connection resolved');
+    factory.on('socketInitialized', function() {
+      console.log('Websocket connection initialized');
       connected = true;
     });
 
@@ -53,8 +53,8 @@
       if (connected) {
         emitJSON(name, json, callback);
       } else {
-        factory.on('connect', function() {
-          emitJSON(name, json, callback);          
+        factory.on('socketInitialized', function() {
+          emitJSON(name, json, callback);       
         });
       }
 
