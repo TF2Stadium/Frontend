@@ -77,8 +77,16 @@ body {
 
 .header-text {
   width: $full-width;
+  height: 100%;
   z-index: 1;
   padding: 0 $commentbox-width 0 $left-sidebar-width;
+  background-image: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, .4) 10%,
+      rgba(0, 0, 0, .4) 90%,
+      rgba(0, 0, 0, 0) 100%
+  );
 }
 
 #fab {

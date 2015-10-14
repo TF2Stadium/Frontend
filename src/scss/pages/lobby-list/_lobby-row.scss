@@ -25,9 +25,14 @@
 
   &:before {
     @extend .fill-parent;
-    content: "";    
-    background: #000;
-    opacity: .4;
+    content: "";
+    background-image: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, .4) 0%,
+        rgba(0, 0, 0, .5) 40%,
+        rgba(0, 0, 0, .5) 60%,
+        rgba(0, 0, 0, .4) 100%
+    );
   }
 
   span {

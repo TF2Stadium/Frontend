@@ -6,13 +6,6 @@
     size: cover;
     position: center;
   }
-
-  &:before {
-    @extend .fill-parent;
-    content: "";
-    background: #000;
-    opacity: .2;
-  }
 }
 
 .lobbypage-text {
@@ -20,6 +13,7 @@
   flex-wrap: wrap;
   z-index: 1;
   padding: 0 $padding-medium;
+  height: 100%;
   
   & > div {    
     @include flex (column, space-between, stretch);
