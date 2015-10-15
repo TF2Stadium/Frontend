@@ -6,7 +6,7 @@
     .controller('CommentBoxController', CommentBoxController);
 
   /** @ngInject */
-  function CommentBoxController ($scope, $rootScope, ChatService, LobbyService) {
+  function CommentBoxController ($scope, $rootScope, $timeout, ChatService, LobbyService) {
     var vm = this;
 
     vm.messages = [];
@@ -15,6 +15,13 @@
 
     ChatService.subscribe($scope, function() {
       vm.messages = ChatService.getMessages();
+      //ToDo: Replace with custom directive
+      $timeout(function(){
+        var globalChat=document.getElementById("tab-content-0");
+        var lobbyChat=document.getElementById("tab-content-1");
+        globalChat.scrollTop = globalChat.scrollHeight;
+        lobbyChat.scrollTop = lobbyChat.scrollHeight;
+      }, 100);
     });
 
     LobbyService.subscribeActive($scope, function() {
@@ -41,8 +48,7 @@
     };
 
     $rootScope.$on('$stateChangeSuccess',
-      function(event, toState, toParams) {
-        console.log(toState)
+      function(event, toState) {
         if (toState.name==='lobby-page') {
           vm.currentTab = 1;
         } else {
