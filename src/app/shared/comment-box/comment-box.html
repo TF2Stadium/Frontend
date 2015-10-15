@@ -5,7 +5,7 @@
       <md-tab>
         <md-tab-label>Chat</md-tab-label>
         <md-tab-body>
-          <md-content>
+          <md-content scroll-glue>
             <div ng-repeat="message in commentBox.messages[0] track by $index"
                 ng-class="['message', message.player.tags]">
               <md-button class="chat-player-name">{{::message.player.name}}:</md-button>

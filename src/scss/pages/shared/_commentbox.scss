@@ -1,8 +1,13 @@
 #chat {
   @extend .sheet;
+
+  md-tab-content > div {
+    height: 100%;
+  }
   
-  md-tab-content {
+  md-content {
     @include scrollbars;
+    height: 100%;
   }  
   
   md-tabs-content-wrapper {

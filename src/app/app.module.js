@@ -6,7 +6,8 @@
     'ngAnimate',
     'ui.router',
     'btford.socket-io',
-    'ngMaterial'
+    'ngMaterial',
+    'luegg.directives'
   ]);
 
   angular.module('tf2stadium.services', []);
