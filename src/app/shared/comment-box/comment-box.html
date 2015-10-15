@@ -17,7 +17,7 @@
       <md-tab ng-if="commentBox.joinedLobby">
         <md-tab-label>Lobby chat</md-tab-label>
         <md-tab-body>
-          <md-content>
+          <md-content scroll-glue>
             <div ng-repeat="message in commentBox.messages[commentBox.joinedLobby] track by $index"
                 ng-class="['message', message.player.tags]">
               <md-button class="chat-player-name">{{::message.player.name}}:</md-button>
