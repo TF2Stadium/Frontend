@@ -6,7 +6,7 @@
     .controller('LobbyListController', LobbyListController);
 
   /** @ngInject */
-  function LobbyListController($scope, Websocket, LobbyService) {
+  function LobbyListController($scope, LobbyService) {
     var vm = this;
 
     vm.lobbies=LobbyService.getList();
