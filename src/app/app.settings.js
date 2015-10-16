@@ -11,23 +11,23 @@
 
     SettingsProvider.constants.filters = {
       regions: {
-        regionEU:             {name: 'Europe'},
-        regionNA:             {name: 'North America'},
-        regionSA:             {name: 'South America'},
-        regionAS:             {name: 'Asia'},
-        regionAUS:            {name: 'Australia'},
-        regionRU:             {name: 'Russia'},
-        regionAF:             {name: 'Africa'}
+        eu:             {name: 'Europe'},
+        na:             {name: 'North America'},
+        sa:             {name: 'South America'},
+        as:             {name: 'Asia'},
+        aus:            {name: 'Australia'},
+        ru:             {name: 'Russia'},
+        af:             {name: 'Africa'}
       },
       formats: {
-        formatSIXES:          {name: '6v6'},
-        formatHL:             {name: 'Highlander'}
+        Sixes:          {name: '6v6'},
+        Highlander:     {name: 'Highlander'}
       },
       gamemodes: {
-        gamemodeCP:           {name: 'Control Points'},
-        gamemodePL:           {name: 'Payload'},
-        gamemodeKOTH:         {name: 'King of the hill'},
-        gamemodeOTHERS:       {name: 'Other gamemodes'},
+        cp:             {name: 'Control Points'},
+        pl:             {name: 'Payload'},
+        koth:           {name: 'King of the hill'},
+        others:         {name: 'Other gamemodes'}
       }
     };
 
