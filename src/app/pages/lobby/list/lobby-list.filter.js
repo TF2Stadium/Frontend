@@ -6,7 +6,7 @@
     .filter('LobbyListSettingsFilter', LobbyListSettingsFilter);
 
   /** @ngInject */
-  function LobbyListSettingsFilter(Settings) {
+  function LobbyListSettingsFilter(Settings, Config) {
 
     var settings = Settings.getSettings(function(response) {
       settings = response;
@@ -22,7 +22,9 @@
 
         if (settings[lobby.region] &&
           settings[lobby.type] &&
-          settings[lobby.map.substr(0, lobby.map.indexOf('_'))]) {
+          settings[lobby.map.substr(0, lobby.map.indexOf('_'))]
+
+          || (Config.debug && lobby.type === 'Debug')) {
           filteredList[key] = lobby;
         }
       }
