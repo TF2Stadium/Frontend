@@ -36,6 +36,10 @@
       LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, true);
     };
 
+    vm.leaveSlot = function() {
+      LobbyService.kick(vm.lobbyInformation.id, '', false);
+    };
+
     vm.joinTF2Server = function() {
       LobbyService.joinTF2Server();
     }
