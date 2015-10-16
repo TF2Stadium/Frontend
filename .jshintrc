@@ -15,6 +15,7 @@
     "module": false,
     "io": false,
     "console": false,
-    "localStorage": false
+    "localStorage": false,
+    "window": false
   }
 }
