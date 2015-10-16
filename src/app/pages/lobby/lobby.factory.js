@@ -84,7 +84,11 @@
       $mdDialog.show({
         templateUrl: 'app/shared/notifications/ready-up.html',
         controller: 'ReadyUpDialogController',
-        controllerAs: 'dialog'
+        controllerAs: 'dialog',
+        locals: {
+          timeout: data.timeout
+        },
+        bindToController: true
       })
       .then(function(response) {
         if (response === 'ready') {
