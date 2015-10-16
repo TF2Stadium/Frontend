@@ -90,13 +90,12 @@
         },
         bindToController: true
       })
-      .then(function(response) {
-        if (response === 'ready') {
+      .then(function() {
           Websocket.emitJSON('playerReady', {});
-        } else {
+        }, function() {
           Websocket.emitJSON('lobbyKick', {id : factory.lobbyActive.id});
         }
-      });
+      );
     });
 
     Websocket.onJSON('lobbyStart', function(data) {

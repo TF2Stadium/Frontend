@@ -22,8 +22,12 @@
       increaseCounter();
     }, 1000);
 
-    vm.action = function(action) {
-      $mdDialog.hide(action);
+    vm.cancel = function() {
+      $mdDialog.cancel();
+    }
+
+    vm.accept = function() {
+      $mdDialog.hide();
     }
     
   }
