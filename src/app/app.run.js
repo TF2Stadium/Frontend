@@ -34,10 +34,7 @@
       }
     });
 
-    User.getProfile(function(profile) {
-        $rootScope.userProfile = profile;
-      }
-    );
+    User.init();
 
     $rootScope.config = Config;
   }

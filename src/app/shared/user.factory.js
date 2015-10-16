@@ -5,7 +5,7 @@
   app.factory('User', User);
 
   /** @ngInject */
-  function User(Websocket) {
+  function User(Websocket, $rootScope) {
 
     var userService = {};
 
@@ -28,20 +28,11 @@
       
     };
 
-    var getProfileFromBackend = function(callback) {
-      callback = callback || angular.noop;
-
-      Websocket.emitJSON('playerProfile',
-        {steamid: ''}, //current user
-        function(response) {
-          if (response.success) {
-            userProfile = response.data;
-            alreadyLoadedFromBackend = true;
-          }
-          callback();
-        }
-      );
-    };
+    userService.init = function() {
+      Websocket.onJSON('playerProfile', function(data) {
+        $rootScope.userProfile = data;
+      });
+    }
 
     return userService;
 
