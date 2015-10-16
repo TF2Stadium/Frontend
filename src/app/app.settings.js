@@ -11,23 +11,23 @@
 
     SettingsProvider.constants.filters = {
       regions: {
-        regionEU:             {name: 'Europe'},
-        regionNA:             {name: 'North America'},
-        regionSA:             {name: 'South America'},
-        regionAS:             {name: 'Asia'},
-        regionAUS:            {name: 'Australia'},
-        regionRU:             {name: 'Russia'},
-        regionAF:             {name: 'Africa'}
+        eu:             {name: 'Europe'},
+        na:             {name: 'North America'},
+        sa:             {name: 'South America'},
+        as:             {name: 'Asia'},
+        aus:            {name: 'Australia'},
+        ru:             {name: 'Russia'},
+        af:             {name: 'Africa'}
       },
       formats: {
-        formatSIXES:          {name: '6v6'},
-        formatHL:             {name: 'Highlander'}
+        Sixes:          {name: '6v6'},
+        Highlander:     {name: 'Highlander'}
       },
       gamemodes: {
-        gamemodeCP:           {name: 'Control Points'},
-        gamemodePL:           {name: 'Payload'},
-        gamemodeKOTH:         {name: 'King of the hill'},
-        gamemodeOTHERS:       {name: 'Other gamemodes'},
+        cp:             {name: 'Control Points'},
+        pl:             {name: 'Payload'},
+        koth:           {name: 'King of the hill'},
+        others:         {name: 'Other gamemodes'}
       }
     };
 
@@ -69,46 +69,34 @@
       during and after the run phase.
     */
     /** @ngInject */
-    var settingsService = function(Websocket) {
+    var settingsService = function(Websocket, $rootScope) {
 
       //Private properties
       var settings = settingsProvider.settings;
       var alreadyLoadedFromBackend = false;
 
-      var syncWithBackend = function(callback) {
-        callback = callback || angular.noop;
+      for(var setting in localStorage) {
+        settings[setting] = localStorage.getItem(setting);
+      }
 
-        if (alreadyLoadedFromBackend) {
-          callback();
-          return;
+      Websocket.onJSON('playerSettings', function(data) {
+        for (var setting in data) {
+          var value = data[setting];
+          /*
+            The backend can only store strings, so we need to convert them
+            to booleans if they are one.
+            It could be an actual string, so we have to check for both true and false.
+          */
+          if (value === 'true' || value === 'false') {
+            value = (value === 'true');
+          }
+          localStorage.setItem(setting, value);
+          settings[setting] = value;
         }
 
-        Websocket.emitJSON('playerSettingsGet',
-          {key: ''},
-          function(response) {
-            if (response.success) {
-              for (var setting in response.data) {
-                var value = response.data[setting];
-                /*
-                  The backend can only store strings, so we need to convert them
-                  to booleans if they are one.
-                  It could be an actual string, so we have to check for both true and false.
-                */
-                if (value === 'true' || value === 'false') {
-                  value = (value === 'true');
-                }
-                localStorage.setItem(setting, value);
-                settings[setting] = value;
-              }
-              alreadyLoadedFromBackend = true;
-              console.log('Settings loaded correctly! ---> ' + JSON.stringify(settingsProvider.settings));
-            } else {
-              console.log('There was a problem with the request ---> ' + response.message);
-            }
-            callback();
-          }
-        );
-      };
+        alreadyLoadedFromBackend = false;
+        $rootScope.$emit('settings-loaded-from-backend');
+      });
 
       /*
         Saves a setting into the service and into the backend and
@@ -135,33 +123,25 @@
         );
       };
 
-      settingsService.get = function(key, callback) {
-
-        callback = callback || angular.noop;
-        settingsService.getSettings(function() {
-          callback(settings[key]);
-        });
-
-        return settings[key];
-      };
-
       settingsService.getConstants = function(key) {
         return settingsProvider.constants[key];
       };
 
       /*
-        Loads all settings, saves them into the service in case of success and
-        fires an optional callback with the response from the backend as an argument.
+        Returns all settings and fires an optional callback
+        when they are loaded from the backend.
       */
       settingsService.getSettings = function(callback) {
+        callback = callback || angular.noop;
 
-        for(var setting in localStorage) {
-          settings[setting] = localStorage.getItem(setting);
-        }
-
-        syncWithBackend (function() {
+        if(!alreadyLoadedFromBackend) {          
+          var handler = $rootScope.$on('settings-loaded-from-backend', function() {
+            callback(settings);
+            handler();
+          });
+        } else {
           callback(settings);
-        });
+        }
 
         return settings;
       };

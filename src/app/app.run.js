@@ -5,7 +5,7 @@
 
   /** @ngInject */
 
-  function runBlock(Config, User, ThemeService, $log, $state, $rootScope, LobbyService, Notifications) {
+  function runBlock(Config, User, Settings, $log, $state, $rootScope, LobbyService, Notifications) {
 
     $log.debug('runBlock end');
 
@@ -34,12 +34,14 @@
       }
     });
 
-    User.getProfile(function(profile) {
-        $rootScope.userProfile = profile;
-      }
-    );
+    User.init();
 
     $rootScope.config = Config;
+    
+    Settings.getSettings(function(settings) {
+      $rootScope.currentTheme = settings.currentTheme;
+    });
+
   }
 
 })();
