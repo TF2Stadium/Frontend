@@ -4,22 +4,23 @@
   var app = angular.module('tf2stadium');
   app.controller('ReadyUpDialogController', ReadyUpDialogController);
 
-  function ReadyUpDialogController($mdDialog, $timeout) {
+  function ReadyUpDialogController($mdDialog, $interval) {
     var vm = this;
 
     vm.seconds = 0;
-    vm.limit = 300;
 
-    vm.increaseCounter = function(){
+    var increaseCounter = function() {
       vm.seconds++;
-      timer = $timeout(vm.increaseCounter,1000);
+      vm.percentage = 100 * vm.seconds / vm.timeout;
 
-      if (vm.seconds > vm.limit) {
+      if (vm.seconds >= vm.timeout) {
         $mdDialog.hide('leave');
       }
     };
 
-    var timer = $timeout(vm.increaseCounter,1000);
+    $interval(function () {
+      increaseCounter();
+    }, 1000);
 
     vm.action = function(action) {
       $mdDialog.hide(action);
