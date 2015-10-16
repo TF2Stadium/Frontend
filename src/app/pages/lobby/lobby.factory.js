@@ -70,7 +70,9 @@
     };
 
     factory.joinTF2Server = function() {
-      window.open('steam://connect/' + factory.lobbyJoinInformation.game.host + '/' + factory.lobbyJoinInformation.password, '_self');
+      setTimeout(function() {
+        window.open('steam://connect/' + factory.lobbyJoinInformation.game.host + '/' + factory.lobbyJoinInformation.password, '_self');
+      }, 1000);
     };
 
     factory.joinMumbleServer = function() {
