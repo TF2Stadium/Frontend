@@ -53,6 +53,44 @@
       $mdToast.show(options);
     };
 
+    notificationsService.notifyBrowser = function(options) {
+
+      if (!("Notification" in window)) {
+        console.log("Browser doesn't support HTML5 notifications");
+        return;
+      }
+
+      if (document.hasFocus() || Notification.permission === 'denied') {
+        return;
+      }
+
+      Notification.requestPermission(function () {
+
+        if (Notification.permission !== 'granted') {
+          return;
+        }
+
+        options.title = options.title || 'TF2Stadium';
+        options.icon = options.icon || '/assets/img/logo-no-text.png';
+        options.tag = options.tag || 'tf2stadium';
+
+        var html5notification = new Notification(options.title, options);
+        
+        if (options.timeout) {
+          setTimeout(function() {
+            html5notification.close();
+          }, options.timeout * 1000);
+        }      
+
+        for (var callback in options.callbacks) {
+          html5notification[callback] = function() {
+            options.callbacks[callback]();
+          }
+        }
+
+      });
+    }
+
     return notificationsService;
 
   }
