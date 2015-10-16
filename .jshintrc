@@ -16,6 +16,8 @@
     "io": false,
     "console": false,
     "localStorage": false,
-    "window": false
+    "window": false,
+    "Notification": false,
+    "document": false
   }
 }

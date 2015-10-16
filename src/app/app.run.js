@@ -19,8 +19,8 @@
           $state.go(toState.parent, toParams);
         }
 
-        if (toState.name == 'lobby-page'
-            && ( angular.equals({}, LobbyService.getActive()) || LobbyService.getActive().id != toParams.lobbyID) ) {
+        if (toState.name === 'lobby-page' &&
+          ( angular.equals({}, LobbyService.getActive()) || LobbyService.getActive().id !== toParams.lobbyID) ) {
           Notifications.toast({message: "Can't spectate lobby " + toParams.lobbyID, error: true});
           event.preventDefault();
           $state.go('lobby-list');
@@ -29,7 +29,7 @@
     );
 
     $rootScope.$on('lobby-active-updated', function() {
-      if (angular.equals({}, LobbyService.getActive()) && $rootScope.currentState=='lobby-page') {
+      if (angular.equals({}, LobbyService.getActive()) && $rootScope.currentState === 'lobby-page') {
         $state.go('lobby-list');
       }
     });
@@ -37,7 +37,7 @@
     User.init();
 
     $rootScope.config = Config;
-    
+
     Settings.getSettings(function(settings) {
       $rootScope.currentTheme = settings.currentTheme;
     });

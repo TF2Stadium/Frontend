@@ -7,7 +7,7 @@
   app.controller('NotificationsController', NotificationsController);
 
   /** @ngInject */
-  function Notifications($mdToast, $document) {
+  function Notifications($mdToast, $document, $timeout) {
 
     var notificationsService = {};
 
@@ -75,21 +75,23 @@
         options.tag = options.tag || 'tf2stadium';
 
         var html5notification = new Notification(options.title, options);
-        
+
         if (options.timeout) {
-          setTimeout(function() {
+          $timeout(function(){
             html5notification.close();
           }, options.timeout * 1000);
-        }      
+        }
+
+        var notificationCallback = function(callback) {
+          options.callbacks[callback]();
+        };
 
         for (var callback in options.callbacks) {
-          html5notification[callback] = function() {
-            options.callbacks[callback]();
-          }
+          html5notification[callback] = notificationCallback(callback);
         }
 
       });
-    }
+    };
 
     return notificationsService;
 

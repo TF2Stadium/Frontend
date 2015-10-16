@@ -6,7 +6,7 @@
     .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
-  function LobbyPageController($scope, LobbyService, Websocket) {
+  function LobbyPageController($scope, LobbyService) {
     var vm = this;
 
     vm.lobbyInformation = LobbyService.getActive();
@@ -42,11 +42,11 @@
 
     vm.joinTF2Server = function() {
       LobbyService.joinTF2Server();
-    }
+    };
 
     vm.joinMumbleServer = function() {
       LobbyService.joinMumbleServer();
-    }
+    };
 
   }
 

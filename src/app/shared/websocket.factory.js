@@ -29,7 +29,7 @@
         }
         callback(data);
       });
-    }
+    };
 
     factory.onJSON = function(name, callback) {
       callback = callback || angular.noop;
@@ -43,18 +43,18 @@
         }
         callback(json);
       });
-      
+
     };
 
     factory.emitJSON = function(name, data, callback) {
       callback = callback || angular.noop;
       var json = JSON.stringify(data);
-      
+
       if (connected) {
         emitJSON(name, json, callback);
       } else {
         factory.on('socketInitialized', function() {
-          emitJSON(name, json, callback);       
+          emitJSON(name, json, callback);
         });
       }
 
@@ -62,5 +62,5 @@
 
     return factory;
   }
-  
+
 })();

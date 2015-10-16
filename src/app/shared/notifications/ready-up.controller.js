@@ -24,12 +24,12 @@
 
     vm.cancel = function() {
       $mdDialog.cancel();
-    }
+    };
 
     vm.accept = function() {
       $mdDialog.hide();
-    }
-    
+    };
+
   }
 
 })();

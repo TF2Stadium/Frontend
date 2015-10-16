@@ -4,7 +4,7 @@
   angular.module('tf2stadium.services').factory('LobbyService', LobbyService);
 
   /** @ngInject */
-  function LobbyService(Websocket, $rootScope, $state, $mdDialog) {
+  function LobbyService($rootScope, $state, $mdDialog, $timeout, Websocket) {
     var factory = {};
 
     factory.lobbyList = {};
@@ -36,7 +36,7 @@
     factory.subscribe = function(request, scope, callback) {
       var handler = $rootScope.$on(request, callback);
       scope.$on('$destroy', handler);
-    }
+    };
 
     factory.kick = function(lobbyID, steamID, banFromLobby) {
       Websocket.emitJSON('lobbyKick',
@@ -51,7 +51,7 @@
       var payload = {
         'id': lobby,
         'team': team,
-        'class': position          
+        'class': position
       };
 
       //We could receive lobbyData before we receive the response to lobbyJoin,
@@ -70,7 +70,7 @@
     };
 
     factory.joinTF2Server = function() {
-      setTimeout(function() {
+      $timeout(function(){
         window.open('steam://connect/' + factory.lobbyJoinInformation.game.host + '/' + factory.lobbyJoinInformation.password, '_self');
       }, 1000);
     };

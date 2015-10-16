@@ -41,8 +41,8 @@
     };
 
     $rootScope.$on('$stateChangeSuccess',
-      function(event, toState, toParams) {
-        console.log(toState)
+      function(event, toState) {
+        console.log(toState);
         if (toState.name==='lobby-page') {
           vm.currentTab = 1;
         } else {

@@ -13,7 +13,7 @@
     var alreadyLoadedFromBackend = false;
 
     userService.getProfile = function(callback) {
-      
+
       callback = callback || angular.noop;
 
       if (alreadyLoadedFromBackend) {
@@ -25,14 +25,14 @@
         callback(userProfile);
       });
       return userProfile;
-      
+
     };
 
     userService.init = function() {
       Websocket.onJSON('playerProfile', function(data) {
         $rootScope.userProfile = data;
       });
-    }
+    };
 
     return userService;
 
