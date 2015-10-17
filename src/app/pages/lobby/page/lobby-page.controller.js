@@ -12,7 +12,7 @@
     vm.lobbyInformation = LobbyService.getLobbySpectated();
     vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
 
-    LobbyService.subscribeLobbySpectated($scope, function(){
+    LobbyService.subscribe('lobby-spectated-updated', $scope, function() {
       vm.lobbyInformation = LobbyService.getLobbySpectated();
     });
 

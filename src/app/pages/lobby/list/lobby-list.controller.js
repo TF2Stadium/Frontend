@@ -22,7 +22,7 @@
       LobbyService.spectate(lobby);
     };
 
-    LobbyService.subscribeList($scope, function() {
+    LobbyService.subscribe('lobby-list-updated', $scope, function() {
       vm.lobbies = LobbyService.getList();
     });
 

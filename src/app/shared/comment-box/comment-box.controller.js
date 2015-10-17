@@ -17,7 +17,7 @@
       vm.messages = ChatService.getMessages();
     });
 
-    LobbyService.subscribeLobbySpectated($scope, function() {
+    LobbyService.subscribe('lobby-spectated-updated', $scope, function() {
       vm.joinedLobby = LobbyService.getLobbySpectated().id;
     });
 

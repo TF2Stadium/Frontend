@@ -20,18 +20,8 @@
       return factory.lobbyList;
     };
 
-    factory.subscribeList = function(scope, callback) {
-      var handler = $rootScope.$on('lobby-list-updated', callback);
-      scope.$on('$destroy', handler);
-    };
-
     factory.getLobbySpectated = function() {
       return factory.lobbySpectated;
-    };
-
-    factory.subscribeLobbySpectated = function(scope, callback) {
-      var handler = $rootScope.$on('lobby-spectated-updated', callback);
-      scope.$on('$destroy', handler);
     };
 
     factory.subscribe = function(request, scope, callback) {
