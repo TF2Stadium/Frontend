@@ -8,10 +8,10 @@
   function LobbyPageHeaderController($scope, LobbyService) {
     var vm = this;
 
-    vm.lobbyInformation = LobbyService.getActive();
+    vm.lobbyInformation = LobbyService.getLobbySpectated();
 
-    LobbyService.subscribeActive($scope, function(){
-      vm.lobbyInformation = LobbyService.getActive();
+    LobbyService.subscribeLobbySpectated($scope, function(){
+      vm.lobbyInformation = LobbyService.getLobbySpectated();
     });
   }
 

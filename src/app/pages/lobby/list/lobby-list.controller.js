@@ -14,10 +14,15 @@
     vm.join = function (lobby, team, position, event) {
       event.preventDefault();
       event.stopImmediatePropagation();
+      LobbyService.spectate(lobby);
       LobbyService.join(lobby, team, position);
     };
 
-    LobbyService.subscribeList($scope, function (){
+    vm.spectate = function (lobby) {
+      LobbyService.spectate(lobby);
+    };
+
+    LobbyService.subscribeList($scope, function() {
       vm.lobbies = LobbyService.getList();
     });
 

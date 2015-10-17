@@ -8,10 +8,10 @@
   function LobbyPageSpectatorsController($scope, LobbyService) {
     var vm = this;
 
-    vm.spectators = LobbyService.getActive().spectators;
+    vm.spectators = LobbyService.getLobbySpectated().spectators;
 
-    LobbyService.subscribeActive($scope, function(){
-      vm.spectators = LobbyService.getActive().spectators;
+    LobbyService.subscribeLobbySpectated($scope, function(){
+      vm.spectators = LobbyService.getLobbySpectated().spectators;
     });
   }
 

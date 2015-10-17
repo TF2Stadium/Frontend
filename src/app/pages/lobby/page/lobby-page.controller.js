@@ -6,14 +6,14 @@
     .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
-  function LobbyPageController($scope, LobbyService) {
+  function LobbyPageController($scope, $state, LobbyService) {
     var vm = this;
 
-    vm.lobbyInformation = LobbyService.getActive();
+    vm.lobbyInformation = LobbyService.getLobbySpectated();
     vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
 
-    LobbyService.subscribeActive($scope, function(){
-      vm.lobbyInformation = LobbyService.getActive();
+    LobbyService.subscribeLobbySpectated($scope, function(){
+      vm.lobbyInformation = LobbyService.getLobbySpectated();
     });
 
     LobbyService.subscribe('lobby-start', $scope, function(){
@@ -47,6 +47,10 @@
     vm.joinMumbleServer = function() {
       LobbyService.joinMumbleServer();
     };
+
+    if (angular.equals({}, vm.lobbyInformation)) {
+      LobbyService.spectate(parseInt($state.params.lobbyID));
+    }
 
   }
 

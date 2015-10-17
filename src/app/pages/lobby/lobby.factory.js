@@ -6,9 +6,10 @@
   /** @ngInject */
   function LobbyService($rootScope, $state, $mdDialog, $timeout, Websocket) {
     var factory = {};
+    var lobbySpectatorRequested = 0;
 
     factory.lobbyList = {};
-    factory.lobbyActive = {};
+    factory.lobbySpectated = {};
     factory.lobbyJoinInformation = {};
 
     factory.getLobbyJoinInformation = function() {
@@ -24,12 +25,12 @@
       scope.$on('$destroy', handler);
     };
 
-    factory.getActive = function() {
-      return factory.lobbyActive;
+    factory.getLobbySpectated = function() {
+      return factory.lobbySpectated;
     };
 
-    factory.subscribeActive = function(scope, callback) {
-      var handler = $rootScope.$on('lobby-active-updated', callback);
+    factory.subscribeLobbySpectated = function(scope, callback) {
+      var handler = $rootScope.$on('lobby-spectated-updated', callback);
       scope.$on('$destroy', handler);
     };
 
@@ -48,26 +49,36 @@
     };
 
     factory.join = function(lobby, team, position) {
+      lobbySpectatorRequested = lobby;
       var payload = {
         'id': lobby,
         'team': team,
         'class': position
       };
 
+      Websocket.emitJSON('lobbyJoin', payload);
+    };
+
+    factory.spectate = function(lobby) {
+      lobbySpectatorRequested = lobby;
+
       //We could receive lobbyData before we receive the response to lobbyJoin,
-      //so the $on event might never be fired.
-      var handler = $rootScope.$on('lobby-active-updated', function() {
+      //so the onJSON event might never be fired.
+      var handler = $rootScope.$on('lobby-spectated-updated', function() {
         $state.go('lobby-page', {lobbyID: lobby});
         handler();
       });
 
-      //If we are not allowed to join the lobby, there's no need to listen for updates
-      Websocket.emitJSON('lobbyJoin', payload, function(response) {
+      Websocket.emitJSON('lobbySpectatorJoin', {id: lobby}, function(response) {
         if (!response.success) {
+          if($state.current.name === 'lobby-page') {
+            $state.go('lobby-list');
+          }
+          //If we are not allowed to spectate the lobby, there's no need to listen for updates
           handler();
         }
       });
-    };
+    }
 
     factory.joinTF2Server = function() {
       $timeout(function(){
@@ -93,14 +104,14 @@
       .then(function() {
           Websocket.emitJSON('playerReady', {});
         }, function() {
-          Websocket.emitJSON('lobbyKick', {id : factory.lobbyActive.id});
+          Websocket.emitJSON('lobbyKick', {id : factory.lobbySpectated.id});
         }
       );
     });
 
     Websocket.onJSON('lobbyStart', function(data) {
       factory.lobbyJoinInformation = data;
-      $state.go('lobby-page', {lobbyID: factory.lobbyActive.id});
+      $state.go('lobby-page', {lobbyID: factory.lobbySpectated.id});
       factory.joinTF2Server();
       $rootScope.$emit('lobby-start');
     });
@@ -111,8 +122,12 @@
     });
 
     Websocket.onJSON('lobbyData', function(data) {
-      factory.lobbyActive = data;
-      $rootScope.$emit('lobby-active-updated');
+      if (angular.equals({}, data)) { //User left his spot or got kicked from it
+        factory.spectate(lobbySpectatorRequested);
+      } else if (data.id === factory.lobbySpectated.id || data.id === lobbySpectatorRequested) {
+        factory.lobbySpectated = data;
+        $rootScope.$emit('lobby-spectated-updated');
+      }
     });
 
     return factory;
