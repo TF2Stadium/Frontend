@@ -3,6 +3,7 @@
 
   var app = angular.module('tf2stadium');
   app.config(SettingsPageConfig);
+  app.provider('SettingsPage', SettingsPage);
 
   /** @ngInject */
   function SettingsPageConfig($stateProvider, SettingsPageProvider) {
@@ -38,6 +39,14 @@
 
     /** @ngInject */
     var settingsPageService = function(Settings) {
+
+      settingsPageProvider.sections.theme = Settings.getConstants('themesList');
+      settingsPageProvider.sections.filters = Settings.getConstants('filters');
+
+      settingsPageService.getSections = function() {
+        return settingsPageProvider.sections;
+      }
+
       return settingsPageService;
     };
 
