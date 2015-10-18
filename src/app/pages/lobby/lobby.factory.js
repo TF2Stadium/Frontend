@@ -30,12 +30,17 @@
     };
 
     factory.kick = function(lobbyID, steamID, banFromLobby) {
-      Websocket.emitJSON('lobbyKick',
-        {
-          id: lobbyID,
-          steamid: steamID,
-          ban: banFromLobby
-        });
+      var payload = {
+        'id': lobbyID,
+        'steamid': steamID,
+        'ban': banFromLobby
+      };
+
+      Websocket.emitJSON('lobbyKick', payload, function(response) {
+        if (response.success && steamID === '') {
+          factory.spectate(lobbyID);
+        }
+      });
     };
 
     factory.join = function(lobby, team, position) {
@@ -112,9 +117,7 @@
     });
 
     Websocket.onJSON('lobbyData', function(data) {
-      if (angular.equals({}, data)) { //User left his spot or got kicked from it
-        factory.spectate(lobbySpectatorRequested);
-      } else if (data.id === factory.lobbySpectated.id || data.id === lobbySpectatorRequested) {
+      if (data.id === factory.lobbySpectated.id || data.id === lobbySpectatorRequested) {
         factory.lobbySpectated = data;
         $rootScope.$emit('lobby-spectated-updated');
       }
