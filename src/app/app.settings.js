@@ -94,7 +94,7 @@
           settings[setting] = value;
         }
 
-        alreadyLoadedFromBackend = false;
+        alreadyLoadedFromBackend = true;
         $rootScope.$emit('settings-loaded-from-backend');
       });
 
