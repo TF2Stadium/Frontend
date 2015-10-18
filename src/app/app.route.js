@@ -4,7 +4,7 @@
   angular.module('tf2stadium').config(routeConfig);
 
   /** @ngInject */
-  function routeConfig($stateProvider, $urlRouterProvider) {
+  function routeConfig($stateProvider, $urlRouterProvider, $locationProvider) {
     $stateProvider
       .state('lobby-list', {
         url: '/',
@@ -69,6 +69,8 @@
       });
 
     $urlRouterProvider.otherwise('/');
+
+    $locationProvider.html5Mode(true);
   }
 
 })();
