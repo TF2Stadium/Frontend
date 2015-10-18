@@ -6,15 +6,20 @@
     .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsPageController(Settings) {
+  function SettingsPageController(SettingsPage, Settings) {
     var vm = this;
 
-    vm.themesList = Settings.getConstants('themesList');
-    vm.filters = Settings.getConstants('filters');
+    vm.sections = SettingsPage.getSections();
+
+    var userSettings = {};
 
     vm.saveSetting = function(key, value) {
       Settings.set(key, value);
     };
+
+    vm.setCurrent = function(key) {
+      vm.current = key;
+    }
 
     /*
       Iterates through all the settings in the list and compares
@@ -23,19 +28,19 @@
       If a user setting exists for that element, it gets updated.
       If it doesn't, it defaults to true.
     */
-    var populateSettings = function(userSettings) {
-      for (var settingsGroupKey in vm.filters) {
-        var settingsGroup = vm.filters[settingsGroupKey];
+    var populateFilters = function(userSettings) {
+      for (var settingsGroupKey in vm.sections.filters) {
+        var settingsGroup = vm.sections.filters[settingsGroupKey];
         for (var fieldKey in settingsGroup) {
           settingsGroup[fieldKey].selected = userSettings[fieldKey];
         }
       }
     };
 
-    var userSettings = Settings.getSettings(function(response) {
-      populateSettings(response);
+    Settings.getSettings(function(response) {
+      populateFilters(response);
     });
-    populateSettings(userSettings);
+
   }
 
 })();
