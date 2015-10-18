@@ -53,9 +53,15 @@
       })
       .state('settings', {
         url: '/settings',
+        redirectTo: 'general',
         views: {
           "content": {
             templateUrl: 'app/pages/settings/settings.html',
+            controller: 'SettingsPageController',
+            controllerAs: 'settings'
+          },
+          "leftSidebar": {
+            templateUrl: 'app/pages/settings/settings-sidebar.html',
             controller: 'SettingsPageController',
             controllerAs: 'settings'
           }
