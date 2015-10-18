@@ -1,0 +1,10 @@
+<div id="wizard-steps">
+  <div class="steps">
+    <md-button class="step"
+      ng-class="{'active' : $root.currentState==settingSection}"
+      ng-repeat="settingSection in settings.sections"
+      ui-sref="{{settingSection}}">
+      {{::settingSection}}
+    </md-button>
+  </div>  
+</div>
