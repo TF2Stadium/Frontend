@@ -142,6 +142,10 @@
   height: 40%;
   width: 100%;
 
+  span:nth-child(even) {
+    margin-left: 3px;
+  }
+
   div {
     padding: 0 5px;
   }
