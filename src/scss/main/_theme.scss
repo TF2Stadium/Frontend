@@ -91,9 +91,13 @@ $themes-list: (
       color: $text-color-medium;
     }
 
-    .md-raised {
+    .md-raised:not([disabled]) {
       color: $text-color-hard;
       background-color: $sheet-color;
+
+      &.md-focused, &:hover {
+        background-color: $hover-color;        
+      }
     }
 
     md-checkbox .md-icon {
@@ -102,6 +106,10 @@ $themes-list: (
 
     md-input-container .md-input {
       border-color: inherit;
+    }
+
+    md-menu-content {
+      background-color: $sheet-color;
     }
 
 

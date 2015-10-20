@@ -24,7 +24,7 @@
     $mdThemingProvider.definePalette('lightBluePalette', lightBlueMap);
     $mdThemingProvider.definePalette('lightRedPalette', lightRedMap);
     $mdThemingProvider.theme('default')
-      .primaryPalette('darkBluePalette')
+      .primaryPalette('lightBluePalette')
       .accentPalette('lightBluePalette')
       .warnPalette('lightRedPalette');
   }
