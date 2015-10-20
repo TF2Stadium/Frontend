@@ -35,6 +35,11 @@
   padding: 0;
 }
 
+.chat-message-text {
+  display: block;
+  overflow: hidden;
+}
+
 .chat-tabs {
   margin-bottom: $padding-small;
 }
