@@ -1,5 +1,5 @@
-<md-button class="md-raised toast"
-  ng-class="toast.error ? 'md-warn' : 'md-accent'"
+<div class="toast"
+  ng-class="{'error' : !toast.error}"
   ng-click="toast.hide()">
   {{::toast.message}}
-</md-button>
+</div>

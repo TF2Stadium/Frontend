@@ -152,6 +152,7 @@
   margin: 0;
   margin-top: $toast-top;
   transition: all .15s ease-out;
+  border-radius: 3px;
 
   &.ng-leave {
     transition: all .15s ease-out;

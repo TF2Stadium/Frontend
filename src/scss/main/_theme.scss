@@ -221,6 +221,20 @@ $themes-list: (
                   OTHERS
      =======================================*/
 
+    .toast {
+      background-color: $sheet-color;
+      color: $text-color-medium;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+
+      &.error {
+        background-color: #f99;
+        color: #fff;
+      }
+    }
+
     .sheet {
       background-color: $sheet-color;
 
