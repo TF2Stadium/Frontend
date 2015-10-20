@@ -104,11 +104,11 @@ $themes-list: (
     }
 
     md-checkbox .md-icon {
-      border-color: inherit;
+      border-color: $text-color-light;
     }
 
     md-input-container .md-input {
-      border-color: inherit;
+      border-color: $text-color-light;
     }
 
     md-menu-content {
