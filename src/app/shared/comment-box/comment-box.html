@@ -6,11 +6,11 @@
         <md-tab-label>Chat</md-tab-label>
         <md-tab-body>
           <md-content scroll-glue>
-            <div ng-repeat="message in commentBox.messages[0] track by $index"
+            <div ng-repeat="message in commentBox.rooms[0] track by $index"
               class="chat-message">
               <md-button class="chat-player-name"
               ng-class="[message.player.tags]"
-              ng-if="message.player.steamid!=commentBox.messages[0][$index-1].player.steamid">{{::message.player.name}}:</md-button>
+              ng-if="message.player.steamid!=commentBox.rooms[0][$index-1].player.steamid">{{::message.player.name}}:</md-button>
               <span class="chat-message-text">{{::message.message}}</span>
             </div>
           </md-content>
@@ -20,11 +20,11 @@
         <md-tab-label>Lobby chat</md-tab-label>
         <md-tab-body>
           <md-content scroll-glue>
-            <div ng-repeat="message in commentBox.messages[commentBox.joinedLobby] track by $index"
+            <div ng-repeat="message in commentBox.rooms[commentBox.joinedLobby] track by $index"
               class="chat-message">
               <md-button class="chat-player-name"
               ng-class="[message.player.tags]"
-              ng-if="message.player.steamid!=commentBox.messages[commentBox.joinedLobby][$index-1].player.steamid">{{::message.player.name}}:</md-button>
+              ng-if="message.player.steamid!=commentBox.rooms[commentBox.joinedLobby][$index-1].player.steamid">{{::message.player.name}}:</md-button>
               <span class="chat-message-text">{{::message.message}}</span>
             </div>
           </md-content>

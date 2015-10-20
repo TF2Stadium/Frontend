@@ -9,13 +9,9 @@
   function CommentBoxController ($scope, $rootScope, ChatService, LobbyService) {
     var vm = this;
 
-    vm.messages = [];
+    vm.rooms = ChatService.getRooms();
     vm.currentTab = 0;
     vm.joinedLobby = false;
-
-    ChatService.subscribe($scope, function() {
-      vm.messages = ChatService.getMessages();
-    });
 
     LobbyService.subscribe('lobby-spectated-updated', $scope, function() {
       vm.joinedLobby = LobbyService.getLobbySpectated().id;
@@ -35,12 +31,12 @@
 
       ChatService.send(vm.messageBox, room);
 
-      vm.messageBox = null;
+      vm.messageBox = '';
       event.preventDefault();
 
     };
 
-    $rootScope.$on('$stateChangeSuccess',
+    $rootScope.$on('$stateChangeStart',
       function(event, toState) {
         console.log(toState);
         if (toState.name==='lobby-page') {
