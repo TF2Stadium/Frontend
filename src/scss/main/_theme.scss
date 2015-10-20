@@ -137,6 +137,15 @@ $themes-list: (
       background-color: $main-color;
     }
 
+    .page-section.active {
+      color: #fff !important;
+      background: $main-color;
+
+      &:hover {
+        background: lighten($main-color, 3.25%) !important;
+      }
+    }
+
 
     /*======================================
                   TYPOGRAPHY

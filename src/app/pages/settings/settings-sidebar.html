@@ -1,10 +1,11 @@
-<div id="wizard-steps">
-  <div class="steps">
-    <md-button class="step"
-      ng-class="{'active' : $root.currentState==settingSection}"
-      ng-repeat="settingSection in settings.sections"
-      ui-sref="{{settingSection}}">
-      {{::settingSection}}
-    </md-button>
-  </div>  
+<div id="page-sections">
+  <h1 class="steps-title">
+    Sections
+  </h1>
+  <md-button class="page-section"
+    ng-class="{'active' : $root.currentState==settingSection}"
+    ng-repeat="settingSection in settings.sections"
+    ui-sref="{{settingSection}}">
+    {{::settingSection}}
+  </md-button>
 </div>

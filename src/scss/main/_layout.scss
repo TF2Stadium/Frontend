@@ -116,6 +116,28 @@ body {
   padding: $padding-small;
 }
 
+
+/*======================================
+             LEFT SIDEBAR
+=======================================*/
+
+#page-sections {
+  @include flex(column, flex-start, stretch);
+  width: $left-sidebar-width;
+  //Substract 5px to the margin-right to compensate for the
+  //padding-left 5px in #main-content due to shadow
+  margin: 0 $padding-medium - 5px 0 0;
+  padding: 0;
+}
+
+.page-section {
+  display: block;
+  text-align: left;
+  margin: 2px 0;
+  transition: background-color .3s ease-out;
+}
+
+
 /* ==================================
                 CONTENT
    ================================== */

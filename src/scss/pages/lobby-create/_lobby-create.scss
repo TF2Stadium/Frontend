@@ -14,7 +14,6 @@ md-grid-tile.tile-card {
               box-shadow .2s ease-out;
 
   &:hover {
-    background-color: #f5f5f5 !important;
 
     .tile-text {
       transform: translateY(0);
@@ -136,36 +135,3 @@ md-grid-tile.tile-card {
      opacity: 1;
    }
  }
-
-
-/*======================================
-             WIZARD STEPS
-=======================================*/
-
-#wizard-steps {
-  @include flex(column, flex-start, stretch);
-  width: $left-sidebar-width;
-  //Substract 5px to the margin-right to compensate for the
-  //padding-left 5px in #main-content due to shadow
-  margin: 0 $padding-medium - 5px 0 0;
-  padding: 0;
-}
-
-.steps {
-  list-style-type: none;
-}
-
-.step {
-  display: block;
-  text-align: left;
-  transition: background-color .3s ease-out;
-
-  &.active {
-    color: #fff !important;
-    background: $main-color;
-
-    &:hover {
-      background: lighten($main-color, 3.25%) !important;
-    }
-  }
-}

@@ -1,14 +1,12 @@
-<div id="wizard-steps">
+<div id="page-sections">
   <h1 class="steps-title">
     Steps
   </h1>
-  <div class="steps">
-    <md-button class="step"
-      ng-class="{'active' : $root.currentState==step}"
-      ng-repeat="step in wizardSteps.steps"
-      ui-sref="{{step}}"
-      ng-disabled="!wizardSteps.isEnabled(step)">
-      {{step}}
-    </md-button>
-  </div>  
+  <md-button class="page-section"
+    ng-class="{'active' : $root.currentState==step}"
+    ng-repeat="step in wizardSteps.steps"
+    ui-sref="{{step}}"
+    ng-disabled="!wizardSteps.isEnabled(step)">
+    {{step}}
+  </md-button>
 </div>
