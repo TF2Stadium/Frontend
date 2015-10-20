@@ -8,6 +8,7 @@
   md-content {
     @include scrollbars;
     height: 100%;
+    padding: 15px;
   }  
   
   md-tabs-content-wrapper {
@@ -25,12 +26,13 @@
   }
 }
 
-.chat-player-name {
-  padding: 0;
+.chat-message {
+  max-width: 100%;
+  word-wrap: break-word;
 }
 
-.chat-message-text {
-  margin-left: 15px;  
+.chat-player-name {
+  padding: 0;
 }
 
 .chat-tabs {
@@ -41,8 +43,5 @@
   min-width: 0;
   min-height: $commentbox-lineheight;
   margin: 0;
-
-  ~ .chat-message-text {
-    margin-left: 5px;
-  }
+  margin-left: -15px;
 }
