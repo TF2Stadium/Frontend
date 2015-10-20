@@ -147,7 +147,7 @@ body {
                 CONTENT
    ================================== */
 
-content {
+main {
   @include flex (column, flex-start, center);
   width: 100%;
 }
@@ -163,7 +163,7 @@ content {
     margin-bottom: 20px;
   }
 
-  &.empty ~ content {    
+  &.empty ~ main {    
     #left-sidebar, md-content {
       padding-top: $padding-medium;
     }
