@@ -1,7 +1,23 @@
-<h1 class="spectators-title">Spectators</h1>
-<md-list class="sheet" id="spectators">
-  <md-list-item  ng-repeat="spectator in spectators.spectators"
-                ng-click="null()">
-    <span>{{::spectator.name}}</span>
-  </md-list-item>
-</md-list>
+<div id="page-sections">
+  <h1 class="spectators-title">
+    Spectators
+  </h1>
+  <md-menu ng-repeat="spectator in spectators.lobbyInformation.spectators"
+  md-position-mode="target-right target" md-offset="-180 0">
+    <md-button class="page-section" ng-click="$mdOpenMenu($event)">
+      {{::spectator.name}}
+    </md-button>    
+    <md-menu-content width="3">
+      <md-menu-item>
+        <md-button ng-click="spectators.goToProfile(spectator.steamid)">
+          Steam profile
+        </md-button>
+      </md-menu-item>
+      <md-menu-item ng-if="$root.userProfile.steamid==spectators.lobbyInformation.leader.steamid">
+        <md-button ng-click="spectators.ban(spectator)">
+          Ban player from lobby
+        </md-button>
+      </md-menu-item>
+    </md-menu-content>
+  </md-menu>
+</div>

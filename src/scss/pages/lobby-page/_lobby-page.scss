@@ -55,7 +55,7 @@
 }
 
 .spectators-title {
-  margin-top: $padding-small;
+  margin: $padding-small 0;
 }
 
 .classes-title {
@@ -144,5 +144,14 @@
 
   div {
     padding: 0 5px;
+  }
+}
+
+.md-menu {
+  padding: 0;
+  margin: 0;
+
+  span {
+    text-transform: none;
   }
 }
