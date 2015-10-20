@@ -24,6 +24,7 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <aside id="toasts"></aside>
     <header id="header">
       <md-toolbar id="header-toolbar">
         <div class="header-toolbar-content">
@@ -44,15 +45,14 @@
           </div>
         </div>
       </md-toolbar>
-      <div id="toasts"></div>
-      <ng-include id="commentbox" src="'app/shared/comment-box/comment-box.html'"></ng-include>
       <div ui-view="headerInfo" class="header-info"></div>
-      <div id="fab">
-        <md-button ui-sref="lobby-create" class="md-fab md-primary">
-          +
-        </md-button>
-      </div>
-    </header>
+    </header>    
+    <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'"></aside>
+    <div id="fab">
+      <md-button ui-sref="lobby-create" class="md-fab md-primary">
+        +
+      </md-button>
+    </div>
     <aside id="notifications" ng-controller="NotificationsController as vm"
       ng-class="{'empty' : vm.isEmpty()}">
       <md-button class="notification"

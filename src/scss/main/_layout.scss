@@ -94,6 +94,8 @@ body {
   width: $full-width;
   margin-left: 0;
   height: 0; //black magic
+  z-index: 150;
+
   .md-button {
     margin: 0 0 0 5px;
     transform: translate(-0%, -50%);
@@ -111,6 +113,7 @@ body {
   width: $commentbox-width;
   margin-left: $content-width;
   height: 0; //black magic
+  z-index: 100;
 }
 
 .md-tab {
@@ -193,7 +196,7 @@ content {
   width: $commentbox-width;
   //next line makes the chat be at a consistent height,
   //no matter what the header height is
-  margin-top: $commentbox-top;
+  margin-top: $commentbox-top + $navbar-height - $header-height;
   min-height: $commentbox-height;
   padding: $padding-medium;
   z-index: 10;

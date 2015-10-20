@@ -75,7 +75,7 @@ $lobby-info-height:       60px;
 
 //Toasts
 $toast-height:            50px;
-$toast-top:               ($commentbox-top - $toast-height) / 2;
+$toast-top:               ($commentbox-top - $toast-height) / 2 + $navbar-height;
 
 
 /*======================================
