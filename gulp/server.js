@@ -13,6 +13,8 @@ function browserSyncInit(baseDir, browser) {
 
   var proxyMiddleware = require('http-proxy-middleware');
 
+  var historyApiFallback = require('connect-history-api-fallback');
+
   browser = browser === undefined ? 'default' : browser;
 
   var routes = null;
@@ -39,13 +41,20 @@ function browserSyncInit(baseDir, browser) {
   browserSync.instance = browserSync.init({
     startPath: '/',
     server: server,
-    browser: browser
+    browser: browser,
+    middleware: [historyApiFallback()]
   });
+
+
 
   browserSync.use(browserSyncSpa({
     selector: '[ng-app]'// Only needed for angular apps
   }));
 }
+
+
+gulp.task('serve', function() {
+});
 
 gulp.task('serve', ['watch'], function () {
   browserSyncInit([path.join(conf.paths.tmp, '/serve'), conf.paths.src]);
