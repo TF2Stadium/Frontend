@@ -122,7 +122,7 @@ body {
              LEFT SIDEBAR
 =======================================*/
 
-#page-sections {
+#sidebar-links {
   @include flex(column, flex-start, stretch);
   width: $left-sidebar-width;
   //Substract 5px to the margin-right to compensate for the
@@ -131,7 +131,7 @@ body {
   padding: 0;
 }
 
-.page-section {
+.sidebar-link {
   display: block;
   width: 100%;
   text-align: left;

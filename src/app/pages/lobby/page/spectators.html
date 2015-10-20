@@ -1,10 +1,10 @@
-<div id="page-sections">
+<div id="sidebar-links">
   <h1 class="spectators-title">
     Spectators
   </h1>
   <md-menu ng-repeat="spectator in spectators.lobbyInformation.spectators"
   md-position-mode="target-right target" md-offset="-180 0">
-    <md-button class="page-section" ng-click="$mdOpenMenu($event)">
+    <md-button class="sidebar-link" ng-click="$mdOpenMenu($event)">
       {{::spectator.name}}
     </md-button>    
     <md-menu-content width="3">
