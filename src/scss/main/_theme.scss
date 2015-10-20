@@ -57,12 +57,12 @@ $themes-list: (
      =======================================*/
 
     md-content {
-      background-color: $sheet-color;
+      background-color: initial;
       color: $text-color-medium;
     }
 
     md-card {
-      background-color: $sheet-color;
+      background-color: initial;
     }
 
     md-list-item {
@@ -92,8 +92,11 @@ $themes-list: (
     }
 
     .md-raised:not([disabled]) {
-      color: $text-color-hard;
       background-color: $sheet-color;
+
+      &.md-primary {
+        background-color: $main-color;
+      }
 
       &.md-focused, &:hover {
         background-color: $hover-color;        
@@ -218,21 +221,28 @@ $themes-list: (
                   OTHERS
      =======================================*/
 
-    %md-whiteframe-z1 {
+    .sheet {
       background-color: $sheet-color;
+
+      &.clickable:hover {
+        background-color: $hover-color;
+      }
+    }
+
+    %md-whiteframe-z1 {
       border-radius: 3px;
       box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
                   0px 2px 2px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
                   0px 1px 5px  0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
 
     %md-whiteframe-z2 {
-      background-color: $sheet-color;
       border-radius: 3px;
       box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
                   0px 4px 5px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
                   0px 1px 10px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
 
     %md-whiteframe-z3 {
+      border-radius: 3px;
       box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
                   0px 6px 10px 0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
                   0px 1px 18px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
