@@ -25,6 +25,14 @@
   }
 }
 
+.chat-player-name {
+  padding: 0;
+}
+
+.chat-message-text {
+  margin-left: 15px;  
+}
+
 .chat-tabs {
   margin-bottom: $padding-small;
 }
@@ -33,4 +41,8 @@
   min-width: 0;
   min-height: $commentbox-lineheight;
   margin: 0;
+
+  ~ .chat-message-text {
+    margin-left: 0;
+  }
 }
