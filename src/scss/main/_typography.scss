@@ -14,7 +14,7 @@
     src: url(/assets/fonts/FiraSansLight.otf);
 }
 
-html { 
+html, textarea, input, button, select { 
   font-family: $font-family-text;
   line-height: 1.5;
   font-size: 16px;
