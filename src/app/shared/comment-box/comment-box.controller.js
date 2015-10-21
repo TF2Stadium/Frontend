@@ -6,16 +6,11 @@
     .controller('CommentBoxController', CommentBoxController);
 
   /** @ngInject */
-  function CommentBoxController ($scope, $rootScope, ChatService, LobbyService) {
+  function CommentBoxController ($rootScope, Websocket, ChatService) {
     var vm = this;
 
     vm.rooms = ChatService.getRooms();
     vm.currentTab = 0;
-    vm.joinedLobby = false;
-
-    LobbyService.subscribe('lobby-spectated-updated', $scope, function() {
-      vm.joinedLobby = LobbyService.getLobbySpectated().id;
-    });
 
     vm.sendMessage = function(event) {
 
@@ -26,7 +21,7 @@
       var room = 0;
 
       if (vm.currentTab !== 0) {
-        room = vm.joinedLobby;
+        room = vm.rooms.lobbySpectated.id;
       }
 
       ChatService.send(vm.messageBox, room);
@@ -35,10 +30,13 @@
       event.preventDefault();
 
     };
+     
+    vm.goToProfile = function(steamId) {
+      window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
+    };
 
     $rootScope.$on('$stateChangeStart',
       function(event, toState) {
-        console.log(toState);
         if (toState.name==='lobby-page') {
           vm.currentTab = 1;
         } else {
@@ -46,10 +44,6 @@
         }
       }
     );
-
-    vm.goToProfile = function(steamId) {
-      window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
-    };
 
   }
 })();

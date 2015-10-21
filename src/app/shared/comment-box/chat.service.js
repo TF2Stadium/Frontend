@@ -4,12 +4,19 @@
   angular.module('tf2stadium.services').factory('ChatService', ChatService);
 
   /** @ngInject */
-  function ChatService(Websocket, $rootScope) {
+  function ChatService(Websocket, $rootScope, LobbyService) {
 
     var factory = {};
-
-    var rooms = {};
-    factory.websocket = Websocket;
+    var rooms = {
+      general: {
+        id: 0,
+        messages: []
+      },
+      lobbySpectated: {
+        id: -1,
+        messages: []
+      }
+    };
 
     factory.getRooms = function() {
       return rooms;
@@ -22,11 +29,20 @@
       });
     };
 
+    $rootScope.$on('lobby-spectated-changed', function() {
+      rooms.lobbySpectated.id = LobbyService.getLobbySpectated().id;
+    });
+
     Websocket.onJSON('chatReceive', function (message) {
-      if (typeof rooms[message.room] === 'undefined') {
-        rooms[message.room] = [];
+      if (message.room === 0) {
+        rooms.general.messages.push(message);
+      } else {
+        rooms.lobbySpectated.messages.push(message);
       }
-      rooms[message.room].push(message);
+    });
+
+    Websocket.onJSON('chatHistoryClear', function() {
+      rooms.lobbySpectated.messages = [];
     });
 
     return factory;
