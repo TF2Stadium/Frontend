@@ -26,18 +26,16 @@
   }
 }
 
-.chat-message {
-  max-width: 100%;
-  word-wrap: break-word;
-}
-
 .chat-player-name {
   padding: 0;
 }
 
 .chat-message-text {
-  display: block;
+  display: inline-block;
+  max-width: 100%;
   overflow: hidden;
+  vertical-align: top;
+  word-wrap: break-word;
 }
 
 .chat-tabs {
