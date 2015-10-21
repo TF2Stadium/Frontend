@@ -25,7 +25,6 @@ body {
   @include flex (row, center, center);
   @extend .sheet;
   min-height: $navbar-height;
-  z-index: 100;
 
   .header-toolbar-content {
     @include flex (row, center, center);
@@ -67,7 +66,6 @@ body {
   height: $header-image-height;
   width: 100%;
   position: relative;
-  z-index: 1;
 
   background: {
     image: url(../assets/img/header-bg.jpg);
@@ -79,7 +77,6 @@ body {
 .header-text {
   width: $full-width;
   height: 100%;
-  z-index: 1;
   padding: 0 $commentbox-width 0 $left-sidebar-width;
   background-image: linear-gradient(
       to right,
@@ -94,7 +91,7 @@ body {
   width: $full-width;
   margin-left: 0;
   height: 0; //black magic
-  z-index: 150;
+  z-index: 75;
 
   .md-button {
     margin: 0 0 0 5px;
@@ -113,7 +110,7 @@ body {
   width: $commentbox-width;
   margin-left: $content-width;
   height: 0; //black magic
-  z-index: 100;
+  z-index: 65;
 }
 
 .md-tab {
@@ -199,5 +196,4 @@ main {
   margin-top: $commentbox-top + $navbar-height - $header-height;
   min-height: $commentbox-height;
   padding: $padding-medium;
-  z-index: 10;
 }
