@@ -10,7 +10,7 @@
            class="class-button lobby-icon-{{::class.class}}"
            ng-class="{'sheet' : !class.blu.player || !class.red.player}">
         <md-button ng-repeat="(team, slot) in class"
-          ng-if="!slot.player && team!='class'"
+          ng-if="!slot.filled && team!='class'"
           ng-class="['join-slot', team]" ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)">
           <md-tooltip>
             Join {{::team}} {{::class.class}} slot
