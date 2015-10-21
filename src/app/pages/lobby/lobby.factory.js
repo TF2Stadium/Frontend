@@ -6,7 +6,6 @@
   /** @ngInject */
   function LobbyService($rootScope, $state, $mdDialog, $timeout, Websocket) {
     var factory = {};
-    var lobbySpectatorRequested = 0;
 
     factory.lobbyList = {};
     factory.lobbySpectated = {};
@@ -44,7 +43,6 @@
     };
 
     factory.join = function(lobby, team, position) {
-      lobbySpectatorRequested = lobby;
       var payload = {
         'id': lobby,
         'team': team,
@@ -55,8 +53,6 @@
     };
 
     factory.spectate = function(lobby) {
-      lobbySpectatorRequested = lobby;
-
       //We could receive lobbyData before we receive the response to lobbyJoin,
       //so the onJSON event might never be fired.
       var handler = $rootScope.$on('lobby-spectated-updated', function() {
@@ -117,10 +113,12 @@
     });
 
     Websocket.onJSON('lobbyData', function(data) {
-      if (data.id === factory.lobbySpectated.id || data.id === lobbySpectatorRequested) {
-        factory.lobbySpectated = data;
-        $rootScope.$emit('lobby-spectated-updated');
+      var oldLobbyId = factory.lobbySpectated.id;
+      factory.lobbySpectated = data;
+      if (data.id !== oldLobbyId) {
+        $rootScope.$emit('lobby-spectated-changed');
       }
+      $rootScope.$emit('lobby-spectated-updated');
     });
 
     return factory;
