@@ -26,10 +26,6 @@
   }
 }
 
-.chat-player-name {
-  padding: 0;
-}
-
 .chat-message-text {
   display: inline-block;
   max-width: 100%;
@@ -45,6 +41,6 @@
 .chat-player-name {
   min-width: 0;
   min-height: $commentbox-lineheight;
-  margin: 0;
-  margin-left: -15px;
+  margin: 0 3px 0 -15px;
+  padding: 0;
 }
