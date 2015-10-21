@@ -8,9 +8,21 @@
           <md-content scroll-glue>
             <div ng-repeat="message in commentBox.rooms[0] track by $index"
               class="chat-message">
-              <md-button class="chat-player-name"
-              ng-class="[message.player.tags]"
-              ng-if="message.player.steamid!=commentBox.rooms[0][$index-1].player.steamid">{{::message.player.name}}:</md-button>
+              <md-menu ng-if="message.player.steamid!=commentBox.rooms[0][$index-1].player.steamid">
+                <md-button class="chat-player-name"
+                  ng-class="[message.player.tags]"
+                  ng-click="$mdOpenMenu($event)"
+                  md-menu-origin>
+                  {{::message.player.name}}:
+                </md-button>
+                <md-menu-content width="3">
+                  <md-menu-item>
+                    <md-button ng-click="commentBox.goToProfile(message.player.steamid)">
+                      Steam profile
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
               <span class="chat-message-text">{{::message.message}}</span>
             </div>
           </md-content>
@@ -22,9 +34,21 @@
           <md-content scroll-glue>
             <div ng-repeat="message in commentBox.rooms[commentBox.joinedLobby] track by $index"
               class="chat-message">
-              <md-button class="chat-player-name"
-              ng-class="[message.player.tags]"
-              ng-if="message.player.steamid!=commentBox.rooms[commentBox.joinedLobby][$index-1].player.steamid">{{::message.player.name}}:</md-button>
+              <md-menu ng-if="message.player.steamid!=commentBox.rooms[commentBox.joinedLobby][$index-1].player.steamid">
+                <md-button class="chat-player-name"
+                  ng-class="[message.player.tags]"
+                  ng-click="$mdOpenMenu($event)"
+                  md-menu-origin>
+                  {{::message.player.name}}:
+                </md-button>
+                <md-menu-content width="3">
+                  <md-menu-item>
+                    <md-button ng-click="commentBox.goToProfile(message.player.steamid)">
+                      Steam profile
+                    </md-button>
+                  </md-menu-item>
+                </md-menu-content>
+              </md-menu>
               <span class="chat-message-text">{{::message.message}}</span>
             </div>
           </md-content>
