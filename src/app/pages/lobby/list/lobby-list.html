@@ -8,7 +8,7 @@
     <div flex class="lobby-classes">
       <div ng-repeat="class in lobbyInformation.classes track by $index"
            class="class-button lobby-icon-{{::class.class}}"
-           ng-class="{'sheet' : !class.blu.player || !class.red.player}">
+           ng-class="{'sheet' : !class.blu.filled || !class.red.filled}">
         <md-button ng-repeat="(team, slot) in class"
           ng-if="!slot.filled && team!='class'"
           ng-class="['join-slot', team]" ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)">
