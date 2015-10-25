@@ -93,8 +93,7 @@
             },{
               value: 'cp_process_final',
               important: true,
-              sixes: true,
-              important: true
+              sixes: true
             },{
               value: 'cp_snakewater_final1',
               sixes: true,
