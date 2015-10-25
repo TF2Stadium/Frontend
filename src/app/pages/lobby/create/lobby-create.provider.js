@@ -47,7 +47,7 @@
     lobbyCreateProvider.wizardSteps = {};
 
     /** @ngInject */
-    var lobbyCreateService = function(Websocket) {
+    var lobbyCreateService = function(Websocket, $state) {
 
       var lobbySettingsList = {
         formats: {
@@ -235,7 +235,7 @@
           lobbySettings,
           function(response) {
             if (response.success) {
-              $state.go('lobby-page', {lobbyID: response.id});
+              $state.go('lobby-page', {lobbyID: response.data.id});
             }
             callback(response);
           }
