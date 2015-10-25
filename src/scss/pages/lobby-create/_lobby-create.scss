@@ -30,7 +30,11 @@ md-grid-tile.tile-card {
 }
 
 .tile-card-mumble .tile-text {
-  padding: $padding-big;
+  padding: $padding-small $padding-medium;
+
+  img {
+    max-height: 50px;
+  }
 }
 
 .tile-image {
