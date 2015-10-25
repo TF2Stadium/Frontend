@@ -2,7 +2,12 @@
   md-colspan="{{format.important ? 8 : 4}}" md-rowspan="{{format.important ? 4 : 2}}"
   ng-repeat="format in lobbyCreate.formats.options | orderBy:'title'"
   ng-click="lobbyCreate.select(lobbyCreate.formats, format)">
-  <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg)'}"></div>
+  <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg), 
+    linear-gradient(
+        to top,
+        rgba(0, 0, 0, .2) 0%,
+        rgba(0, 0, 0, .6) 80px
+    )'}"></div>
   <div class="tile-text">
     <span class="title">{{::format.title}}</span>
   </div>

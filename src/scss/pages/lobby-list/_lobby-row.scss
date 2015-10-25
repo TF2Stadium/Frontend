@@ -56,22 +56,35 @@
   width: $lobby-info-width;
   height: $lobby-info-height;
   margin-left: $padding-small;
+  text-transform: uppercase;
 }
 
 .lobby-mumble {
-  text-align: center;
-  padding: 0 $padding-small;
+  height: 100%;
+  color: #fff;
+  min-width: 30px;
+  background: {
+    image: url(/assets/img/mumble.svg);
+    size: 25px;
+    repeat: no-repeat;
+    position: center;
+  }
+
+  &.not-required {
+    background-image: url(/assets/img/not-mumble.svg);  
+    opacity: .4;  
+  }
 }
 
-.lobby-ruleset {
-  text-align:right;
+.lobby-region {
+  min-width: 30px;
 }
 
 .lobby-info-row {
-  @include flex (row, flex-start, flex-start);
+  @include flex (row, space-between, center);
   height: 50%;
+  text-align: center;
 }
-
 
 .lobby-location {
   height: 100%;

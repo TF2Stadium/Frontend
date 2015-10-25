@@ -24,29 +24,18 @@
         <span class="lobby-info-players">{{::lobbyInformation.players}}</span>
         <span class="lobby-info-maxplayers">/{{::lobbyInformation.maxPlayers}}</span>
         <div flex></div>
-        <span class="lobby-location flag-{{::lobbyInformation.region}}">
+        <div class="lobby-mumble" ng-class="{'not-required': !lobbyInformation.mumbleRequired}">
           <md-tooltip md-direction="top">
-            Server located in {{::lobbyInformation.serverLocation}}
-          </md-tooltip>
-        </span>
-      </div>
-      <div class="lobby-info-row">
-        <span ng-if="lobbyInformation.mumbleRequired" class="lobby-mumble">
-          <i class="fa fa-microphone"></i>
-          <md-tooltip>
             Mumble mandatory
           </md-tooltip>
-        </span>
-        <span ng-if="!lobbyInformation.mumbleRequired" class="lobby-mumble">
-          <i class="fa fa-microphone-slash"></i>
+        </div>
+      </div>
+      <div class="lobby-info-row">
+        <span></span>
+        <span class="lobby-league">
+          {{::lobbyInformation.league}}
           <md-tooltip>
-            Mumble not mandatory
-          </md-tooltip>
-        </span>
-        <span flex class="lobby-ruleset">
-          {{::lobbyInformation.rules}}
-          <md-tooltip>
-            {{::lobbyInformation.rules}} rules and whitelist
+            {{::lobbyInformation.league | uppercase}} rules and whitelist
           </md-tooltip>
         </span>
       </div>
