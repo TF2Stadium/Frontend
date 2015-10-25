@@ -149,29 +149,29 @@
             {
               value: 'etf2l',
               title: 'ETF2L',
-              description: 'Brief description of the ETF2L rules.',
+              description: 'First to lead by 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
               sixes: true,
               highlander: true
             },{
               value: 'ugc',
               title: 'UGC',
-              description: 'Brief description of the UGC rules.',
+              description: 'First to 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
               sixes: true,
               highlander: true
             },{
               value: 'esea',
               title: 'ESEA',
-              description: 'Brief description of the ESEA rules.',
+              description: 'First to 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
               sixes: true
             },{
               value: 'ozfortress',
               title: 'ozfortress',
-              description: 'Brief description of the ozfortress rules.',
+              description: 'First to lead by 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
               sixes: true
             },{
               value: 'asia',
               title: 'AsiaFortress',
-              description: 'Brief description of the AsiaFortress rules.',
+              description: 'First to 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
               sixes: true
             }
           ]
