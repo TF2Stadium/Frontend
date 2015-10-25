@@ -25,6 +25,10 @@
   }
 }
 
+.lobbypage-map {
+  min-width: 51%; //force line jump of .left and .right
+}
+
 .lobbypage-lobby-controls {
   @include flex (column, space-between, stretch);
 
