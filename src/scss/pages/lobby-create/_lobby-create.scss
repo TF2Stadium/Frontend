@@ -31,6 +31,15 @@ md-grid-tile.tile-card {
   h2 {
     margin: 0;
   }
+
+  .tile-text {
+    padding: $padding-small $padding-medium;
+
+    & > * {
+      max-width: 350px;
+    }
+  }
+
 }
 
 .tile-card-mumble .tile-text {
