@@ -38,12 +38,12 @@
             Steam profile
           </md-button>
         </md-menu-item>
-        <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid">
+        <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
           <md-button ng-click="lobbyPage.kick(slot.player)">
             Kick player from slot
           </md-button>
         </md-menu-item>
-        <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid">
+        <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
           <md-button ng-click="lobbyPage.ban(slot.player)">
             Ban player from lobby
           </md-button>
