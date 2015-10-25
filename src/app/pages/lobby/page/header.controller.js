@@ -13,6 +13,10 @@
     LobbyService.subscribe('lobby-spectated-updated', $scope, function() {
       vm.lobbyInformation = LobbyService.getLobbySpectated();
     });
+
+    vm.closeLobby = function() {
+      LobbyService.closeLobby(vm.lobbyInformation.id);
+    };
   }
 
 })();

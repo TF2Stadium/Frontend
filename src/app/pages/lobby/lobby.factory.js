@@ -69,7 +69,15 @@
           handler();
         }
       });
-    }
+    };
+
+    factory.closeLobby = function(lobbyID) {
+      Websocket.emitJSON('lobbyClose', {id: lobbyID}, function(response) {
+        if(response.success && $state.current.name === 'lobby-page') {
+          $state.go('lobby-list');
+        }
+      });
+    };
 
     factory.joinTF2Server = function() {
       $timeout(function(){

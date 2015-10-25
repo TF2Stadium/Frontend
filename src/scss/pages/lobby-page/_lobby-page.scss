@@ -15,17 +15,22 @@
   padding: 0 $padding-medium;
   height: 100%;
   
-  & > div {    
+  .left, .right {
     @include flex (column, space-between, stretch);
     width: 50%;
   }
   
-  & > span {
-    width: 100%;
-  }
-  
   .right {
     text-align: right;
+  }
+}
+
+.lobbypage-lobby-controls {
+  @include flex (column, space-between, stretch);
+
+  .md-button {
+    margin-right: 0;
+    padding: 0 $padding-small;
   }
 }
 

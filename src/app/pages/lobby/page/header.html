@@ -2,6 +2,12 @@
   <div class="header-text">
     <div class="lobbypage-text">
       <span class="lobbypage-map">{{::header.lobbyInformation.map}}</span>
+      <div class="lobbypage-lobby-controls"
+        ng-if="$root.userProfile.steamid==header.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
+        <md-button class="md-raised" ng-click="header.closeLobby()">
+          Close lobby
+        </md-button>
+      </div>
       <div class="left">
         <span class="lobbypage-rules">{{::header.lobbyInformation.type}}, whitelist 
           <a target="_blank" 

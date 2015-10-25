@@ -186,6 +186,15 @@ $themes-list: (
 
     //LOBBYPAGE
 
+    .lobbypage-lobby-controls .md-button {
+      background: white;
+      color: $text-color-medium;
+
+      &:hover, &:focus {
+        background: #eee;
+      }
+    }
+
     #spectators md-list-item {
       background-color: $sheet-color;
     }
