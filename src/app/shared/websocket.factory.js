@@ -10,7 +10,7 @@
     var connected = false;
     var factory = socketFactory({
       prefix: '',
-      ioSocket: io.connect(Config.endpoints.websocket)
+      ioSocket: io.connect(Config.endpoints.websocket, {transports:["polling"]})
     });
 
     factory.on('socketInitialized', function() {
