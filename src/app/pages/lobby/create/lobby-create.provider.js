@@ -187,10 +187,20 @@
               league: 'etf2l',
               format: 'highlander'
             },{
+              value: 4498,
+              title: 'ETF2L 6v6 (Season 22)',
+              league: 'etf2l',
+              format: 'sixes'
+            },{
               value: 3951,
               title: 'UGC Highlander (Season 16)',
               league: 'ugc',
               format: 'highlander'
+            },,{
+              value: 4559,
+              title: 'UGC 6v6 (Season 19)',
+              league: 'ugc',
+              format: 'sixes'
             },{
               value: 3771,
               title: 'UGC Highlander (Season 16)',
