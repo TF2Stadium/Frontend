@@ -1,11 +1,11 @@
 <md-grid-tile md-ink-ripple class="tile-card"
-  md-colspan="12" md-rowspan="1"
+  md-colspan="12" md-rowspan="2"
   ng-repeat="whitelist in lobbyCreate.whitelists.options"
   ng-click="lobbyCreate.select(lobbyCreate.whitelists, whitelist)"
   ng-if="whitelist.format==lobbyCreate.lobbySettings[lobbyCreate.formats.key]
          && whitelist.league==lobbyCreate.lobbySettings[lobbyCreate.leagues.key]
          || lobbyCreate.lobbySettings[lobbyCreate.formats.key]=='debug'">
   <div class="tile-text">
-    <span>{{::whitelist.title}}</span>
+    <h2>{{::whitelist.title}}</h2>
   </div>
 </md-grid-tile>

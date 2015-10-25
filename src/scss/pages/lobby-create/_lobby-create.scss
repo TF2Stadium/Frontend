@@ -27,6 +27,10 @@ md-grid-tile.tile-card {
       transform: scale(1.5);
     }
   }
+
+  h2 {
+    margin: 0;
+  }
 }
 
 .tile-card-mumble .tile-text {
@@ -34,6 +38,7 @@ md-grid-tile.tile-card {
 
   img {
     max-height: 50px;
+    margin: $padding-medium;
   }
 }
 

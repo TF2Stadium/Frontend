@@ -1,10 +1,10 @@
 <md-grid-tile md-ink-ripple class="tile-card"
-  md-colspan="12" md-rowspan="1"
+  md-colspan="12" md-rowspan="2"
   ng-repeat="league in lobbyCreate.leagues.options"
   ng-click="lobbyCreate.select(lobbyCreate.leagues, league)"
   ng-if="league[lobbyCreate.lobbySettings[lobbyCreate.formats.key]] || lobbyCreate.lobbySettings[lobbyCreate.formats.key]=='debug'">
   <div class="tile-text">
-    <span>{{::league.title}}</span>
+    <h2>{{::league.title}}</h2>
     <span>{{::league.description}}</span>
   </div>
 </md-grid-tile>
