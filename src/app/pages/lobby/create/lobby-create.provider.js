@@ -234,7 +234,10 @@
         Websocket.emitJSON('lobbyCreate',
           lobbySettings,
           function(response) {
-            callback(response.data);
+            if (response.success) {
+              $state.go('lobby-page', {lobbyID: response.id});
+            }
+            callback(response);
           }
         );
       };
