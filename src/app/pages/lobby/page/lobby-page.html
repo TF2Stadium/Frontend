@@ -14,7 +14,7 @@
       ng-repeat="(key, slot) in class track by key"
       ng-if="key!='class'"
       class="slot-button-container">
-      <md-button aria-label="Join {{::key}} {{::class.class}}"
+      <md-button aria-label="Join {{::key}} {{::class.class | classNameFilter}}"
         ng-click="slot.player ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)"
         ng-class="{'md-raised' : !slot.player}"
         class="slot-button">
@@ -55,6 +55,6 @@
         </md-menu-item>
       </md-menu-content>
     </md-menu>
-    <div class="class-button lobby-icon-{{::class.class}}"></div>
+    <div class="class-button lobby-icon-{{::class.class | classNameFilter}}"></div>
   </div>
 </div>

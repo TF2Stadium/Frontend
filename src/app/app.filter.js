@@ -5,6 +5,7 @@
   app.filter('capitalize', capitalize);
   app.filter('reverse', reverse);
   app.filter('trusted', trusted);
+  app.filter('classNameFilter', classNameFilter);
 
   /** @ngInject */
   function capitalize() {
@@ -24,6 +25,13 @@
   function trusted($sce) {
     return function(url) {
       return $sce.trustAsResourceUrl(url);
+    };
+  }
+
+  /** @ngInject */
+  function classNameFilter() {
+    return function(className) {
+      return className.replace(/\d+$/, "");
     };
   }
 

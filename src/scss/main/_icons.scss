@@ -30,7 +30,7 @@
   //search .class-buttons to see in action
   
   
-  $classes: (scout soldier pyro demoman heavy engineer medic sniper spy); 
+  $classes: (scout soldier pocket roamer pyro demoman heavy engineer medic sniper spy); 
   
   //makes a class named .lobby-icon-classname for each of the nine classes
   @each $class in $classes {
