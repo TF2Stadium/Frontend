@@ -48,9 +48,7 @@
       LobbyService.joinMumbleServer();
     };
 
-    if (angular.equals({}, vm.lobbyInformation)) {
-      LobbyService.spectate(parseInt($state.params.lobbyID));
-    }
+    LobbyService.spectate(parseInt($state.params.lobbyID));
 
   }
 
