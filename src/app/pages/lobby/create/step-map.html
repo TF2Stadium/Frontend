@@ -1,6 +1,6 @@
 <md-grid-tile md-ink-ripple class="tile-card"
   md-colspan="{{map.important ? 6 : 6}}"  md-rowspan="{{map.important ? 4 : 2}}"
-  ng-repeat="map in lobbyCreate.maps.options | orderBy:'important'"
+  ng-repeat="map in lobbyCreate.maps.options | orderBy:'name'"
   ng-click="lobbyCreate.select(lobbyCreate.maps, map)"
   ng-if="map[lobbyCreate.lobbySettings[lobbyCreate.formats.key]] || lobbyCreate.lobbySettings[lobbyCreate.formats.key]=='debug'">
   <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/maps/lobby-create/' + map.value + '.jpg)'}"></div>

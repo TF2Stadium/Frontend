@@ -93,14 +93,17 @@
             },{
               value: 'cp_process_final',
               important: true,
-              sixes: true
+              sixes: true,
+              important: true
             },{
               value: 'cp_snakewater_final1',
-              sixes: true
+              sixes: true,
+              important: true
             },{
               value: 'cp_gullywash_final1',
               sixes: true,
-              highlander: true
+              highlander: true,
+              important: true
             },{
               value: 'cp_metalworks_rc5',
               sixes: true
@@ -109,7 +112,7 @@
               sixes: true,
               highlander: true
             },{
-              value: 'koth_pro_viaduct_rc4',
+              value: 'koth_product_rc8',
               sixes: true,
               highlander: true,
               important: true
