@@ -50,8 +50,10 @@
       nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stepState) + 1];
       $state.go(nextStepState);
     };
-
-    vm.goToNext();
+    
+    if ($state.current.name === 'lobby-create') {
+      vm.goToNext();
+    }
   }
 
 })();
