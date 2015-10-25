@@ -53,7 +53,7 @@
       })
       .state('settings', {
         url: '/settings',
-        redirectTo: 'general',
+        redirectTo: 'theme',
         views: {
           "content": {
             templateUrl: 'app/pages/settings/settings.html',

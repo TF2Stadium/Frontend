@@ -11,7 +11,6 @@
       Makes children states for each section of the settings.
     */
     SettingsPageProvider.sections = [
-      'general',
       'theme',
       'filters'
     ];
