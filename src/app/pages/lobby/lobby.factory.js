@@ -111,7 +111,6 @@
     Websocket.onJSON('lobbyStart', function(data) {
       factory.lobbyJoinInformation = data;
       $state.go('lobby-page', {lobbyID: factory.lobbySpectated.id});
-      factory.joinTF2Server();
       $rootScope.$emit('lobby-start');
     });
 
