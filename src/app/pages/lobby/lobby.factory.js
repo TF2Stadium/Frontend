@@ -4,7 +4,7 @@
   angular.module('tf2stadium.services').factory('LobbyService', LobbyService);
 
   /** @ngInject */
-  function LobbyService($rootScope, $state, $mdDialog, $timeout, Websocket) {
+  function LobbyService($rootScope, $state, $mdDialog, $timeout, Websocket, Notifications) {
     var factory = {};
 
     factory.lobbyList = {};
@@ -103,15 +103,35 @@
       .then(function() {
           Websocket.emitJSON('playerReady', {});
         }, function() {
-          Websocket.emitJSON('lobbyKick', {id : factory.lobbySpectated.id});
+          Websocket.emitJSON('playerNotReady', {});
         }
       );
+      Notifications.notifyBrowser({
+        title: 'Click here to ready up!',
+        body: 'All the slots are filled, ready up to start',
+        timeout: 30,
+        callbacks: {
+          onclick: function() {
+            window.focus();
+          }
+        }
+      });
     });
 
     Websocket.onJSON('lobbyStart', function(data) {
       factory.lobbyJoinInformation = data;
       $state.go('lobby-page', {lobbyID: factory.lobbySpectated.id});
       $rootScope.$emit('lobby-start');
+      Notifications.notifyBrowser({
+        title: 'Lobby is starting!',
+        body: 'Come back to the site to join the server',
+        timeout: 30,
+        callbacks: {
+          onclick: function() {
+            window.focus();
+          }
+        }
+      });
     });
 
     Websocket.onJSON('lobbyListData', function(data) {
