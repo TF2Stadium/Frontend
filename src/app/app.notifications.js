@@ -82,12 +82,8 @@
           }, options.timeout * 1000);
         }
 
-        var notificationCallback = function(callback) {
-          options.callbacks[callback]();
-        };
-
         for (var callback in options.callbacks) {
-          html5notification[callback] = notificationCallback(callback);
+          html5notification[callback] = options.callbacks[callback];
         }
 
       });
