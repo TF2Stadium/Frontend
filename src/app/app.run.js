@@ -33,6 +33,10 @@
       $rootScope.currentTheme = settings.currentTheme;
     });
 
+    new Clipboard('.clipboard-button').on('success', function(event) {
+      Notifications.toast({message: 'Text copied to clipboard'});
+    });
+
   }
 
 })();

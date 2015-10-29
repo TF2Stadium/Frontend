@@ -18,6 +18,7 @@
 
     LobbyService.subscribe('lobby-start', $scope, function(){
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
+      vm.lobbyJoinInformation.connectString = 'connect ' + vm.lobbyJoinInformation.game.host + '; password ' + vm.lobbyJoinInformation.password;
     });
 
     vm.join = function (lobby, team, position) {

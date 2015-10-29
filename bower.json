@@ -6,13 +6,14 @@
   "readme": "readme.md",
   "version": "0.0.0",
   "dependencies": {
-    "angular-animate": "~1.4.0",
-    "angular-ui-router": "~0.2.15",
     "angular": "~1.4.0",
-    "angular-socket-io": "~0.7.0",
-    "socket.io-client": "1.2.0",
+    "angular-animate": "~1.4.0",
     "angular-material": "~0.10.1",
-    "angular-scroll-glue": "~2.0.6"
+    "angular-scroll-glue": "~2.0.6",
+    "angular-socket-io": "~0.7.0",
+    "angular-ui-router": "~0.2.15",
+    "clipboard": "~1.5.3",
+    "socket.io-client": "1.2.0"
   },
   "devDependencies": {},
   "resolutions": {
