@@ -43,7 +43,14 @@
 }
 
 #lobby-join-information {
+  @include flex(row, center, center);
   text-align: center;
+
+  & > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: $padding-small 0;
+  }
 }
 
 #slots {  
