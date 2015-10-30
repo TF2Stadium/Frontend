@@ -69,6 +69,14 @@
   &.clickable {
     cursor: pointer;
   }
+
+  &.low {
+    @extend %md-whiteframe-z1;
+
+    &:not(.flat):hover {
+      @extend %md-whiteframe-z2;
+    }
+  }
 }
 
 .text-center {
