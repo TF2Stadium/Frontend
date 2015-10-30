@@ -139,9 +139,13 @@
       .then(function(response) {
           if (response.readyUp) {
             Websocket.emitJSON('playerReady', {});
+            localStorage.setItem('tabCommunication', '');
+            localStorage.setItem('tabCommunication', 'closeDialog');
           }
         }, function() {
           Websocket.emitJSON('playerNotReady', {});
+          localStorage.setItem('tabCommunication', '');
+          localStorage.setItem('tabCommunication', 'closeDialog');
         }
       );
       Notifications.notifyBrowser({

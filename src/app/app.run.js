@@ -5,7 +5,7 @@
 
   /** @ngInject */
 
-  function runBlock(Config, User, Settings, $log, $state, $rootScope, LobbyService, Notifications) {
+  function runBlock(Config, User, Settings, $log, $state, $rootScope, LobbyService, Notifications, $mdDialog) {
 
     $log.debug('runBlock end');
 
@@ -36,6 +36,22 @@
     new Clipboard('.clipboard-button').on('success', function(event) {
       Notifications.toast({message: 'Text copied to clipboard'});
     });
+
+    if (window.addEventListener) {
+      window.addEventListener("storage", onStorageChanged, false);
+    } else {
+      window.attachEvent("onstorage", onStorageChanged);
+    };
+
+    function onStorageChanged(event) {
+      if (event.key !== 'tabCommunication') {
+        return;
+      }
+
+      if (event.newValue === 'closeDialog') {
+        $mdDialog.hide();
+      }
+    }
 
   }
 
