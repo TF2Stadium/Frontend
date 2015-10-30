@@ -17,6 +17,9 @@
     var toastDefault = {
       templateUrl: 'app/shared/notifications/toast.html',
       message: 'Default',
+      action: function() {
+        angular.noop();
+      },
       controller: 'ToastController',
       controllerAs: 'toast',
       bindToController: true,

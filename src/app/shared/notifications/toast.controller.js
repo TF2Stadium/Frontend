@@ -9,6 +9,7 @@
     var vm = this;
 
     vm.hide = function() {
+      vm.action();
       $mdToast.hide();
     };
     
