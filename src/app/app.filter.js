@@ -6,6 +6,7 @@
   app.filter('reverse', reverse);
   app.filter('trusted', trusted);
   app.filter('classNameFilter', classNameFilter);
+  app.filter('secondsToMinutes', secondsToMinutes);
 
   /** @ngInject */
   function capitalize() {
@@ -32,6 +33,16 @@
   function classNameFilter() {
     return function(className) {
       return className.replace(/\d+$/, "");
+    };
+  }
+
+  /** @ngInject */
+  function secondsToMinutes() {
+    return function(seconds) {
+      var minutes = Math.floor(seconds / 60);
+      var seconds = seconds % 60;
+      seconds = seconds < 10 ? "0" + seconds : seconds;
+      return minutes + ':' + seconds;
     };
   }
 

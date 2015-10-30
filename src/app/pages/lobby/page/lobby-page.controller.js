@@ -11,6 +11,8 @@
 
     vm.lobbyInformation = LobbyService.getLobbySpectated();
     vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
+    vm.playerPreReady = LobbyService.getPlayerPreReady();
+    vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
 
     LobbyService.subscribe('lobby-spectated-updated', $scope, function() {
       vm.lobbyInformation = LobbyService.getLobbySpectated();
@@ -19,6 +21,14 @@
     LobbyService.subscribe('lobby-start', $scope, function(){
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
       vm.lobbyJoinInformation.connectString = 'connect ' + vm.lobbyJoinInformation.game.host + '; password ' + vm.lobbyJoinInformation.password;
+    });
+
+    $scope.$watch(LobbyService.getPlayerPreReady, function () {
+      vm.playerPreReady = LobbyService.getPlayerPreReady();
+    });
+
+    $scope.$watch(LobbyService.getPreReadyUpTimer, function () {
+      vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
     });
 
     vm.join = function (lobby, team, position) {
@@ -47,6 +57,10 @@
 
     vm.joinMumbleServer = function() {
       LobbyService.joinMumbleServer();
+    };
+
+    vm.preReadyUp = function() {
+       LobbyService.setPlayerPreReady(!LobbyService.getPlayerPreReady());
     };
 
     LobbyService.spectate(parseInt($state.params.lobbyID));

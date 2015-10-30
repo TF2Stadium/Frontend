@@ -92,9 +92,17 @@
 }
 
 .slot-button {
+  @include flex (row, space-between, center);
+  height: 100%;
+  width: 100%;
   padding: 0;
   margin: 0;
-  height: 100%;
+  flex: 1;
+  position: relative;
+  line-height: normal !important; //otherwise can't multiline inside md-button
+  border-radius: 3px; //overriding .class-button .md-button
+  transition: all .3s ease-out;
+  overflow: hidden;
   
   &:nth-child(2) {
     flex-direction: row-reverse;
@@ -110,6 +118,11 @@
 
     .slot-misc {
       flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .slot-playername {
+      text-align: left;
     }
   }
 
@@ -117,20 +130,6 @@
     margin: 0 auto;
     width: 15px;
   }  
-}
-
-.slot-button {
-  @include flex (row, space-between, center);
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
-  flex: 1;
-  position: relative;
-  line-height: normal !important; //otherwise can't multiline inside md-button
-  border-radius: 3px; //overriding .class-button .md-button
-  transition: all .3s ease-out;
-  overflow: hidden;
 
   &:not(.sheet) > .md-ripple-container {
     display: none;
@@ -144,7 +143,7 @@
   width: 24px;
   padding-top: 100%;
   display: block;
-  margin: 2px;
+  margin: 0;
 
   img {
     @extend .fill-parent;
@@ -164,6 +163,7 @@
 
 .slot-playername {
   max-width: 100%;
+  text-align: right;
   white-space: nowrap;
 }
 
@@ -174,15 +174,26 @@
 }
 
 .slot-misc {
-  @include flex (row, flex-end, flex-end);
+  @include flex (row, flex-end, center);
+  height: 26px;
   width: 100%;
 
-  span:nth-child(even) {
-    margin-left: 3px;
+  span {
+    height: 26px;
+    line-height: 26px;
+
+    &:nth-child(even) {
+      margin-left: 3px;
+    }
   }
 
-  div {
+  & > div {
     padding: 0 5px;
+
+    &:first-child, 
+    &:last-child {
+      padding: 0;
+    }
   }
 }
 

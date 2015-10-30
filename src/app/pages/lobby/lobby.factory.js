@@ -4,12 +4,16 @@
   angular.module('tf2stadium.services').factory('LobbyService', LobbyService);
 
   /** @ngInject */
-  function LobbyService($rootScope, $state, $mdDialog, $timeout, Websocket, Notifications) {
+  function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval, Websocket, Notifications) {
     var factory = {};
 
     factory.lobbyList = {};
     factory.lobbySpectated = {};
     factory.lobbyJoinInformation = {};
+
+    var playerPreReady = false;
+    var preReadyUpTimer = 0;
+    var preReadyUpInterval;
 
     factory.getLobbyJoinInformation = function() {
       return factory.lobbyJoinInformation;
@@ -21,6 +25,34 @@
 
     factory.getLobbySpectated = function() {
       return factory.lobbySpectated;
+    };
+
+    factory.getPlayerPreReady = function() {
+      return playerPreReady;
+    };
+
+    factory.setPlayerPreReady = function(isReady) {
+      playerPreReady = isReady;
+
+      if (!playerPreReady) {
+        $interval.cancel(preReadyUpInterval);
+        return;
+      }
+
+      preReadyUpTimer = 180;
+
+      preReadyUpInterval = $interval(function() {
+        preReadyUpTimer--;
+
+        if (preReadyUpTimer <= 0) {
+          playerPreReady = false;
+          $interval.cancel(preReadyUpInterval);
+        }
+      }, 1000);
+    };
+
+    factory.getPreReadyUpTimer = function() {
+      return preReadyUpTimer;
     };
 
     factory.subscribe = function(request, scope, callback) {
