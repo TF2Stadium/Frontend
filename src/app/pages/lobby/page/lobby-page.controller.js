@@ -7,10 +7,21 @@
 
   /** @ngInject */
   function LobbyPageController($scope, $state, LobbyService) {
+
     var vm = this;
+
+    var buildConnectString = function() {
+      if (!vm.lobbyJoinInformation.game) {
+        return;
+      }
+      vm.lobbyJoinInformation.connectString =
+        'connect ' + vm.lobbyJoinInformation.game.host +
+        '; password ' + vm.lobbyJoinInformation.password;
+    };
 
     vm.lobbyInformation = LobbyService.getLobbySpectated();
     vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
+    buildConnectString();
     vm.playerPreReady = LobbyService.getPlayerPreReady();
     vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
 
@@ -20,7 +31,7 @@
 
     LobbyService.subscribe('lobby-start', $scope, function(){
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
-      vm.lobbyJoinInformation.connectString = 'connect ' + vm.lobbyJoinInformation.game.host + '; password ' + vm.lobbyJoinInformation.password;
+      buildConnectString();
     });
 
     $scope.$watch(LobbyService.getPlayerPreReady, function () {
