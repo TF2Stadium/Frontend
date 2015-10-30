@@ -123,6 +123,10 @@
 
     Websocket.onJSON('lobbyReadyUp', function(data) {
       $rootScope.$emit('lobby-ready-up');
+      if (playerPreReady) {
+        Websocket.emitJSON('playerReady', {});
+        return;
+      }
       $mdDialog.show({
         templateUrl: 'app/shared/notifications/ready-up.html',
         controller: 'ReadyUpDialogController',
