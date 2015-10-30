@@ -1,8 +1,8 @@
 <div id="lobby-join-information" class="sheet"
-  ng-if="lobbyPage.lobbyJoinInformation.game">
+  ng-show="lobbyPage.lobbyJoinInformation.id==lobbyPage.lobbyInformation.id">
   <md-button ng-click="lobbyPage.joinTF2Server()">Connect to server</md-button>
-  <span flex>{{::lobbyPage.lobbyJoinInformation.connectString}}</span>
-  <md-button data-clipboard-text="{{::lobbyPage.lobbyJoinInformation.connectString}}" class="clipboard-button">Copy to clipboard</md-button>
+  <span flex>{{lobbyPage.lobbyJoinInformation.connectString}}</span>
+  <md-button data-clipboard-text="{{lobbyPage.lobbyJoinInformation.connectString}}" class="clipboard-button">Copy to clipboard</md-button>
 </div>
 
 <div id="slots">
@@ -21,6 +21,7 @@
       <div ng-show="slot.filled">
         <md-menu>
           <md-button class="more-button"
+            aria-label="More"
             ng-click="slot.player ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)">
             <img src="/assets/img/icon-more.svg">
           </md-button>
