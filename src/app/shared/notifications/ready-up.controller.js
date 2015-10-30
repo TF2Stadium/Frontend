@@ -27,7 +27,7 @@
     };
 
     vm.accept = function() {
-      $mdDialog.hide();
+      $mdDialog.hide({readyUp: true});
     };
 
   }

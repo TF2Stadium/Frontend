@@ -132,12 +132,14 @@
         controller: 'ReadyUpDialogController',
         controllerAs: 'dialog',
         locals: {
-          timeout: data.timeout
+          timeout: 30
         },
         bindToController: true
       })
-      .then(function() {
-          Websocket.emitJSON('playerReady', {});
+      .then(function(response) {
+          if (response.readyUp) {
+            Websocket.emitJSON('playerReady', {});
+          }
         }, function() {
           Websocket.emitJSON('playerNotReady', {});
         }
