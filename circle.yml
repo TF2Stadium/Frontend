@@ -14,6 +14,7 @@ deployment:
   dev:
     branch: dev
     commands:
+      - sed -i "s|http://localhost:8080|$API_URL_DEV|g" src/app/app.config.js
       - gulp build
       - rsync -rl -e "ssh -p $SSH_PORT" dist/* $FRONTEND_USER@tf2stadium.com:$FRONTEND_DEPLOY_PATH_DEV
       - ssh -p $SSH_PORT $FRONTEND_USER@tf2stadium.com $FRONTEND_DEPLOY_SCRIPT_DEV
