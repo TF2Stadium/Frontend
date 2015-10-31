@@ -12,5 +12,5 @@ deployment:
     commands:
       - gulp build
       - ls -la
-      - rsync dist/* $FRONTEND_USER@tf2stadium.com:$SSH_PORT:$FRONTEND_DEPLOY_PATH
-      - ssh $FRONTEND_USER@tf2stadium.com:$SSH_PORT $FRONTEND_DEPLOY_SCRIPT
+      - rsync -e "ssh -p $SSH_PORT" dist/* $FRONTEND_USER@tf2stadium.com:$FRONTEND_DEPLOY_PATH
+      - ssh -p $SSH_PORT $FRONTEND_USER@tf2stadium.com $FRONTEND_DEPLOY_SCRIPT
