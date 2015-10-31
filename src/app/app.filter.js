@@ -11,6 +11,9 @@
   /** @ngInject */
   function capitalize() {
     return function(input) {
+      if(typeof input === 'undefined' || input === '') {
+        return input;
+      }
       return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
     };
   }

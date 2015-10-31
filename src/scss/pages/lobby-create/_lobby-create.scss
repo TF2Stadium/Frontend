@@ -1,3 +1,21 @@
+.lobbycreate-text {
+  @include flex (row, space-between, center);
+  flex-wrap: wrap;
+  z-index: 1;
+  padding: 0 $padding-medium;
+  height: 100%;
+  
+  .left, .right {
+    @include flex (column, space-between, stretch);
+    width: 50%;
+  }
+  
+  .right {
+    text-align: right;
+  }
+}
+
+
 /*======================================
               GENERAL STEPS
  =======================================*/
