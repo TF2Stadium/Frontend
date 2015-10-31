@@ -5,15 +5,12 @@ dependencies:
   override:
     - npm install --production
     - npm install -g bower gulp
-    - npm rebuild node-sass
     - bower install
 deployment:
-  production:
-    branch: master
-    commands:
-      - ls -la
   dev:
     branch: circleci
     commands:
       - gulp build
       - ls -la
+      - rsync dist/* $FRONTEND_USER@tf2stadium.com:$SSH_PORT:$FRONTEND_DEPLOY_PATH
+      - ssh $FRONTEND_USER@tf2stadium.com:$SSH_PORT $FRONTEND_DEPLOY_SCRIPT
