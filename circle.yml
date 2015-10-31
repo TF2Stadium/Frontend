@@ -1,0 +1,19 @@
+machine:
+  node:
+    version: 0.12.0
+dependencies:
+  override:
+    - npm install --production
+    - npm install -g bower gulp
+    - npm rebuild node-sass
+    - bower install
+test:
+  override:
+    - ls -la
+deployment:
+  dev:
+    branch: dev
+    commands:
+      - gulp build
+      - rsync -rl -e "ssh -p $SSH_PORT" dist/* $FRONTEND_USER@tf2stadium.com:$FRONTEND_DEPLOY_PATH_DEV
+      - ssh -p $SSH_PORT $FRONTEND_USER@tf2stadium.com $FRONTEND_DEPLOY_SCRIPT_DEV
