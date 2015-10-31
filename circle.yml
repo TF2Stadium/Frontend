@@ -1,0 +1,19 @@
+machine:
+  node:
+    version: 0.12.0
+dependencies:
+  override:
+    - npm install --production
+deployment:
+  production:
+    branch: master
+    commands:
+      - npm install -g bower
+      - bower install
+      - ls -la
+  dev:
+    branch: circleci
+    commands:
+      - npm install -g bower
+      - bower install
+      - ls -la
