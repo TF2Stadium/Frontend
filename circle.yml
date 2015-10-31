@@ -4,17 +4,16 @@ machine:
 dependencies:
   override:
     - npm install --production
+    - npm install -g bower gulp
+    - npm rebuild node-sass
+    - bower install
 deployment:
   production:
     branch: master
     commands:
-      - npm install -g bower
-      - bower install
       - ls -la
   dev:
     branch: circleci
     commands:
-      - npm install -g bower gulp
-      - bower install
       - gulp build
       - ls -la
