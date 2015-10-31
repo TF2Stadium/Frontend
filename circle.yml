@@ -14,6 +14,7 @@ deployment:
   dev:
     branch: circleci
     commands:
-      - npm install -g bower
+      - npm install -g bower gulp
       - bower install
+      - gulp build
       - ls -la
