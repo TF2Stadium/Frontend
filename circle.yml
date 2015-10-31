@@ -5,6 +5,7 @@ dependencies:
   override:
     - npm install --production
     - npm install -g bower gulp
+    - npm rebuild node-sass
     - bower install
 test:
   override:
