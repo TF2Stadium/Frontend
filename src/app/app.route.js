@@ -24,6 +24,11 @@
             controller: 'LobbyCreateController',
             controllerAs: 'lobbyCreate'
           },
+          "headerInfo": {
+            templateUrl: 'app/pages/lobby/create/header.html',
+            controller: 'LobbyCreateHeaderController',
+            controllerAs: 'header'
+          },
           "leftSidebar": {
             templateUrl: 'app/pages/lobby/create/lobby-create-steps.html',
             controller: 'WizardStepsController',
