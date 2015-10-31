@@ -6,6 +6,9 @@ dependencies:
     - npm install --production
     - npm install -g bower gulp
     - bower install
+test:
+  override:
+    - ls -la
 deployment:
   dev:
     branch: circleci
