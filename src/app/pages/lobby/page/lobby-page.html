@@ -24,7 +24,7 @@
       ng-class="{'sheet low clickable' : !slot.player}"
       class="slot-button"
       md-ink-ripple>
-      <div ng-show="slot.filled">
+      <div ng-if="slot.filled">
         <md-menu>
           <md-button class="more-button"
             aria-label="More"
@@ -59,7 +59,7 @@
           ng-checked="slot.ready || lobbyPage.playerPreReady" ng-click="lobbyPage.preReadyUp()" aria-label="Player ready">
         </md-checkbox>
       </div>
-      <div flex class="slot-info" ng-show="slot.filled">
+      <div flex class="slot-info" ng-if="slot.filled">
         <span class="slot-playername">{{::slot.player.name}}</span>
         <div class="slot-misc">
           <div flex ng-show="!slot.ready && $root.userProfile.steamid==slot.player.steamid">
@@ -68,7 +68,7 @@
           <div><span>{{::slot.player.lobbiesPlayed}}</span><span>lobbies</span></div>
         </div>
       </div>
-      <img ng-show="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+      <img ng-if="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
     </div>
     <div class="class-button lobby-icon-{{::class.class | classNameFilter}}"></div>
   </div>
