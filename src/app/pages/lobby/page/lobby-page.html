@@ -55,8 +55,11 @@
           </md-menu-content>
         </md-menu>
         <md-checkbox 
-          ng-show="lobbyPage.lobbyInformation.state>=2 || $root.userProfile.steamid==slot.player.steamid"
-          ng-checked="slot.ready || lobbyPage.playerPreReady" ng-click="lobbyPage.preReadyUp()" aria-label="Player ready">
+          ng-show="lobbyPage.lobbyInformation.state==2
+            || ($root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state==1)"
+          ng-checked="slot.ready 
+            || (lobbyPage.playerPreReady && $root.userProfile.steamid==slot.player.steamid)" ng-click="lobbyPage.preReadyUp()"
+            aria-label="Player ready">
         </md-checkbox>
       </div>
       <div flex class="slot-info" ng-if="slot.filled">
