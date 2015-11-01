@@ -167,7 +167,7 @@
       Notifications.notifyBrowser({
         title: 'Lobby is starting!',
         body: 'Come back to the site to join the server',
-        timeout: 30,
+        timeout: 5,
         callbacks: {
           onclick: function() {
             window.focus();
