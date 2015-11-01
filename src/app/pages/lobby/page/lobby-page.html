@@ -1,7 +1,13 @@
 <div id="lobby-join-information" class="sheet"
-  ng-show="lobbyPage.lobbyJoinInformation.id==lobbyPage.lobbyInformation.id">
+  ng-show="lobbyPage.lobbyJoinInformation.id==lobbyPage.lobbyInformation.id || true">
   <md-button ng-click="lobbyPage.joinTF2Server()">Connect to server</md-button>
-  <span flex>{{lobbyPage.lobbyJoinInformation.connectString}}</span>
+  <md-button ng-show="!lobbyPage.showConnectString"
+    ng-click="lobbyPage.showConnectString=true">
+    Show the connect string
+  </md-button>
+  <span flex ng-show="lobbyPage.showConnectString">
+    {{lobbyPage.lobbyJoinInformation.connectString}}
+  </span>
   <md-button data-clipboard-text="{{lobbyPage.lobbyJoinInformation.connectString}}" class="clipboard-button">Copy to clipboard</md-button>
 </div>
 
