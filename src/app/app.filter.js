@@ -7,6 +7,7 @@
   app.filter('trusted', trusted);
   app.filter('classNameFilter', classNameFilter);
   app.filter('secondsToMinutes', secondsToMinutes);
+  app.filter('unique', unique);
 
   /** @ngInject */
   function capitalize() {
@@ -48,5 +49,24 @@
       return minutes + ':' + seconds;
     };
   }
+
+  /** @ngInject */
+  function unique() {
+    return function (array) {
+      var uniqueArray = [];
+      for (var key in array) {
+        var existsInArray = false;
+        for (var j in uniqueArray) {
+          if (uniqueArray[j].steamid == array[key].steamid) {
+            existsInArray = true;
+          }
+        }
+        if (!existsInArray) {
+          uniqueArray.push(array[key]);
+        }
+      }
+      return uniqueArray;
+    };
+  };
 
 })();

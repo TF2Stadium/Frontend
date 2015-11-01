@@ -2,7 +2,7 @@
   <h1 class="spectators-title">
     Spectators
   </h1>
-  <md-menu ng-repeat="spectator in spectators.lobbyInformation.spectators"
+  <md-menu ng-repeat="spectator in spectators.lobbyInformation.spectators | unique"
   md-position-mode="target-right target" md-offset="-180 0">
     <md-button class="sidebar-link" ng-click="$mdOpenMenu($event)">
       {{::spectator.name}}
