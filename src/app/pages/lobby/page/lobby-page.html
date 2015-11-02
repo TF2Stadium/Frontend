@@ -54,10 +54,10 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-        <md-checkbox 
+        <md-checkbox
           ng-show="lobbyPage.lobbyInformation.state==2
             || ($root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state==1)"
-          ng-checked="slot.ready 
+          ng-checked="slot.ready
             || (lobbyPage.playerPreReady && $root.userProfile.steamid==slot.player.steamid)" ng-click="lobbyPage.preReadyUp()"
             aria-label="Player ready">
         </md-checkbox>

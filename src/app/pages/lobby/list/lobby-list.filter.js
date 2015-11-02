@@ -30,6 +30,6 @@
 
       return filteredList;
     };
-    
+
   }
 })();

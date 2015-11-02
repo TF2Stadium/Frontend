@@ -98,11 +98,11 @@ $toast-top:               ($commentbox-top - $toast-height) / 2 + $navbar-height
   &::-webkit-scrollbar {
     width: 4px !important;
   }
-  
+
   &::-webkit-scrollbar-track {
     background-color: transparent !important;
   }
-  
+
   &::-webkit-scrollbar-thumb {
     background-color: #ccc !important;
   }

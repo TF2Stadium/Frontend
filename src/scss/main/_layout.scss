@@ -161,7 +161,7 @@ main {
     margin-bottom: 20px;
   }
 
-  &.empty ~ main {    
+  &.empty ~ main {
     #left-sidebar, md-content {
       padding-top: $padding-medium;
     }

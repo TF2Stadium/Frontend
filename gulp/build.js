@@ -21,7 +21,7 @@ var $ = require('gulp-load-plugins')({
     'gulp-sourcemaps',
     'gulp-uglify',
     'gulp-useref',
-    'gulp-util', 
+    'gulp-util',
     'main-bower-files',
     'uglify-save-license',
     'del']

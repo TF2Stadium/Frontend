@@ -11,8 +11,6 @@
 
     vm.sections = SettingsPage.getSections();
 
-    var userSettings = {};
-
     vm.saveSetting = function(key, value) {
       Settings.set(key, value);
     };

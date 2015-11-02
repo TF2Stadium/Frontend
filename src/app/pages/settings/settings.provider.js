@@ -27,7 +27,7 @@
         }
       });
     }
-  }  
+  }
 
   /** @ngInject */
   function SettingsPage() {

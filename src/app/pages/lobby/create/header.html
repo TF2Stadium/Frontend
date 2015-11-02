@@ -6,12 +6,12 @@
         {{header.lobbyInformation.map}}
       </span>
       <div class="left">
-        <span class="lobbypage-rules">          
+        <span class="lobbypage-rules">
           <span ng-show="header.lobbyInformation.type">
             {{header.lobbyInformation.type | capitalize}}
           </span><!--
           --><span ng-show="header.lobbyInformation.whitelistID">
-            , whitelist #<a target="_blank" 
+            , whitelist #<a target="_blank"
               href="http://whitelist.tf/{{header.lobbyInformation.whitelistID}}">
               {{header.lobbyInformation.whitelistID}}
             </a>

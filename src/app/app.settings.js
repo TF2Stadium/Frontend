@@ -134,7 +134,7 @@
       settingsService.getSettings = function(callback) {
         callback = callback || angular.noop;
 
-        if(!alreadyLoadedFromBackend) {          
+        if(!alreadyLoadedFromBackend) {
           var handler = $rootScope.$on('settings-loaded-from-backend', function() {
             callback(settings);
             handler();
