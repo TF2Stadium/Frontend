@@ -63,7 +63,7 @@ body {
 }
 
 .header-info {
-  @include flex (column, center, center);
+  @include flex (column, flex-end, center);
   height: $header-image-height;
   width: 100%;
   position: relative;

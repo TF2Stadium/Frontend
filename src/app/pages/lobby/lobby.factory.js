@@ -84,21 +84,16 @@
       Websocket.emitJSON('lobbyJoin', payload);
     };
 
-    factory.spectate = function(lobby) {
-      //We could receive lobbyData before we receive the response to lobbyJoin,
-      //so the onJSON event might never be fired.
-      var handler = $rootScope.$on('lobby-spectated-updated', function() {
-        $state.go('lobby-page', {lobbyID: lobby});
-        handler();
-      });
+    factory.goToLobby = function(lobby) {
+      $state.go('lobby-page', {lobbyID: lobby});
+    };
 
+    factory.spectate = function(lobby) {
       Websocket.emitJSON('lobbySpectatorJoin', {id: lobby}, function(response) {
         if (!response.success) {
           if($state.current.name === 'lobby-page') {
             $state.go('lobby-list');
           }
-          //If we are not allowed to spectate the lobby, there's no need to listen for updates
-          handler();
         }
       });
     };

@@ -1,4 +1,5 @@
-<div class="header-image" ng-style="{'background-image':'url(assets/img/maps/header/' + header.lobbyInformation.map + '.jpg)'}">
+<div class="header-image" ng-style="{'background-image':'url(assets/img/maps/header/' + header.lobbyInformation.map + '.jpg)'}"
+  ng-show="header.shouldShowLobbyInformation()">
   <div class="header-text">
     <div class="lobbypage-text">
       <span class="lobbypage-map">{{header.lobbyInformation.map}}</span>
@@ -24,3 +25,8 @@
     </div>
   </div>
 </div>
+<div ng-if="header.shouldShowError()">
+  asdfasdf
+</div>
+<md-progress-linear md-mode="indeterminate"
+    ng-if="header.shouldShowProgress()"></md-progress-linear>
