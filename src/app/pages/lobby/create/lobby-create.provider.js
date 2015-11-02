@@ -36,7 +36,7 @@
         }
       });
     }
-  }  
+  }
 
   /** @ngInject */
   function LobbyCreate() {
@@ -194,7 +194,7 @@
               title: 'UGC Highlander (Season 16)',
               league: 'ugc',
               format: 'highlander'
-            },,{
+            },{
               value: 4559,
               title: 'UGC 6v6 (Season 19)',
               league: 'ugc',
@@ -219,7 +219,7 @@
               title: 'AsiaFortress 6v6 (Season 9)',
               league: 'asia',
               format: 'sixes'
-            }            
+            }
           ]
         },
         mumble: {
@@ -234,7 +234,7 @@
               value: false,
               title: 'Mumble not required',
               description: 'Participants will join the mumble only if they want to do so.',
-            }         
+            }
           ]
         }
       };
@@ -265,7 +265,7 @@
 
         Websocket.emitJSON('serverVerify',
           {
-            server: lobbyCreateService.settings.server, 
+            server: lobbyCreateService.settings.server,
             rconpwd: lobbyCreateService.settings.rconpwd
           },
           function(response) {
@@ -287,7 +287,7 @@
         $rootScope.$emit('lobby-create-settings-updated');
       };
 
-      lobbyCreateService.getLobbySettings = function(key, value) {
+      lobbyCreateService.getLobbySettings = function() {
         return lobbyCreateService.settings;
       };
 

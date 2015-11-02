@@ -30,7 +30,7 @@
       event.preventDefault();
 
     };
-     
+
     vm.goToProfile = function(steamId) {
       window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };

@@ -34,7 +34,7 @@ $themes-list: (
   $secondary-color:       themeVar(secondary-color);
   $body-color:            themeVar(body-background);
   $sheet-color:           lighten($body-color, 6.5%);
-  @if themeVar(type) == 'light' {    
+  @if themeVar(type) == 'light' {
     $hover-color:           lighten($body-color, 3.25%);
   } @else {
     $hover-color:           lighten($sheet-color, 3.25%);
@@ -47,7 +47,7 @@ $themes-list: (
 
 
   body.#{themeVar(selector)} {
-    
+
     background: $body-color;
     color: $text-color-medium;
 
@@ -99,7 +99,7 @@ $themes-list: (
       }
 
       &.md-focused, &:hover {
-        background-color: $hover-color;        
+        background-color: $hover-color;
       }
     }
 
@@ -124,7 +124,7 @@ $themes-list: (
       background-color: $sheet-color;
     }
 
-    #notifications {  
+    #notifications {
       background-color: $sheet-color;
     }
 
@@ -160,7 +160,7 @@ $themes-list: (
 
     #header-title > span {
       color: $main-color;
-      
+
       &:nth-child(3) {
         color: $secondary-color;
       }
@@ -204,7 +204,7 @@ $themes-list: (
     }
 
     .slot-misc span:nth-child(even) {
-      //makes "hours", "reliability"... stand out less  
+      //makes "hours", "reliability"... stand out less
       color: $text-color-light;
     }
 

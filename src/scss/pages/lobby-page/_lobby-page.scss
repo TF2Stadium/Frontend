@@ -14,12 +14,12 @@
   z-index: 1;
   padding: 0 $padding-medium;
   height: 100%;
-  
+
   .left, .right {
     @include flex (column, space-between, stretch);
     width: 50%;
   }
-  
+
   .right {
     text-align: right;
   }
@@ -80,11 +80,11 @@
   @include flex (row, space-between, stretch);
   height: $class-button-height;
   margin: 0 0 $padding-small 0;
-  
+
   &:first-child {
     margin-top: $padding-medium;
   }
-  
+
   //Nesting required
   .class-button {
     margin: 0 $padding-small;
@@ -103,7 +103,7 @@
   border-radius: 3px; //overriding .class-button .md-button
   transition: all .3s ease-out;
   overflow: hidden;
-  
+
   &:nth-child(2) {
     flex-direction: row-reverse;
     order: 3;
@@ -129,7 +129,7 @@
   md-checkbox {
     margin: 0 auto;
     width: 15px;
-  }  
+  }
 
   &:not(.sheet) > .md-ripple-container {
     display: none;
@@ -190,7 +190,7 @@
   & > div {
     padding: 0 5px;
 
-    &:first-child, 
+    &:first-child,
     &:last-child {
       padding: 0;
     }
