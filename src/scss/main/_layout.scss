@@ -188,7 +188,7 @@ main {
   //to show the shadows, needed because of the overflow:auto
   padding-left: 5px;
   background: transparent;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 #chat {
