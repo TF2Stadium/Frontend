@@ -42,7 +42,8 @@
         var lobby = lobbies[key];
         lobby.region = "eu";
 
-        var availableClasses = lobby.classes.map(maybeClassName).filter(truthy);
+        var classes = angular.isArray(lobby.classes)? lobby.classes : [];
+        var availableClasses = classes.map(slotNameToClassName).filter(truthy);
 
         if (settings[lobby.region] &&
             settings[lobby.type] &&
