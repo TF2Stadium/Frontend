@@ -1,4 +1,4 @@
-$maps: (cp_process_final cp_badlands pl_upward); 
+$maps: (cp_process_final cp_badlands pl_upward);
 
 
 //This might not be needed anymore, but I'm keeping it for the moment
@@ -6,11 +6,11 @@ $maps: (cp_process_final cp_badlands pl_upward);
   .background-4k-#{$map} {
     background-image:url(../assets/img/maps/#{$map}-4k.jpeg);
   }
-  
+
   .background-large-#{$map} {
     background-image:url(../assets/img/maps/#{$map}-large.jpeg);
   }
-  
+
   .background-small-#{$map} {
     background-image:url(../assets/img/maps/#{$map}-small.jpeg);
   }

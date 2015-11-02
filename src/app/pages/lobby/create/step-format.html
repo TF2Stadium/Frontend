@@ -3,7 +3,7 @@
   ng-repeat="format in lobbyCreate.formats.options | orderBy:'title'"
   ng-click="lobbyCreate.select(lobbyCreate.formats, format)"
   ng-if="format.value!='debug' || $root.userProfile.role=='administrator'">
-  <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg), 
+  <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg),
     linear-gradient(
         to top,
         rgba(0, 0, 0, .2) 0%,

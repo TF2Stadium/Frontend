@@ -27,7 +27,7 @@
         }
       });
     }
-  }  
+  }
 
   /** @ngInject */
   function SettingsPage() {
@@ -44,7 +44,7 @@
 
       settingsPageService.getSections = function() {
         return settingsPageProvider.sections;
-      }
+      };
 
       return settingsPageService;
     };

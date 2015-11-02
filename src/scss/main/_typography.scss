@@ -14,7 +14,7 @@
     src: url(/assets/fonts/FiraSansLight.otf);
 }
 
-html, textarea, input, button, select { 
+html, textarea, input, button, select {
   font-family: $font-family-text;
   line-height: 1.5;
   font-size: 16px;
@@ -52,13 +52,13 @@ a {
 
 .lobby-info-maxplayers {
   font-size: .8em;
-} 
+}
 
 .lobby-info-row {
   line-height: $lobby-info-height/2;
 
   &.top {
-    font-size: 26px; 
+    font-size: 26px;
     font-family: $font-family-header;
     font-weight: bold;
   }
@@ -71,7 +71,7 @@ a {
 
 .lobbypage-map {
   font-family: $font-family-header;
-  font-weight: bold; 
+  font-weight: bold;
   font-size: 60px;
 }
 
