@@ -22,9 +22,8 @@
 
         if (settings[lobby.region] &&
           settings[lobby.type] &&
-          settings[lobby.map.substr(0, lobby.map.indexOf('_'))]
-
-          || (Config.debug && lobby.type === 'Debug')) {
+          settings[lobby.map.substr(0, lobby.map.indexOf('_'))] ||
+          (Config.debug && lobby.type === 'Debug')) {
           filteredList[key] = lobby;
         }
       }

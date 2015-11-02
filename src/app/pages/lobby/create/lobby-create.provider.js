@@ -194,7 +194,7 @@
               title: 'UGC Highlander (Season 16)',
               league: 'ugc',
               format: 'highlander'
-            },,{
+            },{
               value: 4559,
               title: 'UGC 6v6 (Season 19)',
               league: 'ugc',
@@ -287,7 +287,7 @@
         $rootScope.$emit('lobby-create-settings-updated');
       };
 
-      lobbyCreateService.getLobbySettings = function(key, value) {
+      lobbyCreateService.getLobbySettings = function() {
         return lobbyCreateService.settings;
       };
 

@@ -44,7 +44,7 @@
   function secondsToMinutes() {
     return function(seconds) {
       var minutes = Math.floor(seconds / 60);
-      var seconds = seconds % 60;
+      seconds = seconds % 60;
       seconds = seconds < 10 ? "0" + seconds : seconds;
       return minutes + ':' + seconds;
     };
@@ -57,7 +57,7 @@
       for (var key in array) {
         var existsInArray = false;
         for (var j in uniqueArray) {
-          if (uniqueArray[j].steamid == array[key].steamid) {
+          if (uniqueArray[j].steamid === array[key].steamid) {
             existsInArray = true;
           }
         }
@@ -67,6 +67,6 @@
       }
       return uniqueArray;
     };
-  };
+  }
 
 })();

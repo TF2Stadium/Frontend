@@ -41,7 +41,7 @@
       window.addEventListener("storage", onStorageChanged, false);
     } else {
       window.attachEvent("onstorage", onStorageChanged);
-    };
+    }
 
     function onStorageChanged(event) {
       if (event.key !== 'tabCommunication') {

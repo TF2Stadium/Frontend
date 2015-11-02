@@ -19,7 +19,7 @@
 
     vm.setCurrent = function(key) {
       vm.current = key;
-    }
+    };
 
     /*
       Iterates through all the settings in the list and compares
