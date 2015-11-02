@@ -17,7 +17,7 @@
     <h1>Red</h1>
   </div>
   <div ng-repeat="class in lobbyPage.lobbyInformation.classes track by class.class" class="class-row">
-    <div aria-label="Join {{::key}} {{::class.class | classNameFilter}}"
+    <div aria-label="Join {{::key}} {{::class.class | stripSlotNameNumber}}"
       ng-repeat="(key, slot) in class track by key"
       ng-if="key!='class'"
       ng-click="slot.player ? angular.noop() : lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)"
@@ -54,10 +54,10 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-        <md-checkbox 
+        <md-checkbox
           ng-show="lobbyPage.lobbyInformation.state==2
             || ($root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state==1)"
-          ng-checked="slot.ready 
+          ng-checked="slot.ready
             || (lobbyPage.playerPreReady && $root.userProfile.steamid==slot.player.steamid)" ng-click="lobbyPage.preReadyUp()"
             aria-label="Player ready">
         </md-checkbox>
@@ -73,6 +73,6 @@
       </div>
       <img ng-if="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
     </div>
-    <div class="class-button lobby-icon-{{::class.class | classNameFilter}}"></div>
+    <div class="class-button lobby-icon-{{::class.class | stripSlotNameNumber}}"></div>
   </div>
 </div>

@@ -28,6 +28,17 @@
         pl:             {name: 'Payload'},
         koth:           {name: 'King of the hill'},
         others:         {name: 'Other gamemodes'}
+      },
+      classes: {
+        scout:          {name: 'Scout' },
+        soldier:        {name: 'Soldier' },
+        pyro:           {name: 'Pyro' },
+        demoman:        {name: 'Demoman' },
+        heavy:          {name: 'Heavy' },
+        engineer:       {name: 'Engineer' },
+        medic:          {name: 'Medic' },
+        sniper:         {name: 'Sniper' },
+        spy:            {name: 'Spy' }
       }
     };
 
@@ -134,7 +145,7 @@
       settingsService.getSettings = function(callback) {
         callback = callback || angular.noop;
 
-        if(!alreadyLoadedFromBackend) {          
+        if(!alreadyLoadedFromBackend) {
           var handler = $rootScope.$on('settings-loaded-from-backend', function() {
             callback(settings);
             handler();

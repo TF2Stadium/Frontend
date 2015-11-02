@@ -5,7 +5,8 @@
   app.filter('capitalize', capitalize);
   app.filter('reverse', reverse);
   app.filter('trusted', trusted);
-  app.filter('classNameFilter', classNameFilter);
+  app.filter('slotNameToClassName', slotNameToClassName);
+  app.filter('stripSlotNameNumber', stripSlotNameNumber);
   app.filter('secondsToMinutes', secondsToMinutes);
   app.filter('unique', unique);
 
@@ -34,9 +35,30 @@
   }
 
   /** @ngInject */
-  function classNameFilter() {
-    return function(className) {
-      return className.replace(/\d+$/, "");
+  function stripSlotNameNumber() {
+    return function(slotName) {
+      return slotName.replace(/\d+$/, "");
+    };
+  }
+
+  /** @ngInject */
+  function slotNameToClassName() {
+    var classSynonyms = {
+      roamer: 'soldier',
+      pocket: 'soldier'
+    };
+
+    var stripNumberFilter = stripSlotNameNumber();
+
+    return function(slotName) {
+      slotName = stripNumberFilter(slotName);
+
+      var className = slotName;
+      if (classSynonyms.hasOwnProperty(slotName)) {
+        className = classSynonyms[slotName];
+      }
+
+      return className;
     };
   }
 
