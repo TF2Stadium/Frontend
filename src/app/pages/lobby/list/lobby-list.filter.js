@@ -5,22 +5,12 @@
     .module('tf2stadium.services')
     .filter('LobbyListSettingsFilter', LobbyListSettingsFilter);
 
-  var CLASS_SYNONYMS = {
-    roamer: 'soldier',
-    pocket: 'soldier',
-    scout1: 'scout',
-    scout2: 'scout'
-  };
+  function slotAvailable(slot) {
+    return !(slot.blu.filled && slot.red.filled);
+  }
 
-  function maybeClassName(slot) {
-    if (!(slot.blu.filled && slot.red.filled)) {
-      var className = slot.class;
-      if (CLASS_SYNONYMS.hasOwnProperty(className)) {
-        className = CLASS_SYNONYMS[className];
-      }
-      return className;
-    }
-    return false;
+  function slotToSlotName(slot) {
+    return slot.class;
   }
 
   function truthy(x) {
@@ -28,11 +18,17 @@
   }
 
   /** @ngInject */
-  function LobbyListSettingsFilter(Settings, Config) {
+  function LobbyListSettingsFilter(Settings, Config, $filter) {
+
+    var slotNameToClassName = $filter('slotNameToClassName');
 
     var settings = Settings.getSettings(function(response) {
       settings = response;
     });
+
+    function playerPlaysClass(className) {
+      return settings[className];
+    }
 
     return function(lobbies) {
 
@@ -42,15 +38,17 @@
         var lobby = lobbies[key];
         lobby.region = "eu";
 
-        var classes = angular.isArray(lobby.classes)? lobby.classes : [];
-        var availableClasses = classes.map(slotNameToClassName).filter(truthy);
+        var slots = angular.isArray(lobby.classes)? lobby.classes : [];
+        var availableClasses = slots
+              .filter(slotAvailable)
+              .map(slotToSlotName)
+              .map(slotNameToClassName)
+              .filter(truthy);
 
         if (settings[lobby.region] &&
             settings[lobby.type] &&
             settings[lobby.map.substr(0, lobby.map.indexOf('_'))] &&
-            availableClasses.some(function(className) {
-              return settings[className];
-            })
+            availableClasses.some(playerPlaysClass)
 
             || (Config.debug && lobby.type === 'Debug')) {
           filteredList[key] = lobby;
