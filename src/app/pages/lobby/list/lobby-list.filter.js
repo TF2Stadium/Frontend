@@ -5,12 +5,30 @@
     .module('tf2stadium.services')
     .filter('LobbyListSettingsFilter', LobbyListSettingsFilter);
 
+  function slotAvailable(slot) {
+    return !(slot.blu.filled && slot.red.filled);
+  }
+
+  function slotToSlotName(slot) {
+    return slot.class;
+  }
+
+  function truthy(x) {
+    return !!x;
+  }
+
   /** @ngInject */
-  function LobbyListSettingsFilter(Settings, Config) {
+  function LobbyListSettingsFilter(Settings, Config, $filter) {
+
+    var slotNameToClassName = $filter('slotNameToClassName');
 
     var settings = Settings.getSettings(function(response) {
       settings = response;
     });
+
+    function playerPlaysClass(className) {
+      return settings[className];
+    }
 
     return function(lobbies) {
 
@@ -20,17 +38,25 @@
         var lobby = lobbies[key];
         lobby.region = "eu";
 
-        if (settings[lobby.region] &&
-          settings[lobby.type] &&
-          settings[lobby.map.substr(0, lobby.map.indexOf('_'))]
+        var slots = angular.isArray(lobby.classes)? lobby.classes : [];
+        var availableClasses = slots
+              .filter(slotAvailable)
+              .map(slotToSlotName)
+              .map(slotNameToClassName)
+              .filter(truthy);
 
-          || (Config.debug && lobby.type === 'Debug')) {
+        if (settings[lobby.region] &&
+            settings[lobby.type] &&
+            settings[lobby.map.substr(0, lobby.map.indexOf('_'))] &&
+            availableClasses.some(playerPlaysClass)
+
+            || (Config.debug && lobby.type === 'Debug')) {
           filteredList[key] = lobby;
         }
       }
 
       return filteredList;
     };
-    
+
   }
 })();
