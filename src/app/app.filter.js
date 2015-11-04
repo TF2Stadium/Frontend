@@ -74,12 +74,12 @@
 
   /** @ngInject */
   function unique() {
-    return function (array) {
+    return function (array, uniqueKey) {
       var uniqueArray = [];
       for (var key in array) {
         var existsInArray = false;
         for (var j in uniqueArray) {
-          if (uniqueArray[j].steamid === array[key].steamid) {
+          if (uniqueArray[j][uniqueKey] === array[key][uniqueKey]) {
             existsInArray = true;
           }
         }
