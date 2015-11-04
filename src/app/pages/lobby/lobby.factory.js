@@ -201,15 +201,18 @@
               .map(_.partialRight(_.pick, ['red', 'blu']))
               .map(_.values)
               .flatten()
-              .filter(_.partialRight(_.pluck, 'filled'))
-              .map(_.partialRight(_.pluck, 'steamid'))
+              .filter(_.property('filled'))
+              .pluck('player.steamid')
               .contains(ourSteamId);
 
         if (newLobby.id === factory.lobbyJoinedId && !inNewLobby) {
+          factory.lobbyJoinedId = -1;
           $rootScope.$emit('lobby-left', newLobby.id);
+          console.log('lobby-left ' + newLobby.id);
         } else if (newLobby.id !== factory.lobbyJoinedId && inNewLobby) {
-          $rootScope.$emit('lobby-left', factory.lobbyJoinedId);
+          factory.lobbyJoinedId = newLobby.id;
           $rootScope.$emit('lobby-joined', newLobby.id);
+          console.log('lobby-joined ' + newLobby.id);
         }
       }
 
@@ -217,10 +220,6 @@
         $rootScope.$emit('lobby-spectated-changed');
       }
       $rootScope.$emit('lobby-spectated-updated');
-    });
-
-    $rootScope.$on('lobby-joined', function (e, lobbyId) {
-      factory.lobbyJoinedId = lobbyId;
     });
 
     return factory;
