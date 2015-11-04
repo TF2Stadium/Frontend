@@ -3,7 +3,7 @@
 
   angular.module('tf2stadium').constant("Config", {
     'endpoints': {
-      'websocket': 'http://websocket-dev.tf2stadium.com',
+      'websocket': 'ws://websocket-dev.tf2stadium.com/websocket/',
       'api': 'http://api-dev.tf2stadium.com'
     },
     'debug': true
