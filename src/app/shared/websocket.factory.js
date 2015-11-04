@@ -5,10 +5,12 @@
   angular.module('tf2stadium.services').factory('Websocket', Websocket);
 
   /** @ngInject */
-  function Websocket(socketFactory, Config, Notifications) {
+  function Websocket(Config, Notifications) {
 
     var connected = false;
-    var factory = socketFactory({
+    var factory = {};
+
+    /*socketFactory({
       prefix: '',
       ioSocket: io.connect(Config.endpoints.websocket)
     });
@@ -16,10 +18,10 @@
     factory.on('socketInitialized', function() {
       console.log('Websocket connection initialized');
       connected = true;
-    });
+    }); */
 
     var emitJSON = function(name, json, callback) {
-      console.log('Sent ' + name);
+/*      console.log('Sent ' + name);
       factory.emit(name, json, function(json) {
         var data = JSON.parse(json);
         console.log('Response to ' + name);
@@ -28,11 +30,11 @@
           Notifications.toast({message: data.message, error: true});
         }
         callback(data);
-      });
+      }); */
     };
 
     factory.onJSON = function(name, callback) {
-      callback = callback || angular.noop;
+/*      callback = callback || angular.noop;
 
       factory.on(name, function (data) {
         var json = {};
@@ -43,11 +45,11 @@
         }
         callback(json);
       });
-
+*/
     };
 
     factory.emitJSON = function(name, data, callback) {
-      callback = callback || angular.noop;
+/*      callback = callback || angular.noop;
       var json = JSON.stringify(data);
 
       if (connected) {
@@ -57,7 +59,7 @@
           emitJSON(name, json, callback);
         });
       }
-
+*/
     };
 
     return factory;
