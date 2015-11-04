@@ -1,23 +1,35 @@
 <!-- The next div is needed to fix a bug regarding flexbox, min-height and IE -->
 <div layout="column">
-  <div id="chat" layout="column" ng-controller="CommentBoxController as commentBox">
-    <md-tabs flex class="chat-tabs" md-selected="commentBox.currentTab" md-stretch-tabs="always">
-      <md-tab>
-        <md-tab-label>Chat</md-tab-label>
+  <div id="chat"
+       layout="column"
+       ng-controller="CommentBoxController as commentBox">
+    <md-tabs flex
+             class="chat-tabs"
+             md-selected="commentBox.currentTab"
+             md-stretch-tabs="always">
+      <md-tab ng-repeat="room in commentBox.rooms | unique:'id'"
+              ng-if="room.id > -1"
+              ng-style="{'text-decoration': (room.joined? 'underline':'')}">
+        <md-tab-label>
+          {{room.id === 0? 'CHAT' : ('Lobby #' + room.id)}}
+        </md-tab-label>
         <md-tab-body>
           <md-content scroll-glue>
-            <div ng-repeat="message in commentBox.rooms.general.messages track by $index"
-              class="chat-message">
-              <md-menu ng-if="message.player.steamid!=commentBox.rooms.general.messages[$index-1].player.steamid">
-                <md-button class="chat-player-name"
-                  ng-class="[message.player.tags]"
-                  ng-click="$mdOpenMenu($event)"
-                  md-menu-origin>
+            <div ng-repeat="message in room.messages track by $index"
+                 class="chat-message">
+              <md-menu
+                 ng-if="message.player.steamid != room.messages[$index-1].player.steamid">
+                <md-button
+                   class="chat-player-name"
+                   ng-class="[message.player.tags]"
+                   ng-click="$mdOpenMenu($event)"
+                   md-menu-origin>
                   {{::message.player.name}}:
                 </md-button>
                 <md-menu-content width="3">
                   <md-menu-item>
-                    <md-button ng-click="commentBox.goToProfile(message.player.steamid)">
+                    <md-button
+                       ng-click="commentBox.goToProfile(message.player.steamid)">
                       Steam profile
                     </md-button>
                   </md-menu-item>
@@ -28,36 +40,16 @@
           </md-content>
         </md-tab-body>
       </md-tab>
-      <md-tab ng-if="commentBox.rooms.lobbySpectated.id>0">
-        <md-tab-label>Lobby #{{commentBox.rooms.lobbySpectated.id}}</md-tab-label>
-        <md-tab-body>
-          <md-content scroll-glue>
-            <div ng-repeat="message in commentBox.rooms.lobbySpectated.messages track by $index"
-              class="chat-message">
-              <md-menu ng-if="message.player.steamid!=commentBox.rooms.lobbySpectated.messages[$index-1].player.steamid">
-                <md-button class="chat-player-name"
-                  ng-class="[message.player.tags]"
-                  ng-click="$mdOpenMenu($event)"
-                  md-menu-origin>
-                  {{::message.player.name}}:
-                </md-button>
-                <md-menu-content width="3">
-                  <md-menu-item>
-                    <md-button ng-click="commentBox.goToProfile(message.player.steamid)">
-                      Steam profile
-                    </md-button>
-                  </md-menu-item>
-                </md-menu-content>
-              </md-menu>
-              <span class="chat-message-text">{{::message.message}}</span>
-            </div>
-          </md-content>
-        </md-tab-body>
-      </md-tab>
+
+
     </md-tabs>
     <md-input-container>
       <label for="chatbox-message">Type your message</label>
-      <textarea id="chatbox-message" name="message" ng-keydown="commentBox.sendMessage($event)" ng-model="commentBox.messageBox"></textarea>
+      <textarea
+         id="chatbox-message"
+         name="message"
+         ng-keydown="commentBox.sendMessage($event)"
+         ng-model="commentBox.messageBox"></textarea>
     </md-input-container>
   </div>
 </div>

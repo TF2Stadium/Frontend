@@ -13,22 +13,15 @@
     vm.currentTab = 0;
 
     vm.sendMessage = function(event) {
-
       if (vm.messageBox === "" || event.keyCode !== 13) {
-        return false;
+        return;
       }
 
-      var room = 0;
-
-      if (vm.currentTab !== 0) {
-        room = vm.rooms.lobbySpectated.id;
-      }
-
+      var room = vm.rooms[vm.currentTab].id;
       ChatService.send(vm.messageBox, room);
 
       vm.messageBox = '';
       event.preventDefault();
-
     };
 
     vm.goToProfile = function(steamId) {
