@@ -4,11 +4,13 @@
   angular.module('tf2stadium.services').factory('LobbyService', LobbyService);
 
   /** @ngInject */
-  function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval, Websocket, Notifications) {
+  function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
+                        Websocket, Notifications, User) {
     var factory = {};
 
     factory.lobbyList = {};
     factory.lobbySpectated = {};
+    factory.lobbyJoinedId = -1;
     factory.lobbyJoinInformation = {};
 
     var playerPreReady = false;
@@ -81,7 +83,11 @@
         'class': position
       };
 
-      Websocket.emitJSON('lobbyJoin', payload);
+      Websocket.emitJSON('lobbyJoin', payload, function (response) {
+        if (response.success) {
+          $rootScope.$emit('lobby-joined', lobby);
+        }
+      });
     };
 
     factory.goToLobby = function(lobby) {
@@ -176,13 +182,45 @@
       $rootScope.$emit('lobby-list-updated');
     });
 
-    Websocket.onJSON('lobbyData', function(data) {
+    Websocket.onJSON('lobbyData', function(newLobby) {
       var oldLobbyId = factory.lobbySpectated.id;
-      factory.lobbySpectated = data;
-      if (data.id !== oldLobbyId) {
+      factory.lobbySpectated = newLobby;
+
+      // A lobbyData sent before the initialization messages have
+      // finished must be a lobby we're already joined to
+      if (!Websocket.isInitialized()) {
+        $rootScope.$emit('lobby-joined', newLobby.id);
+      }
+
+      // Deduce user state changes from lobbyData (if we got kicked, etc.)
+      if (angular.isDefined($rootScope.userProfile)
+          && angular.isDefined($rootScope.userProfile.steamid)) {
+        var ourSteamId = $rootScope.userProfile.steamid;
+        var slots = newLobby.classes;
+        var inNewLobby = _(_.isArray(slots)? slots : [])
+              .map(_.partialRight(_.pick, ['red', 'blu']))
+              .map(_.values)
+              .flatten()
+              .filter(_.partialRight(_.pluck, 'filled'))
+              .map(_.partialRight(_.pluck, 'steamid'))
+              .contains(ourSteamId);
+
+        if (newLobby.id === factory.lobbyJoinedId && !inNewLobby) {
+          $rootScope.$emit('lobby-left', newLobby.id);
+        } else if (newLobby.id !== factory.lobbyJoinedId && inNewLobby) {
+          $rootScope.$emit('lobby-left', factory.lobbyJoinedId);
+          $rootScope.$emit('lobby-joined', newLobby.id);
+        }
+      }
+
+      if (newLobby.id !== oldLobbyId) {
         $rootScope.$emit('lobby-spectated-changed');
       }
       $rootScope.$emit('lobby-spectated-updated');
+    });
+
+    $rootScope.$on('lobby-joined', function (e, lobbyId) {
+      factory.lobbyJoinedId = lobbyId;
     });
 
     return factory;

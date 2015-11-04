@@ -66,69 +66,74 @@
                     data);
         if (!queuedMessages[name]) {
           queuedMessages[name] = [];
+        }
+
+        queuedMessages[name].push(data);
+      }
+    };
+
+    var factory = {};
+    factory.onJSON = function(name, callback) {
+      callback = asyncAngularify(callback || angular.noop);
+
+      // Dispatch queued messages for the initialization
+      // workaround. Technically it is possible for messages to arrive
+      // out of order by doing this, but it should be negligible (a
+      // message would have to arrive and be delivered to the socket
+      // between when this function completes and the 0-delay timeout of
+      // asyncAngularify). We can't skip the timeout here because event
+      // handlers are not generally defined with the intention of being
+      // called before their enclosing scope finishes executing.
+      registeredHandlers[name] = true;
+      if (queuedMessages[name]) {
+        asyncAngularify(function () {
+          queuedMessages[name].forEach(function (data) {
+            console.log('Received: ' + name, data);
+            callback(data);
+          });
+        })();
       }
 
-      queuedMessages[name].push(data);
-    }
-  };
+      socket.On(name, function (data) {
+        console.log('Received: ' + name, data);
+        callback(data);
+      });
+    };
 
-  var factory = {};
-  factory.onJSON = function(name, callback) {
-    callback = asyncAngularify(callback || angular.noop);
 
-    // Dispatch queued messages for the initialization
-    // workaround. Technically it is possible for messages to arrive
-    // out of order by doing this, but it should be negligible (a
-    // message would have to arrive and be delivered to the socket
-    // between when this function completes and the 0-delay timeout of
-    // asyncAngularify). We can't skip the timeout here because event
-    // handlers are not generally defined with the intention of being
-    // called before their enclosing scope finishes executing.
-    registeredHandlers[name] = true;
-    if (queuedMessages[name]) {
-      asyncAngularify(function () {
-        queuedMessages[name].forEach(function (data) {
-          console.log('Received: ' + name, data);
-          callback(data);
-        });
-      })();
-    }
+    factory.isInitialized = function () {
+      return connected;
+    };
 
-    socket.On(name, function (data) {
-      console.log('Received: ' + name, data);
-      callback(data);
-    });
-  };
+    function emitJSON(name, data, callback) {
+      console.log('Sending ' + name, data);
+      data.request = name;
 
-  function emitJSON(name, data, callback) {
-    console.log('Sending ' + name, data);
-    data.request = name;
-
-    socket.Emit(data, function(jsonIn) {
-      var data = JSON.parse(jsonIn);
-      console.log('Response to ' + name, data);
-      console.log(data);
-      if (!data.success) {
-        Notifications.toast({message: data.message, error: true});
-      }
-      callback(data);
-    });
-  }
-
-  factory.emitJSON = function(name, data, callback) {
-    callback = asyncAngularify(callback || angular.noop);
-
-    if (connected) {
-      emitJSON(name, data, callback);
-    } else {
-      var deregister = $rootScope.$on('socket-opened', function() {
-        emitJSON(name, data, callback);
-        deregister();
+      socket.Emit(data, function(jsonIn) {
+        var data = JSON.parse(jsonIn);
+        console.log('Response to ' + name, data);
+        console.log(data);
+        if (!data.success) {
+          Notifications.toast({message: data.message, error: true});
+        }
+        callback(data);
       });
     }
-  };
 
-  return factory;
-}
+    factory.emitJSON = function(name, data, callback) {
+      callback = asyncAngularify(callback || angular.noop);
+
+      if (connected) {
+        emitJSON(name, data, callback);
+      } else {
+        var deregister = $rootScope.$on('socket-opened', function() {
+          emitJSON(name, data, callback);
+          deregister();
+        });
+      }
+    };
+
+    return factory;
+  }
 
 })();
