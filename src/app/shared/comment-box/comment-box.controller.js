@@ -34,16 +34,5 @@
     vm.goToProfile = function(steamId) {
       window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };
-
-    $rootScope.$on('$stateChangeStart',
-      function(event, toState) {
-        if (toState.name==='lobby-page') {
-          vm.currentTab = 1;
-        } else {
-          vm.currentTab = 0;
-        }
-      }
-    );
-
   }
 })();
