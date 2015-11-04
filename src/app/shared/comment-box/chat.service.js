@@ -4,8 +4,74 @@
   angular.module('tf2stadium.services')
     .factory('ChatService', ChatService);
 
+  function flatten(arrays) {
+    return Array.prototype.concat.apply([], arrays);
+  }
+
+  // Takes a raw input string and makes it something safe to embed in
+  // a regular expression. This involves escaping all special regex
+  // characters.
+  function regexSafe(raw) {
+    return raw.replace(/[\\\[\]\^\$\*\+\?\.\(\)\|\{\}]/g,
+                       function (c) { return '\\' + c; });
+  }
+
   /** @ngInject */
-  function ChatService(Websocket, $rootScope, LobbyService, Notifications) {
+  function ChatService(Websocket, $rootScope, LobbyService, $sce,
+                       Notifications, Config) {
+    // takes a string and replaces emotes strings with appropriate
+    // HTML elements
+    var emotesToHTML = (function () {
+      function emoteDescriptorToHTML(desc) {
+        var imgDesc = desc.image;
+
+        if (imgDesc.type === 'img') {
+          return '<img src="assets/img/emotes/' + imgDesc.src +
+            '" height="16" width="16" alt="' + desc.name + '" />';
+        }
+        // TODO: other emote image sources (spritesheets, ...)
+
+        console.error('Unknown emote type: ' + desc.type + ' in descriptor:',
+                      desc);
+        return '';
+      }
+
+      function makeColonReplacer(imgHTML, name) {
+        var regexpr = new RegExp(':' + regexSafe(name) + ':', 'g');
+        return function (str) {
+          return str.replace(regexpr, imgHTML);
+        };
+      }
+
+      function makeShortcutReplacer(imgHTML, name) {
+        var regexpr = new RegExp(regexSafe(name), 'g');
+        return function (str) {
+          return str.replace(regexpr, imgHTML);
+        };
+      }
+
+      // Takes a emote descriptor (see app.config.js.template)
+      function emoteDescriptorToReplacer(desc) {
+        var imgHTML = emoteDescriptorToHTML(desc);
+
+        var colons = angular.isArray(desc.names)? desc.names : [];
+        colons = colons.map(makeColonReplacer.bind(null, imgHTML));
+
+        var shortcuts = angular.isArray(desc.shortcuts)? desc.shortcuts : [];
+        shortcuts = shortcuts.map(makeShortcutReplacer.bind(null, imgHTML));
+
+        return colons.concat(shortcuts);
+      }
+
+      var replacements = flatten(Config.emotes.map(emoteDescriptorToReplacer));
+
+      return function emotesToHTML(str) {
+        return replacements.reduce(function (s, replaceFn) {
+          return replaceFn(s);
+        }, str);
+      };
+    })();
+
     var factory = {};
 
     // Persistent map of room id -> messages list
@@ -67,6 +133,10 @@
     });
 
     Websocket.onJSON('chatReceive', function (message) {
+      var msg = message.message;
+      msg = xssFilters.inHTMLData(msg);
+      msg = emotesToHTML(msg);
+      message.message = $sce.trustAsHtml(msg);
       message.timestamp = new Date(message.timestamp * 1000);
 
       var log = getChatRoom(message.room);
