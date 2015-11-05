@@ -20,7 +20,7 @@
   padding: 0;
   margin: 0;
   border-radius: 0;
-  
+
   span {
     @extend .fill-width;
     height: 10%;
@@ -36,38 +36,38 @@
 
   &:only-child {
     min-width: 50px; //only way for it to work in IE
-  }    
+  }
 
   &:nth-child(2) {
     background-position: -$class-button-width/2 0;
 
     span::after{
-      background-position: -$class-button-width/2 0;  
+      background-position: -$class-button-width/2 0;
     }
   }
 
   &:hover > span {
     height: $class-button-height;
   }
-  
+
   &.blu > span:before {
     background-color: #9cf;
   }
-  
+
   &.red > span:before {
     background-color: #f99;
   }
 }
 
 .slot-button {
-  
+
 }
 
 
 /* ==================================
       TOOLBAR STEAM LOGIN BUTTON
-   ================================== */  
-      
+   ================================== */
+
 .steam-login {
   width: 154px;
 
@@ -86,10 +86,10 @@
    ================================== */
 
 #chat .chat-message {
-  
+
   //In order from low priority to high priority to appear
   $chatBadges: (donator contributor moderator administrator);
-  
+
   @each $badge in $chatBadges {
     .md-button.#{$badge}:before {
       content: "";
@@ -106,11 +106,11 @@
       }
     }
   }
-  
+
   &.super-contributor:before {
     width: 40px;
   }
-  
+
   &.alert {
     &, span {
       //color: white;
@@ -130,7 +130,7 @@
   text-align: center;
   height: 40px;
   margin: 0;
-  
+
   span {
     width: $content-width;
     margin-right: 350px;
@@ -167,7 +167,7 @@
 
 /* ==================================
                 OTHERS
-   ================================== */  
+   ================================== */
 
 //https://github.com/philipwalton/flexbugs#9-button-elements-cant-be-flex-containers
 .firefox-bug-container {

@@ -14,12 +14,12 @@
   z-index: 1;
   padding: 0 $padding-medium;
   height: 100%;
-  
+
   .left, .right {
     @include flex (column, space-between, stretch);
     width: 50%;
   }
-  
+
   .right {
     text-align: right;
   }
@@ -43,16 +43,17 @@
 }
 
 #lobby-join-information {
+  @include flex(row, center, center);
   text-align: center;
+
+  & > span {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin: $padding-small 0;
+  }
 }
 
-#slots {  
-  .md-button {
-    width: 100%;
-    height: 100%;
-    line-height: normal !important; //otherwise can't multiline inside md-button
-    border-radius: 3px; //overriding .class-button .md-button
-  }
+#slots {
 }
 
 #spectators {
@@ -79,22 +80,30 @@
   @include flex (row, space-between, stretch);
   height: $class-button-height;
   margin: 0 0 $padding-small 0;
-  
+
   &:first-child {
     margin-top: $padding-medium;
   }
-  
+
   //Nesting required
   .class-button {
     margin: 0 $padding-small;
   }
 }
 
-.slot-button-container {
+.slot-button {
+  @include flex (row, space-between, center);
+  height: 100%;
+  width: 100%;
   padding: 0;
   margin: 0;
-  height: 100%;
-  
+  flex: 1;
+  position: relative;
+  line-height: normal !important; //otherwise can't multiline inside md-button
+  border-radius: 3px; //overriding .class-button .md-button
+  transition: all .3s ease-out;
+  overflow: hidden;
+
   &:nth-child(2) {
     flex-direction: row-reverse;
     order: 3;
@@ -109,19 +118,36 @@
 
     .slot-misc {
       flex-direction: row-reverse;
+      text-align: right;
+    }
+
+    .slot-playername {
+      text-align: left;
     }
   }
 
   md-checkbox {
-    margin: 0;
-  }  
+    margin: 0 auto;
+    width: 15px;
+  }
+
+  &:not(.sheet) > .md-ripple-container {
+    display: none;
+  }
 }
 
-.slot-button {
-  @include flex (row, space-between, flex-start);
-  padding: 0;
+.md-button.more-button {
+  min-width: 0;
+  min-height: 0;
+  height: 0;
+  width: 24px;
+  padding-top: 100%;
+  display: block;
   margin: 0;
-  height: 100%;
+
+  img {
+    @extend .fill-parent;
+  }
 }
 
 .firefox-bug-container {
@@ -129,7 +155,7 @@
 }
 
 .slot-info {
-  @include flex (column, flex-end, flex-end);
+  @include flex (column, center, stretch);
   height: 100%;
   margin: 0 $padding-small;
   min-width: 0;
@@ -137,7 +163,8 @@
 
 .slot-playername {
   max-width: 100%;
-  min-height: 60%;
+  text-align: right;
+  white-space: nowrap;
 }
 
 .slot-avatar {
@@ -147,16 +174,26 @@
 }
 
 .slot-misc {
-  @include flex (row, flex-end, flex-end);
-  height: 40%;
+  @include flex (row, flex-end, center);
+  height: 26px;
   width: 100%;
 
-  span:nth-child(even) {
-    margin-left: 3px;
+  span {
+    height: 26px;
+    line-height: 26px;
+
+    &:nth-child(even) {
+      margin-left: 3px;
+    }
   }
 
-  div {
+  & > div {
     padding: 0 5px;
+
+    &:first-child,
+    &:last-child {
+      padding: 0;
+    }
   }
 }
 

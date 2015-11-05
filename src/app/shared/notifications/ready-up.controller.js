@@ -4,7 +4,7 @@
   var app = angular.module('tf2stadium');
   app.controller('ReadyUpDialogController', ReadyUpDialogController);
 
-  function ReadyUpDialogController($mdDialog, $interval) {
+  function ReadyUpDialogController($scope, $mdDialog, $interval) {
     var vm = this;
 
     vm.seconds = 0;
@@ -18,17 +18,21 @@
       }
     };
 
-    $interval(function () {
-      increaseCounter();
-    }, 1000);
-
     vm.cancel = function() {
       $mdDialog.cancel();
     };
 
     vm.accept = function() {
-      $mdDialog.hide();
+      $mdDialog.hide({readyUp: true});
     };
+
+    var timer = $interval(function () {
+      increaseCounter();
+    }, 1000);
+
+    $scope.$on("$destroy", function readyUpDialogDestroyed() {
+      $interval.cancel(timer);
+    });
 
   }
 

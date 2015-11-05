@@ -1,6 +1,7 @@
 * {
   min-height: 0;
-  box-sizing: border-box
+  box-sizing: border-box;
+  outline: none !important;
 }
 
 body {
@@ -62,7 +63,7 @@ body {
 }
 
 .header-info {
-  @include flex (column, center, center);
+  @include flex (column, flex-end, center);
   height: $header-image-height;
   width: 100%;
   position: relative;
@@ -160,7 +161,7 @@ main {
     margin-bottom: 20px;
   }
 
-  &.empty ~ main {    
+  &.empty ~ main {
     #left-sidebar, md-content {
       padding-top: $padding-medium;
     }
@@ -187,6 +188,7 @@ main {
   //to show the shadows, needed because of the overflow:auto
   padding-left: 5px;
   background: transparent;
+  overflow-x: hidden;
 }
 
 #chat {

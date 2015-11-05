@@ -11,15 +11,13 @@
 
     vm.sections = SettingsPage.getSections();
 
-    var userSettings = {};
-
     vm.saveSetting = function(key, value) {
       Settings.set(key, value);
     };
 
     vm.setCurrent = function(key) {
       vm.current = key;
-    }
+    };
 
     /*
       Iterates through all the settings in the list and compares

@@ -14,12 +14,12 @@
     vm.join = function (lobby, team, position, event) {
       event.preventDefault();
       event.stopImmediatePropagation();
-      LobbyService.spectate(lobby);
+      LobbyService.goToLobby(lobby);
       LobbyService.join(lobby, team, position);
     };
 
     vm.spectate = function (lobby) {
-      LobbyService.spectate(lobby);
+      LobbyService.goToLobby(lobby);
     };
 
     LobbyService.subscribe('lobby-list-updated', $scope, function() {

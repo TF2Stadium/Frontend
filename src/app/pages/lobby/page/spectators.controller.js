@@ -5,7 +5,7 @@
   app.controller('LobbyPageSpectatorsController', LobbyPageSpectatorsController);
 
   /** @ngInject */
-  function LobbyPageSpectatorsController($scope, LobbyService) {
+  function LobbyPageSpectatorsController($scope, $state, LobbyService) {
     var vm = this;
 
     vm.lobbyInformation = LobbyService.getLobbySpectated();
@@ -24,6 +24,10 @@
 
     vm.ban = function(playerSummary) {
       LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, true);
+    };
+
+    vm.shouldShowSpectators = function() {
+      return vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID);
     };
   }
 

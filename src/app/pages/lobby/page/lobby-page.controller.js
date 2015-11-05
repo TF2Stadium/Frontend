@@ -7,10 +7,23 @@
 
   /** @ngInject */
   function LobbyPageController($scope, $state, LobbyService) {
+
     var vm = this;
+
+    var buildConnectString = function() {
+      if (!vm.lobbyJoinInformation.game) {
+        return;
+      }
+      vm.lobbyJoinInformation.connectString =
+        'connect ' + vm.lobbyJoinInformation.game.host +
+        '; password ' + vm.lobbyJoinInformation.password;
+    };
 
     vm.lobbyInformation = LobbyService.getLobbySpectated();
     vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
+    buildConnectString();
+    vm.playerPreReady = LobbyService.getPlayerPreReady();
+    vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
 
     LobbyService.subscribe('lobby-spectated-updated', $scope, function() {
       vm.lobbyInformation = LobbyService.getLobbySpectated();
@@ -18,6 +31,15 @@
 
     LobbyService.subscribe('lobby-start', $scope, function(){
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
+      buildConnectString();
+    });
+
+    $scope.$watch(LobbyService.getPlayerPreReady, function () {
+      vm.playerPreReady = LobbyService.getPlayerPreReady();
+    });
+
+    $scope.$watch(LobbyService.getPreReadyUpTimer, function () {
+      vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
     });
 
     vm.join = function (lobby, team, position) {
@@ -48,8 +70,15 @@
       LobbyService.joinMumbleServer();
     };
 
-    LobbyService.spectate(parseInt($state.params.lobbyID));
+    vm.preReadyUp = function() {
+       LobbyService.setPlayerPreReady(!LobbyService.getPlayerPreReady());
+    };
 
+    vm.shouldShowLobbyInformation = function() {
+      return vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID);
+    };
+
+    LobbyService.spectate(parseInt($state.params.lobbyID));
   }
 
 })();

@@ -5,7 +5,6 @@
     'tf2stadium.services',
     'ngAnimate',
     'ui.router',
-    'btford.socket-io',
     'ngMaterial',
     'luegg.directives'
   ]);

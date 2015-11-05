@@ -17,6 +17,9 @@
     var toastDefault = {
       templateUrl: 'app/shared/notifications/toast.html',
       message: 'Default',
+      action: function() {
+        angular.noop();
+      },
       controller: 'ToastController',
       controllerAs: 'toast',
       bindToController: true,
@@ -82,12 +85,8 @@
           }, options.timeout * 1000);
         }
 
-        var notificationCallback = function(callback) {
-          options.callbacks[callback]();
-        };
-
         for (var callback in options.callbacks) {
-          html5notification[callback] = notificationCallback(callback);
+          html5notification[callback] = options.callbacks[callback];
         }
 
       });

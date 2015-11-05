@@ -5,7 +5,7 @@
   app.controller('LobbyCreateController', LobbyCreateController);
 
   /** @ngInject */
-  function LobbyCreateController(LobbyCreate, $state) {
+  function LobbyCreateController(LobbyCreate, $state, $scope) {
 
     var vm = this;
 
@@ -13,34 +13,26 @@
     for (var key in lobbySettingsList) {
       vm[key] = lobbySettingsList[key];
     }
+
     vm.wizardSteps = LobbyCreate.getSteps();
-
-    vm.lobbySettings = {
-      server: 'tf2stadium.com:27031',
-      rconpwd: ''
-    };
-
-    vm.lobbySummary = {};
-    vm.verifyServer = false;
+    vm.lobbySettings = LobbyCreate.getLobbySettings();
+    LobbyCreate.subscribe('lobby-create-settings-updated', $scope, function() {
+      vm.lobbySettings = LobbyCreate.getLobbySettings();
+    });
 
     vm.create = function() {
       LobbyCreate.create(vm.lobbySettings);
     };
 
     vm.verifyServer = function() {
-      LobbyCreate.verifyServer (
-        vm.lobbySettings.server, 
-        vm.lobbySettings.rconpwd, 
-        function(verified) {
-          vm.verifiedServer = verified;
-          vm.verifyServerError = !verified;
-        }
-      );
+      LobbyCreate.verifyServer(function(isValid) {
+        vm.verifiedServer = isValid;
+        vm.verifyServerError = !isValid;
+      });
     };
 
     vm.select = function(field, option) {
-      vm.lobbySettings[field.key] = option.value;
-      vm.lobbySummary[field.title] = option.title || option.value;
+      LobbyCreate.set(field.key, option.value);
       vm.goToNext();
     };
 
@@ -50,10 +42,12 @@
       nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stepState) + 1];
       $state.go(nextStepState);
     };
-    
+
     if ($state.current.name === 'lobby-create') {
       vm.goToNext();
     }
+
+    LobbyCreate.clearLobbySettings();
   }
 
 })();

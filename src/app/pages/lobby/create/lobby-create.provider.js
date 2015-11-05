@@ -21,8 +21,7 @@
       'league',
       'whitelist',
       'mumble',
-      'server',
-      'confirm'
+      'server'
     ];
 
     for (var i = 0; i < LobbyCreateProvider.wizardSteps.length; i++) {
@@ -37,7 +36,7 @@
         }
       });
     }
-  }  
+  }
 
   /** @ngInject */
   function LobbyCreate() {
@@ -47,7 +46,7 @@
     lobbyCreateProvider.wizardSteps = {};
 
     /** @ngInject */
-    var lobbyCreateService = function(Websocket, $state) {
+    var lobbyCreateService = function(Websocket, $state, $rootScope) {
 
       var lobbySettingsList = {
         formats: {
@@ -81,7 +80,7 @@
           ]
         },
         maps: {
-          key: 'mapName',
+          key: 'map',
           title: 'Map',
           options: [
             {
@@ -177,7 +176,7 @@
           ]
         },
         whitelists: {
-          key: 'whitelist',
+          key: 'whitelistID',
           title: 'Whitelist',
           options: [
             {
@@ -195,7 +194,7 @@
               title: 'UGC Highlander (Season 16)',
               league: 'ugc',
               format: 'highlander'
-            },,{
+            },{
               value: 4559,
               title: 'UGC 6v6 (Season 19)',
               league: 'ugc',
@@ -220,7 +219,7 @@
               title: 'AsiaFortress 6v6 (Season 9)',
               league: 'asia',
               format: 'sixes'
-            }            
+            }
           ]
         },
         mumble: {
@@ -235,9 +234,16 @@
               value: false,
               title: 'Mumble not required',
               description: 'Participants will join the mumble only if they want to do so.',
-            }         
+            }
           ]
         }
+      };
+
+      lobbyCreateService.settings = {};
+
+      lobbyCreateService.subscribe = function(request, scope, callback) {
+        var handler = $rootScope.$on(request, callback);
+        scope.$on('$destroy', handler);
       };
 
       lobbyCreateService.create = function(lobbySettings, callback) {
@@ -254,11 +260,14 @@
         );
       };
 
-      lobbyCreateService.verifyServer = function(address, password, callback) {
+      lobbyCreateService.verifyServer = function(callback) {
         callback = callback || angular.noop;
 
         Websocket.emitJSON('serverVerify',
-          {server: address, rconpwd: password},
+          {
+            server: lobbyCreateService.settings.server,
+            rconpwd: lobbyCreateService.settings.rconpwd
+          },
           function(response) {
             callback(response.success);
           }
@@ -271,6 +280,20 @@
 
       lobbyCreateService.getSteps = function() {
         return lobbyCreateProvider.wizardSteps;
+      };
+
+      lobbyCreateService.clearLobbySettings = function() {
+        lobbyCreateService.settings = {};
+        $rootScope.$emit('lobby-create-settings-updated');
+      };
+
+      lobbyCreateService.getLobbySettings = function() {
+        return lobbyCreateService.settings;
+      };
+
+      lobbyCreateService.set = function(key, value) {
+        lobbyCreateService.settings[key] = value;
+        $rootScope.$emit('lobby-create-settings-updated');
       };
 
       return lobbyCreateService;

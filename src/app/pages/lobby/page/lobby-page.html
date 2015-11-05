@@ -1,60 +1,79 @@
 <div id="lobby-join-information" class="sheet"
-  ng-if="lobbyPage.lobbyJoinInformation.game">
+  ng-if="lobbyPage.lobbyJoinInformation.id && lobbyPage.lobbyJoinInformation.id==lobbyPage.lobbyInformation.id">
   <md-button ng-click="lobbyPage.joinTF2Server()">Connect to server</md-button>
-  <md-button ng-click="lobbyPage.joinMumbleServer()">Connect to mumble</md-button>
+  <md-button ng-if="!lobbyPage.showConnectString"
+    ng-click="lobbyPage.showConnectString=true">
+    Show the connect string
+  </md-button>
+  <span flex ng-if="lobbyPage.showConnectString">
+    {{lobbyPage.lobbyJoinInformation.connectString}}
+  </span>
+  <md-button data-clipboard-text="{{lobbyPage.lobbyJoinInformation.connectString}}" class="clipboard-button">Copy to clipboard</md-button>
 </div>
 
-<div id="slots">
+<div id="slots"
+  ng-show="lobbyPage.shouldShowLobbyInformation()">
   <div class="classes-title">
     <h1>Blu</h1>
     <h1>Red</h1>
   </div>
   <div ng-repeat="class in lobbyPage.lobbyInformation.classes track by class.class" class="class-row">
-    <md-menu flex md-offset="12 60"
+    <div aria-label="Join {{::key}} {{::class.class | stripSlotNameNumber}}"
       ng-repeat="(key, slot) in class track by key"
       ng-if="key!='class'"
-      class="slot-button-container">
-      <md-button aria-label="Join {{::key}} {{::class.class | classNameFilter}}"
-        ng-click="slot.player ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)"
-        ng-class="{'md-raised' : !slot.player}"
-        class="slot-button">
-        <!--  If slot.id set, show flat button with player info
-              If it's not set, show raised button -->
-        <div flex class="firefox-bug-container" ng-if="slot.filled">
-          <md-checkbox ng-checked="slot.ready" aria-label="Player ready" ng-if="lobbyPage.lobbyInformation.state==2"></md-checkbox>
-          <div flex class="slot-info">
-            <span class="slot-playername">{{::slot.player.name}}</span>
-            <div class="slot-misc">
-              <div><span>{{::slot.player.lobbiesPlayed}}</span><span>lobbies</span></div>
-              <div><span>{{::slot.player.gameHours}}</span><span>hr</span></div>
-            </div>
+      ng-click="slot.player ? angular.noop() : lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)"
+      ng-class="{'sheet low clickable' : !slot.player}"
+      class="slot-button"
+      md-ink-ripple>
+      <div ng-if="slot.filled">
+        <md-menu>
+          <md-button class="more-button"
+            aria-label="More"
+            ng-click="slot.player ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)">
+            <img src="/assets/img/icon-more.svg">
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item>
+              <md-button ng-click="lobbyPage.goToProfile(slot.player.steamid)">
+                Steam profile
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
+              <md-button ng-click="lobbyPage.kick(slot.player)">
+                Kick player from slot
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
+              <md-button ng-click="lobbyPage.ban(slot.player)">
+                Ban player from lobby
+              </md-button>
+            </md-menu-item>
+            <md-menu-item ng-if="$root.userProfile.steamid==slot.player.steamid">
+              <md-button ng-click="lobbyPage.leaveSlot()">
+                Leave slot
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+        <md-checkbox 
+          ng-if="lobbyPage.lobbyInformation.state==2
+            || ($root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state==1)"
+          ng-checked="slot.ready
+            || (lobbyPage.playerPreReady && $root.userProfile.steamid==slot.player.steamid)" ng-click="lobbyPage.preReadyUp()"
+            aria-label="Player ready">
+        </md-checkbox>
+      </div>
+      <div flex class="slot-info" ng-if="slot.filled">
+        <span class="slot-playername">{{::slot.player.name}}</span>
+        <div class="slot-misc">
+          <div flex ng-if="!slot.ready && $root.userProfile.steamid==slot.player.steamid">
+            <span>{{lobbyPage.playerPreReady ? (lobbyPage.preReadyUpTimer | secondsToMinutes) : 'Pre-ready up!'}}<span>
           </div>
-          <img ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+          <div><span>{{::slot.player.lobbiesPlayed}}</span><span>lobbies</span></div>
         </div>
-      </md-button>
-      <md-menu-content width="4">
-        <md-menu-item>
-          <md-button ng-click="lobbyPage.goToProfile(slot.player.steamid)">
-            Steam profile
-          </md-button>
-        </md-menu-item>
-        <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
-          <md-button ng-click="lobbyPage.kick(slot.player)">
-            Kick player from slot
-          </md-button>
-        </md-menu-item>
-        <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
-          <md-button ng-click="lobbyPage.ban(slot.player)">
-            Ban player from lobby
-          </md-button>
-        </md-menu-item>
-        <md-menu-item ng-if="$root.userProfile.steamid==slot.player.steamid">
-          <md-button ng-click="lobbyPage.leaveSlot()">
-            Leave slot
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>
-    <div class="class-button lobby-icon-{{::class.class | classNameFilter}}"></div>
+      </div>
+      <img ng-if="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+    </div>
+    <div class="class-button lobby-icon-{{::class.class | stripSlotNameNumber}}"></div>
   </div>
 </div>

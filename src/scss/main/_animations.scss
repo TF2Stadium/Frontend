@@ -1,45 +1,12 @@
-/* @keyframes lobbyExpand {
-  0% {
-    width: 175px;
-    margin-left: 175px;
-    border-radius: 45px;
-    
-    &.lobby-main {
-      opacity: 0 !important;
-    }
-  }
-  
-  50% {
-    border-radius: 45px;    
-  }
-  
-  100% {
-    width: 100%;
-    margin-left: 0px;
-    border-radius: 3px;
-  }
+.ng-hide {
+  opacity: 0;
+  transform: translateY(10px);
 }
 
-@keyframes opacity {
-  from {opacity: 0}
-  to {opacity: 1};
+.lobbycreate-text span {
+  transition: all .3s ease-out;
 }
 
-//ignore this, just looks cool
-ng-include { 
-  @for $i from 1 to 10 {
-    
-// Change i to $i when uncommenting, for some reason it won't compile if you comment the $i
-//&:nth-child(#{i}) {
-
-      .lobby-row{
-        animation-delay: $i*.05s;
-        .lobby-image, .lobby-main {
-          animation-delay: .4+$i*.05s;
-        }
-      }
-    }
-  }
+.header-image {
+  transition: background-image .6s .3s ease-out;
 }
-    
-*/
