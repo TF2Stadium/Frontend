@@ -5,7 +5,11 @@
   <md-button class="sidebar-link"
     ng-class="{'active' : $root.currentState==settingSection}"
     ng-repeat="settingSection in settings.sections"
-    ui-sref="{{settingSection}}">
+    ui-sref="{{::settingSection}}">
     {{::settingSection}}
+  </md-button>
+  <md-button class="sidebar-link"
+             href="{{::config.endpoints.api}}/logout">
+    Logout
   </md-button>
 </div>
