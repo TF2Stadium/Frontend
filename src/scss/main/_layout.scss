@@ -10,6 +10,16 @@ body {
   //angular adds overflow-y:scroll when activating md-select for some reason
 }
 
+
+/* ==================================
+            SPLASH SCREEN
+   ================================== */
+
+#splash-screen.ng-hide {
+  transition-delay: .4s;
+  transform: scale(1.2);
+}
+
 /* ==================================
                 HEADER
    ================================== */
