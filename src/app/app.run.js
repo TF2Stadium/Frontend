@@ -31,6 +31,7 @@
     $rootScope.config = Config;
     Settings.getSettings(function(settings) {
       $rootScope.currentTheme = settings.currentTheme;
+      $rootScope.themeLoaded = true;
     });
 
     new Clipboard('.clipboard-button').on('success', function(event) {
