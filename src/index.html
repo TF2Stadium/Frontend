@@ -58,7 +58,7 @@
               {{::$root.userProfile.name}}
               <img ng-src="{{::$root.userProfile.avatar}}">
             </md-button>
-            <md-button ng-if="$root.userProfile && !$root.userProfile.steamid"
+            <md-button ng-if="!$root.userProfile.steamid"
               ng-href="{{config.endpoints.api}}/startLogin"
               class="steam-login">
               Login
