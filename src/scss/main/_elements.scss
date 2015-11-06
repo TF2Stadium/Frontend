@@ -7,7 +7,11 @@
   width: $class-button-width;
   min-width: $class-button-width; //override md-button
   min-height: $class-button-height;
-  background-size: $class-button-height;
+  background:{
+    size: $class-button-background-width;
+    position: center;
+    repeat: no-repeat;
+  }
   overflow: hidden;
   border-radius: 3px;
   padding: 0;
@@ -25,12 +29,17 @@
     @extend .fill-width;
     height: 10%;
     overflow: hidden;
-    transition: all 0.1s ease-out;
+    transition: height 0.1s ease-out;
 
     &:before, &:after {
       @extend .fill-parent;
       content: "";
-      background-size: $class-button-width;
+      background:{
+        size: $class-button-background-width;
+        position: ($class-button-width - $class-button-background-width) / 2 
+                  ($class-button-height - $class-button-background-height) / 2;
+        repeat: no-repeat;
+      }
     }
   }
 
@@ -39,10 +48,9 @@
   }
 
   &:nth-child(2) {
-    background-position: -$class-button-width/2 0;
-
     span::after{
-      background-position: -$class-button-width/2 0;
+      background-position: - $class-button-background-width / 2
+              ($class-button-height - $class-button-background-height) / 2;
     }
   }
 
