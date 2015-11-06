@@ -35,10 +35,10 @@
   //makes a class named .lobby-icon-classname for each of the nine classes
   @each $class in $classes {
     &-#{$class} {
-      background-image:url(../assets/img/class/classicon-#{$class}.png);
+      background-image:url(../assets/img/class/class-icon-#{$class}.svg);
 
       span:after {
-        background-image: url(../assets/img/class/classicon-#{$class}-white.png);
+        background-image: url(../assets/img/class/class-icon-#{$class}-white.svg);
       }
     }
   }
