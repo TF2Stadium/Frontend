@@ -5,7 +5,8 @@
 
   /** @ngInject */
 
-  function runBlock(Config, User, Settings, $log, $state, $rootScope, LobbyService, Notifications, $mdDialog) {
+  function runBlock(Config, User, Settings, $timeout, $log,
+    $state, $rootScope, LobbyService, Notifications, $mdDialog) {
 
     $log.debug('runBlock end');
 
@@ -33,6 +34,11 @@
       $rootScope.currentTheme = settings.currentTheme;
       $rootScope.themeLoaded = true;
     });
+
+    //If the websocket is dead, we still need to show the page.
+    $timeout(function() {
+      $rootScope.themeLoaded = true;
+    }, 1000);
 
     new Clipboard('.clipboard-button').on('success', function(event) {
       Notifications.toast({message: 'Text copied to clipboard'});
