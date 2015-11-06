@@ -12,7 +12,7 @@ test:
     - ls -la
 deployment:
   master:
-    branch: deploy_prod
+    branch: master
     commands:
       - sed -i "s|localhost:8080|$API_URL_PROD|g" src/app/app.config.js
       - gulp build
