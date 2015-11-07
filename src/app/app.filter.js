@@ -8,7 +8,6 @@
   app.filter('slotNameToClassName', slotNameToClassName);
   app.filter('stripSlotNameNumber', stripSlotNameNumber);
   app.filter('secondsToMinutes', secondsToMinutes);
-  app.filter('unique', unique);
 
   /** @ngInject */
   function capitalize() {
@@ -69,25 +68,6 @@
       seconds = seconds % 60;
       seconds = seconds < 10 ? "0" + seconds : seconds;
       return minutes + ':' + seconds;
-    };
-  }
-
-  /** @ngInject */
-  function unique() {
-    return function (array) {
-      var uniqueArray = [];
-      for (var key in array) {
-        var existsInArray = false;
-        for (var j in uniqueArray) {
-          if (uniqueArray[j].steamid === array[key].steamid) {
-            existsInArray = true;
-          }
-        }
-        if (!existsInArray) {
-          uniqueArray.push(array[key]);
-        }
-      }
-      return uniqueArray;
     };
   }
 
