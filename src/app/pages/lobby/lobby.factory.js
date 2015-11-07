@@ -9,6 +9,7 @@
 
     factory.lobbyList = {};
     factory.lobbySpectated = {};
+    factory.lobbyJoined = {};
     factory.lobbyJoinInformation = {};
 
     var playerPreReady = false;
@@ -174,6 +175,17 @@
     Websocket.onJSON('lobbyListData', function(data) {
       factory.lobbyList = data.lobbies;
       $rootScope.$emit('lobby-list-updated');
+
+      if (!factory.lobbyJoined.id) {
+        return;
+      }
+      factory.lobbyList.forEach(function(lobby) {
+        if (lobby.id === factory.lobbyJoined.id) {
+          factory.lobbyJoined.players = lobby.players;
+          factory.lobbyJoined.maxPlayers = lobby.maxPlayers;          
+        }
+      });
+      $rootScope.$emit('lobby-joined-updated');
     });
 
     Websocket.onJSON('lobbyData', function(data) {
@@ -183,6 +195,18 @@
         $rootScope.$emit('lobby-spectated-changed');
       }
       $rootScope.$emit('lobby-spectated-updated');
+    });
+
+    Websocket.onJSON('lobbyJoined', function(data) {
+      factory.lobbyJoined = data;
+      $rootScope.$emit('lobby-joined');
+      $rootScope.$emit('lobby-joined-updated');
+    });
+
+    Websocket.onJSON('lobbyLeft', function(data) {
+      factory.lobbyJoined = {};
+      $rootScope.$emit('lobby-joined-updated');
+      $rootScope.$emit('lobby-left');
     });
 
     return factory;

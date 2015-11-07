@@ -66,6 +66,14 @@
           </div>
         </div>
       </md-toolbar>
+      <div id="current-lobby-info">
+        <div class="current-lobby" ng-controller="CurrentLobbyController as vm"
+          ng-show="vm.visible">
+          <span>Your lobby has</span>
+          <span>{{vm.lobbyInformation.players}}/{{vm.lobbyInformation.maxPlayers}} players</span>
+          <md-button ui-sref="lobby-page({lobbyID: vm.lobbyInformation.id})">Go back</md-button>
+        </div>
+      </div>
       <div ui-view="headerInfo" class="header-info"></div>
     </header>
     <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'"></aside>
