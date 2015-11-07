@@ -110,6 +110,22 @@ body {
   }
 }
 
+#current-lobby-info {
+  width: $left-sidebar-width;
+  margin-right: $full-width - $left-sidebar-width;
+  height: 0; //black magic
+  z-index: 70;
+}
+
+.current-lobby {
+  @include flex(column, space-between, stretch);
+  @extend .sheet;
+  height: $current-lobby-height;
+  margin-top: $current-lobby-top;
+  padding-top: $padding-small;
+  text-align: center;
+}
+
 #toasts {
   width: $commentbox-width;
   margin-left: $content-width;
