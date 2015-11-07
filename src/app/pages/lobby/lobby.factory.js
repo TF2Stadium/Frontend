@@ -189,10 +189,10 @@
       if (angular.isDefined($rootScope.userProfile)
           && angular.isDefined($rootScope.userProfile.steamid)) {
         var ourSteamId = $rootScope.userProfile.steamid;
-        if (data.player_id === ourSteamId) {
+        if (data.playerId === ourSteamId) {
           factory.lobbyJoinedId = -1;
-          $rootScope.$emit('lobby-left', data.lobby_id);
-          console.log('lobby-left ' + data.lobby_id);
+          $rootScope.$emit('lobby-left', data.lobbyId);
+          console.log('lobby-left ' + data.lobbyId);
         }
       }
     });
@@ -206,10 +206,10 @@
       if (angular.isDefined($rootScope.userProfile)
           && angular.isDefined($rootScope.userProfile.steamid)) {
         var ourSteamId = $rootScope.userProfile.steamid;
-        if (data.player_id === ourSteamId) {
-          factory.lobbyJoinedId = data.lobby_id;
-          $rootScope.$emit('lobby-joined', data.lobby_id);
-          console.log('lobby-joined ' + data.lobby_id);
+        if (data.playerId === ourSteamId) {
+          factory.lobbyJoinedId = data.lobbyId;
+          $rootScope.$emit('lobby-joined', data.lobbyId);
+          console.log('lobby-joined ' + data.lobbyId);
         }
       }
     });
