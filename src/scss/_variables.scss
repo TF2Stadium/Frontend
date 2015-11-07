@@ -75,6 +75,10 @@ $lobby-state-width:       $lobby-info-width - ($class-button-width + 8px) * 9 - 
 $lobby-info-width:        80px;
 $lobby-info-height:       60px;
 
+//Current lobby info
+$current-lobby-height:    $header-image-height - $padding-medium * 2 - 23px;
+$current-lobby-top:       $padding-medium;
+
 //Toasts
 $toast-height:            50px;
 $toast-top:               ($commentbox-top - $toast-height) / 2 + $navbar-height;

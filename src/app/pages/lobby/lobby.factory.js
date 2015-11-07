@@ -10,7 +10,7 @@
 
     factory.lobbyList = {};
     factory.lobbySpectated = {};
-    factory.lobbyJoinedId = -1;
+    factory.lobbyJoined = {};
     factory.lobbyJoinInformation = {};
 
     var playerPreReady = false;
@@ -183,35 +183,17 @@
     Websocket.onJSON('lobbyListData', function(data) {
       factory.lobbyList = data.lobbies;
       $rootScope.$emit('lobby-list-updated');
-    });
 
-    Websocket.onJSON('lobbyLeave', function(data) {
-      if (angular.isDefined($rootScope.userProfile)
-          && angular.isDefined($rootScope.userProfile.steamid)) {
-        var ourSteamId = $rootScope.userProfile.steamid;
-        if (data.playerId === ourSteamId) {
-          factory.lobbyJoinedId = -1;
-          $rootScope.$emit('lobby-left', data.lobbyId);
-          console.log('lobby-left ' + data.lobbyId);
-        }
+      if (!factory.lobbyJoined.id) {
+        return;
       }
-    });
-
-    // Handling lobbyJoin here instead of the response to our
-    // lobbyJoin requests properly captures lobbyJoins from other
-    // browsers of the same logged in user, and also gets the state of
-    // the user when a user in a lobby connects in a fresh browser
-    // session.
-    Websocket.onJSON('lobbyJoin', function(data) {
-      if (angular.isDefined($rootScope.userProfile)
-          && angular.isDefined($rootScope.userProfile.steamid)) {
-        var ourSteamId = $rootScope.userProfile.steamid;
-        if (data.playerId === ourSteamId) {
-          factory.lobbyJoinedId = data.lobbyId;
-          $rootScope.$emit('lobby-joined', data.lobbyId);
-          console.log('lobby-joined ' + data.lobbyId);
+      factory.lobbyList.forEach(function(lobby) {
+        if (lobby.id === factory.lobbyJoined.id) {
+          factory.lobbyJoined.players = lobby.players;
+          factory.lobbyJoined.maxPlayers = lobby.maxPlayers;
         }
-      }
+      });
+      $rootScope.$emit('lobby-joined-updated');
     });
 
     Websocket.onJSON('lobbyData', function(newLobby) {
@@ -222,6 +204,18 @@
         $rootScope.$emit('lobby-spectated-changed');
       }
       $rootScope.$emit('lobby-spectated-updated');
+    });
+
+    Websocket.onJSON('lobbyJoined', function(data) {
+      factory.lobbyJoined = data;
+      $rootScope.$emit('lobby-joined');
+      $rootScope.$emit('lobby-joined-updated');
+    });
+
+    Websocket.onJSON('lobbyLeft', function(data) {
+      factory.lobbyJoined = {};
+      $rootScope.$emit('lobby-joined-updated');
+      $rootScope.$emit('lobby-left');
     });
 
     return factory;

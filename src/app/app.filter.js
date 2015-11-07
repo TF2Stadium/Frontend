@@ -8,7 +8,6 @@
   app.filter('slotNameToClassName', slotNameToClassName);
   app.filter('stripSlotNameNumber', stripSlotNameNumber);
   app.filter('secondsToMinutes', secondsToMinutes);
-  app.filter('unique', unique);
 
   /** @ngInject */
   function capitalize() {

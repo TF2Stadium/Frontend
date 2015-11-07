@@ -29,6 +29,11 @@ a {
   color: inherit;
 }
 
+.current-lobby > span {
+  font-family: $font-family-header;
+  font-size: 20px;
+}
+
 .chat-player-name {
   line-height: 1.6;
   text-transform: none;
