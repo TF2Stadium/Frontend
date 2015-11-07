@@ -9,14 +9,14 @@
     var vm = this;
 
     vm.visible = false;
-    vm.lobbyInformation = LobbyService.lobbyJoined;
+    vm.lobbyInformation = LobbyService.getLobbyJoined();
 
     vm.checkVisible = function() {
       vm.visible = vm.lobbyInformation.id && vm.lobbyInformation.id !== parseInt($state.params.lobbyID);
     };
 
     LobbyService.subscribe('lobby-joined-updated', $scope, function() {
-      vm.lobbyInformation = LobbyService.lobbyJoined;
+      vm.lobbyInformation = LobbyService.getLobbyJoined();
       vm.visible = vm.lobbyInformation.id;
       vm.checkVisible();
     });
