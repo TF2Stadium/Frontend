@@ -85,7 +85,10 @@
 
       Websocket.emitJSON('lobbyJoin', payload, function (response) {
         if (response.success) {
-          $rootScope.$emit('lobby-joined', lobby);
+          // lobbyJoin is now handled later in a dedicated lobbyJoin
+          // event message handler (a separate event, not the response
+          // to this lobbyJoin request)
+          // $rootScope.$emit('lobby-joined', lobby);
         }
       });
     };
@@ -137,7 +140,7 @@
         },
         bindToController: true
       })
-      .then(function(response) {
+        .then(function(response) {
           if (response.readyUp) {
             Websocket.emitJSON('playerReady', {});
             localStorage.setItem('tabCommunication', '');
@@ -148,7 +151,7 @@
           localStorage.setItem('tabCommunication', '');
           localStorage.setItem('tabCommunication', 'closeDialog');
         }
-      );
+             );
       Notifications.notifyBrowser({
         title: 'Click here to ready up!',
         body: 'All the slots are filled, ready up to start',
@@ -182,39 +185,38 @@
       $rootScope.$emit('lobby-list-updated');
     });
 
-    Websocket.onJSON('lobbyData', function(newLobby) {
-      var oldLobbyId = factory.lobbySpectated.id;
-      factory.lobbySpectated = newLobby;
-
-      // A lobbyData sent before the initialization messages have
-      // finished must be a lobby we're already joined to
-      if (!Websocket.isInitialized()) {
-        $rootScope.$emit('lobby-joined', newLobby.id);
-      }
-
-      // Deduce user state changes from lobbyData (if we got kicked, etc.)
+    Websocket.onJSON('lobbyLeave', function(data) {
       if (angular.isDefined($rootScope.userProfile)
           && angular.isDefined($rootScope.userProfile.steamid)) {
         var ourSteamId = $rootScope.userProfile.steamid;
-        var slots = newLobby.classes;
-        var inNewLobby = _(_.isArray(slots)? slots : [])
-              .map(_.partialRight(_.pick, ['red', 'blu']))
-              .map(_.values)
-              .flatten()
-              .filter(_.property('filled'))
-              .pluck('player.steamid')
-              .contains(ourSteamId);
-
-        if (newLobby.id === factory.lobbyJoinedId && !inNewLobby) {
+        if (data.player_id === ourSteamId) {
           factory.lobbyJoinedId = -1;
-          $rootScope.$emit('lobby-left', newLobby.id);
-          console.log('lobby-left ' + newLobby.id);
-        } else if (newLobby.id !== factory.lobbyJoinedId && inNewLobby) {
-          factory.lobbyJoinedId = newLobby.id;
-          $rootScope.$emit('lobby-joined', newLobby.id);
-          console.log('lobby-joined ' + newLobby.id);
+          $rootScope.$emit('lobby-left', data.lobby_id);
+          console.log('lobby-left ' + data.lobby_id);
         }
       }
+    });
+
+    // Handling lobbyJoin here instead of the response to our
+    // lobbyJoin requests properly captures lobbyJoins from other
+    // browsers of the same logged in user, and also gets the state of
+    // the user when a user in a lobby connects in a fresh browser
+    // session.
+    Websocket.onJSON('lobbyJoin', function(data) {
+      if (angular.isDefined($rootScope.userProfile)
+          && angular.isDefined($rootScope.userProfile.steamid)) {
+        var ourSteamId = $rootScope.userProfile.steamid;
+        if (data.player_id === ourSteamId) {
+          factory.lobbyJoinedId = data.lobby_id;
+          $rootScope.$emit('lobby-joined', data.lobby_id);
+          console.log('lobby-joined ' + data.lobby_id);
+        }
+      }
+    });
+
+    Websocket.onJSON('lobbyData', function(newLobby) {
+      var oldLobbyId = factory.lobbySpectated.id;
+      factory.lobbySpectated = newLobby;
 
       if (newLobby.id !== oldLobbyId) {
         $rootScope.$emit('lobby-spectated-changed');
