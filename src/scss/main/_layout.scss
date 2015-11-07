@@ -18,6 +18,7 @@ body {
 #splash-screen.ng-hide {
   transition-delay: .4s;
   transform: scale(1.2);
+  opacity: 0;
 }
 
 /* ==================================
@@ -114,7 +115,7 @@ body {
   width: $left-sidebar-width;
   margin-right: $full-width - $left-sidebar-width;
   height: 0; //black magic
-  z-index: 70;
+  z-index: 1;
 }
 
 .current-lobby {

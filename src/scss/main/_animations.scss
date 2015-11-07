@@ -1,4 +1,4 @@
-.ng-hide {
+span.ng-hide {
   opacity: 0;
   transform: translateY(10px);
 }
@@ -9,4 +9,14 @@
 
 .header-image {
   transition: background-image .6s .3s ease-out;
+}
+
+.current-lobby {
+  transition: all .2s ease-out;
+  
+  &.ng-hide {
+    transform: translateY(-200px);
+    opacity: 0;
+    display: flex !important;
+  }
 }
