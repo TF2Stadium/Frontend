@@ -67,10 +67,11 @@
         </div>
       </md-toolbar>
       <div id="current-lobby-info">
-        <div class="current-lobby">
+        <div class="current-lobby" ng-controller="CurrentLobbyController as vm"
+          ng-show="vm.visible">
           <span>Your lobby has</span>
-          <span>7/12 players</span>
-          <md-button>Go back</md-button>
+          <span>{{vm.lobbyInformation.players}}/{{vm.lobbyInformation.maxPlayers}} players</span>
+          <md-button ui-sref="lobby-page({lobbyID: vm.lobbyInformation.id})">Go back</md-button>
         </div>
       </div>
       <div ui-view="headerInfo" class="header-info"></div>
