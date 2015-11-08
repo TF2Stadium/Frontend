@@ -1,8 +1,8 @@
 .lobbycreate-text {
-  @include flex (row, space-between, center);
+  @include flex (row, space-between, flex-end);
   flex-wrap: wrap;
   z-index: 1;
-  padding: 0 $padding-medium;
+  padding: 0 $padding-medium $padding-medium;
   height: 100%;
 
   .left, .right {
