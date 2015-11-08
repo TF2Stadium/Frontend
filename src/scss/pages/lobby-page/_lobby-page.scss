@@ -23,10 +23,17 @@
   .right {
     text-align: right;
   }
+
+  .row {
+    width: 100%;
+    @include flex (row, space-between, center);
+  }
 }
 
 .lobbypage-map {
-  min-width: 51%; //force line jump of .left and .right
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lobbypage-lobby-controls {
