@@ -29,6 +29,10 @@
       return factory.lobbySpectated;
     };
 
+    factory.getLobbyJoined = function() {
+      return factory.lobbyJoined;
+    };
+
     factory.getPlayerPreReady = function() {
       return playerPreReady;
     };

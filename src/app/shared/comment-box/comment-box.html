@@ -8,10 +8,10 @@
              md-selected="commentBox.currentTab"
              md-stretch-tabs="always">
       <md-tab ng-repeat="room in commentBox.rooms | unique:'id'"
-              ng-if="room.id > -1"
-              ng-style="{'text-decoration': (room.joined? 'underline':'')}">
+              ng-if="room.id > -1">
         <md-tab-label>
-          {{room.id === 0? 'CHAT' : ('Lobby #' + room.id)}}
+          {{room.id === 0?
+             'CHAT' : ((room.joined? 'Your':'This') + ' Lobby #' + room.id)}}
         </md-tab-label>
         <md-tab-body>
           <md-content scroll-glue>

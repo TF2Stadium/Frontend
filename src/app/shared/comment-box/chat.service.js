@@ -48,18 +48,18 @@
       });
     };
 
-    $rootScope.$on('lobby-joined', function (e, id) {
-      joinedChatRoom.changeRoom(id);
+    $rootScope.$on('lobby-joined', function () {
+      var joinedLobbyId = LobbyService.getLobbyJoined().id;
+      joinedChatRoom.changeRoom(joinedLobbyId);
     });
 
-    $rootScope.$on('lobby-left', function (e, id) {
+    $rootScope.$on('lobby-left', function () {
       joinedChatRoom.leave();
     });
 
     $rootScope.$on('lobby-spectated-changed', function() {
-      var spectatedLobby = LobbyService.getLobbySpectated();
-
-      spectatedChatRoom.changeRoom(spectatedLobby.id);
+      var spectatedLobbyId = LobbyService.getLobbySpectated().id;
+      spectatedChatRoom.changeRoom(spectatedLobbyId);
     });
 
     Websocket.onJSON('chatReceive', function (message) {
