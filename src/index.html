@@ -23,29 +23,35 @@
   <body class="{{$root.currentTheme || 'default-theme'}}">    
     <!-- Splash screen style goes here to ensure it loads as fast as possible -->
     <div id="splash-screen" style="
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          position: fixed;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          z-index: 1000;
-          will-change: transform;
-          transition: all .3s cubic-bezier(0.215, 0.61, 0.355, 1);
-          background: #9cf;
-          background-image: url('/assets/img/logo-alpha.svg');
-          background-repeat: no-repeat;
-          background-position: center;
-          background-size: 300px"
-          ng-show="!$root.themeLoaded">
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      will-change: transform;
+      transition: all .3s cubic-bezier(0.215, 0.61, 0.355, 1);
+      background: #9cf;"
+      ng-hide="$root.themeLoaded && $root.backendAuthenticated">
+      <img src="/assets/img/logo-alpha.svg">
+      <div style="height:0">
+        <md-button class="md-raised"
+          ng-href="{{::config.endpoints.api}}/startLogin"
+          style="transform:scale(0);"
+          ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}">
+          Login
+        </md-button>
+      </div>
     </div>
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <aside id="toasts"></aside>
-    <header id="header">
+    <aside id="toasts" ng-if="$root.backendAuthenticated"></aside>
+    <header id="header" ng-if="$root.backendAuthenticated">
       <md-toolbar id="header-toolbar">
         <div class="header-toolbar-content">
           <md-button ui-sref="lobby-list" id="header-title" aria-label="Go to index">
@@ -76,8 +82,8 @@
       </div>
       <div ui-view="headerInfo" class="header-info"></div>
     </header>
-    <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'"></aside>
-    <div id="fab">
+    <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'" ng-if="$root.backendAuthenticated"></aside>
+    <div id="fab" ng-if="$root.backendAuthenticated">
       <md-button ui-sref="lobby-create" class="md-fab md-primary">
         +
       </md-button>
@@ -89,8 +95,8 @@
            ng-click=vm.remove(id)>
         {{::notification.message}}
       </md-button>
-    </aside>
-    <main flex>
+    </aside ng-if="$root.backendAuthenticated">
+    <main flex ng-if="$root.backendAuthenticated">
       <div flex id="page-content">
         <div ui-view="leftSidebar" id="left-sidebar"></div>
         <md-content flex ui-view="content" id="main-content"></md-content>
