@@ -19,9 +19,20 @@
         '; password ' + vm.lobbyJoinInformation.password;
     };
 
+    var buildMumbleString = function() {
+      if (!vm.lobbyJoinInformation.mumble) {
+        return;
+      }
+      vm.lobbyJoinInformation.mumbleInformation =
+        'IP address: ' + vm.lobbyJoinInformation.mumble.address +
+        ', port ' + vm.lobbyJoinInformation.mumble.port + 
+        ', password ' + vm.lobbyJoinInformation.mumble.password;
+    };
+
     vm.lobbyInformation = LobbyService.getLobbySpectated();
     vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
     buildConnectString();
+    buildMumbleString();
     vm.playerPreReady = LobbyService.getPlayerPreReady();
     vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
 
@@ -32,6 +43,7 @@
     LobbyService.subscribe('lobby-start', $scope, function(){
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
       buildConnectString();
+      buildMumbleString();
     });
 
     $scope.$watch(LobbyService.getPlayerPreReady, function () {

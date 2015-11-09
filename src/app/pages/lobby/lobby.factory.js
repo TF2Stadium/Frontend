@@ -118,7 +118,14 @@
     };
 
     factory.joinMumbleServer = function() {
-      //TODO
+      $timeout(function(){
+        var connectString = 'mumble://' +
+          factory.lobbyJoinInformation.mumble.nick + ':' +
+          factory.lobbyJoinInformation.mumble.password + '@' +
+          factory.lobbyJoinInformation.mumble.address + ':' +
+          factory.lobbyJoinInformation.mumble.port + '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
+        window.open(connectString, '_self');
+      }, 1000);
     };
 
     Websocket.onJSON('lobbyReadyUp', function(data) {
