@@ -12,6 +12,11 @@
 
   .right {
     text-align: right;
+  }  
+
+  .row {
+    width: 100%;
+    @include flex (row, space-between, center);
   }
 }
 

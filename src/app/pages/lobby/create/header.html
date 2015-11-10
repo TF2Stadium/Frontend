@@ -1,10 +1,12 @@
 <div class="header-image" ng-style="{'background-image':'url(assets/img/maps/header/' + header.lobbyInformation.map + '.jpg)'}">
   <div class="header-text">
     <div class="lobbycreate-text">
-      <span ng-show="header.lobbyInformation.map"
-        class="lobbypage-map">
-        {{header.lobbyInformation.map}}
-      </span>
+      <div class="row">
+        <span ng-show="header.lobbyInformation.map"
+          class="lobbypage-map">
+          {{header.lobbyInformation.map}}
+        </span>
+      </div>
       <div class="left">
         <span class="lobbypage-rules">
           <span ng-show="header.lobbyInformation.type">
