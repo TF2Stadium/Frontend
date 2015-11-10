@@ -53,6 +53,51 @@ $themes-list: (
 
 
     /*======================================
+                  OTHERS
+     =======================================*/
+
+    .toast {
+      background-color: $sheet-color;
+      color: $text-color-medium;
+
+      &:hover {
+        background-color: $hover-color;
+      }
+
+      &.error {
+        background-color: #f99;
+        color: #fff;
+      }
+    }
+
+    .sheet {
+      background-color: $sheet-color;
+
+      &.clickable:hover {
+        background-color: $hover-color;
+      }
+    }
+
+    %md-whiteframe-z1 {
+      border-radius: 3px;
+      box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
+                  0px 2px 2px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
+                  0px 1px 5px  0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
+
+    %md-whiteframe-z2 {
+      border-radius: 3px;
+      box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
+                  0px 4px 5px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
+                  0px 1px 10px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
+
+    %md-whiteframe-z3 {
+      border-radius: 3px;
+      box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
+                  0px 6px 10px 0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
+                  0px 1px 18px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
+
+
+    /*======================================
                   INITIALIZING
      =======================================*/
 
@@ -119,6 +164,11 @@ $themes-list: (
     /*======================================
                     LAYOUT
      =======================================*/
+
+    .current-lobby {
+      background-color: white;
+      color: $text-color-medium;      
+    }
 
     #header-toolbar {
       background-color: $sheet-color;
@@ -224,51 +274,6 @@ $themes-list: (
     .lobby-image span {
       color: white;
     }
-
-
-    /*======================================
-                  OTHERS
-     =======================================*/
-
-    .toast {
-      background-color: $sheet-color;
-      color: $text-color-medium;
-
-      &:hover {
-        background-color: $hover-color;
-      }
-
-      &.error {
-        background-color: #f99;
-        color: #fff;
-      }
-    }
-
-    .sheet {
-      background-color: $sheet-color;
-
-      &.clickable:hover {
-        background-color: $hover-color;
-      }
-    }
-
-    %md-whiteframe-z1 {
-      border-radius: 3px;
-      box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
-                  0px 2px 2px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
-                  0px 1px 5px  0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
-
-    %md-whiteframe-z2 {
-      border-radius: 3px;
-      box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
-                  0px 4px 5px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
-                  0px 1px 10px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
-
-    %md-whiteframe-z3 {
-      border-radius: 3px;
-      box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
-                  0px 6px 10px 0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
-                  0px 1px 18px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
 
   }
 }

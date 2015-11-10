@@ -112,11 +112,7 @@
     };
 
     factory.closeLobby = function(lobbyID) {
-      Websocket.emitJSON('lobbyClose', {id: lobbyID}, function(response) {
-        if(response.success && $state.current.name === 'lobby-page') {
-          $state.go('lobby-list');
-        }
-      });
+      Websocket.emitJSON('lobbyClose', {id: lobbyID});
     };
 
     factory.joinTF2Server = function() {
@@ -126,7 +122,14 @@
     };
 
     factory.joinMumbleServer = function() {
-      //TODO
+      $timeout(function(){
+        var connectString = 'mumble://' +
+          factory.lobbyJoinInformation.mumble.nick + ':' +
+          factory.lobbyJoinInformation.mumble.password + '@' +
+          factory.lobbyJoinInformation.mumble.address + ':' +
+          factory.lobbyJoinInformation.mumble.port + '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
+        window.open(connectString, '_self');
+      }, 1000);
     };
 
     Websocket.onJSON('lobbyReadyUp', function(data) {
@@ -218,8 +221,19 @@
 
     Websocket.onJSON('lobbyLeft', function(data) {
       factory.lobbyJoined = {};
+      factory.lobbyJoinInformation = {};
       $rootScope.$emit('lobby-joined-updated');
       $rootScope.$emit('lobby-left');
+    });
+
+    Websocket.onJSON('lobbyClosed', function(data) {
+      factory.lobbySpectated = {};      
+      if($state.current.name === 'lobby-page') {
+        $state.go('lobby-list');
+      }
+      $rootScope.$emit('lobby-spectated-updated');
+      $rootScope.$emit('lobby-spectated-changed');
+      $rootScope.$emit('lobby-closed');
     });
 
     return factory;

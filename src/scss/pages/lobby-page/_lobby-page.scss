@@ -23,10 +23,17 @@
   .right {
     text-align: right;
   }
+
+  .row {
+    width: 100%;
+    @include flex (row, space-between, center);
+  }
 }
 
 .lobbypage-map {
-  min-width: 51%; //force line jump of .left and .right
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lobbypage-lobby-controls {
@@ -43,13 +50,16 @@
 }
 
 #lobby-join-information {
-  @include flex(row, center, center);
-  text-align: center;
 
-  & > span {
-    text-overflow: ellipsis;
-    overflow: hidden;
-    margin: $padding-small 0;
+  .row {
+    @include flex(row, center, center);
+    text-align: center;
+
+    span {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin: $padding-small 0;
+    }
   }
 }
 

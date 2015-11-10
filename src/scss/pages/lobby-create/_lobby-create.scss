@@ -1,8 +1,8 @@
 .lobbycreate-text {
-  @include flex (row, space-between, center);
+  @include flex (row, space-between, flex-end);
   flex-wrap: wrap;
   z-index: 1;
-  padding: 0 $padding-medium;
+  padding: 0 $padding-medium $padding-medium;
   height: 100%;
 
   .left, .right {
@@ -12,6 +12,11 @@
 
   .right {
     text-align: right;
+  }  
+
+  .row {
+    width: 100%;
+    @include flex (row, space-between, center);
   }
 }
 
@@ -138,7 +143,6 @@ md-grid-tile.tile-card {
    img {
      height: 100px;
      width: 100px;
-     padding: $padding-small;
    }
 
    span {

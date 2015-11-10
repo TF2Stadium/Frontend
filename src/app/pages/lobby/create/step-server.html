@@ -17,13 +17,13 @@
   </div>
   <div class="server-verify-message"
     ng-if="lobbyCreate.verifyServerError">
-    <span>:(</span>
+    <img src="/assets/img/icon-error.svg">
     <span>Something is wrong with that server.</span>
     <span>Please check the address and password and try again.</span>
   </div>
   <div class="server-verify-message"
     ng-if="lobbyCreate.verifiedServer">
-    <img src="/assets/img/tick.png">
+    <img src="/assets/img/icon-check.svg">
     <span>The server is ready to be configured and used</span>
     <md-button class="md-raised md-primary"
       ng-click="lobbyCreate.create()">
