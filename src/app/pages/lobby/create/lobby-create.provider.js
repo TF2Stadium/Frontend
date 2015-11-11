@@ -62,14 +62,11 @@
               title: 'Highlander',
               important: true
             },{
-              value: '4v4',
+              value: 'fours',
               title: '4v4'
             },{
               value: 'ultiduo',
               title: 'Ultiduo'
-            },{
-              value: 'arena-respawn',
-              title: 'Arena:Respawn'
             },{
               value: 'bball',
               title: 'Bball'
@@ -101,7 +98,6 @@
               value: 'cp_gullywash_final1',
               sixes: true,
               highlander: true,
-              important: true
             },{
               value: 'cp_metalworks_rc5',
               sixes: true
@@ -116,9 +112,11 @@
               important: true
             },{
               value: 'pl_upward',
+              important: true,
               highlander: true
             },{
               value: 'pl_badwater',
+              important: true,
               highlander: true
             },{
               value: 'pl_borneo',
@@ -138,6 +136,43 @@
             },{
               value: 'koth_ramjam_rc1',
               highlander: true
+            },{
+              value: 'koth_badlands',
+              fours: true
+            },{
+              value: 'koth_highpass_rc1a',
+              fours: true
+            },{
+              value: 'cp_alamo',
+              fours: true
+            },{
+              value: 'koth_sandstone_pro_rc1',
+              fours: true
+            },{
+              value: 'cp_warmfrost_rc1',
+              fours: true
+            },{
+              value: 'koth_artefact_v1',
+              fours: true
+            },{
+              value: 'koth_airfield_b7',
+              fours: true
+            },{
+              value: 'ctf_ballin',
+              important: true,
+              'bball': true
+            },{
+              value: 'ctf_bball_alpine_b4',
+              important: true,
+              'bball': true
+            },{
+              value: 'ultiduo_baloo',
+              important: true,
+              'ultiduo': true
+            },{
+              value: 'koth_ultiduo_r_b7',
+              important: true,
+              'ultiduo': true
             }
           ]
         },
@@ -148,31 +183,34 @@
             {
               value: 'etf2l',
               title: 'ETF2L',
-              description: 'First to lead by 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
+              description: '',
               sixes: true,
-              highlander: true
+              highlander: true,
+              bball: true,
+              ultiduo: true
             },{
               value: 'ugc',
               title: 'UGC',
-              description: 'First to 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
+              description: '',
               sixes: true,
-              highlander: true
+              highlander: true,
+              fours: true
             },{
               value: 'esea',
               title: 'ESEA',
-              description: 'First to 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
+              description: '',
               sixes: true
             },{
               value: 'ozfortress',
               title: 'ozfortress',
-              description: 'First to lead by 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
+              description: '',
               sixes: true
             },{
               value: 'asia',
               title: 'AsiaFortress',
-              description: 'First to 5 rounds wins automatically. Whoever has more points after 30 minutes wins.',
+              description: '',
               sixes: true
-            }
+            },
           ]
         },
         whitelists: {
@@ -201,9 +239,9 @@
               format: 'sixes'
             },{
               value: 3771,
-              title: 'UGC Highlander (Season 16)',
+              title: 'UGC 4v4 (Season 16)',
               league: 'ugc',
-              format: '4v4'
+              format: 'fours'
             },{
               value: 3688,
               title: 'ESEA 6v6 (Season 19)',
@@ -219,6 +257,16 @@
               title: 'AsiaFortress 6v6 (Season 9)',
               league: 'asia',
               format: 'sixes'
+            },{
+              value: 3872,
+              title: 'ETF2L Ultiduo',
+              league: 'etf2l',
+              format: 'ultiduo'
+            },{
+              value: 3872,
+              title: 'ETF2L BBall',
+              league: 'etf2l',
+              format: 'bball'
             }
           ]
         },
