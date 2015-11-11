@@ -42,8 +42,8 @@
         <md-button class="md-raised"
           ng-href="{{::config.endpoints.api}}/startLogin"
           style="transform:scale(0);"
-          ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}">
-          Login
+          ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}"
+          ng-bind="'Login'">
         </md-button>
       </div>
     </div>
