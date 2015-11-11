@@ -48,7 +48,16 @@
 
 
 .lobby-classes {
-  @include flex (row, space-around, center);
+  @include flex (row, center, center);
+}
+
+.flex-max-margin {
+  flex: 1;
+  max-width: $class-button-width * 2;
+
+  & > div {
+    margin: 0 auto;
+  }
 }
 
 .lobby-info {
