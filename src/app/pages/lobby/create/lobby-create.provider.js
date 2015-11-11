@@ -258,12 +258,12 @@
               league: 'asia',
               format: 'sixes'
             },{
-              value: 3872,
+              value: 3312,
               title: 'ETF2L Ultiduo',
               league: 'etf2l',
               format: 'ultiduo'
             },{
-              value: 3872,
+              value: 3759,
               title: 'ETF2L BBall',
               league: 'etf2l',
               format: 'bball'
