@@ -12,6 +12,13 @@
 
     $rootScope.$on('$stateChangeStart',
       function(event, toState, toParams, fromState) {
+
+        if (!$rootScope.backendAuthenticated && toState.name !== 'lobby-list') {
+          console.log(toState)
+          event.preventDefault();
+          $state.go('lobby-list');
+        }
+
         $rootScope.currentState = toState.name;
 
         //Forbid direct navigation to children states
@@ -39,6 +46,10 @@
     $timeout(function() {
       $rootScope.themeLoaded = true;
     }, 1000);
+
+    $rootScope.$on('socket-opened', function() {
+      $rootScope.backendAuthenticated = true;
+    });
 
     new Clipboard('.clipboard-button').on('success', function(event) {
       Notifications.toast({message: 'Text copied to clipboard'});
