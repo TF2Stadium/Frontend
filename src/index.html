@@ -50,7 +50,7 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <aside id="toasts" ng-if="$root.backendAuthenticated"></aside>
+    <aside id="toasts"></aside>
     <header id="header" ng-if="$root.backendAuthenticated">
       <md-toolbar id="header-toolbar">
         <div class="header-toolbar-content">
@@ -88,15 +88,14 @@
         <md-icon md-svg-icon="/assets/img/icon-add.svg"></md-icon>
       </md-button>
     </div>
-    <aside id="notifications"  ng-if="$root.backendAuthenticated"
-      ng-controller="NotificationsController as vm"
+    <aside id="notifications" ng-controller="NotificationsController as vm"
       ng-class="{'empty' : vm.isEmpty()}">
       <md-button class="notification"
            ng-repeat="(id, notification) in vm.notifications track by id"
            ng-click=vm.remove(id)>
         {{::notification.message}}
       </md-button>
-    </aside ng-if="$root.backendAuthenticated">
+    </aside>
     <main flex ng-if="$root.backendAuthenticated">
       <div flex id="page-content">
         <div ui-view="leftSidebar" id="left-sidebar"></div>
