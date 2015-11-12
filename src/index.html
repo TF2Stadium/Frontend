@@ -88,7 +88,8 @@
         <md-icon md-svg-icon="/assets/img/icon-add.svg"></md-icon>
       </md-button>
     </div>
-    <aside id="notifications" ng-controller="NotificationsController as vm"
+    <aside id="notifications"  ng-if="$root.backendAuthenticated"
+      ng-controller="NotificationsController as vm"
       ng-class="{'empty' : vm.isEmpty()}">
       <md-button class="notification"
            ng-repeat="(id, notification) in vm.notifications track by id"
