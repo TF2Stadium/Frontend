@@ -18,10 +18,6 @@
       LobbyService.join(lobby, team, position);
     };
 
-    vm.spectate = function (lobby) {
-      LobbyService.goToLobby(lobby);
-    };
-
     LobbyService.subscribe('lobby-list-updated', $scope, function() {
       vm.lobbies = LobbyService.getList();
     });
