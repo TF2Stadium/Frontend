@@ -6,7 +6,7 @@
     .controller('CommentBoxController', CommentBoxController);
 
   /** @ngInject */
-  function CommentBoxController ($rootScope, Websocket, ChatService) {
+  function CommentBoxController ($rootScope, Websocket, ChatService, Notifications) {
     var vm = this;
 
     vm.rooms = ChatService.getRooms();
@@ -15,6 +15,14 @@
     vm.sendMessage = function(event) {
 
       if (vm.messageBox === "" || event.keyCode !== 13) {
+        return false;
+      }
+
+      //If user has pressed Enter...
+      event.preventDefault();
+
+      if (vm.error) {
+        Notifications.toast({message: 'That message is too long', error: true});
         return false;
       }
 
@@ -27,8 +35,11 @@
       ChatService.send(vm.messageBox, room);
 
       vm.messageBox = '';
-      event.preventDefault();
+    };
 
+    vm.checkMessage = function() {
+      //Check if message is longer than the char limit
+      vm.error = typeof vm.messageBox === 'undefined';
     };
 
     vm.goToProfile = function(steamId) {
