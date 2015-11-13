@@ -158,7 +158,7 @@
               value: 'koth_airfield_b7',
               '4v4': true
             },{
-              value: 'ctf_ballin',
+              value: 'ctf_ballin_sky',
               important: true,
               'bball': true
             },{
