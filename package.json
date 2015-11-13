@@ -4,7 +4,7 @@
   "license": "GPL-3.0",
   "repository": "https://github.com/TF2Stadium/Frontend",
   "readme": "readme.md",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "dependencies": {
     "del": "~1.2.0",
     "uglify-save-license": "~0.4.1",
