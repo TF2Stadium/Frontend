@@ -25,9 +25,10 @@
     };
 
     vm.verifyServer = function() {
-      LobbyCreate.verifyServer(function(isValid) {
-        vm.verifiedServer = isValid;
-        vm.verifyServerError = !isValid;
+      LobbyCreate.verifyServer(function(response) {
+        vm.verifiedServer = response.success;
+        vm.verifyServerError = !response.success;
+        vm.verifyServerErrorMessage = response.message;
       });
     };
 

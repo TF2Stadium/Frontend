@@ -317,7 +317,7 @@
             rconpwd: lobbyCreateService.settings.rconpwd
           },
           function(response) {
-            callback(response.success);
+            callback(response);
           }
         );
       };
