@@ -54,15 +54,15 @@
           title: 'Format',
           options: [
             {
-              value: 'sixes',
-              title: '6v6',
+              value: '6s',
+              title: '6s',
               important: true
             },{
               value: 'highlander',
               title: 'Highlander',
               important: true
             },{
-              value: 'fours',
+              value: '4v4',
               title: '4v4'
             },{
               value: 'ultiduo',

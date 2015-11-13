@@ -20,14 +20,17 @@
         af:             {name: 'Africa'}
       },
       formats: {
-        Sixes:          {name: '6v6'},
-        Highlander:     {name: 'Highlander'}
+        '6s':           {name: '6s'},
+        Highlander:     {name: 'Highlander'},
+        '4v4':          {name: '4v4'},
+        Bball:          {name: 'Bball'},
+        Ultiduo:        {name: 'Ultiduo'}
       },
       gamemodes: {
         cp:             {name: 'Control Points'},
         pl:             {name: 'Payload'},
         koth:           {name: 'King of the hill'},
-        others:         {name: 'Other gamemodes'}
+        otherGamemodes: {name: 'Other gamemodes'}
       },
       classes: {
         scout:          {name: 'Scout' },
