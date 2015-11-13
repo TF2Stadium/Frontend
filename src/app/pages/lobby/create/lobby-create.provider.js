@@ -54,15 +54,15 @@
           title: 'Format',
           options: [
             {
-              value: 'sixes',
-              title: '6v6',
+              value: '6s',
+              title: '6s',
               important: true
             },{
               value: 'highlander',
               title: 'Highlander',
               important: true
             },{
-              value: 'fours',
+              value: '4v4',
               title: '4v4'
             },{
               value: 'ultiduo',
@@ -82,32 +82,32 @@
           options: [
             {
               value: 'cp_badlands',
-              sixes: true
+              '6s': true
             },{
               value: 'cp_granary_pro_b10',
-              sixes: true
+              '6s': true
             },{
               value: 'cp_process_final',
               important: true,
-              sixes: true
+              '6s': true
             },{
               value: 'cp_snakewater_final1',
-              sixes: true,
+              '6s': true,
               important: true
             },{
               value: 'cp_gullywash_final1',
-              sixes: true,
+              '6s': true,
               highlander: true,
             },{
               value: 'cp_metalworks_rc5',
-              sixes: true
+              '6s': true
             },{
               value: 'cp_sunshine_rc7',
-              sixes: true,
+              '6s': true,
               highlander: true
             },{
               value: 'koth_product_rc8',
-              sixes: true,
+              '6s': true,
               highlander: true,
               important: true
             },{
@@ -138,27 +138,27 @@
               highlander: true
             },{
               value: 'koth_badlands',
-              fours: true
+              '4v4': true
             },{
               value: 'koth_highpass_rc1a',
-              fours: true
+              '4v4': true
             },{
               value: 'cp_alamo',
-              fours: true
+              '4v4': true
             },{
               value: 'koth_sandstone_pro_rc1',
-              fours: true
+              '4v4': true
             },{
               value: 'cp_warmfrost_rc1',
-              fours: true
+              '4v4': true
             },{
               value: 'koth_artefact_v1',
-              fours: true
+              '4v4': true
             },{
               value: 'koth_airfield_b7',
-              fours: true
+              '4v4': true
             },{
-              value: 'ctf_ballin',
+              value: 'ctf_ballin_sky',
               important: true,
               'bball': true
             },{
@@ -184,7 +184,7 @@
               value: 'etf2l',
               title: 'ETF2L',
               description: '',
-              sixes: true,
+              '6s': true,
               highlander: true,
               bball: true,
               ultiduo: true
@@ -192,24 +192,24 @@
               value: 'ugc',
               title: 'UGC',
               description: '',
-              sixes: true,
+              '6s': true,
               highlander: true,
-              fours: true
+              '4v4': true
             },{
               value: 'esea',
               title: 'ESEA',
               description: '',
-              sixes: true
+              '6s': true
             },{
               value: 'ozfortress',
               title: 'ozfortress',
               description: '',
-              sixes: true
+              '6s': true
             },{
               value: 'asia',
               title: 'AsiaFortress',
               description: '',
-              sixes: true
+              '6s': true
             },
           ]
         },
@@ -226,7 +226,7 @@
               value: 4498,
               title: 'ETF2L 6v6 (Season 22)',
               league: 'etf2l',
-              format: 'sixes'
+              format: '6s'
             },{
               value: 3951,
               title: 'UGC Highlander (Season 16)',
@@ -236,27 +236,27 @@
               value: 4559,
               title: 'UGC 6v6 (Season 19)',
               league: 'ugc',
-              format: 'sixes'
+              format: '6s'
             },{
               value: 3771,
               title: 'UGC 4v4 (Season 16)',
               league: 'ugc',
-              format: 'fours'
+              format: '4v4'
             },{
               value: 3688,
               title: 'ESEA 6v6 (Season 19)',
               league: 'esea',
-              format: 'sixes'
+              format: '6s'
             },{
               value: 4034,
               title: 'ozfortress 6v6 (OWL 14)',
               league: 'ozfortress',
-              format: 'sixes'
+              format: '6s'
             },{
               value: 3872,
               title: 'AsiaFortress 6v6 (Season 9)',
               league: 'asia',
-              format: 'sixes'
+              format: '6s'
             },{
               value: 3312,
               title: 'ETF2L Ultiduo',
@@ -317,7 +317,7 @@
             rconpwd: lobbyCreateService.settings.rconpwd
           },
           function(response) {
-            callback(response.success);
+            callback(response);
           }
         );
       };

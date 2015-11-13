@@ -13,7 +13,7 @@
         messages: []
       },
       lobbySpectated: {
-        id: -1,
+        id: LobbyService.getLobbySpectated().id || -1,
         messages: []
       }
     };

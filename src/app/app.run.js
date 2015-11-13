@@ -12,13 +12,6 @@
 
     $rootScope.$on('$stateChangeStart',
       function(event, toState, toParams, fromState) {
-
-        if (!$rootScope.backendAuthenticated && toState.name !== 'lobby-list') {
-          console.log(toState)
-          event.preventDefault();
-          $state.go('lobby-list');
-        }
-
         $rootScope.currentState = toState.name;
 
         //Forbid direct navigation to children states
