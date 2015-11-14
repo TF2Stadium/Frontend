@@ -18,8 +18,7 @@
   <div class="server-verify-message"
     ng-if="lobbyCreate.verifyServerError">
     <img src="/assets/img/icon-error.svg">
-    <span>Something is wrong with that server.</span>
-    <span>Please check the address and password and try again.</span>
+    <span>{{lobbyCreate.verifyServerErrorMessage}}</span>
   </div>
   <div class="server-verify-message"
     ng-if="lobbyCreate.verifiedServer">

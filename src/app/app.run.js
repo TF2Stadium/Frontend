@@ -40,6 +40,10 @@
       $rootScope.themeLoaded = true;
     }, 1000);
 
+    $rootScope.$on('socket-opened', function() {
+      $rootScope.backendAuthenticated = true;
+    });
+
     new Clipboard('.clipboard-button').on('success', function(event) {
       Notifications.toast({message: 'Text copied to clipboard'});
     });

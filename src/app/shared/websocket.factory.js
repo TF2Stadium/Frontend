@@ -133,6 +133,10 @@
       }
     };
 
+    factory.isInitialized = function() {
+      return connected;
+    };
+
     return factory;
   }
 

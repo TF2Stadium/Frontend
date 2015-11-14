@@ -43,13 +43,16 @@
 
 
     </md-tabs>
-    <md-input-container>
+    <md-input-container
+      md-is-error="commentBox.error">
       <label for="chatbox-message">Type your message</label>
-      <textarea
-         id="chatbox-message"
-         name="message"
-         ng-keydown="commentBox.sendMessage($event)"
-         ng-model="commentBox.messageBox"></textarea>
+      <textarea id="chatbox-message"
+        name="message"
+        ng-keydown="commentBox.sendMessage($event)"
+        ng-model="commentBox.messageBox"
+        ng-change="commentBox.checkMessage()"
+        md-maxlength="120">
+      </textarea>
     </md-input-container>
   </div>
 </div>

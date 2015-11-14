@@ -47,7 +47,7 @@
 
         if (settings[lobby.region] &&
             settings[lobby.type] &&
-            settings[lobby.map.substr(0, lobby.map.indexOf('_'))] &&
+            (settings[lobby.map.substr(0, lobby.map.indexOf('_'))] || settings.otherGamemodes) &&
             availableClasses.some(playerPlaysClass)
 
             || (Config.debug && lobby.type === 'Debug')) {

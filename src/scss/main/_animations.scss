@@ -20,3 +20,11 @@ span.ng-hide {
     display: flex !important;
   }
 }
+
+#splash-screen .md-button {
+  transition: transform .15s ease-out;
+
+  &.visible {
+    transform: scale(1) !important;
+  }
+}
