@@ -7,7 +7,7 @@
   position: relative; //so the ripple doesn't fill the whole page
   text-decoration: none;
 
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:first-child {
     margin-top: $padding-medium;
