@@ -206,7 +206,7 @@
               description: '',
               '6s': true
             },{
-              value: 'asia',
+              value: 'asiafortress',
               title: 'AsiaFortress',
               description: '',
               '6s': true
