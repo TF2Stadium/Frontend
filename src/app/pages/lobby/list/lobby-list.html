@@ -10,12 +10,12 @@
     <div flex class="lobby-classes">
       <div ng-repeat="class in lobbyInformation.classes track by $index"
         class="flex-max-margin">
-        <div class="class-button lobby-icon-{{::class.class | stripSlotNameNumber}}"
+        <div class="class-button no-animate lobby-icon-{{::class.class | stripSlotNameNumber}}"
              ng-class="{'sheet' : !class.blu.filled || !class.red.filled}">
-          <md-button ng-repeat="(team, slot) in class"
-            ng-if="!slot.filled && team!='class'"
+          <md-button ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
+            ng-if="!slot.filled"
             ng-class="['join-slot', team]" ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)">
-            <md-tooltip>
+            <md-tooltip md-direction="bottom">
               Join {{::team}} {{::class.class | stripSlotNameNumber}} slot
             </md-tooltip>
             <span></span>
@@ -38,7 +38,7 @@
         <span></span>
         <span class="lobby-league">
           {{::lobbyInformation.league}}
-          <md-tooltip>
+          <md-tooltip md-direction="bottom">
             {{::lobbyInformation.league | uppercase}} rules and whitelist
           </md-tooltip>
         </span>
