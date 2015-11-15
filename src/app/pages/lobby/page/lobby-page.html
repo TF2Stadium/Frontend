@@ -87,6 +87,10 @@
       </div>
       <img ng-if="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
     </div>
-    <div class="class-button lobby-icon-{{::class.class | stripSlotNameNumber}}"></div>
+    <div class="class-button lobby-icon-{{::class.class | stripSlotNameNumber}}">
+      <md-tooltip md-direction="bottom">
+        {{::class.class | stripSlotNameNumber | capitalize}}
+      </md-tooltip>
+    </div>
   </div>
 </div>
