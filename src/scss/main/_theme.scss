@@ -245,6 +245,10 @@ $themes-list: (
       }
     }
 
+    .lobbypage-lobby-closed {
+      background-color: $main-color;
+    }
+
     #spectators md-list-item {
       background-color: $sheet-color;
     }
