@@ -12,7 +12,7 @@
         class="flex-max-margin">
         <div class="class-button no-animate lobby-icon-{{::class.class | stripSlotNameNumber}}"
              ng-class="{'sheet' : !class.blu.filled || !class.red.filled}">
-          <md-button ng-repeat="(team, slot) in class"
+          <md-button ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
             ng-if="!slot.filled && team!='class'"
             ng-class="['join-slot', team]" ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)">
             <md-tooltip md-direction="bottom">
