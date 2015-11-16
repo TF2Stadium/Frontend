@@ -20,16 +20,25 @@
     };
 
     vm.shouldShowLobbyInformation = function() {
-      return !error && (vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID));
+      return !error && (vm.lobbyInformation && vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID));
     };
 
     vm.shouldShowLobbyControls = function() {
-      return vm.lobbyInformation.state < 5 &&
-        $rootScope.userProfile.steamid === vm.lobbyInformation.leader.steamid || $rootScope.userProfile.role == 'administrator';
+      if (!vm.lobbyInformation || vm.lobbyInformation.state >= 5) {
+        return false;
+      }
+
+      if (typeof $rootScope.userProfile === 'undefined') {
+        return false;
+      }
+
+      var user = $rootScope.userProfile;
+      var leader = vm.lobbyInformation.leader;
+      return user.steamid === leader.steamid || user.role === 'administrator';
     };
 
     vm.shouldShowProgress = function() {
-      return !error && !(vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID));
+      return !error && !(vm.lobbyInformation && vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID));
     };
 
     vm.shouldShowError = function() {

@@ -12,12 +12,12 @@
     vm.lobbyInformation = LobbyService.getLobbyJoined();
 
     vm.checkVisible = function() {
-      vm.visible = vm.lobbyInformation.id && vm.lobbyInformation.id !== parseInt($state.params.lobbyID);
+      vm.visible = !!vm.lobbyInformation && vm.lobbyInformation.id && vm.lobbyInformation.id !== parseInt($state.params.lobbyID);
     };
 
     LobbyService.subscribe('lobby-joined-updated', $scope, function() {
       vm.lobbyInformation = LobbyService.getLobbyJoined();
-      vm.visible = vm.lobbyInformation.id;
+      vm.visible = !!vm.lobbyInformation && vm.lobbyInformation.id;
       vm.checkVisible();
     });
 

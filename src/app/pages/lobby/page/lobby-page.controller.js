@@ -87,7 +87,7 @@
     };
 
     vm.shouldShowLobbyInformation = function() {
-      return vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID);
+      return vm.lobbyInformation && vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID);
     };
 
     LobbyService.spectate(parseInt($state.params.lobbyID));

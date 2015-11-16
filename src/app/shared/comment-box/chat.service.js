@@ -30,8 +30,9 @@
     var factory = {};
 
     var globalChatRoom = new ChatRoom(0);
-    var spectatedChatRoom = new ChatRoom();
-    var joinedChatRoom = new ChatRoom();
+
+    var spectatedChatRoom = new ChatRoom(LobbyService.getLobbySpectatedId());
+    var joinedChatRoom = new ChatRoom(LobbyService.getLobbyJoinedId());
 
     joinedChatRoom.joined = true;
 
@@ -49,8 +50,7 @@
     };
 
     $rootScope.$on('lobby-joined', function () {
-      var joinedLobbyId = LobbyService.getLobbyJoined().id;
-      joinedChatRoom.changeRoom(joinedLobbyId);
+      joinedChatRoom.changeRoom(LobbyService.getLobbyJoinedId());
     });
 
     $rootScope.$on('lobby-left', function () {
@@ -58,8 +58,7 @@
     });
 
     $rootScope.$on('lobby-spectated-changed', function() {
-      var spectatedLobbyId = LobbyService.getLobbySpectated().id;
-      spectatedChatRoom.changeRoom(spectatedLobbyId);
+      spectatedChatRoom.changeRoom(LobbyService.getLobbySpectatedId());
     });
 
     Websocket.onJSON('chatReceive', function (message) {
@@ -70,9 +69,11 @@
       }
     });
 
-    // TODO: I think this message isn't needed
-    Websocket.onJSON('chatHistoryClear', function() {
-      // spectatedChatRoom.clear();
+    Websocket.onJSON('chatHistoryClear', function(data) {
+      // Note: ChatRooms may have pointers to the arrays in
+      // chatRoomLogs, so we have to mutate the actual logs rather
+      // than just assign a new empty array.
+      chatRoomLogs[data.room].length = 0;
     });
 
     return factory;
