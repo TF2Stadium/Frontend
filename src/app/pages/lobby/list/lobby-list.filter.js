@@ -36,7 +36,6 @@
 
       for (var key in lobbies) {
         var lobby = lobbies[key];
-        lobby.region = "eu";
 
         var slots = angular.isArray(lobby.classes)? lobby.classes : [];
         var availableClasses = slots
