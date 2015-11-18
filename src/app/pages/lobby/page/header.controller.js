@@ -5,7 +5,7 @@
   app.controller('LobbyPageHeaderController', LobbyPageHeaderController);
 
   /** @ngInject */
-  function LobbyPageHeaderController($scope, $state, LobbyService) {
+  function LobbyPageHeaderController($scope, $rootScope, $state, LobbyService) {
     var vm = this;
     var error = false;
 
@@ -21,6 +21,11 @@
 
     vm.shouldShowLobbyInformation = function() {
       return !error && (vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID));
+    };
+
+    vm.shouldShowLobbyControls = function() {
+      return vm.lobbyInformation.state < 5 &&
+        $rootScope.userProfile.steamid === vm.lobbyInformation.leader.steamid || $rootScope.userProfile.role == 'administrator';
     };
 
     vm.shouldShowProgress = function() {

@@ -114,10 +114,6 @@ $themes-list: (
       color: $text-color-hard;
     }
 
-    md-tooltip span {
-      color: #ddd;
-    }
-
     md-tabs .md-tab:not(.md-active) {
       color: $text-color-medium;
     }
@@ -134,6 +130,10 @@ $themes-list: (
 
     .md-button {
       color: $text-color-medium;
+    }
+
+    .md-button.md-primary.md-raised {
+      color: $white;
     }
 
     .md-raised:not([disabled]) {
@@ -243,6 +243,10 @@ $themes-list: (
       &:hover, &:focus {
         background: #eee;
       }
+    }
+
+    .lobbypage-lobby-closed {
+      background-color: $main-color;
     }
 
     #spectators md-list-item {

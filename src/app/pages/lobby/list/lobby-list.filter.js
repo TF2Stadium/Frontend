@@ -36,7 +36,6 @@
 
       for (var key in lobbies) {
         var lobby = lobbies[key];
-        lobby.region = "eu";
 
         var slots = angular.isArray(lobby.classes)? lobby.classes : [];
         var availableClasses = slots
@@ -45,7 +44,7 @@
               .map(slotNameToClassName)
               .filter(truthy);
 
-        if (settings[lobby.region] &&
+        if (settings[lobby.region.code] &&
             settings[lobby.type] &&
             (settings[lobby.map.substr(0, lobby.map.indexOf('_'))] || settings.otherGamemodes) &&
             availableClasses.some(playerPlaysClass)

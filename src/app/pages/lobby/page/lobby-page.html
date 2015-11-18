@@ -31,18 +31,17 @@
     <h1>Red</h1>
   </div>
   <div ng-repeat="class in lobbyPage.lobbyInformation.classes track by class.class" class="class-row">
-    <div aria-label="Join {{::key}} {{::class.class | stripSlotNameNumber}}"
-      ng-repeat="(key, slot) in class track by key"
-      ng-if="key!='class'"
-      ng-click="slot.player ? angular.noop() : lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)"
-      ng-class="{'sheet low clickable' : !slot.player}"
+    <div aria-label="Join {{::team}} {{::class.class | stripSlotNameNumber}}"
+      ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
+      ng-click="slot.filled ? angular.noop() : lobbyPage.join(lobbyPage.lobbyInformation.id, team, class.class)"
+      ng-class="{'sheet low clickable' : !slot.filled}"
       class="slot-button"
       md-ink-ripple>
       <div ng-if="slot.filled">
         <md-menu>
           <md-button class="more-button"
             aria-label="More"
-            ng-click="slot.player ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, key, class.class)">
+            ng-click="slot.filled ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, team, class.class)">
             <img src="/assets/img/icon-more.svg">
           </md-button>
           <md-menu-content width="4">
@@ -80,13 +79,17 @@
         <span class="slot-playername">{{::slot.player.name}}</span>
         <div class="slot-misc">
           <div flex ng-if="!slot.ready && $root.userProfile.steamid==slot.player.steamid">
-            <span>{{lobbyPage.playerPreReady ? (lobbyPage.preReadyUpTimer | secondsToMinutes) : 'Pre-ready up!'}}<span>
+            <span>{{lobbyPage.playerPreReady ? (lobbyPage.preReadyUpTimer | secondsToMinutes) : 'Pre-ready up!'}}</span>
           </div>
           <div><span>{{::slot.player.lobbiesPlayed}}</span><span>lobbies</span></div>
         </div>
       </div>
       <img ng-if="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
     </div>
-    <div class="class-button lobby-icon-{{::class.class | stripSlotNameNumber}}"></div>
+    <div class="class-button lobby-icon-{{::class.class | stripSlotNameNumber}}">
+      <md-tooltip md-direction="bottom">
+        {{::class.class | stripSlotNameNumber | capitalize}}
+      </md-tooltip>
+    </div>
   </div>
 </div>

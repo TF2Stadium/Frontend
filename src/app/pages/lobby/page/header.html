@@ -4,12 +4,16 @@
     <div class="lobbypage-text">
       <div class="row">
         <span class="lobbypage-map">{{header.lobbyInformation.map}}</span>
+        <div class="lobbypage-lobby-closed"
+          ng-if="header.lobbyInformation.state>=5">
+          FINISHED
+        </div>
         <div class="lobbypage-lobby-controls"
-          ng-if="$root.userProfile.steamid==header.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
+          ng-if="header.shouldShowLobbyControls()">
           <md-button class="md-raised" ng-click="header.closeLobby()">
             Close lobby
           </md-button>
-        </div>        
+        </div>
       </div>
       <div class="left">
         <span class="lobbypage-rules">{{header.lobbyInformation.type}}, whitelist
@@ -22,7 +26,7 @@
       </div>
       <div class="right">
         <span class="lobbypage-mumble">Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required</span>
-        <span class="lobbypage-region">{{header.lobbyInformation.region}}</span>
+        <span class="lobbypage-region">{{header.lobbyInformation.region.name}}</span>
       </div>
     </div>
   </div>
