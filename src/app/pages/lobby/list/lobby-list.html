@@ -35,7 +35,12 @@
         </div>
       </div>
       <div class="lobby-info-row">
-        <span></span>
+        <span>
+          {{::lobbyInformation.region.code}}
+          <md-tooltip md-direction="bottom">
+            Server located in {{::lobbyInformation.region.name}}
+          </md-tooltip>        
+        </span>
         <span class="lobby-league">
           {{::lobbyInformation.league}}
           <md-tooltip md-direction="bottom">

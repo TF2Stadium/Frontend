@@ -15,7 +15,7 @@
         na:             {name: 'North America'},
         sa:             {name: 'South America'},
         as:             {name: 'Asia'},
-        aus:            {name: 'Australia'},
+        oc:             {name: 'Oceania'},
         ru:             {name: 'Russia'},
         af:             {name: 'Africa'}
       },
