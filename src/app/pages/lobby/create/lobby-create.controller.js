@@ -5,7 +5,7 @@
   app.controller('LobbyCreateController', LobbyCreateController);
 
   /** @ngInject */
-  function LobbyCreateController(LobbyCreate, $state, $scope) {
+  function LobbyCreateController(LobbyCreate, $state, $scope, $rootScope) {
 
     var vm = this;
 
@@ -19,6 +19,16 @@
     LobbyCreate.subscribe('lobby-create-settings-updated', $scope, function() {
       vm.lobbySettings = LobbyCreate.getLobbySettings();
     });
+
+    var getCurrentWizardStep = function() {
+      var currentStep = vm.wizardSteps[0];
+      vm.wizardSteps.forEach(function(wizardStep, index) {
+        if (wizardStep.name === $state.current.name) {
+          currentStep = wizardStep;
+        }
+      });
+      return currentStep;
+    };
 
     var getNextWizardStep = function() {
       var nextStep = vm.wizardSteps[0];
@@ -70,7 +80,7 @@
 
       checks.forEach(function(check) {
         if (!isSettingValid(check.field, check.optionName)) {
-          LobbyCreate.set(check.field.key, null);
+          LobbyCreate.deleteSetting(check.field.key);
         }
       });
 
@@ -95,9 +105,24 @@
       return shouldShow;
     };
 
+    vm.shouldShowSearch = function() {
+      var settingsGroup = lobbySettingsList[getCurrentWizardStep().groupKey];
+      return settingsGroup && settingsGroup.filterable;
+    };
+
     if ($state.current.name === 'lobby-create') {
       vm.goToNext();
     }
+
+    $rootScope.$on('$stateChangeSuccess',
+      function(event, toState, toParams, fromState) {
+        vm.searchString = '';
+        var searchInput = document.getElementById("search-input");
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }
+    );
 
     LobbyCreate.clearLobbySettings();
   }

@@ -1,8 +1,10 @@
 <md-grid-tile md-ink-ripple class="tile-card"
   md-colspan="{{format.important ? 8 : 4}}" md-rowspan="{{format.important ? 4 : 2}}"
-  ng-repeat="format in lobbyCreate.formats.options | orderBy:'title'"
+  ng-repeat="format in lobbyCreate.formats.options | filter:lobbyCreate.searchString | orderBy:'title'"
   ng-click="lobbyCreate.select(lobbyCreate.formats, format)"
-  ng-if="format.value!='debug' || $root.userProfile.role=='administrator'">
+  ng-if="format.value!='debug' || $root.userProfile.role=='administrator'"
+  ng-class="{'fade-in-top no-animate': !lobbyCreate.searchString}"
+  ng-style="{'animation-delay': 0.03 * ($index+1) + 's'}">
   <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg),
     linear-gradient(
         to top,

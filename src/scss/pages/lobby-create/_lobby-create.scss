@@ -1,26 +1,4 @@
 /*======================================
-              GENERAL STEPS
- =======================================*/
-
-.sidebar-link.already-filled span {
-  @include flex(row, space-between, center);
-  height: 100%;
-
-  &:after {
-    content: '';
-    display: inline-block;
-    margin-left: auto;
-    width: 20px;
-    height: 20px;
-    background: {
-      image: url(/assets/img/icon-check.svg);
-      size: cover;
-    };
-  }
-}
-
-
-/*======================================
                 HEADER
  =======================================*/
 
@@ -48,6 +26,28 @@
 
 
 /*======================================
+                SIDEBAR
+ =======================================*/
+
+.sidebar-link.already-filled span {
+  @include flex(row, space-between, center);
+  height: 100%;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    background: {
+      image: url(/assets/img/icon-check.svg);
+      size: cover;
+    };
+  }
+}
+
+
+/*======================================
               GENERAL STEPS
  =======================================*/
 
@@ -55,12 +55,36 @@
   margin: $padding-medium 0;
 }
 
+.search-filter {
+  @extend .sheet;
+  @extend .fade-in-top;
+  width: 100%;
+  padding: $padding-small $padding-medium;
+  z-index: 1;
+
+  md-input-container {
+    display: block;
+    margin: 0;
+
+    input {
+      border-style: hidden;      
+    }
+  }
+
+  &.ng-leave {
+    @extend .fade-out-top;
+  }
+}
+
 md-grid-tile.tile-card {
   @extend .sheet, .clickable;
   cursor: pointer;
   overflow: hidden;
   transition: background-color .2s ease-out,
-              box-shadow .2s ease-out;
+              box-shadow .2s ease-out,
+              //now for the repositioning animations
+              left .3s cubic-bezier(0.215, 0.61, 0.355, 1),
+              margin-top .3s cubic-bezier(0.215, 0.61, 0.355, 1);
 
   &:hover {
 
@@ -89,6 +113,9 @@ md-grid-tile.tile-card {
     }
   }
 
+  &.ng-leave {
+    @extend .scale-out;
+  }
 }
 
 .tile-card-mumble .tile-text {
@@ -151,6 +178,7 @@ md-grid-tile.tile-card {
 
  .tile-form {
    @include flex(column, flex-start, stretch);
+   @extend .fade-in-top;
    position: relative;
  }
 

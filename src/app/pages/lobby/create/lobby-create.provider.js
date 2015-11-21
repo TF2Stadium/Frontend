@@ -52,6 +52,7 @@
         formats: {
           key: 'type',
           title: 'Format',
+          filterable: true,
           options: [
             {
               value: '6s',
@@ -79,6 +80,7 @@
         maps: {
           key: 'map',
           title: 'Map',
+          filterable: true,
           options: [
             {
               value: 'cp_badlands',
@@ -182,6 +184,7 @@
         leagues: {
           key: 'league',
           title: 'League',
+          filterable: true,
           options: [
             {
               value: 'etf2l',
@@ -222,6 +225,7 @@
         whitelists: {
           key: 'whitelistID',
           title: 'Whitelist',
+          filterable: true,
           options: [
             {
               value: 3250,
@@ -352,6 +356,10 @@
       lobbyCreateService.set = function(key, value) {
         lobbyCreateService.settings[key] = value;
         $rootScope.$emit('lobby-create-settings-updated');
+      };
+
+      lobbyCreateService.deleteSetting = function(key) {
+        delete lobbyCreateService[key];
       };
 
       return lobbyCreateService;

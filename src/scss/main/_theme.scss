@@ -76,6 +76,10 @@ $themes-list: (
       &.clickable:hover {
         background-color: $hover-color;
       }
+
+      &:not(.flat):focus {
+        border: 2px solid $main-color;
+      }
     }
 
     %md-whiteframe-z1 {
