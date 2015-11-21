@@ -16,16 +16,16 @@
       because they're nested states
     */
     LobbyCreateProvider.wizardSteps = [
-      'format',
-      'map',
-      'league',
-      'whitelist',
-      'mumble',
-      'server'
+      {name: 'format',      groupKey: 'formats'},
+      {name: 'map',         groupKey: 'maps'},
+      {name: 'league',      groupKey: 'leagues'},
+      {name: 'whitelist',   groupKey: 'whitelists'},
+      {name: 'mumble',      groupKey: 'mumble'},
+      {name: 'server',      groupKey: 'server'}
     ];
 
     for (var i = 0; i < LobbyCreateProvider.wizardSteps.length; i++) {
-      var stepName = LobbyCreateProvider.wizardSteps[i];
+      var stepName = LobbyCreateProvider.wizardSteps[i].name;
       $stateProvider.state(stepName, {
         url: '/' + stepName,
         parent: 'lobby-create',
@@ -174,6 +174,9 @@
               important: true,
               'ultiduo': true
             }
+          ],
+          dependsOn: [
+            'formats'
           ]
         },
         leagues: {
@@ -211,6 +214,9 @@
               description: '',
               '6s': true
             },
+          ],
+          dependsOn: [
+            'formats'
           ]
         },
         whitelists: {
@@ -220,54 +226,58 @@
             {
               value: 3250,
               title: 'ETF2L Highlander (Season 8)',
-              league: 'etf2l',
-              format: 'highlander'
+              etf2l: true,
+              highlander: true
             },{
               value: 4498,
               title: 'ETF2L 6v6 (Season 22)',
-              league: 'etf2l',
-              format: '6s'
+              etf2l: true,
+              '6s': true
             },{
               value: 3951,
               title: 'UGC Highlander (Season 16)',
-              league: 'ugc',
-              format: 'highlander'
+              ugc: true,
+              highlander: true
             },{
               value: 4559,
               title: 'UGC 6v6 (Season 19)',
-              league: 'ugc',
-              format: '6s'
+              ugc: true,
+              '6s': true
             },{
               value: 3771,
               title: 'UGC 4v4 (Season 16)',
-              league: 'ugc',
-              format: '4v4'
+              ugc: true,
+              '4v4': true
             },{
               value: 3688,
               title: 'ESEA 6v6 (Season 19)',
-              league: 'esea',
-              format: '6s'
+              esea: true,
+              '6s': true
             },{
               value: 4034,
               title: 'ozfortress 6v6 (OWL 14)',
-              league: 'ozfortress',
-              format: '6s'
+              ozfortress: true,
+              '6s': true
             },{
               value: 3872,
               title: 'AsiaFortress 6v6 (Season 9)',
-              league: 'asia',
-              format: '6s'
+              asia: true,
+              '6s': true
             },{
               value: 3312,
               title: 'ETF2L Ultiduo',
-              league: 'etf2l',
-              format: 'ultiduo'
+              etf2l: true,
+              ultiduo: true
             },{
               value: 3759,
               title: 'ETF2L BBall',
-              league: 'etf2l',
-              format: 'bball'
+              etf2l: true,
+              bball: true
             }
+          ],
+          dependsOn: [
+            'formats',
+            'leagues'
           ]
         },
         mumble: {

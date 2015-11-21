@@ -2,7 +2,7 @@
   md-colspan="12" md-rowspan="2"
   ng-repeat="league in lobbyCreate.leagues.options"
   ng-click="lobbyCreate.select(lobbyCreate.leagues, league)"
-  ng-if="league[lobbyCreate.lobbySettings[lobbyCreate.formats.key]] || lobbyCreate.lobbySettings[lobbyCreate.formats.key]=='debug'">
+  ng-if="lobbyCreate.shouldShowOption(lobbyCreate.leagues, league)">
   <div class="tile-text">
     <h2>{{::league.title}}</h2>
     <span>{{::league.description}}</span>

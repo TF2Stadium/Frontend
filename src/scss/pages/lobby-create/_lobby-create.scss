@@ -1,3 +1,29 @@
+/*======================================
+              GENERAL STEPS
+ =======================================*/
+
+.sidebar-link.already-filled span {
+  @include flex(row, space-between, center);
+  height: 100%;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    background: {
+      image: url(/assets/img/icon-check.svg);
+      size: cover;
+    };
+  }
+}
+
+
+/*======================================
+                HEADER
+ =======================================*/
+
 .lobbycreate-text {
   @include flex (row, space-between, flex-end);
   flex-wrap: wrap;

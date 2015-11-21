@@ -3,9 +3,10 @@
     Steps
   </h1>
   <md-button class="sidebar-link"
-    ng-class="{'active' : $root.currentState==step}"
+    ng-class="{'active' : $root.currentState===step.name, 'already-filled' : wizardSteps.isAlreadyFilled(step)}"
     ng-repeat="step in wizardSteps.steps"
-    ui-sref="{{wizardSteps.isEnabled(step) ? step : ''}}">
-    {{step}}
+    ng-disabled="!wizardSteps.isEnabled(step)"
+    ui-sref="{{step.name}}">
+    {{step.name}}
   </md-button>
 </div>

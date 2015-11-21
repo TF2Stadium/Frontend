@@ -190,6 +190,12 @@ $themes-list: (
       background-color: $main-color;
     }
 
+    .sidebar-link {
+      //Stupid angular-material added an !important clause
+      //for ng-disabled buttons that made me did this
+      color: $text-color-medium !important;
+    }
+
     .sidebar-link.active {
       color: #fff !important;
       background: $main-color;
