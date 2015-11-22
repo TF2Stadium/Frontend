@@ -30,11 +30,21 @@
   </div>
   <div class="server-verify-message"
     ng-if="lobbyCreate.verifiedServer">
-    <img src="/assets/img/icon-check.svg">
-    <span>The server is ready to be configured and used</span>
+    <img ng-if="!lobbyCreate.requestSent"
+      src="/assets/img/icon-check.svg">
+    <span ng-if="!lobbyCreate.requestSent">
+      The server is ready to be configured and used
+    </span>
     <md-button class="md-raised md-primary"
+      ng-if="!lobbyCreate.requestSent"
       ng-click="lobbyCreate.create()">
       Create the lobby!
-    </md-button>
+    </md-button>    
+    <span ng-if="lobbyCreate.requestSent">
+      Configuring server...
+    </span>
+    <md-progress-circular md-mode="indeterminate"
+      ng-if="lobbyCreate.requestSent">
+    </md-progress-circular>
   </div>
 </div>

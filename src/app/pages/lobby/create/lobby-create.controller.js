@@ -41,7 +41,12 @@
     };
 
     vm.create = function() {
-      LobbyCreate.create(vm.lobbySettings);
+      LobbyCreate.create(vm.lobbySettings, function(response) {
+        if (!response.success) {
+          vm.requestSent = false;
+        }
+      });
+      vm.requestSent = true;
     };
 
     vm.verifyServer = function() {
