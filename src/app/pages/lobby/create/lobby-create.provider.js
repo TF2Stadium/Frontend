@@ -46,7 +46,7 @@
     lobbyCreateProvider.wizardSteps = {};
 
     /** @ngInject */
-    var lobbyCreateService = function(Websocket, $state, $rootScope) {
+    var lobbyCreateService = function(Websocket, $state, $rootScope, $filter) {
 
       var lobbySettingsList = {
         formats: {
@@ -303,6 +303,27 @@
 
       lobbyCreateService.settings = {};
 
+      var deleteSetting = function(key) {
+        delete lobbyCreateService.settings[key];
+        $rootScope.$emit('lobby-create-settings-updated');
+      };
+
+      /*
+        Receives a field (e.g. lobbySettingsList.maps) and an option value
+        (e.g. 'pl_upward'), finds the option in the field and checks
+        if it's valid
+      */
+      var isSettingValid = function(fieldKey, optionValue) {
+        var isValid = false;
+        var field = lobbySettingsList[fieldKey];
+        field.options.forEach(function(option) {
+          if (option.value === optionValue) {
+            isValid = $filter('LobbyCreateOptionFilter')([option], fieldKey,'')[0];
+          }
+        });
+        return isValid;
+      };
+
       lobbyCreateService.subscribe = function(request, scope, callback) {
         var handler = $rootScope.$on(request, callback);
         scope.$on('$destroy', handler);
@@ -356,10 +377,21 @@
       lobbyCreateService.set = function(key, value) {
         lobbyCreateService.settings[key] = value;
         $rootScope.$emit('lobby-create-settings-updated');
-      };
 
-      lobbyCreateService.deleteSetting = function(key) {
-        delete lobbyCreateService[key];
+        //If we select something, we need to check if the next steps
+        //have already been selected, and if they have, check that they're valid
+        var checks = [
+          {fieldKey: 'maps', optionName: lobbyCreateService.settings.map},
+          {fieldKey: 'leagues', optionName: lobbyCreateService.settings.league},
+          {fieldKey: 'whitelists', optionName: lobbyCreateService.settings.whitelistID}        
+        ];
+
+        checks.forEach(function(check) {
+          if (!isSettingValid(check.fieldKey, check.optionName)) {
+            var field = lobbySettingsList[check.fieldKey];
+            deleteSetting(field.key);
+          }
+        });
       };
 
       return lobbyCreateService;

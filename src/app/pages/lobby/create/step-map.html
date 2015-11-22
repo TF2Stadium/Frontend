@@ -1,9 +1,8 @@
 <md-grid-tile md-ink-ripple class="tile-card"
   md-colspan="{{map.important ? 6 : 6}}"  md-rowspan="{{map.important ? 4 : 2}}"
-  ng-repeat="map in lobbyCreate.maps.options | filter:lobbyCreate.searchString | orderBy:'name'"
+  ng-repeat="map in lobbyCreate.maps.options | LobbyCreateOptionFilter:'maps':lobbyCreate.searchString"
   ng-click="lobbyCreate.select(lobbyCreate.maps, map)"
-  ng-if="lobbyCreate.shouldShowOption(lobbyCreate.maps, map)"
-  ng-class="{'fade-in-top no-animate': !lobbyCreate.searchString}"
+  ng-class="{'fade-in-top no-animate': lobbyCreate.searchString===null}"
   ng-style="{'animation-delay': 0.03 * ($index+1) + 's'}">
   <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/maps/lobby-create/' + map.value + '.jpg)'}"></div>
   <div class="tile-text">

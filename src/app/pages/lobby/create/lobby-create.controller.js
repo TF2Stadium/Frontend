@@ -40,21 +40,6 @@
       return nextStep;
     };
 
-    /*
-      Receives a field (e.g. lobbySettingsList.maps) and an option value
-      (e.g. 'pl_upward'), finds the option in the field and checks
-      if it's valid
-    */
-    var isSettingValid = function(field, optionValue) {
-      var isValid = false;
-      field.options.forEach(function(option) {
-        if (option.value === optionValue) {
-          isValid = vm.shouldShowOption(field, option);
-        }
-      });
-      return isValid;
-    };
-
     vm.create = function() {
       LobbyCreate.create(vm.lobbySettings);
     };
@@ -69,40 +54,11 @@
 
     vm.select = function(field, option) {
       LobbyCreate.set(field.key, option.value);
-
-      //If we select something, we need to check if the next steps
-      //have already been selected, and if they have, check that they're valid
-      var checks = [
-        {field: lobbySettingsList.maps, optionName: vm.lobbySettings.map},
-        {field: lobbySettingsList.leagues, optionName: vm.lobbySettings.league},
-        {field: lobbySettingsList.whitelists, optionName: vm.lobbySettings.whitelistID}        
-      ];
-
-      checks.forEach(function(check) {
-        if (!isSettingValid(check.field, check.optionName)) {
-          LobbyCreate.deleteSetting(check.field.key);
-        }
-      });
-
       vm.goToNext();
     };
 
     vm.goToNext = function() {
       $state.go(getNextWizardStep().name);
-    };
-
-    /*
-      Looks at the other fields this option depends on in lobbySettingsList,
-      then checks for each one of them
-    */
-    vm.shouldShowOption = function(optionGroup, option) {
-      var shouldShow = option; //checks for empty option
-      optionGroup.dependsOn.forEach(function(dependencyName) { //e.g. 'formats'
-        var dependencyKey = lobbySettingsList[dependencyName].key; //e.g. 'type'
-        var dependency = vm.lobbySettings[dependencyKey]; //e.g. 'highlander'
-        shouldShow = shouldShow && option[dependency];
-      });
-      return shouldShow;
     };
 
     vm.shouldShowSearch = function() {
@@ -116,7 +72,7 @@
 
     $rootScope.$on('$stateChangeSuccess',
       function(event, toState, toParams, fromState) {
-        vm.searchString = '';
+        vm.searchString = null;
         var searchInput = document.getElementById("search-input");
         if (searchInput) {
           searchInput.focus();
