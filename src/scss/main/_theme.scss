@@ -290,7 +290,7 @@ $themes-list: (
     }
 
     //LOBBY-CREATE
-    .tile-card:hover .tile-text {
+    .tile-card:hover .tile-image ~ .tile-text {
       color: $main-color;
     }
 
