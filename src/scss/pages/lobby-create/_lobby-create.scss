@@ -1,3 +1,7 @@
+/*======================================
+                HEADER
+ =======================================*/
+
 .lobbycreate-text {
   @include flex (row, space-between, flex-end);
   flex-wrap: wrap;
@@ -22,6 +26,28 @@
 
 
 /*======================================
+                SIDEBAR
+ =======================================*/
+
+.sidebar-link.already-filled span {
+  @include flex(row, space-between, center);
+  height: 100%;
+
+  &:after {
+    content: '';
+    display: inline-block;
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    background: {
+      image: url(/assets/img/icon-check.svg);
+      size: cover;
+    };
+  }
+}
+
+
+/*======================================
               GENERAL STEPS
  =======================================*/
 
@@ -29,12 +55,36 @@
   margin: $padding-medium 0;
 }
 
+.search-filter {
+  @extend .sheet;
+  @extend .fade-in-top;
+  width: 100%;
+  padding: $padding-small $padding-medium;
+  z-index: 1;
+
+  md-input-container {
+    display: block;
+    margin: 0;
+
+    input {
+      border-style: hidden;      
+    }
+  }
+
+  &.ng-leave {
+    @extend .fade-out-top;
+  }
+}
+
 md-grid-tile.tile-card {
   @extend .sheet, .clickable;
   cursor: pointer;
   overflow: hidden;
   transition: background-color .2s ease-out,
-              box-shadow .2s ease-out;
+              box-shadow .2s ease-out,
+              //now for the repositioning animations
+              left .3s cubic-bezier(0.215, 0.61, 0.355, 1),
+              margin-top .3s cubic-bezier(0.215, 0.61, 0.355, 1);
 
   &:hover {
 
@@ -63,6 +113,9 @@ md-grid-tile.tile-card {
     }
   }
 
+  &.ng-leave {
+    @extend .scale-out;
+  }
 }
 
 .tile-card-mumble .tile-text {
@@ -123,55 +176,69 @@ md-grid-tile.tile-card {
               SERVER STEP
  =======================================*/
 
- .tile-form {
+.tile-form {
    @include flex(column, flex-start, stretch);
+   @extend .fade-in-top;
    position: relative;
- }
+}
 
- .server-form {
-   @include flex(column, center, center);
-   @extend .sheet;
-   padding: $padding-medium;
-   z-index: 1;
- }
+.server-form {
+  @include flex(column, center, center);
+  @extend .sheet;
+  padding: $padding-medium $padding-big * 2;
+  z-index: 1;
 
- .server-verify-message {
-   @include flex(column, center, center);
-   @extend .sheet;
-   padding: $padding-medium;
+  md-input-container {
+    width: 100%;
+    margin-top: 0;
+  }
 
-   img {
-     height: 100px;
-     width: 100px;
-   }
+  input {
+    text-align: center;
+  }
 
-   span {
-     padding: $padding-small;
-   }
+  md-checkbox {
+    margin-top: 0;    
+  }
+}
 
-   &.ng-enter {
-     transition: all .2s .2s ease-out;
-   }
+.server-verify-message {
+  @include flex(column, center, center);
+  @extend .sheet;
+  padding: $padding-medium;
 
-   &.ng-leave {
-     transition: all .2s ease-out;
-   }
+  img {
+    height: 100px;
+    width: 100px;
+  }
 
-   &.ng-animate {
-     position: absolute;
-     right: 0;
-     left: 0;
-   }
+  span {
+    padding: $padding-small;
+  }
 
-   &.ng-enter,
-   &.ng-leave.ng-leave-active {
-     transform: translateY(-100%);
-     opacity: 0;
-   }
+  &.ng-enter {
+    transition: all .2s .2s ease-out;
+  }
 
-   &.ng-enter.ng-enter-active,
-   &.ng-leave {
-     transform: translateY(0);
-     opacity: 1;
-   }
- }
+  &.ng-leave {
+    transition: all .2s ease-out;
+  }
+
+  &.ng-animate {
+    position: absolute;
+    right: 0;
+    left: 0;
+  }
+
+  &.ng-enter,
+  &.ng-leave.ng-leave-active {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  &.ng-enter.ng-enter-active,
+  &.ng-leave {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

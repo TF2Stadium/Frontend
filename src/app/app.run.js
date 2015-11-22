@@ -15,9 +15,12 @@
         $rootScope.currentState = toState.name;
 
         //Forbid direct navigation to children states
-        if (!fromState.name && toState.parent === 'lobby-create') {
-          event.preventDefault();
-          $state.go(toState.parent, toParams);
+        if (toState.parent === 'lobby-create') {
+          //We allow navigation from the children states to other children states
+          if (fromState.parent !== 'lobby-create' && fromState.name !== 'lobby-create') {
+            event.preventDefault();
+            $state.go(toState.parent, toParams);
+          }
         }
 
         if (toState.redirectTo) {
