@@ -87,13 +87,8 @@ md-grid-tile.tile-card {
               margin-top .3s cubic-bezier(0.215, 0.61, 0.355, 1);
 
   &:hover {
-
     .tile-text {
       transform: translateY(0);
-    }
-
-    .tile-image ~ .tile-text {
-      color: #9cf;
     }
 
     .tile-image:after {
@@ -151,7 +146,6 @@ md-grid-tile.tile-card {
     content:"";
     width: 100%;
     padding-bottom: 100%; //makes the height equal to the width
-    background: #fff;
     border-radius: 50%;
     transition: all .2s ease-out;
     transform-origin: 50% 50%;

@@ -289,5 +289,14 @@ $themes-list: (
       color: white;
     }
 
+    //LOBBY-CREATE
+    .tile-card:hover .tile-text {
+      color: $main-color;
+    }
+
+    .tile-image:after {
+      background-color: $sheet-color;
+    }
+
   }
 }
