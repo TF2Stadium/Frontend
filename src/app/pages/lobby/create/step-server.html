@@ -5,11 +5,19 @@
         ng-change="lobbyCreate.verifiedServer=false"
         placeholder="Server address">
     </md-input-container>
-    <md-input-container md-no-float>
+    <md-input-container md-no-float
+      ng-show="!showPassword">
       <input type="password" ng-model="lobbyCreate.lobbySettings.rconpwd"
         ng-change="lobbyCreate.verifiedServer=false"
         placeholder="Server RCON password">
     </md-input-container>
+    <md-input-container md-no-float
+      ng-show="showPassword">
+      <input type="text" ng-model="lobbyCreate.lobbySettings.rconpwd"
+        ng-change="lobbyCreate.verifiedServer=false"
+        placeholder="Server RCON password">
+    </md-input-container>
+    <md-checkbox ng-model="showPassword">Show password</md-checkbox>
     <md-button ng-class="{'md-raised md-primary' : !lobbyCreate.verifiedServer}"
       ng-click="lobbyCreate.verifyServer(serverAdress, serverPassword)">
       Verify server
