@@ -9,7 +9,10 @@
   function LobbyListController($scope, LobbyService) {
     var vm = this;
 
-    vm.lobbies=LobbyService.getList();
+    vm.lobbies = LobbyService.getList();
+    LobbyService.subscribe('lobby-list-updated', $scope, function() {
+      vm.lobbies = LobbyService.getList();
+    });
 
     vm.join = function (lobby, team, position, event) {
       event.preventDefault();
