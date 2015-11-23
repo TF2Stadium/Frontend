@@ -64,7 +64,7 @@
         return;
       }
 
-      if (document.hasFocus() || Notification.permission === 'denied') {
+      if ((document.hasFocus() && !options.showAlways) || Notification.permission === 'denied') {
         return;
       }
 

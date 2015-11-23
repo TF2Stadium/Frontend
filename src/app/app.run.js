@@ -67,6 +67,25 @@
       }
     }
 
+    //We check if the user allowed us to show notifications
+    //If he didn't set the permissions yet, we ask him to do so
+    $timeout(function() {
+      if (Notification.permission !== 'default') {
+        return;
+      }
+      Notifications.toast({
+        message: 'You need to allow us to show you browser notifications',
+        actionMessage: 'Set permissions',
+        action: function() {
+          Notifications.notifyBrowser({
+            title: 'HTML5 notifications enabled!',
+            timeout: 3,
+            showAlways: true
+          });
+          }
+        });
+    }, 2000);
+
   }
 
 })();
