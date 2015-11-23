@@ -1,3 +1,16 @@
+<div id="subList" ng-controller="SubListController as vm">
+  <div class="substitute md-button" md-ink-ripple
+    ng-repeat="sub in vm.subList"
+    ng-click="lobbyList.join(sub.id, sub.team, sub.class, $event)">
+      <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
+      <span>
+        {{sub.region}} {{sub.type}} {{sub.class | stripSlotNameNumber}} needed in {{sub.map}}.
+        Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required
+      </span>
+      <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
+    </div>
+  </div>
+</div>
 <a md-ink-ripple
   ng-repeat="lobbyInformation in lobbyList.lobbies | LobbyListSettingsFilter track by lobbyInformation.id"
   class="lobby-row"
