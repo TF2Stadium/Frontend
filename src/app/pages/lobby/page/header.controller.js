@@ -24,8 +24,9 @@
     };
 
     vm.shouldShowLobbyControls = function() {
-      return vm.lobbyInformation.state < 5 &&
-        $rootScope.userProfile.steamid === vm.lobbyInformation.leader.steamid || $rootScope.userProfile.role == 'administrator';
+      return vm.lobbyInformation.state < 5 && $rootScope.userProfile &&
+        ($rootScope.userProfile.steamid === vm.lobbyInformation.leader.steamid ||
+         $rootScope.userProfile.role == 'administrator');
     };
 
     vm.shouldShowProgress = function() {
