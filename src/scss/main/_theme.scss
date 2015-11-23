@@ -76,6 +76,10 @@ $themes-list: (
       &.clickable:hover {
         background-color: $hover-color;
       }
+
+      &:not(.flat):focus {
+        border: 2px solid $main-color;
+      }
     }
 
     %md-whiteframe-z1 {
@@ -190,6 +194,12 @@ $themes-list: (
       background-color: $main-color;
     }
 
+    .sidebar-link {
+      //Stupid angular-material added an !important clause
+      //for ng-disabled buttons that made me did this
+      color: $text-color-medium !important;
+    }
+
     .sidebar-link.active {
       color: #fff !important;
       background: $main-color;
@@ -277,6 +287,15 @@ $themes-list: (
 
     .lobby-image span {
       color: white;
+    }
+
+    //LOBBY-CREATE
+    .tile-card:hover .tile-image ~ .tile-text {
+      color: $main-color;
+    }
+
+    .tile-image:after {
+      background-color: $sheet-color;
     }
 
   }

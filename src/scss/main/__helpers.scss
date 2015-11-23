@@ -47,7 +47,6 @@
 }
 
 .no-animate {
-  -webkit-transition: none !important;
   transition: none !important;
 }
 
@@ -63,6 +62,10 @@
   transition: box-shadow .2s ease-out;
 
   &:not(.flat):hover {
+    @extend %md-whiteframe-z3;
+  }
+
+  &:not(.flat):focus {
     @extend %md-whiteframe-z3;
   }
 
