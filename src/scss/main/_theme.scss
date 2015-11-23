@@ -67,6 +67,10 @@ $themes-list: (
       &.error {
         background-color: #f99;
         color: #fff;
+
+        .md-button {
+          color: #fff;
+        }
       }
     }
 

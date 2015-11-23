@@ -17,15 +17,16 @@
     var toastDefault = {
       templateUrl: 'app/shared/notifications/toast.html',
       message: 'Default',
+      actionMessage: 'OK',
       action: function() {
-        angular.noop();
+        $mdToast.hide();
       },
       controller: 'ToastController',
       controllerAs: 'toast',
       bindToController: true,
       error: false,
       parent: $document[0].querySelector('#toasts'),
-      hideDelay: 3000
+      hideDelay: 0
     };
 
     notificationsService.add = function(message, level) {
@@ -55,7 +56,7 @@
       }
       $mdToast.show(options);
     };
-
+    
     notificationsService.notifyBrowser = function(options) {
 
       if (!("Notification" in window)) {
