@@ -8,11 +8,10 @@
   function ToastController($mdToast) {
     var vm = this;
 
-    vm.hide = function() {
+    vm.executeAction = function() {
       vm.action();
       $mdToast.hide();
-    };
-
+    }
   }
 
 })();
