@@ -147,24 +147,56 @@
 
 
 /* ==================================
+            SUBSTITUTES
+   ================================== */
+
+.substitute {
+  @include flex (row, center, center);
+  @extend .sheet, .clickable;
+  width: 100%;
+  text-align: center;
+  height: 40px;
+  margin: 0 0 $padding-small;
+  padding: $padding-small*.75 0;
+  position: relative;
+
+  .icon {
+    height: 100%;
+    width: 50px;
+    background: {
+      repeat: no-repeat;
+      position: center;
+      size: contain;
+    }
+  }
+}
+
+/* ==================================
                 TOASTS
    ================================== */
 
 .toast {
-  @include flex (row, center, center);
+  //@include flex (row, space-between, center);
   height: $toast-height;
   width: 100%;
   margin: 0;
-  margin-top: $toast-top;
-  transition: all .15s ease-out;
-  border-radius: 3px;
+  max-width: $full-width;
+  bottom: 0 !important;
+  will-change: transform;
+  transition: all .3s .15s ease-out;
+  border-radius: 0;
+
+  span {
+    flex: 1;
+    text-align: center;
+  }
 
   &.ng-leave {
     transition: all .15s ease-out;
   }
 
   &.ng-enter, &.ng-leave.ng-leave-active {
-    transform: translateY(- $toast-top - $toast-height);
+    transform: translateY(100%);
   }
 
   &.ng.enter.ng-enter-active, &.ng-leave {

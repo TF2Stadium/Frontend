@@ -5,7 +5,7 @@
   app.controller('LobbyCreateController', LobbyCreateController);
 
   /** @ngInject */
-  function LobbyCreateController(LobbyCreate, $state, $scope) {
+  function LobbyCreateController(LobbyCreate, $state, $scope, $rootScope) {
 
     var vm = this;
 
@@ -20,8 +20,33 @@
       vm.lobbySettings = LobbyCreate.getLobbySettings();
     });
 
+    var getCurrentWizardStep = function() {
+      var currentStep = vm.wizardSteps[0];
+      vm.wizardSteps.forEach(function(wizardStep, index) {
+        if (wizardStep.name === $state.current.name) {
+          currentStep = wizardStep;
+        }
+      });
+      return currentStep;
+    };
+
+    var getNextWizardStep = function() {
+      var nextStep = vm.wizardSteps[0];
+      vm.wizardSteps.forEach(function(wizardStep, index) {
+        if (wizardStep.name === $state.current.name) {
+          nextStep = vm.wizardSteps[index + 1];
+        }
+      });
+      return nextStep;
+    };
+
     vm.create = function() {
-      LobbyCreate.create(vm.lobbySettings);
+      LobbyCreate.create(vm.lobbySettings, function(response) {
+        if (!response.success) {
+          vm.requestSent = false;
+        }
+      });
+      vm.requestSent = true;
     };
 
     vm.verifyServer = function() {
@@ -38,15 +63,27 @@
     };
 
     vm.goToNext = function() {
-      var stepState, nextStepState;
-      stepState = $state.current.name;
-      nextStepState = vm.wizardSteps[vm.wizardSteps.indexOf(stepState) + 1];
-      $state.go(nextStepState);
+      $state.go(getNextWizardStep().name);
+    };
+
+    vm.shouldShowSearch = function() {
+      var settingsGroup = lobbySettingsList[getCurrentWizardStep().groupKey];
+      return settingsGroup && settingsGroup.filterable;
     };
 
     if ($state.current.name === 'lobby-create') {
       vm.goToNext();
     }
+
+    $rootScope.$on('$stateChangeSuccess',
+      function(event, toState, toParams, fromState) {
+        vm.searchString = null;
+        var searchInput = document.getElementById("search-input");
+        if (searchInput) {
+          searchInput.focus();
+        }
+      }
+    );
 
     LobbyCreate.clearLobbySettings();
   }

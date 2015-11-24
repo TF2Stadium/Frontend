@@ -1,5 +1,9 @@
-<div class="toast"
-  ng-class="{'error' : toast.error}"
-  ng-click="toast.hide()">
-  {{::toast.message}}
-</div>
+<md-toast class="toast"
+  ng-class="{'error' : toast.error}">
+  <span>{{::toast.message}}</span>
+  <md-button class="md-action"
+    ng-if="toast.action"
+    ng-click="toast.executeAction()">
+    {{::toast.actionMessage}}
+  </md-button>
+</md-toast>

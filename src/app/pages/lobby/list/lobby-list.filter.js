@@ -32,7 +32,7 @@
 
     return function(lobbies) {
 
-      var filteredList = {};
+      var filteredList = [];
 
       for (var key in lobbies) {
         var lobby = lobbies[key];
@@ -50,7 +50,7 @@
             availableClasses.some(playerPlaysClass)
 
             || (Config.debug && lobby.type === 'Debug')) {
-          filteredList[key] = lobby;
+          filteredList.push(lobby);
         }
       }
 

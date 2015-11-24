@@ -1,3 +1,18 @@
+/*======================================
+              EMPTY-STATE
+ =======================================*/
+
+.lobby-list-empty-state {
+  font-size: 1.2rem;
+  width: 100%;
+  text-align: center;
+}
+
+
+/*======================================
+              LOBBY-ROW
+ =======================================*/
+
 .lobby-row {
   @include flex (row, space-between, stretch);
   @extend .sheet, .clickable;

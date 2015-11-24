@@ -15,9 +15,12 @@
         $rootScope.currentState = toState.name;
 
         //Forbid direct navigation to children states
-        if (!fromState.name && toState.parent === 'lobby-create') {
-          event.preventDefault();
-          $state.go(toState.parent, toParams);
+        if (toState.parent === 'lobby-create') {
+          //We allow navigation from the children states to other children states
+          if (fromState.parent !== 'lobby-create' && fromState.name !== 'lobby-create') {
+            event.preventDefault();
+            $state.go(toState.parent, toParams);
+          }
         }
 
         if (toState.redirectTo) {
@@ -63,6 +66,25 @@
         $mdDialog.hide();
       }
     }
+
+    //We check if the user allowed us to show notifications
+    //If he didn't set the permissions yet, we ask him to do so
+    $timeout(function() {
+      if (Notification.permission !== 'default') {
+        return;
+      }
+      Notifications.toast({
+        message: 'You need to allow us to show you browser notifications',
+        actionMessage: 'Set permissions',
+        action: function() {
+          Notifications.notifyBrowser({
+            title: 'HTML5 notifications enabled!',
+            timeout: 3,
+            showAlways: true
+          });
+          }
+        });
+    }, 2000);
 
   }
 

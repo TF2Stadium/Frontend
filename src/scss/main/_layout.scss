@@ -6,7 +6,7 @@
 
 body {
   @include flex (column, flex-start, center);
-  overflow-y: auto !important;
+  overflow-y: hidden !important;
   //angular adds overflow-y:scroll when activating md-select for some reason
 }
 
@@ -135,9 +135,7 @@ body {
 }
 
 #toasts {
-  width: $commentbox-width;
-  margin-left: $content-width;
-  height: 0; //black magic
+  width: $full-width;
   z-index: 70;
 }
 
@@ -231,5 +229,14 @@ main {
   //no matter what the header height is
   margin-top: $commentbox-top + $navbar-height - $header-height;
   min-height: $commentbox-height;
+  padding: $padding-medium;
+}
+
+
+/*======================================
+                OTHERS
+=======================================*/
+
+md-dialog-content {
   padding: $padding-medium;
 }

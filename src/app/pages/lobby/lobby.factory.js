@@ -16,6 +16,7 @@
     factory.lobbySpectatedId = -1;
     factory.lobbyJoinedId = -1;
 
+    factory.subList = {};
     factory.lobbyJoinInformation = {};
 
     var playerPreReady = false;
@@ -24,6 +25,10 @@
 
     factory.getLobbyJoinInformation = function() {
       return factory.lobbyJoinInformation;
+    };
+
+    factory.getSubList = function() {
+      return factory.subList;
     };
 
     factory.getList = function() {
@@ -219,6 +224,11 @@
           }
         }
       });
+    });
+
+    Websocket.onJSON('subListData', function(data) {
+      factory.subList = data.data;
+      $rootScope.$emit('sub-list-updated');
     });
 
     Websocket.onJSON('lobbyListData', function(data) {

@@ -1,10 +1,9 @@
 <md-grid-tile md-ink-ripple class="tile-card"
   md-colspan="12" md-rowspan="2"
-  ng-repeat="whitelist in lobbyCreate.whitelists.options"
+  ng-repeat="whitelist in lobbyCreate.whitelists.options | LobbyCreateOptionFilter:'whitelists':lobbyCreate.searchString"
   ng-click="lobbyCreate.select(lobbyCreate.whitelists, whitelist)"
-  ng-if="whitelist.format==lobbyCreate.lobbySettings[lobbyCreate.formats.key]
-         && whitelist.league==lobbyCreate.lobbySettings[lobbyCreate.leagues.key]
-         || lobbyCreate.lobbySettings[lobbyCreate.formats.key]=='debug'">
+  ng-class="{'fade-in-top no-animate': lobbyCreate.searchString===null}"
+  ng-style="{'animation-delay': 0.03 * ($index+1) + 's'}">
   <div class="tile-text">
     <h2>{{::whitelist.title}}</h2>
   </div>
