@@ -57,19 +57,14 @@ $themes-list: (
      =======================================*/
 
     .toast {
-      background-color: $sheet-color;
-      color: $text-color-medium;
-
-      &:hover {
-        background-color: $hover-color;
-      }
+      color: $white-dirty;
 
       &.error {
-        background-color: #f99;
-        color: #fff;
+        background-color: #f77;
+        color: $white;
 
         .md-button {
-          color: #fff;
+          color: $white;
         }
       }
     }
@@ -136,7 +131,7 @@ $themes-list: (
       }
     }
 
-    .md-button {
+    .md-button:not(.md-action) {
       color: $text-color-medium;
     }
 
