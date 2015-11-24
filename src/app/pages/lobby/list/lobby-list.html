@@ -11,8 +11,18 @@
     </div>
   </div>
 </div>
+<div class="lobby-list-empty-state"
+  ng-if="filteredLobbies.length === 0">
+  <h1>There are no lobbies up right now</h1>
+  <p>Why don't you try <a ui-sref="filters">changing your filter settings</a> or creating a new one?</p>
+  <md-button
+    class="md-raised md-primary"
+    ui-sref="lobby-create">
+    Create a lobby
+  </md-button>
+</div>
 <a md-ink-ripple
-  ng-repeat="lobbyInformation in lobbyList.lobbies | LobbyListSettingsFilter track by lobbyInformation.id"
+  ng-repeat="lobbyInformation in lobbyList.lobbies | LobbyListSettingsFilter as filteredLobbies track by lobbyInformation.id"
   class="lobby-row"
   ui-sref="lobby-page({lobbyID: lobbyInformation.id})">
   <div class="lobby-image" ng-style="{'background-image':'url(/assets/img/maps/lobby-row/' + lobbyInformation.map + '.jpg)'}">
