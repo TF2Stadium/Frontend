@@ -232,10 +232,7 @@
     });
 
     Websocket.onJSON('lobbyClosed', function(data) {
-      factory.lobbySpectated = {};
       Notifications.toast({message: 'The lobby was closed'});
-      $rootScope.$emit('lobby-spectated-updated');
-      $rootScope.$emit('lobby-spectated-changed');
       $rootScope.$emit('lobby-closed');
     });
 
