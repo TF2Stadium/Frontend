@@ -4,7 +4,13 @@
   angular.module('tf2stadium.services').factory('ChatService', ChatService);
 
   // Persistent map of room id -> messages list
-  var chatRoomLogs = {};
+  var chatRoomLogs = Object.create(null);
+  function getChatRoom(id) {
+    if (!angular.isDefined(chatRoomLogs[id])) {
+      chatRoomLogs[id] = [];
+    }
+    return chatRoomLogs[id];
+  }
 
   function ChatRoom(id) {
     this.changeRoom(angular.isDefined(id)? id : -1);
@@ -13,11 +19,7 @@
   ChatRoom.prototype.changeRoom = function chageRoom(id) {
     if (id !== this.id) {
       this.id = id;
-      if (chatRoomLogs.hasOwnProperty(id)) {
-        this.messages = chatRoomLogs[id];
-      } else {
-        this.messages = chatRoomLogs[id] = [];
-      }
+      this.messages = getChatRoom(id);
     }
   };
 
@@ -62,18 +64,14 @@
     });
 
     Websocket.onJSON('chatReceive', function (message) {
-      if (chatRoomLogs.hasOwnProperty(message.room)) {
-        chatRoomLogs[message.room].push(message);
-      } else {
-        chatRoomLogs[message.room] = [message];
-      }
+      getChatRoom(message.room).push(message);
     });
 
     Websocket.onJSON('chatHistoryClear', function(data) {
       // Note: ChatRooms may have pointers to the arrays in
       // chatRoomLogs, so we have to mutate the actual logs rather
       // than just assign a new empty array.
-      chatRoomLogs[data.room].length = 0;
+      getChatRoom(data.room).length = 0;
     });
 
     return factory;
