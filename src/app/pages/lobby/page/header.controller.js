@@ -19,6 +19,10 @@
       LobbyService.closeLobby(vm.lobbyInformation.id);
     };
 
+    vm.resetServer = function() {
+      LobbyService.resetServer(vm.lobbyInformation.id);
+    };
+
     vm.shouldShowLobbyInformation = function() {
       return !error && (vm.lobbyInformation && vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID));
     };

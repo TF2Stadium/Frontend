@@ -155,6 +155,10 @@
       Websocket.emitJSON('lobbyClose', {id: lobbyID});
     };
 
+    factory.resetServer = function(lobbyID) {
+      Websocket.emitJSON('lobbyServerReset', {id: lobbyID});
+    };
+
     factory.joinTF2Server = function() {
       $timeout(function(){
         window.open('steam://connect/' + factory.lobbyJoinInformation.game.host + '/' + factory.lobbyJoinInformation.password, '_self');
@@ -281,6 +285,8 @@
       }
       $rootScope.$emit('lobby-spectated-updated');
       $rootScope.$emit('lobby-spectated-changed');
+
+      Notifications.toast({message: 'The lobby was closed'});
       $rootScope.$emit('lobby-closed');
     });
 
