@@ -279,13 +279,6 @@
     });
 
     Websocket.onJSON('lobbyClosed', function(data) {
-      factory.lobbySpectatedId = -1;
-      if($state.current.name === 'lobby-page') {
-        $state.go('lobby-list');
-      }
-      $rootScope.$emit('lobby-spectated-updated');
-      $rootScope.$emit('lobby-spectated-changed');
-
       Notifications.toast({message: 'The lobby was closed'});
       $rootScope.$emit('lobby-closed');
     });
