@@ -22,7 +22,16 @@
         return;
       }
 
-      var room = vm.rooms[vm.currentTab].id;
+      var tabId = vm.currentTab;
+      if (tabId === 1 && vm.rooms[1].id === -1) {
+        // If we're on the main screen, and we're joined in a lobby
+        // but not spectating one, then the only two visible tabs will
+        // be general chat and "your lobby" chat, so the 2nd displayed
+        // tab is the normally 3rd tab
+        tabId = 2;
+      }
+
+      var room = vm.rooms[tabId].id;
       ChatService.send(vm.messageBox, room);
 
       vm.messageBox = '';
