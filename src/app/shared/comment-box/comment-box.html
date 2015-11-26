@@ -6,6 +6,8 @@
     <md-tabs flex
              class="chat-tabs"
              md-selected="commentBox.currentTab"
+             md-autoselect="true"
+             md-enable-disconnect="true"
              md-stretch-tabs="always">
       <md-tab ng-repeat="room in commentBox.rooms | unique:'id'"
               ng-if="room.id > -1">

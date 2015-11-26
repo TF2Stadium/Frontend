@@ -6,10 +6,14 @@
     .controller('CommentBoxController', CommentBoxController);
 
   /** @ngInject */
-  function CommentBoxController ($rootScope, Websocket, ChatService, Notifications) {
+  function CommentBoxController ($rootScope, Websocket, ChatService, Notifications, $timeout) {
     var vm = this;
 
-    vm.rooms = ChatService.getRooms();
+    //The $timeout makes sure the last tab (lobbyJoined tab)
+    //will get selected on load thanks to md-autoselect
+    $timeout(function(){
+      vm.rooms = ChatService.getRooms();
+    }, 0);
     vm.currentTab = 0;
 
     vm.sendMessage = function(event) {

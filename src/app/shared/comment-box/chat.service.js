@@ -38,7 +38,7 @@
 
     joinedChatRoom.joined = true;
 
-    var rooms = [globalChatRoom, spectatedChatRoom, joinedChatRoom];
+    var rooms = [globalChatRoom, joinedChatRoom, spectatedChatRoom];
 
     factory.getRooms = function() {
       return rooms;
