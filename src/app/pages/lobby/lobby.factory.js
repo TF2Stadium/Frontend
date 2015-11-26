@@ -128,11 +128,7 @@
 
     factory.spectate = function(lobby) {
       Websocket.emitJSON('lobbySpectatorJoin', {id: lobby}, function(response) {
-        if (!response.success) {
-          if($state.current.name === 'lobby-page') {
-            $state.go('lobby-list');
-          }
-        } else {
+        if (response.success) {
           var oldLobbyId = factory.lobbySpectatedId;
           factory.lobbySpectatedId = lobby;
 
@@ -140,7 +136,7 @@
             $rootScope.$emit('lobby-spectated-changed');
           }
           $rootScope.$emit('lobby-spectated-updated');
-        }
+        } 
       });
     };
 
