@@ -165,12 +165,6 @@
       }, 1000);
     };
 
-    $rootScope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState) {
-      if (fromState.name === 'lobby-page') {
-        factory.leaveSpectatedLobby();
-      }
-    });
-
     Websocket.onJSON('lobbyReadyUp', function(data) {
       $rootScope.$emit('lobby-ready-up');
       if (playerPreReady) {
