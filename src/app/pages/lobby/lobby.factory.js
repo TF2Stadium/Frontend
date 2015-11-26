@@ -119,14 +119,7 @@
         'class': position
       };
 
-      Websocket.emitJSON('lobbyJoin', payload, function (response) {
-        if (response.success) {
-          // lobbyJoin is now handled later in a dedicated lobbyJoin
-          // event message handler (a separate event, not the response
-          // to this lobbyJoin request)
-          // $rootScope.$emit('lobby-joined', lobby);
-        }
-      });
+      Websocket.emitJSON('lobbyJoin', payload);
     };
 
     factory.goToLobby = function(lobby) {
