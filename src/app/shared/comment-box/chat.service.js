@@ -65,6 +65,7 @@
 
     Websocket.onJSON('chatReceive', function (message) {
       getChatRoom(message.room).push(message);
+      $rootScope.$emit('chat-message', message);
     });
 
     Websocket.onJSON('chatHistoryClear', function(data) {
