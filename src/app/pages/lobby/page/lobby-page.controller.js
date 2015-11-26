@@ -54,6 +54,10 @@
       vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
     });
 
+    $scope.$on("$destroy",function(){
+      LobbyService.leaveSpectatedLobby();
+    });
+
     vm.join = function (lobby, team, position) {
       LobbyService.join(lobby, team, position);
     };
