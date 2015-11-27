@@ -40,12 +40,11 @@
     "connect-history-api-fallback": "^1.1.0",
     "eslint": "^1.10.1",
     "eslint-plugin-angular": "^0.14.0",
-    "gulp-jshint": "~1.11.0",
+    "gulp-eslint": "^1.1.1",
     "gulp-protractor": "~1.0.0",
     "gulp-rename": "~1.2.2",
     "gulp-replace": "~0.5.3",
     "http-proxy-middleware": "~0.0.5",
-    "jshint-stylish": "~2.0.0",
     "merge-stream": "~0.1.7",
     "require-dir": "~0.3.0"
   },
