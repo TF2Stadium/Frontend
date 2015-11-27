@@ -20,7 +20,7 @@
     <!-- endbuild -->
 
   </head>
-  <body class="{{$root.currentTheme || 'default-theme'}}">    
+  <body class="{{$root.currentTheme || 'default-theme'}}">
     <!-- Splash screen style goes here to ensure it loads as fast as possible -->
     <div id="splash-screen" style="
       display: flex;
@@ -40,10 +40,11 @@
       <img src="/assets/img/logo-alpha.svg">
       <div style="height:0">
         <md-button class="md-raised"
-          ng-href="{{::config.endpoints.api}}/startLogin"
-          style="transform:scale(0);"
-          ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}"
-          ng-bind="'Login'">
+                   aria-label="Login"
+                   ng-href="{{::config.endpoints.api}}/startLogin"
+                   style="transform:scale(0);"
+                   ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}"
+                   ng-bind="'Login'">
         </md-button>
       </div>
     </div>
@@ -83,7 +84,7 @@
     </header>
     <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'" ng-if="$root.backendAuthenticated"></aside>
     <div id="fab" ng-if="$root.backendAuthenticated">
-      <md-button ui-sref="lobby-create" class="md-fab md-primary">
+      <md-button ui-sref="lobby-create" class="md-fab md-primary" aria-label="create a lobby">
         <md-icon md-svg-icon="/assets/img/icon-add.svg"></md-icon>
       </md-button>
     </div>

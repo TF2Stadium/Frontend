@@ -1,15 +1,15 @@
-(function() {
+(function () {
   'use strict';
 
-  var app = angular.module('tf2stadium');
-  app.controller('ReadyUpDialogController', ReadyUpDialogController);
+  angular.module('tf2stadium')
+    .controller('ReadyUpDialogController', ReadyUpDialogController);
 
   function ReadyUpDialogController($scope, $mdDialog, $interval) {
     var vm = this;
 
     vm.seconds = 0;
 
-    var increaseCounter = function() {
+    var increaseCounter = function () {
       vm.seconds++;
       vm.percentage = 100 * vm.seconds / vm.timeout;
 
@@ -18,11 +18,11 @@
       }
     };
 
-    vm.cancel = function() {
+    vm.cancel = function () {
       $mdDialog.cancel();
     };
 
-    vm.accept = function() {
+    vm.accept = function () {
       $mdDialog.hide({readyUp: true});
     };
 
@@ -30,7 +30,7 @@
       increaseCounter();
     }, 1000);
 
-    $scope.$on("$destroy", function readyUpDialogDestroyed() {
+    $scope.$on('$destroy', function readyUpDialogDestroyed() {
       $interval.cancel(timer);
     });
 

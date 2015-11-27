@@ -1,43 +1,50 @@
-(function() {
+(function () {
   'use strict';
 
-  var app = angular.module('tf2stadium');
-  app.controller('LobbyPageHeaderController', LobbyPageHeaderController);
+  angular.module('tf2stadium')
+    .controller('LobbyPageHeaderController', LobbyPageHeaderController);
 
   /** @ngInject */
-  function LobbyPageHeaderController($scope, $rootScope, $state, LobbyService) {
+  function LobbyPageHeaderController($scope, $rootScope, $state,
+                                     LobbyService) {
     var vm = this;
     var error = false;
 
     vm.lobbyInformation = LobbyService.getLobbySpectated();
 
-    LobbyService.subscribe('lobby-spectated-updated', $scope, function() {
+    LobbyService.subscribe('lobby-spectated-updated', $scope, function () {
       vm.lobbyInformation = LobbyService.getLobbySpectated();
     });
 
-    vm.closeLobby = function() {
+    vm.closeLobby = function () {
       LobbyService.closeLobby(vm.lobbyInformation.id);
     };
 
-    vm.resetServer = function() {
+    vm.resetServer = function () {
       LobbyService.resetServer(vm.lobbyInformation.id);
     };
 
-    vm.shouldShowLobbyInformation = function() {
-      return !error && (vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID));
+    vm.shouldShowLobbyInformation = function () {
+      return !error &&
+        vm.lobbyInformation.id &&
+        vm.lobbyInformation.id === parseInt($state.params.lobbyID);
     };
 
-    vm.shouldShowLobbyControls = function() {
-      return vm.lobbyInformation.state < 5 && $rootScope.userProfile &&
-        ($rootScope.userProfile.steamid === vm.lobbyInformation.leader.steamid ||
-         $rootScope.userProfile.role == 'administrator');
+    vm.shouldShowLobbyControls = function () {
+      var user = $rootScope.userProfile;
+      var lobby = vm.lobbyInformation;
+      return lobby.state < 5 && user &&
+        (user.steamid === lobby.leader.steamid ||
+         user.role === 'administrator');
     };
 
-    vm.shouldShowProgress = function() {
-      return !error && !(vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID));
+    vm.shouldShowProgress = function () {
+      return !error &&
+        !(vm.lobbyInformation.id &&
+          vm.lobbyInformation.id === parseInt($state.params.lobbyID));
     };
 
-    vm.shouldShowError = function() {
+    vm.shouldShowError = function () {
       return error;
     };
 

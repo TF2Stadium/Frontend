@@ -11,9 +11,8 @@ gulp.task('scripts', function () {
   var browserSync = require('browser-sync');
 
   return gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
-    .pipe($.jshint({ unused: 'vars',
-                     predef: ['Clipboard', 'Socket', 'WebSocket'] }))
-    .pipe($.jshint.reporter('jshint-stylish'))
+    .pipe($.eslint())
+    .pipe($.eslint.format())
     .pipe(browserSync.reload({ stream: true }))
     .pipe($.size());
 });
