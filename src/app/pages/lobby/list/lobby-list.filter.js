@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -22,7 +22,7 @@
 
     var slotNameToClassName = $filter('slotNameToClassName');
 
-    var settings = Settings.getSettings(function(response) {
+    var settings = Settings.getSettings(function (response) {
       settings = response;
     });
 
@@ -30,7 +30,7 @@
       return settings[className];
     }
 
-    return function(lobbies) {
+    return function (lobbies) {
 
       var filteredList = [];
 

@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -10,7 +10,7 @@
     var vm = this;
 
     vm.lobbies = LobbyService.getList();
-    LobbyService.subscribe('lobby-list-updated', $scope, function() {
+    LobbyService.subscribe('lobby-list-updated', $scope, function () {
       vm.lobbies = LobbyService.getList();
     });
 
@@ -21,7 +21,7 @@
       LobbyService.join(lobby, team, position);
     };
 
-    LobbyService.subscribe('lobby-list-updated', $scope, function() {
+    LobbyService.subscribe('lobby-list-updated', $scope, function () {
       vm.lobbies = LobbyService.getList();
     });
 

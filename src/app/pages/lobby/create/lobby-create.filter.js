@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -11,7 +11,7 @@
     var lobbySettingsList = LobbyCreate.getSettingsList();
     var lobbySettings = LobbyCreate.getLobbySettings();
 
-    return function(options, optionGroupKey, searchString) {
+    return function (options, optionGroupKey, searchString) {
       searchString = searchString || ''; //maybe it's null for animations
       var searchFilter = $filter('filter');
 
@@ -21,19 +21,19 @@
         Looks at the other fields this option depends on in lobbySettingsList,
         then checks for each one of them
       */
-      var shouldShowOption = function(option) {
+      var shouldShowOption = function (option) {
         var shouldShow = option; //checks for empty option
         if (!optionGroup.dependsOn) {
           return true;
         }
-        optionGroup.dependsOn.forEach(function(dependencyName) { //e.g. 'formats'
+        optionGroup.dependsOn.forEach(function (dependencyName) { //e.g. 'formats'
           var dependencyKey = lobbySettingsList[dependencyName].key; //e.g. 'type'
           var dependency = lobbySettings[dependencyKey]; //e.g. 'highlander'
           shouldShow = shouldShow && option[dependency];
         });
         return shouldShow;
       };
-      
+
       options = options.filter(shouldShowOption);
 
       if (optionGroup.filterable) {

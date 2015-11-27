@@ -1,9 +1,9 @@
-(function() {
+(function () {
   'use strict';
 
-  var app = angular.module('tf2stadium');
-  app.config(LobbyCreateConfig);
-  app.provider('LobbyCreate', LobbyCreate);
+  angular.module('tf2stadium')
+    .config(LobbyCreateConfig)
+    .provider('LobbyCreate', LobbyCreate);
 
   /** @ngInject */
   function LobbyCreateConfig($stateProvider, LobbyCreateProvider) {
@@ -30,7 +30,7 @@
         url: '/' + stepName,
         parent: 'lobby-create',
         views: {
-          "wizard-step": {
+          'wizard-step': {
             templateUrl: 'app/pages/lobby/create/step-' + stepName + '.html'
           }
         }
@@ -46,7 +46,7 @@
     lobbyCreateProvider.wizardSteps = {};
 
     /** @ngInject */
-    var lobbyCreateService = function(Websocket, $state, $rootScope, $filter) {
+    var lobbyCreateService = function (Websocket, $state, $rootScope, $filter) {
 
       var lobbySettingsList = {
         formats: {
@@ -99,7 +99,7 @@
             },{
               value: 'cp_gullywash_final1',
               '6s': true,
-              highlander: true,
+              highlander: true
             },{
               value: 'cp_metalworks_rc5',
               '6s': true
@@ -216,7 +216,7 @@
               title: 'AsiaFortress',
               description: '',
               '6s': true
-            },
+            }
           ],
           dependsOn: [
             'formats'
@@ -291,11 +291,11 @@
             {
               value: true,
               title: 'Mumble required',
-              description: 'All participants will need to join the mumble channel.',
+              description: 'All participants will need to join the mumble channel.'
             },{
               value: false,
               title: 'Mumble not required',
-              description: 'Participants will join the mumble only if they want to do so.',
+              description: 'Participants will join the mumble only if they want to do so.'
             }
           ]
         }
@@ -303,7 +303,7 @@
 
       lobbyCreateService.settings = {};
 
-      var deleteSetting = function(key) {
+      var deleteSetting = function (key) {
         delete lobbyCreateService.settings[key];
         $rootScope.$emit('lobby-create-settings-updated');
       };
@@ -313,10 +313,10 @@
         (e.g. 'pl_upward'), finds the option in the field and checks
         if it's valid
       */
-      var isSettingValid = function(fieldKey, optionValue) {
+      var isSettingValid = function (fieldKey, optionValue) {
         var isValid = false;
         var field = lobbySettingsList[fieldKey];
-        field.options.forEach(function(option) {
+        field.options.forEach(function (option) {
           if (option.value === optionValue) {
             isValid = $filter('LobbyCreateOptionFilter')([option], fieldKey,'')[0];
           }
@@ -324,17 +324,17 @@
         return isValid;
       };
 
-      lobbyCreateService.subscribe = function(request, scope, callback) {
+      lobbyCreateService.subscribe = function (request, scope, callback) {
         var handler = $rootScope.$on(request, callback);
         scope.$on('$destroy', handler);
       };
 
-      lobbyCreateService.create = function(lobbySettings, callback) {
+      lobbyCreateService.create = function (lobbySettings, callback) {
         callback = callback || angular.noop;
 
         Websocket.emitJSON('lobbyCreate',
           lobbySettings,
-          function(response) {
+          function (response) {
             if (response.success) {
               $state.go('lobby-page', {lobbyID: response.data.id});
             }
@@ -343,7 +343,7 @@
         );
       };
 
-      lobbyCreateService.verifyServer = function(callback) {
+      lobbyCreateService.verifyServer = function (callback) {
         callback = callback || angular.noop;
 
         Websocket.emitJSON('serverVerify',
@@ -351,30 +351,30 @@
             server: lobbyCreateService.settings.server,
             rconpwd: lobbyCreateService.settings.rconpwd
           },
-          function(response) {
+          function (response) {
             callback(response);
           }
         );
       };
 
-      lobbyCreateService.getSettingsList = function() {
+      lobbyCreateService.getSettingsList = function () {
         return lobbySettingsList;
       };
 
-      lobbyCreateService.getSteps = function() {
+      lobbyCreateService.getSteps = function () {
         return lobbyCreateProvider.wizardSteps;
       };
 
-      lobbyCreateService.clearLobbySettings = function() {
+      lobbyCreateService.clearLobbySettings = function () {
         lobbyCreateService.settings = {};
         $rootScope.$emit('lobby-create-settings-updated');
       };
 
-      lobbyCreateService.getLobbySettings = function() {
+      lobbyCreateService.getLobbySettings = function () {
         return lobbyCreateService.settings;
       };
 
-      lobbyCreateService.set = function(key, value) {
+      lobbyCreateService.set = function (key, value) {
         lobbyCreateService.settings[key] = value;
         $rootScope.$emit('lobby-create-settings-updated');
 
@@ -383,10 +383,10 @@
         var checks = [
           {fieldKey: 'maps', optionName: lobbyCreateService.settings.map},
           {fieldKey: 'leagues', optionName: lobbyCreateService.settings.league},
-          {fieldKey: 'whitelists', optionName: lobbyCreateService.settings.whitelistID}        
+          {fieldKey: 'whitelists', optionName: lobbyCreateService.settings.whitelistID}
         ];
 
-        checks.forEach(function(check) {
+        checks.forEach(function (check) {
           if (!isSettingValid(check.fieldKey, check.optionName)) {
             var field = lobbySettingsList[check.fieldKey];
             deleteSetting(field.key);
