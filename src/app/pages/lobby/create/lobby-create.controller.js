@@ -79,7 +79,7 @@
     var clearStateChange = $rootScope.$on('$stateChangeSuccess',
       function () {
         vm.searchString = null;
-        var searchInput = $document.getElementById('search-input');
+        var searchInput = $document[0].getElementById('search-input');
         if (searchInput) {
           searchInput.focus();
         }
