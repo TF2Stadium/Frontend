@@ -1,18 +1,19 @@
-(function() {
+(function () {
   'use strict';
 
-  var app = angular.module('tf2stadium');
-  app.filter('capitalize', capitalize);
-  app.filter('reverse', reverse);
-  app.filter('trusted', trusted);
-  app.filter('slotNameToClassName', slotNameToClassName);
-  app.filter('stripSlotNameNumber', stripSlotNameNumber);
-  app.filter('secondsToMinutes', secondsToMinutes);
-  app.filter('unique', unique);
+
+  angular.module('tf2stadium')
+    .filter('capitalize', capitalize)
+    .filter('reverse', reverse)
+    .filter('trusted', trusted)
+    .filter('slotNameToClassName', slotNameToClassName)
+    .filter('stripSlotNameNumber', stripSlotNameNumber)
+    .filter('secondsToMinutes', secondsToMinutes)
+    .filter('unique', unique);
 
   /** @ngInject */
   function capitalize() {
-    return function(input) {
+    return function (input) {
       if(typeof input === 'undefined' || input === '') {
         return input;
       }
@@ -22,22 +23,22 @@
 
   /** @ngInject */
   function reverse(){
-    return function(items) {
+    return function (items) {
       return items.slice().reverse();
     };
   }
 
   /** @ngInject */
   function trusted($sce) {
-    return function(url) {
+    return function (url) {
       return $sce.trustAsResourceUrl(url);
     };
   }
 
   /** @ngInject */
   function stripSlotNameNumber() {
-    return function(slotName) {
-      return slotName.replace(/\d+$/, "");
+    return function (slotName) {
+      return slotName.replace(/\d+$/, '');
     };
   }
 
@@ -50,7 +51,7 @@
 
     var stripNumberFilter = stripSlotNameNumber();
 
-    return function(slotName) {
+    return function (slotName) {
       slotName = stripNumberFilter(slotName);
 
       var className = slotName;
@@ -64,10 +65,10 @@
 
   /** @ngInject */
   function secondsToMinutes() {
-    return function(seconds) {
+    return function (seconds) {
       var minutes = Math.floor(seconds / 60);
       seconds = seconds % 60;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
+      seconds = seconds < 10 ? '0' + seconds : seconds;
       return minutes + ':' + seconds;
     };
   }

@@ -1,11 +1,12 @@
-(function() {
+(function () {
   'use strict';
 
-  var app = angular.module('tf2stadium');
-  app.controller('LobbyCreateController', LobbyCreateController);
+  angular.module('tf2stadium')
+    .controller('LobbyCreateController', LobbyCreateController);
 
   /** @ngInject */
-  function LobbyCreateController(LobbyCreate, $state, $scope, $rootScope) {
+  function LobbyCreateController($document, $state, $scope, $rootScope,
+                                 LobbyCreate) {
 
     var vm = this;
 
@@ -16,13 +17,13 @@
 
     vm.wizardSteps = LobbyCreate.getSteps();
     vm.lobbySettings = LobbyCreate.getLobbySettings();
-    LobbyCreate.subscribe('lobby-create-settings-updated', $scope, function() {
+    LobbyCreate.subscribe('lobby-create-settings-updated', $scope, function () {
       vm.lobbySettings = LobbyCreate.getLobbySettings();
     });
 
-    var getCurrentWizardStep = function() {
+    var getCurrentWizardStep = function () {
       var currentStep = vm.wizardSteps[0];
-      vm.wizardSteps.forEach(function(wizardStep, index) {
+      vm.wizardSteps.forEach(function (wizardStep) {
         if (wizardStep.name === $state.current.name) {
           currentStep = wizardStep;
         }
@@ -30,9 +31,9 @@
       return currentStep;
     };
 
-    var getNextWizardStep = function() {
+    var getNextWizardStep = function () {
       var nextStep = vm.wizardSteps[0];
-      vm.wizardSteps.forEach(function(wizardStep, index) {
+      vm.wizardSteps.forEach(function (wizardStep, index) {
         if (wizardStep.name === $state.current.name) {
           nextStep = vm.wizardSteps[index + 1];
         }
@@ -40,8 +41,8 @@
       return nextStep;
     };
 
-    vm.create = function() {
-      LobbyCreate.create(vm.lobbySettings, function(response) {
+    vm.create = function () {
+      LobbyCreate.create(vm.lobbySettings, function (response) {
         if (!response.success) {
           vm.requestSent = false;
         }
@@ -49,24 +50,24 @@
       vm.requestSent = true;
     };
 
-    vm.verifyServer = function() {
-      LobbyCreate.verifyServer(function(response) {
+    vm.verifyServer = function () {
+      LobbyCreate.verifyServer(function (response) {
         vm.verifiedServer = response.success;
         vm.verifyServerError = !response.success;
         vm.verifyServerErrorMessage = response.message;
       });
     };
 
-    vm.select = function(field, option) {
+    vm.select = function (field, option) {
       LobbyCreate.set(field.key, option.value);
       vm.goToNext();
     };
 
-    vm.goToNext = function() {
+    vm.goToNext = function () {
       $state.go(getNextWizardStep().name);
     };
 
-    vm.shouldShowSearch = function() {
+    vm.shouldShowSearch = function () {
       var settingsGroup = lobbySettingsList[getCurrentWizardStep().groupKey];
       return settingsGroup && settingsGroup.filterable;
     };
@@ -75,15 +76,15 @@
       vm.goToNext();
     }
 
-    $rootScope.$on('$stateChangeSuccess',
-      function(event, toState, toParams, fromState) {
+    var clearStateChange = $rootScope.$on('$stateChangeSuccess',
+      function () {
         vm.searchString = null;
-        var searchInput = document.getElementById("search-input");
+        var searchInput = $document[0].getElementById('search-input');
         if (searchInput) {
           searchInput.focus();
         }
-      }
-    );
+      });
+    $scope.$on('$destroy', clearStateChange);
 
     LobbyCreate.clearLobbySettings();
   }

@@ -1,9 +1,9 @@
-(function() {
+(function () {
   'use strict';
 
-  var app = angular.module('tf2stadium');
-  app.provider('Settings', Settings);
-  app.config(SettingsConfigBlock);
+  angular.module('tf2stadium')
+    .provider('Settings', Settings)
+    .config(SettingsConfigBlock);
 
 
   /** @ngInject */
@@ -46,8 +46,8 @@
     };
 
     SettingsProvider.constants.themesList = {
-      light:  {name: "TF2Stadium", selector: "default-theme"},
-      dark:   {name: "TF2Stadium Dark", selector: "dark-theme"}
+      light:  {name: 'TF2Stadium', selector: 'default-theme'},
+      dark:   {name: 'TF2Stadium Dark', selector: 'dark-theme'}
     };
 
     function setDefaultValues() {
@@ -70,8 +70,6 @@
 
   /** @ngInject */
   function Settings() {
-    console.log('Starting Settings');
-
     var settingsProvider = {};
 
     settingsProvider.settings = {};
@@ -83,17 +81,17 @@
       during and after the run phase.
     */
     /** @ngInject */
-    var settingsService = function(Websocket, $rootScope) {
+    var settingsService = function (Websocket, $rootScope, $log) {
 
       //Private properties
       var settings = settingsProvider.settings;
       var alreadyLoadedFromBackend = false;
 
-      for(var setting in localStorage) {
-        settings[setting] = localStorage.getItem(setting);
+      for (var settingKey in localStorage) {
+        settings[settingKey] = localStorage.getItem(settingKey);
       }
 
-      Websocket.onJSON('playerSettings', function(data) {
+      Websocket.onJSON('playerSettings', function (data) {
         for (var setting in data) {
           var value = data[setting];
           /*
@@ -116,7 +114,7 @@
         Saves a setting into the service and into the backend and
         fires an optional callback with the response from the backend as an argument.
       */
-      settingsService.set = function(key, value, callback) {
+      settingsService.set = function (key, value, callback) {
 
         callback = callback || angular.noop;
         settings[key] = value;
@@ -126,18 +124,19 @@
         Websocket.emitJSON('playerSettingsSet',
           //Backend only accepts strings!
           {key: key.toString(), value: value.toString()},
-          function(response) {
+          function (response) {
             if (response.success) {
-              console.log('Setting "' + key + '" saved correctly on the backend!');
+              $log.log('Setting "' + key + '" saved correctly on the backend!');
             } else {
-              console.log('Error setting key ' + key + ' with value ' + value + '. Reason: ' + response.message);
+              $log.log('Error setting key ' + key + ' with value ' +
+                       value + '. Reason: ' + response.message);
             }
             callback(response);
           }
         );
       };
 
-      settingsService.getConstants = function(key) {
+      settingsService.getConstants = function (key) {
         return settingsProvider.constants[key];
       };
 
@@ -145,11 +144,11 @@
         Returns all settings and fires an optional callback
         when they are loaded from the backend.
       */
-      settingsService.getSettings = function(callback) {
+      settingsService.getSettings = function (callback) {
         callback = callback || angular.noop;
 
         if(!alreadyLoadedFromBackend) {
-          var handler = $rootScope.$on('settings-loaded-from-backend', function() {
+          var handler = $rootScope.$on('settings-loaded-from-backend', function () {
             callback(settings);
             handler();
           });

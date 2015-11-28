@@ -1,8 +1,8 @@
-(function() {
+(function () {
   'use strict';
 
-  var app = angular.module('tf2stadium');
-  app.factory('User', User);
+  angular.module('tf2stadium')
+    .factory('User', User);
 
   /** @ngInject */
   function User(Websocket, $rootScope) {
@@ -12,12 +12,12 @@
     var userProfile = {};
     var alreadyLoadedFromBackend = false;
 
-    userService.getUserProfile = function(callback) {
+    userService.getUserProfile = function (callback) {
 
       callback = callback || angular.noop;
 
       if (!alreadyLoadedFromBackend) {
-        userService.getProfile ('', function(response) {
+        userService.getProfile ('', function (response) {
           if (response.success) {
             userProfile = response.data;
           }
@@ -31,21 +31,21 @@
 
     };
 
-    userService.getProfile = function(steamid, callback) {
+    userService.getProfile = function (steamid, callback) {
 
       callback = callback || angular.noop;
 
       Websocket.emitJSON('playerProfile',
         {steamid: steamid},
-        function(response) {
+        function (response) {
           callback(response.data);
         }
       );
 
     };
 
-    userService.init = function() {
-      Websocket.onJSON('playerProfile', function(data) {
+    userService.init = function () {
+      Websocket.onJSON('playerProfile', function (data) {
         $rootScope.userProfile = data;
         alreadyLoadedFromBackend = true;
       });

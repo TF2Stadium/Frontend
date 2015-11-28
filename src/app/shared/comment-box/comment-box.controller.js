@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -6,14 +6,13 @@
     .controller('CommentBoxController', CommentBoxController);
 
   /** @ngInject */
-  function CommentBoxController ($rootScope, $scope,
-                                 ChatService, Notifications) {
+  function CommentBoxController($rootScope, $scope, $window, $log,
+                                ChatService, Notifications) {
     var vm = this;
 
     vm.rooms = ChatService.getRooms();
     vm.lastSeenIds = Object.create(null);
-
-    $scope.currentTab = 0;
+    vm.currentTab = 0;
 
     // The three tabs are:
     //  0 - global chat
@@ -34,9 +33,9 @@
       return tabId;
     }
 
-    $rootScope.$on('chat-message', function (e, message) {
+    var clearChatMessage = $rootScope.$on('chat-message', function (e, message) {
       var room = message.room;
-      if (!angular.isDefined(vm.lastSeenIds[room])) {
+      if (angular.isUndefined(vm.lastSeenIds[room])) {
         vm.lastSeenIds[room] = 0;
       }
 
@@ -44,9 +43,15 @@
         vm.lastSeenIds[room] = Math.max(vm.lastSeenIds[room], message.id);
       }
     });
+    $scope.$on('$destroy', clearChatMessage);
 
-    $scope.$watch('currentTab', function (newVal, oldVal) {
-      console.log('tab', newVal, oldVal, $scope.currentTab);
+    $scope.$watch('currentTab', function (newVal) {
+      if (angular.isUndefined(newVal)) {
+        // On initialization, this callback will be called with
+        // newVal === oldVal === undefined
+        return;
+      }
+
       var room = vm.rooms[currentTabId()];
       var msgs = room.messages;
 
@@ -55,8 +60,8 @@
       }
     });
 
-    vm.sendMessage = function(event) {
-      if (vm.messageBox === "" || event.keyCode !== 13) {
+    vm.sendMessage = function (event) {
+      if (vm.messageBox === '' || event.keyCode !== 13) {
         return;
       }
 
@@ -71,13 +76,13 @@
       event.preventDefault();
     };
 
-    vm.checkMessage = function() {
+    vm.checkMessage = function () {
       //Check if message is longer than the char limit
       vm.error = typeof vm.messageBox === 'undefined';
     };
 
-    vm.goToProfile = function(steamId) {
-      window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
+    vm.goToProfile = function (steamId) {
+      $window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };
   }
 })();

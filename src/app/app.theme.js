@@ -1,9 +1,8 @@
-(function() {
+(function () {
   'use strict';
 
-
-  var app = angular.module('tf2stadium');
-  app.config(ThemeConfig);
+  angular.module('tf2stadium')
+    .config(ThemeConfig);
 
   /** @ngInject */
   function ThemeConfig($mdThemingProvider) {

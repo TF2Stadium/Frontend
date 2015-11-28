@@ -9,6 +9,10 @@
   padding: 0 $padding-medium $padding-medium;
   height: 100%;
 
+  span {
+    float: left; //gets rid of whitespace
+  }
+
   .left, .right {
     @include flex (column, space-between, stretch);
     width: 50%;
