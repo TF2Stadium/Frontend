@@ -19,11 +19,19 @@
         </div>
       </div>
       <div class="left">
-        <span class="lobbypage-rules">{{header.lobbyInformation.type}}, whitelist
-          <a target="_blank"
-            href="http://whitelist.tf/{{header.lobbyInformation.whitelistId}}">
-            #{{header.lobbyInformation.whitelistId}}
-          </a>, {{header.lobbyInformation.league | uppercase}} rules
+        <span class="lobbypage-rules">
+          <span>
+            {{header.lobbyInformation.type}}
+          </span>
+          <span>
+            , whitelist #<a target="_blank"
+              href="http://whitelist.tf/{{header.lobbyInformation.whitelistID}}">
+              {{header.lobbyInformation.whitelistId}}
+            </a>
+          </span>
+          <span>
+            , {{header.lobbyInformation.league | uppercase}} rules
+          </span>
         </span>
         <span class="lobbypage-leader">Leader: {{header.lobbyInformation.leader.name}}</span>
       </div>
