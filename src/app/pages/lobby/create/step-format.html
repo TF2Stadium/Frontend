@@ -3,7 +3,7 @@
   ng-repeat="format in lobbyCreate.formats.options | LobbyCreateOptionFilter:'formats':lobbyCreate.searchString | orderBy:'title'"
   ng-click="lobbyCreate.select(lobbyCreate.formats, format)"
   ng-if="format.value!='debug' || $root.userProfile.role=='administrator'"
-  ng-class="{'fade-in-top no-animate': lobbyCreate.searchString===null}"
+  ng-class="{'fade-in-top no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.formats, format)}"
   ng-style="{'animation-delay': 0.03 * ($index+1) + 's'}">
   <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg),
     linear-gradient(
