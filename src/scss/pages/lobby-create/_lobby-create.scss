@@ -86,8 +86,23 @@ md-grid-tile.tile-card {
               left .3s cubic-bezier(0.215, 0.61, 0.355, 1),
               margin-top .3s cubic-bezier(0.215, 0.61, 0.355, 1);
 
-  &.selected {
-    border: 2px solid #99ccff;
+  &.selected .tile-text {
+    .title, .ng-binding {
+      position: relative;
+    }
+
+    .title::before, h2::before {
+      content: '';
+      position: absolute;
+      left: -1.1em;
+      top: .35em;
+      width: 0.8em;
+      height: 0.8em;
+      background: {
+        image: url(/assets/img/icon-check.svg);
+        size: cover;
+      };
+    }
   }
 
   &:hover {

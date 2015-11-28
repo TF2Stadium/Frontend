@@ -10,16 +10,15 @@
       <div class="left">
         <span class="lobbypage-rules">
           <span ng-show="header.lobbyInformation.type">
-            {{header.lobbyInformation.type | capitalize}}
-          </span><!--
-          --><span ng-show="header.lobbyInformation.whitelistID">
-            , whitelist #<a target="_blank"
-              href="http://whitelist.tf/{{header.lobbyInformation.whitelistID}}">
-              {{header.lobbyInformation.whitelistID}}
-            </a>
-          </span><!--
-          --><span ng-show="header.lobbyInformation.league">
-            , {{header.lobbyInformation.league | uppercase}} rules
+            {{header.lobbyInformation.type | capitalize}},
+          </span>
+          <span ng-show="header.lobbyInformation.whitelistID">
+            whitelist #<a target="_blank"
+              href="http://whitelist.tf/{{header.lobbyInformation.whitelistID}}"
+            >{{header.lobbyInformation.whitelistID}}</a>,
+          </span>
+          <span ng-show="header.lobbyInformation.league">
+            {{header.lobbyInformation.league | uppercase}} rules
           </span>
         </span>
         <span class="lobbypage-leader">Leader: {{$root.userProfile.name}}</span>
