@@ -66,16 +66,16 @@
       $window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };
 
-    vm.kick = function (playerSummary) {
-      LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, false);
+    vm.kick = function(playerSummary) {
+      LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid);
     };
 
-    vm.ban = function (playerSummary) {
-      LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, true);
+    vm.ban = function(playerSummary) {
+      LobbyService.ban(vm.lobbyInformation.id, playerSummary.steamid);
     };
 
-    vm.leaveSlot = function () {
-      LobbyService.kick(vm.lobbyInformation.id, '', false);
+    vm.leaveSlot = function() {
+      LobbyService.leaveSlot(vm.lobbyInformation.id);
     };
 
     vm.joinTF2Server = function () {

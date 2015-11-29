@@ -3,13 +3,13 @@ machine:
     version: 0.12.0
 dependencies:
   override:
-    - npm install --production
+    - npm install
     - npm install -g bower gulp
     - npm rebuild node-sass
     - bower install
 test:
   override:
-    - ls -la
+    - gulp scripts
 deployment:
   master:
     branch: master
