@@ -11,16 +11,35 @@
     </div>
   </div>
 </div>
+
+<div id="lobby-filters"
+  ng-if="lobbyList.shouldShowFilters()"
+  ng-controller="SettingsPageController as settings">
+  <md-tabs md-stretch-tabs="always" md-dynamic-height="true">
+    <md-tab label="{{keyName}}"
+      ng-repeat="(keyName, settingsGroup) in settings.sections.filters">
+      <md-checkbox
+        ng-repeat="(key, field) in settingsGroup track by key"
+        ng-model="field.selected"
+        aria-label="{{field}}"
+        ng-change="settings.saveSetting(key, field.selected)">
+        {{field.name}}
+      </md-checkbox>
+    </md-tab>
+  </md-tabs>
+</div>
+
 <div class="lobby-list-empty-state"
   ng-if="filteredLobbies.length === 0">
   <h1>There are no lobbies up right now</h1>
-  <p>Why don't you try <a ui-sref="filters">changing your filter settings</a> or creating a new one?</p>
+  <p>Why don't you try changing your filter settings or creating a new one?</p>
   <md-button
     class="md-raised md-primary"
     ui-sref="lobby-create">
     Create a lobby
   </md-button>
 </div>
+
 <a md-ink-ripple
   ng-repeat="lobbyInformation in lobbyList.lobbies | LobbyListSettingsFilter as filteredLobbies track by lobbyInformation.id"
   class="lobby-row"

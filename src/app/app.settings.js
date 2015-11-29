@@ -42,6 +42,9 @@
         medic:          {name: 'Medic' },
         sniper:         {name: 'Sniper' },
         spy:            {name: 'Spy' }
+      },
+      misc: {
+        mumbleRequired: {name: 'Mumble required'}
       }
     };
 

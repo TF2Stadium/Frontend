@@ -1,0 +1,9 @@
+<div class="header-text">
+  <div class="lobbylist-text">
+    <md-switch id="filters-checkbox"
+      ng-model="header.filtersEnabled"
+      ng-change="header.updateFilters()">
+      Filters {{header.filtersEnabled ? 'enabled' : 'disabled'}}
+    </md-switch>
+  </div>
+</div>

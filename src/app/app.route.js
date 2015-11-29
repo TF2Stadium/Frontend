@@ -13,6 +13,11 @@
             templateUrl: 'app/pages/lobby/list/lobby-list.html',
             controller: 'LobbyListController',
             controllerAs: 'lobbyList'
+          },
+          'headerInfo': {
+            templateUrl: 'app/pages/lobby/list/header.html',
+            controller: 'LobbyListHeaderController',
+            controllerAs: 'header'
           }
         }
       })

@@ -30,6 +30,19 @@
       return settings[className];
     }
 
+    function playerPlaysGamemode(mapName) {
+      var gamemode = mapName.split('_')[0];
+      if (settings.hasOwnProperty(gamemode)) {
+        return settings[gamemode];
+      } else {
+        return settings.otherGamemodes;
+      }
+    }
+
+    function playerWantsMumble(lobby) {
+      return !(settings.mumbleRequired && !lobby.mumbleRequired);
+    }
+
     return function (lobbies) {
 
       var filteredList = [];
@@ -46,9 +59,11 @@
 
         if (settings[lobby.region.code] &&
             settings[lobby.type] &&
-            (settings[lobby.map.substr(0, lobby.map.indexOf('_'))] || settings.otherGamemodes) &&
+            playerPlaysGamemode(lobby.map) &&
+            playerWantsMumble(lobby) &&
             availableClasses.some(playerPlaysClass)
 
+            || !settings['filtersEnabled']
             || (Config.debug && lobby.type === 'Debug')) {
           filteredList.push(lobby);
         }

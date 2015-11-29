@@ -1,4 +1,22 @@
 /*======================================
+                HEADER
+ =======================================*/
+
+.lobbylist-text {
+  height: 100%;
+  position: relative;
+}
+
+
+#filters-checkbox {
+  position: absolute;
+  bottom: $padding-small;
+  right: $padding-medium;
+  margin: 0;
+}
+
+
+/*======================================
               EMPTY-STATE
  =======================================*/
 
@@ -6,6 +24,28 @@
   font-size: 1.2rem;
   width: 100%;
   text-align: center;
+}
+
+
+/*======================================
+              LOBBY-ROW
+ =======================================*/
+
+
+#lobby-filters {
+  @extend .sheet;
+  @extend .fade-in-top;
+  padding: $padding-small $padding-medium;
+  margin: $padding-medium 0;
+
+  md-tab-content > div {
+    @include flex(row, center, center);
+  }
+
+  &.ng-leave {
+    @extend .fade-out-top;
+    animation-delay: .2s;
+  }
 }
 
 
@@ -22,10 +62,54 @@
   position: relative; //so the ripple doesn't fill the whole page
   text-decoration: none;
 
-  transition: background-color 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  transition: background-color 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:first-child {
     margin-top: $padding-medium;
+  }
+
+  &.ng-leave {
+    transform: translateX(0);
+    opacity: 1;
+    animation: .3s slide-to-right cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+
+  &.ng-enter-stagger {
+    animation-delay: 0.03s;
+  }
+
+  &.ng-leave-stagger {
+    animation-delay: 0.06s;    
+  }
+
+  &.ng-enter {
+    transform: translateX(100px);
+    opacity: 0;
+    animation: .3s enter-to-right cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+  }
+}
+
+@keyframes slide-to-right {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(100px);
+    opacity: 0;
+  }
+}
+
+@keyframes enter-to-right {
+  0% {
+    transform: translateX(-100px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }
 

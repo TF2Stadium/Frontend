@@ -20,7 +20,7 @@
     vm.isEnabled = function (step) {
       var previousStepIndex = vm.steps.indexOf(step) - 1;
       var previousStep = vm.steps[previousStepIndex] || vm.steps[0];
-      return vm.isAlreadyFilled(previousStep) || vm.isAlreadyFilled(step) || (previousStepIndex == -1);
+      return vm.isAlreadyFilled(previousStep) || vm.isAlreadyFilled(step) || (previousStepIndex === -1);
     };
 
     vm.isAlreadyFilled = function (step) {
