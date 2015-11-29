@@ -1,12 +1,13 @@
-(function() {
+(function () {
   'use strict';
 
-  angular.module('tf2stadium.services').factory('ChatService', ChatService);
+  angular.module('tf2stadium.services')
+    .factory('ChatService', ChatService);
 
   // Persistent map of room id -> messages list
   var chatRoomLogs = Object.create(null);
   function getChatRoom(id) {
-    if (!angular.isDefined(chatRoomLogs[id])) {
+    if (angular.isUndefined(chatRoomLogs[id])) {
       chatRoomLogs[id] = [];
     }
     return chatRoomLogs[id];
@@ -40,17 +41,19 @@
 
     var rooms = [globalChatRoom, joinedChatRoom, spectatedChatRoom];
 
-    factory.getRooms = function() {
+    factory.getRooms = function () {
       return rooms;
     };
 
-    factory.send = function(message, room) {
+    factory.send = function (message, room) {
       Websocket.emitJSON('chatSend', {
         message: message,
         room: room
       });
     };
 
+    /*eslint-disable angular/on-watch */
+    /* the angular/on-watch warning doesn't apply to services */
     $rootScope.$on('lobby-joined', function () {
       joinedChatRoom.changeRoom(LobbyService.getLobbyJoinedId());
     });
@@ -59,15 +62,17 @@
       joinedChatRoom.leave();
     });
 
-    $rootScope.$on('lobby-spectated-changed', function() {
+    $rootScope.$on('lobby-spectated-changed', function () {
       spectatedChatRoom.changeRoom(LobbyService.getLobbySpectatedId());
     });
 
     Websocket.onJSON('chatReceive', function (message) {
       getChatRoom(message.room).push(message);
+      $rootScope.$emit('chat-message', message);
     });
 
-    Websocket.onJSON('chatHistoryClear', function(data) {
+
+    Websocket.onJSON('chatHistoryClear', function (data) {
       // Note: ChatRooms may have pointers to the arrays in
       // chatRoomLogs, so we have to mutate the actual logs rather
       // than just assign a new empty array.

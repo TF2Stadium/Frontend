@@ -1,4 +1,4 @@
-(function() {
+(function () {
   'use strict';
 
   angular
@@ -6,11 +6,11 @@
     .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
-  function LobbyPageController($scope, $state, LobbyService) {
+  function LobbyPageController($scope, $state, $window, LobbyService) {
 
     var vm = this;
 
-    var buildConnectString = function() {
+    var buildConnectString = function () {
       if (!vm.lobbyJoinInformation.game) {
         return;
       }
@@ -19,13 +19,13 @@
         '; password ' + vm.lobbyJoinInformation.password;
     };
 
-    var buildMumbleString = function() {
+    var buildMumbleString = function () {
       if (!vm.lobbyJoinInformation.mumble) {
         return;
       }
       vm.lobbyJoinInformation.mumbleInformation =
         'IP address: ' + vm.lobbyJoinInformation.mumble.address +
-        ', port ' + vm.lobbyJoinInformation.mumble.port + 
+        ', port ' + vm.lobbyJoinInformation.mumble.port +
         ', password ' + vm.lobbyJoinInformation.mumble.password;
     };
 
@@ -36,11 +36,11 @@
     vm.playerPreReady = LobbyService.getPlayerPreReady();
     vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
 
-    LobbyService.subscribe('lobby-spectated-updated', $scope, function() {
+    LobbyService.subscribe('lobby-spectated-updated', $scope, function () {
       vm.lobbyInformation = LobbyService.getLobbySpectated();
     });
 
-    LobbyService.subscribe('lobby-start', $scope, function(){
+    LobbyService.subscribe('lobby-start', $scope, function (){
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
       buildConnectString();
       buildMumbleString();
@@ -54,39 +54,43 @@
       vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
     });
 
+    $scope.$on('$destroy', function (){
+      LobbyService.leaveSpectatedLobby();
+    });
+
     vm.join = function (lobby, team, position) {
       LobbyService.join(lobby, team, position);
     };
 
-    vm.goToProfile = function(steamId) {
-      window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
+    vm.goToProfile = function (steamId) {
+      $window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };
 
-    vm.kick = function(playerSummary) {
+    vm.kick = function (playerSummary) {
       LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, false);
     };
 
-    vm.ban = function(playerSummary) {
+    vm.ban = function (playerSummary) {
       LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid, true);
     };
 
-    vm.leaveSlot = function() {
+    vm.leaveSlot = function () {
       LobbyService.kick(vm.lobbyInformation.id, '', false);
     };
 
-    vm.joinTF2Server = function() {
+    vm.joinTF2Server = function () {
       LobbyService.joinTF2Server();
     };
 
-    vm.joinMumbleServer = function() {
+    vm.joinMumbleServer = function () {
       LobbyService.joinMumbleServer();
     };
 
-    vm.preReadyUp = function() {
-       LobbyService.setPlayerPreReady(!LobbyService.getPlayerPreReady());
+    vm.preReadyUp = function () {
+      LobbyService.setPlayerPreReady(!LobbyService.getPlayerPreReady());
     };
 
-    vm.shouldShowLobbyInformation = function() {
+    vm.shouldShowLobbyInformation = function () {
       return vm.lobbyInformation && vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID);
     };
 

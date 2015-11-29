@@ -12,6 +12,9 @@
       <md-tab ng-repeat="room in commentBox.rooms | unique:'id'"
               ng-if="room.id > -1">
         <md-tab-label>
+          {{room.messages.length > 0
+            && room.messages[room.messages.length - 1].id > commentBox.lastSeenIds[room.id]?
+          '*' : ''}}
           {{room.id === 0?
              'CHAT' : ((room.joined? 'YOUR':'THIS') + ' Lobby #' + room.id)}}
         </md-tab-label>

@@ -1,15 +1,15 @@
-(function() {
+(function () {
   'use strict';
 
-  var app = angular.module('tf2stadium');
-  app.config(SettingsPageConfig);
-  app.provider('SettingsPage', SettingsPage);
+  angular.module('tf2stadium')
+    .config(SettingsPageConfig)
+    .provider('SettingsPage', SettingsPage);
 
   /** @ngInject */
   function SettingsPageConfig($stateProvider, SettingsPageProvider) {
     /*
-      Makes children states for each section of the settings.
-    */
+     Makes children states for each section of the settings.
+     */
     SettingsPageProvider.sections = [
       'theme',
       'filters'
@@ -21,7 +21,7 @@
         url: '/' + settingSection,
         parent: 'settings',
         views: {
-          "setting-section": {
+          'setting-section': {
             templateUrl: 'app/pages/settings/section-' + settingSection + '.html'
           }
         }
@@ -37,12 +37,11 @@
     settingsPageProvider.sections =  [];
 
     /** @ngInject */
-    var settingsPageService = function(Settings) {
-
+    var settingsPageService = function (Settings) {
       settingsPageProvider.sections.theme = Settings.getConstants('themesList');
       settingsPageProvider.sections.filters = Settings.getConstants('filters');
 
-      settingsPageService.getSections = function() {
+      settingsPageService.getSections = function () {
         return settingsPageProvider.sections;
       };
 

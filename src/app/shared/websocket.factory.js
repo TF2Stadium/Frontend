@@ -1,10 +1,11 @@
-(function() {
+(function () {
   'use strict';
 
-  angular.module('tf2stadium.services').factory('Websocket', Websocket);
+  angular.module('tf2stadium.services')
+    .factory('Websocket', Websocket);
 
   /** @ngInject */
-  function Websocket(Config, Notifications, $rootScope, $timeout) {
+  function Websocket($rootScope, $timeout, $log, Config, Notifications) {
     var connected = false;
     var socket = null;
 
@@ -30,14 +31,14 @@
       asyncAngularify(function () {
         $rootScope.$emit('socket-opened');
       })();
-      console.log('WebSocket connection opened', e);
+      $log.log('WebSocket connection opened', e);
     };
 
     socket.onclose = function (e) {
       asyncAngularify(function () {
         $rootScope.$emit('socket-closed');
       })();
-      console.log('WebSocket closed:', e);
+      $log.log('WebSocket closed:', e);
       connected = false;
     };
 
@@ -60,9 +61,9 @@
     // before the socket is connected.
     var queuedMessages = Object.create(null);
     var registeredHandlers = Object.create(null);
-    socket.onmessage = function(name, data) {
+    socket.onmessage = function (name, data) {
       if (!registeredHandlers[name]) {
-        console.log('Received message with no registered handler: ' + name,
+        $log.log('Received message with no registered handler: ' + name,
                     data);
         if (!queuedMessages[name]) {
           queuedMessages[name] = [];
@@ -73,7 +74,7 @@
     };
 
     var factory = {};
-    factory.onJSON = function(name, callback) {
+    factory.onJSON = function (name, callback) {
       callback = asyncAngularify(callback || angular.noop);
 
       // Dispatch queued messages for the initialization
@@ -88,52 +89,47 @@
       if (queuedMessages[name]) {
         asyncAngularify(function () {
           queuedMessages[name].forEach(function (data) {
-            console.log('Received: ' + name, data);
+            $log.log('Received: ' + name, data);
             callback(data);
           });
         })();
       }
 
       socket.On(name, function (data) {
-        console.log('Received: ' + name, data);
+        $log.log('Received: ' + name, data);
         callback(data);
       });
-    };
-
-
-    factory.isInitialized = function () {
-      return connected;
     };
 
     function emitJSON(name, data, callback) {
-      console.log('Sending ' + name, data);
+      $log.log('Sending ' + name, data);
       data.request = name;
 
-      socket.Emit(data, function(jsonIn) {
-        var data = JSON.parse(jsonIn);
-        console.log('Response to ' + name, data);
-        console.log(data);
-        if (!data.success) {
-          Notifications.toast({message: data.message, error: true});
+      socket.Emit(data, function (jsonIn) {
+        var dataIn = angular.fromJson(jsonIn);
+        $log.log('Response to ' + name, dataIn);
+        $log.log(dataIn);
+        if (!dataIn.success) {
+          Notifications.toast({message: dataIn.message, error: true});
         }
-        callback(data);
+        callback(dataIn);
       });
     }
 
-    factory.emitJSON = function(name, data, callback) {
+    factory.emitJSON = function (name, data, callback) {
       callback = asyncAngularify(callback || angular.noop);
 
       if (connected) {
         emitJSON(name, data, callback);
       } else {
-        var deregister = $rootScope.$on('socket-opened', function() {
+        var deregister = $rootScope.$on('socket-opened', function () {
           emitJSON(name, data, callback);
           deregister();
         });
       }
     };
 
-    factory.isInitialized = function() {
+    factory.isInitialized = function () {
       return connected;
     };
 

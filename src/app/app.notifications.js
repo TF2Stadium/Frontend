@@ -1,24 +1,23 @@
-(function() {
+(function () {
   'use strict';
 
-
-  var app = angular.module('tf2stadium');
-  app.factory('Notifications', Notifications);
-  app.controller('NotificationsController', NotificationsController);
+  angular.module('tf2stadium')
+    .factory('Notifications', NotificationsFactory)
+    .controller('NotificationsController', NotificationsController);
 
   /** @ngInject */
-  function Notifications($mdToast, $document, $timeout) {
+  function NotificationsFactory($mdToast, $document, $timeout, $log) {
 
     var notificationsService = {};
 
     var notifications = {};
-    var id = 0;
+    var nextId = 0;
 
     var toastDefault = {
       templateUrl: 'app/shared/notifications/toast.html',
       message: 'Default',
       actionMessage: 'OK',
-      action: function() {
+      action: function () {
         $mdToast.hide();
       },
       controller: 'ToastController',
@@ -29,26 +28,26 @@
       hideDelay: 0
     };
 
-    notificationsService.add = function(message, level) {
-      notifications[id] = {message: message, level: level};
-      id++;
+    notificationsService.add = function (message, level) {
+      notifications[nextId] = {message: message, level: level};
+      nextId++;
     };
 
-    notificationsService.remove = function(id) {
+    notificationsService.remove = function (id) {
       delete notifications[id];
     };
 
-    notificationsService.clearNotifications = function() {
+    notificationsService.clearNotifications = function () {
       for (var notificationKey in notifications) {
         delete notifications[notificationKey];
       }
     };
 
-    notificationsService.getNotifications = function() {
+    notificationsService.getNotifications = function () {
       return notifications;
     };
 
-    notificationsService.toast = function(options) {
+    notificationsService.toast = function (options) {
       for (var key in toastDefault) {
         if (!options[key]) {
           options[key] = toastDefault[key];
@@ -56,15 +55,15 @@
       }
       $mdToast.show(options);
     };
-    
-    notificationsService.notifyBrowser = function(options) {
 
-      if (!("Notification" in window)) {
-        console.log("Browser doesn't support HTML5 notifications");
+    notificationsService.notifyBrowser = function (options) {
+
+      if (!('Notification' in window)) {
+        $log.log('Browser doesn\'t support HTML5 notifications');
         return;
       }
 
-      if ((document.hasFocus() && !options.showAlways) || Notification.permission === 'denied') {
+      if (($document[0].hasFocus() && !options.showAlways) || Notification.permission === 'denied') {
         return;
       }
 
@@ -81,7 +80,7 @@
         var html5notification = new Notification(options.title, options);
 
         if (options.timeout) {
-          $timeout(function(){
+          $timeout(function (){
             html5notification.close();
           }, options.timeout * 1000);
         }
@@ -102,15 +101,15 @@
 
     var vm = this;
 
-    vm.remove = function(id) {
+    vm.remove = function (id) {
       Notifications.remove(id);
     };
 
-    vm.add = function(message, level) {
+    vm.add = function (message, level) {
       Notifications.add(message, level);
     };
 
-    vm.isEmpty = function() {
+    vm.isEmpty = function () {
       return Object.keys(vm.notifications).length < 1;
     };
 

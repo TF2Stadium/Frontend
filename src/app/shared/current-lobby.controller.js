@@ -1,8 +1,8 @@
-(function() {
+(function () {
   'use strict';
 
-  var app = angular.module('tf2stadium');
-  app.controller('CurrentLobbyController', CurrentLobbyController);
+  angular.module('tf2stadium')
+    .controller('CurrentLobbyController', CurrentLobbyController);
 
   /** @ngInject */
   function CurrentLobbyController($state, $rootScope, $scope, LobbyService) {
@@ -11,19 +11,20 @@
     vm.visible = false;
     vm.lobbyInformation = LobbyService.getLobbyJoined();
 
-    vm.checkVisible = function() {
+    vm.checkVisible = function () {
       vm.visible = !!vm.lobbyInformation && vm.lobbyInformation.id && vm.lobbyInformation.id !== parseInt($state.params.lobbyID);
     };
 
-    LobbyService.subscribe('lobby-joined-updated', $scope, function() {
+    LobbyService.subscribe('lobby-joined-updated', $scope, function () {
       vm.lobbyInformation = LobbyService.getLobbyJoined();
       vm.visible = !!vm.lobbyInformation && vm.lobbyInformation.id;
       vm.checkVisible();
     });
 
-    $rootScope.$on('$stateChangeSuccess', function() {
+    var clearStateChange = $rootScope.$on('$stateChangeSuccess', function () {
       vm.checkVisible();
     });
+    $scope.$on('$destroy', clearStateChange);
   }
 
 })();

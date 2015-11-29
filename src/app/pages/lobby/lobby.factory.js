@@ -1,11 +1,12 @@
-(function() {
+(function () {
   'use strict';
 
-  angular.module('tf2stadium.services').factory('LobbyService', LobbyService);
+  angular.module('tf2stadium.services')
+    .factory('LobbyService', LobbyService);
 
   /** @ngInject */
   function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
-                        Websocket, Notifications, User) {
+                        $window, Websocket, Notifications) {
     var factory = {};
 
     factory.lobbyList = {};
@@ -23,15 +24,15 @@
     var preReadyUpTimer = 0;
     var preReadyUpInterval;
 
-    factory.getLobbyJoinInformation = function() {
+    factory.getLobbyJoinInformation = function () {
       return factory.lobbyJoinInformation;
     };
 
-    factory.getSubList = function() {
+    factory.getSubList = function () {
       return factory.subList;
     };
 
-    factory.getList = function() {
+    factory.getList = function () {
       return factory.lobbyList;
     };
 
@@ -43,11 +44,11 @@
 
     // Will return -1 when a lobby is not currently being
     // spectated
-    factory.getLobbySpectatedId = function() {
+    factory.getLobbySpectatedId = function () {
       return factory.lobbySpectatedId;
     };
 
-    factory.leaveSpectatedLobby = function() {
+    factory.leaveSpectatedLobby = function () {
       factory.lobbySpectatedId = -1;
       factory.lobbySpectated = {};
       $rootScope.$emit('lobby-spectated-changed');
@@ -62,15 +63,15 @@
 
     // Will return -1 when not currently joined in any
     // lobby
-    factory.getLobbyJoinedId = function() {
+    factory.getLobbyJoinedId = function () {
       return factory.lobbyJoinedId;
     };
 
-    factory.getPlayerPreReady = function() {
+    factory.getPlayerPreReady = function () {
       return playerPreReady;
     };
 
-    factory.setPlayerPreReady = function(isReady) {
+    factory.setPlayerPreReady = function (isReady) {
       playerPreReady = isReady;
 
       if (!playerPreReady) {
@@ -80,7 +81,7 @@
 
       preReadyUpTimer = 180;
 
-      preReadyUpInterval = $interval(function() {
+      preReadyUpInterval = $interval(function () {
         preReadyUpTimer--;
 
         if (preReadyUpTimer <= 0) {
@@ -90,30 +91,30 @@
       }, 1000);
     };
 
-    factory.getPreReadyUpTimer = function() {
+    factory.getPreReadyUpTimer = function () {
       return preReadyUpTimer;
     };
 
-    factory.subscribe = function(request, scope, callback) {
+    factory.subscribe = function (request, scope, callback) {
       var handler = $rootScope.$on(request, callback);
       scope.$on('$destroy', handler);
     };
 
-    factory.kick = function(lobbyID, steamID, banFromLobby) {
+    factory.kick = function (lobbyID, steamID, banFromLobby) {
       var payload = {
         'id': lobbyID,
         'steamid': steamID,
         'ban': banFromLobby
       };
 
-      Websocket.emitJSON('lobbyKick', payload, function(response) {
+      Websocket.emitJSON('lobbyKick', payload, function (response) {
         if (response.success && steamID === '') {
           factory.spectate(lobbyID);
         }
       });
     };
 
-    factory.join = function(lobby, team, position) {
+    factory.join = function (lobby, team, position) {
       var payload = {
         'id': lobby,
         'team': team,
@@ -123,7 +124,7 @@
       Websocket.emitJSON('lobbyJoin', payload);
     };
 
-    factory.goToLobby = function(lobby) {
+    factory.goToLobby = function (lobby) {
       $state.go('lobby-page', {lobbyID: lobby});
     };
 
@@ -152,32 +153,32 @@
       });
     };
 
-    factory.closeLobby = function(lobbyID) {
+    factory.closeLobby = function (lobbyID) {
       Websocket.emitJSON('lobbyClose', {id: lobbyID});
     };
 
-    factory.resetServer = function(lobbyID) {
+    factory.resetServer = function (lobbyID) {
       Websocket.emitJSON('lobbyServerReset', {id: lobbyID});
     };
 
-    factory.joinTF2Server = function() {
-      $timeout(function(){
-        window.open('steam://connect/' + factory.lobbyJoinInformation.game.host + '/' + factory.lobbyJoinInformation.password, '_self');
+    factory.joinTF2Server = function () {
+      $timeout(function (){
+        $window.open('steam://connect/' + factory.lobbyJoinInformation.game.host + '/' + factory.lobbyJoinInformation.password, '_self');
       }, 1000);
     };
 
-    factory.joinMumbleServer = function() {
-      $timeout(function(){
+    factory.joinMumbleServer = function () {
+      $timeout(function (){
         var connectString = 'mumble://' +
           factory.lobbyJoinInformation.mumble.nick + ':' +
           factory.lobbyJoinInformation.mumble.password + '@' +
           factory.lobbyJoinInformation.mumble.address + ':' +
           factory.lobbyJoinInformation.mumble.port + '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
-        window.open(connectString, '_self');
+        $window.open(connectString, '_self');
       }, 1000);
     };
 
-    Websocket.onJSON('lobbyReadyUp', function(data) {
+    Websocket.onJSON('lobbyReadyUp', function () {
       $rootScope.$emit('lobby-ready-up');
       if (playerPreReady) {
         Websocket.emitJSON('playerReady', {});
@@ -191,31 +192,31 @@
           timeout: 30
         },
         bindToController: true
-      })
-        .then(function(response) {
-          if (response.readyUp) {
-            Websocket.emitJSON('playerReady', {});
-            localStorage.setItem('tabCommunication', '');
-            localStorage.setItem('tabCommunication', 'closeDialog');
-          }
-        }, function() {
-          Websocket.emitJSON('playerNotReady', {});
+      }).then(function (response) {
+        if (response.readyUp) {
+          Websocket.emitJSON('playerReady', {});
           localStorage.setItem('tabCommunication', '');
           localStorage.setItem('tabCommunication', 'closeDialog');
-        });
+        }
+      }, function () {
+        Websocket.emitJSON('playerNotReady', {});
+        localStorage.setItem('tabCommunication', '');
+        localStorage.setItem('tabCommunication', 'closeDialog');
+      });
+
       Notifications.notifyBrowser({
         title: 'Click here to ready up!',
         body: 'All the slots are filled, ready up to start',
         timeout: 30,
         callbacks: {
-          onclick: function() {
-            window.focus();
+          onclick: function () {
+            $window.focus();
           }
         }
       });
     });
 
-    Websocket.onJSON('lobbyStart', function(data) {
+    Websocket.onJSON('lobbyStart', function (data) {
       factory.lobbyJoinInformation = data;
       $state.go('lobby-page', {lobbyID: factory.lobbySpectatedId});
       $rootScope.$emit('lobby-start');
@@ -224,19 +225,19 @@
         body: 'Come back to the site to join the server',
         timeout: 5,
         callbacks: {
-          onclick: function() {
-            window.focus();
+          onclick: function () {
+            $window.focus();
           }
         }
       });
     });
 
-    Websocket.onJSON('subListData', function(data) {
+    Websocket.onJSON('subListData', function (data) {
       factory.subList = data.data;
       $rootScope.$emit('sub-list-updated');
     });
 
-    Websocket.onJSON('lobbyListData', function(data) {
+    Websocket.onJSON('lobbyListData', function (data) {
       factory.lobbyList = data.lobbies;
       $rootScope.$emit('lobby-list-updated');
 
@@ -244,7 +245,7 @@
         return;
       }
 
-      factory.lobbyList.forEach(function(lobby) {
+      factory.lobbyList.forEach(function (lobby) {
         if (lobby.id === factory.lobbyJoinedId) {
           factory.getLobbyJoined().players = lobby.players;
           factory.getLobbyJoined().maxPlayers = lobby.maxPlayers;
@@ -265,14 +266,14 @@
       }
     });
 
-    Websocket.onJSON('lobbyJoined', function(data) {
+    Websocket.onJSON('lobbyJoined', function (data) {
       factory.lobbyJoinedId = data.id;
       factory.lobbyJoined = data;
       $rootScope.$emit('lobby-joined');
       $rootScope.$emit('lobby-joined-updated');
     });
 
-    Websocket.onJSON('lobbyLeft', function(data) {
+    Websocket.onJSON('lobbyLeft', function () {
       factory.lobbyJoinedId = -1;
       factory.lobbyJoined = {};
       factory.lobbyJoinInformation = {};
@@ -280,7 +281,7 @@
       $rootScope.$emit('lobby-left');
     });
 
-    Websocket.onJSON('lobbyClosed', function(data) {
+    Websocket.onJSON('lobbyClosed', function () {
       Notifications.toast({message: 'The lobby was closed'});
       $rootScope.$emit('lobby-closed');
     });
