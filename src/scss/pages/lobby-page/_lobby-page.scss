@@ -111,48 +111,58 @@
   }
 }
 
-.slot-button {
-  @include flex (row, space-between, center);
+.slot-button-wrapper {
   height: 100%;
   width: 100%;
   padding: 0;
   margin: 0;
   flex: 1;
-  position: relative;
-  line-height: normal !important; //otherwise can't multiline inside md-button
-  border-radius: 3px; //overriding .class-button .md-button
-  transition: all .3s ease-out;
-  overflow: hidden;
 
   &:nth-child(2) {
-    flex-direction: row-reverse;
     order: 3;
 
-    .firefox-bug-container {
+    .slot-button {
       flex-direction: row-reverse;
-    }
 
-    .slot-info {
-      align-items: flex-start;
-    }
+      .firefox-bug-container {
+        flex-direction: row-reverse;
+      }
 
-    .slot-misc {
-      flex-direction: row-reverse;
-      text-align: right;
-    }
+      .slot-info {
+        align-items: flex-start;
+      }
 
-    .slot-playername {
-      text-align: left;
+      .slot-misc {
+        flex-direction: row-reverse;
+        text-align: right;
+      }
+
+      .slot-playername {
+        text-align: left;
+      }
     }
   }
 
-  md-checkbox {
-    margin: 0 auto;
-    width: 15px;
-  }
+  .slot-button {
+    @include flex (row, space-between, center);
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    line-height: normal !important; //otherwise can't multiline inside md-button
+    border-radius: 3px; //overriding .class-button .md-button
+    transition: all .3s ease-out;
+    overflow: hidden;
 
-  &:not(.sheet) > .md-ripple-container {
-    display: none;
+    md-checkbox {
+      margin: 0 auto;
+      width: 15px;
+    }
+
+    &:not(.sheet) > .md-ripple-container {
+      display: none;
+    }
   }
 }
 
