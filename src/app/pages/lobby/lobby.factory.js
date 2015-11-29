@@ -72,33 +72,33 @@
       scope.$on('$destroy', handler);
     };
 
-    factory.kick = function(lobbyID, steamID) {
+    factory.kick = function (lobbyID, steamID) {
       var payload = {
         'id': lobbyID,
         'steamid': steamID
       };
 
-      Websocket.emitJSON('lobbyKick', payload, function(response) {
+      Websocket.emitJSON('lobbyKick', payload, function (response) {
         if (response.success) {
           Notifications.toast({message: 'Player kicked'});
         }
       });
     };
 
-    factory.ban = function(lobbyID, steamID) {
+    factory.ban = function (lobbyID, steamID) {
       var payload = {
         'id': lobbyID,
         'steamid': steamID
       };
 
-      Websocket.emitJSON('lobbyBan', payload, function(response) {
+      Websocket.emitJSON('lobbyBan', payload, function (response) {
         if (response.success) {
           Notifications.toast({message: 'Player banned'});
         }
       });
     };
 
-    factory.join = function(lobbyID, team, position) {
+    factory.join = function (lobbyID, team, position) {
       var payload = {
         'id': lobbyID,
         'team': team,
@@ -108,7 +108,7 @@
       Websocket.emitJSON('lobbyJoin', payload);
     };
 
-    factory.leaveSlot = function(lobbyID) {
+    factory.leaveSlot = function (lobbyID) {
       var payload = {
         'id': lobbyID
       };
@@ -116,7 +116,7 @@
       Websocket.emitJSON('lobbyLeave', payload);
     };
 
-    factory.goToLobby = function(lobby) {
+    factory.goToLobby = function (lobby) {
       $state.go('lobby-page', {lobbyID: lobby});
     };
 
