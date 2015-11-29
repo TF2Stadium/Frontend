@@ -14,10 +14,24 @@
     //will get selected on load thanks to md-autoselect
     $timeout(function(){
       vm.rooms = ChatService.getRooms();
+
+      $scope.$watch('currentTab', function (newVal) {
+        if (angular.isUndefined(newVal)) {
+          // On initialization, this callback will be called with
+          // newVal === oldVal === undefined
+          return;
+        }
+
+        var room = vm.rooms[currentTabId()];
+        var msgs = room.messages;
+
+        if (msgs.length > 0) {
+          vm.lastSeenIds[room.id] = msgs[msgs.length - 1].id;
+        }
+      });
     }, 0);
 
     vm.lastSeenIds = Object.create(null);
-    vm.currentTab = 0;
 
     // The three tabs are:
     //  0 - global chat
@@ -49,21 +63,6 @@
       }
     });
     $scope.$on('$destroy', clearChatMessage);
-
-    $scope.$watch('currentTab', function (newVal) {
-      if (angular.isUndefined(newVal)) {
-        // On initialization, this callback will be called with
-        // newVal === oldVal === undefined
-        return;
-      }
-
-      var room = vm.rooms[currentTabId()];
-      var msgs = room.messages;
-
-      if (msgs.length > 0) {
-        vm.lastSeenIds[room.id] = msgs[msgs.length - 1].id;
-      }
-    });
 
     vm.sendMessage = function (event) {
       if (vm.messageBox === '' || event.keyCode !== 13) {
