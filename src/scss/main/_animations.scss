@@ -65,12 +65,12 @@ span.ng-hide {
   }
 }
 
-.fade-out-top {
+.fade-out-top-height {
   opacity: 1;
-  animation: .3s fade-out-top cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+  animation: .3s fade-out-top-height cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
 }
 
-@keyframes fade-out-top {
+@keyframes fade-out-top-height {
   0% {
     transform: translateY(0);
     opacity: 1;
@@ -84,9 +84,24 @@ span.ng-hide {
   }
 }
 
+.fade-out-top {
+  animation: .3s fade-out-top cubic-bezier(0.215, 0.61, 0.355, 1) both;
+}
+
+@keyframes fade-out-top {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(-25px);
+    opacity: 0;
+  }
+}
+
 .fade-in-top {
-  opacity: 0;
-  animation: .3s fade-in-top cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
+  animation: .3s fade-in-top cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 
 @keyframes fade-in-top {
