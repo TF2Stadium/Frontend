@@ -22,6 +22,10 @@ It uses [AngularJS](https://angularjs.org/) as its framework, [Gulp](http://gulp
 * Execute `gulp serve` and and a Webbrowser Tab should open. This needs a full npm dependency installation (`npm install`); using `npm install --production` will result in a missing module error.
 * Execute `gulp` or `gulp build` when you want to build the project. It will output the files to `dist/`.
 
+##Development
+
+After making changes, run `gulp lint` to check for common errors or whitespace formatting issues. Most simple formatting errors can be automatically fixed with `gulp lint-fix`.
+
 ##License
 
 Released under the [GPLv3 License (GPLv3)](https://github.com/TF2Stadium/Frontend/blob/master/LICENSE).
