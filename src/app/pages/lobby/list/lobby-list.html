@@ -43,12 +43,12 @@
             </md-tooltip>
             <span></span>
           </md-button>
-        </div>        
+        </div>
       </div>
     </div>
     <div class="lobby-info">
       <div class="lobby-info-row top">
-        <span class="lobby-info-players">{{::lobbyInformation.players}}</span>
+        <span class="lobby-info-players">{{lobbyInformation.players}}</span>
         <span class="lobby-info-maxplayers">/{{::lobbyInformation.maxPlayers}}</span>
         <div flex></div>
         <div class="lobby-mumble" ng-class="{'not-required': !lobbyInformation.mumbleRequired}">
@@ -62,7 +62,7 @@
           {{::lobbyInformation.region.code}}
           <md-tooltip md-direction="bottom">
             Server located in {{::lobbyInformation.region.name}}
-          </md-tooltip>        
+          </md-tooltip>
         </span>
         <span class="lobby-league">
           {{::lobbyInformation.league}}
