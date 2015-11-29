@@ -66,15 +66,15 @@
       $window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };
 
-    vm.kick = function(playerSummary) {
+    vm.kick = function (playerSummary) {
       LobbyService.kick(vm.lobbyInformation.id, playerSummary.steamid);
     };
 
-    vm.ban = function(playerSummary) {
+    vm.ban = function (playerSummary) {
       LobbyService.ban(vm.lobbyInformation.id, playerSummary.steamid);
     };
 
-    vm.leaveSlot = function() {
+    vm.leaveSlot = function () {
       LobbyService.leaveSlot(vm.lobbyInformation.id);
     };
 

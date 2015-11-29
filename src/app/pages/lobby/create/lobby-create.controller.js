@@ -63,6 +63,10 @@
       vm.goToNext();
     };
 
+    vm.isSelected = function (field, option) {
+      return LobbyCreate.settings[field.key] === option.value;
+    };
+
     vm.goToNext = function () {
       $state.go(getNextWizardStep().name);
     };
