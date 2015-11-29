@@ -76,7 +76,7 @@ $themes-list: (
         background-color: $hover-color;
       }
 
-      &:not(.flat):focus {
+      &:not(.flat):focus:after {
         border: 2px solid $main-color;
       }
     }
