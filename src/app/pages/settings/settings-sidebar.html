@@ -4,7 +4,7 @@
   </h1>
   <md-button class="sidebar-link"
     ng-class="{'active' : $root.currentState==settingSection}"
-    ng-repeat="settingSection in settings.sections"
+    ng-repeat="(settingSection, _) in settings.sections"
     ui-sref="{{::settingSection}}">
     {{::settingSection}}
   </md-button>
