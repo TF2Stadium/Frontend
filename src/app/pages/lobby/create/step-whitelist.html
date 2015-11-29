@@ -2,7 +2,7 @@
   md-colspan="12" md-rowspan="2"
   ng-repeat="whitelist in lobbyCreate.whitelists.options | LobbyCreateOptionFilter:'whitelists':lobbyCreate.searchString"
   ng-click="lobbyCreate.select(lobbyCreate.whitelists, whitelist)"
-  ng-class="{'fade-in-top no-animate': lobbyCreate.searchString===null}"
+  ng-class="{'fade-in-top no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.whitelists, whitelist)}"
   ng-style="{'animation-delay': 0.03 * ($index+1) + 's'}">
   <div class="tile-text">
     <h2>{{::whitelist.title}}</h2>
