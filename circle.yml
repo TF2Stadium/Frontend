@@ -9,7 +9,7 @@ dependencies:
     - bower install
 test:
   override:
-    - gulp scripts
+    - gulp lint
 deployment:
   master:
     branch: master
