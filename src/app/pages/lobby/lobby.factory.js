@@ -6,7 +6,7 @@
 
   /** @ngInject */
   function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
-                        $window, Websocket, Notifications) {
+                        $window, Websocket, Notifications, Settings) {
     var factory = {};
 
     factory.lobbyList = {};
@@ -180,33 +180,40 @@
         Websocket.emitJSON('playerNotReady', {});
         localStorage.setItem('tabCommunication', '');
         localStorage.setItem('tabCommunication', 'closeDialog');
-      }
-      );
-      Notifications.notifyBrowser({
-        title: 'Click here to ready up!',
-        body: 'All the slots are filled, ready up to start',
-        timeout: 30,
-        callbacks: {
-          onclick: function () {
-            $window.focus();
+      });      
+      Settings.getSettings(function (settings) {
+        Notifications.notifyBrowser({
+          title: 'Click here to ready up!',
+          body: 'All the slots are filled, ready up to start',
+          soundFile: '/assets/sound/lobby-readyup.wav',
+          soundVolume: settings.soundVolume * 0.01,
+          timeout: 30,
+          callbacks: {
+            onclick: function () {
+              $window.focus();
+            }
           }
-        }
-      });
+        });
+      }
     });
 
     Websocket.onJSON('lobbyStart', function (data) {
       factory.lobbyJoinInformation = data;
       $state.go('lobby-page', {lobbyID: factory.lobbySpectated.id});
       $rootScope.$emit('lobby-start');
-      Notifications.notifyBrowser({
-        title: 'Lobby is starting!',
-        body: 'Come back to the site to join the server',
-        timeout: 5,
-        callbacks: {
-          onclick: function () {
-            $window.focus();
+      Settings.getSettings(function (settings) {
+        Notifications.notifyBrowser({
+          title: 'Lobby is starting!',
+          body: 'Come back to the site to join the server',
+          soundFile: '/assets/sound/lobby-start.wav',
+          soundVolume: settings.soundVolume * 0.01,
+          timeout: 5,
+          callbacks: {
+            onclick: function () {
+              $window.focus();
+            }
           }
-        }
+        });
       });
     });
 
