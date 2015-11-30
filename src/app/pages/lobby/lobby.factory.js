@@ -11,8 +11,8 @@
 
     factory.lobbyList = {};
 
-    // map lobby id -> last seen data
-    factory.lobbyData = Object.create(null);
+    factory.lobbySpectated = Object.create(null);
+    factory.lobbyJoined = Object.create(null);
 
     factory.lobbySpectatedId = -1;
     factory.lobbyJoinedId = -1;
@@ -38,8 +38,8 @@
 
     // Will return undefined when a lobby is not currently being
     // spectated
-    factory.getLobbySpectated = function () {
-      return factory.lobbyData[factory.lobbySpectatedId];
+    factory.getLobbySpectated = function() {
+      return factory.lobbySpectated;
     };
 
     // Will return -1 when a lobby is not currently being
@@ -50,14 +50,15 @@
 
     factory.leaveSpectatedLobby = function () {
       factory.lobbySpectatedId = -1;
+      factory.lobbySpectated = {};
       $rootScope.$emit('lobby-spectated-changed');
       $rootScope.$emit('lobby-spectated-updated');
     };
 
     // Will return undefined when not currently joined in any
     // lobby
-    factory.getLobbyJoined = function () {
-      return factory.lobbyData[factory.lobbyJoinedId];
+    factory.getLobbyJoined = function() {
+      return factory.lobbyJoined;
     };
 
     // Will return -1 when not currently joined in any
@@ -132,14 +133,7 @@
         'class': position
       };
 
-      Websocket.emitJSON('lobbyJoin', payload, function (response) {
-        if (response.success) {
-          // lobbyJoin is now handled later in a dedicated lobbyJoin
-          // event message handler (a separate event, not the response
-          // to this lobbyJoin request)
-          // $rootScope.$emit('lobby-joined', lobby);
-        }
-      });
+      Websocket.emitJSON('lobbyJoin', payload);
     };
 
     factory.leaveSlot = function (lobbyID) {
@@ -154,13 +148,20 @@
       $state.go('lobby-page', {lobbyID: lobby});
     };
 
-    factory.spectate = function (lobby) {
-      Websocket.emitJSON('lobbySpectatorJoin', {id: lobby}, function (response) {
-        if (!response.success) {
-          if($state.current.name === 'lobby-page') {
-            $state.go('lobby-list');
-          }
-        } else {
+    factory.spectate = function(lobby) {
+      Websocket.emitJSON('lobbySpectatorJoin', {id: lobby}, function(response) {
+        if (response.success) {
+          /*
+          This code assumes that the only way we'll ever spectate
+          a lobby is when we asked the backend to let us do it.
+          
+          However, the backend might have some ideas of its own and
+          force us to spectate a lobby (for example, on websocket connection).
+          
+          This code needs to be moved to the lobbyData handler, but the backend
+          is sending us bogus lobbyData on lobbyJoin that makes the page stutter,
+          so it stays here for the moment.
+          */
           var oldLobbyId = factory.lobbySpectatedId;
           factory.lobbySpectatedId = lobby;
 
@@ -168,7 +169,7 @@
             $rootScope.$emit('lobby-spectated-changed');
           }
           $rootScope.$emit('lobby-spectated-updated');
-        }
+        } 
       });
     };
 
@@ -277,8 +278,8 @@
       $rootScope.$emit('lobby-joined-updated');
     });
 
-    Websocket.onJSON('lobbyData', function (newLobby) {
-      factory.lobbyData[newLobby.id] = newLobby;
+    Websocket.onJSON('lobbyData', function(newLobby) {
+      factory.lobbySpectated = newLobby;
 
       if (newLobby.id === factory.lobbySpectatedId) {
         $rootScope.$emit('lobby-spectated-updated');
@@ -291,14 +292,14 @@
 
     Websocket.onJSON('lobbyJoined', function (data) {
       factory.lobbyJoinedId = data.id;
-      factory.lobbyData[data.id] = data;
-
+      factory.lobbyJoined = data;
       $rootScope.$emit('lobby-joined');
       $rootScope.$emit('lobby-joined-updated');
     });
 
     Websocket.onJSON('lobbyLeft', function () {
       factory.lobbyJoinedId = -1;
+      factory.lobbyJoined = {};
       factory.lobbyJoinInformation = {};
       $rootScope.$emit('lobby-joined-updated');
       $rootScope.$emit('lobby-left');
