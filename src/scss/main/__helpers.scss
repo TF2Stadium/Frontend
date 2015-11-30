@@ -67,6 +67,13 @@
 
   &:not(.flat):focus {
     @extend %md-whiteframe-z3;
+
+    &:after {
+      @extend .fill-parent;
+      content: '';
+      border-radius: 3px;
+      box-sizing: border-box;  
+    }
   }
 
   &.clickable {
