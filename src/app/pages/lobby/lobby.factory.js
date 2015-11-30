@@ -38,7 +38,7 @@
 
     // Will return undefined when a lobby is not currently being
     // spectated
-    factory.getLobbySpectated = function() {
+    factory.getLobbySpectated = function () {
       return factory.lobbySpectated;
     };
 
@@ -57,7 +57,7 @@
 
     // Will return undefined when not currently joined in any
     // lobby
-    factory.getLobbyJoined = function() {
+    factory.getLobbyJoined = function () {
       return factory.lobbyJoined;
     };
 
@@ -148,16 +148,16 @@
       $state.go('lobby-page', {lobbyID: lobby});
     };
 
-    factory.spectate = function(lobby) {
-      Websocket.emitJSON('lobbySpectatorJoin', {id: lobby}, function(response) {
+    factory.spectate = function (lobby) {
+      Websocket.emitJSON('lobbySpectatorJoin', {id: lobby}, function (response) {
         if (response.success) {
           /*
           This code assumes that the only way we'll ever spectate
           a lobby is when we asked the backend to let us do it.
-          
+
           However, the backend might have some ideas of its own and
           force us to spectate a lobby (for example, on websocket connection).
-          
+
           This code needs to be moved to the lobbyData handler, but the backend
           is sending us bogus lobbyData on lobbyJoin that makes the page stutter,
           so it stays here for the moment.
@@ -169,7 +169,7 @@
             $rootScope.$emit('lobby-spectated-changed');
           }
           $rootScope.$emit('lobby-spectated-updated');
-        } 
+        }
       });
     };
 
@@ -278,7 +278,7 @@
       $rootScope.$emit('lobby-joined-updated');
     });
 
-    Websocket.onJSON('lobbyData', function(newLobby) {
+    Websocket.onJSON('lobbyData', function (newLobby) {
       factory.lobbySpectated = newLobby;
 
       if (newLobby.id === factory.lobbySpectatedId) {
