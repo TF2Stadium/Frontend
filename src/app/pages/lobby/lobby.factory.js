@@ -185,6 +185,7 @@
       Notifications.notifyBrowser({
         title: 'Click here to ready up!',
         body: 'All the slots are filled, ready up to start',
+        soundFile: '/assets/sound/lobby-readyup.wav',
         timeout: 30,
         callbacks: {
           onclick: function () {
@@ -201,6 +202,7 @@
       Notifications.notifyBrowser({
         title: 'Lobby is starting!',
         body: 'Come back to the site to join the server',
+        soundFile: '/assets/sound/lobby-start.wav',
         timeout: 5,
         callbacks: {
           onclick: function () {

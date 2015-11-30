@@ -6,7 +6,8 @@
     'ngAnimate',
     'ui.router',
     'ngMaterial',
-    'luegg.directives'
+    'luegg.directives',
+    'ngAudio'
   ]);
 
   angular.module('tf2stadium.services', []);
