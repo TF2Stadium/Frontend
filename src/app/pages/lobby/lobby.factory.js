@@ -6,7 +6,7 @@
 
   /** @ngInject */
   function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
-                        $window, Websocket, Notifications) {
+                        $window, Websocket, Notifications, Settings) {
     var factory = {};
 
     factory.lobbyList = {};
@@ -239,15 +239,19 @@
       factory.lobbyJoinInformation = data;
       $state.go('lobby-page', {lobbyID: factory.lobbySpectatedId});
       $rootScope.$emit('lobby-start');
-      Notifications.notifyBrowser({
-        title: 'Lobby is starting!',
-        body: 'Come back to the site to join the server',
-        timeout: 5,
-        callbacks: {
-          onclick: function () {
-            $window.focus();
+      Settings.getSettings(function (settings) {
+        Notifications.notifyBrowser({
+          title: 'Lobby is starting!',
+          body: 'Come back to the site to join the server',
+          soundFile: '/assets/sound/lobby-start.wav',
+          soundVolume: settings.soundVolume * 0.01,
+          timeout: 5,
+          callbacks: {
+            onclick: function () {
+              $window.focus();
+            }
           }
-        }
+        });
       });
     });
 

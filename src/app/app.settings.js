@@ -53,6 +53,10 @@
       dark:   {name: 'TF2Stadium Dark', selector: 'dark-theme'}
     };
 
+    SettingsProvider.constants.sound = {
+      soundVolume:      {name: 'Notifications volume'}
+    };
+
     function setDefaultValues() {
       SettingsProvider.settings.currentTheme = 'default-theme';
 
