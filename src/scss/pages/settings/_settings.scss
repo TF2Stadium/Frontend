@@ -8,4 +8,8 @@
   @extend .sheet;
   padding: 0 $padding-medium $padding-medium!important;
   margin-top: $padding-medium;
+
+  .md-track-ticks {
+    display: none;
+  }
 }

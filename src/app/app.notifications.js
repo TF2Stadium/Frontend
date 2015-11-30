@@ -78,7 +78,7 @@
         options.tag = options.tag || 'tf2stadium';
 
         if (options.soundFile) {
-          ngAudio.play(options.soundFile);
+          ngAudio.play(options.soundFile).volume = options.soundVolume;
         }
 
         var html5notification = new Notification(options.title, options);
