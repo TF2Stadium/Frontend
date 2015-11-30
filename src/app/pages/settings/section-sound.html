@@ -1,4 +1,11 @@
 <div  class="settings-section">
   <h1>Notification volume</h1>
-  <md-slider md-discrete ng-model="soundVolume" step="1" min="0" max="100" ng-change="settings.saveSetting('soundVolume', soundVolume)"></md-slider>
+  <md-slider md-discrete
+    ng-model="settings.soundVolume"
+    step="1" min="0" max="100"
+    ng-change="settings.saveSetting('soundVolume', settings.soundVolume)">
+  </md-slider>
+  <md-button ng-click="settings.playSoundSample()">
+    Test sound
+  </md-button>
 </div>
