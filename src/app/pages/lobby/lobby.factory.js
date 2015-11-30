@@ -180,7 +180,7 @@
         Websocket.emitJSON('playerNotReady', {});
         localStorage.setItem('tabCommunication', '');
         localStorage.setItem('tabCommunication', 'closeDialog');
-      });      
+      });
       Settings.getSettings(function (settings) {
         Notifications.notifyBrowser({
           title: 'Click here to ready up!',
@@ -194,7 +194,7 @@
             }
           }
         });
-      }
+      });
     });
 
     Websocket.onJSON('lobbyStart', function (data) {
