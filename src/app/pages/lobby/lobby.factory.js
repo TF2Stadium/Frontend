@@ -49,8 +49,13 @@
     };
 
     factory.leaveSpectatedLobby = function () {
-      factory.lobbySpectatedId = -1;
-      factory.lobbySpectated = {};
+      if (factory.lobbySpectatedId === -1) {
+        return;
+      }
+      Websocket.emitJSON('lobbySpectatorLeave', {id: factory.lobbySpectatedId}, function () {
+        factory.lobbySpectatedId = -1;
+        factory.lobbySpectated = {};
+      });
       $rootScope.$emit('lobby-spectated-changed');
       $rootScope.$emit('lobby-spectated-updated');
     };
