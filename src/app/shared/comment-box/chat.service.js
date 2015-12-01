@@ -17,8 +17,9 @@
   }
 
   /** @ngInject */
-  function ChatService(Websocket, $rootScope, LobbyService, $sce,
-                       Notifications, Config) {
+  function ChatService($rootScope, $sce, $log,
+                       Websocket, LobbyService, Config, Notifications) {
+
     // takes a string and replaces emotes strings with appropriate
     // HTML elements
     var emotesToHTML = (function () {
@@ -31,7 +32,7 @@
         }
         // TODO: other emote image sources (spritesheets, ...)
 
-        console.error('Unknown emote type: ' + desc.type + ' in descriptor:',
+        $log.error('Unknown emote type: ' + desc.type + ' in descriptor:',
                       desc);
         return '';
       }
@@ -65,7 +66,7 @@
 
       var replacements = flatten(Config.emotes.map(emoteDescriptorToReplacer));
 
-      return function emotesToHTML(str) {
+      return function emotesToHTML_impl(str) {
         return replacements.reduce(function (s, replaceFn) {
           return replaceFn(s);
         }, str);
