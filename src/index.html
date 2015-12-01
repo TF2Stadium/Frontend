@@ -59,6 +59,10 @@
           </md-button>
           <div flex></div>
           <div class="toolbar-buttons">
+            <md-button ng-if="$root.currentState!=='lobby-list'"
+              ui-sref="lobby-list">
+              Home
+            </md-button>
             <md-button ng-if="$root.userProfile.steamid" ui-sref="settings">
               <img src="/assets/img/settings.svg">
               {{::$root.userProfile.name}}
