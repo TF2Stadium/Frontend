@@ -42,7 +42,8 @@
                   </md-menu-item>
                 </md-menu-content>
               </md-menu>
-              <span class="chat-message-text">{{message.message}}</span>
+              <span class="chat-message-text"
+                    ng-bind-html="message.message"></span>
             </div>
           </md-content>
         </md-tab-body>
