@@ -1,6 +1,9 @@
 'use strict';
 
+var fs = require('fs');
+var glob = require('glob');
 var path = require('path');
+var _ = require('lodash');
 var runSequence = require('run-sequence');
 var gulp = require('gulp');
 var conf = require('./conf');
@@ -110,6 +113,24 @@ gulp.task('clean', function (done) {
   $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
 });
 
-gulp.task('build', ['clean'], function (cb) {
+// Return only base file name without dir
+function getMostRecentMtimeSync(dir) {
+  var files = glob.sync(path.join(dir, '**/*'));
+
+  return _.max(_.map(files, function (f) {
+    return fs.statSync(f).mtime;
+  }));
+}
+
+gulp.task('rebuild', function (cb) {
   runSequence('clean', ['html', 'fonts', 'other'], cb);
+});
+
+gulp.task('build', function (cb) {
+  if (getMostRecentMtimeSync(conf.paths.src) <= getMostRecentMtimeSync(conf.paths.dist)) {
+    $.util.log('No modified files: not building');
+    cb();
+  } else {
+    runSequence('rebuild', cb);
+  }
 });
