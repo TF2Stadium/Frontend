@@ -4,7 +4,7 @@
     Spectators
   </h1>
   <md-menu ng-repeat="spectator in spectators.lobbyInformation.spectators"
-  md-position-mode="target-right target" md-offset="-180 0">
+           md-position-mode="target-right target" md-offset="-180 0">
     <md-button class="sidebar-link" ng-click="$mdOpenMenu($event)">
       {{::spectator.name}}
     </md-button>

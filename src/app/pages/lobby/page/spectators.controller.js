@@ -28,7 +28,8 @@
     };
 
     vm.shouldShowSpectators = function () {
-      return vm.lobbyInformation.id &&
+      return vm.lobbyInformation &&
+        vm.lobbyInformation.id &&
         vm.lobbyInformation.id === parseInt($state.params.lobbyID);
     };
   }

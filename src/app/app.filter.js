@@ -1,13 +1,15 @@
 (function () {
   'use strict';
 
+
   angular.module('tf2stadium')
     .filter('capitalize', capitalize)
     .filter('reverse', reverse)
     .filter('trusted', trusted)
     .filter('slotNameToClassName', slotNameToClassName)
     .filter('stripSlotNameNumber', stripSlotNameNumber)
-    .filter('secondsToMinutes', secondsToMinutes);
+    .filter('secondsToMinutes', secondsToMinutes)
+    .filter('unique', unique);
 
   /** @ngInject */
   function capitalize() {
@@ -68,6 +70,25 @@
       seconds = seconds % 60;
       seconds = seconds < 10 ? '0' + seconds : seconds;
       return minutes + ':' + seconds;
+    };
+  }
+
+  /** @ngInject */
+  function unique() {
+    return function (array, uniqueKey) {
+      var uniqueArray = [];
+      for (var key in array) {
+        var existsInArray = false;
+        for (var j in uniqueArray) {
+          if (uniqueArray[j][uniqueKey] === array[key][uniqueKey]) {
+            existsInArray = true;
+          }
+        }
+        if (!existsInArray) {
+          uniqueArray.push(array[key]);
+        }
+      }
+      return uniqueArray;
     };
   }
 
