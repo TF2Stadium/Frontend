@@ -1,6 +1,7 @@
 'use strict';
 
 var path = require('path');
+var runSequence = require('run-sequence');
 var gulp = require('gulp');
 var conf = require('./conf');
 
@@ -109,8 +110,6 @@ gulp.task('clean', function (done) {
   $.del([path.join(conf.paths.dist, '/'), path.join(conf.paths.tmp, '/')], done);
 });
 
-gulp.task('build-after-cleaned', ['html', 'fonts', 'other']);
-
-gulp.task('build', ['clean'], function () {
-  gulp.start('build-after-cleaned');
+gulp.task('build', ['clean'], function (cb) {
+  runSequence('clean', ['html', 'fonts', 'other'], cb);
 });
