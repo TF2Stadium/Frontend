@@ -28,7 +28,7 @@
 
         if (imgDesc.type === 'img') {
           return '<img src="assets/img/emotes/' + imgDesc.src +
-            '" height="16" width="16" alt="' + desc.name + '" />';
+            '" height="16" width="16" alt="' + desc.names[0] + '" />';
         }
         // TODO: other emote image sources (spritesheets, ...)
 
