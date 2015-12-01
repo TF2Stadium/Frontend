@@ -55,9 +55,9 @@
       Websocket.emitJSON('lobbySpectatorLeave', {id: factory.lobbySpectatedId}, function () {
         factory.lobbySpectatedId = -1;
         factory.lobbySpectated = {};
+        $rootScope.$emit('lobby-spectated-changed');
+        $rootScope.$emit('lobby-spectated-updated');
       });
-      $rootScope.$emit('lobby-spectated-changed');
-      $rootScope.$emit('lobby-spectated-updated');
     };
 
     // Will return undefined when not currently joined in any
