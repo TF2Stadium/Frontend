@@ -12,7 +12,8 @@
      */
     SettingsPageProvider.sections = [
       'theme',
-      'filters'
+      'filters',
+      'sound'
     ];
 
     for (var settingSectionKey in SettingsPageProvider.sections) {
@@ -40,6 +41,7 @@
     var settingsPageService = function (Settings) {
       settingsPageProvider.sections.theme = Settings.getConstants('themesList');
       settingsPageProvider.sections.filters = Settings.getConstants('filters');
+      settingsPageProvider.sections.sound = Settings.getConstants('sound');
 
       settingsPageService.getSections = function () {
         return settingsPageProvider.sections;

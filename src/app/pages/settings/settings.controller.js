@@ -6,7 +6,7 @@
     .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsPageController(SettingsPage, Settings) {
+  function SettingsPageController(SettingsPage, Settings, ngAudio) {
     var vm = this;
 
     vm.sections = SettingsPage.getSections();
@@ -17,6 +17,12 @@
 
     vm.setCurrent = function (key) {
       vm.current = key;
+    };
+
+    vm.playSoundSample = function () {
+      Settings.getSettings(function (settings) {
+        ngAudio.play('/assets/sound/lobby-readyup.wav').volume = settings.soundVolume / 100;
+      });
     };
 
     /*
@@ -37,6 +43,7 @@
 
     Settings.getSettings(function (response) {
       populateFilters(response);
+      vm.soundVolume = response.soundVolume;
     });
 
   }

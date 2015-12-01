@@ -6,7 +6,7 @@
     .controller('NotificationsController', NotificationsController);
 
   /** @ngInject */
-  function NotificationsFactory($mdToast, $document, $timeout, $log) {
+  function NotificationsFactory($mdToast, $document, $timeout, $log, ngAudio) {
 
     var notificationsService = {};
 
@@ -76,6 +76,10 @@
         options.title = options.title || 'TF2Stadium';
         options.icon = options.icon || '/assets/img/logo-no-text.png';
         options.tag = options.tag || 'tf2stadium';
+
+        if (options.soundFile) {
+          ngAudio.play(options.soundFile).volume = options.soundVolume;
+        }
 
         var html5notification = new Notification(options.title, options);
 

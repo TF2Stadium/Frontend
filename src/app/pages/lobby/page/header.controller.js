@@ -26,6 +26,7 @@
 
     vm.shouldShowLobbyInformation = function () {
       return !error &&
+        vm.lobbyInformation &&
         vm.lobbyInformation.id &&
         vm.lobbyInformation.id === parseInt($state.params.lobbyID);
     };
@@ -33,15 +34,15 @@
     vm.shouldShowLobbyControls = function () {
       var user = $rootScope.userProfile;
       var lobby = vm.lobbyInformation;
-      return lobby.state < 5 && user &&
+      return user && lobby && lobby.state < 5 &&
         (user.steamid === lobby.leader.steamid ||
          user.role === 'administrator');
     };
 
     vm.shouldShowProgress = function () {
-      return !error &&
-        !(vm.lobbyInformation.id &&
-          vm.lobbyInformation.id === parseInt($state.params.lobbyID));
+      var lobby = vm.lobbyInformation;
+      var curLobbyId = parseInt($state.params.lobbyID);
+      return !error && !(lobby && lobby.id && lobby.id === curLobbyId);
     };
 
     vm.shouldShowError = function () {

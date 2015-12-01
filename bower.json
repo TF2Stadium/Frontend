@@ -7,8 +7,9 @@
   "version": "0.0.0",
   "dependencies": {
     "angular": "~1.4.7",
-    "angular-material": "1.0.0-rc4",
     "angular-animate": "~1.4.0",
+    "angular-audio": "~1.7.1",
+    "angular-material": "1.0.0-rc4",
     "angular-scroll-glue": "~2.0.6",
     "angular-ui-router": "~0.2.15",
     "clipboard": "~1.5.3",
