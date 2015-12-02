@@ -67,6 +67,7 @@
     });
 
     Websocket.onJSON('chatReceive', function (message) {
+      message.timestamp = new Date(message.timestamp * 1000);
       getChatRoom(message.room).push(message);
       $rootScope.$emit('chat-message', message);
     });

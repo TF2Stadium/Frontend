@@ -26,6 +26,15 @@
   }
 }
 
+.chat-message-time {
+  display: inline-block;
+  max-width: 100%;
+  overflow: hidden;
+  vertical-align: top;
+  margin: 0 15px 0 -15px;
+  color: $text-color-light;
+}
+
 .chat-message-text {
   display: inline-block;
   max-width: 100%;

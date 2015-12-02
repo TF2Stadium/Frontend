@@ -35,13 +35,18 @@
 
     var settingsPageProvider = {};
 
-    settingsPageProvider.sections =  [];
+    settingsPageProvider.sections = {};
 
     /** @ngInject */
     var settingsPageService = function (Settings) {
-      settingsPageProvider.sections.theme = Settings.getConstants('themesList');
-      settingsPageProvider.sections.filters = Settings.getConstants('filters');
-      settingsPageProvider.sections.sound = Settings.getConstants('sound');
+      settingsPageProvider.sections = {
+        theme: {
+          theme: Settings.getConstants('themesList'),
+          timestamps: Settings.getConstants('timestampOptions')
+        },
+        filters: Settings.getConstants('filters'),
+        sound: Settings.getConstants('sound')
+      };
 
       settingsPageService.getSections = function () {
         return settingsPageProvider.sections;
