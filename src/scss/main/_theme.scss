@@ -131,8 +131,12 @@ $themes-list: (
       }
     }
 
-    .md-button:not(.md-action) {
+    .md-button {
       color: $text-color-medium;
+
+      &.md-action {
+        color: white;
+      }
     }
 
     .md-button.md-primary.md-raised {
@@ -223,6 +227,11 @@ $themes-list: (
       &:nth-child(3) {
         color: $secondary-color;
       }
+
+    }
+
+    .chat-message-time {
+      color: $text-color-medium;
     }
 
     .chat-player-name {
