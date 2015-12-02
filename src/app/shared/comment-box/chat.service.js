@@ -4,33 +4,33 @@
   angular.module('tf2stadium.services')
     .factory('ChatService', ChatService);
 
-  // Persistent map of room id -> messages list
-  var chatRoomLogs = Object.create(null);
-  function getChatRoom(id) {
-    if (angular.isUndefined(chatRoomLogs[id])) {
-      chatRoomLogs[id] = [];
-    }
-    return chatRoomLogs[id];
-  }
-
-  function ChatRoom(id) {
-    this.changeRoom(angular.isDefined(id)? id : -1);
-  }
-
-  ChatRoom.prototype.changeRoom = function chageRoom(id) {
-    if (id !== this.id) {
-      this.id = id;
-      this.messages = getChatRoom(id);
-    }
-  };
-
-  ChatRoom.prototype.leave = function leave() {
-    this.changeRoom(-1);
-  };
-
   /** @ngInject */
   function ChatService(Websocket, $rootScope, LobbyService) {
     var factory = {};
+
+    // Persistent map of room id -> messages list
+    var chatRoomLogs = Object.create(null);
+    function getChatRoom(id) {
+      if (angular.isUndefined(chatRoomLogs[id])) {
+        chatRoomLogs[id] = [];
+      }
+      return chatRoomLogs[id];
+    }
+
+    function ChatRoom(id) {
+      this.changeRoom(angular.isDefined(id)? id : -1);
+    }
+
+    ChatRoom.prototype.changeRoom = function chageRoom(id) {
+      if (id !== this.id) {
+        this.id = id;
+        this.messages = getChatRoom(id);
+      }
+    };
+
+    ChatRoom.prototype.leave = function leave() {
+      this.changeRoom(-1);
+    };
 
     var globalChatRoom = new ChatRoom(0);
 
