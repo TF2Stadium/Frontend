@@ -68,10 +68,32 @@
 
     Websocket.onJSON('chatReceive', function (message) {
       message.timestamp = new Date(message.timestamp * 1000);
-      getChatRoom(message.room).push(message);
+
+      var log = getChatRoom(message.room);
+
+      // Insert messages in sorted order (sorted by message id)
+      if (log.length === 0 || log[log.length - 1].id < message.id) {
+        log.push(message);
+      } else {
+        // performance likely isn't an issue, but since the log is
+        // sorted by id, it would be better to use a binary search
+        // here (also, use ES6 findIndex when available).
+        var insertIdx = 0;
+        while (log[insertIdx].id < message.id) {
+          insertIdx++;
+        }
+        if (log[insertIdx].id === message.id) {
+          // Same message id? Overwrite the logged message
+          log[insertIdx] = message;
+        } else {
+          // else insert it into the array (yeah, splice is far from
+          // efficient, but this should be very rare).
+          log.splice(insertIdx, 0, message);
+        }
+      }
+
       $rootScope.$emit('chat-message', message);
     });
-
 
     Websocket.onJSON('chatHistoryClear', function (data) {
       // Note: ChatRooms may have pointers to the arrays in
