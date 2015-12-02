@@ -53,12 +53,19 @@
       dark:   {name: 'TF2Stadium Dark', selector: 'dark-theme'}
     };
 
+    SettingsProvider.constants.timestampOptions = {
+      hours12:  {name: '12-hour'},
+      hours24:  {name: '24-hour'},
+      none:     {name: 'None'}
+    };
+
     SettingsProvider.constants.sound = {
       soundVolume:      {name: 'Notifications volume'}
     };
 
     function setDefaultValues() {
       SettingsProvider.settings.currentTheme = 'default-theme';
+      SettingsProvider.settings.timestamps = 'hours12';
 
       /*
         Defaults every value found in the filters to true.

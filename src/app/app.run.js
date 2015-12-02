@@ -38,6 +38,7 @@
     $rootScope.config = Config;
     Settings.getSettings(function (settings) {
       $rootScope.currentTheme = settings.currentTheme;
+      $rootScope.currentTimestampsOption = settings.timestamps;
       $rootScope.themeLoaded = true;
     });
 
