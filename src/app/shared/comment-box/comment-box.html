@@ -23,7 +23,7 @@
             <div ng-repeat="message in room.messages track by $index"
                  class="chat-message">
               <span class="chat-message-time"
-                    ng-if="message.player.steamid != room.messages[$index-1].player.steamid && $root.currentTimestampsOption !== 'none'">{{message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:M')}}</span>
+                    ng-if="message.player.steamid != room.messages[$index-1].player.steamid && $root.currentTimestampsOption !== 'none'">{{message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:mm')}}</span>
               <md-menu
                  ng-if="message.player.steamid != room.messages[$index-1].player.steamid">
                 <md-button
