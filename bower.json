@@ -15,5 +15,7 @@
     "clipboard": "~1.5.3",
     "wsevent.js": "~0.0.4"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "angular-mocks": "~1.4.7"
+  }
 }
