@@ -95,6 +95,13 @@
       $rootScope.$emit('chat-message', message);
     });
 
+    Websocket.onJSON('chatHistoryClear', function (data) {
+      // Note: ChatRooms may have pointers to the arrays in
+      // chatRoomLogs, so we have to mutate the actual logs rather
+      // than just assign a new empty array.
+      getChatRoom(data.room).length = 0;
+    });
+
     return factory;
   }
 })();

@@ -51,6 +51,10 @@ describe('Service: ChatService', function () {
     expect(mockWebsocket.onJSON).to.have.been.calledWith('chatReceive');
   });
 
+  it('should register for chatHistoryClear messages', function () {
+    expect(mockWebsocket.onJSON).to.have.been.calledWith('chatHistoryClear');
+  });
+
   it('should emit one chat-message event after each chatReceive', function () {
     sinon.stub($rootScope, '$emit');
 
@@ -113,5 +117,38 @@ describe('Service: ChatService', function () {
     expect(ChatService.getRooms()[0].messages[0].id).to.equal(msg1.id);
     expect(ChatService.getRooms()[0].messages[1].id).to.equal(msg2.id);
     expect(ChatService.getRooms()[0].messages[2].id).to.equal(msg3.id);
+  });
+
+  it('should clear a room\'s log on chatHistoryClear', function () {
+    var onJSONcalls = mockWebsocket.onJSON.args;
+    var onChatReceive = onJSONcalls.filter(function (args) {
+      return args[0] === 'chatReceive';
+    })[0][1];
+
+    var onChatHistoryClear = onJSONcalls.filter(function (args) {
+      return args[0] === 'chatHistoryClear';
+    })[0][1];
+
+    expect(onChatHistoryClear).to.be.a('function');
+
+    var msg1 = makeTestMessage();
+    msg1.id = 1;
+
+    var msg2 = makeTestMessage();
+    msg2.id = 2;
+
+    var msg3 = makeTestMessage();
+    msg3.id = 3;
+
+    // Note the wrong order
+    onChatReceive(msg1);
+    onChatReceive(msg2);
+    onChatReceive(msg3);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(3);
+    onChatHistoryClear({ room: msg1.room + 1 });
+    expect(ChatService.getRooms()[0].messages.length).to.equal(3);
+    onChatHistoryClear({ room: msg1.room });
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
   });
 });
