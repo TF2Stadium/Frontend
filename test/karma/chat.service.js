@@ -140,7 +140,6 @@ describe('Service: ChatService', function () {
     var msg3 = makeTestMessage();
     msg3.id = 3;
 
-    // Note the wrong order
     onChatReceive(msg1);
     onChatReceive(msg2);
     onChatReceive(msg3);
@@ -150,5 +149,36 @@ describe('Service: ChatService', function () {
     expect(ChatService.getRooms()[0].messages.length).to.equal(3);
     onChatHistoryClear({ room: msg1.room });
     expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+  });
+
+  it('should overwrite messages with the same id in the same room', function () {
+    var onJSONcalls = mockWebsocket.onJSON.args;
+    var onChatReceive = onJSONcalls.filter(function (args) {
+      return args[0] === 'chatReceive';
+    })[0][1];
+
+    var onChatHistoryClear = onJSONcalls.filter(function (args) {
+      return args[0] === 'chatHistoryClear';
+    })[0][1];
+
+    expect(onChatHistoryClear).to.be.a('function');
+
+    var msg1 = makeTestMessage();
+    msg1.id = 1;
+
+    var msg2 = makeTestMessage();
+    msg2.id = 2;
+
+    var msg3 = makeTestMessage();
+    msg3.id = 1;
+    msg3.message = msg1.message + 'unique';
+
+    onChatReceive(msg1);
+    onChatReceive(msg2);
+    expect(ChatService.getRooms()[0].messages.length).to.equal(2);
+    onChatReceive(msg3);
+    expect(ChatService.getRooms()[0].messages.length).to.equal(2);
+
+    expect(ChatService.getRooms()[0].messages[0].message).to.equal(msg3.message);
   });
 });
