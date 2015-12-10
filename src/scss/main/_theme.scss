@@ -48,9 +48,11 @@ $themes-list: (
 
   body.#{themeVar(selector)} {
 
-    background: $body-color;
-    color: $text-color-medium;
+    main {
+      background: $body-color;
+    }
 
+    color: $text-color-medium;
 
     /*======================================
                   OTHERS
@@ -174,7 +176,7 @@ $themes-list: (
 
     .current-lobby {
       background-color: white;
-      color: $text-color-medium;      
+      color: $text-color-medium;
     }
 
     #header-toolbar {
@@ -312,10 +314,10 @@ $themes-list: (
       background-color: $sheet-color;
     }
 
-    //SLIDER 
+    //SLIDER
     .md-thumb-text {
       color: white;
     }
-    
+
   }
 }

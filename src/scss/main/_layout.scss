@@ -6,7 +6,7 @@
 
 body {
   @include flex (column, flex-start, center);
-  overflow-y: hidden !important;
+  overflow-y: auto !important;
   //angular adds overflow-y:scroll when activating md-select for some reason
 }
 
@@ -21,7 +21,7 @@ body {
     transform: scale(1.2);
     opacity: 0;
   }
-  
+
   img {
     width: 300px;
     margin-bottom: $padding-medium;
@@ -38,6 +38,7 @@ body {
   width: 100%;
   background: #000;
   z-index: 50;
+  min-height: 230px;
 }
 
 #header-toolbar {
@@ -180,6 +181,10 @@ body {
 main {
   @include flex (column, flex-start, center);
   width: 100%;
+
+  // Never be shorter than the comment box, which has height: 500px but is
+  // also offset by margin-top: -100px
+  min-height: 400px;
 }
 
 #notifications {
