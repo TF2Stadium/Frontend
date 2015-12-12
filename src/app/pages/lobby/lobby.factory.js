@@ -243,8 +243,14 @@
 
     Websocket.onJSON('lobbyStart', function (data) {
       factory.lobbyJoinInformation = data;
-      $state.go('lobby-page', {lobbyID: factory.lobbySpectatedId});
       $rootScope.$emit('lobby-start');
+      Notifications.toast({
+        message: 'Your lobby has started!',
+        actionMessage: 'Go back',
+        action: function () {
+          factory.goToLobby(factory.lobbyJoinedId);
+        }
+      });
       Settings.getSettings(function (settings) {
         Notifications.notifyBrowser({
           title: 'Lobby is starting!',
