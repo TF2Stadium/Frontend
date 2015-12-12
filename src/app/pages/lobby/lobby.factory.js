@@ -232,6 +232,8 @@
       Notifications.notifyBrowser({
         title: 'Click here to ready up!',
         body: 'All the slots are filled, ready up to start',
+        soundFile: '/assets/sound/lobby-readyup.wav',
+        soundVolume: settings.soundVolume * 0.01,
         timeout: 30,
         callbacks: {
           onclick: function () {
