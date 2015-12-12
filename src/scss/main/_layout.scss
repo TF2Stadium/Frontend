@@ -38,7 +38,7 @@ body {
   width: 100%;
   background: #000;
   z-index: 50;
-  min-height: 230px;
+  min-height: $navbar-height + $header-image-height;
 }
 
 #header-toolbar {
@@ -189,7 +189,7 @@ main {
 
   // Never be shorter than the comment box, which has height: 500px but is
   // also offset by margin-top: -100px
-  min-height: 400px;
+  min-height: $commentbox-height + ($commentbox-top + $navbar-height - $header-height);
 }
 
 #notifications {
