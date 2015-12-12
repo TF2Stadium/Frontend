@@ -136,8 +136,13 @@ body {
 }
 
 #toasts {
-  width: $full-width;
-  z-index: 70;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: $toast-height;
+  overflow-y: hidden;
 }
 
 #commentbox {
