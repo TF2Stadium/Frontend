@@ -36,7 +36,7 @@
       content: "";
       background:{
         size: $class-button-background-width;
-        position: ($class-button-width - $class-button-background-width) / 2 
+        position: ($class-button-width - $class-button-background-width) / 2
                   ($class-button-height - $class-button-background-height) / 2;
         repeat: no-repeat;
       }
@@ -179,12 +179,18 @@
   //@include flex (row, space-between, center);
   height: $toast-height;
   width: 100%;
-  margin: 0;
   max-width: $full-width;
-  bottom: 0 !important;
   will-change: transform;
   transition: all .3s .15s ease-out;
   border-radius: 0;
+
+  // Override some angular positioning (since we're moving the toasts
+  // to the bottom of the viewport by ourselves)
+  bottom: 0 !important;
+  left: 0 !important;
+
+  margin: 0 auto;
+  position: relative;
 
   span {
     flex: 1;
