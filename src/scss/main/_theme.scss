@@ -9,7 +9,9 @@ $themes-list: (
     text-color-hard:      $grey-hard,
     text-color-medium:    $grey-medium,
     text-color-light:     $grey-light,
-    shadow-multiplier:    1
+    shadow-multiplier:    1,
+    toast-background:     #323232,
+    toast-error-background:  #f77
   ),
   theme-map-dark: (
     selector:             'dark-theme',
@@ -21,7 +23,9 @@ $themes-list: (
     text-color-hard:      $grey-light,
     text-color-medium:    $grey-medium,
     text-color-light:     $grey-hard,
-    shadow-multiplier:    1.7
+    shadow-multiplier:    1.7,
+    toast-background:     #323232,
+    toast-error-background:  #f77
   )
 );
 
@@ -43,6 +47,8 @@ $themes-list: (
   $text-color-hard:       themeVar(text-color-hard);
   $text-color-medium:     themeVar(text-color-medium);
   $text-color-light:      themeVar(text-color-light);
+  $toast-color:           themeVar(toast-background);
+  $toast-error-color:     themeVar(toast-error-background);
   $shadow-multiplier:     themeVar(shadow-multiplier);
 
 
@@ -60,9 +66,11 @@ $themes-list: (
 
     .toast {
       color: $white-dirty;
+      background-color: $toast-color;
+      box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26 * $shadow-multiplier);
 
       &.error {
-        background-color: #f77;
+        background-color: $toast-error-color;
         color: $white;
 
         .md-button {
