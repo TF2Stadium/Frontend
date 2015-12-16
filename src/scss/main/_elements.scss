@@ -176,15 +176,13 @@
    ================================== */
 
 .toast {
-  //@include flex (row, space-between, center);
+  @include flex (row, space-between, center);
   height: $toast-height;
   width: 100%;
   max-width: $full-width;
   will-change: transform;
   transition: all .3s .15s ease-out;
   border-radius: 0;
-  align-items: center;
-  display: flex;
   font-size: 14px;
 
   // Override some angular positioning (since we're moving the toasts
