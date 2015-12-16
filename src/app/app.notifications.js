@@ -17,9 +17,7 @@
       templateUrl: 'app/shared/notifications/toast.html',
       message: 'Default',
       actionMessage: 'OK',
-      action: function () {
-        $mdToast.hide();
-      },
+      action: function () {},
       controller: 'ToastController',
       controllerAs: 'toast',
       bindToController: true,
@@ -49,12 +47,13 @@
     };
 
     notificationsService.toast = function (options) {
-      for (var key in toastDefault) {
-        if (!options[key]) {
-          options[key] = toastDefault[key];
-        }
-      }
-      $mdToast.show(options);
+      $mdToast
+        .show(angular.extend({}, toastDefault, options))
+        .then(function (clicked) {
+          if (clicked === 'ok') {
+            options.action();
+          }
+        });
     };
 
     notificationsService.notifyBrowser = function (options) {
