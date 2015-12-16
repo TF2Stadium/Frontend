@@ -7,6 +7,7 @@
   /** @ngInject */
   function Websocket($rootScope, $timeout, $log, Config, Notifications) {
     var connected = false;
+    var reconnecting = false;
     var socket = null;
 
     var asyncAngularify = function (callback) {
@@ -35,7 +36,16 @@
       asyncAngularify(function () {
         $rootScope.$emit('socket-opened');
       })();
+
       $log.log('WebSocket connection opened', e);
+
+      if (reconnecting) {
+        Notifications.toast({
+          message: 'Connected to TF2Stadium!',
+          hideDelay: 5000,
+          actionMessage: 'Ok'
+        });
+      }
     };
 
     socket.onclose = function () {
@@ -55,6 +65,7 @@
         actionMessage: 'Reconnect',
         action: function () {
           $log.log('WebSocket reconnecting');
+          reconnecting = true;
           socket.connect();
         }
       });
