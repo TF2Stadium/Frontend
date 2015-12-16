@@ -9,7 +9,7 @@
     <span flex ng-if="lobbyPage.showConnectString">
       {{lobbyPage.lobbyJoinInformation.connectString}}
     </span>
-    <md-button data-clipboard-text="{{lobbyPage.lobbyJoinInformation.connectString}}" class="clipboard-button">Copy to clipboard</md-button>   
+    <md-button data-clipboard-text="{{lobbyPage.lobbyJoinInformation.connectString}}" class="clipboard-button">Copy to clipboard</md-button>
   </div>
   <div class="row">
     <md-button ng-click="lobbyPage.joinMumbleServer()">Connect to Mumble</md-button>
@@ -20,7 +20,7 @@
     <span flex ng-if="lobbyPage.showMumbleInformation">
       {{lobbyPage.lobbyJoinInformation.mumbleInformation}}
     </span>
-    <md-button data-clipboard-text="{{lobbyPage.lobbyJoinInformation.mumbleInformation}}" class="clipboard-button">Copy to clipboard</md-button>   
+    <md-button data-clipboard-text="{{lobbyPage.lobbyJoinInformation.mumbleInformation}}" class="clipboard-button">Copy to clipboard</md-button>
   </div>
 </div>
 
@@ -67,7 +67,7 @@
             </md-menu-item>
           </md-menu-content>
         </md-menu>
-        <md-checkbox 
+        <md-checkbox
           ng-if="lobbyPage.lobbyInformation.state==2
             || ($root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state==1)"
           ng-checked="slot.ready
