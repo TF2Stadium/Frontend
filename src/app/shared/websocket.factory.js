@@ -19,7 +19,10 @@
     };
 
     socket = new Socket(Config.endpoints.websocket,
-                        {extractor: extractor});
+      {
+        extractor: extractor,
+        maxRetries: 0
+      });
 
     socket.onopen = function (e) {
       // Note: connected=true must come before we emit the event,
@@ -28,18 +31,33 @@
       // connected==false, data gets queued for the socket-opened
       // event).
       connected = true;
+
       asyncAngularify(function () {
         $rootScope.$emit('socket-opened');
       })();
       $log.log('WebSocket connection opened', e);
     };
 
-    socket.onclose = function (e) {
+    socket.onclose = function () {
+      // this callback is called both when an opened connection is
+      // closed and when a closed connection attempts a reconnect, but
+      // fails.
+      $log.log('WebSocket closed');
+      connected = false;
+
       asyncAngularify(function () {
         $rootScope.$emit('socket-closed');
       })();
-      $log.log('WebSocket closed:', e);
-      connected = false;
+
+      Notifications.toast({
+        message: 'Disconnected from server',
+        error: true,
+        actionMessage: 'Reconnect',
+        action: function () {
+          $log.log('WebSocket reconnecting');
+          socket.connect();
+        }
+      });
     };
 
     function extractor(data) {
