@@ -27,20 +27,6 @@
         type: 'img',
         src: 'frown.png'
       }
-    },{
-      names: ['kappa'],
-      shortcuts: [],
-      image: {
-        type: 'img',
-        src: 'kappa.png'
-      }
-    },{
-      names: ['kappaRoss'],
-      shortcuts: [],
-      image: {
-        type: 'img',
-        src: 'kappaRoss.png'
-      }
     }]
   });
 
