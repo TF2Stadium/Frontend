@@ -65,9 +65,11 @@ $themes-list: (
      =======================================*/
 
     .toast {
+      @extend %md-whiteframe-z2;
+      border-radius: 0 !important;
+
       color: $white-dirty;
       background-color: $toast-color;
-      box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.26 * $shadow-multiplier);
 
       &.error {
         background-color: $toast-error-color;
@@ -95,19 +97,22 @@ $themes-list: (
       border-radius: 3px;
       box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
                   0px 2px 2px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
-                  0px 1px 5px  0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
+                  0px 1px 5px  0px rgba(0, 0, 0, 0.084 * $shadow-multiplier);
+    }
 
     %md-whiteframe-z2 {
       border-radius: 3px;
       box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
                   0px 4px 5px  0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
-                  0px 1px 10px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
+                  0px 1px 10px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier);
+    }
 
     %md-whiteframe-z3 {
       border-radius: 3px;
       box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.14  * $shadow-multiplier),
                   0px 6px 10px 0px rgba(0, 0, 0, 0.098 * $shadow-multiplier),
-                  0px 1px 18px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier); }
+                  0px 1px 18px 0px rgba(0, 0, 0, 0.084 * $shadow-multiplier);
+    }
 
 
     /*======================================
