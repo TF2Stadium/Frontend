@@ -29,7 +29,6 @@ gulp.task('test:unit', function (done) {
             'node_modules/es5-shim/es5-shim.js',
             src_files,
             'test/karma/**/*.js'),
-        logLevel: 'DEBUG',
         singleRun: true
       });
 
