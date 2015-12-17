@@ -176,21 +176,29 @@
    ================================== */
 
 .toast {
-  //@include flex (row, space-between, center);
+  @include flex (row, space-between, center);
   height: $toast-height;
   width: 100%;
   max-width: $full-width;
   will-change: transform;
   transition: all .3s .15s ease-out;
   border-radius: 0;
+  font-size: 14px;
 
   // Override some angular positioning (since we're moving the toasts
   // to the bottom of the viewport by ourselves)
   bottom: 0 !important;
   left: 0 !important;
 
+  padding-left: 24px;
+  padding-right: 24px;
+
   margin: 0 auto;
   position: relative;
+
+  button.md-button {
+    margin-right: 8px;
+  }
 
   span {
     flex: 1;

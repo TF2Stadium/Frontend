@@ -15,6 +15,10 @@
     margin-top: $padding-medium;
   }
 
+  > md-input-container {
+    margin-bottom: 0;
+  }
+
   ul {
     padding: 0 $padding-small 0;
     margin: 0;

@@ -250,3 +250,10 @@ main {
 md-dialog-content {
   padding: $padding-medium;
 }
+
+md-input-container {
+  // Temporary fix for https://github.com/angular/material/issues/6214
+  .md-errors-spacer {
+    min-height: 0 !important;
+  }
+}
