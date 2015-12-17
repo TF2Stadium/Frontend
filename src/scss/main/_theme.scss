@@ -327,5 +327,10 @@ $themes-list: (
       color: white;
     }
 
+    //CHECKBOXES
+    .md-checked .md-icon:after {
+      border-color: $sheet-color !important;
+    }
+
   }
 }
