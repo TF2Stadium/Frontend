@@ -1,0 +1,13 @@
+table {
+  &.punishment-grid-legend {
+    width: 100%;
+  }
+
+  .ban-tiny { color: black; background-color: gray; }
+  .ban-minor { color: black; background-color: green; }
+  .ban-medium { color: black; background-color: yellow; }
+  .ban-major { color: black; background-color: orange; }
+  .ban-severe { color: black; background-color: red; }
+  .ban-critical { color: black; background-color: maroon; }
+  .ban-permanent { color: white; background-color: black; }
+}

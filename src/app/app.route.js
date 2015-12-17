@@ -76,6 +76,38 @@
             controllerAs: 'settings'
           }
         }
+      })
+      .state('about', {
+        url: '/about',
+        redirectTo: 'about-about',
+        views: {
+          'content': {
+            templateUrl: 'app/pages/about/about.html',
+            controller: 'AboutPageController',
+            controllerAs: 'about'
+          },
+          'leftSidebar': {
+            templateUrl: 'app/pages/about/about-sidebar.html',
+            controller: 'AboutPageController',
+            controllerAs: 'about'
+          }
+        }
+      })
+      .state('rules', {
+        url: '/rules',
+        redirectTo: 'rules-rules',
+        views: {
+          'content': {
+            templateUrl: 'app/pages/rules/rules.html',
+            controller: 'RulesPageController',
+            controllerAs: 'rules'
+          },
+          'leftSidebar': {
+            templateUrl: 'app/pages/rules/rules-sidebar.html',
+            controller: 'RulesPageController',
+            controllerAs: 'rules'
+          }
+        }
       });
 
     $urlRouterProvider.otherwise('/');
