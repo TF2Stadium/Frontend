@@ -9,8 +9,7 @@
     var vm = this;
 
     vm.executeAction = function () {
-      vm.action();
-      $mdToast.hide();
+      $mdToast.hide('ok');
     };
   }
 

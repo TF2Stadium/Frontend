@@ -1,4 +1,8 @@
+/*global describe,beforeEach,it,sinon,expect,module,inject */
+
 describe('Service: ChatService', function () {
+  'use strict';
+
   function makeTestMessage() {
     // The chat service may mutate the received object, so use a
     // factory like this to make the tests are truly isolated
@@ -25,8 +29,8 @@ describe('Service: ChatService', function () {
 
   beforeEach(function () {
     mockWebsocket = sinon.stub({
-      onJSON: function (name, callback) {},
-      emitJSON: function (name, data, callback) {}
+      onJSON: function () {},
+      emitJSON: function () {}
     });
 
     mockLobbyService = sinon.stub({

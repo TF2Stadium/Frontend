@@ -1,0 +1,159 @@
+/*global describe,beforeEach,it,sinon,expect,module,inject,afterEach */
+
+describe('Service: ChatService', function () {
+  'use strict';
+
+  var Websocket;
+  var $rootScope;
+  var $timeout;
+  var mockNotifications;
+
+  var mockConfig = {
+    'endpoints': {
+      'websocket': 'ws://api.tf2stadium.gcommer.com/websocket/',
+      'api': 'http://api.tf2stadium.gcommer.com'
+    }
+  };
+
+  var stubSocket;
+  var mockConnection;
+
+  beforeEach(function () {
+    mockNotifications = sinon.stub({
+      toast: function () {}
+    });
+
+    mockConnection = sinon.stub({
+      connect: function () {},
+      On: function () {},
+      Emit: function () {}
+    });
+
+    stubSocket = sinon.stub(window, 'Socket', function () {
+      return mockConnection;
+    });
+
+    module('tf2stadium.services', function ($provide) {
+      $provide.value('Notifications', mockNotifications);
+      $provide.constant('Config',  mockConfig);
+    });
+
+    inject(function (_Websocket_, _$rootScope_, _$timeout_) {
+      $timeout = _$timeout_;
+      $rootScope = _$rootScope_;
+      Websocket = _Websocket_;
+    });
+  });
+
+  afterEach(function () {
+    stubSocket.restore();
+  });
+
+  it('should only construct one socket', function () {
+    expect(Socket).to.be.calledOnce;
+    expect(Socket).to.be.calledWithNew;
+    expect(mockConnection.connect).to.not.be.called;
+  });
+
+  it('should open a socket to the configured endpoint with retries disabled', function () {
+    expect(stubSocket).to.have.been.calledWith(
+      mockConfig.endpoints.websocket,
+      sinon.match({ maxRetries: 0 })
+    );
+  });
+
+  describe('Socket events', function () {
+    beforeEach(function () {
+      sinon.stub($rootScope, '$emit');
+    });
+
+    afterEach(function () {
+      $rootScope.$emit.restore();
+    });
+
+    it('should emit socket-opened when the socket connects', function () {
+      mockConnection.onopen();
+      $timeout.flush();
+      expect($rootScope.$emit).to.be.calledOnce;
+      expect($rootScope.$emit).to.be.calledWith('socket-opened');
+    });
+
+    it('should emit socket-close when the socket closes', function () {
+      mockConnection.onclose();
+      $timeout.flush();
+      expect($rootScope.$emit).to.be.calledOnce;
+      expect($rootScope.$emit).to.be.calledWith('socket-closed');
+    });
+  });
+
+  describe('Reconnect toast', function () {
+    beforeEach(function () {
+      mockConnection.onclose();
+    });
+
+    it('should be made when the socket closes', function () {
+      expect(mockNotifications.toast).to.have.been.calledOnce;
+      expect(mockNotifications.toast).to.have.been.calledWithMatch({
+        error: true
+      });
+    });
+
+    it('should allow the user to attempt to reconnect', function () {
+      expect(mockNotifications.toast).to.have.been.calledOnce;
+
+      // User clicks the button
+      mockNotifications.toast.args[0][0].action();
+
+      expect(mockConnection.connect).to.have.been.calledOnce;
+    });
+
+    it('should make another toast if the reconnect fails', function () {
+      expect(mockNotifications.toast).to.have.been.calledOnce;
+
+      // User clicks the button
+      mockNotifications.toast.args[0][0].action();
+
+      expect(mockConnection.connect).to.have.been.calledOnce;
+
+      // The reconnect fails
+      mockConnection.onclose();
+      expect(mockNotifications.toast).to.have.been.calledTwice;
+      expect(mockNotifications.toast.secondCall.args[0].error).to.be.ok;
+    });
+
+    it('should make a non-error toast if the reconnect works', function () {
+      expect(mockNotifications.toast).to.have.been.calledOnce;
+
+      // User clicks the button
+      mockNotifications.toast.args[0][0].action();
+
+      expect(mockConnection.connect).to.have.been.calledOnce;
+
+      // The reconnect fails
+      mockConnection.onopen();
+      expect(mockNotifications.toast.secondCall.args[0].error).to.not.be.ok;
+    });
+  });
+
+  describe('Message Sending', function () {
+    beforeEach(function () {
+      mockConnection.onopen();
+    });
+
+    it('should send messages', function () {
+      var testName = 'test';
+      var testData = { test: 'test' };
+      Websocket.emitJSON(testName, testData);
+
+      expect(mockConnection.Emit).to.be.calledOnce;
+      expect(mockConnection.Emit).to.be.calledWithMatch({
+        test: 'test',
+        request: testName
+      });
+    });
+  });
+
+  describe('Message Events', function () {
+    //TODO
+  });
+});
