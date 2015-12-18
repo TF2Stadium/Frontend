@@ -9,7 +9,7 @@ var karma = require('karma');
 
 var $ = require('gulp-load-plugins')();
 
-gulp.task('test:unit', function (done) {
+function runUnitTestsOn(browsers, done) {
   var src_files = [];
   gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
     .pipe($.angularFilesort())
@@ -17,7 +17,7 @@ gulp.task('test:unit', function (done) {
       src_files.push(file.path);
     }).on('end', function () {
       var server = new karma.Server({
-        browsers: ['PhantomJS'],
+        browsers: browsers,
         frameworks: ['mocha', 'chai-sinon'],
         files:
         mainBowerFiles({ includeDev: true })
@@ -39,8 +39,21 @@ gulp.task('test:unit', function (done) {
       });
       server.start();
     });
+}
+
+gulp.task('test:unit', function (done) {
+  runUnitTestsOn(['PhantomJS'], done)
+});
+
+gulp.task('test-browsers:unit', function (done) {
+  runUnitTestsOn(['PhantomJS', 'Firefox', 'Chrome'], done)
 });
 
 gulp.task('test', function (cb) {
   runSequence('test:unit', cb);
+});
+
+
+gulp.task('test-browsers', function (cb) {
+  runSequence('test-browsers:unit', cb);
 });
