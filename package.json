@@ -64,7 +64,8 @@
     "require-dir": "~0.3.0",
     "run-sequence": "^1.1.5",
     "selenium-webdriver": "^2.48.2",
-    "sinon": "^1.17.2"
+    "sinon": "^1.17.2",
+    "sinon-chai": "^2.8.0"
   },
   "engines": {
     "node": ">=0.10.0"
