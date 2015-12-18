@@ -28,7 +28,7 @@ gulp.task('test:unit', function (done) {
             // upgrade to phantomjs2 is complete
             'node_modules/es5-shim/es5-shim.js',
             src_files,
-            'test/karma/**/*.js'),
+            path.join(conf.paths.test, '/karma/**/*.js')),
         singleRun: true
       });
 

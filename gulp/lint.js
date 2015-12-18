@@ -13,7 +13,8 @@ function isFixed(file) {
 
 function runLinter(tryToFix) {
   var codePath = path.join(conf.paths.src, 'app');
-  return gulp.src(path.join(codePath, '**/*.js'))
+  return gulp.src([path.join(codePath, '**/*.js'),
+                   path.join(conf.paths.test, '**/*.js')])
     .pipe($.eslint({ fix: tryToFix }))
     .pipe($.eslint.format())
     .pipe($.if(isFixed, gulp.dest(codePath)))
