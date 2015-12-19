@@ -143,6 +143,10 @@ $themes-list: (
         color: $text-color-light;
       }
 
+      &.md-input-invalid label {
+        color: $input-error-color;
+      }
+
       .md-input {
         color: $text-color-hard;
       }
@@ -178,6 +182,10 @@ $themes-list: (
 
     md-input-container .md-input {
       border-color: $text-color-light;
+    }
+
+    md-input-container.md-input-invalid .md-input {
+      border-color: rgb(213,100,100);
     }
 
     md-menu-content {
