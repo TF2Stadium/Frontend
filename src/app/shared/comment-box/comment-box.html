@@ -49,17 +49,20 @@
       </md-tab>
     </md-tabs>
     <form name="chatForm">
-      <!-- Yes, this md-is-error is just the default invalid behavior,
-      but without explicitly specifying it, the md-input-container
+      <!-- Yes, this md-is-error is almost the default invalid
+      behavior, but a) we don't want an error if the field is empty,
+      and b) without explicitly specifying it, the md-input-container
       won't be marked invalid until it has been touched (focused and
       blurred) at least once. See:
       https://github.com/angular/material/issues/1330 -->
-      <md-input-container md-is-error="chatForm.chatMessage.$invalid">
+      <md-input-container
+         md-is-error="chatForm.chatMessage.$error['md-maxlength']">
         <label for="chatMessage">Type your message</label>
         <textarea name="chatMessage"
                   ng-keydown="commentBox.sendMessage($event)"
                   ng-model="commentBox.messageBox"
-                  md-maxlength="120"></textarea>
+                  md-maxlength="120"
+                  required></textarea>
         <div class="chat-error"
              ng-show="chatForm.chatMessage.$error['md-maxlength']">
           <p>Message too long</p>

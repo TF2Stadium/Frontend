@@ -65,19 +65,16 @@
     $scope.$on('$destroy', clearChatMessage);
 
     vm.sendMessage = function (event) {
-      if (vm.messageBox === '' || event.keyCode !== 13) {
+      if (event.keyCode !== 13) {
         return;
       }
 
       event.preventDefault();
 
-      if (vm.chatForm.chatMessage.$invalid) {
-        return;
+      if (angular.isDefined(vm.messageBox) && vm.messageBox.trim() !== '') {
+        ChatService.send(vm.messageBox, vm.rooms[currentTabId()].id);
+        vm.messageBox = '';
       }
-
-      ChatService.send(vm.messageBox, vm.rooms[currentTabId()].id);
-
-      vm.messageBox = '';
     };
 
     vm.goToProfile = function (steamId) {
