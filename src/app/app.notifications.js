@@ -2,8 +2,7 @@
   'use strict';
 
   angular.module('tf2stadium')
-    .factory('Notifications', NotificationsFactory)
-    .controller('NotificationsController', NotificationsController);
+    .factory('Notifications', NotificationsFactory);
 
   /** @ngInject */
   function NotificationsFactory($mdToast, $document, $timeout, $log, ngAudio) {
