@@ -5,7 +5,7 @@
     .factory('Notifications', NotificationsFactory);
 
   /** @ngInject */
-  function NotificationsFactory($mdToast, $document, $timeout, $log, ngAudio) {
+  function NotificationsFactory($mdToast, $window, $document, $timeout, $log, ngAudio) {
 
     var notificationsService = {};
 
@@ -34,10 +34,12 @@
     };
 
     notificationsService.notifyBrowser = function (options) {
-      if (!('Notification' in window)) {
+      if (!('Notification' in $window)) {
         $log.log('Browser doesn\'t support HTML5 notifications');
         return;
       }
+
+      var Notification = $window.Notification;
 
       if (($document[0].hasFocus() && !options.showAlways) || Notification.permission === 'denied') {
         return;
