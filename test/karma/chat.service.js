@@ -3,24 +3,36 @@
 describe('Service: ChatService', function () {
   'use strict';
 
-  function makeTestMessage() {
+  function makeTestPlayer(p) {
+    return {
+      avatar: '',
+      gameHours: 1201 + p*100,
+      lobbiesPlayed: 0,
+      name: 'player' + p,
+      profileUrl: '',
+      role: '',
+      steamid: '' + p,
+      tags: ['player']
+    };
+  }
+
+  function makeTestMessage(n, p) {
+    // n is a way to order messages,
+    // p lets us test multiple players
     // The chat service may mutate the received object, so use a
     // factory like this to make the tests are truly isolated
+    if (angular.isUndefined(n)) {
+      n = 1;
+    }
+    if (angular.isUndefined(p)) {
+      p = 1;
+    }
     return {
-      id: 1,
-      message: 'hi',
+      id: n,
+      message: 'hi' + n,
       room: 0,
-      timestamp: 1449001384,
-      player: {
-        avatar: '',
-        gameHours: 1201,
-        lobbiesPlayed: 0,
-        name: 'test',
-        profileUrl: '',
-        role: '',
-        steamid: '123',
-        tags: ['player']
-      }
+      timestamp: 1449001384 + n*1000,
+      player: makeTestPlayer(p)
     };
   }
 
@@ -103,14 +115,9 @@ describe('Service: ChatService', function () {
 
     expect(onChatReceive).to.be.a('function');
 
-    var msg1 = makeTestMessage();
-    msg1.id = 1;
-
-    var msg2 = makeTestMessage();
-    msg2.id = 2;
-
-    var msg3 = makeTestMessage();
-    msg3.id = 3;
+    var msg1 = makeTestMessage(1);
+    var msg2 = makeTestMessage(2);
+    var msg3 = makeTestMessage(3);
 
     // Note the wrong order
     onChatReceive(msg3);
@@ -135,14 +142,9 @@ describe('Service: ChatService', function () {
 
     expect(onChatHistoryClear).to.be.a('function');
 
-    var msg1 = makeTestMessage();
-    msg1.id = 1;
-
-    var msg2 = makeTestMessage();
-    msg2.id = 2;
-
-    var msg3 = makeTestMessage();
-    msg3.id = 3;
+    var msg1 = makeTestMessage(1);
+    var msg2 = makeTestMessage(2);
+    var msg3 = makeTestMessage(3);
 
     onChatReceive(msg1);
     onChatReceive(msg2);
@@ -167,15 +169,10 @@ describe('Service: ChatService', function () {
 
     expect(onChatHistoryClear).to.be.a('function');
 
-    var msg1 = makeTestMessage();
-    msg1.id = 1;
-
-    var msg2 = makeTestMessage();
-    msg2.id = 2;
-
-    var msg3 = makeTestMessage();
+    var msg1 = makeTestMessage(1);
+    var msg2 = makeTestMessage(2);
+    var msg3 = makeTestMessage(3);
     msg3.id = 1;
-    msg3.message = msg1.message + 'unique';
 
     onChatReceive(msg1);
     onChatReceive(msg2);
