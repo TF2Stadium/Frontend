@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function CommentBoxController($rootScope, $scope, $window, $log, $timeout,
-                                ChatService, Notifications) {
+                                ChatService) {
     var vm = this;
 
     //The $timeout makes sure the last tab (lobbyJoined tab)
@@ -69,20 +69,15 @@
         return;
       }
 
-      if (vm.error) {
-        Notifications.toast({message: 'That message is too long', error: true});
+      event.preventDefault();
+
+      if (vm.chatForm.chatMessage.$invalid) {
         return;
       }
 
       ChatService.send(vm.messageBox, vm.rooms[currentTabId()].id);
 
       vm.messageBox = '';
-      event.preventDefault();
-    };
-
-    vm.checkMessage = function () {
-      //Check if message is longer than the char limit
-      vm.error = typeof vm.messageBox === 'undefined';
     };
 
     vm.goToProfile = function (steamId) {

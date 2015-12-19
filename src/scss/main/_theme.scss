@@ -11,7 +11,8 @@ $themes-list: (
     text-color-light:     $grey-light,
     shadow-multiplier:    1,
     toast-background:     #323232,
-    toast-error-background:  #f77
+    toast-error-background:  #f77,
+    input-error-color:    rgb(213,0,0)
   ),
   theme-map-dark: (
     selector:             'dark-theme',
@@ -25,7 +26,8 @@ $themes-list: (
     text-color-light:     $grey-hard,
     shadow-multiplier:    1.7,
     toast-background:     #323232,
-    toast-error-background:  #f77
+    toast-error-background:  #f77,
+    input-error-color:    rgb(213,0,0)
   )
 );
 
@@ -50,7 +52,7 @@ $themes-list: (
   $toast-color:           themeVar(toast-background);
   $toast-error-color:     themeVar(toast-error-background);
   $shadow-multiplier:     themeVar(shadow-multiplier);
-
+  $input-error-color:     themeVar(input-error-color);
 
   body.#{themeVar(selector)} {
 
@@ -206,6 +208,10 @@ $themes-list: (
 
     #chat {
       background-color: $sheet-color;
+    }
+
+    .chat-error {
+      color: $input-error-color;
     }
 
     .header-info {

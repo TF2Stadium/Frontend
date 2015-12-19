@@ -47,19 +47,24 @@
           </md-content>
         </md-tab-body>
       </md-tab>
-
-
     </md-tabs>
-    <md-input-container
-      md-is-error="commentBox.error">
-      <label for="chatbox-message">Type your message</label>
-      <textarea id="chatbox-message"
-        name="message"
-        ng-keydown="commentBox.sendMessage($event)"
-        ng-model="commentBox.messageBox"
-        ng-change="commentBox.checkMessage()"
-        md-maxlength="120">
-      </textarea>
-    </md-input-container>
+    <form name="chatForm">
+      <!-- Yes, this md-is-error is just the default invalid behavior,
+      but without explicitly specifying it, the md-input-container
+      won't be marked invalid until it has been touched (focused and
+      blurred) at least once. See:
+      https://github.com/angular/material/issues/1330 -->
+      <md-input-container md-is-error="chatForm.chatMessage.$invalid">
+        <label for="chatMessage">Type your message</label>
+        <textarea name="chatMessage"
+                  ng-keydown="commentBox.sendMessage($event)"
+                  ng-model="commentBox.messageBox"
+                  md-maxlength="120"></textarea>
+        <div class="chat-error"
+             ng-show="chatForm.chatMessage.$error['md-maxlength']">
+          <p>Message too long</p>
+        </div>
+      </md-input-container>
+    </form>
   </div>
 </div>

@@ -15,8 +15,31 @@
     margin-top: $padding-medium;
   }
 
-  > md-input-container {
-    margin-bottom: 0;
+  form {
+    width: 100%;
+
+    md-input-container {
+      margin-bottom: 0;
+      width: 100%;
+      .chat-error {
+        font-size: 12px;
+        float: left;
+        padding-top: 5px;
+        font-size: 12px;
+        line-height: 14px;
+        overflow: hidden;
+        transition: all .2s ease-out;
+
+        p {
+          transition: all .2s ease-out;
+          margin: 0;
+        }
+
+        &.ng-hide p {
+          transform: translateY(-19px);
+        }
+      }
+    }
   }
 
   ul {
