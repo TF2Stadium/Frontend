@@ -31,7 +31,7 @@
                    ng-class="[message.player.tags]"
                    ng-click="$mdOpenMenu($event)"
                    md-menu-origin>
-                  {{::message.player.name}}:
+                  {{message.player.name}}:
                 </md-button>
                 <md-menu-content width="3">
                   <md-menu-item>
@@ -42,7 +42,7 @@
                   </md-menu-item>
                 </md-menu-content>
               </md-menu>
-              <span class="chat-message-text">{{::message.message}}</span>
+              <span class="chat-message-text">{{message.message}}</span>
             </div>
           </md-content>
         </md-tab-body>
