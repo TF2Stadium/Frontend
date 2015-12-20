@@ -13,7 +13,8 @@
     SettingsPageProvider.sections = [
       'theme',
       'filters',
-      'sound'
+      'sound',
+      'profile'
     ];
 
     for (var settingSectionKey in SettingsPageProvider.sections) {
@@ -45,7 +46,8 @@
           timestamps: Settings.getConstants('timestampOptions')
         },
         filters: Settings.getConstants('filters'),
-        sound: Settings.getConstants('sound')
+        sound: Settings.getConstants('sound'),
+        profile: null
       };
 
       settingsPageService.getSections = function () {
