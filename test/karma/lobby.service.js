@@ -4,8 +4,8 @@ describe('Service: LobbyService', function () {
   'use strict';
 
   var LobbyService, $rootScope, $timeout, $q;
-  var mockWebsocket, mockNotifications, mockSettings,
-      mock$state, mock$mdDialog, mock$window;
+  var mockWebsocket, mockNotifications, mockSettings;
+  var mock$state, mock$mdDialog, mock$window;
 
   var callbacks = {};
 
