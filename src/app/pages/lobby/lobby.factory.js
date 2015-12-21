@@ -7,6 +7,19 @@
   /** @ngInject */
   function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
                         $window, Websocket, Notifications, Settings) {
+
+    function cleanForMumble(str) {
+      // By default, murmur servers accept usernames matching:
+      //   [-=\w\[\]\{\}\(\)\@\|\.]+
+      // Note: that the \w is not JavaScript's \w; it is from mumble's
+      // Unicode aware regex and matches an underscore or any of the
+      // following Unicode character classes:
+      //   Mn,Mc,Me,Nd,Nl,No,Lu,Ll,Lt,Lm,Lo
+      // The '\wÀ-ÿ' below is only an approximation of the characters
+      // from those sets that are most likely to actually be used.
+      return str.replace(/[^-=\wÀ-ÿ\[\]\{\}\(\)\@\|\.]+/g, '_');
+    }
+
     var factory = {};
 
     factory.lobbyList = {};
@@ -195,7 +208,7 @@
     factory.joinMumbleServer = function () {
       $timeout(function (){
         var connectString = 'mumble://' +
-          factory.lobbyJoinInformation.mumble.nick + ':' +
+          cleanForMumble(factory.lobbyJoinInformation.mumble.nick) + ':' +
           factory.lobbyJoinInformation.mumble.password + '@' +
           factory.lobbyJoinInformation.mumble.address + ':' +
           factory.lobbyJoinInformation.mumble.port + '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
