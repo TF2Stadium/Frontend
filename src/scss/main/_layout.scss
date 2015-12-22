@@ -192,24 +192,6 @@ main {
   min-height: $commentbox-height + ($commentbox-top + $navbar-height - $header-height);
 }
 
-#notifications {
-  @include flex (column, flex-start, center);
-  flex-shrink: 0;
-  @extend .sheet, .flat;
-  width: 100%;
-  z-index: 20;
-
-  &.hidden {
-    margin-bottom: 20px;
-  }
-
-  &.empty ~ main {
-    #left-sidebar, md-content {
-      padding-top: $padding-medium;
-    }
-  }
-}
-
 #page-content {
   @include flex (row, initial, initial);
   width: $content-width;
