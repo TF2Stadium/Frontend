@@ -14,7 +14,7 @@
       'theme',
       'filters',
       'sound',
-      'profile'
+      'account'
     ];
 
     for (var settingSectionKey in SettingsPageProvider.sections) {
@@ -47,7 +47,7 @@
         },
         filters: Settings.getConstants('filters'),
         sound: Settings.getConstants('sound'),
-        profile: null
+        account: null
       };
 
       settingsPageService.getSections = function () {
