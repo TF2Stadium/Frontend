@@ -185,7 +185,7 @@ $themes-list: (
     }
 
     md-input-container.md-input-invalid .md-input {
-      border-color: rgb(213,100,100);
+      border-color: $warn-color;
     }
 
     md-menu-content {

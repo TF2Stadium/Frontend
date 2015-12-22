@@ -29,10 +29,19 @@ a {
   color: inherit;
 }
 
+.lobby-image {
+  font-size: 13px;
+}
+
 .current-lobby > span {
   font-family: $font-family-header;
   font-size: 20px;
 }
+
+
+/* ==================================
+            COMMENT BOX
+   ================================== */
 
 .chat-player-name {
   line-height: 1.6;
@@ -46,14 +55,18 @@ a {
   font-size: 13px;
 }
 
-.lobby-image {
-  font-size: 13px;
+.chat-error {
+  font-size: 12px;
 }
 
 
 /* ==================================
             LOBBY LIST
    ================================== */
+
+.lobby-list-empty-state {
+  font-size: 1.2rem;
+}
 
 .lobby-info-maxplayers {
   font-size: .8em;
@@ -100,4 +113,21 @@ a {
   font-family: montserrat;
   font-weight: bold;
   font-size: 20px;
+}
+
+
+/* ==================================
+            TOOLBAR
+   ================================== */
+
+.steam-login {
+  font-size: 0;
+}
+
+/* ==================================
+            TOAST
+   ================================== */
+
+.toast {
+  font-size: 14px;
 }

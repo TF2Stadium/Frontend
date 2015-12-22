@@ -85,7 +85,6 @@
     repeat: no-repeat;
     position: center;
   }
-  font-size: 0;
 }
 
 
@@ -183,7 +182,6 @@
   will-change: transform;
   transition: all .3s .15s ease-out;
   border-radius: 0;
-  font-size: 14px;
 
   // Override some angular positioning (since we're moving the toasts
   // to the bottom of the viewport by ourselves)
