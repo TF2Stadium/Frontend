@@ -22,7 +22,7 @@
       {name: 'whitelist',         groupKey: 'whitelists'},
       {name: 'mumble',            groupKey: 'mumble'},
       {name: 'restrictions',      groupKey: 'restrictions'},
-      {name: 'server',            groupKey: 'server'},
+      {name: 'server',            groupKey: 'server'}
     ];
 
     for (var i = 0; i < LobbyCreateProvider.wizardSteps.length; i++) {
