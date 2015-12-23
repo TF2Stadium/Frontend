@@ -11,7 +11,7 @@
     var socket = null;
 
     var asyncAngularify = function (callback) {
-      return function () {
+      return function asyncAngularifedFn() {
         var args = arguments;
         $timeout(function () {
           callback.apply(null, args);
@@ -159,10 +159,6 @@
           deregister();
         });
       }
-    };
-
-    factory.isInitialized = function () {
-      return connected;
     };
 
     return factory;
