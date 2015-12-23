@@ -42,7 +42,6 @@
       if (reconnecting) {
         Notifications.toast({
           message: 'Connected to TF2Stadium!',
-          hideDelay: 5000,
           actionMessage: 'Ok'
         });
       }
@@ -139,7 +138,11 @@
         $log.log('Response to ' + name, dataIn);
         $log.log(dataIn);
         if (!dataIn.success) {
-          Notifications.toast({message: dataIn.message, error: true});
+          Notifications.toast({
+            message: dataIn.message,
+            error: true,
+            hideDelay: 5000
+          });
         }
         callback(dataIn);
       });

@@ -20,7 +20,7 @@
       error: false,
       parent: $document[0].querySelector('#toasts'),
       autoWrap: false,
-      hideDelay: 0
+      hideDelay: 5000
     };
 
     notificationsService.toast = function (options) {
