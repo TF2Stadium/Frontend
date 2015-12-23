@@ -151,6 +151,71 @@ describe('Service: ChatService', function () {
         request: testName
       });
     });
+
+    it('message callbacks should be triggered, and errors should trigger toasts', function () {
+      var testName = 'test';
+      var testData = { test: 'test' };
+
+      var cb = sinon.spy();
+      Websocket.emitJSON(testName, testData, cb);
+
+      expect(mockConnection.Emit).to.be.calledOnce;
+      expect(mockConnection.Emit).to.be.calledWithMatch({
+        test: 'test',
+        request: testName
+      });
+
+      var msg = {success: false, message: 'abc'};
+
+      var websocketCb = mockConnection.Emit.getCall(0).args[1];
+      expect(websocketCb).to.be.a.function;
+      websocketCb(angular.toJson(msg));
+      $timeout.flush();
+
+      expect(cb).to.be.calledOnce;
+      expect(cb).to.be.calledWith(msg);
+    });
+  });
+
+  describe('extractor paramaeter to wsevent.js', function () {
+    it('should pull out the request field', function () {
+      expect(stubSocket).to.be.calledOnce;
+
+      var opts = stubSocket.getCall(0).args[1];
+      expect(opts).to.have.property('extractor');
+      expect(opts.extractor).to.be.a.function;
+      expect(opts.extractor({request: 123})).to.equal(123);
+    });
+  });
+
+  describe('Message queueing', function () {
+    it('Should queue up messages for unregistered handlers', function () {
+      mockConnection.onmessage('e1', 1);
+      mockConnection.onmessage('e1', 2);
+      mockConnection.onmessage('e1', 3);
+
+      var cb = sinon.spy();
+
+      expect(cb).to.not.be.called;
+
+      Websocket.onJSON('e1', cb);
+      $timeout.flush();
+
+      expect(cb).to.be.calledThrice;
+      expect(cb.firstCall).to.be.calledWith(1);
+      expect(cb.secondCall).to.be.calledWith(2);
+      expect(cb.thirdCall).to.be.calledWith(3);
+
+      expect(mockConnection.On).to.be.calledOnce;
+      expect(mockConnection.On).to.be.calledWith('e1');
+      var wsOnCb = mockConnection.On.getCall(0).args[1];
+      expect(wsOnCb).to.be.a.function;
+      wsOnCb(4);
+      $timeout.flush();
+
+      expect(cb.callCount).to.equal(4);
+      expect(cb.getCall(3)).to.be.calledWith(4);
+    });
   });
 
   describe('Message Events', function () {
