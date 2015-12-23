@@ -11,7 +11,12 @@ var $ = require('gulp-load-plugins')();
 
 function runUnitTestsOn(browsers, done) {
   var src_files = [];
-  gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
+  var src_glob = path.join(conf.paths.src, '/app/**/*.js');
+
+  var preprocessors = {};
+  preprocessors[src_glob] = ['coverage'];
+
+  gulp.src(src_glob)
     .pipe($.angularFilesort())
     .on('data', function (file) {
       src_files.push(file.path);
@@ -29,7 +34,9 @@ function runUnitTestsOn(browsers, done) {
             'node_modules/es5-shim/es5-shim.js',
             src_files,
             path.join(conf.paths.test, '/karma/**/*.js')),
-        singleRun: true
+        singleRun: true,
+        reporters: ['progress', 'coverage'],
+        preprocessors: preprocessors
       });
 
       server.on('run_complete', function (browsers, results) {

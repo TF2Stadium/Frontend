@@ -93,14 +93,6 @@
         <md-icon md-svg-icon="/assets/img/icon-add.svg"></md-icon>
       </md-button>
     </div>
-    <aside id="notifications" ng-controller="NotificationsController as vm"
-      ng-class="{'empty' : vm.isEmpty()}">
-      <md-button class="notification"
-           ng-repeat="(id, notification) in vm.notifications track by id"
-           ng-click=vm.remove(id)>
-        {{::notification.message}}
-      </md-button>
-    </aside>
     <main flex ng-if="$root.backendAuthenticated">
       <div flex id="page-content">
         <div ui-view="leftSidebar" id="left-sidebar"></div>

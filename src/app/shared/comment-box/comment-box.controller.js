@@ -2,17 +2,17 @@
   'use strict';
 
   angular
-    .module('tf2stadium')
+    .module('tf2stadium.controllers')
     .controller('CommentBoxController', CommentBoxController);
 
   /** @ngInject */
   function CommentBoxController($rootScope, $scope, $window, $log, $timeout,
-                                ChatService, Notifications) {
+                                ChatService) {
     var vm = this;
 
     //The $timeout makes sure the last tab (lobbyJoined tab)
     //will get selected on load thanks to md-autoselect
-    $timeout(function (){
+    $timeout(function () {
       vm.rooms = ChatService.getRooms();
 
       $scope.$watch('currentTab', function (newVal) {
@@ -65,24 +65,16 @@
     $scope.$on('$destroy', clearChatMessage);
 
     vm.sendMessage = function (event) {
-      if (vm.messageBox === '' || event.keyCode !== 13) {
+      if (event.keyCode !== 13) {
         return;
       }
 
-      if (vm.error) {
-        Notifications.toast({message: 'That message is too long', error: true});
-        return;
-      }
-
-      ChatService.send(vm.messageBox, vm.rooms[currentTabId()].id);
-
-      vm.messageBox = '';
       event.preventDefault();
-    };
 
-    vm.checkMessage = function () {
-      //Check if message is longer than the char limit
-      vm.error = typeof vm.messageBox === 'undefined';
+      if (angular.isDefined(vm.messageBox) && vm.messageBox.trim() !== '') {
+        ChatService.send(vm.messageBox, vm.rooms[currentTabId()].id);
+        vm.messageBox = '';
+      }
     };
 
     vm.goToProfile = function (steamId) {

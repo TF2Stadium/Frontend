@@ -2,7 +2,7 @@
   'use strict';
 
   angular
-    .module('tf2stadium')
+    .module('tf2stadium.controllers')
     .controller('SubListController', SubListController);
 
   /** @ngInject */

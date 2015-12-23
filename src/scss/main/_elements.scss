@@ -85,7 +85,6 @@
     repeat: no-repeat;
     position: center;
   }
-  font-size: 0;
 }
 
 
@@ -181,7 +180,6 @@
   width: 100%;
   max-width: $full-width;
   border-radius: 0;
-  font-size: 14px;
 
   // Override some angular positioning (since we're moving the toasts
   // to the bottom of the viewport by ourselves)

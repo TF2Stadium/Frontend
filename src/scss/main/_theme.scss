@@ -4,6 +4,7 @@ $themes-list: (
     type:                 'light',
     main-color:           $blue-medium,
     secondary-color:      $blue-hard,
+    warn-color:           #D50000,
     body-background:      $white-dirty,
     header-background:    $white-dirty,
     text-color-hard:      $grey-hard,
@@ -18,6 +19,7 @@ $themes-list: (
     type:                 'dark',
     main-color:           $blue-medium,
     secondary-color:      $blue-hard,
+    warn-color:           #D50000,
     body-background:      $grey-dark,
     header-background:    $grey-dark,
     text-color-hard:      $grey-light,
@@ -36,6 +38,7 @@ $themes-list: (
 @each $theme-label, $theme in $themes-list {
   $main-color:            themeVar(main-color);
   $secondary-color:       themeVar(secondary-color);
+  $warn-color:            themeVar(warn-color);
   $body-color:            themeVar(body-background);
   $sheet-color:           lighten($body-color, 6.5%);
   @if themeVar(type) == 'light' {
@@ -50,7 +53,6 @@ $themes-list: (
   $toast-color:           themeVar(toast-background);
   $toast-error-color:     themeVar(toast-error-background);
   $shadow-multiplier:     themeVar(shadow-multiplier);
-
 
   body.#{themeVar(selector)} {
 
@@ -141,6 +143,10 @@ $themes-list: (
         color: $text-color-light;
       }
 
+      &.md-input-invalid label {
+        color: $warn-color;
+      }
+
       .md-input {
         color: $text-color-hard;
       }
@@ -178,6 +184,10 @@ $themes-list: (
       border-color: $text-color-light;
     }
 
+    md-input-container.md-input-invalid .md-input {
+      border-color: $warn-color;
+    }
+
     md-menu-content {
       background-color: $sheet-color;
     }
@@ -196,16 +206,16 @@ $themes-list: (
       background-color: $sheet-color;
     }
 
-    #notifications {
-      background-color: $sheet-color;
-    }
-
     .toolbar-buttons .md-button {
       color: $text-color-medium;
     }
 
     #chat {
       background-color: $sheet-color;
+    }
+
+    .chat-error {
+      color: $warn-color;
     }
 
     .header-info {

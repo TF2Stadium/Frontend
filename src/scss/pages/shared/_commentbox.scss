@@ -15,8 +15,22 @@
     margin-top: $padding-medium;
   }
 
-  > md-input-container {
+  form {
+    width: 100%;
+  }
+
+  md-input-container {
     margin-bottom: 0;
+    width: 100%;
+
+    .md-char-counter {
+      // By default angular-material gives the character counter
+      // transition: all but we don't want that because it causes
+      // it to gradually change to/from the red error font color,
+      // which other error-reflecting parts of the UI don't
+      // transition for
+      transition: none;
+    }
   }
 
   ul {
@@ -27,6 +41,23 @@
 
   li {
     padding: 3px 0;
+  }
+}
+
+.chat-error {
+  float: left;
+  padding-top: 5px;
+  line-height: 14px;
+  overflow: hidden;
+  transition: all .2s ease-out;
+
+  p {
+    transition: all .2s ease-out;
+    margin: 0;
+  }
+
+  &.ng-hide p {
+    transform: translateY(-19px);
   }
 }
 
