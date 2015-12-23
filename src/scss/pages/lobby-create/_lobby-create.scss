@@ -144,7 +144,6 @@ md-grid-tile.tile-card {
 .tile-image {
   @include flex(row, center, center);
   @extend .fill-parent;
-  transition: all .1s ease-out;
   background: {
     size: cover;
     position: 50% 20%;

@@ -1,25 +1,3 @@
-.header-image {
-  transition: background-image .6s .3s ease-out;
-}
-
-.current-lobby {
-  transition: all .2s ease-out;
-  
-  &.ng-hide {
-    transform: translateY(-200px);
-    opacity: 0;
-    display: flex !important;
-  }
-}
-
-#splash-screen .md-button {
-  transition: transform .15s ease-out;
-
-  &.visible {
-    transform: scale(1) !important;
-  }
-}
-
 @mixin animation($names, $duration: .2s, $delay: null, $distance: $padding-medium) {
   $animation:; //declare variable
   @each $name in $names {
@@ -146,6 +124,13 @@
   100%  {transform: scale(0)}  
 }
 
+//CIRCLE MASK
+
+@keyframes circle-mask {
+  0%    {clip-path: circle(0 at center)}
+  100%  {clip-path: circle(100% at center)}  
+}
+
 
 @keyframes fade-out-top-height {
   0% {
@@ -180,5 +165,25 @@
 }
 
 .settings-section {
-  @include animation(slide-from-top fade-in);  
+  @include animation(slide-from-top fade-in);
+}
+
+.current-lobby {
+  @include animation(slide-from-top-full fade-in);
+
+  &.ng-leave {
+    @include animation(slide-to-top-full fade-out);
+  }
+}
+
+#splash-screen .md-button.visible {
+  @include animation(scale-in);
+}
+
+.toast {
+  @include animation(slide-from-bottom-full, .3s);  
+
+  &.ng-leave {
+    @include animation(slide-to-bottom-full);
+  }
 }
