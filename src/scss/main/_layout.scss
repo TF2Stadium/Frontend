@@ -199,11 +199,13 @@ main {
 
 #left-sidebar {
   min-width: initial;
+  padding-top: $padding-medium;
 }
 
 #main-content {
   @include scrollbars;
   width: 100%;
+  padding-top: $padding-medium;
   //This divides the padding into padding + margin
   //That way, when scrollbars appear, they are next to the content
   padding-right: $padding-medium / 2 - 3px;
