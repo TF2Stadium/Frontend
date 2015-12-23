@@ -3,6 +3,11 @@
   <div class="header-text">
     <div class="lobbypage-text">
       <div class="row">
+        <md-icon class="big"
+          md-svg-src="/assets/img/icon-lock-closed-white.svg"
+          ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">
+          <md-tooltip>Private lobby</md-tooltip>
+        </md-icon>
         <span class="lobbypage-map">{{header.lobbyInformation.map}}</span>
         <div class="lobbypage-lobby-closed"
           ng-if="header.lobbyInformation.state>=5">
@@ -38,6 +43,7 @@
       <div class="right">
         <span class="lobbypage-mumble">Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required</span>
         <span class="lobbypage-region">{{header.lobbyInformation.region.name}}</span>
+        <span ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">Private lobby</span>
       </div>
     </div>
   </div>
