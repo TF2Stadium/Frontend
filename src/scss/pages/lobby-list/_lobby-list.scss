@@ -34,7 +34,6 @@
 
 #lobby-filters {
   @extend .sheet;
-  @extend .fade-in-top;
   padding: $padding-small $padding-medium;
   margin: $padding-medium 0;
 
@@ -42,9 +41,12 @@
     @include flex(row, center, center);
   }
 
+  &.ng-enter {
+    @include animation(slide-from-top fade-in);
+  }
+
   &.ng-leave {
-    @extend .fade-out-top;
-    animation-delay: .2s;
+    @include animation(slide-to-top fade-out);
   }
 }
 
@@ -69,9 +71,11 @@
   }
 
   &.ng-leave {
-    transform: translateX(0);
-    opacity: 1;
-    animation: .3s slide-to-right cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    @include animation(slide-to-right fade-out);
+  }
+
+  &.ng-enter {
+    @include animation(slide-from-left fade-in);
   }
 
   &.ng-enter-stagger {
@@ -80,36 +84,6 @@
 
   &.ng-leave-stagger {
     animation-delay: 0.06s;    
-  }
-
-  &.ng-enter {
-    transform: translateX(100px);
-    opacity: 0;
-    animation: .3s enter-to-right cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-  }
-}
-
-@keyframes slide-to-right {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateX(100px);
-    opacity: 0;
-  }
-}
-
-@keyframes enter-to-right {
-  0% {
-    transform: translateX(-100px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
   }
 }
 

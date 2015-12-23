@@ -61,10 +61,10 @@
 
 .search-filter {
   @extend .sheet;
-  @extend .fade-in-top;
   width: 100%;
   padding: $padding-small $padding-medium;
   z-index: 1;
+  @include animation(slide-from-top fade-in);
 
   md-input-container {
     display: block;
@@ -76,7 +76,7 @@
   }
 
   &.ng-leave {
-    @extend .fade-out-top-height;
+    @include animation(fade-out-top-height);
   }
 }
 
@@ -84,6 +84,7 @@ md-grid-tile.tile-card {
   @extend .sheet, .clickable;
   cursor: pointer;
   overflow: hidden;
+  @include animation(slide-from-top fade-in);
   transition: background-color .2s ease-out,
               box-shadow .2s ease-out,
               //now for the repositioning animations
@@ -127,7 +128,7 @@ md-grid-tile.tile-card {
   }
 
   &.ng-leave {
-    @extend .scale-out;
+    @include animation(scale-out fade-out);
   }
 }
 
@@ -190,7 +191,6 @@ md-grid-tile.tile-card {
 
 .tile-form {
    @include flex(column, flex-start, stretch);
-   @extend .fade-in-top;
    position: relative;
 }
 
@@ -199,6 +199,7 @@ md-grid-tile.tile-card {
   @extend .sheet;
   padding: $padding-medium $padding-big * 2;
   z-index: 1;
+  @include animation(slide-from-top fade-in);
 
   md-input-container {
     width: 100%;
@@ -229,28 +230,16 @@ md-grid-tile.tile-card {
   }
 
   &.ng-enter {
-    transition: all .2s .2s ease-out;
+    @include animation(slide-from-top-full, $delay: .3s);
   }
 
   &.ng-leave {
-    transition: all .2s ease-out;
+    @include animation(slide-to-top-full, .3s);
   }
 
   &.ng-animate {
     position: absolute;
     right: 0;
     left: 0;
-  }
-
-  &.ng-enter,
-  &.ng-leave.ng-leave-active {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-
-  &.ng-enter.ng-enter-active,
-  &.ng-leave {
-    transform: translateY(0);
-    opacity: 1;
   }
 }
