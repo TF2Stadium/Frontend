@@ -7,3 +7,4 @@ dist/
 src/assets/
 src/app/app.config.js
 Frontend.iml
+coverage/
