@@ -179,8 +179,6 @@
   height: $toast-height;
   width: 100%;
   max-width: $full-width;
-  will-change: transform;
-  transition: all .3s .15s ease-out;
   border-radius: 0;
 
   // Override some angular positioning (since we're moving the toasts
@@ -201,18 +199,6 @@
   span {
     flex: 1;
     text-align: center;
-  }
-
-  &.ng-leave {
-    transition: all .15s ease-out;
-  }
-
-  &.ng-enter, &.ng-leave.ng-leave-active {
-    transform: translateY(100%);
-  }
-
-  &.ng.enter.ng-enter-active, &.ng-leave {
-    transform: translateY(0);
   }
 }
 

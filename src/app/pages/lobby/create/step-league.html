@@ -2,7 +2,7 @@
   md-colspan="12" md-rowspan="2"
   ng-repeat="league in lobbyCreate.leagues.options | LobbyCreateOptionFilter:'leagues':lobbyCreate.searchString"
   ng-click="lobbyCreate.select(lobbyCreate.leagues, league)"
-  ng-class="{'fade-in-top no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.leagues, league)}"
+  ng-class="{'no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.leagues, league)}"
   ng-style="{'animation-delay': 0.03 * ($index+1) + 's'}">
   <div class="tile-text">
     <h2>{{::league.title}}</h2>

@@ -1,117 +1,189 @@
-span.ng-hide {
-  opacity: 0;
-  transform: translateY(10px);
-}
-
-.lobbycreate-text span {
-  transition: all .3s ease-out;
-}
-
-.header-image {
-  transition: background-image .6s .3s ease-out;
-}
-
-.current-lobby {
-  transition: all .2s ease-out;
-  
-  &.ng-hide {
-    transform: translateY(-200px);
-    opacity: 0;
-    display: flex !important;
+@mixin animation($names, $duration: .2s, $delay: null, $distance: $padding-medium) {
+  $animation:; //declare variable
+  @each $name in $names {
+    $animation: $animation + $duration $name $delay cubic-bezier(0.215, 0.61, 0.355, 1) both + ",";
   }
-}
-
-#splash-screen .md-button {
-  transition: transform .15s ease-out;
-
-  &.visible {
-    transform: scale(1) !important;
-  }
+  animation: $animation;
 }
 
 
+//SLIDE-IN
 
-.scale-out {
-  opacity: 1;
-  animation: .2s scale-out cubic-bezier(0.215, 0.61, 0.355, 1) forwards;  
+@keyframes slide-from-top {
+  0%    {transform: translateY(-$padding-medium)}
+  100%  {transform: translateY(0)}
+}
+
+@keyframes slide-from-right {
+  0%    {transform: translateX($padding-medium)}
+  100%  {transform: translateX(0)}
+}
+
+@keyframes slide-from-bottom {
+  0%    {transform: translateY($padding-medium)}
+  100%  {transform: translateY(0)}
+}
+
+@keyframes slide-from-left {
+  0%    {transform: translateX(-$padding-medium)}
+  100%  {transform: translateX(0)}
+}
+
+
+//SLIDE-OUT
+
+@keyframes slide-to-top {
+  0%    {transform: translateY(0)}
+  100%  {transform: translateY(-$padding-medium)}
+}
+
+@keyframes slide-to-right {
+  0%    {transform: translateX(0)}
+  100%  {transform: translateX($padding-medium)}
+}
+
+@keyframes slide-to-bottom {
+  0%    {transform: translateY(0)}
+  100%  {transform: translateY($padding-medium)}
+}
+
+@keyframes slide-to-left {
+  0%    {transform: translateX(0)}
+  100%  {transform: translateX(-$padding-medium)}
+}
+
+
+//SLIDE-IN FULL
+
+@keyframes slide-from-top-full {
+  0%    {transform: translateY(-100%)}
+  100%  {transform: translateY(0)}
+}
+
+@keyframes slide-from-right-full {
+  0%    {transform: translateX(100%)}
+  100%  {transform: translateX(0)}
+}
+
+@keyframes slide-from-bottom-full {
+  0%    {transform: translateY(100%)}
+  100%  {transform: translateY(0)}
+}
+
+@keyframes slide-from-left-full {
+  0%    {transform: translateX(-100%)}
+  100%  {transform: translateX(0)}
+}
+
+
+//SLIDE-OUT
+
+@keyframes slide-to-top-full {
+  0%    {transform: translateY(0)}
+  100%  {transform: translateY(-100%)}
+}
+
+@keyframes slide-to-right-full {
+  0%    {transform: translateX(0)}
+  100%  {transform: translateX(100%)}
+}
+
+@keyframes slide-to-bottom-full {
+  0%    {transform: translateY(0)}
+  100%  {transform: translateY(100%)}
+}
+
+@keyframes slide-to-left-full {
+  0%    {transform: translateX(0)}
+  100%  {transform: translateX(-100%)}
+}
+
+
+//FADE
+
+@keyframes fade-in {
+  0%    {opacity: 0}
+  100%  {opacity: 1}
+}
+
+@keyframes fade-out {
+  0%    {opacity: 1}
+  100%  {opacity: 0}
+}
+
+
+//SCALE
+
+@keyframes scale-in {
+  0%    {transform: scale(0)}
+  100%  {transform: scale(1)}  
 }
 
 @keyframes scale-out {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-
-  100% {
-    transform: scale(0);
-    opacity: 0;
-  }
+  0%    {transform: scale(1)}
+  100%  {transform: scale(0)}  
 }
 
-.scale-in {
-  opacity: 0;
-  animation: .2s scale-in cubic-bezier(0.215, 0.61, 0.355, 1) forwards;   
+//CIRCLE MASK
+
+@keyframes circle-mask {
+  0%    {clip-path: circle(0 at center)}
+  100%  {clip-path: circle(100% at center)}  
 }
 
-@keyframes scale-in {
-  0% {
-    transform: scale(0);
-    opacity: 0;
-  }
-
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-.fade-out-top-height {
-  opacity: 1;
-  animation: .3s fade-out-top-height cubic-bezier(0.215, 0.61, 0.355, 1) forwards;
-}
 
 @keyframes fade-out-top-height {
   0% {
     transform: translateY(0);
-    opacity: 1;
   }
 
   100% {
     transform: translateY(-100px);
-    opacity: 0;
     height: 0;
     padding: 0;
   }
 }
 
-.fade-out-top {
-  animation: .3s fade-out-top cubic-bezier(0.215, 0.61, 0.355, 1) both;
+.lobbycreate-text span {
+  @include animation(slide-from-bottom fade-in);  
 }
 
-@keyframes fade-out-top {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
+.lobbypage-text {
+  @include animation(slide-from-bottom fade-in, .4s);
+}
 
-  100% {
-    transform: translateY(-25px);
-    opacity: 0;
+#slots {
+  @include animation(slide-from-top);  
+}
+
+.slot-button {
+  @include animation(slide-from-right fade-in, $delay: .1s);
+
+  &:nth-child(2) {
+    @include animation(slide-from-left fade-in, $delay: .1s);
   }
 }
 
-.fade-in-top {
-  animation: .3s fade-in-top cubic-bezier(0.215, 0.61, 0.355, 1) both;
+.settings-section {
+  @include animation(slide-from-top fade-in);
 }
 
-@keyframes fade-in-top {
-  0% {
-    transform: translateY(-25px);
-    opacity: 0;
-  }
+.current-lobby {
+  @include animation(slide-from-top-full fade-in);
 
-  100% {
-    transform: translateY(0);
-    opacity: 1;
+  &.ng-leave {
+    @include animation(slide-to-top-full fade-out);
+  }
+}
+
+#splash-screen .md-button.visible {
+  @include animation(scale-in);
+}
+
+.toast {
+  @include animation(slide-from-bottom-full, .3s);  
+
+  &.ng-leave {
+    @include animation(slide-to-bottom-full);
   }
 }

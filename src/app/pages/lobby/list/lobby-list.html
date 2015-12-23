@@ -43,7 +43,8 @@
 <a md-ink-ripple
   ng-repeat="lobbyInformation in lobbyList.lobbies | LobbyListSettingsFilter as filteredLobbies track by lobbyInformation.id"
   class="lobby-row"
-  ui-sref="lobby-page({lobbyID: lobbyInformation.id})">
+  ui-sref="lobby-page({lobbyID: lobbyInformation.id})"  
+  ng-style="{'animation-delay': 0.05 * ($index+1) + 's'}">
   <div class="lobby-image" ng-style="{'background-image':'url(/assets/img/maps/lobby-row/' + lobbyInformation.map + '.jpg)'}">
     <span class="lobby-type">{{::lobbyInformation.type}}</span>
     <span class="lobby-map">{{::lobbyInformation.map}}</span>
