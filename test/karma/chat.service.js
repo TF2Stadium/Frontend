@@ -39,11 +39,15 @@ describe('Service: ChatService', function () {
   var ChatService, $rootScope;
   var mockWebsocket, mockLobbyService;
 
+  var onJSONCallbacks = {};
+
   beforeEach(function () {
-    mockWebsocket = sinon.stub({
-      onJSON: function () {},
-      emitJSON: function () {}
-    });
+    mockWebsocket = {
+      onJSON: sinon.spy(function (eventName, callback) {
+        onJSONCallbacks[eventName] = callback;
+      }),
+      emitJSON: sinon.spy(function () {})
+    };
 
     mockLobbyService = sinon.stub({
       getLobbySpectatedId: function () { return -1; },
@@ -74,10 +78,7 @@ describe('Service: ChatService', function () {
   it('should emit one chat-message event after each chatReceive', function () {
     sinon.stub($rootScope, '$emit');
 
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
+    var onChatReceive = onJSONCallbacks['chatReceive'];
 
     expect(onChatReceive).to.be.a('function');
 
@@ -93,12 +94,7 @@ describe('Service: ChatService', function () {
   });
 
   it('should log chat messages', function () {
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
-
-    expect(onChatReceive).to.be.a('function');
+    var onChatReceive = onJSONCallbacks['chatReceive'];
 
     var msg = makeTestMessage();
     onChatReceive(msg);
@@ -108,12 +104,7 @@ describe('Service: ChatService', function () {
   });
 
   it('should log chat messages ordered by id', function () {
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
-
-    expect(onChatReceive).to.be.a('function');
+    var onChatReceive = onJSONCallbacks['chatReceive'];
 
     var msg1 = makeTestMessage(1);
     var msg2 = makeTestMessage(2);
@@ -131,14 +122,8 @@ describe('Service: ChatService', function () {
   });
 
   it('should clear a room\'s log on chatHistoryClear', function () {
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
-
-    var onChatHistoryClear = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatHistoryClear';
-    })[0][1];
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+    var onChatHistoryClear = onJSONCallbacks['chatHistoryClear'];
 
     expect(onChatHistoryClear).to.be.a('function');
 
@@ -158,16 +143,7 @@ describe('Service: ChatService', function () {
   });
 
   it('should overwrite messages with the same id in the same room', function () {
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
-
-    var onChatHistoryClear = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatHistoryClear';
-    })[0][1];
-
-    expect(onChatHistoryClear).to.be.a('function');
+    var onChatReceive = onJSONCallbacks['chatReceive'];
 
     var msg1 = makeTestMessage(1);
     var msg2 = makeTestMessage(2);
@@ -181,5 +157,92 @@ describe('Service: ChatService', function () {
     expect(ChatService.getRooms()[0].messages.length).to.equal(2);
 
     expect(ChatService.getRooms()[0].messages[0].message).to.equal(msg3.message);
+  });
+
+  it('should track joined chat rooms', function () {
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+
+    var joinedRoomId = 5;
+    mockLobbyService.getLobbyJoinedId.returns(joinedRoomId);
+    $rootScope.$emit('lobby-joined');
+
+    var msg = makeTestMessage(1);
+    msg.room = joinedRoomId + 1;
+
+    onChatReceive(msg);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(0);
+
+    var msg2 = makeTestMessage(2);
+    msg2.room = joinedRoomId;
+
+    onChatReceive(msg2);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(1);
+  });
+
+  it('should track spectated chat rooms', function () {
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+
+    var spectatedRoomId = 5;
+    mockLobbyService.getLobbySpectatedId.returns(spectatedRoomId);
+    $rootScope.$emit('lobby-spectated-changed');
+
+    var msg = makeTestMessage(1);
+    msg.room = spectatedRoomId + 1;
+
+    onChatReceive(msg);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[2].messages.length).to.equal(0);
+
+    var msg2 = makeTestMessage(2);
+    msg2.room = spectatedRoomId;
+
+    onChatReceive(msg2);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[2].messages.length).to.equal(1);
+  });
+
+  it('should leave and join chatrooms', function () {
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+
+    var joinedRoomId = 1;
+    mockLobbyService.getLobbyJoinedId.returns(joinedRoomId);
+    $rootScope.$emit('lobby-joined');
+
+    var msg = makeTestMessage(1);
+    msg.room = joinedRoomId;
+
+    onChatReceive(msg);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(1);
+
+    $rootScope.$emit('lobby-left');
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(0);
+  });
+
+  it('should send chat messages to rooms', function () {
+    var roomId = 123;
+    var message = 'asdfasdf';
+
+    ChatService.send(message, roomId);
+
+    expect(mockWebsocket.emitJSON).to.be.calledOnce;
+    expect(mockWebsocket.emitJSON).to.be.calledWith(
+      'chatSend',
+      sinon.match({
+        message: message,
+        room: roomId
+      })
+    );
   });
 });

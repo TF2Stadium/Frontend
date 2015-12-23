@@ -129,5 +129,34 @@ describe('Controller: CommentBoxController', function () {
       ctrl.sendMessage(mockEvent);
       expect(mockChatService.send).to.not.be.called;
     });
+
+    it('should do nothing when triggered by a non-Enter key', function () {
+      setupPageController();
+
+      textarea.val('abcd').triggerHandler('input');
+      $scope.$digest();
+
+      mockEvent = sinon.stub({
+        preventDefault: function () {},
+        keyCode: 69
+      });
+
+      ctrl.sendMessage(mockEvent);
+      expect(mockEvent.preventDefault).to.not.be.called;
+      expect(mockChatService.send).to.not.be.called;
+    });
+  });
+
+  describe('handling chat-message', function () {
+    it('should ', function () {
+      setupBareController();
+
+      $rootScope.$emit('chat-message', {
+        room: globalRoomId,
+        id: 123
+      });
+
+      expect(ctrl.lastSeenIds[0]).to.equal(123);
+    });
   });
 });
