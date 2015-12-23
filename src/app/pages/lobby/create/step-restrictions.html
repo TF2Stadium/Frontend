@@ -1,0 +1,19 @@
+<div class="restrictions-form">
+  <h2>Lobby restrictions</h2>
+  <md-input-container md-no-float>
+    <input ng-model="lobbyCreate.lobbySettings.steamGroupWhitelist"
+      placeholder="Steam group whitelist">
+  </md-input-container>
+  <md-input-container md-no-float
+    ng-show="!showPassword">
+    <input type="password" ng-model="lobbyCreate.lobbySettings.password"
+      placeholder="Password for slots">
+  </md-input-container>
+  <md-input-container md-no-float
+    ng-show="showPassword">
+    <input type="text" ng-model="lobbyCreate.lobbySettings.password"
+      placeholder="Password for slots">
+  </md-input-container>
+  <md-checkbox ng-model="showPassword">Show password</md-checkbox>
+  <md-button class="md-raised md-primary" ng-click="lobbyCreate.goToNext()">Continue</md-button>
+</div>
