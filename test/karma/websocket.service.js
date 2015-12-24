@@ -188,7 +188,7 @@ describe('Service: ChatService', function () {
     });
   });
 
-  describe('Message queueing', function () {
+  describe('Message Receive Queueing', function () {
     it('Should queue up messages for unregistered handlers', function () {
       mockConnection.onmessage('e1', 1);
       mockConnection.onmessage('e1', 2);
