@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('tf2stadium')
+  angular.module('tf2stadium.services')
     .factory('User', User);
 
   /** @ngInject */
