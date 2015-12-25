@@ -4,6 +4,7 @@
   angular.module('tf2stadium', [
     'tf2stadium.controllers',
     'tf2stadium.services',
+    'tf2stadium.filters',
     'ngAnimate',
     'ui.router',
     'ngMaterial',
@@ -13,5 +14,6 @@
 
   angular.module('tf2stadium.controllers', []);
   angular.module('tf2stadium.services', []);
+  angular.module('tf2stadium.filters', []);
 
 })();
