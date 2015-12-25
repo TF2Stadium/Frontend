@@ -1,8 +1,7 @@
 (function () {
   'use strict';
 
-
-  angular.module('tf2stadium')
+  angular.module('tf2stadium.filters')
     .filter('capitalize', capitalize)
     .filter('reverse', reverse)
     .filter('trusted', trusted)
@@ -14,7 +13,7 @@
   /** @ngInject */
   function capitalize() {
     return function (input) {
-      if(typeof input === 'undefined' || input === '') {
+      if (angular.isUndefined(input) || input === '') {
         return input;
       }
       return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
