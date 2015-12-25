@@ -144,11 +144,12 @@
       });
     };
 
-    factory.join = function (lobbyID, team, position) {
+    factory.join = function (lobbyID, team, position, password) {
       var payload = {
         'id': lobbyID,
         'team': team,
-        'class': position
+        'class': position,
+        'password': password
       };
 
       Websocket.emitJSON('lobbyJoin', payload);

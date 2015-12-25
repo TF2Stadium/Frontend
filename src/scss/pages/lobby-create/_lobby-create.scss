@@ -187,17 +187,6 @@ md-grid-tile.tile-card {
 /*======================================
           RESTRICTIONS STEP
  =======================================*/
- 
-.class-row, .classes-title {
-  md-input-container {
-    @include flex(row, center, center);
-    flex: 1;
-    padding: 0 $padding-small;
-    margin: 0;
-    min-width: 50px;
-    order: 5;
-  }
-}
 
 .slot-button .checkbox-lock {
   @include flex(row, center, center);
