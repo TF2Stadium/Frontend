@@ -1,6 +1,7 @@
 # Changelog
 
 ## [Unreleased]
+* Added support for title notifications (https://github.com/TF2Stadium/Frontend/issues/112).
 * Fix animations not displaying properly on Chrome Canary.
 * Fix debug format not displaying maps/leagues/whitelists.
 * Fixed wrong ready-up timer behaviour (https://github.com/TF2Stadium/Frontend/issues/107).

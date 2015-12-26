@@ -5,7 +5,7 @@
     .factory('ChatService', ChatService);
 
   /** @ngInject */
-  function ChatService(Websocket, $rootScope, LobbyService) {
+  function ChatService(Websocket, $rootScope, LobbyService, Notifications) {
     var factory = {};
 
     // Persistent map of room id -> messages list
@@ -92,6 +92,7 @@
         }
       }
 
+      Notifications.titleNotification();
       $rootScope.$emit('chat-message', message);
     });
 
