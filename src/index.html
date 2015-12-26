@@ -85,7 +85,7 @@
         <md-button class="md-raised"
                    aria-label="Login"
                    ng-href="{{::config.endpoints.api}}/startLogin"
-                   style="transform:scale(0);"
+                   style="display:none"
                    ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}"
                    ng-bind="'Login'">
         </md-button>
