@@ -1,8 +1,10 @@
-@mixin animation($names, $duration: .2s, $delay: null, $distance: $padding-medium) {
+@mixin animation($names, $duration: .2s, $delay: null) {
   $animation:; //declare variable
   @each $name in $names {
     $animation: $animation + $duration $name $delay cubic-bezier(0.215, 0.61, 0.355, 1) both + ",";
   }
+  //Remove trailing comma
+  $animation: str-slice(#{$animation}, 1, str-length(#{$animation}) - 1);
   animation: $animation;
 }
 
@@ -177,6 +179,7 @@
 }
 
 #splash-screen .md-button.visible {
+  display:block;
   @include animation(scale-in);
 }
 
