@@ -38,6 +38,49 @@
       background: #9cf;"
       ng-hide="$root.themeLoaded && $root.backendAuthenticated">
       <img src="/assets/img/logo-alpha.svg">
+      <noscript style="max-width: 600px;
+                  font-size: 20px;
+                  min-height: 2em;
+                  text-align: center;
+                  color: #f5f5f5;
+                  padding-top: 20px;">
+        TF2Stadium requires JavaScript to be enabled.
+        <a href="http://www.enable-javascript.com/"
+          style="display:block;
+                padding-top:10px;
+                font-size: 20px;">
+          Click here to learn how
+        </a>
+      </noscript>
+      <div id="loading-quote"
+           style="max-width: 600px;
+                  font-size: 25px;
+                  min-height: 2em;
+                  text-align: center;
+                  color: #f5f5f5;
+                  padding-bottom: 20px;
+                  font-style: italic">
+        <script type="text/javascript">
+            //Inlined script so it shows as soon as possible
+            var quotes = [
+              '"r.e.m wouldn\'t MGE capu because he\'s scared" -vibhavp',
+              '"All disputes must be settled via MGE" -Rand',
+              '"I am become R.E.M, destroyer of memes." -vibhavp',
+              '\'"C++ is dead. PHP is dead. Ruby is dead. Python is neither Haskell or NodeJS and is therefore dead." - Dennis "Sublime Text" Ritchie.\' -vibhavp',
+              '"teamplay.tf was a much better name" -Rand',
+              '"u wot m8 this is tf2stadium" -vibhavp',
+              '"Friday is hatday" -Rand',
+              '"Spycrabbing is a viable way of settling arguments" -Rand',
+              '"I think Helen is dead" -Capu',
+              '"It has to be the backend" -Capu',
+              '"Pretty sure it\'s the backend" -Capu',
+              '"It\'s probably the backend" -Capu',
+              '"After 8 years in development, I hope it was worth the wait" -kevinispwn'
+            ];
+            var i = Math.floor(Math.random()*quotes.length);
+            document.write(quotes[i]);
+        </script>
+      </div>
       <div style="height:0">
         <md-button class="md-raised"
                    aria-label="Login"
@@ -51,6 +94,8 @@
     <!--[if lt IE 10]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
+    <aside id="toasts"></aside>
+
     <header id="header" ng-if="$root.backendAuthenticated">
       <md-toolbar id="header-toolbar">
         <div class="header-toolbar-content">
@@ -76,9 +121,8 @@
           </div>
         </div>
       </md-toolbar>
-      <div id="current-lobby-info">
-        <div class="current-lobby" ng-controller="CurrentLobbyController as vm"
-          ng-show="vm.visible">
+      <div id="current-lobby-info" ng-controller="CurrentLobbyController as vm">
+        <div class="current-lobby" ng-if="vm.visible">
           <span>Your lobby has</span>
           <span>{{vm.lobbyInformation.players}}/{{vm.lobbyInformation.maxPlayers}} players</span>
           <md-button ui-sref="lobby-page({lobbyID: vm.lobbyInformation.id})">Go back</md-button>
@@ -92,22 +136,12 @@
         <md-icon md-svg-icon="/assets/img/icon-add.svg"></md-icon>
       </md-button>
     </div>
-    <aside id="notifications" ng-controller="NotificationsController as vm"
-      ng-class="{'empty' : vm.isEmpty()}">
-      <md-button class="notification"
-           ng-repeat="(id, notification) in vm.notifications track by id"
-           ng-click=vm.remove(id)>
-        {{::notification.message}}
-      </md-button>
-    </aside>
     <main flex ng-if="$root.backendAuthenticated">
       <div flex id="page-content">
         <div ui-view="leftSidebar" id="left-sidebar"></div>
         <md-content flex ui-view="content" id="main-content"></md-content>
       </div>
     </main>
-    <aside id="toasts"></aside>
-
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->

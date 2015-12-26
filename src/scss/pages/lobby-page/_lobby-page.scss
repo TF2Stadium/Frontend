@@ -148,7 +148,18 @@
 
   md-checkbox {
     margin: 0 auto;
-    width: 15px;
+    width: 18px;
+    padding: 5px 0 5px;
+
+    div.md-container {
+      width: 18px;
+      height: 18px;
+
+      .md-icon {
+        width: 18px;
+        height: 18px;
+      }
+    }
   }
 
   &:not(.sheet) > .md-ripple-container {

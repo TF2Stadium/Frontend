@@ -87,7 +87,8 @@
             timeout: 3,
             showAlways: true
           });
-        }
+        },
+        hideDelay: 0
       });
     }, 2000);
 

@@ -31,7 +31,7 @@
                    ng-class="[message.player.tags]"
                    ng-click="$mdOpenMenu($event)"
                    md-menu-origin>
-                  {{::message.player.name}}:
+                  {{message.player.name}}:
                 </md-button>
                 <md-menu-content width="3">
                   <md-menu-item>
@@ -42,24 +42,32 @@
                   </md-menu-item>
                 </md-menu-content>
               </md-menu>
-              <span class="chat-message-text">{{::message.message}}</span>
+              <span class="chat-message-text">{{message.message}}</span>
             </div>
           </md-content>
         </md-tab-body>
       </md-tab>
-
-
     </md-tabs>
-    <md-input-container
-      md-is-error="commentBox.error">
-      <label for="chatbox-message">Type your message</label>
-      <textarea id="chatbox-message"
-        name="message"
-        ng-keydown="commentBox.sendMessage($event)"
-        ng-model="commentBox.messageBox"
-        ng-change="commentBox.checkMessage()"
-        md-maxlength="120">
-      </textarea>
-    </md-input-container>
+    <form name="chatForm">
+      <!-- Yes, this md-is-error is almost the default invalid
+      behavior, but a) we don't want an error if the field is empty,
+      and b) without explicitly specifying it, the md-input-container
+      won't be marked invalid until it has been touched (focused and
+      blurred) at least once. See:
+      https://github.com/angular/material/issues/1330 -->
+      <md-input-container
+         md-is-error="chatForm.chatMessage.$error['md-maxlength']">
+        <label for="chatMessage">Type your message</label>
+        <textarea name="chatMessage"
+                  ng-keydown="commentBox.sendMessage($event)"
+                  ng-model="commentBox.messageBox"
+                  md-maxlength="120"
+                  required></textarea>
+        <div class="chat-error"
+             ng-show="chatForm.chatMessage.$error['md-maxlength']">
+          <p>Message too long</p>
+        </div>
+      </md-input-container>
+    </form>
   </div>
 </div>

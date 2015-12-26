@@ -9,27 +9,58 @@ var karma = require('karma');
 
 var $ = require('gulp-load-plugins')();
 
+function runUnitTestsOn(browsers, done) {
+  var src_files = [];
+  var src_glob = path.join(conf.paths.src, '/app/**/*.js');
+
+  var preprocessors = {};
+  preprocessors[src_glob] = ['coverage'];
+
+  gulp.src(src_glob)
+    .pipe($.angularFilesort())
+    .on('data', function (file) {
+      src_files.push(file.path);
+    }).on('end', function () {
+      var server = new karma.Server({
+        browsers: browsers,
+        frameworks: ['mocha', 'chai-sinon'],
+        files:
+        mainBowerFiles({ includeDev: true })
+          .concat(
+            // Note: es5-shim needed to fix some phantomjs issues,
+            // including no Function.prototype.bind . This can be
+            // removed (along with the es5-shim dependency) once an
+            // upgrade to phantomjs2 is complete
+            'node_modules/es5-shim/es5-shim.js',
+            src_files,
+            path.join(conf.paths.test, '/karma/**/*.js')),
+        singleRun: true,
+        reporters: ['progress', 'coverage'],
+        preprocessors: preprocessors
+      });
+
+      server.on('run_complete', function (browsers, results) {
+        // NB If the argument of done() is not null or not undefined,
+        // e.g. a string, the next task in a series won't run.
+        done(results.error ? 'There are test failures' : null);
+      });
+      server.start();
+    });
+}
+
 gulp.task('test:unit', function (done) {
-  var server = new karma.Server({
-    browsers: ['PhantomJS'],
-    frameworks: ['mocha', 'chai-sinon'],
-    files: mainBowerFiles({ includeDev: true }).concat([
-      'dist/scripts/app-*.js',
-      'test/karma/**/*.js'
-    ]),
-    logLevel: 'DEBUG',
-    singleRun: true
-  });
+  runUnitTestsOn(['PhantomJS'], done)
+});
 
-  server.on('run_complete', function (browsers, results) {
-    // NB If the argument of done() is not null or not undefined,
-    // e.g. a string, the next task in a series won't run.
-    done(results.error ? 'There are test failures' : null);
-  });
-
-  server.start();
+gulp.task('test-browsers:unit', function (done) {
+  runUnitTestsOn(['PhantomJS', 'Firefox', 'Chrome'], done)
 });
 
 gulp.task('test', function (cb) {
-  runSequence('build', 'test:unit', cb);
+  runSequence('test:unit', cb);
+});
+
+
+gulp.task('test-browsers', function (cb) {
+  runSequence('test-browsers:unit', cb);
 });

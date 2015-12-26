@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('tf2stadium')
+  angular.module('tf2stadium.controllers')
     .controller('ToastController', ToastController);
 
   /** @ngInject */
@@ -9,8 +9,7 @@
     var vm = this;
 
     vm.executeAction = function () {
-      vm.action();
-      $mdToast.hide();
+      $mdToast.hide('ok');
     };
   }
 

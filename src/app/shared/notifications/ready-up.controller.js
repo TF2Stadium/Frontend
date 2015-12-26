@@ -1,7 +1,7 @@
 (function () {
   'use strict';
 
-  angular.module('tf2stadium')
+  angular.module('tf2stadium.controllers')
     .controller('ReadyUpDialogController', ReadyUpDialogController);
 
   function ReadyUpDialogController($scope, $mdDialog, $interval) {

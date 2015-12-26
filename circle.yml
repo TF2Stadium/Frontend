@@ -10,7 +10,7 @@ dependencies:
 test:
   override:
     - gulp lint
-    - gulp test
+    - gulp test-browsers
 deployment:
   master:
     branch: master

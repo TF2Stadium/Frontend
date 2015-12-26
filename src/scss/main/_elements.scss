@@ -36,7 +36,7 @@
       content: "";
       background:{
         size: $class-button-background-width;
-        position: ($class-button-width - $class-button-background-width) / 2 
+        position: ($class-button-width - $class-button-background-width) / 2
                   ($class-button-height - $class-button-background-height) / 2;
         repeat: no-repeat;
       }
@@ -85,7 +85,6 @@
     repeat: no-repeat;
     position: center;
   }
-  font-size: 0;
 }
 
 
@@ -176,31 +175,30 @@
    ================================== */
 
 .toast {
-  //@include flex (row, space-between, center);
+  @include flex (row, space-between, center);
   height: $toast-height;
   width: 100%;
-  margin: 0;
   max-width: $full-width;
-  bottom: 0 !important;
-  will-change: transform;
-  transition: all .3s .15s ease-out;
   border-radius: 0;
+
+  // Override some angular positioning (since we're moving the toasts
+  // to the bottom of the viewport by ourselves)
+  bottom: 0 !important;
+  left: 0 !important;
+
+  padding-left: 24px;
+  padding-right: 24px;
+
+  margin: 0 auto;
+  position: relative;
+
+  button.md-button {
+    margin-right: 8px;
+  }
 
   span {
     flex: 1;
     text-align: center;
-  }
-
-  &.ng-leave {
-    transition: all .15s ease-out;
-  }
-
-  &.ng-enter, &.ng-leave.ng-leave-active {
-    transform: translateY(100%);
-  }
-
-  &.ng.enter.ng-enter-active, &.ng-leave {
-    transform: translateY(0);
   }
 }
 

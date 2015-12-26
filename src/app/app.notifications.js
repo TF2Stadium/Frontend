@@ -2,66 +2,44 @@
   'use strict';
 
   angular.module('tf2stadium')
-    .factory('Notifications', NotificationsFactory)
-    .controller('NotificationsController', NotificationsController);
+    .factory('Notifications', NotificationsFactory);
 
   /** @ngInject */
-  function NotificationsFactory($mdToast, $document, $timeout, $log, ngAudio) {
+  function NotificationsFactory($mdToast, $window, $document, $timeout, $log, ngAudio) {
 
     var notificationsService = {};
-
-    var notifications = {};
-    var nextId = 0;
 
     var toastDefault = {
       templateUrl: 'app/shared/notifications/toast.html',
       message: 'Default',
       actionMessage: 'OK',
-      action: function () {
-        $mdToast.hide();
-      },
+      action: function () {},
       controller: 'ToastController',
       controllerAs: 'toast',
       bindToController: true,
       error: false,
       parent: $document[0].querySelector('#toasts'),
-      hideDelay: 0
-    };
-
-    notificationsService.add = function (message, level) {
-      notifications[nextId] = {message: message, level: level};
-      nextId++;
-    };
-
-    notificationsService.remove = function (id) {
-      delete notifications[id];
-    };
-
-    notificationsService.clearNotifications = function () {
-      for (var notificationKey in notifications) {
-        delete notifications[notificationKey];
-      }
-    };
-
-    notificationsService.getNotifications = function () {
-      return notifications;
+      autoWrap: false,
+      hideDelay: 5000
     };
 
     notificationsService.toast = function (options) {
-      for (var key in toastDefault) {
-        if (!options[key]) {
-          options[key] = toastDefault[key];
-        }
-      }
-      $mdToast.show(options);
+      $mdToast
+        .show(angular.extend({}, toastDefault, options))
+        .then(function (clicked) {
+          if (clicked === 'ok') {
+            options.action();
+          }
+        });
     };
 
     notificationsService.notifyBrowser = function (options) {
-
-      if (!('Notification' in window)) {
+      if (!('Notification' in $window)) {
         $log.log('Browser doesn\'t support HTML5 notifications');
         return;
       }
+
+      var Notification = $window.Notification;
 
       if (($document[0].hasFocus() && !options.showAlways) || Notification.permission === 'denied') {
         return;
@@ -97,27 +75,6 @@
     };
 
     return notificationsService;
-
-  }
-
-  /** @ngInject */
-  function NotificationsController(Notifications) {
-
-    var vm = this;
-
-    vm.remove = function (id) {
-      Notifications.remove(id);
-    };
-
-    vm.add = function (message, level) {
-      Notifications.add(message, level);
-    };
-
-    vm.isEmpty = function () {
-      return Object.keys(vm.notifications).length < 1;
-    };
-
-    vm.notifications = Notifications.getNotifications();
 
   }
 

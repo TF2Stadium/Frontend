@@ -6,7 +6,7 @@
 
 body {
   @include flex (column, flex-start, center);
-  overflow-y: hidden !important;
+  overflow-y: auto !important;
   //angular adds overflow-y:scroll when activating md-select for some reason
 }
 
@@ -21,7 +21,7 @@ body {
     transform: scale(1.2);
     opacity: 0;
   }
-  
+
   img {
     width: 300px;
     margin-bottom: $padding-medium;
@@ -38,6 +38,7 @@ body {
   width: 100%;
   background: #000;
   z-index: 50;
+  min-height: $navbar-height + $header-image-height;
 }
 
 #header-toolbar {
@@ -135,8 +136,13 @@ body {
 }
 
 #toasts {
-  width: $full-width;
-  z-index: 70;
+  position: fixed;
+  z-index: 100;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: $toast-height;
+  overflow-y: hidden;
 }
 
 #commentbox {
@@ -169,7 +175,6 @@ body {
   width: 100%;
   text-align: left;
   margin: 2px 0;
-  transition: background-color .3s ease-out;
 }
 
 
@@ -180,24 +185,10 @@ body {
 main {
   @include flex (column, flex-start, center);
   width: 100%;
-}
 
-#notifications {
-  @include flex (column, flex-start, center);
-  flex-shrink: 0;
-  @extend .sheet, .flat;
-  width: 100%;
-  z-index: 20;
-
-  &.hidden {
-    margin-bottom: 20px;
-  }
-
-  &.empty ~ main {
-    #left-sidebar, md-content {
-      padding-top: $padding-medium;
-    }
-  }
+  // Never be shorter than the comment box, which has height: 500px but is
+  // also offset by margin-top: -100px
+  min-height: $commentbox-height + ($commentbox-top + $navbar-height - $header-height);
 }
 
 #page-content {
@@ -208,11 +199,13 @@ main {
 
 #left-sidebar {
   min-width: initial;
+  padding-top: $padding-medium;
 }
 
 #main-content {
   @include scrollbars;
   width: 100%;
+  padding-top: $padding-medium;
   //This divides the padding into padding + margin
   //That way, when scrollbars appear, they are next to the content
   padding-right: $padding-medium / 2 - 3px;
@@ -239,4 +232,11 @@ main {
 
 md-dialog-content {
   padding: $padding-medium;
+}
+
+md-input-container {
+  // Temporary fix for https://github.com/angular/material/issues/6214
+  .md-errors-spacer {
+    min-height: 0 !important;
+  }
 }
