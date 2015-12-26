@@ -31,7 +31,7 @@
           var dependency = lobbySettings[dependencyKey]; //e.g. 'highlander'
           shouldShow = shouldShow && option[dependency];
         });
-        return shouldShow;
+        return shouldShow || lobbySettings[lobbySettingsList.formats.key] === 'debug';
       };
 
       options = options.filter(shouldShowOption);
