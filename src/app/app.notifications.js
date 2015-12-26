@@ -31,7 +31,7 @@
             options.action();
           }
         });
-        
+
       notificationsService.titleNotification();
     };
 
@@ -40,7 +40,7 @@
         $rootScope.titleNotification = true;
       }
 
-      $window.onfocus = function() {
+      $window.onfocus = function () {
         $rootScope.titleNotification = false;
       };
     };
