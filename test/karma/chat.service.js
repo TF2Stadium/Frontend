@@ -37,7 +37,7 @@ describe('Service: ChatService', function () {
   }
 
   var ChatService, $rootScope;
-  var mockWebsocket, mockLobbyService;
+  var mockWebsocket, mockLobbyService, mockNotifications;
 
   var onJSONCallbacks = {};
 
@@ -56,9 +56,14 @@ describe('Service: ChatService', function () {
       getLobbySpectated: function () { return undefined; }
     });
 
+    mockNotifications = sinon.stub({
+      titleNotification: function () { return undefined; }
+    });
+
     module('tf2stadium.services', function ($provide) {
       $provide.value('Websocket', mockWebsocket);
       $provide.value('LobbyService', mockLobbyService);
+      $provide.value('Notifications', mockNotifications);
     });
 
     inject(function (_ChatService_, _$rootScope_) {
