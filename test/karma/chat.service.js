@@ -56,9 +56,9 @@ describe('Service: ChatService', function () {
       getLobbySpectated: function () { return undefined; }
     });
 
-    mockNotifications = sinon.stub({
-      titleNotification: function () { return undefined; }
-    });
+    mockNotifications = {
+      titleNotification: sinon.spy()
+    };
 
     module('tf2stadium.services', function ($provide) {
       $provide.value('Websocket', mockWebsocket);
@@ -72,21 +72,7 @@ describe('Service: ChatService', function () {
         }
       });
       $provide.constant('Config', {
-        emotes: [{
-          names: ['smile', 'happy'],
-          shortcuts: [':)', '(:', '=)'],
-          image: {
-            type: 'img',
-            src: 'smile.png'
-          }
-        },{
-          names: ['frown', 'sad'],
-          shortcuts: [':(', '):', '=('],
-          image: {
-            type: 'img',
-            src: 'frown.png'
-          }
-        }]
+        'allowedChatDomains': []
       });
     });
 
@@ -102,6 +88,24 @@ describe('Service: ChatService', function () {
 
   it('should register for chatHistoryClear messages', function () {
     expect(mockWebsocket.onJSON).to.have.been.calledWith('chatHistoryClear');
+  });
+
+  it('should make a title notification for each chat message', function () {
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+    expect(onChatReceive).to.be.a('function');
+    onChatReceive(makeTestMessage());
+    expect(mockNotifications.titleNotification).to.be.calledOnce;
+  });
+
+  it('should not make a title notification for a player\'s own chat message', function () {
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+    expect(onChatReceive).to.be.a('function');
+
+    var m = makeTestMessage();
+    $rootScope.userProfile = { steamid: m.player.steamid };
+    onChatReceive(m);
+
+    expect(mockNotifications.titleNotification).to.not.be.called;
   });
 
   it('should emit one chat-message event after each chatReceive', function () {
