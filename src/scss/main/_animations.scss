@@ -179,7 +179,7 @@
 }
 
 #splash-screen .md-button.visible {
-  display:block;
+  display: block !important;
   @include animation(scale-in);
 }
 
