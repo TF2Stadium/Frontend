@@ -39,14 +39,6 @@
   md-tab-content > div {
     @include flex(row, center, center);
   }
-
-  &.ng-enter {
-    @include animation(slide-from-top fade-in);
-  }
-
-  &.ng-leave {
-    @include animation(slide-to-top fade-out);
-  }
 }
 
 
@@ -62,16 +54,11 @@
   overflow: hidden;
   position: relative; //so the ripple doesn't fill the whole page
   text-decoration: none;
-  @include animation(slide-from-left fade-in);
 
   transition: background-color 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
 
   &:first-child {
     margin-top: $padding-medium;
-  }
-
-  &.ng-leave {
-    @include animation(slide-to-right fade-out);
   }
 }
 

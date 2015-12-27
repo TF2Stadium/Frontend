@@ -43,7 +43,8 @@
       settingsPageProvider.sections = {
         theme: {
           theme: Settings.getConstants('themesList'),
-          timestamps: Settings.getConstants('timestampOptions')
+          timestamps: Settings.getConstants('timestampOptions'),
+          animationOptions: Settings.getConstants('animationOptions')
         },
         filters: Settings.getConstants('filters'),
         sound: Settings.getConstants('sound'),

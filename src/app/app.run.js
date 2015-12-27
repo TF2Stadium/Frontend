@@ -39,6 +39,7 @@
     Settings.getSettings(function (settings) {
       $rootScope.currentTheme = settings.currentTheme;
       $rootScope.currentTimestampsOption = settings.timestamps;
+      $rootScope.animationLength = settings.animationLength;
       $rootScope.themeLoaded = true;
     });
 
