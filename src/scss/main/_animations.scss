@@ -1,14 +1,37 @@
 /*======================================
                 MIXINS
  =======================================*/
-
-@mixin animation($names, $duration: $animation-duration, $delay: null) {
+/*
+  The mixin takes several parameters and combines them into a single animation property.
+  $names: list of the names of the animations to be combined (no comma).
+  $duration: duration of all the animations.
+    In this case, the mixin is to be used inside the @each loop for animations,
+    so it defaults to $animation-duration.
+  $delay: defaults to 0s -null so it doesn't appear in the property.
+  $stagger: meant for staggering children of the same parent.
+*/
+@mixin animation($names, $duration: $animation-duration, $delay: null, $stagger: null) {
   $animation:; //declare variable
-  @each $name in $names {
-    $animation: $animation + $duration $name $delay cubic-bezier(0.215, 0.61, 0.355, 1) both + ",";
+
+  @if $stagger {
+    // Add a general animation-delay to every children equal to $stagger * 10.
+    // This way, children from 1-10 will stagger, but if the children is deeper,
+    // it will appear at the same time as the 10th.
+    $delay: $stagger * 10;
+    @for $i from 0 through 10 {
+      &:nth-child(#{$i + 1}) {
+        animation-delay: $stagger * $i;
+      }
+    }
   }
-  //Remove trailing comma
-  $animation: str-slice(#{$animation}, 1, str-length(#{$animation}) - 1);
+
+  @each $name in $names {
+    $animation: $animation + $duration $name $delay cubic-bezier(0.215, 0.61, 0.355, 1) both + ", ";
+  }
+
+  //Remove trailing comma and space
+  $animation: str-slice(#{$animation}, 1, str-length(#{$animation}) - 2);
+  //If no animation, use animation: none (gets rid of delays).
   animation: if($duration == 0s, none, $animation);
 }
 
@@ -182,13 +205,12 @@ $animation-options-list: (
   @return map-get($animation-option, $varName);
 }
 
-$animation-duration-default: 0.2s;
-
 @each $animation-label, $animation-option in $animation-options-list {
   $speed-multiplier:          themeVar(speed-multiplier);
   $animation-fast:            $animation-duration-default * $speed-multiplier * 0.5;
   $animation-regular:         $animation-duration-default * $speed-multiplier;
   $animation-slow:            $animation-duration-default * $speed-multiplier * 1.25;
+  $animation-stagger:         $animation-stagger-default * $speed-multiplier;
 
   //Default value for animation mixin
   $animation-duration:        $animation-regular;
@@ -223,7 +245,7 @@ $animation-duration-default: 0.2s;
     }
 
     .lobby-row {
-      @include animation(slide-from-left fade-in);
+      @include animation(slide-from-left fade-in, $stagger: $animation-stagger);
 
       &.ng-leave {
         @include animation(slide-to-right fade-out);
@@ -263,7 +285,7 @@ $animation-duration-default: 0.2s;
     }
 
     md-grid-tile.tile-card {
-      @include animation(slide-from-top fade-in);
+      @include animation(slide-from-top fade-in, $stagger: $animation-stagger);
 
       &.ng-leave {
         @include animation(scale-out fade-out);
@@ -297,7 +319,7 @@ $animation-duration-default: 0.2s;
     //SETTINGS
 
     .settings-section {
-      @include animation(slide-from-top fade-in);
+      @include animation(slide-from-top fade-in, $stagger: $animation-stagger);
     }
 
     .current-lobby {
