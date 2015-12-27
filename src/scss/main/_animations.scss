@@ -2,8 +2,6 @@
                 MIXINS
  =======================================*/
 
-$animation-duration: 2s;
-
 @mixin animation($names, $duration: $animation-duration, $delay: null) {
   $animation:; //declare variable
   @each $name in $names {
@@ -11,7 +9,7 @@ $animation-duration: 2s;
   }
   //Remove trailing comma
   $animation: str-slice(#{$animation}, 1, str-length(#{$animation}) - 1);
-  animation: $animation;
+  animation: if($duration == 0s, none, $animation);
 }
 
 
