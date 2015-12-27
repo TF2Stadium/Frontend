@@ -1,4 +1,10 @@
-@mixin animation($names, $duration: .2s, $delay: null) {
+/*======================================
+                MIXINS
+ =======================================*/
+
+$animation-duration: 2s;
+
+@mixin animation($names, $duration: $animation-duration, $delay: null) {
   $animation:; //declare variable
   @each $name in $names {
     $animation: $animation + $duration $name $delay cubic-bezier(0.215, 0.61, 0.355, 1) both + ",";
@@ -8,6 +14,10 @@
   animation: $animation;
 }
 
+
+/*======================================
+          KEYFRAMES DECLARATIONS
+ =======================================*/
 
 //SLIDE-IN
 
@@ -146,47 +156,90 @@
   }
 }
 
-.lobbycreate-text span {
-  @include animation(slide-from-bottom fade-in);  
+
+/*======================================
+          BODY SELECTOR OPTIONS
+ =======================================*/
+
+$animation-options-list: (
+  animation-map-none: (
+    selector:             'animation-none',
+    speed-multiplier:     0
+  ),
+  animation-map-fast: (
+    selector:             'animation-fast',
+    speed-multiplier:     .5
+  ),
+  animation-map: (
+    selector:             'animation-normal',
+    speed-multiplier:     1
+  ),
+  animation-map-slow: (
+    selector:             'animation-slow',
+    speed-multiplier:     2
+  )
+);
+
+@function themeVar ($varName) {
+  @return map-get($animation-option, $varName);
 }
 
-.lobbypage-text {
-  @include animation(slide-from-bottom fade-in, .4s);
-}
+$animation-duration-default: 0.2s;
 
-#slots {
-  @include animation(slide-from-top);  
-}
+@each $animation-label, $animation-option in $animation-options-list {
+  $speed-multiplier:          themeVar(speed-multiplier);
+  $animation-fast:            $animation-duration-default * $speed-multiplier * 0.5;
+  $animation-regular:         $animation-duration-default * $speed-multiplier;
+  $animation-slow:            $animation-duration-default * $speed-multiplier * 1.25;
 
-.slot-button {
-  @include animation(slide-from-right fade-in, $delay: .1s);
+  //Default value for animation mixin
+  $animation-duration:        $animation-regular;
 
-  &:nth-child(2) {
-    @include animation(slide-from-left fade-in, $delay: .1s);
-  }
-}
+  body.#{themeVar(selector)} {
 
-.settings-section {
-  @include animation(slide-from-top fade-in);
-}
+    .lobbycreate-text span {
+      @include animation(slide-from-bottom fade-in);  
+    }
 
-.current-lobby {
-  @include animation(slide-from-top-full fade-in);
+    .lobbypage-text {
+      @include animation(slide-from-bottom fade-in, $animation-slow);
+    }
 
-  &.ng-leave {
-    @include animation(slide-to-top-full fade-out);
-  }
-}
+    #slots {
+      @include animation(slide-from-top);  
+    }
 
-#splash-screen .md-button.visible {
-  display: block !important;
-  @include animation(scale-in);
-}
+    .slot-button {
+      @include animation(slide-from-right fade-in, $delay: .1s * $speed-multiplier);
 
-.toast {
-  @include animation(slide-from-bottom-full, .3s);  
+      &:nth-child(2) {
+        @include animation(slide-from-left fade-in, $delay: .1s * $speed-multiplier);
+      }
+    }
 
-  &.ng-leave {
-    @include animation(slide-to-bottom-full);
+    .settings-section {
+      @include animation(slide-from-top fade-in);
+    }
+
+    .current-lobby {
+      @include animation(slide-from-top-full fade-in);
+
+      &.ng-leave {
+        @include animation(slide-to-top-full fade-out);
+      }
+    }
+
+    #splash-screen .md-button.visible {
+      display: block !important;
+      @include animation(scale-in);
+    }
+
+    .toast {
+      @include animation(slide-from-bottom-full, $animation-slow);  
+
+      &.ng-leave {
+        @include animation(slide-to-bottom-full);
+      }
+    }
   }
 }
