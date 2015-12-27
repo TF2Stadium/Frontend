@@ -4,11 +4,15 @@
 
 .settings-section {
   @extend .sheet;
-  padding: $padding-medium $padding-medium $padding-medium !important;
+  padding: $padding-medium;
   margin-bottom: $padding-medium;
 
   h1, h2 {
     margin-top: 0;
+  }
+
+  .md-button {
+    margin: 0;
   }
 
   .md-track-ticks {
