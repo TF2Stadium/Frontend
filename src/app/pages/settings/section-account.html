@@ -11,12 +11,19 @@
   <h1>Permanent name</h1>
   <p>Set a name that will be displayed on the site instead of your
     steam name.</p>
-  <md-input-container>
-    <label>Permanent name</label>
-    <input ng-model="settings.permanentName">
-  </md-input-container>
-  <md-button
-     class="md-raised md-primary">
-    Save
-  </md-button>
+  <form name="permanentNameForm">
+    <md-input-container>
+      <label>Permanent name</label>
+      <input
+         name="permanentName"
+         ng-model="settings.permanentName"
+         required>
+    </md-input-container>
+    <md-button
+       class="md-raised md-primary"
+       ng-disabled="permanentNameForm.$invalid"
+       ng-click="settings.saveSetting('permanentName', settings.permanentName)">
+      Save
+    </md-button>
+  </form>
 </div>
