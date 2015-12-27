@@ -197,9 +197,42 @@ $animation-duration-default: 0.2s;
 
   body.#{themeVar(selector)} {
 
-    .lobbycreate-text span {
-      @include animation(slide-from-bottom fade-in);  
+    //SPLASH-SCREEN
+
+    #splash-screen .md-button.visible {
+      display: block !important;
+      @include animation(scale-in);
     }
+
+    .toast {
+      @include animation(slide-from-bottom-full, $animation-slow);  
+
+      &.ng-leave {
+        @include animation(slide-to-bottom-full);
+      }
+    }
+
+    //LOBBY-LIST
+
+    #lobby-filters {
+      &.ng-enter {
+        @include animation(slide-from-top fade-in);
+      }
+
+      &.ng-leave {
+        @include animation(slide-to-top fade-out);
+      }
+    }
+
+    .lobby-row {
+      @include animation(slide-from-left fade-in);
+
+      &.ng-leave {
+        @include animation(slide-to-right fade-out);
+      }
+    }
+
+    //LOBBY-PAGE
 
     .lobbypage-text {
       @include animation(slide-from-bottom fade-in, $animation-slow);
@@ -217,6 +250,52 @@ $animation-duration-default: 0.2s;
       }
     }
 
+    //LOBBY-CREATE
+
+    .search-filter {      
+      @include animation(slide-from-top fade-in);
+
+      &.ng-leave {
+        @include animation(fade-out-top-height);
+      }
+    }
+
+    .lobbycreate-text span {
+      @include animation(slide-from-bottom fade-in);  
+    }
+
+    md-grid-tile.tile-card {
+      @include animation(slide-from-top fade-in);
+
+      &.ng-leave {
+        @include animation(scale-out fade-out);
+      }
+    }
+
+    .server-form {      
+      @include animation(slide-from-top fade-in);
+    }
+
+    .server-verify-message {
+      &.ng-enter {
+        @include animation(slide-from-top-full, $delay: .3s);
+      }
+
+      &.ng-leave {
+        @include animation(slide-to-top-full, .3s);
+      }
+
+      // Needs absolute positioning, otherwise
+      // there will be a hole between sheets
+      &.ng-animate {
+        position: absolute;
+        right: 0;
+        left: 0;
+      }
+    }
+
+    //SETTINGS
+
     .settings-section {
       @include animation(slide-from-top fade-in);
     }
@@ -229,17 +308,5 @@ $animation-duration-default: 0.2s;
       }
     }
 
-    #splash-screen .md-button.visible {
-      display: block !important;
-      @include animation(scale-in);
-    }
-
-    .toast {
-      @include animation(slide-from-bottom-full, $animation-slow);  
-
-      &.ng-leave {
-        @include animation(slide-to-bottom-full);
-      }
-    }
   }
 }

@@ -64,7 +64,6 @@
   width: 100%;
   padding: $padding-small $padding-medium;
   z-index: 1;
-  @include animation(slide-from-top fade-in);
 
   md-input-container {
     display: block;
@@ -74,17 +73,12 @@
       border-style: hidden;      
     }
   }
-
-  &.ng-leave {
-    @include animation(fade-out-top-height);
-  }
 }
 
 md-grid-tile.tile-card {
   @extend .sheet, .clickable;
   cursor: pointer;
   overflow: hidden;
-  @include animation(slide-from-top fade-in);
   transition: background-color .2s ease-out,
               box-shadow .2s ease-out,
               //now for the repositioning animations
@@ -125,10 +119,6 @@ md-grid-tile.tile-card {
     & > * {
       max-width: 350px;
     }
-  }
-
-  &.ng-leave {
-    @include animation(scale-out fade-out);
   }
 }
 
@@ -198,7 +188,6 @@ md-grid-tile.tile-card {
   @extend .sheet;
   padding: $padding-medium $padding-big * 2;
   z-index: 1;
-  @include animation(slide-from-top fade-in);
 
   md-input-container {
     width: 100%;
@@ -226,19 +215,5 @@ md-grid-tile.tile-card {
 
   span {
     padding: $padding-small;
-  }
-
-  &.ng-enter {
-    @include animation(slide-from-top-full, $delay: .3s);
-  }
-
-  &.ng-leave {
-    @include animation(slide-to-top-full, .3s);
-  }
-
-  &.ng-animate {
-    position: absolute;
-    right: 0;
-    left: 0;
   }
 }
