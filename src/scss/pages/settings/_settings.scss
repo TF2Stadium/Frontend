@@ -1,6 +1,6 @@
 .settings-section {
   @extend .sheet;
-  padding: $padding-medium;
+  padding: $padding-medium $padding-big;
   margin-bottom: $padding-medium;
 
   h1, h2 {
@@ -8,14 +8,14 @@
   }
 
   .md-button {
-    margin: 0;
+    margin: $padding-small 0;
   }
 
   .md-track-ticks {
     display: none;
   }
 
-  p {
+  .md-input-container {
     margin: 0;
   }
 }
