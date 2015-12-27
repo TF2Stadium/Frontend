@@ -4,7 +4,7 @@ describe('Service: User', function () {
   'use strict';
 
   var User, $rootScope;
-  var mockWebsocket;
+  var mockWebsocket, mockConfig, mock$window;
 
   var onJSONCallbacks = {};
   var emitJSONCallbacks = [];
@@ -19,8 +19,20 @@ describe('Service: User', function () {
       })
     };
 
+    mock$window = sinon.stub({
+      open: function () {}
+    });
+
+    mockConfig = {
+      endpoints: {
+        'api': ''
+      }
+    };
+
     module('tf2stadium.services', function ($provide) {
       $provide.value('Websocket', mockWebsocket);
+      $provide.value('Config', mockConfig);
+      $provide.value('$window', mock$window);
     });
 
     inject(function (_User_, _$rootScope_) {
@@ -69,6 +81,12 @@ describe('Service: User', function () {
 
       expect(cb).to.be.calledOnce;
       expect(cb).to.be.calledWith(data);
+    });
+  });
+
+  describe('logout()', function () {
+    it('should navigate to logout url', function () {
+      expect(mock$window.open).to.be.calledOnce;
     });
   });
 });

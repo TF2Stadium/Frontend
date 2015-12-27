@@ -6,7 +6,7 @@
     .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsPageController(SettingsPage, Settings, ngAudio) {
+  function SettingsPageController(SettingsPage, Settings, ngAudio, User) {
     var vm = this;
 
     vm.sections = SettingsPage.getSections();
@@ -23,6 +23,10 @@
       Settings.getSettings(function (settings) {
         ngAudio.play('/assets/sound/lobby-readyup.wav').volume = settings.soundVolume / 100;
       });
+    };
+
+    vm.logout = function () {
+      User.logout();
     };
 
     /*
