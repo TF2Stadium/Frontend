@@ -86,6 +86,7 @@ describe('Service: User', function () {
 
   describe('logout()', function () {
     it('should navigate to logout url', function () {
+      User.logout();
       expect(mock$window.open).to.be.calledOnce;
     });
   });
