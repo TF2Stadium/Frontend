@@ -271,16 +271,18 @@ $animation-duration-default: 0.2s;
     }
 
     .server-form {      
-      @include animation(slide-from-top fade-in);
+      @include animation(slide-from-top);
     }
 
     .server-verify-message {
+      @include animation(slide-from-top-full);
+
       &.ng-enter {
-        @include animation(slide-from-top-full, $delay: .3s);
+        @include animation(slide-from-top-full fade-in, $delay: $animation-regular);
       }
 
       &.ng-leave {
-        @include animation(slide-to-top-full, .3s);
+        @include animation(slide-to-top-full fade-out);
       }
 
       // Needs absolute positioning, otherwise
