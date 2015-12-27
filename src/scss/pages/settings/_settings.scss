@@ -3,13 +3,19 @@
 }
 
 .settings-section {
-  @include flex (column, flex-start, stretch);
-  flex-wrap: wrap;
   @extend .sheet;
-  padding: 0 $padding-medium $padding-medium !important;
+  padding: $padding-medium $padding-medium $padding-medium !important;
   margin-bottom: $padding-medium;
+
+  h1, h2 {
+    margin-top: 0;
+  }
 
   .md-track-ticks {
     display: none;
+  }
+
+  p {
+    margin: 0;
   }
 }
