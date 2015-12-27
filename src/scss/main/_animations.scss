@@ -13,16 +13,23 @@
 @mixin animation($names, $duration: $animation-duration, $delay: null, $stagger: null) {
   $animation:; //declare variable
 
+  // Doing it this way so $delay can be null and not show up in the property
+  @if $delay {
+    $set-delay: $delay;
+  } @else {
+    $set-delay: 0s;
+  }
+
   @if $stagger {
+    @for $i from 0 through 10 {
+      &:nth-child(#{$i + 1}) {
+        animation-delay: $set-delay + $stagger * $i;
+      }
+    }
     // Add a general animation-delay to every children equal to $stagger * 10.
     // This way, children from 1-10 will stagger, but if the children is deeper,
     // it will appear at the same time as the 10th.
-    $delay: $stagger * 10;
-    @for $i from 0 through 10 {
-      &:nth-child(#{$i + 1}) {
-        animation-delay: $stagger * $i;
-      }
-    }
+    $delay: $set-delay + $stagger * 10;
   }
 
   @each $name in $names {
