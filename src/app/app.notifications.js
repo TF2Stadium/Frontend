@@ -5,8 +5,8 @@
     .factory('Notifications', NotificationsFactory);
 
   /** @ngInject */
-  function NotificationsFactory($rootScope, $mdToast, $window, $document, $timeout, $log, ngAudio) {
-
+  function NotificationsFactory($rootScope, $mdToast, $window, $document,
+                                $timeout, $log, ngAudio, $q) {
     var notificationsService = {};
 
     var toastDefault = {
