@@ -1,7 +1,29 @@
-<div  class="settings-section">
+<div class="settings-section">
   <h1>Account</h1>
 
-  <md-button href="{{::config.endpoints.api}}/logout">
+  <md-button
+     class="md-raised md-primary"
+     href="{{::config.endpoints.api}}/logout">
     Logout
   </md-button>
+</div>
+<div class="settings-section">
+  <h1>Permanent name</h1>
+  <p>Set a name that will be displayed on the site instead of your
+    steam name.</p>
+  <form name="permanentNameForm">
+    <md-input-container>
+      <label>Permanent name</label>
+      <input
+         name="permanentName"
+         ng-model="settings.permanentName"
+         required>
+    </md-input-container>
+    <md-button
+       class="md-raised md-primary"
+       ng-disabled="permanentNameForm.$invalid"
+       ng-click="settings.saveSetting('permanentName', settings.permanentName)">
+      Save
+    </md-button>
+  </form>
 </div>

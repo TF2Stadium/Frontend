@@ -5,7 +5,9 @@
     step="1" min="0" max="100"
     ng-change="settings.saveSetting('soundVolume', settings.soundVolume)">
   </md-slider>
-  <md-button ng-click="settings.playSoundSample()">
+  <md-button
+     class="md-raised md-primary"
+     ng-click="settings.playSoundSample()">
     Test sound
   </md-button>
 </div>
