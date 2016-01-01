@@ -6,13 +6,17 @@
     .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsPageController(SettingsPage, Settings, ngAudio, User) {
+  function SettingsPageController(SettingsPage, Settings, ngAudio, User, Notifications) {
     var vm = this;
 
     vm.sections = SettingsPage.getSections();
 
-    vm.saveSetting = function (key, value) {
-      Settings.set(key, value);
+    vm.saveSetting = function (key, value, showNotification) {
+      Settings.set(key, value, function () {
+        if (showNotification) {
+          Notifications.toast({message: 'Saved correctly'});
+        }
+      });
     };
 
     vm.setCurrent = function (key) {
