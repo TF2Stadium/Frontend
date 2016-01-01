@@ -110,7 +110,7 @@
             </md-button>
             <md-button ng-if="$root.userProfile.steamid" ui-sref="settings">
               <img src="/assets/img/settings.svg">
-              {{::$root.userProfile.name}}
+              {{$root.userProfile.name}}
               <img ng-src="{{::$root.userProfile.avatar}}">
             </md-button>
             <md-button ng-if="!$root.userProfile.steamid"
