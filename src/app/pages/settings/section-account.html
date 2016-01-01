@@ -1,19 +1,18 @@
 <div class="settings-section">
-  <h1>Permanent name</h1>
-  <p>Set a name that will be displayed on the site instead of your
-    steam name.</p>
-  <form name="permanentNameForm">
+  <h1>Site alias</h1>
+  <p>Set a name that will be displayed on the site instead of your steam one.</p>
+  <form name="siteAliasForm">
     <md-input-container md-no-float>
       <input
-         name="permanentName"
-         ng-model="settings.permanentName"
-         placeholder="Name"
+         name="siteAlias"
+         ng-model="settings.siteAlias"
+         placeholder="{{settings.siteAlias}}"
          required>
     </md-input-container>
     <md-button
        class="md-raised md-primary"
-       ng-disabled="permanentNameForm.$invalid"
-       ng-click="settings.saveSetting('permanentName', settings.permanentName)">
+       ng-disabled="siteAliasForm.$invalid"
+       ng-click="settings.saveSetting('siteAlias', settings.siteAlias)">
       Save
     </md-button>
   </form>

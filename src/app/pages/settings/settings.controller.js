@@ -48,6 +48,7 @@
     Settings.getSettings(function (response) {
       populateFilters(response);
       vm.soundVolume = response.soundVolume;
+      vm.siteAlias = response.siteAlias;
     });
 
   }
