@@ -6,13 +6,22 @@
     .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsPageController(SettingsPage, Settings, ngAudio) {
+  function SettingsPageController(SettingsPage, Settings, ngAudio, User, Notifications) {
     var vm = this;
 
     vm.sections = SettingsPage.getSections();
 
-    vm.saveSetting = function (key, value) {
-      Settings.set(key, value);
+    vm.saveSetting = function (key, value, showNotification) {
+      Settings.set(key, value, function () {
+        if (showNotification) {
+          var msg = 'Setting updated.';
+          if (key ===  'siteAlias') {
+            msg = 'Alias updated.';
+          }
+
+          Notifications.toast({message: msg});
+        }
+      });
     };
 
     vm.setCurrent = function (key) {
@@ -23,6 +32,10 @@
       Settings.getSettings(function (settings) {
         ngAudio.play('/assets/sound/lobby-readyup.wav').volume = settings.soundVolume / 100;
       });
+    };
+
+    vm.logout = function () {
+      User.logout();
     };
 
     /*
@@ -44,6 +57,7 @@
     Settings.getSettings(function (response) {
       populateFilters(response);
       vm.soundVolume = response.soundVolume;
+      vm.siteAlias = response.siteAlias;
     });
 
   }

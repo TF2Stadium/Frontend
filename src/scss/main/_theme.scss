@@ -176,6 +176,11 @@ $themes-list: (
       }
     }
 
+    .md-button.md-raised[disabled] {
+      //material-angular likes to add !important clauses
+      color: $text-color-light !important;
+    }
+
     md-checkbox .md-icon {
       border-color: $text-color-light;
     }
