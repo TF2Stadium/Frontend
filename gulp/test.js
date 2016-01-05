@@ -12,7 +12,9 @@ var $ = require('gulp-load-plugins')();
 
 function runUnitTestsOn(browsers, done) {
   var srcGlob = path.join(conf.paths.src, '/app/**/*.js');
-  var src = gulp.src(srcGlob).pipe($.angularFilesort());
+  var src = gulp.src(srcGlob)
+        .pipe(conf.replaceConfig())
+        .pipe($.angularFilesort());
 
   var preprocessors = {};
   preprocessors[srcGlob] = ['coverage'];
