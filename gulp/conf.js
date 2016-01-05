@@ -40,7 +40,13 @@ exports.shouldReplace = function(fname) {
   return fname.indexOf(configFile) > -1;
 };
 
-var noopStream = es.map(function (f, next) { next(null, f); });
+function isFile(path) {
+  try {
+    return fs.statSync(path).isFile();
+  } catch(err) {
+    return !(err && err.code === 'ENOENT');
+  }
+}
 
 /**
  *  Returns a stream creation function that creates streams to replace
@@ -55,7 +61,7 @@ exports.replaceConfig = function() {
   var overrideFile =
         path.join(exports.paths.src, 'app', configFile) + '.override';
 
-  if (fs.statSync(overrideFile).isFile()) {
+  if (isFile(overrideFile)) {
     return es.map(function (file, next) {
       if (exports.shouldReplace(file.path)) {
         toArray(vfs.src(overrideFile), function (err, arr) {
@@ -77,7 +83,7 @@ exports.replaceConfig = function() {
       }
     });
   } else {
-    return noopStream;
+    return es.map(function (f, next) { next(null, f); });;
   }
 };
 
