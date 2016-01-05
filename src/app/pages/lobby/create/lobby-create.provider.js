@@ -228,32 +228,32 @@
           filterable: true,
           options: [
             {
-              value: 'etf2l_9v9',
+              value: 'ETF2L_9v9',
               title: 'ETF2L Highlander',
               etf2l: true,
               highlander: true
             },{
-              value: 'etf2l_6v6',
+              value: 'ETF2L_6v6',
               title: 'ETF2L 6v6',
               etf2l: true,
               '6s': true
             },{
-              value: 'ugc_9v9',
+              value: 'UGC_9v9',
               title: 'UGC Highlander',
               ugc: true,
               highlander: true
             },{
-              value: 'ugc_6v6',
+              value: 'UGC_6v6',
               title: 'UGC 6v6',
               ugc: true,
               '6s': true
             },{
-              value: 'ugc_4v4',
+              value: 'UGC_4v4',
               title: 'UGC 4v4',
               ugc: true,
               '4v4': true
             },{
-              value: 'esea_6v6',
+              value: 'ESEA_6v6',
               title: 'ESEA 6v6',
               esea: true,
               '6s': true
@@ -263,17 +263,17 @@
               ozfortress: true,
               '6s': true
             },{
-              value: 'asiafortress_6v6',
+              value: 'AsiaFortress_6v6',
               title: 'AsiaFortress 6v6',
               asia: true,
               '6s': true
             },{
-              value: 'etf2l_ultiduo',
+              value: 'ETF2L_ultiduo',
               title: 'ETF2L Ultiduo',
               etf2l: true,
               ultiduo: true
             },{
-              value: 'etf2l_bball',
+              value: 'ETF2L_bball',
               title: 'ETF2L BBall',
               etf2l: true,
               bball: true
