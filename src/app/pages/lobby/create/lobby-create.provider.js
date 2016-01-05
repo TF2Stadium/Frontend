@@ -228,43 +228,43 @@
           filterable: true,
           options: [
             {
-              value: 'etf2l_9v9_s9',
-              title: 'ETF2L Highlander (Season 9)',
+              value: 'etf2l_9v9',
+              title: 'ETF2L Highlander',
               etf2l: true,
               highlander: true
             },{
-              value: 'etf2l_6v6_s22',
-              title: 'ETF2L 6v6 (Season 22)',
+              value: 'etf2l_6v6',
+              title: 'ETF2L 6v6',
               etf2l: true,
               '6s': true
             },{
-              value: 'ugc_9v9_s19',
-              title: 'UGC Highlander (Season 19)',
+              value: 'ugc_9v9',
+              title: 'UGC Highlander',
               ugc: true,
               highlander: true
             },{
-              value: 'ugc_6v6_s19',
-              title: 'UGC 6v6 (Season 19)',
+              value: 'ugc_6v6',
+              title: 'UGC 6v6',
               ugc: true,
               '6s': true
             },{
-              value: 'ugc_4v4_s6',
-              title: 'UGC 4v4 (Season 6)',
+              value: 'ugc_4v4',
+              title: 'UGC 4v4',
               ugc: true,
               '4v4': true
             },{
-              value: 'esea_6v6_s20',
-              title: 'ESEA 6v6 (Season 20)',
+              value: 'esea_6v6',
+              title: 'ESEA 6v6',
               esea: true,
               '6s': true
             },{
-              value: 'ozfortress_6v6_s14',
-              title: 'ozfortress 6v6 (OWL 14)',
+              value: 'ozfortress_6v6',
+              title: 'ozfortress 6v6',
               ozfortress: true,
               '6s': true
             },{
-              value: 'asiafortress_6v6_s9',
-              title: 'AsiaFortress 6v6 (Season 9)',
+              value: 'asiafortress_6v6',
+              title: 'AsiaFortress 6v6',
               asia: true,
               '6s': true
             },{
