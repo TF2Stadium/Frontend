@@ -13,10 +13,7 @@
             {{header.lobbyInformation.type | capitalize}}
           </span>
           <span ng-show="header.lobbyInformation.whitelistID">
-            , whitelist #<a target="_blank"
-              href="http://whitelist.tf/{{header.lobbyInformation.whitelistID}}">
-              {{header.lobbyInformation.whitelistID}}
-            </a>
+            , <whitelist id="header.lobbyInformation.whitelistID" />
           </span>
           <span ng-show="header.lobbyInformation.league">
             , {{header.lobbyInformation.league | uppercase}} rules
