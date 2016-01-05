@@ -14,7 +14,12 @@
     vm.saveSetting = function (key, value, showNotification) {
       Settings.set(key, value, function () {
         if (showNotification) {
-          Notifications.toast({message: 'Saved correctly'});
+          var msg = 'Setting updated.';
+          if (key ===  'siteAlias') {
+            msg = 'Alias updated.';
+          }
+
+          Notifications.toast({message: msg});
         }
       });
     };
