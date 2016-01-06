@@ -5,8 +5,9 @@
     .filter('capitalize', capitalize)
     .filter('reverse', reverse)
     .filter('trusted', trusted)
-    .filter('slotNameToClassName', slotNameToClassName)
     .filter('stripSlotNameNumber', stripSlotNameNumber)
+    .filter('slotNameToClassName', slotNameToClassName)
+    .filter('ifNumeric', ifNumeric)
     .filter('secondsToMinutes', secondsToMinutes)
     .filter('unique', unique);
 
@@ -59,6 +60,19 @@
       }
 
       return className;
+    };
+  }
+
+  /** @ngInject */
+  function ifNumeric() {
+    return function (str, out) {
+      // only intended for string inputs, and only intended to output
+      // 'out' if the string represents an integer
+      if (angular.isNumber(str) || /^\d+$/.test(str)) {
+        return out;
+      } else {
+        return '';
+      }
     };
   }
 
