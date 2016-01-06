@@ -8,12 +8,12 @@
   /** @ngInject */
   function LobbyCreateOptionFilter(LobbyCreate, $filter) {
 
-    var lobbySettingsList = LobbyCreate.getSettingsList();
-    var lobbySettings = LobbyCreate.getLobbySettings();
-
     return function (options, optionGroupKey, searchString) {
       searchString = searchString || ''; //maybe it's null for animations
       var searchFilter = $filter('filter');
+
+      var lobbySettingsList = LobbyCreate.getSettingsList();
+      var lobbySettings = LobbyCreate.getLobbySettings();
 
       var optionGroup = lobbySettingsList[optionGroupKey];
 
@@ -29,6 +29,7 @@
         optionGroup.dependsOn.forEach(function (dependencyName) { //e.g. 'formats'
           var dependencyKey = lobbySettingsList[dependencyName].key; //e.g. 'type'
           var dependency = lobbySettings[dependencyKey]; //e.g. 'highlander'
+
           shouldShow = shouldShow && option[dependency];
         });
         return shouldShow || lobbySettings[lobbySettingsList.formats.key] === 'debug';
