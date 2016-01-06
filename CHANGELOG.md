@@ -6,6 +6,8 @@
 * Fix animations not displaying properly on Chrome Canary.
 * Fix debug format not displaying maps/leagues/whitelists.
 * Fixed wrong ready-up timer behaviour (https://github.com/TF2Stadium/Frontend/issues/107).
+* Fixed lobby create showing wrong options (https://github.com/TF2Stadium/Frontend/issues/134).
+* Changed whitelist options to use strings that always point to the current season.
 
 ## [0.4.0-alpha] - 2015-12-26
 
