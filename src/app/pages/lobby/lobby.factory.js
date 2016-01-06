@@ -98,6 +98,7 @@
       }
 
       preReadyUpTimer = 180;
+      $interval.cancel(preReadyUpInterval);
 
       preReadyUpInterval = $interval(function () {
         preReadyUpTimer--;
@@ -320,6 +321,7 @@
     Websocket.onJSON('lobbyJoined', function (data) {
       factory.lobbyJoinedId = data.id;
       factory.lobbyJoined = data;
+      factory.setPlayerPreReady(true);
       $rootScope.$emit('lobby-joined');
       $rootScope.$emit('lobby-joined-updated');
     });
@@ -328,6 +330,7 @@
       factory.lobbyJoinedId = -1;
       factory.lobbyJoined = {};
       factory.lobbyJoinInformation = {};
+      factory.setPlayerPreReady(false);
       $rootScope.$emit('lobby-joined-updated');
       $rootScope.$emit('lobby-left');
     });

@@ -1,15 +1,21 @@
-#settings-wrapper {
-  //padding: $padding-medium $padding-big $padding-big !important;
-}
-
 .settings-section {
-  @include flex (column, flex-start, stretch);
-  flex-wrap: wrap;
   @extend .sheet;
-  padding: 0 $padding-medium $padding-medium !important;
+  padding: $padding-medium $padding-big;
   margin-bottom: $padding-medium;
+
+  h1, h2 {
+    margin-top: 0;
+  }
+
+  .md-button {
+    margin: $padding-small 0;
+  }
 
   .md-track-ticks {
     display: none;
+  }
+
+  .md-input-container {
+    margin: 0;
   }
 }

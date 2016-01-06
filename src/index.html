@@ -2,7 +2,7 @@
 <html ng-app="tf2stadium">
   <head>
     <meta charset="utf-8">
-    <title>TF2Stadium</title>
+    <title ng-bind-template="{{$root.titleNotification ? '(!)' : ''}} TF2Stadium">TF2Stadium</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=1200">
     <link rel="icon" href="/assets/img/favicon.ico">
@@ -20,7 +20,7 @@
     <!-- endbuild -->
 
   </head>
-  <body class="{{$root.currentTheme || 'default-theme'}}">
+  <body class="{{$root.currentTheme || 'default-theme'}} {{$root.animationLength || 'animation-normal'}}">
     <!-- Splash screen style goes here to ensure it loads as fast as possible -->
     <div id="splash-screen" style="
       display: flex;
@@ -85,7 +85,7 @@
         <md-button class="md-raised"
                    aria-label="Login"
                    ng-href="{{::config.endpoints.api}}/startLogin"
-                   style="transform:scale(0);"
+                   style="display:none"
                    ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}"
                    ng-bind="'Login'">
         </md-button>
@@ -110,7 +110,7 @@
             </md-button>
             <md-button ng-if="$root.userProfile.steamid" ui-sref="settings">
               <img src="/assets/img/settings.svg">
-              {{::$root.userProfile.name}}
+              {{$root.userProfile.name}}
               <img ng-src="{{::$root.userProfile.avatar}}">
             </md-button>
             <md-button ng-if="!$root.userProfile.steamid"

@@ -49,8 +49,15 @@
     };
 
     SettingsProvider.constants.themesList = {
-      light:  {name: 'TF2Stadium', selector: 'default-theme'},
-      dark:   {name: 'TF2Stadium Dark', selector: 'dark-theme'}
+      light:    {name: 'TF2Stadium', selector: 'default-theme'},
+      dark:     {name: 'TF2Stadium Dark', selector: 'dark-theme'}
+    };
+
+    SettingsProvider.constants.animationOptions = {
+      slow:     {name: 'Slow',      selector: 'animation-slow'},
+      normal:   {name: 'Normal',    selector: 'animation-normal'},
+      fast:     {name: 'Fast',      selector: 'animation-fast'},
+      none:     {name: 'None',      selector: 'animation-none'}
     };
 
     SettingsProvider.constants.timestampOptions = {
@@ -66,6 +73,7 @@
     function setDefaultValues() {
       SettingsProvider.settings.currentTheme = 'default-theme';
       SettingsProvider.settings.timestamps = 'hours12';
+      SettingsProvider.settings.animationLength = 'animation-normal';
 
       /*
         Defaults every value found in the filters to true.

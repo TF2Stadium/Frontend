@@ -4,7 +4,7 @@
   "license": "GPL-3.0",
   "repository": "https://github.com/TF2Stadium/Frontend",
   "readme": "readme.md",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "dependencies": {
     "del": "~1.2.0",
     "uglify-save-license": "~0.4.1",
@@ -26,7 +26,7 @@
     "gulp-sass": "~2.0.1",
     "gulp-sourcemaps": "~1.5.2",
     "gulp-uglify": "~1.2.0",
-    "gulp-useref": "~1.2.0",
+    "gulp-useref": "~3.0.4",
     "gulp-util": "~3.0.5",
     "gulp-if": "^2.0.0",
     "lodash": "~3.9.3",
@@ -44,6 +44,7 @@
     "es5-shim": "^4.4.1",
     "eslint": "^1.10.1",
     "eslint-plugin-angular": "^0.14.0",
+    "event-stream": "^3.3.2",
     "glob": "^6.0.1",
     "gulp-eslint": "^1.1.1",
     "gulp-karma": "0.0.5",
@@ -59,6 +60,7 @@
     "karma-firefox-launcher": "^0.1.7",
     "karma-mocha": "^0.2.1",
     "karma-phantomjs-launcher": "^0.2.1",
+    "lazypipe": "^1.0.1",
     "merge-stream": "~0.1.7",
     "mocha": "^2.3.4",
     "phantomjs": "^1.9.19",
@@ -66,7 +68,9 @@
     "run-sequence": "^1.1.5",
     "selenium-webdriver": "^2.48.2",
     "sinon": "^1.17.2",
-    "sinon-chai": "^2.8.0"
+    "sinon-chai": "^2.8.0",
+    "stream-to-array": "^2.2.0",
+    "vinyl-fs": "^2.2.1"
   },
   "engines": {
     "node": ">=0.10.0"

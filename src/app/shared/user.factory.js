@@ -5,7 +5,7 @@
     .factory('User', User);
 
   /** @ngInject */
-  function User(Websocket, $rootScope) {
+  function User(Websocket, $rootScope, $window, Config) {
 
     var userService = {};
 
@@ -18,6 +18,10 @@
           callback(response.data);
         }
       );
+    };
+
+    userService.logout = function () {
+      $window.open(Config.endpoints.api + '/logout', '_self');
     };
 
     userService.init = function () {

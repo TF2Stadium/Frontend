@@ -66,7 +66,8 @@
           $log.log('WebSocket reconnecting');
           reconnecting = true;
           socket.connect();
-        }
+        },
+        hideDelay: 0
       });
     };
 

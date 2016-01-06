@@ -5,7 +5,7 @@
     .factory('Notifications', NotificationsFactory);
 
   /** @ngInject */
-  function NotificationsFactory($mdToast, $window, $document, $timeout, $log, ngAudio) {
+  function NotificationsFactory($rootScope, $mdToast, $window, $document, $timeout, $log, ngAudio) {
 
     var notificationsService = {};
 
@@ -31,6 +31,18 @@
             options.action();
           }
         });
+
+      notificationsService.titleNotification();
+    };
+
+    notificationsService.titleNotification = function () {
+      if (!$document[0].hasFocus()) {
+        $rootScope.titleNotification = true;
+      }
+
+      $window.onfocus = function () {
+        $rootScope.titleNotification = false;
+      };
     };
 
     notificationsService.notifyBrowser = function (options) {
@@ -44,6 +56,8 @@
       if (($document[0].hasFocus() && !options.showAlways) || Notification.permission === 'denied') {
         return;
       }
+
+      notificationsService.titleNotification();
 
       Notification.requestPermission(function () {
 
