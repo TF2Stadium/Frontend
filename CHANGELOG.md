@@ -1,6 +1,9 @@
 # Changelog
 
 ## [Unreleased]
+
+## [0.5.0-alpha] - 2016-1-6
+
 * Added settings: animation speed and site alias.
 * Added support for title notifications (https://github.com/TF2Stadium/Frontend/issues/112).
 * Fix animations not displaying properly on Chrome Canary.
