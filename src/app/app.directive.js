@@ -8,9 +8,7 @@
         scope: {
           whitelistId: '=id'
         },
-        template:
-        'whitelist '
-          + '{{whitelistId | ifNumeric:"#"}}'
+        template: '{{whitelistId | ifNumeric:"#"}}'
           + '<a target="_blank" href="http://whitelist.tf/{{whitelistId}}">'
           + '{{whitelistId}}'
           + '</a>'

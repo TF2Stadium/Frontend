@@ -22,13 +22,6 @@ describe('Directives', function () {
       return el;
     }
 
-    it('should start with "whitelist"', function () {
-      var el = render(123);
-      var html = el.html();
-
-      expect(html.indexOf('whitelist ')).to.equal(0);
-    });
-
     it('should contain a single link', function () {
       var el = render(123);
       var links = el.find('a');
