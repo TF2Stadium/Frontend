@@ -285,7 +285,7 @@
     });
 
     Websocket.onJSON('subListData', function (data) {
-      factory.subList = data.data;
+      factory.subList = data;
       $rootScope.$emit('sub-list-updated');
     });
 
