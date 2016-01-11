@@ -24,11 +24,13 @@
     };
 
     notificationsService.toast = function (options) {
+      var toastOptions = angular.extend({}, toastDefault, options);
+
       $mdToast
-        .show(angular.extend({}, toastDefault, options))
+        .show(toastOptions)
         .then(function (clicked) {
           if (clicked === 'ok') {
-            options.action();
+            toastOptions.action();
           }
         });
 
