@@ -290,7 +290,12 @@
     });
 
     Websocket.onJSON('lobbyListData', function (data) {
-      factory.lobbyList = data.lobbies;
+      if (angular.isArray(data)) {
+        factory.lobbyList = data;
+      } else {
+        factory.lobbyList = data.lobbies;
+      }
+
       $rootScope.$emit('lobby-list-updated');
 
       if (factory.lobbyJoinedId === -1) {
