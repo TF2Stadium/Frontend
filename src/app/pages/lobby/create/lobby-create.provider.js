@@ -101,10 +101,10 @@
               '6s': true,
               highlander: true
             },{
-              value: 'cp_metalworks_rc5',
+              value: 'cp_metalworks_rc7',
               '6s': true
             },{
-              value: 'cp_sunshine_rc7',
+              value: 'cp_sunshine_rc9',
               '6s': true,
               highlander: true
             },{
