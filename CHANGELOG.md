@@ -2,6 +2,14 @@
 
 ## [Unreleased]
 
+## [0.6.0-alpha] - 2016-1-12
+
+* Backend protocol updates
+* About and Rules pages added
+* Substitutes list fixed
+* Updated sunshine and metalworks
+* TF2Stadium messages in chat have a chat badge
+
 ## [0.5.0-alpha] - 2016-1-6
 
 * Added settings: animation speed and site alias.
