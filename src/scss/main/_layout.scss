@@ -8,6 +8,8 @@ body {
   @include flex (column, flex-start, center);
   overflow-y: auto !important;
   //angular adds overflow-y:scroll when activating md-select for some reason
+
+  min-width: 1200px;
 }
 
 
