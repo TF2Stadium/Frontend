@@ -156,19 +156,19 @@
 
 @keyframes scale-in {
   0%    {transform: scale(0)}
-  100%  {transform: scale(1)}  
+  100%  {transform: scale(1)}
 }
 
 @keyframes scale-out {
   0%    {transform: scale(1)}
-  100%  {transform: scale(0)}  
+  100%  {transform: scale(0)}
 }
 
 //CIRCLE MASK
 
 @keyframes circle-mask {
   0%    {clip-path: circle(0 at center)}
-  100%  {clip-path: circle(100% at center)}  
+  100%  {clip-path: circle(100% at center)}
 }
 
 
@@ -232,7 +232,7 @@ $animation-options-list: (
     }
 
     .toast {
-      @include animation(slide-from-bottom-full, $animation-slow);  
+      @include animation(slide-from-bottom-full, $animation-slow);
 
       &.ng-leave {
         @include animation(slide-to-bottom-full);
@@ -266,7 +266,7 @@ $animation-options-list: (
     }
 
     #slots {
-      @include animation(slide-from-top);  
+      @include animation(slide-from-top);
     }
 
     .slot-button {
@@ -279,7 +279,7 @@ $animation-options-list: (
 
     //LOBBY-CREATE
 
-    .search-filter {      
+    .search-filter {
       @include animation(slide-from-top fade-in);
 
       &.ng-leave {
@@ -288,7 +288,7 @@ $animation-options-list: (
     }
 
     .lobbycreate-text span {
-      @include animation(slide-from-bottom fade-in);  
+      @include animation(slide-from-bottom fade-in);
     }
 
     md-grid-tile.tile-card {
@@ -299,7 +299,7 @@ $animation-options-list: (
       }
     }
 
-    .server-form {      
+    .server-form {
       @include animation(slide-from-top);
     }
 
