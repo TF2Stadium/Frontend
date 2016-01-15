@@ -122,7 +122,7 @@ $themes-list: (
      =======================================*/
 
     md-content {
-      background-color: initial;
+      background-color: $sheet-color;
       color: $text-color-medium;
     }
 
