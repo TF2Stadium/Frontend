@@ -303,6 +303,18 @@ $animation-options-list: (
       @include animation(slide-from-top);
     }
 
+    .server-form {
+      @include animation(slide-from-top);
+    }
+
+    .save-server-form {
+      @include animation(slide-from-top fade-in);
+
+      &.ng-leave {
+        @include animation(slide-to-top fade-out);
+      }
+    }
+
     .server-verify-message {
       @include animation(slide-from-top-full);
 

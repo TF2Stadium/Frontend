@@ -1,28 +1,72 @@
 <div class="tile-form">
-  <div class="server-form"><h2>Server information</h2>
+  <form name="serverCreateForm" class="server-form">
+    <h2>Server information</h2>
+
+    <md-input-container
+       md-no-float
+       ng-if="lobbyCreate.showServers">
+      <md-select
+         placeholder="Saved Servers"
+         ng-model="selectedServer"
+         ng-change="lobbyCreate.loadSavedServer(selectedServer)">
+        <md-option
+           ng-repeat="(name, _) in lobbyCreate.savedServers"
+           ng-value="name">{{name}}</md-option>
+      </md-select>
+    </md-input-container>
+
     <md-input-container md-no-float>
       <input ng-model="lobbyCreate.lobbySettings.server"
-        ng-change="lobbyCreate.verifiedServer=false"
-        placeholder="Server address">
+             ng-change="lobbyCreate.verifiedServer=false"
+             placeholder="Server address"
+             required>
     </md-input-container>
+
     <md-input-container md-no-float
-      ng-show="!showPassword">
-      <input type="password" ng-model="lobbyCreate.lobbySettings.rconpwd"
-        ng-change="lobbyCreate.verifiedServer=false"
-        placeholder="Server RCON password">
+                        ng-show="!showPassword">
+      <input type="password"
+             ng-model="lobbyCreate.lobbySettings.rconpwd"
+             ng-change="lobbyCreate.verifiedServer=false"
+             placeholder="Server RCON password"
+             required>
     </md-input-container>
+
     <md-input-container md-no-float
-      ng-show="showPassword">
+                        ng-show="showPassword">
       <input type="text" ng-model="lobbyCreate.lobbySettings.rconpwd"
-        ng-change="lobbyCreate.verifiedServer=false"
-        placeholder="Server RCON password">
+             ng-change="lobbyCreate.verifiedServer=false"
+             placeholder="Server RCON password">
     </md-input-container>
+
     <md-checkbox ng-model="showPassword">Show password</md-checkbox>
-    <md-button ng-class="{'md-raised md-primary' : !lobbyCreate.verifiedServer}"
-      ng-click="lobbyCreate.verifyServer(serverAdress, serverPassword)">
+
+    <md-checkbox ng-model="saveServer">Save server address</md-checkbox>
+
+    <span class="save-server-form"
+          ng-if="saveServer">
+      <md-input-container
+         md-no-float>
+        <input type="text"
+               md-maxlength="50"
+               ng-model="lobbyCreate.serverName"
+               placeholder="Saved server name">
+      </md-input-container>
+
+      <md-button
+         ng-class="{'md-raised md-primary': true}"
+         ng-click="lobbyCreate.saveServer(lobbyCreate.serverName)"
+         ng-disabled="!lobbyCreate.lobbySettings.server || !lobbyCreate.serverName">
+        Save Server
+      </md-button>
+    </span>
+
+    <md-button
+       ng-class="{'md-raised md-primary' : !lobbyCreate.verifiedServer}"
+       ng-click="lobbyCreate.verifyServer(serverAdress, serverPassword)"
+       ng-disabled="serverCreateForm.$invalid">
       Verify server
     </md-button>
-  </div>
+  </form>
   <div class="server-verify-message"
     ng-if="lobbyCreate.verifyServerError">
     <img src="/assets/img/icon-error.svg">
@@ -39,7 +83,7 @@
       ng-if="!lobbyCreate.requestSent"
       ng-click="lobbyCreate.create()">
       Create the lobby!
-    </md-button>    
+    </md-button>
     <span ng-if="lobbyCreate.requestSent">
       Configuring server...
     </span>

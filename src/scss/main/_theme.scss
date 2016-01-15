@@ -197,6 +197,12 @@ $themes-list: (
       background-color: $sheet-color;
     }
 
+    md-select md-select-value,
+    md-select md-select-value.md-select-placeholder {
+      border-color: $text-color-light;
+      color: $text-color-light;
+    }
+
 
     /*======================================
                     LAYOUT
