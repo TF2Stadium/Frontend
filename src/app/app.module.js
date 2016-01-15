@@ -9,6 +9,7 @@
     'ngAnimate',
     'ui.router',
     'ngMaterial',
+    'md.data.table',
     'luegg.directives',
     'ngAudio'
   ]);

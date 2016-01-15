@@ -138,6 +138,14 @@ $themes-list: (
       color: $text-color-medium;
     }
 
+    table.md-table {
+      color: $text-color-hard;
+
+      td, th, th.md-active, th.md-active md-icon {
+        color: $text-color-hard;
+      }
+    }
+
     md-input-container {
       label {
         color: $text-color-light;
@@ -169,6 +177,10 @@ $themes-list: (
 
       &.md-primary {
         background-color: $main-color;
+      }
+
+      &.md-warn {
+        background-color: $warn-color;
       }
 
       &.md-focused, &:hover {
