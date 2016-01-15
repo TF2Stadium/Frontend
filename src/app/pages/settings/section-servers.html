@@ -1,0 +1,34 @@
+<div class="settings-section">
+  <h1>Saved servers</h1>
+
+  <md-button
+     class="md-raised md-warn"
+     ng-click="settings.deleteSelectedServers()"
+     ng-disabled="settings.selectedServerNames.length === 0">
+    Delete selected
+  </md-button>
+
+  <md-table-container>
+    <table md-table
+           md-row-select="true"
+           ng-model="settings.selectedServerNames">
+      <thead md-head>
+        <tr md-row>
+          <th md-column>Name</th>
+          <th md-column>Address</th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row
+            md-auto-select
+            ng-repeat="server in settings.savedServers"
+            md-select="server.name"
+            md-select-id="{{server.name}}">
+          <td md-cell>{{server.name}}</td>
+          <td md-cell>{{server.url}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+
+</div>

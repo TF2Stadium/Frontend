@@ -6,7 +6,8 @@
     .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsPageController(SettingsPage, Settings, ngAudio, User, Notifications) {
+  function SettingsPageController($rootScope, $scope, SettingsPage, Settings,
+                                  ngAudio, User, Notifications) {
     var vm = this;
 
     vm.sections = SettingsPage.getSections();
@@ -54,12 +55,52 @@
       }
     };
 
-    Settings.getSettings(function (response) {
-      populateFilters(response);
-      vm.soundVolume = response.soundVolume;
-      vm.siteAlias = response.siteAlias;
+    vm.selectedServerNames = [];
+    vm.savedServers = {};
+    vm.serverTableOrder = 'name';
+
+    vm.deleteSelectedServers = function () {
+      var newSavedServers = vm.savedServers.filter(function (o) {
+        return vm.selectedServerNames.indexOf(o.name) === -1;
+      });
+
+      vm.selectedServerNames = [];
+      Settings.set('savedServers', serializeServers(newSavedServers));
+    };
+
+    function receiveSettings(settings) {
+      populateFilters(settings);
+      vm.soundVolume = settings.soundVolume;
+      vm.siteAlias = settings.siteAlias;
+
+      vm.savedServers = deserializeServers(settings.savedServers);
+    }
+
+    function deserializeServers(str) {
+      var serversObj = angular.fromJson(str);
+      return Object.keys(serversObj).map(function (name) {
+        var server = serversObj[name];
+        return {
+          name: name,
+          url: server.url //,
+          // password: server.password
+        };
+      });
+    }
+
+    function serializeServers(servers) {
+      return angular.toJson(
+        servers.reduce(function (acc, server) {
+          acc[server.name] = { url: server.url };
+          return acc;
+        }, {})
+      );
+    }
+
+    Settings.getSettings(receiveSettings);
+    var handler = $rootScope.$on('settings-updated', function () {
+      Settings.getSettings(receiveSettings);
     });
-
+    $scope.$on('$destroy', handler);
   }
-
 })();
