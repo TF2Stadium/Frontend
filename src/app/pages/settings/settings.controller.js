@@ -64,10 +64,10 @@
     }
 
     vm.deleteSelectedServers = function () {
-      vm.selectedServerNames = [];
       saveServers(vm.savedServers.filter(function (o) {
         return vm.selectedServerNames.indexOf(o.name) === -1;
       }));
+      vm.selectedServerNames = [];
     };
 
     vm.editServerField = function editServerField(e, server, field) {
@@ -125,6 +125,22 @@
         name: vm.newServerName,
         url: vm.newServerAddress
       }));
+
+      $scope.$apply(function () {
+        vm.newServerName = '';
+        vm.newServerAddress = '';
+
+        vm.newServerName.$setValidity();
+        vm.newServerName.$setUntouched();
+        vm.newServerName.$setPristine();
+
+        vm.newServerAddress.$setValidity();
+        vm.newServerAddress.$setUntouched();
+        vm.newServerAddress.$setPristine();
+
+        $scope.newServerForm.$setValidity();
+        $scope.newServerForm.$setPristine();
+      });
     };
 
     function receiveSettings(settings) {
