@@ -1,0 +1,76 @@
+<div class="settings-section">
+  <h1>Saved servers</h1>
+
+  <span class="no-saved-servers"
+        ng-if="settings.savedServers.length === 0">
+    You have no saved servers.
+  </span>
+
+  <md-button
+     class="md-raised md-warn"
+     ng-if="settings.savedServers.length > 0"
+     ng-click="settings.deleteSelectedServers()"
+     ng-disabled="settings.selectedServerNames.length === 0">
+    Delete selected
+  </md-button>
+
+  <md-table-container
+     ng-if="settings.savedServers.length > 0">
+    <table md-table
+           md-row-select="true"
+           ng-model="settings.selectedServerNames">
+      <thead md-head>
+        <tr md-row>
+          <th md-column>Name</th>
+          <th md-column>Address</th>
+        </tr>
+      </thead>
+      <tbody md-body>
+        <tr md-row
+            ng-repeat="server in settings.savedServers"
+            md-select="server.name"
+            md-select-id="{{server.name}}">
+          <td md-cell ng-click="settings.editServerField($event, server, 'name')">
+            <span>{{server.name}}</span>
+          </td>
+          <td md-cell ng-click="settings.editServerField($event, server, 'url')">
+            <span>{{server.url}}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </md-table-container>
+
+  <h2>Add a server</h2>
+
+  <form name="newServerForm"
+        class="new-server-form"
+        ng-submit="settings.saveNewServer();">
+    <md-input-container
+       md-no-float
+       md-is-error="(newServerForm.newServerName.$touched && newServerForm.newServerName.$invalid) || newServerForm.newServerName.$error['nameTaken']">
+      <input type="text"
+             name="newServerName"
+             ng-model="settings.newServerName"
+             placeholder="Name"
+             ui-validate="{nameTaken: '!settings.serverNameAlreadyExists($value)'}"
+             required>
+    </md-input-container>
+
+    <md-input-container
+       md-no-float
+       class="address-input">
+      <input type="text"
+             ng-model="settings.newServerAddress"
+             placeholder="Address (e.g. example.com:27015)"
+             required>
+    </md-input-container>
+
+    <md-button
+       type="submit"
+       class="md-raised md-primary"
+       ng-disabled="newServerForm.$invalid">
+      Add Server
+    </md-button>
+  </form>
+</div>

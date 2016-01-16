@@ -14,6 +14,7 @@
       'theme',
       'filters',
       'sound',
+      'servers',
       'account'
     ];
 
@@ -48,6 +49,7 @@
         },
         filters: Settings.getConstants('filters'),
         sound: Settings.getConstants('sound'),
+        servers: null,
         account: null
       };
 

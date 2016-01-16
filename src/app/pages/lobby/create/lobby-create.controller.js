@@ -6,7 +6,7 @@
 
   /** @ngInject */
   function LobbyCreateController($document, $state, $scope, $rootScope,
-                                 LobbyCreate) {
+                                 LobbyCreate, Settings, Notifications) {
 
     var vm = this;
 
@@ -20,6 +20,47 @@
     LobbyCreate.subscribe('lobby-create-settings-updated', $scope, function () {
       vm.lobbySettings = LobbyCreate.getLobbySettings();
     });
+
+    vm.showServers = false;
+    vm.savedServers = {};
+    vm.serverName = '';
+
+    function loadServers(settings) {
+      vm.savedServers = angular.fromJson(settings.savedServers);
+      vm.showServers = Object.keys(vm.savedServers).length > 0;
+    }
+
+    Settings.getSettings(loadServers);
+    var handler = $rootScope.$on('settings-updated', function () {
+      Settings.getSettings(loadServers);
+    });
+    $scope.$on('$destroy', handler);
+
+
+    vm.loadSavedServer = function (name) {
+      vm.serverName = name;
+
+      // password saving intentionally left commented out: We want to
+      // somehow offer that functionality, but are still discussing
+      // different options and their security implications.
+      var server = vm.savedServers[name];
+      vm.lobbySettings.server = server.url;
+      // vm.lobbySettings.rconpwd = server.password;
+    };
+
+    vm.saveServer = function (name) {
+      vm.savedServers[name] = {
+        url: vm.lobbySettings.server // ,
+        // password: vm.lobbySettings.rconpwd
+      };
+
+      Settings.set('savedServers', angular.toJson(vm.savedServers), function () {
+        Notifications.toast({
+          message: 'Server saved.',
+          hideDelay: 3000
+        });
+      });
+    };
 
     var getCurrentWizardStep = function () {
       var currentStep = vm.wizardSteps[0];
