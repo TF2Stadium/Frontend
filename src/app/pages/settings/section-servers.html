@@ -20,12 +20,15 @@
       </thead>
       <tbody md-body>
         <tr md-row
-            md-auto-select
             ng-repeat="server in settings.savedServers"
             md-select="server.name"
             md-select-id="{{server.name}}">
-          <td md-cell>{{server.name}}</td>
-          <td md-cell>{{server.url}}</td>
+          <td md-cell ng-click="settings.editServerField($event, server, 'name')">
+            <span>{{server.name}}</span>
+          </td>
+          <td md-cell ng-click="settings.editServerField($event, server, 'url')">
+            <span>{{server.url}}</span>
+          </td>
         </tr>
       </tbody>
     </table>

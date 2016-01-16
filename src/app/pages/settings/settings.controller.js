@@ -6,8 +6,8 @@
     .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsPageController($rootScope, $scope, SettingsPage, Settings,
-                                  ngAudio, User, Notifications) {
+  function SettingsPageController($rootScope, $scope, $mdEditDialog, SettingsPage,
+                                  Settings, ngAudio, User, Notifications) {
     var vm = this;
 
     vm.sections = SettingsPage.getSections();
@@ -56,16 +56,54 @@
     };
 
     vm.selectedServerNames = [];
-    vm.savedServers = {};
+    vm.savedServers = [];
     vm.serverTableOrder = 'name';
 
-    vm.deleteSelectedServers = function () {
-      var newSavedServers = vm.savedServers.filter(function (o) {
-        return vm.selectedServerNames.indexOf(o.name) === -1;
-      });
-
-      vm.selectedServerNames = [];
+    function saveServers(newSavedServers) {
       Settings.set('savedServers', serializeServers(newSavedServers));
+    }
+
+    vm.deleteSelectedServers = function () {
+      vm.selectedServerNames = [];
+      saveServers(vm.savedServers.filter(function (o) {
+        return vm.selectedServerNames.indexOf(o.name) === -1;
+      }));
+    };
+
+    vm.editServerField = function editServerField(e, server, field) {
+      e.stopPropagation(); // prevent auto row-select
+
+      console.log('edit', e, server, field);
+
+      $mdEditDialog.small({
+        modelValue: server[field],
+        placeholder: 'Edit ' + field,
+        save: function (input) {
+          var newValue = input.$modelValue;
+
+          // We do all of this mapping instead of just `server[field]
+          // = newValue;` (the server arg is a reference to that
+          // element in the savedServers array) because we aren't
+          // doing speculative updates, and we want the same behavior
+          // for both edits and deletes.
+          saveServers(vm.savedServers.map(function (s) {
+            if (s.name === server.name) {
+              var newProps = {};
+              newProps[field] = newValue;
+              return angular.extend({}, server, newProps);
+            } else {
+              return s;
+            }
+          }));
+        },
+        targetEvent: e,
+        title: 'Edit ' + field,
+        validators: {
+          'md-maxlength': 30
+        }
+      }).then(function (ctrl) {
+
+      });
     };
 
     function receiveSettings(settings) {
