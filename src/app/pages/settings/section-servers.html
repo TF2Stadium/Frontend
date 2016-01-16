@@ -1,14 +1,21 @@
 <div class="settings-section">
   <h1>Saved servers</h1>
 
+  <span class="no-saved-servers"
+        ng-if="settings.savedServers.length === 0">
+    You have no saved servers.
+  </span>
+
   <md-button
      class="md-raised md-warn"
+     ng-if="settings.savedServers.length > 0"
      ng-click="settings.deleteSelectedServers()"
      ng-disabled="settings.selectedServerNames.length === 0">
     Delete selected
   </md-button>
 
-  <md-table-container>
+  <md-table-container
+     ng-if="settings.savedServers.length > 0">
     <table md-table
            md-row-select="true"
            ng-model="settings.selectedServerNames">

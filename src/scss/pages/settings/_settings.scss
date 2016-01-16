@@ -25,6 +25,12 @@
   }
 }
 
+.no-saved-servers {
+  font-style: italic;
+  display: block;
+  margin-bottom: $padding-medium;
+}
+
 .new-server-form {
   @include flex (row, space-between, center);
 
