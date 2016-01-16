@@ -38,18 +38,29 @@
         return '';
       }
 
+      function setPriority(x, f) {
+        f.priority = x;
+        return f;
+      }
+
+      function sortDescendingPriority(arr) {
+        return arr.sort(function (a, b) {
+          return a.priority < b.priority;
+        });
+      }
+
       function makeColonReplacer(imgHTML, name) {
         var regexpr = new RegExp(':' + regexSafe(name) + ':', 'g');
-        return function (str) {
+        return setPriority(name.length, function (str) {
           return str.replace(regexpr, imgHTML);
-        };
+        });
       }
 
       function makeShortcutReplacer(imgHTML, name) {
         var regexpr = new RegExp(regexSafe(name), 'g');
-        return function (str) {
+        return setPriority(name.length,function (str) {
           return str.replace(regexpr, imgHTML);
-        };
+        });
       }
 
       // Takes a emote descriptor (see app.config.js.template)
@@ -65,7 +76,10 @@
         return colons.concat(shortcuts);
       }
 
-      var replacements = flatten(Config.emotes.map(emoteDescriptorToReplacer));
+      var replacements =
+            sortDescendingPriority(
+              flatten(
+                Config.emotes.map(emoteDescriptorToReplacer)));
 
       return function emotesToHTML_impl(str) {
         return replacements.reduce(function (s, replaceFn) {
