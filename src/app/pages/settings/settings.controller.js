@@ -73,11 +73,15 @@
     vm.editServerField = function editServerField(e, server, field) {
       e.stopPropagation(); // prevent auto row-select
 
-      console.log('edit', e, server, field);
+      var validators = {
+        'md-maxlength': field === 'name'? 50:100
+      };
 
       $mdEditDialog.small({
         modelValue: server[field],
         placeholder: 'Edit ' + field,
+        targetEvent: e,
+        validators: validators,
         save: function (input) {
           var newValue = input.$modelValue;
 
@@ -95,15 +99,32 @@
               return s;
             }
           }));
-        },
-        targetEvent: e,
-        title: 'Edit ' + field,
-        validators: {
-          'md-maxlength': 30
         }
       }).then(function (ctrl) {
-
+        if (field === 'name') {
+          var input = ctrl.getInput();
+          input.$viewChangeListeners.push(function () {
+            var val = input.$modelValue;
+            var nameTaken = server[field] !== val && vm.serverNameAlreadyExists(val);
+            input.$setValidity('nameTaken', !nameTaken);
+          });
+        }
       });
+    };
+
+    vm.serverNameAlreadyExists = function (v) {
+      return vm.savedServers.filter(function (s) {
+        return s.name === v;
+      }).length > 0;
+    };
+
+    vm.newServerName = '';
+    vm.newServerAddress = '';
+    vm.saveNewServer = function saveNewServer() {
+      saveServers(vm.savedServers.concat({
+        name: vm.newServerName,
+        url: vm.newServerAddress
+      }));
     };
 
     function receiveSettings(settings) {

@@ -8,6 +8,7 @@
     'tf2stadium.filters',
     'ngAnimate',
     'ui.router',
+    'ui.validate',
     'ngMaterial',
     'md.data.table',
     'luegg.directives',
