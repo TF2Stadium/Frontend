@@ -35,5 +35,7 @@ function writeConfig(rawEmojis) {
     };
   });
 
-  process.stdout.write(JSON.stringify(config));
+  process.stdout.write(
+    JSON.stringify(
+      config.concat(require('./custom_emoji.js'))));
 }
