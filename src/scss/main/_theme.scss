@@ -144,6 +144,16 @@ $themes-list: (
       td, th, th.md-active, th.md-active md-icon {
         color: $text-color-hard;
       }
+
+      &.md-row-select {
+        tbody.md-body {
+          > tr.md-row:not([disabled]):hover,
+          > tr.md-selected {
+            // md-data-table marks this as important also...
+            background-color: $hover-color !important;
+          }
+        }
+      }
     }
 
     md-input-container {
