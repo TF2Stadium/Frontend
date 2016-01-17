@@ -143,14 +143,6 @@
       });
     };
 
-    function receiveSettings(settings) {
-      populateFilters(settings);
-      vm.soundVolume = settings.soundVolume;
-      vm.siteAlias = settings.siteAlias;
-
-      vm.savedServers = deserializeServers(settings.savedServers);
-    }
-
     function deserializeServers(str) {
       var serversObj = angular.fromJson(str);
       return Object.keys(serversObj).map(function (name) {
@@ -170,6 +162,16 @@
           return acc;
         }, {})
       );
+    }
+
+    function receiveSettings(settings) {
+      populateFilters(settings);
+      vm.soundVolume = settings.soundVolume;
+      vm.siteAlias = settings.siteAlias;
+
+      vm.savedServers = deserializeServers(settings.savedServers);
+
+      vm.emoteStyle = settings.emoteStyle;
     }
 
     Settings.getSettings(receiveSettings);

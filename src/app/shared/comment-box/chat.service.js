@@ -16,80 +16,75 @@
                        function (c) { return '\\' + c; });
   }
 
+  function makeEmotesTransformer(emotesConfig) {
+    var replacements =
+          sortDescendingPriority(
+            flatten(
+              emotesConfig.map(emoteDescriptorToReplacer)));
+
+    return function emotesToHTML_impl(str) {
+      return replacements.reduce(function (s, replaceFn) {
+        return replaceFn(s);
+      }, str);
+    };
+
+    function emoteDescriptorToHTML(desc) {
+      var imgDesc = desc.image;
+
+      if (imgDesc.type === 'img') {
+        return '<img class="emote" src="assets/img/emotes/' + imgDesc.src +
+          '" height="16" width="16"' +
+          ' alt="' + desc.names[0] +'" title="' + desc.names[0] + '" />' +
+          '<emote type="' + imgDesc.src + '"/>';
+      }
+      // TODO: other emote image sources (spritesheets, ...)
+
+      return '';
+    }
+
+    function setPriority(x, f) {
+      f.priority = x;
+      return f;
+    }
+
+    function sortDescendingPriority(arr) {
+      return arr.sort(function (a, b) {
+        return a.priority < b.priority;
+      });
+    }
+
+    function makeColonReplacer(imgHTML, name) {
+      var regexpr = new RegExp(':' + regexSafe(name) + ':', 'g');
+      return setPriority(name.length, function (str) {
+        return str.replace(regexpr, imgHTML);
+      });
+    }
+
+    function makeShortcutReplacer(imgHTML, name) {
+      var regexpr = new RegExp(regexSafe(name), 'g');
+      return setPriority(name.length,function (str) {
+        return str.replace(regexpr, imgHTML);
+      });
+    }
+
+    // Takes a emote descriptor (see app.config.js.template)
+    function emoteDescriptorToReplacer(desc) {
+      var imgHTML = emoteDescriptorToHTML(desc);
+
+      var colons = angular.isArray(desc.names)? desc.names : [];
+      colons = colons.map(makeColonReplacer.bind(null, imgHTML));
+
+      var shortcuts = angular.isArray(desc.shortcuts)? desc.shortcuts : [];
+      shortcuts = shortcuts.map(makeShortcutReplacer.bind(null, imgHTML));
+
+      return colons.concat(shortcuts);
+    }
+  }
+
   /** @ngInject */
-  function ChatService($rootScope, $sce, $log,
-                       Websocket, LobbyService, Config, Notifications) {
-
-    // takes a string and replaces emotes strings with appropriate
-    // HTML elements
-    var emotesToHTML = (function () {
-      function emoteDescriptorToHTML(desc) {
-        var imgDesc = desc.image;
-
-        if (imgDesc.type === 'img') {
-          return '<img class="emote" src="assets/img/emotes/' + imgDesc.src +
-            '" height="16" width="16"' +
-            ' alt="' + desc.names[0] +'" title="' + desc.names[0] + '" />';
-        }
-        // TODO: other emote image sources (spritesheets, ...)
-
-        $log.error('Unknown emote type: ' + desc.type + ' in descriptor:',
-                      desc);
-        return '';
-      }
-
-      function setPriority(x, f) {
-        f.priority = x;
-        return f;
-      }
-
-      function sortDescendingPriority(arr) {
-        return arr.sort(function (a, b) {
-          return a.priority < b.priority;
-        });
-      }
-
-      function makeColonReplacer(imgHTML, name) {
-        var regexpr = new RegExp(':' + regexSafe(name) + ':', 'g');
-        return setPriority(name.length, function (str) {
-          return str.replace(regexpr, imgHTML);
-        });
-      }
-
-      function makeShortcutReplacer(imgHTML, name) {
-        var regexpr = new RegExp(regexSafe(name), 'g');
-        return setPriority(name.length,function (str) {
-          return str.replace(regexpr, imgHTML);
-        });
-      }
-
-      // Takes a emote descriptor (see app.config.js.template)
-      function emoteDescriptorToReplacer(desc) {
-        var imgHTML = emoteDescriptorToHTML(desc);
-
-        var colons = angular.isArray(desc.names)? desc.names : [];
-        colons = colons.map(makeColonReplacer.bind(null, imgHTML));
-
-        var shortcuts = angular.isArray(desc.shortcuts)? desc.shortcuts : [];
-        shortcuts = shortcuts.map(makeShortcutReplacer.bind(null, imgHTML));
-
-        return colons.concat(shortcuts);
-      }
-
-      var replacements =
-            sortDescendingPriority(
-              flatten(
-                Config.emotes.map(emoteDescriptorToReplacer)));
-
-      return function emotesToHTML_impl(str) {
-        return replacements.reduce(function (s, replaceFn) {
-          return replaceFn(s);
-        }, str);
-      };
-    })();
-
-    var factory = {};
-
+  function ChatService($rootScope, $sce, $log, $http, $q,
+                       Websocket, LobbyService, Config,
+                       Notifications, Settings) {
     // Persistent map of room id -> messages list
     var chatRoomLogs = Object.create(null);
     function getChatRoom(id) {
@@ -123,6 +118,48 @@
 
     var rooms = [globalChatRoom, joinedChatRoom, spectatedChatRoom];
 
+
+    // takes a string and replaces emotes strings with appropriate
+    // HTML elements
+    var emotesToHTML = makeEmotesTransformer([]);
+
+    function trustEmotesAsHTML(s) {
+      return $sce.trustAsHtml(emotesToHTML(s));
+    }
+
+    function reapplyEmotes() {
+      Object.keys(chatRoomLogs).map(function (roomId) {
+        chatRoomLogs[roomId].forEach(function (m) {
+          m.message = trustEmotesAsHTML(m.rawMessage);
+        });
+      });
+    }
+
+    function loadSettings(settings) {
+      var promise;
+
+      if (settings.emoteStyle === 'none') {
+        promise = $q.when({data: []});
+      } else {
+        promise = $http.get('/assets/' + settings.emoteStyle + '.json');
+      }
+
+      promise.then(function (data) {
+        emotesToHTML = makeEmotesTransformer(data.data);
+        reapplyEmotes();
+      });
+    }
+
+    Settings.getSettings(loadSettings);
+
+    /* the angular/on-watch warning doesn't apply to services */
+    /*eslint-disable angular/on-watch */
+    $rootScope.$on('settings-updated', function () {
+      Settings.getSettings(loadSettings);
+    });
+
+
+    var factory = {};
     factory.getRooms = function () {
       return rooms;
     };
@@ -134,8 +171,6 @@
       });
     };
 
-    /*eslint-disable angular/on-watch */
-    /* the angular/on-watch warning doesn't apply to services */
     $rootScope.$on('lobby-joined', function () {
       joinedChatRoom.changeRoom(LobbyService.getLobbyJoinedId());
     });
@@ -149,10 +184,11 @@
     });
 
     Websocket.onJSON('chatReceive', function (message) {
-      var msg = message.message;
-      msg = xssFilters.inHTMLData(msg);
-      msg = emotesToHTML(msg);
-      message.message = $sce.trustAsHtml(msg);
+      var msg = xssFilters.inHTMLData(message.message);
+
+      message.rawMessage = msg;
+      message.message = trustEmotesAsHTML(msg);
+
       message.timestamp = new Date(message.timestamp * 1000);
 
       var log = getChatRoom(message.room);

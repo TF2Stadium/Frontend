@@ -8,7 +8,6 @@
 
   /** @ngInject */
   function SettingsConfigBlock(SettingsProvider) {
-
     SettingsProvider.constants.filters = {
       regions: {
         eu:             {name: 'Europe'},
@@ -66,13 +65,19 @@
       none:     {name: 'None'}
     };
 
+    SettingsProvider.constants.emoteStyle = {
+      emojione: {name: 'EmojiOne'},
+      none:     {name: 'None'}
+    };
+
     SettingsProvider.constants.sound = {
-      soundVolume:      {name: 'Notifications volume'}
+      soundVolume: {name: 'Notifications volume'}
     };
 
     function setDefaultValues() {
       SettingsProvider.settings.currentTheme = 'default-theme';
       SettingsProvider.settings.timestamps = 'hours12';
+      SettingsProvider.settings.emoteStyle = 'emojione';
       SettingsProvider.settings.animationLength = 'animation-normal';
       SettingsProvider.settings.savedServers = '{}';
 

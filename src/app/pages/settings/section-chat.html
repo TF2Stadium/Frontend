@@ -1,0 +1,25 @@
+<div class="settings-section">
+  <h1>Timestamps</h1>
+  <md-radio-group
+     ng-model="$root.currentTimestampsOption"
+     ng-change="settings.saveSetting('timestamps', $root.currentTimestampsOption)">
+    <md-radio-button
+       ng-repeat="(key, opt) in settings.sections.chat.timestamps track by opt.name"
+       ng-value="key">
+      {{opt.name}}
+    </md-radio-button>
+  </md-radio-group>
+</div>
+
+<div class="settings-section">
+  <h1>Emote Styles</h1>
+  <md-radio-group
+     ng-model="settings.emoteStyle"
+     ng-change="settings.saveSetting('emoteStyle', settings.emoteStyle)">
+    <md-radio-button
+       ng-repeat="(key, opt) in settings.sections.chat.emotes track by opt.name"
+       ng-value="key">
+      {{opt.name}}
+    </md-radio-button>
+  </md-radio-group>
+</div>
