@@ -134,16 +134,20 @@
     }
 
     function makeColonReplacer(imgHTML, name) {
-      var regexpr = new RegExp('\s+:' + regexSafe(name) + ':(\s|$)', 'g');
+      var regexpr = new RegExp('(\\s|^):' + regexSafe(name) + ':(\\s|$)', 'g');
       return setPriority(name.length, function (str) {
-        return str.replace(regexpr, imgHTML);
+        return str.replace(regexpr, function (matched, leadingWhitespace) {
+          return leadingWhitespace + imgHTML;
+        });
       });
     }
 
     function makeShortcutReplacer(imgHTML, name) {
-      var regexpr = new RegExp('\s' + regexSafe(name) + '(\s|$)', 'g');
+      var regexpr = new RegExp('(\\s|^)' + regexSafe(name) + '(?=\\s|$)', 'g');
       return setPriority(name.length,function (str) {
-        return str.replace(regexpr, imgHTML);
+        return str.replace(regexpr, function (matched, leadingWhitespace) {
+          return leadingWhitespace + imgHTML;
+        });
       });
     }
 
@@ -218,7 +222,7 @@
 
           if (urlWhitelist.indexOf(domain) !== -1) {
             return leadingWhitespace +
-              '<a href="' + href + '" target="_blank">' + w + '</a>';
+              '<a href="' + encodeURI(href) + '" target="_blank">' + w + '</a>';
           }
         }
 
