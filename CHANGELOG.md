@@ -2,6 +2,9 @@
 
 ## [Unreleased]
 
+* Whitelisted links in chat are clickable
+* Emotes in chat :)
+
 ## [0.6.0-alpha] - 2016-1-12
 
 * Backend protocol updates

@@ -42,12 +42,14 @@
                   </md-menu-item>
                 </md-menu-content>
               </md-menu>
-              <span class="chat-message-text">{{message.message}}</span>
+              <span class="chat-message-text"
+                    ng-bind-html="message.message"></span>
             </div>
           </md-content>
         </md-tab-body>
       </md-tab>
     </md-tabs>
+
     <form name="chatForm">
       <!-- Yes, this md-is-error is almost the default invalid
       behavior, but a) we don't want an error if the field is empty,

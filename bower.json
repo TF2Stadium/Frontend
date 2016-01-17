@@ -15,7 +15,8 @@
     "clipboard": "~1.5.3",
     "wsevent.js": "~1.0.1",
     "angular-material-data-table": "~0.9.8",
-    "angular-ui-validate": "~1.2.2"
+    "angular-ui-validate": "~1.2.2",
+    "xss-filters": "~1.2.6"
   },
   "devDependencies": {
     "angular-mocks": "~1.4.7"

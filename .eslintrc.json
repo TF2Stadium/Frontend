@@ -2,7 +2,8 @@
   "globals": {
     "angular": false,
     "Socket": false,
-    "Clipboard": false
+    "Clipboard": false,
+    "xssFilters": true
   },
   "rules": {
     "no-console": 0,
