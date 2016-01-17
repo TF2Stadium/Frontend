@@ -64,6 +64,13 @@ describe('Service: ChatService', function () {
       $provide.value('Websocket', mockWebsocket);
       $provide.value('LobbyService', mockLobbyService);
       $provide.value('Notifications', mockNotifications);
+      $provide.constant('Settings', {
+        getSettings: function (cb) {
+          cb({
+            emoteStyle: 'none'
+          });
+        }
+      });
       $provide.constant('Config', {
         emotes: [{
           names: ['smile', 'happy'],
