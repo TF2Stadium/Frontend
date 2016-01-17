@@ -7,27 +7,26 @@
       'api': 'http://localhost:8080'
     },
     'debug': true,
-    emotes: [{
-      // Names that can be used in :emoteName: syntax
-      names: ['smile', 'happy'],
-      // (Optional) short character sequences that can be used other
-      // than the double colon syntax
-      shortcuts: [':)', '(:', '=)'],
-      // Where to load the emote from. Can be a separate image file,
-      // or (TODO) description of a spritesheet and CSS options.
-      // image names are relative to assets/img/emotes/
-      image: {
-        type: 'img',
-        src: 'smile.png'
-      }
-    },{
-      names: ['frown', 'sad'],
-      shortcuts: [':(', '):', '=('],
-      image: {
-        type: 'img',
-        src: 'frown.png'
-      }
-    }]
+    'allowedChatDomains': [
+      'logs.tf',
+      'teamfortress.tv',
+      'teamfortress.com',
+      'imgur.com',
+      'bball.tf',
+      'jump.tf',
+      'twitch.tv',
+      'tf2stadium.com',
+      'tragicservers.com',
+      'playcomp.tf',
+      'etf2l.com',
+      'ugcleague.com',
+      'esea.com',
+      'esea.net',
+      'asiafortress.com',
+      'ozfortress.com',
+      'tf2center.com',
+      'tf2lobby.com'
+    ]
   });
 
 })();
