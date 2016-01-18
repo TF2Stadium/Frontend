@@ -5,6 +5,7 @@
 * Add option for admins and mods to delete chat messages
 * Whitelisted links in chat are clickable
 * Emotes in chat :)
+* Increase max chat message length to 150
 
 ## [0.6.0-alpha] - 2016-1-12
 
