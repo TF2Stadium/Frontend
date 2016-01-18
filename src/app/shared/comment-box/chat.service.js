@@ -213,12 +213,15 @@
         var url = urlRegex.exec(w);
         if (url) {
           var leadingWhitespace = url[1];
-          var domain = url[2];
 
           var href = url[0].trim();
           if (href.indexOf('http') !== 0) {
             href = 'http://' + href;
           }
+
+          // Whitelist check based on the domain name + TLD; ignore
+          // sub domains
+          var domain = url[2].split('.').splice(-2).join('.');
 
           if (urlWhitelist.indexOf(domain) !== -1) {
             return leadingWhitespace +
