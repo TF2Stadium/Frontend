@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+* Add option for admins and mods to delete chat messages
 * Whitelisted links in chat are clickable
 * Emotes in chat :)
 

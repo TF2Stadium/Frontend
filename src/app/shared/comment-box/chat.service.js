@@ -282,6 +282,15 @@
       });
     };
 
+    factory.deleteMessage = function (messageID, room) {
+      var payload = {
+        'id': messageID,
+        'room': room
+      };
+
+      Websocket.emitJSON('chatDelete', payload);
+    };
+
     $rootScope.$on('lobby-joined', function () {
       joinedChatRoom.changeRoom(LobbyService.getLobbyJoinedId());
     });
@@ -316,7 +325,7 @@
           insertIdx++;
         }
         if (log[insertIdx].id === message.id) {
-          // Same message id? Overwrite the logged message
+          // Same message id: Overwrite the logged message
           log[insertIdx] = message;
         } else {
           // else insert it into the array (yeah, splice is far from

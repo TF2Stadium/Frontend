@@ -13,19 +13,18 @@
               ng-if="room.id > -1">
         <md-tab-label>
           {{room.messages.length > 0
-            && room.messages[room.messages.length - 1].id > commentBox.lastSeenIds[room.id]?
+          && room.messages[room.messages.length - 1].id > commentBox.lastSeenIds[room.id]?
           '*' : ''}}
           {{room.id === 0?
-             'CHAT' : ((room.joined? 'YOUR':'THIS') + ' Lobby #' + room.id)}}
+          'CHAT' : ((room.joined? 'YOUR':'THIS') + ' Lobby #' + room.id)}}
         </md-tab-label>
         <md-tab-body>
           <md-content scroll-glue>
             <div ng-repeat="message in room.messages track by $index"
                  class="chat-message">
               <span class="chat-message-time"
-                    ng-if="message.player.steamid != room.messages[$index-1].player.steamid && $root.currentTimestampsOption !== 'none'">{{message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:mm')}}</span>
-              <md-menu
-                 ng-if="message.player.steamid != room.messages[$index-1].player.steamid">
+                    ng-if="$root.currentTimestampsOption !== 'none'">{{message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:mm')}}</span>
+              <md-menu>
                 <md-button
                    class="chat-player-name"
                    ng-class="[message.player.tags]"
@@ -40,9 +39,17 @@
                       Steam profile
                     </md-button>
                   </md-menu-item>
+		              <md-menu-item
+                     ng-if="($root.userProfile.role=='moderator' || $root.userProfile.role=='administrator') && !message.deleted">
+		                <md-button
+		                   ng-click="commentBox.deleteMessage(message)">
+		                  Delete Message
+		                </md-button>
+		              </md-menu-item>
                 </md-menu-content>
               </md-menu>
-              <span class="chat-message-text"
+              <span ng-class="{'chat-message-text':true,
+                               'chat-message-deleted':message.deleted}"
                     ng-bind-html="message.message"></span>
             </div>
           </md-content>
@@ -52,11 +59,11 @@
 
     <form name="chatForm">
       <!-- Yes, this md-is-error is almost the default invalid
-      behavior, but a) we don't want an error if the field is empty,
-      and b) without explicitly specifying it, the md-input-container
-      won't be marked invalid until it has been touched (focused and
-      blurred) at least once. See:
-      https://github.com/angular/material/issues/1330 -->
+           behavior, but a) we don't want an error if the field is empty,
+           and b) without explicitly specifying it, the md-input-container
+           won't be marked invalid until it has been touched (focused and
+           blurred) at least once. See:
+           https://github.com/angular/material/issues/1330 -->
       <md-input-container
          md-is-error="chatForm.chatMessage.$error['md-maxlength']">
         <label for="chatMessage">Type your message</label>
