@@ -309,9 +309,7 @@
       message.rawMessage = msg;
       message.message = trustEmotesAsHTML(msg);
 
-      if (!message.deleted){
-        message.timestamp = new Date(message.timestamp * 1000);
-      }
+      message.timestamp = new Date(message.timestamp * 1000);
 
       var log = getChatRoom(message.room);
 
@@ -327,7 +325,7 @@
           insertIdx++;
         }
         if (log[insertIdx].id === message.id) {
-          // Same message id? Overwrite the logged message
+          // Same message id: Overwrite the logged message
           log[insertIdx] = message;
         } else {
           // else insert it into the array (yeah, splice is far from
