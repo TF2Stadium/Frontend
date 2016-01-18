@@ -23,9 +23,8 @@
             <div ng-repeat="message in room.messages track by $index"
                  class="chat-message">
               <span class="chat-message-time"
-                    ng-if="message.player.steamid != room.messages[$index-1].player.steamid && $root.currentTimestampsOption !== 'none'">{{message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:mm')}}</span>
-              <md-menu
-                 ng-if="message.player.steamid != room.messages[$index-1].player.steamid">
+                    ng-if="$root.currentTimestampsOption !== 'none'">{{message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:mm')}}</span>
+              <md-menu>
                 <md-button
                    class="chat-player-name"
                    ng-class="[message.player.tags]"
@@ -40,6 +39,12 @@
                       Steam profile
                     </md-button>
                   </md-menu-item>
+		  <md-menu-item ng-if="($root.userProfile.role=='moderator' || $root.userProfile.role=='administrator') && !message.deleted">
+		    <md-button
+		      ng-click="commentBox.deleteMessage(message)">
+		      Delete Message
+		    </md-button>
+		  </md-menu-item>
                 </md-menu-content>
               </md-menu>
               <span class="chat-message-text"
