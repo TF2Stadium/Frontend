@@ -282,6 +282,17 @@
       });
     };
 
+    factory.deleteMessage = function (messageID, room) {
+      var payload = {
+	  'id': messageID,
+	  'room': room
+      };
+
+      Websocket.emitJSON('chatDelete', payload, function (response) {
+
+      });
+    };
+
     $rootScope.$on('lobby-joined', function () {
       joinedChatRoom.changeRoom(LobbyService.getLobbyJoinedId());
     });
