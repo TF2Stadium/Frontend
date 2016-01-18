@@ -311,7 +311,9 @@
       message.rawMessage = msg;
       message.message = trustEmotesAsHTML(msg);
 
-      message.timestamp = new Date(message.timestamp * 1000);
+      if (!message.deleted){
+          message.timestamp = new Date(message.timestamp * 1000);
+      }
 
       var log = getChatRoom(message.room);
 
