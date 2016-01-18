@@ -81,8 +81,8 @@
       $window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };
 
-    vm.deleteMessage = function(message) {
-      ChatService.deleteMessage(message.id, message.room)
+    vm.deleteMessage = function (message) {
+      ChatService.deleteMessage(message.id, message.room);
     };
   }
 })();

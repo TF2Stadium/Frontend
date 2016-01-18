@@ -284,13 +284,11 @@
 
     factory.deleteMessage = function (messageID, room) {
       var payload = {
-	  'id': messageID,
-	  'room': room
+        'id': messageID,
+        'room': room
       };
 
-      Websocket.emitJSON('chatDelete', payload, function (response) {
-
-      });
+      Websocket.emitJSON('chatDelete', payload);
     };
 
     $rootScope.$on('lobby-joined', function () {
@@ -312,7 +310,7 @@
       message.message = trustEmotesAsHTML(msg);
 
       if (!message.deleted){
-          message.timestamp = new Date(message.timestamp * 1000);
+        message.timestamp = new Date(message.timestamp * 1000);
       }
 
       var log = getChatRoom(message.room);
