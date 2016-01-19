@@ -102,10 +102,10 @@
               '6s': true,
               highlander: true
             },{
-              value: 'cp_metalworks_rc5',
+              value: 'cp_metalworks_rc7',
               '6s': true
             },{
-              value: 'cp_sunshine_rc7',
+              value: 'cp_sunshine_rc9',
               '6s': true,
               highlander: true
             },{
@@ -229,52 +229,52 @@
           filterable: true,
           options: [
             {
-              value: 3250,
-              title: 'ETF2L Highlander (Season 8)',
+              value: 'ETF2L_9v9',
+              title: 'ETF2L Highlander',
               etf2l: true,
               highlander: true
             },{
-              value: 4498,
-              title: 'ETF2L 6v6 (Season 22)',
+              value: 'ETF2L_6v6',
+              title: 'ETF2L 6v6',
               etf2l: true,
               '6s': true
             },{
-              value: 3951,
-              title: 'UGC Highlander (Season 16)',
+              value: 'UGC_9v9',
+              title: 'UGC Highlander',
               ugc: true,
               highlander: true
             },{
-              value: 4559,
-              title: 'UGC 6v6 (Season 19)',
+              value: 'UGC_6v6',
+              title: 'UGC 6v6',
               ugc: true,
               '6s': true
             },{
-              value: 3771,
-              title: 'UGC 4v4 (Season 16)',
+              value: 'UGC_4v4',
+              title: 'UGC 4v4',
               ugc: true,
               '4v4': true
             },{
-              value: 3688,
-              title: 'ESEA 6v6 (Season 19)',
+              value: 'ESEA_6v6',
+              title: 'ESEA 6v6',
               esea: true,
               '6s': true
             },{
-              value: 4034,
-              title: 'ozfortress 6v6 (OWL 14)',
+              value: 'ozfortress_6v6',
+              title: 'ozfortress 6v6',
               ozfortress: true,
               '6s': true
             },{
-              value: 3872,
-              title: 'AsiaFortress 6v6 (Season 9)',
+              value: 'AsiaFortress_6v6',
+              title: 'AsiaFortress 6v6',
               asia: true,
               '6s': true
             },{
-              value: 3312,
+              value: 'ETF2L_ultiduo',
               title: 'ETF2L Ultiduo',
               etf2l: true,
               ultiduo: true
             },{
-              value: 3759,
+              value: 'ETF2L_bball',
               title: 'ETF2L BBall',
               etf2l: true,
               bball: true
@@ -302,7 +302,10 @@
         }
       };
 
-      lobbyCreateService.settings = {};
+      lobbyCreateService.settings = {
+        server: '',
+        rconpwd: ''
+      };
 
       var deleteSetting = function (key) {
         delete lobbyCreateService.settings[key];

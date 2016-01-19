@@ -3,35 +3,51 @@
 describe('Service: ChatService', function () {
   'use strict';
 
-  function makeTestMessage() {
+  function makeTestPlayer(p) {
+    return {
+      avatar: '',
+      gameHours: 1201 + p*100,
+      lobbiesPlayed: 0,
+      name: 'player' + p,
+      profileUrl: '',
+      role: '',
+      steamid: '' + p,
+      tags: ['player']
+    };
+  }
+
+  function makeTestMessage(n, p) {
+    // n is a way to order messages,
+    // p lets us test multiple players
     // The chat service may mutate the received object, so use a
     // factory like this to make the tests are truly isolated
+    if (angular.isUndefined(n)) {
+      n = 1;
+    }
+    if (angular.isUndefined(p)) {
+      p = 1;
+    }
     return {
-      id: 1,
-      message: 'hi',
+      id: n,
+      message: 'hi' + n,
       room: 0,
-      timestamp: 1449001384,
-      player: {
-        avatar: '',
-        gameHours: 1201,
-        lobbiesPlayed: 0,
-        name: 'test',
-        profileUrl: '',
-        role: '',
-        steamid: '123',
-        tags: ['player']
-      }
+      timestamp: 1449001384 + n*1000,
+      player: makeTestPlayer(p)
     };
   }
 
   var ChatService, $rootScope;
-  var mockWebsocket, mockLobbyService;
+  var mockWebsocket, mockLobbyService, mockNotifications;
+
+  var onJSONCallbacks = {};
 
   beforeEach(function () {
-    mockWebsocket = sinon.stub({
-      onJSON: function () {},
-      emitJSON: function () {}
-    });
+    mockWebsocket = {
+      onJSON: sinon.spy(function (eventName, callback) {
+        onJSONCallbacks[eventName] = callback;
+      }),
+      emitJSON: sinon.spy(function () {})
+    };
 
     mockLobbyService = sinon.stub({
       getLobbySpectatedId: function () { return -1; },
@@ -40,9 +56,38 @@ describe('Service: ChatService', function () {
       getLobbySpectated: function () { return undefined; }
     });
 
+    mockNotifications = sinon.stub({
+      titleNotification: function () { return undefined; }
+    });
+
     module('tf2stadium.services', function ($provide) {
       $provide.value('Websocket', mockWebsocket);
       $provide.value('LobbyService', mockLobbyService);
+      $provide.value('Notifications', mockNotifications);
+      $provide.constant('Settings', {
+        getSettings: function (cb) {
+          cb({
+            emoteStyle: 'none'
+          });
+        }
+      });
+      $provide.constant('Config', {
+        emotes: [{
+          names: ['smile', 'happy'],
+          shortcuts: [':)', '(:', '=)'],
+          image: {
+            type: 'img',
+            src: 'smile.png'
+          }
+        },{
+          names: ['frown', 'sad'],
+          shortcuts: [':(', '):', '=('],
+          image: {
+            type: 'img',
+            src: 'frown.png'
+          }
+        }]
+      });
     });
 
     inject(function (_ChatService_, _$rootScope_) {
@@ -62,10 +107,7 @@ describe('Service: ChatService', function () {
   it('should emit one chat-message event after each chatReceive', function () {
     sinon.stub($rootScope, '$emit');
 
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
+    var onChatReceive = onJSONCallbacks['chatReceive'];
 
     expect(onChatReceive).to.be.a('function');
 
@@ -81,12 +123,7 @@ describe('Service: ChatService', function () {
   });
 
   it('should log chat messages', function () {
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
-
-    expect(onChatReceive).to.be.a('function');
+    var onChatReceive = onJSONCallbacks['chatReceive'];
 
     var msg = makeTestMessage();
     onChatReceive(msg);
@@ -96,21 +133,11 @@ describe('Service: ChatService', function () {
   });
 
   it('should log chat messages ordered by id', function () {
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
+    var onChatReceive = onJSONCallbacks['chatReceive'];
 
-    expect(onChatReceive).to.be.a('function');
-
-    var msg1 = makeTestMessage();
-    msg1.id = 1;
-
-    var msg2 = makeTestMessage();
-    msg2.id = 2;
-
-    var msg3 = makeTestMessage();
-    msg3.id = 3;
+    var msg1 = makeTestMessage(1);
+    var msg2 = makeTestMessage(2);
+    var msg3 = makeTestMessage(3);
 
     // Note the wrong order
     onChatReceive(msg3);
@@ -124,25 +151,14 @@ describe('Service: ChatService', function () {
   });
 
   it('should clear a room\'s log on chatHistoryClear', function () {
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
-
-    var onChatHistoryClear = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatHistoryClear';
-    })[0][1];
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+    var onChatHistoryClear = onJSONCallbacks['chatHistoryClear'];
 
     expect(onChatHistoryClear).to.be.a('function');
 
-    var msg1 = makeTestMessage();
-    msg1.id = 1;
-
-    var msg2 = makeTestMessage();
-    msg2.id = 2;
-
-    var msg3 = makeTestMessage();
-    msg3.id = 3;
+    var msg1 = makeTestMessage(1);
+    var msg2 = makeTestMessage(2);
+    var msg3 = makeTestMessage(3);
 
     onChatReceive(msg1);
     onChatReceive(msg2);
@@ -156,26 +172,12 @@ describe('Service: ChatService', function () {
   });
 
   it('should overwrite messages with the same id in the same room', function () {
-    var onJSONcalls = mockWebsocket.onJSON.args;
-    var onChatReceive = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatReceive';
-    })[0][1];
+    var onChatReceive = onJSONCallbacks['chatReceive'];
 
-    var onChatHistoryClear = onJSONcalls.filter(function (args) {
-      return args[0] === 'chatHistoryClear';
-    })[0][1];
-
-    expect(onChatHistoryClear).to.be.a('function');
-
-    var msg1 = makeTestMessage();
-    msg1.id = 1;
-
-    var msg2 = makeTestMessage();
-    msg2.id = 2;
-
-    var msg3 = makeTestMessage();
+    var msg1 = makeTestMessage(1);
+    var msg2 = makeTestMessage(2);
+    var msg3 = makeTestMessage(3);
     msg3.id = 1;
-    msg3.message = msg1.message + 'unique';
 
     onChatReceive(msg1);
     onChatReceive(msg2);
@@ -184,5 +186,92 @@ describe('Service: ChatService', function () {
     expect(ChatService.getRooms()[0].messages.length).to.equal(2);
 
     expect(ChatService.getRooms()[0].messages[0].message).to.equal(msg3.message);
+  });
+
+  it('should track joined chat rooms', function () {
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+
+    var joinedRoomId = 5;
+    mockLobbyService.getLobbyJoinedId.returns(joinedRoomId);
+    $rootScope.$emit('lobby-joined');
+
+    var msg = makeTestMessage(1);
+    msg.room = joinedRoomId + 1;
+
+    onChatReceive(msg);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(0);
+
+    var msg2 = makeTestMessage(2);
+    msg2.room = joinedRoomId;
+
+    onChatReceive(msg2);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(1);
+  });
+
+  it('should track spectated chat rooms', function () {
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+
+    var spectatedRoomId = 5;
+    mockLobbyService.getLobbySpectatedId.returns(spectatedRoomId);
+    $rootScope.$emit('lobby-spectated-changed');
+
+    var msg = makeTestMessage(1);
+    msg.room = spectatedRoomId + 1;
+
+    onChatReceive(msg);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[2].messages.length).to.equal(0);
+
+    var msg2 = makeTestMessage(2);
+    msg2.room = spectatedRoomId;
+
+    onChatReceive(msg2);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[2].messages.length).to.equal(1);
+  });
+
+  it('should leave and join chatrooms', function () {
+    var onChatReceive = onJSONCallbacks['chatReceive'];
+
+    var joinedRoomId = 1;
+    mockLobbyService.getLobbyJoinedId.returns(joinedRoomId);
+    $rootScope.$emit('lobby-joined');
+
+    var msg = makeTestMessage(1);
+    msg.room = joinedRoomId;
+
+    onChatReceive(msg);
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(1);
+
+    $rootScope.$emit('lobby-left');
+
+    expect(ChatService.getRooms()[0].messages.length).to.equal(0);
+    expect(ChatService.getRooms()[1].messages.length).to.equal(0);
+  });
+
+  it('should send chat messages to rooms', function () {
+    var roomId = 123;
+    var message = 'asdfasdf';
+
+    ChatService.send(message, roomId);
+
+    expect(mockWebsocket.emitJSON).to.be.calledOnce;
+    expect(mockWebsocket.emitJSON).to.be.calledWith(
+      'chatSend',
+      sinon.match({
+        message: message,
+        room: roomId
+      })
+    );
   });
 });

@@ -59,6 +59,9 @@ a {
   font-size: 12px;
 }
 
+.chat-message-deleted {
+  font-style: italic;
+}
 
 /* ==================================
             LOBBY LIST
@@ -130,4 +133,12 @@ a {
 
 .toast {
   font-size: 14px;
+}
+
+/* ==================================
+           SETTINGS
+   ================================== */
+
+.no-saved-servers {
+  font-style: italic;
 }

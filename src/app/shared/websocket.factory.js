@@ -11,7 +11,7 @@
     var socket = null;
 
     var asyncAngularify = function (callback) {
-      return function () {
+      return function asyncAngularifedFn() {
         var args = arguments;
         $timeout(function () {
           callback.apply(null, args);
@@ -66,7 +66,8 @@
           $log.log('WebSocket reconnecting');
           reconnecting = true;
           socket.connect();
-        }
+        },
+        hideDelay: 0
       });
     };
 
@@ -159,10 +160,6 @@
           deregister();
         });
       }
-    };
-
-    factory.isInitialized = function () {
-      return connected;
     };
 
     return factory;

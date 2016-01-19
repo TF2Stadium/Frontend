@@ -1,20 +1,20 @@
 (function () {
   'use strict';
 
-
-  angular.module('tf2stadium')
+  angular.module('tf2stadium.filters')
     .filter('capitalize', capitalize)
     .filter('reverse', reverse)
     .filter('trusted', trusted)
-    .filter('slotNameToClassName', slotNameToClassName)
     .filter('stripSlotNameNumber', stripSlotNameNumber)
+    .filter('slotNameToClassName', slotNameToClassName)
+    .filter('ifNumeric', ifNumeric)
     .filter('secondsToMinutes', secondsToMinutes)
     .filter('unique', unique);
 
   /** @ngInject */
   function capitalize() {
     return function (input) {
-      if(typeof input === 'undefined' || input === '') {
+      if (angular.isUndefined(input) || input === '') {
         return input;
       }
       return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
@@ -60,6 +60,19 @@
       }
 
       return className;
+    };
+  }
+
+  /** @ngInject */
+  function ifNumeric() {
+    return function (str, out) {
+      // only intended for string inputs, and only intended to output
+      // 'out' if the string represents an integer
+      if (angular.isNumber(str) || /^\d+$/.test(str)) {
+        return out;
+      } else {
+        return '';
+      }
     };
   }
 

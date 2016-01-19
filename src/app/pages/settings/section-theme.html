@@ -9,14 +9,13 @@
   </md-radio-group>
 </div>
 <div class="settings-section">
-  <h1>Chat</h1>
-  <h2>Timestamps</h2>
+  <h1>Animations</h1>
   <md-radio-group
-     ng-model="$root.currentTimestampsOption"
-     ng-change="settings.saveSetting('timestamps', $root.currentTimestampsOption)">
+     ng-model="$root.animationLength"
+     ng-change="settings.saveSetting('animationLength', $root.animationLength)">
     <md-radio-button
-       ng-repeat="(key, opt) in settings.sections.theme.timestamps track by opt.name"
-       ng-value="key">
+       ng-repeat="(key, opt) in settings.sections.theme.animationOptions track by opt.selector"
+       ng-value="opt.selector">
       {{opt.name}}
     </md-radio-button>
   </md-radio-group>

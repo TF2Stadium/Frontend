@@ -13,6 +13,7 @@ gulp.task('scripts', function () {
   return gulp.src(path.join(conf.paths.src, '/app/**/*.js'))
     .pipe($.eslint())
     .pipe($.eslint.format())
+    .pipe(conf.replaceConfig())
     .pipe(browserSync.reload({ stream: true }))
     .pipe($.size());
 });

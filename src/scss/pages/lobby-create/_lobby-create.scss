@@ -20,7 +20,7 @@
 
   .right {
     text-align: right;
-  }  
+  }
 
   .row {
     width: 100%;
@@ -64,19 +64,14 @@
   width: 100%;
   padding: $padding-small $padding-medium;
   z-index: 1;
-  @include animation(slide-from-top fade-in);
 
   md-input-container {
     display: block;
     margin: 0;
 
     input {
-      border-style: hidden;      
+      border-style: hidden;
     }
-  }
-
-  &.ng-leave {
-    @include animation(fade-out-top-height);
   }
 }
 
@@ -84,7 +79,6 @@ md-grid-tile.tile-card {
   @extend .sheet, .clickable;
   cursor: pointer;
   overflow: hidden;
-  @include animation(slide-from-top fade-in);
   transition: background-color .2s ease-out,
               box-shadow .2s ease-out,
               //now for the repositioning animations
@@ -125,10 +119,6 @@ md-grid-tile.tile-card {
     & > * {
       max-width: 350px;
     }
-  }
-
-  &.ng-leave {
-    @include animation(scale-out fade-out);
   }
 }
 
@@ -218,11 +208,26 @@ md-grid-tile.tile-card {
   @extend .sheet;
   padding: $padding-medium $padding-big * 2;
   z-index: 1;
-  @include animation(slide-from-top fade-in);
 
-  md-input-container {
+  md-select {
+    text-align: center;
+  }
+
+  md-select > md-select-value > span > .md-text,
+  md-select > md-select-value.md-select-placeholder {
+    // md-select isn't really intended for use with centered text, so
+    // we have to counteract the 32px down-arrow
+    padding-left: 32px;
+  }
+
+  span.save-server-form {
+    @include flex(column, center, center);
     width: 100%;
-    margin-top: 0;
+
+    md-input-container {
+      margin-bottom: 0;
+    }
+
   }
 
   input {
@@ -230,7 +235,21 @@ md-grid-tile.tile-card {
   }
 
   md-checkbox {
-    margin-top: 0;    
+    margin-top: 0;
+
+    // by default, all the but :last-of-type checkbox are given a //
+    // margin-right, but we're going for a vertical layout so we don't
+    // want that (since they'll be off center)
+    margin-right: 0;
+  }
+
+  md-input-container {
+    width: 100%;
+    margin-top: 0;
+
+    &.saved-servers {
+      text-align: center; // Centers the placeholder text
+    }
   }
 }
 
@@ -246,19 +265,5 @@ md-grid-tile.tile-card {
 
   span {
     padding: $padding-small;
-  }
-
-  &.ng-enter {
-    @include animation(slide-from-top-full, $delay: .3s);
-  }
-
-  &.ng-leave {
-    @include animation(slide-to-top-full, .3s);
-  }
-
-  &.ng-animate {
-    position: absolute;
-    right: 0;
-    left: 0;
   }
 }

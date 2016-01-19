@@ -1,5 +1,6 @@
 'use strict';
 
+var fs = require('fs');
 var path = require('path');
 var gulp = require('gulp');
 var conf = require('./conf');
@@ -42,7 +43,18 @@ function browserSyncInit(baseDir, browser) {
     startPath: '/',
     server: server,
     browser: browser,
-    middleware: [historyApiFallback()]
+    middleware: [
+      historyApiFallback(),
+      function (req, res, next) {
+        if (conf.shouldReplace(req.url)) {
+          var replaceWith = path.join(conf.paths.src, req.url + '.override');
+          if (fs.statSync(replaceWith).isFile()) {
+            req.url += '.override';
+          }
+        }
+        next();
+      }
+    ]
   });
 
 

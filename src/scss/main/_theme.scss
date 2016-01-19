@@ -122,7 +122,7 @@ $themes-list: (
      =======================================*/
 
     md-content {
-      background-color: initial;
+      background-color: $sheet-color;
       color: $text-color-medium;
     }
 
@@ -136,6 +136,24 @@ $themes-list: (
 
     md-tabs .md-tab:not(.md-active) {
       color: $text-color-medium;
+    }
+
+    table.md-table {
+      color: $text-color-hard;
+
+      td, th, th.md-active, th.md-active md-icon {
+        color: $text-color-hard;
+      }
+
+      &.md-row-select {
+        tbody.md-body {
+          > tr.md-row:not([disabled]):hover,
+          > tr.md-selected {
+            // md-data-table marks this as important also...
+            background-color: $hover-color !important;
+          }
+        }
+      }
     }
 
     md-input-container {
@@ -171,9 +189,18 @@ $themes-list: (
         background-color: $main-color;
       }
 
+      &.md-warn {
+        background-color: $warn-color;
+      }
+
       &.md-focused, &:hover {
         background-color: $hover-color;
       }
+    }
+
+    .md-button.md-raised[disabled] {
+      //material-angular likes to add !important clauses
+      color: $text-color-light !important;
     }
 
     md-checkbox .md-icon {
@@ -190,6 +217,12 @@ $themes-list: (
 
     md-menu-content {
       background-color: $sheet-color;
+    }
+
+    md-select md-select-value,
+    md-select md-select-value.md-select-placeholder {
+      border-color: $text-color-light;
+      color: $text-color-light;
     }
 
 

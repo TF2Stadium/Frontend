@@ -62,7 +62,7 @@ $full-width:              1200px;
 $content-width:           850px;
 //$split-width:             20px;
 $left-sidebar-width:      175px;
-$padding-big:             50px;
+$padding-big:             40px;
 $padding-medium:          20px;
 $padding-small:           $padding-medium / 2;
 
@@ -82,6 +82,10 @@ $current-lobby-top:       $padding-medium;
 //Toasts
 $toast-height:            50px;
 $toast-top:               ($commentbox-top - $toast-height) / 2 + $navbar-height;
+
+//Animations
+$animation-duration-default:    0.2s;
+$animation-stagger-default:     0.05s;
 
 
 /*======================================

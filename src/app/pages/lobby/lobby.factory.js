@@ -98,6 +98,7 @@
       }
 
       preReadyUpTimer = 180;
+      $interval.cancel(preReadyUpInterval);
 
       preReadyUpInterval = $interval(function () {
         preReadyUpTimer--;
@@ -285,12 +286,17 @@
     });
 
     Websocket.onJSON('subListData', function (data) {
-      factory.subList = data.data;
+      factory.subList = data;
       $rootScope.$emit('sub-list-updated');
     });
 
     Websocket.onJSON('lobbyListData', function (data) {
-      factory.lobbyList = data.lobbies;
+      if (angular.isArray(data)) {
+        factory.lobbyList = data;
+      } else {
+        factory.lobbyList = data.lobbies;
+      }
+
       $rootScope.$emit('lobby-list-updated');
 
       if (factory.lobbyJoinedId === -1) {
@@ -321,6 +327,7 @@
     Websocket.onJSON('lobbyJoined', function (data) {
       factory.lobbyJoinedId = data.id;
       factory.lobbyJoined = data;
+      factory.setPlayerPreReady(true);
       $rootScope.$emit('lobby-joined');
       $rootScope.$emit('lobby-joined-updated');
     });
@@ -329,6 +336,7 @@
       factory.lobbyJoinedId = -1;
       factory.lobbyJoined = {};
       factory.lobbyJoinInformation = {};
+      factory.setPlayerPreReady(false);
       $rootScope.$emit('lobby-joined-updated');
       $rootScope.$emit('lobby-left');
     });

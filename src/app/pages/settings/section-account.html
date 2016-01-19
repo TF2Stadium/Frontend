@@ -1,7 +1,28 @@
-<div  class="settings-section">
+<div class="settings-section">
+  <h1>Site alias</h1>
+  <p>Set a name that will be displayed on the site instead of your steam one.</p>
+  <form name="siteAliasForm">
+    <md-input-container md-no-float>
+      <input
+         name="siteAlias"
+         ng-model="settings.siteAlias"
+         placeholder="Alias"
+         required>
+    </md-input-container>
+    <md-button
+       class="md-raised md-primary"
+       ng-disabled="siteAliasForm.$invalid"
+       ng-click="settings.saveSetting('siteAlias', settings.siteAlias, true)">
+      Save
+    </md-button>
+  </form>
+</div>
+<div class="settings-section">
   <h1>Account</h1>
-
-  <md-button href="{{::config.endpoints.api}}/logout">
+  <p>You can logout here.</p>
+  <md-button
+     class="md-raised md-primary"
+     ng-click="settings.logout()">
     Logout
   </md-button>
 </div>

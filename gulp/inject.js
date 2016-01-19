@@ -21,6 +21,7 @@ gulp.task('inject', ['scripts', 'styles'], function () {
     path.join('!' + conf.paths.src, '/app/**/*.spec.js'),
     path.join('!' + conf.paths.src, '/app/**/*.mock.js')
   ])
+  .pipe(conf.replaceConfig())
   .pipe($.angularFilesort()).on('error', conf.errorHandler('AngularFilesort'));
 
   var injectOptions = {
@@ -47,6 +48,7 @@ gulp.task('build:inject', ['build:styles'], function () {
     path.join('!' + conf.paths.src, '/app/**/*.spec.js'),
     path.join('!' + conf.paths.src, '/app/**/*.mock.js')
   ])
+  .pipe(conf.replaceConfig())
   .pipe($.angularFilesort()).on('error', conf.errorHandler('AngularFilesort'));
 
   var injectOptions = {

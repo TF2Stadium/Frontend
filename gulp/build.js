@@ -1,6 +1,8 @@
 'use strict';
 
 var fs = require('fs');
+var es = require('event-stream');
+var lazypipe = require('lazypipe');
 var glob = require('glob');
 var path = require('path');
 var _ = require('lodash');
@@ -11,6 +13,8 @@ var conf = require('./conf');
 var $ = require('gulp-load-plugins')({
   pattern: [
     'gulp-angular-templatecache',
+    'gulp-change',
+    'gulp-if',
     'gulp-csso',
     'gulp-filter',
     'gulp-flatten',
@@ -59,21 +63,24 @@ gulp.task('html', ['build:inject', 'partials'], function () {
   var htmlFilter = $.filter('*.html');
   var jsFilter = $.filter('**/*.js');
   var cssFilter = $.filter('**/*.css');
-  var assets;
+
+  var injectTransforms = function (name) {
+    return lazypipe().pipe(conf.replaceConfig)();
+  };
 
   return gulp.src(path.join(conf.paths.tmp, '/serve/*.html'))
     .pipe($.inject(partialsInjectFile, partialsInjectOptions))
-    .pipe(assets = $.useref.assets())
-    .pipe($.rev())
+    .pipe($.useref({}, injectTransforms))
     .pipe(jsFilter)
+    .pipe($.rev())
     .pipe($.ngAnnotate())
-    .pipe($.uglify({ preserveComments: $.uglifySaveLicense })).on('error', conf.errorHandler('Uglify'))
+    .pipe($.uglify({ preserveComments: $.uglifySaveLicense }))
+    .on('error', conf.errorHandler('Uglify'))
     .pipe(jsFilter.restore())
     .pipe(cssFilter)
+    .pipe($.rev())
     .pipe($.csso())
     .pipe(cssFilter.restore())
-    .pipe(assets.restore())
-    .pipe($.useref())
     .pipe($.revReplace())
     .pipe(htmlFilter)
     .pipe($.minifyHtml({

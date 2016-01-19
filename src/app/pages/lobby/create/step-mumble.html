@@ -2,8 +2,7 @@
   md-colspan="6"  md-rowspan="4"
   ng-repeat="option in lobbyCreate.mumble.options"
   ng-click="lobbyCreate.select(lobbyCreate.mumble, option)"
-  ng-class="{'no-animate': !lobbyCreate.searchString, 'selected': lobbyCreate.isSelected(lobbyCreate.mumble, option)}"
-  ng-style="{'animation-delay': 0.03 * ($index+1) + 's'}">
+  ng-class="{'no-animate': !lobbyCreate.searchString, 'selected': lobbyCreate.isSelected(lobbyCreate.mumble, option)}">
   <div class="circle"></div>
   <div class="tile-text">
   	<img ng-src="{{option.value ? '/assets/img/mumble.svg' : '/assets/img/not-mumble.svg'}}">
