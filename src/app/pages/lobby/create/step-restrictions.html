@@ -15,6 +15,14 @@
            placeholder="Password for slots">
   </md-input-container>
   <md-checkbox ng-model="showPassword">Show password</md-checkbox>
+  <md-input-container md-no-float>
+    <input type="number" ng-model="lobbyCreate.lobbySettings.requirements.general.hours"
+      placeholder="Minimum hours required">
+  </md-input-container>
+  <md-input-container md-no-float>
+    <input type="number" ng-model="lobbyCreate.lobbySettings.requirements.general.lobbies"
+           placeholder="Minimum lobbies required">
+  </md-input-container>
   <md-button
      class="md-raised md-primary"
      ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">Continue</md-button>
