@@ -15,5 +15,7 @@
       placeholder="Password for slots">
   </md-input-container>
   <md-checkbox ng-model="showPassword">Show password</md-checkbox>
-  <md-button class="md-raised md-primary" ng-click="lobbyCreate.goToNext()">Continue</md-button>
+  <md-button
+     class="md-raised md-primary"
+     ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">Continue</md-button>
 </div>

@@ -299,6 +299,9 @@
               description: 'Participants will join the mumble only if they want to do so.'
             }
           ]
+        },
+        restrictions: {
+          key: 'restrictionsSet'
         }
       };
 

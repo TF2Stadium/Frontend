@@ -1,15 +1,22 @@
 <div class="search-filter" ng-if="lobbyCreate.shouldShowSearch()">
   <md-input-container md-no-float>
     <md-icon md-svg-src="/assets/img/icon-search.svg" class="name"></md-icon>
-    <input id="search-input" autofocus 
+    <input id="search-input" autofocus
       ng-model="lobbyCreate.searchString" placeholder="Search..."
   </md-input-container>
 </div>
-<md-grid-list ui-view="wizard-step" id="wizard"
-  md-cols="12"  md-row-height="1:1.2" md-gutter="12px">
-  <md-grid-tile md-ink-ripple class="tile-card"
-    md-colspan="12" md-rowspan="1"
-    ng-click="lobbyCreate.goToNext()">
+<md-grid-list
+   ui-view="wizard-step"
+   id="wizard"
+   md-cols="12"
+   md-row-height="1:1.2"
+   md-gutter="12px">
+  <md-grid-tile
+     md-ink-ripple
+     class="tile-card"
+     md-colspan="12"
+     md-rowspan="1"
+     ng-click="lobbyCreate.goToNext()">
     <span>Create a new lobby</span>
   </md-grid-tile>
 </md-grid-list>
