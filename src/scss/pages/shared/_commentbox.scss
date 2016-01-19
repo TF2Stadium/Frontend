@@ -70,11 +70,14 @@
 }
 
 .chat-message-text {
-  display: inline-block;
   max-width: 100%;
   overflow: hidden;
   vertical-align: top;
   word-wrap: break-word;
+
+  img.emote {
+    vertical-align: text-bottom;
+  }
 }
 
 .chat-tabs {

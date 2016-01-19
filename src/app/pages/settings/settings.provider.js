@@ -12,8 +12,10 @@
      */
     SettingsPageProvider.sections = [
       'theme',
+      'chat',
       'filters',
       'sound',
+      'servers',
       'account'
     ];
 
@@ -43,11 +45,15 @@
       settingsPageProvider.sections = {
         theme: {
           theme: Settings.getConstants('themesList'),
-          timestamps: Settings.getConstants('timestampOptions'),
           animationOptions: Settings.getConstants('animationOptions')
+        },
+        chat: {
+          emotes: Settings.getConstants('emoteStyle'),
+          timestamps: Settings.getConstants('timestampOptions')
         },
         filters: Settings.getConstants('filters'),
         sound: Settings.getConstants('sound'),
+        servers: null,
         account: null
       };
 

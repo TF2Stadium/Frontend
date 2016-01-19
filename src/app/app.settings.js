@@ -8,7 +8,6 @@
 
   /** @ngInject */
   function SettingsConfigBlock(SettingsProvider) {
-
     SettingsProvider.constants.filters = {
       regions: {
         eu:             {name: 'Europe'},
@@ -66,14 +65,21 @@
       none:     {name: 'None'}
     };
 
+    SettingsProvider.constants.emoteStyle = {
+      emojione: {name: 'EmojiOne'},
+      none:     {name: 'None'}
+    };
+
     SettingsProvider.constants.sound = {
-      soundVolume:      {name: 'Notifications volume'}
+      soundVolume: {name: 'Notifications volume'}
     };
 
     function setDefaultValues() {
       SettingsProvider.settings.currentTheme = 'default-theme';
       SettingsProvider.settings.timestamps = 'hours12';
+      SettingsProvider.settings.emoteStyle = 'emojione';
       SettingsProvider.settings.animationLength = 'animation-normal';
+      SettingsProvider.settings.savedServers = '{}';
 
       /*
         Defaults every value found in the filters to true.
@@ -113,6 +119,8 @@
         settings[settingKey] = localStorage.getItem(settingKey);
       }
 
+      $rootScope.$emit('settings-updated');
+
       Websocket.onJSON('playerSettings', function (data) {
         for (var setting in data) {
           var value = data[setting];
@@ -130,6 +138,7 @@
 
         alreadyLoadedFromBackend = true;
         $rootScope.$emit('settings-loaded-from-backend');
+        $rootScope.$emit('settings-updated');
       });
 
       /*
@@ -137,9 +146,14 @@
         fires an optional callback with the response from the backend as an argument.
       */
       settingsService.set = function (key, value, callback) {
-
         callback = callback || angular.noop;
         settings[key] = value;
+
+        // TODO: we don't rollback settings changes on commit
+        // failures, so it makes sense to always emit this, but that
+        // behavior needs to be better thought through: perhaps
+        // speculative updates
+        $rootScope.$emit('settings-updated');
 
         localStorage.setItem(key, value);
 

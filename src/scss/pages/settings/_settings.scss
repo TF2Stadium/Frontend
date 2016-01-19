@@ -5,6 +5,11 @@
 
   h1, h2 {
     margin-top: 0;
+    margin-bottom: $padding-small;
+  }
+
+  .md-table {
+    margin-bottom: $padding-medium;
   }
 
   .md-button {
@@ -17,5 +22,26 @@
 
   .md-input-container {
     margin: 0;
+  }
+}
+
+.no-saved-servers {
+  display: block;
+  margin-bottom: $padding-medium;
+}
+
+.new-server-form {
+  @include flex (row, space-between, center);
+
+  margin: 0;
+  width: 100%;
+
+  .address-input {
+    flex: 1;
+  }
+
+  md-input-container {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }

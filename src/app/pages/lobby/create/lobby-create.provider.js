@@ -301,7 +301,10 @@
         }
       };
 
-      lobbyCreateService.settings = {};
+      lobbyCreateService.settings = {
+        server: '',
+        rconpwd: ''
+      };
 
       var deleteSetting = function (key) {
         delete lobbyCreateService.settings[key];
