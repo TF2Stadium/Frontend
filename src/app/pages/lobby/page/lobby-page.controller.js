@@ -66,15 +66,9 @@
           var input = event.target.getElementsByClassName('slot-password-input')[0];
           input.focus();
         }), 0);
+        return;
       }
-      /*
-        We try to join the slot anyway.
-        If it fails, it means we're not in the whitelist,
-        so we show the password input.
-        If it works, the password input will disappear and the slot info will show up.
 
-        This will show an error toast, so it should be fixed.
-      */
       vm.join(slotScope);
     };
 
@@ -89,8 +83,8 @@
       }
 
       event.preventDefault();
-      vm.onPasswordInputBlur();
       vm.join(slotScope);
+      vm.onPasswordInputBlur(slotScope);
     };
 
     vm.join = function (slotScope) {
