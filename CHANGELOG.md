@@ -2,10 +2,14 @@
 
 ## [Unreleased]
 
+## [0.7.0-alpha] - 2016-1-18
+
 * Add option for admins and mods to delete chat messages
 * Whitelisted links in chat are clickable
 * Emotes in chat :)
 * Increase max chat message length to 150
+* Server address saving (RCON password saving still under consideration)
+* Improve behavior in narrow viewports
 
 ## [0.6.0-alpha] - 2016-1-12
 
