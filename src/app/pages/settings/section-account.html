@@ -18,6 +18,25 @@
   </form>
 </div>
 <div class="settings-section">
+  <h1>Mumble nickname</h1>
+  <p>Set a name that will be used as your Mumble nickname</p>
+  <form name="mumbleNickForm">
+    <md-input-container md-no-float>
+      <input
+         name="mumbleNick"
+         ng-model="settings.mumbleNick"
+         placeholder="Nickname"
+         required>
+    </md-input-container>
+    <md-button
+       class="md-raised md-primary"
+       ng-disabled="mumbleNickForm.$invalid"
+       ng-click="settings.saveSetting('mumbleNick', settings.mumbleNick, true)">
+      Save
+    </md-button>
+  </form>
+</div>
+<div class="settings-section">
   <h1>Account</h1>
   <p>You can logout here.</p>
   <md-button
