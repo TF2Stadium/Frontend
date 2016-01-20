@@ -34,6 +34,12 @@
   }
 }
 
+md-icon.big {
+  height: 60px;
+  width: 60px;
+  margin: 0;
+}
+
 .lobbypage-map {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -111,6 +117,13 @@
   }
 }
 
+.slot-password {
+  flex: 1;
+  @include flex(column, center, center);
+  height: 200%;
+  padding: 0 $padding-medium;
+}
+
 .slot-button {
   @include flex (row, space-between, center);
   height: 100%;
@@ -123,6 +136,10 @@
   border-radius: 3px; //overriding .class-button .md-button
   transition: all .3s ease-out;
   overflow: hidden;
+
+  &:focus .slot-password {
+    display: block;
+  }
 
   &:nth-child(2) {
     flex-direction: row-reverse;

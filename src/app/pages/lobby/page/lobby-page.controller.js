@@ -6,7 +6,7 @@
     .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
-  function LobbyPageController($scope, $state, $window, LobbyService) {
+  function LobbyPageController($scope, $state, $window, LobbyService, $timeout) {
 
     var vm = this;
 
@@ -58,8 +58,37 @@
       LobbyService.leaveSpectatedLobby();
     });
 
-    vm.join = function (lobby, team, position) {
-      LobbyService.join(lobby, team, position);
+    vm.slotClicked = function (slotScope, event) {
+      if (vm.lobbyInformation.password) {
+        slotScope.showPasswordBox = true;
+        //Wrapped in a timeout because of ng-if DOM manipulation
+        $timeout((function () {
+          var input = event.target.getElementsByClassName('slot-password-input')[0];
+          input.focus();
+        }), 0);
+        return;
+      }
+
+      vm.join(slotScope);
+    };
+
+    vm.onPasswordInputBlur = function (slotScope) {
+      slotScope.slotPassword = undefined;
+      slotScope.showPasswordBox = false;
+    };
+
+    vm.onPasswordInputKeydown = function (slotScope, event) {
+      if (event.keyCode !== 13) { //not Enter
+        return;
+      }
+
+      event.preventDefault();
+      vm.join(slotScope);
+      vm.onPasswordInputBlur(slotScope);
+    };
+
+    vm.join = function (slotScope) {
+      LobbyService.join(vm.lobbyInformation.id, slotScope.team, slotScope.class.class, slotScope.slotPassword);
     };
 
     vm.goToProfile = function (steamId) {

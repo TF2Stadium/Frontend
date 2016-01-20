@@ -33,7 +33,7 @@
   <div ng-repeat="class in lobbyPage.lobbyInformation.classes track by class.class" class="class-row">
     <div aria-label="Join {{::team}} {{::class.class | stripSlotNameNumber}}"
       ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
-      ng-click="slot.filled ? angular.noop() : lobbyPage.join(lobbyPage.lobbyInformation.id, team, class.class)"
+      ng-click="lobbyPage.slotClicked(this, $event)"
       ng-class="{'sheet low clickable' : !slot.filled}"
       class="slot-button"
       md-ink-ripple>
@@ -86,6 +86,21 @@
         </div>
       </div>
       <img ng-if="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+      <md-icon
+        md-svg-src="/assets/img/icon-lock-closed.svg"
+        ng-if="!showPasswordBox && !slot.filled && lobbyPage.lobbyInformation.password">
+      </md-icon>
+      <md-input-container
+        md-no-float
+        class="slot-password"
+        ng-if="showPasswordBox && !slot.filled && lobbyPage.lobbyInformation.password">
+        <input
+          placeholder="Password"
+          class="slot-password-input"
+          ng-blur="lobbyPage.onPasswordInputBlur($parent)"
+          ng-model="$parent.slotPassword"
+          ng-keydown="lobbyPage.onPasswordInputKeydown($parent, $event)">
+      </md-input-container>
     </div>
     <div class="class-button lobby-icon-{{::class.class | stripSlotNameNumber}}">
       <md-tooltip md-direction="bottom">

@@ -16,12 +16,13 @@
       because they're nested states
     */
     LobbyCreateProvider.wizardSteps = [
-      {name: 'format',      groupKey: 'formats'},
-      {name: 'map',         groupKey: 'maps'},
-      {name: 'league',      groupKey: 'leagues'},
-      {name: 'whitelist',   groupKey: 'whitelists'},
-      {name: 'mumble',      groupKey: 'mumble'},
-      {name: 'server',      groupKey: 'server'}
+      {name: 'format',            groupKey: 'formats'},
+      {name: 'map',               groupKey: 'maps'},
+      {name: 'league',            groupKey: 'leagues'},
+      {name: 'whitelist',         groupKey: 'whitelists'},
+      {name: 'mumble',            groupKey: 'mumble'},
+      {name: 'restrictions',      groupKey: 'restrictions'},
+      {name: 'server',            groupKey: 'server'}
     ];
 
     for (var i = 0; i < LobbyCreateProvider.wizardSteps.length; i++) {
@@ -298,6 +299,9 @@
               description: 'Participants will join the mumble only if they want to do so.'
             }
           ]
+        },
+        restrictions: {
+          key: 'restrictionsSet'
         }
       };
 

@@ -112,24 +112,38 @@
       $state.go(getNextWizardStep().name);
     };
 
+    vm.goToStart = function () {
+      $state.go(vm.wizardSteps[0].name);
+    };
+
     vm.shouldShowSearch = function () {
       var settingsGroup = lobbySettingsList[getCurrentWizardStep().groupKey];
       return settingsGroup && settingsGroup.filterable;
     };
 
-    if ($state.current.name === 'lobby-create') {
-      vm.goToNext();
-    }
+    $scope.$on('$destroy', $rootScope.$on('$stateChangeSuccess', function () {
+      // clear search input when navigating to a page
+      vm.searchString = null;
+      var searchInput = $document[0].getElementById('search-input');
+      if (searchInput) {
+        searchInput.focus();
+      }
+    }));
 
-    var clearStateChange = $rootScope.$on('$stateChangeSuccess',
-      function () {
-        vm.searchString = null;
-        var searchInput = $document[0].getElementById('search-input');
-        if (searchInput) {
-          searchInput.focus();
-        }
-      });
-    $scope.$on('$destroy', clearStateChange);
+    $scope.$on('$destroy', $rootScope.$on('$stateChangeStart', function (e, toState) {
+      if (toState.name === 'lobby-create') {
+        // Redirect all navigations to the 'default' state to instead
+        // go to the first step of the lobby create process
+        e.preventDefault();
+        vm.goToStart();
+      }
+    }));
+
+    if ($state.current.name === 'lobby-create') {
+      // Also redirect on initial laod of this controller, since the
+      // stateChangeStart handler won't have been registered yet.
+      vm.goToStart();
+    }
 
     LobbyCreate.clearLobbySettings();
   }
