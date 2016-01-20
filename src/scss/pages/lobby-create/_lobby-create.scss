@@ -99,7 +99,6 @@ md-grid-tile.tile-card {
   }
 
   &:hover {
-
     .tile-text {
       transform: translateY(0);
     }
@@ -201,6 +200,16 @@ md-grid-tile.tile-card {
 .tile-form {
    @include flex(column, flex-start, stretch);
    position: relative;
+}
+
+.restrictions-form {
+  p {
+    margin-bottom: $padding-medium;
+  }
+
+  h2 {
+    margin-bottom: 0;
+  }
 }
 
 .server-form, .restrictions-form {
