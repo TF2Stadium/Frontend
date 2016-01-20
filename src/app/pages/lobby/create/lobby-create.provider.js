@@ -306,6 +306,12 @@
       };
 
       lobbyCreateService.settings = {
+        requirements: {
+          general: {
+            hours: 0,
+            lobbies: 0
+          }
+        },
         server: '',
         rconpwd: ''
       };
