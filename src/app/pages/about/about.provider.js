@@ -25,7 +25,8 @@
     var aboutPageProvider = {
       sections: [
         'about',
-        'privacy'
+        'privacy',
+        'servers'
       ]
     };
 
