@@ -1,8 +1,5 @@
 FROM phusion/baseimage:0.9.18
 
-# Build Arguments
-ARG branch=master
-
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
 
