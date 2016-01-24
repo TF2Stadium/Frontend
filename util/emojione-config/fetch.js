@@ -30,7 +30,7 @@ function writeConfig(rawEmojis) {
       shortcuts: emoji['aliases_ascii'],
       image: {
         type: 'img',
-        src: emoji['unicode'] + '.png'
+        src: 'emojione/' + emoji['unicode'] + '.png'
       }
     };
   });
