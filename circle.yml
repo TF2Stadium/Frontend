@@ -1,8 +1,11 @@
 machine:
+  services:
+    - docker
   node:
     version: 0.12.0
 dependencies:
   override:
+    - docker info
     - npm install
     - npm install -g bower gulp
     - npm rebuild node-sass
@@ -23,3 +26,10 @@ deployment:
       - gulp build
       - rsync -rl -e "ssh -p $SSH_PORT" dist/* $FRONTEND_USER@tf2stadium.com:$FRONTEND_DEPLOY_PATH_DEV
       - ssh -p $SSH_PORT $FRONTEND_USER@tf2stadium.com $FRONTEND_DEPLOY_SCRIPT_DEV
+
+      - sed -i "s|localhost:8080|<<API_ENDPOINT>>|g" src/app/app.config.js
+      - gulp build
+      - cp -r dist docker/source/dist
+      - cd docker && docker build -t tf2stadium/frontend:dev .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push tgf2stadium/frontend
