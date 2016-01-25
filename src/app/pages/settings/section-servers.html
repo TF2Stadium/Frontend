@@ -43,12 +43,12 @@
 
   <h2>Add a server</h2>
 
-  <form name="newServerForm"
+  <form name="settings.newServerForm"
         class="new-server-form"
         ng-submit="settings.saveNewServer();">
     <md-input-container
        md-no-float
-       md-is-error="(newServerForm.newServerName.$touched && newServerForm.newServerName.$invalid) || newServerForm.newServerName.$error['nameTaken']">
+       md-is-error="(settings.newServerForm.newServerName.$touched && settings.newServerForm.newServerName.$invalid) || settings.newServerForm.newServerName.$error['nameTaken']">
       <input type="text"
              name="newServerName"
              ng-model="settings.newServerName"
@@ -69,7 +69,7 @@
     <md-button
        type="submit"
        class="md-raised md-primary"
-       ng-disabled="newServerForm.$invalid">
+       ng-disabled="settings.newServerForm.$invalid">
       Add Server
     </md-button>
   </form>
