@@ -6,8 +6,10 @@
     .controller('SettingsPageController', SettingsPageController);
 
   /** @ngInject */
-  function SettingsPageController($rootScope, $scope, $mdEditDialog, SettingsPage,
-                                  Settings, ngAudio, User, Notifications) {
+  function SettingsPageController($rootScope, $scope, $mdEditDialog,
+                                  $timeout,
+                                  SettingsPage, Settings, ngAudio,
+                                  User, Notifications) {
     var vm = this;
 
     vm.sections = SettingsPage.getSections();
@@ -126,21 +128,13 @@
         url: vm.newServerAddress
       }));
 
-      $scope.$apply(function () {
+      $timeout(function () {
         vm.newServerName = '';
         vm.newServerAddress = '';
 
-        vm.newServerName.$setValidity();
-        vm.newServerName.$setUntouched();
-        vm.newServerName.$setPristine();
-
-        vm.newServerAddress.$setValidity();
-        vm.newServerAddress.$setUntouched();
-        vm.newServerAddress.$setPristine();
-
-        $scope.newServerForm.$setValidity();
-        $scope.newServerForm.$setPristine();
-      });
+        vm.newServerForm.$setPristine();
+        vm.newServerForm.$setUntouched();
+      }, 1);
     };
 
     function deserializeServers(str) {
