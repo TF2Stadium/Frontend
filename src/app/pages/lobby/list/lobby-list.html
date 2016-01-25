@@ -16,13 +16,17 @@
      ng-controller="SettingsPageController as settings">
   <md-tabs md-stretch-tabs="always" md-dynamic-height="true">
     <md-tab label="{{keyName}}"
-      ng-repeat="(keyName, settingsGroup) in settings.sections.filters">
+            ng-repeat="(keyName, settingsGroup) in settings.sections.filters">
       <md-checkbox
-        ng-repeat="(key, field) in settingsGroup track by key"
-        ng-model="field.selected"
-        aria-label="{{field}}"
-        ng-change="settings.saveSetting(key, field.selected)">
-        {{field.name}}
+         ng-repeat="(key, field) in settingsGroup track by key"
+         ng-model="field.selected"
+         aria-label="{{field.name}}"
+         ng-change="settings.saveSetting(key, field.selected)">
+        <i ng-if="keyName === 'classes'"
+           class="filter-icon filter-icon-{{key}}"></i>
+        <span ng-if="keyName !== 'classes'">
+          {{field.name}}
+        </span>
       </md-checkbox>
     </md-tab>
   </md-tabs>

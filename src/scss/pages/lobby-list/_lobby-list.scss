@@ -27,7 +27,7 @@
 
 
 /*======================================
-              LOBBY-ROW
+              LOBBY-FILTERS
  =======================================*/
 
 #lobby-filters {
@@ -40,6 +40,25 @@
 
     md-checkbox {
       margin: $padding-small;
+
+      // Force the height to match the line-height, so that using
+      // larger icons for the class filters doesn't make the
+      // #lobby-filters div shrink/expand when moving through
+      // tabs
+      height: 1.5em;
+
+      i.filter-icon {
+        // quick hack to roughly center the icons
+        position: relative;
+        top: -2px;
+      }
+
+      .md-label {
+        // angular-material sets vertical-align: middle which
+        // does very little except make the full md-checkbox
+        // 1px taller
+        vertical-align: baseline;
+      }
     }
   }
 }

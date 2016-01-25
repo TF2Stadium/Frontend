@@ -1,6 +1,8 @@
 //apply a size and an icon and you are good to go. Icons default to display: block because otherwise
 //they will not display on an inline element. If you need a standalone icon use an <i> tag.
 
+$classes: (scout soldier pocket roamer pyro demoman heavy engineer medic sniper spy);
+
 .lobby-icon {
 
 //---------------------
@@ -29,10 +31,24 @@
   //span::after is for rollovers
   //search .class-buttons to see in action
 
-
-  $classes: (scout soldier pocket roamer pyro demoman heavy engineer medic sniper spy);
-
   //makes a class named .lobby-icon-classname for each of the nine classes
+  @each $class in $classes {
+    &-#{$class} {
+      background-image:url(../assets/img/class/class-icon-#{$class}.svg);
+
+      span:after {
+        background-image: url(../assets/img/class/class-icon-#{$class}-white.svg);
+      }
+    }
+  }
+}
+
+.filter-icon {
+  width: $icon-small-dimensions;
+  height: $icon-small-dimensions;
+  background-size: $icon-small-dimensions;
+  display: block;
+
   @each $class in $classes {
     &-#{$class} {
       background-image:url(../assets/img/class/class-icon-#{$class}.svg);
