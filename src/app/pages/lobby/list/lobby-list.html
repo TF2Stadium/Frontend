@@ -1,20 +1,19 @@
 <div id="subList" ng-controller="SubListController as vm">
   <div class="substitute md-button" md-ink-ripple
-    ng-repeat="sub in vm.subList"
-    ng-click="lobbyList.join(sub.id, sub.team, sub.class, $event)">
-      <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
-      <span>
-        {{sub.region}} {{sub.type}} {{sub.class | stripSlotNameNumber}} needed in {{sub.map}}.
-        Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required
-      </span>
-      <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
-    </div>
+       ng-repeat="sub in vm.subList"
+       ng-click="lobbyList.join(sub.id, sub.team, sub.class, $event)">
+    <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
+    <span>
+      {{sub.region}} {{sub.type}} {{sub.class | stripSlotNameNumber}} needed in {{sub.map}}.
+      Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required
+    </span>
+    <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
   </div>
 </div>
 
 <div id="lobby-filters"
-  ng-if="lobbyList.shouldShowFilters()"
-  ng-controller="SettingsPageController as settings">
+     ng-if="lobbyList.shouldShowFilters()"
+     ng-controller="SettingsPageController as settings">
   <md-tabs md-stretch-tabs="always" md-dynamic-height="true">
     <md-tab label="{{keyName}}"
       ng-repeat="(keyName, settingsGroup) in settings.sections.filters">
@@ -30,20 +29,20 @@
 </div>
 
 <div class="lobby-list-empty-state"
-  ng-if="filteredLobbies.length === 0">
+     ng-if="filteredLobbies.length === 0">
   <h1>There are no lobbies up right now</h1>
   <p>Why don't you try changing your filter settings or creating a new one?</p>
   <md-button
-    class="md-raised md-primary"
-    ui-sref="lobby-create">
+     class="md-raised md-primary"
+     ui-sref="lobby-create">
     Create a lobby
   </md-button>
 </div>
 
 <a md-ink-ripple
-  ng-repeat="lobbyInformation in lobbyList.lobbies | LobbyListSettingsFilter as filteredLobbies track by lobbyInformation.id"
-  class="lobby-row"
-  ui-sref="lobby-page({lobbyID: lobbyInformation.id})">
+   ng-repeat="lobbyInformation in lobbyList.lobbies | LobbyListSettingsFilter as filteredLobbies track by lobbyInformation.id"
+   class="lobby-row"
+   ui-sref="lobby-page({lobbyID: lobbyInformation.id})">
   <div class="lobby-image" ng-style="{'background-image':'url(/assets/img/maps/lobby-row/' + lobbyInformation.map + '.jpg)'}">
     <span class="lobby-type">{{::lobbyInformation.type}}</span>
     <span class="lobby-map">{{::lobbyInformation.map}}</span>
@@ -51,12 +50,13 @@
   <div flex class="lobby-main">
     <div flex class="lobby-classes">
       <div ng-repeat="class in lobbyInformation.classes track by $index"
-        class="flex-max-margin">
+           class="flex-max-margin">
         <div class="class-button no-animate lobby-icon-{{::class.class | stripSlotNameNumber}}"
              ng-class="{'sheet' : !class.blu.filled || !class.red.filled}">
           <md-button ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
-            ng-if="!slot.filled"
-            ng-class="['join-slot', team]" ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)">
+                     ng-if="!slot.filled"
+                     ng-class="['join-slot', team]"
+                     ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)">
             <md-tooltip md-direction="bottom">
               Join {{::team}} {{::class.class | stripSlotNameNumber}} slot
             </md-tooltip>
