@@ -7,7 +7,7 @@
   position: relative;
 }
 
-
+/* The filters enabled/disabled switch */
 #filters-checkbox {
   position: absolute;
   bottom: $padding-small;
@@ -30,7 +30,6 @@
               LOBBY-ROW
  =======================================*/
 
-
 #lobby-filters {
   @extend .sheet;
   padding: $padding-small $padding-medium;
@@ -38,6 +37,10 @@
 
   md-tab-content > div {
     @include flex(row, center, center);
+
+    md-checkbox {
+      margin: $padding-small;
+    }
   }
 }
 
