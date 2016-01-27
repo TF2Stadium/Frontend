@@ -1,15 +1,24 @@
-<md-grid-tile md-ink-ripple class="tile-card"
-  md-colspan="{{format.important ? 8 : 4}}" md-rowspan="{{format.important ? 4 : 2}}"
-  ng-repeat="format in lobbyCreate.formats.options | LobbyCreateOptionFilter:'formats':lobbyCreate.searchString | orderBy:'title'"
-  ng-click="lobbyCreate.select(lobbyCreate.formats, format)"
-  ng-if="format.value!='debug' || $root.userProfile.role=='administrator'"
-  ng-class="{'no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.formats, format)}">
-  <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg),
-    linear-gradient(
-        to top,
-        rgba(0, 0, 0, .2) 0%,
-        rgba(0, 0, 0, .6) 80px
-    )'}"></div>
+<md-grid-tile
+   md-ink-ripple
+   class="tile-card"
+
+   ng-repeat="format in lobbyCreate.formats.options | LobbyCreateOptionFilter:'formats':lobbyCreate.searchString | orderBy:'title'"
+   ng-if="format.value!='debug' || $root.userProfile.role=='administrator'"
+
+   ng-click="lobbyCreate.select(lobbyCreate.formats, format)"
+   ng-mouseover="lobbyCreate.preloadMaps(format.value)"
+
+   md-colspan="{{format.important ? 8 : 4}}"
+   md-rowspan="{{format.important ? 4 : 2}}"
+
+   ng-class="{'no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.formats, format)}">
+  <div class="tile-image"
+       ng-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg),
+                 linear-gradient(
+                 to top,
+                 rgba(0, 0, 0, .2) 0%,
+                 rgba(0, 0, 0, .6) 80px
+                 )'}"></div>
   <div class="tile-text">
     <span class="title">{{::format.title}}</span>
   </div>

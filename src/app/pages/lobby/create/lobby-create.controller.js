@@ -6,7 +6,10 @@
 
   /** @ngInject */
   function LobbyCreateController($document, $state, $scope, $rootScope,
-                                 LobbyCreate, Settings, Notifications) {
+                                 LobbyCreate, Settings, Notifications,
+                                 PreloadService) {
+    PreloadService.queuePreload('/assets/img/mumble.svg');
+    PreloadService.queuePreload('/assets/img/not-mumble.svg');
 
     var vm = this;
 
@@ -36,6 +39,19 @@
     });
     $scope.$on('$destroy', handler);
 
+    vm.preloadMaps = function (format) {
+      lobbySettingsList['maps']
+        .options
+        .filter(function (map) { return map[format]; })
+        .map(function (map) {
+          return '/assets/img/maps/lobby-create/' + map.value + '.jpg';
+        })
+        .forEach(PreloadService.queuePreload);
+    };
+
+    vm.preloadImage = function (src) {
+      PreloadService.queuePreload(src);
+    };
 
     vm.loadSavedServer = function (name) {
       vm.serverName = name;

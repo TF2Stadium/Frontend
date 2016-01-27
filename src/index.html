@@ -136,12 +136,20 @@
       </div>
       <div ui-view="headerInfo" class="header-info"></div>
     </header>
+
     <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'" ng-if="$root.backendAuthenticated"></aside>
-    <div id="fab" ng-if="$root.backendAuthenticated">
-      <md-button ui-sref="lobby-create" class="md-fab md-primary" aria-label="create a lobby">
+
+    <div id="fab"
+         ng-if="$root.backendAuthenticated"
+         ng-controller="LobbyCreateButtonController as lcbc">
+      <md-button ui-sref="lobby-create"
+                 class="md-fab md-primary"
+                 aria-label="create a lobby"
+                 ng-mouseover="lcbc.preloadLobbyCreate()">
         <md-icon md-svg-icon="/assets/img/icon-add.svg"></md-icon>
       </md-button>
     </div>
+
     <main flex ng-if="$root.backendAuthenticated">
       <div flex id="page-content">
         <div ui-view="leftSidebar" id="left-sidebar"></div>

@@ -1,8 +1,16 @@
-<md-grid-tile md-ink-ripple class="tile-card"
-  md-colspan="{{map.important ? 6 : 6}}"  md-rowspan="{{map.important ? 4 : 2}}"
-  ng-repeat="map in lobbyCreate.maps.options | LobbyCreateOptionFilter:'maps':lobbyCreate.searchString"
-  ng-click="lobbyCreate.select(lobbyCreate.maps, map)"
-  ng-class="{'no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.maps, map)}">
+<md-grid-tile
+   md-ink-ripple
+   class="tile-card"
+
+   ng-repeat="map in lobbyCreate.maps.options | LobbyCreateOptionFilter:'maps':lobbyCreate.searchString"
+
+   ng-click="lobbyCreate.select(lobbyCreate.maps, map)"
+   ng-mouseover="lobbyCreate.preloadImage('/assets/img/maps/header/' + map.value + '.jpg')"
+
+   md-colspan="{{map.important ? 6 : 6}}"
+   md-rowspan="{{map.important ? 4 : 2}}"
+
+   ng-class="{'no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.maps, map)}">
   <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/maps/lobby-create/' + map.value + '.jpg)'}"></div>
   <div class="tile-text">
     <span class="title">{{::map.value}}</span>
