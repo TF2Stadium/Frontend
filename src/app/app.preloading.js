@@ -4,8 +4,17 @@
   angular.module('tf2stadium.services')
     .factory('PreloadService', PreloadService);
 
+  function once(el, eventName, fn) {
+    function wrapper() {
+      fn.apply(this, arguments);
+      el.removeEventListener(eventName, wrapper);
+    }
+
+    el.addEventListener(eventName, wrapper);
+  }
+
   /** @ngInject */
-  function PreloadService($window) {
+  function PreloadService($window, $q) {
     // Never attempt to preload the same image multiple times. This
     // isn't a huge deal, since making multiple requests for the same
     // image will get stopped by the cache, but if we're ever
@@ -17,10 +26,17 @@
     return {
       queuePreload: function preload(src) {
         if (!alreadyQueued[src]) {
+          var deferred = $q.defer();
           var img = new $window.Image();
           img.src = src;
-          alreadyQueued[src] = true;
+
+          once(img, 'load', deferred.resolve.bind(deferred));
+          once(img, 'error', deferred.reject.bind(deferred));
+
+          alreadyQueued[src] = deferred.promise;
         }
+
+        return alreadyQueued[src];
       }
     };
   }
