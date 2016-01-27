@@ -2,7 +2,9 @@
   'use strict';
 
   angular.module('tf2stadium')
-    .config(LobbyCreateConfig)
+    .config(LobbyCreateConfig);
+
+  angular.module('tf2stadium.services')
     .provider('LobbyCreate', LobbyCreate);
 
   /** @ngInject */
