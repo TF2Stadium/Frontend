@@ -364,7 +364,8 @@
         Websocket.emitJSON('serverVerify',
           {
             server: lobbyCreateService.settings.server,
-            rconpwd: lobbyCreateService.settings.rconpwd
+            rconpwd: lobbyCreateService.settings.rconpwd,
+            map: lobbyCreateService.settings.map
           },
           function (response) {
             callback(response);
