@@ -1,16 +1,3 @@
-<div id="subList" ng-controller="SubListController as vm">
-  <div class="substitute md-button" md-ink-ripple
-       ng-repeat="sub in vm.subList"
-       ng-click="lobbyList.join(sub.id, sub.team, sub.class, $event)">
-    <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
-    <span>
-      {{sub.region}} {{sub.type}} {{sub.class | stripSlotNameNumber}} needed in {{sub.map}}.
-      Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required
-    </span>
-    <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
-  </div>
-</div>
-
 <div id="lobby-filters"
      ng-if="lobbyList.shouldShowFilters()"
      ng-controller="SettingsPageController as settings">
@@ -32,6 +19,20 @@
   </md-tabs>
 </div>
 
+<div id="subList" ng-controller="SubListController as vm">
+  <div class="substitute md-button"
+       md-ink-ripple
+       ng-repeat="sub in vm.subList | LobbyListSettingsFilter"
+       ng-click="lobbyList.join(sub.id, sub.team, sub.class, $event)">
+    <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
+    <span>
+      {{sub.region.name}} {{sub.type}} {{sub.class | stripSlotNameNumber}} needed in {{sub.map}}.
+      Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required
+    </span>
+    <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
+  </div>
+</div>
+
 <div class="lobby-list-empty-state"
      ng-if="filteredLobbies.length === 0"
      ng-controller="LobbyCreateButtonController as lcbc">
@@ -49,7 +50,8 @@
    ng-repeat="lobbyInformation in lobbyList.lobbies | LobbyListSettingsFilter as filteredLobbies track by lobbyInformation.id"
    class="lobby-row"
    ui-sref="lobby-page({lobbyID: lobbyInformation.id})">
-  <div class="lobby-image" ng-style="{'background-image':'url(/assets/img/maps/lobby-row/' + lobbyInformation.map + '.jpg)'}">
+  <div class="lobby-image"
+       ng-style="{'background-image':'url(/assets/img/maps/lobby-row/' + lobbyInformation.map + '.jpg)'}">
     <span class="lobby-type">{{::lobbyInformation.type}}</span>
     <span class="lobby-map">{{::lobbyInformation.map}}</span>
   </div>
