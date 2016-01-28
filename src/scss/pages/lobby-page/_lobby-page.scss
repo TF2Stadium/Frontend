@@ -168,6 +168,10 @@ md-icon.big {
     width: 18px;
     padding: 5px 0 5px;
 
+    &.no-click {
+      cursor: auto;
+    }
+
     div.md-container {
       width: 18px;
       height: 18px;
