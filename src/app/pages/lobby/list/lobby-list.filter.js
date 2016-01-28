@@ -19,7 +19,6 @@
 
   /** @ngInject */
   function LobbyListSettingsFilter(Settings, Config, $filter) {
-
     var slotNameToClassName = $filter('slotNameToClassName');
 
     var settings = Settings.getSettings(function (response) {
@@ -44,33 +43,46 @@
     }
 
     return function (lobbies) {
-
-      var filteredList = [];
-
-      for (var key in lobbies) {
-        var lobby = lobbies[key];
-
-        var slots = angular.isArray(lobby.classes)? lobby.classes : [];
-        var availableClasses = slots
-              .filter(slotAvailable)
-              .map(slotToSlotName)
-              .map(slotNameToClassName)
-              .filter(truthy);
-
-        if (settings[lobby.region.code] &&
-            settings[lobby.type] &&
-            playerPlaysGamemode(lobby.map) &&
-            playerWantsMumble(lobby) &&
-            availableClasses.some(playerPlaysClass)
-
-            || !settings['filtersEnabled']
-            || (Config.debug && lobby.type === 'Debug')) {
-          filteredList.push(lobby);
-        }
+      if (!lobbies) {
+        return [];
       }
 
-      return filteredList;
-    };
+      if (!settings['filtersEnabled']) {
+        return lobbies;
+      }
 
+      return lobbies.filter(function (lobby) {
+        var availableClasses = [];
+
+        if (angular.isArray(lobby.classes)) {
+          availableClasses = lobby.classes
+            .filter(slotAvailable)
+            .map(slotToSlotName)
+            .map(slotNameToClassName)
+            .filter(truthy);
+        }
+
+        // If this is a sub data it'll have only a .class attribute,
+        // no .classes list
+        if (lobby.class) {
+          availableClasses = [lobby.class];
+        }
+
+        var regionCode = lobby.region.code;
+
+        // Allow an empty region code, so filtering doesn't totally
+        // break if the backend doesn't have GeoIP configured.
+        var regionOk = regionCode === '' || settings[regionCode];
+
+        return regionOk &&
+          settings[lobby.type] &&
+          playerPlaysGamemode(lobby.map) &&
+          playerWantsMumble(lobby) &&
+          availableClasses.some(playerPlaysClass) ||
+          (Config.debug && lobby.type === 'Debug');
+      });
+    };
   }
+
+
 })();

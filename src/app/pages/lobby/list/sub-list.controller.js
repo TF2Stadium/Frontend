@@ -13,6 +13,6 @@
     LobbyService.subscribe('sub-list-updated', $scope, function () {
       vm.subList = LobbyService.getSubList();
     });
-
   }
+
 })();
