@@ -22,7 +22,7 @@
 
     var factory = {};
 
-    factory.lobbyList = {};
+    factory.lobbyList = [];
 
     factory.lobbySpectated = Object.create(null);
     factory.lobbyJoined = Object.create(null);
@@ -30,7 +30,7 @@
     factory.lobbySpectatedId = -1;
     factory.lobbyJoinedId = -1;
 
-    factory.subList = {};
+    factory.subList = [];
     factory.lobbyJoinInformation = {};
 
     var playerPreReady = false;
