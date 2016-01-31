@@ -1,8 +1,11 @@
 machine:
+  services:
+    - docker
   node:
     version: 0.12.0
 dependencies:
   override:
+    - docker info
     - npm install
     - npm install -g bower gulp
     - npm rebuild node-sass
@@ -15,11 +18,25 @@ deployment:
   dev:
     branch: dev
     commands:
-      - sed -i "s|localhost:8080|$API_URL_PROD|g" src/app/app.config.js
+      - cp src/app/app.config.js.template src/app/app.config.js
+      - sed -i "s|<<$WS_ENDPOINT>>|ws://"$API_URL_PROD"/websocket|g" src/app/app.config.js
+      - sed -i "s|<<$API_ENDPOINT>>|http://"$API_URL_PROD"|g" src/app/app.config.js
       - gulp build
       - rsync -rl -e "ssh -p $SSH_PORT" dist/* $FRONTEND_USER@tf2stadium.com:$FRONTEND_DEPLOY_PATH_PROD
       - ssh -p $SSH_PORT $FRONTEND_USER@tf2stadium.com $FRONTEND_DEPLOY_SCRIPT_PROD
-      - sed -i "s|localhost:8080|$API_URL_DEV|g" src/app/app.config.js
+
+      - rm src/app/app.config.js
+      - cp src/app/app.config.js.template src/app/app.config.js
+      - sed -i "s|<<$WS_ENDPOINT>>|ws://"$API_URL_DEV"/websocket|g" src/app/app.config.js
+      - sed -i "s|<<$API_ENDPOINT>>|http://"$API_URL_DEV"|g" src/app/app.config.js
       - gulp build
       - rsync -rl -e "ssh -p $SSH_PORT" dist/* $FRONTEND_USER@tf2stadium.com:$FRONTEND_DEPLOY_PATH_DEV
       - ssh -p $SSH_PORT $FRONTEND_USER@tf2stadium.com $FRONTEND_DEPLOY_SCRIPT_DEV
+
+      - rm src/app/app.config.js
+      - cp src/app/app.config.js.template src/app/app.config.js
+      - gulp build
+      - cp -r dist docker/source/dist
+      - cd docker && docker build -t tf2stadium/frontend:dev .
+      - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
+      - docker push tf2stadium/frontend
