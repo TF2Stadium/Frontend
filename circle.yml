@@ -22,12 +22,16 @@ deployment:
       - gulp build
       - rsync -rl -e "ssh -p $SSH_PORT" dist/* $FRONTEND_USER@tf2stadium.com:$FRONTEND_DEPLOY_PATH_PROD
       - ssh -p $SSH_PORT $FRONTEND_USER@tf2stadium.com $FRONTEND_DEPLOY_SCRIPT_PROD
+
+      - rm src/app/app.config.js
+      - cp src/app/app.config.js.template src/app/app.config.js
       - sed -i "s|localhost:8080|$API_URL_DEV|g" src/app/app.config.js
       - gulp build
       - rsync -rl -e "ssh -p $SSH_PORT" dist/* $FRONTEND_USER@tf2stadium.com:$FRONTEND_DEPLOY_PATH_DEV
       - ssh -p $SSH_PORT $FRONTEND_USER@tf2stadium.com $FRONTEND_DEPLOY_SCRIPT_DEV
 
-      - sed -i "s|localhost:8080|<<API_ENDPOINT>>|g" src/app/app.config.js
+      - rm src/app/app.config.js
+      - cp src/app/app.config.js.template src/app/app.config.js
       - gulp build
       - cp -r dist docker/source/dist
       - cd docker && docker build -t tf2stadium/frontend:dev .
