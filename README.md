@@ -16,7 +16,7 @@ It uses [AngularJS](https://angularjs.org/) as its framework, [Gulp](http://gulp
 2. Clone the the git repository. If you're using git, just run `git clone https://github.com/TF2Stadium/Frontend.git`. Otherwise, get it from [here](https://github.com/TF2Stadium/Frontend/archive/master.zip) and unpack it somewhere in your drive.
 3. Change to the directory to where you cloned the repository and execute `npm install` (or `npm install --production` if you only want to build it) and `bower install` to install dependencies
 4. Execute `npm install` and `bower install`
-5. In the directory src/app, copy the app.config.js.template to app.config.js and replace the placeholders with your setup.
+5. In the directory `src/app`, copy the `app.config.js.template` to `app.config.js` and replace the placeholders with your setup.
 
 ##Use
 
