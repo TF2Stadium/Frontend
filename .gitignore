@@ -5,6 +5,6 @@ bower_components/
 .tmp/
 dist/
 src/assets/
-src/app/app.config.js.override
+src/app/app.config.js
 Frontend.iml
 coverage/
