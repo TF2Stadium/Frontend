@@ -3,8 +3,8 @@
 
   angular.module('tf2stadium').constant('Config', {
     'endpoints': {
-      'websocket': '<<$WS_ENDPOINT>>',
-      'api': '<<$API_ENDPOINT>>'
+      'websocket': '<<WS_ENDPOINT>>',
+      'api': '<<API_ENDPOINT>>'
     },
     'debug': true,
     'allowedChatDomains': [
