@@ -39,4 +39,4 @@ deployment:
       - cp -r dist docker/source/dist
       - cd docker && docker build -t tf2stadium/frontend:dev .
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
-      - docker push tgf2stadium/frontend
+      - docker push tf2stadium/frontend
