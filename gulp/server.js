@@ -48,7 +48,7 @@ function browserSyncInit(baseDir, browser) {
       function (req, res, next) {
         if (conf.shouldReplace(req.url)) {
           var replaceWith = path.join(conf.paths.src, req.url + '.override');
-          if (fs.statSync(replaceWith).isFile()) {
+          if (conf.isFile(replaceWith)) {
             req.url += '.override';
           }
         }
