@@ -176,6 +176,11 @@ md-icon.big {
       width: 18px;
       height: 18px;
 
+      // Fix the checkbox having an oversized click-hitbox
+      &:after {
+        pointer-events: none;
+      }
+
       .md-icon {
         width: 18px;
         height: 18px;
