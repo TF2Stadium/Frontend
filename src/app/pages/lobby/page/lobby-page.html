@@ -32,13 +32,21 @@
   </div>
   <div ng-repeat="class in lobbyPage.lobbyInformation.classes track by class.class" class="class-row">
     <div aria-label="Join {{::team}} {{::class.class | stripSlotNameNumber}}"
-      ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
-      ng-click="!slot.filled && lobbyPage.slotClicked(this, $event)"
-      ng-class="{'sheet low clickable' : !slot.filled}"
-      class="slot-button"
-      md-ink-ripple>
+         ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
+         ng-click="!slot.filled && lobbyPage.slotClicked(this, $event)"
+         ng-class="{'sheet low clickable' : !slot.filled}"
+         class="slot-button"
+         md-ink-ripple>
       <div ng-if="slot.filled">
-        <md-menu>
+        <md-button
+           ng-if="$root.userProfile.steamid === slot.player.steamid"
+           class="leave-slot"
+           aria-label="Leave Slot"
+           ng-click="lobbyPage.leaveSlot()"
+           ><md-icon md-svg-src="/assets/img/icons/material/clear.svg"></md-icon></md-button>
+
+        <md-menu ng-if="$root.userProfile.steamid !== slot.player.steamid"
+                 class="slot-menu">
           <md-button class="more-button"
             aria-label="More"
             ng-click="slot.filled ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, team, class.class)">
@@ -50,12 +58,12 @@
                 Steam profile
               </md-button>
             </md-menu-item>
-            <md-menu-item ng-if="$root.userProfile.steamid !== slot.player.steamid && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')">
+            <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
               <md-button ng-click="lobbyPage.kick(slot.player)">
                 Kick player from slot
               </md-button>
             </md-menu-item>
-            <md-menu-item ng-if="$root.userProfile.steamid !== slot.player.steamid && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')">
+            <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
               <md-button ng-click="lobbyPage.ban(slot.player)">
                 Ban player from lobby
               </md-button>
