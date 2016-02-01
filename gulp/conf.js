@@ -40,13 +40,13 @@ exports.shouldReplace = function(fname) {
   return fname.indexOf(configFile) > -1;
 };
 
-function isFile(path) {
+exports.isFile = function isFile(path) {
   try {
     return fs.statSync(path).isFile();
   } catch(err) {
     return !(err && err.code === 'ENOENT');
   }
-}
+};
 
 /**
  *  Returns a stream creation function that creates streams to replace
@@ -61,7 +61,7 @@ exports.replaceConfig = function() {
   var overrideFile =
         path.join(exports.paths.src, 'app', configFile) + '.override';
 
-  if (isFile(overrideFile)) {
+  if (exports.isFile(overrideFile)) {
     return es.map(function (file, next) {
       if (exports.shouldReplace(file.path)) {
         toArray(vfs.src(overrideFile), function (err, arr) {
