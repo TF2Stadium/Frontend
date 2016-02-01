@@ -32,8 +32,13 @@
                 <md-menu-content width="3">
                   <md-menu-item>
                     <md-button
-                       ng-click="commentBox.goToProfile(message.player.steamid)">
+                       ng-click="commentBox.goToSteamProfile(message.player.steamid)">
                       Steam profile
+                    </md-button>
+                  </md-menu-item>
+                  <md-menu-item ui-sref="user-profile({userID: message.player.steamid})">
+                    <md-button>
+                      Stadium profile
                     </md-button>
                   </md-menu-item>
 		              <md-menu-item

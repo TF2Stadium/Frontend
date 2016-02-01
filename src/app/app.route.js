@@ -61,6 +61,16 @@
           }
         }
       })
+      .state('user-profile', {
+        url: '/user/{userID}',
+        views: {
+          'content': {
+            templateUrl: 'app/pages/user-profile/user-profile.html',
+            controller: 'UserProfileController',
+            controllerAs: 'userProfile'
+          }
+        }
+      })
       .state('settings', {
         url: '/settings',
         redirectTo: 'theme',

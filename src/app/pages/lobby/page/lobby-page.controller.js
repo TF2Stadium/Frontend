@@ -113,7 +113,7 @@
       LobbyService.join(vm.lobbyInformation.id, slotScope.team, slotScope.class.class, slotScope.slotPassword);
     };
 
-    vm.goToProfile = function (steamId) {
+    vm.goToSteamProfile = function (steamId) {
       $window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };
 
