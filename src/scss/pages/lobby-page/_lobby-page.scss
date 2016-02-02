@@ -163,6 +163,12 @@ md-icon.big {
     }
   }
 
+  md-icon {
+    svg {
+      fill: #666;
+    }
+  }
+
   md-checkbox {
     margin: 0 auto;
     width: 18px;
@@ -280,9 +286,5 @@ md-menu.slot-menu {
     height: 18px;
 
     @extend .fill-parent;
-
-    svg {
-      fill: #666;
-    }
   }
 }
