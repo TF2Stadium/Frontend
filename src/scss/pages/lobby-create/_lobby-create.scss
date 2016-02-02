@@ -267,7 +267,7 @@ md-grid-tile.tile-card {
   @extend .sheet;
   padding: $padding-medium;
 
-  img {
+  md-icon {
     height: 100px;
     width: 100px;
   }
