@@ -50,7 +50,7 @@
           <md-button class="more-button"
             aria-label="More"
             ng-click="slot.filled ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, team, class.class)">
-            <img src="/assets/img/icon-more.svg">
+            <img src="/assets/img/icons/material/more-vert.svg">
           </md-button>
           <md-menu-content width="4">
             <md-menu-item>
@@ -96,7 +96,7 @@
       </div>
       <img ng-if="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
       <md-icon
-        md-svg-src="/assets/img/icon-lock-closed.svg"
+        md-svg-src="/assets/img/icons/material/lock-closed.svg"
         ng-if="!showPasswordBox && !slot.filled && lobbyPage.lobbyInformation.password">
       </md-icon>
       <md-input-container

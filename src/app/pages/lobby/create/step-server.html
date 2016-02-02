@@ -68,14 +68,14 @@
     </md-button>
   </form>
   <div class="server-verify-message"
-    ng-if="lobbyCreate.verifyServerError">
-    <img src="/assets/img/icon-error.svg">
+       ng-if="lobbyCreate.verifyServerError">
+    <img src="/assets/img/icons/material/error-red.svg">
     <span>{{lobbyCreate.verifyServerErrorMessage}}</span>
   </div>
   <div class="server-verify-message"
-    ng-if="lobbyCreate.verifiedServer">
+       ng-if="lobbyCreate.verifiedServer">
     <img ng-if="!lobbyCreate.requestSent"
-      src="/assets/img/icon-check.svg">
+         src="/assets/img/icons/material/check-blue.svg">
     <span ng-if="!lobbyCreate.requestSent">
       The server is ready to be configured and used
     </span>
