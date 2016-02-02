@@ -3,13 +3,13 @@
   <div class="header-text">
     <div class="lobbypage-text">
       <div class="row">
-        <md-icon class="big"
-          md-svg-icon="material:lock-closed-white"
-          ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">
-          <md-tooltip>Private lobby</md-tooltip>
-        </md-icon>
         <span class="lobbypage-map"
-              title="{{header.lobbyInformation.map}}">{{header.lobbyInformation.map}}</span>
+              title="{{header.lobbyInformation.map}}"
+              ><md-icon class="big"
+                        md-svg-icon="material:lock-closed-white"
+                        ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">
+            <md-tooltip>Private lobby</md-tooltip>
+        </md-icon>{{header.lobbyInformation.map}}</span>
         <div class="lobbypage-lobby-closed"
           ng-if="header.lobbyInformation.state>=5">
           FINISHED
