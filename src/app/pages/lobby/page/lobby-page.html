@@ -39,18 +39,18 @@
          md-ink-ripple>
       <div ng-if="slot.filled">
         <md-button
-           ng-if="$root.userProfile.steamid === slot.player.steamid"
+           ng-if="$root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state < 5"
            class="leave-slot"
            aria-label="Leave Slot"
            ng-click="lobbyPage.leaveSlot()"
-           ><md-icon md-svg-src="/assets/img/icons/material/clear.svg"></md-icon></md-button>
+           ><md-icon md-svg-icon="material:clear"></md-icon></md-button>
 
         <md-menu ng-if="$root.userProfile.steamid !== slot.player.steamid"
                  class="slot-menu">
           <md-button class="more-button"
             aria-label="More"
             ng-click="slot.filled ? $mdOpenMenu($event) : lobbyPage.join(lobbyPage.lobbyInformation.id, team, class.class)">
-            <img src="/assets/img/icon-more.svg">
+            <md-icon md-svg-icon="material:more-vert"></md-icon>
           </md-button>
           <md-menu-content width="4">
             <md-menu-item>
@@ -96,7 +96,7 @@
       </div>
       <img ng-if="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
       <md-icon
-        md-svg-src="/assets/img/icon-lock-closed.svg"
+        md-svg-icon="material:lock-closed"
         ng-if="!showPasswordBox && !slot.filled && lobbyPage.lobbyInformation.password">
       </md-icon>
       <md-input-container
