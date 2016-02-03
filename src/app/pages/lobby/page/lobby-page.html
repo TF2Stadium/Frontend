@@ -39,7 +39,7 @@
          md-ink-ripple>
       <div ng-if="slot.filled">
         <md-button
-           ng-if="$root.userProfile.steamid === slot.player.steamid"
+           ng-if="$root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state < 5"
            class="leave-slot"
            aria-label="Leave Slot"
            ng-click="lobbyPage.leaveSlot()"
