@@ -1,12 +1,12 @@
 (function () {
   'use strict';
 
-  angular.module('tf2stadium')
+  angular.module('tf2stadium.services')
     .factory('Notifications', NotificationsFactory);
 
   /** @ngInject */
-  function NotificationsFactory($rootScope, $mdToast, $window, $document, $timeout, $log, ngAudio) {
-
+  function NotificationsFactory($rootScope, $mdToast, $window, $document,
+                                $timeout, $log, ngAudio) {
     var notificationsService = {};
 
     var toastDefault = {
@@ -37,14 +37,16 @@
       notificationsService.titleNotification();
     };
 
+    $rootScope.titleNotification = false;
+
+    $window.onfocus = function () {
+      $rootScope.titleNotification = false;
+    };
+
     notificationsService.titleNotification = function () {
       if (!$document[0].hasFocus()) {
         $rootScope.titleNotification = true;
       }
-
-      $window.onfocus = function () {
-        $rootScope.titleNotification = false;
-      };
     };
 
     notificationsService.notifyBrowser = function (options) {

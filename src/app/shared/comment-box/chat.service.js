@@ -337,7 +337,11 @@
         }
       }
 
-      Notifications.titleNotification();
+      if (!$rootScope.userProfile ||
+          $rootScope.userProfile.steamid !== message.player.steamid) {
+        Notifications.titleNotification();
+      }
+
       $rootScope.$emit('chat-message', message);
     });
 
