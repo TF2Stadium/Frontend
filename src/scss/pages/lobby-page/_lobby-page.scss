@@ -171,7 +171,7 @@ md-icon.big {
 
   md-checkbox {
     margin: 0 auto;
-    width: 18px;
+    width: 20px;
     padding: 5px 0 5px;
 
     &.no-click {
@@ -179,8 +179,8 @@ md-icon.big {
     }
 
     div.md-container {
-      width: 18px;
-      height: 18px;
+      width: 20px;
+      height: 20px;
 
       // Fix the checkbox having an oversized click-hitbox
       &:after {
@@ -188,8 +188,8 @@ md-icon.big {
       }
 
       .md-icon {
-        width: 18px;
-        height: 18px;
+        width: 20px;
+        height: 20px;
       }
     }
   }
@@ -220,7 +220,8 @@ md-icon.big {
 .slot-info {
   @include flex (column, center, stretch);
   height: 100%;
-  margin: 0 $padding-small;
+  margin: 0;
+  margin-right: 5px;
   min-width: 0;
 }
 
@@ -240,6 +241,8 @@ md-icon.big {
   @include flex (row, flex-end, center);
   height: 26px;
   width: 100%;
+
+  padding-left: 3px;
 
   span {
     height: 26px;
@@ -272,8 +275,8 @@ md-menu.slot-menu {
 .leave-slot {
   min-width: 0;
   min-height: 0;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   display: block;
   padding: 0;
   margin: 0;
@@ -282,8 +285,8 @@ md-menu.slot-menu {
     padding: 0;
     margin: 0;
 
-    width: 18px;
-    height: 18px;
+    width: 20px;
+    height: 20px;
 
     @extend .fill-parent;
   }
