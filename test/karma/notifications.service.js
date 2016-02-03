@@ -8,7 +8,14 @@ describe('Service: Notifications', function () {
   var toastShowPromise, hasFocus;
 
   beforeEach(function () {
-    mock$window = sinon.stub({});
+    hasFocus = true;
+
+    mock$window = {
+      document: {
+        hasFocus: function () { return hasFocus; },
+        querySelector: function () {}
+      }
+    };
 
     mockNgAudio = sinon.stub({
       play: function () { return -1; }
@@ -22,6 +29,7 @@ describe('Service: Notifications', function () {
         hide: sinon.spy()
       };
 
+      $provide.value('$window', mock$window);
       $provide.value('$mdToast', mock$mdToast);
       $provide.value('ngAudio', mockNgAudio);
     });
@@ -68,6 +76,20 @@ describe('Service: Notifications', function () {
       $rootScope.$digest();
 
       expect(action).to.not.be.called;
+    });
+  });
+
+  describe('titleNotification()', function () {
+    it('should not set rootScope flag if document isn\'t focused', function () {
+      hasFocus = true;
+      Notifications.titleNotification();
+      expect($rootScope.titleNotification).to.be.false;
+    });
+
+    it('should set rootScope flag if document isn\'t focused', function () {
+      hasFocus = false;
+      Notifications.titleNotification();
+      expect($rootScope.titleNotification).to.be.true;
     });
   });
 
