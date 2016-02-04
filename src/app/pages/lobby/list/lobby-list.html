@@ -80,7 +80,7 @@
         <div flex></div>
         <div class="lobby-mumble" ng-class="{'not-required': !lobbyInformation.mumbleRequired}">
           <md-tooltip md-direction="top">
-            Mumble mandatory
+            Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}}mandatory
           </md-tooltip>
         </div>
       </div>
