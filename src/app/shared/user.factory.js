@@ -5,19 +5,27 @@
     .factory('User', User);
 
   /** @ngInject */
-  function User(Websocket, $rootScope, $window, Config) {
+  function User(Websocket, $rootScope, $window, $q, Config) {
 
     var userService = {};
 
     userService.getProfile = function (steamid, callback) {
       callback = callback || angular.noop;
 
-      Websocket.emitJSON('playerProfile',
-        {steamid: steamid},
+      var deferred = $q.defer();
+
+      Websocket.emitJSON(
+        'playerProfile',
+        { steamid: steamid },
         function (response) {
-          callback(response.data);
-        }
-      );
+          if (response.success) {
+            deferred.resolve(response.data);
+          } else {
+            deferred.reject(response.message);
+          }
+        });
+
+      return deferred.promise;
     };
 
     userService.logout = function () {
