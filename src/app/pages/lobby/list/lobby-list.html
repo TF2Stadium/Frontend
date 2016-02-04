@@ -36,7 +36,15 @@
 <div class="lobby-list-empty-state"
      ng-if="filteredLobbies.length === 0"
      ng-controller="LobbyCreateButtonController as lcbc">
-  <h1>There are no lobbies up right now</h1>
+  <h1>
+    There {{
+      (!lobbyList.lobbies || lobbyList.lobbies.length === 0 || lobbyList.lobbies.length > 1)? 'are':'is'
+    }} {{
+      (!lobbyList.lobbies || lobbyList.lobbies.length === 0)? 'no':lobbyList.lobbies.length
+    }} lobb{{
+      (!lobbyList.lobbies || lobbyList.lobbies.length === 0 || lobbyList.lobbies.length > 1)? 'ies':'y'
+    }} up right now
+  </h1>
   <p>Why don't you try changing your filter settings or creating a new one?</p>
   <md-button
      ng-mouseover="lcbc.preloadLobbyCreate()"
