@@ -4,6 +4,7 @@ $themes-list: (
     type:                 'light',
     main-color:           $blue-medium,
     secondary-color:      $blue-hard,
+    good-color:           #42bd41,
     warn-color:           #D50000,
     body-background:      $white-dirty,
     header-background:    $white-dirty,
@@ -19,6 +20,7 @@ $themes-list: (
     type:                 'dark',
     main-color:           $blue-medium,
     secondary-color:      $blue-hard,
+    good-color:           #42bd41,
     warn-color:           #D50000,
     body-background:      $grey-dark,
     header-background:    $grey-dark,
@@ -39,6 +41,7 @@ $themes-list: (
   $main-color:            themeVar(main-color);
   $secondary-color:       themeVar(secondary-color);
   $warn-color:            themeVar(warn-color);
+  $good-color:          themeVar(good-color);
   $body-color:            themeVar(body-background);
   $sheet-color:           lighten($body-color, 6.5%);
   @if themeVar(type) == 'light' {
@@ -381,12 +384,20 @@ $themes-list: (
     }
 
     .slot-requirement-met {
-      color: #42bd41;
+      color: $good-color;
     }
 
     .slot-requirement-failed {
       color: $warn-color;
     }
 
+    // user-profile
+    .karma-good {
+      color: $good-color;
+    }
+
+    .karma-bad {
+      color: $warn-color;
+    }
   }
 }

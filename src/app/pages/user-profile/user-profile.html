@@ -1,3 +1,84 @@
-<div>
-  User profile: {{::userProfile.steamid}}
+<div ng-if="userProfile.loadingError"
+     class="profile-loading-error">
+  <h1>Error loading profile</h1>
+  <p>{{userProfile.error}}</p>
+</div>
+
+<div ng-if="!userProfile.loadingError">
+  <div class="user-profile">
+    <a href="{{userProfile.steamUrl}}"
+       target="_blank"
+       tabindex="0"
+       ng-focus="hover_steam=true"
+       ng-blur="hover_steam=false">
+      <div class="avatar">
+        <img alt="avatar"
+             src="{{userProfile.profile.avatar.replace('.jpg', '_full.jpg')}}" />
+        <div ng-class="{'focused': hover_steam}"></div>
+      </div>
+    </a>
+
+    <a href="{{userProfile.steamUrl}}"
+       target="_blank"
+       class="player-name"
+       ng-mouseover="hover_steam = true"
+       ng-mouseout="hover_steam = false"
+       ng-focus="hover_steam=true"
+       ng-blur="hover_steam=false"
+       tabindex="-1">
+      <h1>
+        <img class="badge"
+             ng-if="userProfile.profile.role !== 'player'"
+             src="/assets/img/badges/{{userProfile.profile.role}}.png">
+        {{::userProfile.profile.name}}
+      </h1>
+    </a>
+    <p class="player-details">
+      TF2 Hours: {{::userProfile.profile.gameHours}}
+      <br />
+      Playing TF2Stadium since: February 10, 2010
+      <br />
+      TODO: League badges here
+    </p>
+
+    <div class="clearfix"></div>
+  </div>
+  <div class="lobbies-sheet">
+    <h1 class="lobbies-played">{{userProfile.profile.stats.lobbiesPlayed}} Lobbies</h1>
+    <h1 class="karma">
+      <md-tooltip class="karma-tooltip" md-direction="bottom">
+        <span class="karma-good">{{userProfile.profile.stats.substitutes}}</span> Subs
+        -
+        <span class="karma-bad">{{userProfile.profile.stats.leaves}}</span> Leaves
+      </md-tooltip>
+      Karma:
+      <span class="karma-good">
+        {{userProfile.profile.stats.substitutes - userProfile.profile.stats.leaves}}
+      </span>
+    </h1>
+    <div class="clearfix"></div>
+
+    <ul class="lobby-types">
+      <li ng-repeat="lobbyType in userProfile.profile.lobbyTypes">
+        <span class="count">{{lobbyType.cnt}}</span>
+        <span class="format">{{lobbyType.abbr}}</span>
+      </li>
+    </ul>
+
+    <ul class="class-types">
+      <li ng-repeat="klass in userProfile.profile.classes">
+        <span class="count">{{klass.cnt}}</span>
+        <img class="icon"
+             alt="{{klass.name}}"
+             src="/assets/img/class/class-icon-{{klass.name}}.svg" />
+      </li>
+    </ul>
+
+    <br />
+    User profile: {{userProfile.steamId}}
+    <br />
+    <p>
+      Profile: {{userProfile.profile}}
+    </p>
+  </div>
 </div>

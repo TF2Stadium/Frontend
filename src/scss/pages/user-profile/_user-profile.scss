@@ -1,0 +1,106 @@
+.user-profile {
+  margin-bottom: $padding-medium;
+
+  .avatar {
+    float: left;
+    margin-right: $padding-small;
+
+    &, img, div {
+      width: 200px;
+      height: 200px;
+    }
+
+    div {
+      position: absolute;
+      top: 0px;
+
+      background-image: url(/assets/img/steam-logo.svg);
+      background-size: 100% 100%;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+
+      transition: 0.25s;
+      transition-property: opacity;
+      transition-timing-function: ease-in-out;
+
+      opacity: 0;
+
+      &:hover,
+      &.focused {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .badge {
+    height: 1.3em;
+    width: 1.3em;
+    vertical-align: top;
+  }
+
+  a.player-name h1 {
+    line-neight: 1em;
+    margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    margin-top: 0;
+  }
+}
+
+.lobbies-sheet {
+  @extend .sheet;
+  padding: $padding-medium;
+
+  h1 {
+    margin: 0;
+
+    &.lobbies-played {
+      float: left;
+    }
+
+    &.karma {
+      float: right;
+    }
+  }
+
+  p {
+    word-break: break-all;
+  }
+}
+
+.lobby-types,
+.class-types {
+  margin-top: 0;
+  padding: 0;
+
+  font-size: 20px;
+
+  margin-top: $padding-small;
+  margin-bottom: 0;
+
+  li {
+    display: inline;
+    margin-left: $padding-medium;
+  }
+
+  img.icon {
+    width: 1.3em;
+    height: 1.3em;
+    vertical-align: middle;
+  }
+
+  .format {
+    font-size: 1.3em;
+    font-weight: bold;
+    vertical-align: middle;
+  }
+}
+
+md-tooltip.karma-tooltip {
+  font-size: 20px;
+}
