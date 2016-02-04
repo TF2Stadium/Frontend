@@ -22,20 +22,12 @@
              required>
     </md-input-container>
 
-    <md-input-container md-no-float
-                        ng-show="!showPassword">
-      <input type="password"
+    <md-input-container md-no-float>
+      <input type="{{showPassword? 'text' : 'password'}}"
              ng-model="lobbyCreate.lobbySettings.rconpwd"
              ng-change="lobbyCreate.verifiedServer=false"
              placeholder="Server RCON password"
              required>
-    </md-input-container>
-
-    <md-input-container md-no-float
-                        ng-show="showPassword">
-      <input type="text" ng-model="lobbyCreate.lobbySettings.rconpwd"
-             ng-change="lobbyCreate.verifiedServer=false"
-             placeholder="Server RCON password">
     </md-input-container>
 
     <md-checkbox ng-model="showPassword">Show password</md-checkbox>
