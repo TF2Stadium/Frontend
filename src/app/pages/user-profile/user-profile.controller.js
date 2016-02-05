@@ -29,32 +29,36 @@
           {key: 'PlayedUltiduoCount', abbr: 'UD'}
         ].map(function (o) {
           return {
-            cnt: Math.floor(160*Math.random()),//vm.profile.stats[o.key],
+            cnt: vm.profile.stats[o.key],
             abbr: o.abbr
           };
-        }); // .sort(function (o) { return o.cnt; });
+        });
 
         vm.profile.classes = [
-          {cnt: 5, name: 'scout'},
-          {cnt: 293, name: 'soldier'},
-          {cnt: -1, name: 'pyro'},
-          {cnt: 15, name: 'demoman'},
-          {cnt: 1, name: 'heavy'},
-          {cnt: 0.5, name: 'engineer'},
-          {cnt: 294, name: 'medic'},
-          {cnt: 33, name: 'sniper'},
-          {cnt: 7134, name: 'spy'}
-        ];
+          'scout',
+          'soldier',
+          'pyro',
+          'demoman',
+          'heavy',
+          'engineer',
+          'medic',
+          'sniper',
+          'spy'
+        ].map(function (className) {
+          return {
+            name: className,
+            cnt: vm.profile.stats[className]
+          };
+        });
 
-        vm.profile.stats.lobbiesPlayed = 578;
-        vm.profile.stats.substitutes = 40;
-        vm.profile.stats.leaves = 5;
-
+        // TODO: TEST DATA, remove once the backend supplies this
+        if (angular.isUndefined(vm.profile.stats.leaves)) {
+          vm.profile.stats.leaves = 0;
+        }
 
       }, function (err) {
         vm.error = err;
         vm.loadingError = true;
       });
-
   }
 })();
