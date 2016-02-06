@@ -1,9 +1,38 @@
-<md-grid-tile md-ink-ripple class="tile-card"
-  md-colspan="12" md-rowspan="2"
-  ng-repeat="whitelist in lobbyCreate.whitelists.options | LobbyCreateOptionFilter:'whitelists':lobbyCreate.searchString"
-  ng-click="lobbyCreate.select(lobbyCreate.whitelists, whitelist)"
-  ng-class="{'fade-in-top no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.whitelists, whitelist)}">
+<md-grid-tile
+   md-ink-ripple
+   class="tile-card"
+
+   md-colspan="12"
+   md-rowspan="2"
+
+   ng-repeat="whitelist in lobbyCreate.whitelists.options | LobbyCreateOptionFilter:'whitelists':lobbyCreate.searchString as filteredOptions"
+   ng-click="lobbyCreate.select(lobbyCreate.whitelists, whitelist)"
+   ng-class="{'fade-in-top no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.whitelists, whitelist)}">
   <div class="tile-text">
     <h2>{{::whitelist.title}}</h2>
+  </div>
+</md-grid-tile>
+
+<md-grid-tile
+   md-ink-ripple
+   class="tile-card"
+
+   md-colspan="12"
+   md-rowspan="2"
+
+   ng-if="lobbyCreate.shouldShowCustomOption(lobbyCreate.searchString, filteredOptions)"
+
+   ng-click="lobbyCreate.select(lobbyCreate.whitelists, {value: lobbyCreate.searchString})"
+
+   ng-click="lobbyCreate.select(lobbyCreate.whitelists, lobbyCreate.searchString)"
+   ng-class="{'selected': lobbyCreate.isSelected(lobbyCreate.whitelists, {value: lobbyCreate.searchString})}">
+  <div class="tile-text">
+    <h2>Whitelist.tf ID:
+      {{lobbyCreate.searchString}}
+      <br />
+      <a href="http://whitelist.tf/{{lobbyCreate.searchString}}"
+         target="_blank"
+         ng-click="$event.stopPropagation();">View</a>
+    </h2>
   </div>
 </md-grid-tile>

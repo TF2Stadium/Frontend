@@ -2,7 +2,7 @@
    md-ink-ripple
    class="tile-card"
 
-   ng-repeat="map in lobbyCreate.maps.options | LobbyCreateOptionFilter:'maps':lobbyCreate.searchString"
+   ng-repeat="map in lobbyCreate.maps.options | LobbyCreateOptionFilter:'maps':lobbyCreate.searchString as filteredOptions"
 
    ng-click="lobbyCreate.select(lobbyCreate.maps, map)"
    ng-mouseover="lobbyCreate.preloadImage('/assets/img/maps/header/' + map.value + '.jpg')"
@@ -14,5 +14,25 @@
   <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/maps/lobby-create/' + map.value + '.jpg)'}"></div>
   <div class="tile-text">
     <span class="title">{{::map.value}}</span>
+  </div>
+</md-grid-tile>
+
+<md-grid-tile
+   md-ink-ripple
+   class="tile-card"
+
+   md-colspan="6"
+   md-rowspan="2"
+
+   ng-if="lobbyCreate.shouldShowCustomOption(lobbyCreate.searchString, filteredOptions)"
+
+   ng-click="lobbyCreate.select(lobbyCreate.maps, {value: lobbyCreate.searchString})"
+   ng-mouseover="lobbyCreate.preloadImage('/assets/img/maps/header/' + lobbyCreate.searchString + '.jpg')"
+
+   ng-class="{'no-animate': true,
+              'selected': lobbyCreate.isSelected(lobbyCreate.maps, {value: lobbyCreate.searchString})}">
+  <div class="tile-image" ng-style="{'background-image': 'url(/assets/img/maps/lobby-create/' + lobbyCreate.searchString + '.jpg)'}"></div>
+  <div class="tile-text">
+    <span class="title">{{lobbyCreate.searchString}}</span>
   </div>
 </md-grid-tile>
