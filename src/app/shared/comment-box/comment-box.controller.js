@@ -27,11 +27,13 @@
 
         if (msgs.length > 0) {
           vm.lastSeenIds[room.id] = msgs[msgs.length - 1].id;
+          vm.showRoomNotification[room.id] = false;
         }
       });
     }, 0);
 
     vm.lastSeenIds = Object.create(null);
+    vm.showRoomNotification = Object.create(null);
 
     // The three tabs are:
     //  0 - global chat
@@ -53,15 +55,32 @@
     }
 
     var clearChatMessage = $rootScope.$on('chat-message', function (e, message) {
-      var room = message.room;
-      if (angular.isUndefined(vm.lastSeenIds[room])) {
-        vm.lastSeenIds[room] = 0;
+      var roomId = message.room;
+      if (angular.isUndefined(vm.lastSeenIds[roomId])) {
+        vm.lastSeenIds[roomId] = 0;
       }
 
-      if (room === vm.rooms[currentTabId()].id) {
-        vm.lastSeenIds[room] = Math.max(vm.lastSeenIds[room], message.id);
+      if (roomId === vm.rooms[currentTabId()].id) {
+        vm.lastSeenIds[roomId] = Math.max(vm.lastSeenIds[roomId], message.id);
+      }
+
+      if ($rootScope.userProfile) {
+        var steamid = $rootScope.userProfile.steamid;
+        var latest = vm.lastSeenIds[roomId];
+
+        var room = vm.rooms.filter(function (r) {
+          return roomId === r.id;
+        })[0];
+
+        // not done as a function declaration to satisfy the linter :\
+        var isFresh = function isFresh(msg) {
+          return msg.id > latest && msg.player.steamid !== steamid;
+        };
+
+        vm.showRoomNotification[roomId] = room.messages.filter(isFresh).length > 0;
       }
     });
+
     $scope.$on('$destroy', clearChatMessage);
 
     vm.sendMessage = function (event) {

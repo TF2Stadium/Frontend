@@ -42,6 +42,28 @@
   li {
     padding: 3px 0;
   }
+
+  span.tab-title {
+    // Put an invisible asterisk on both sides, and they're always
+    // there in order to balance each other out. This way, the tab
+    // titles don't get pushed off center (since there is an asterisk
+    // on both sides) and also, when a tab gets marked/unmarked, it
+    // doesn't shift slightly.
+
+    // Downside: Wide tabs titles may scroll with less text than they normally would
+
+    &::before,
+    &::after {
+      content: "*";
+      color: transparent;
+    }
+
+    &.changed {
+      &::before {
+        color: inherit;
+      }
+    }
+  }
 }
 
 .chat-error {
@@ -78,10 +100,6 @@
   img.emote {
     vertical-align: text-bottom;
   }
-}
-
-.chat-tabs {
-  margin-bottom: $padding-small;
 }
 
 .chat-player-name {
