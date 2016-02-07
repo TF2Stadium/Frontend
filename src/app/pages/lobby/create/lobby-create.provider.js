@@ -84,6 +84,7 @@
           key: 'map',
           title: 'Map',
           filterable: true,
+          allowCustomInput: true,
           options: [
             {
               value: 'cp_badlands',
@@ -229,6 +230,7 @@
           key: 'whitelistID',
           title: 'Whitelist',
           filterable: true,
+          allowCustomInput: true,
           options: [
             {
               value: 'ETF2L_9v9',
@@ -329,14 +331,14 @@
         if it's valid
       */
       var isSettingValid = function (fieldKey, optionValue) {
-        var isValid = false;
         var field = lobbySettingsList[fieldKey];
-        field.options.forEach(function (option) {
-          if (option.value === optionValue) {
-            isValid = $filter('LobbyCreateOptionFilter')([option], fieldKey,'')[0];
-          }
-        });
-        return isValid;
+        var optionFilter = $filter('LobbyCreateOptionFilter');
+
+        return field.allowCustomInput ||
+          field.options.filter(function (option) {
+            return option.value === optionValue &&
+              optionFilter([option], fieldKey,'')[0];
+          });
       };
 
       lobbyCreateService.subscribe = function (request, scope, callback) {

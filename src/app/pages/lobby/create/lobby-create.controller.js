@@ -137,6 +137,21 @@
       return settingsGroup && settingsGroup.filterable;
     };
 
+    vm.searchAndInput = function () {
+      var settingsGroup = lobbySettingsList[getCurrentWizardStep().groupKey];
+      return settingsGroup && settingsGroup.allowCustomInput;
+    };
+
+    vm.shouldShowCustomOption = function (searchStr, options) {
+      searchStr = vm.searchString && vm.searchString.toLowerCase();
+
+      // If the custom input is an exact match to a predefined option,
+      // don't show it as a duplicate option
+      return searchStr && !options.some(function (x) {
+        return x.value.toLowerCase() === searchStr;
+      });
+    };
+
     $scope.$on('$destroy', $rootScope.$on('$stateChangeSuccess', function () {
       // clear search input when navigating to a page
       vm.searchString = null;
