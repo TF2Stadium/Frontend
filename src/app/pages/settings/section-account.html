@@ -18,6 +18,21 @@
   </form>
 </div>
 <div class="settings-section">
+  <h1>Twitch</h1>
+  <p>Twitch Integration</p>
+  <md-button
+    ng-if="$root.userProfile.twitchName"
+     class="md-raised md-primary"
+     ng-click="settings.twitchLogout()">
+    Logout
+  </md-button>
+
+  <md-button
+    ng-if="!$root.userProfile.twitchName"
+    ng-href="{{config.endpoints.api}}/startTwitchLogin"
+    class="twitch-login">
+</div>
+<div class="settings-section">
   <h1>Account</h1>
   <p>You can logout here.</p>
   <md-button

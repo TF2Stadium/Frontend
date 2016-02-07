@@ -24,6 +24,10 @@
       $window.open(Config.endpoints.api + '/logout', '_self');
     };
 
+    userService.twitchLogout = function () {
+      $window.open(Config.endpoints.api+'/twitchLogout', '_self');
+    };
+
     userService.init = function () {
       Websocket.onJSON('playerProfile', function (data) {
         $rootScope.userProfile = data;
