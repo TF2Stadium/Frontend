@@ -41,6 +41,10 @@
       User.logout();
     };
 
+    vm.twitchLogout = function () {
+      User.twitchLogout();
+    };
+
     /*
       Iterates through all the settings in the list and compares
       them to the stored settings.

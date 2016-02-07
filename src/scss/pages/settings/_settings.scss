@@ -45,3 +45,14 @@
     margin-bottom: 0;
   }
 }
+
+.twitch-login {
+  width: 170px;
+
+  //Don't show text, instead use steam's button
+  background: {
+    image: url(../assets/img/twitch-login.png);
+    repeat: no-repeat;
+    position: center;
+  }
+}

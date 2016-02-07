@@ -10,6 +10,10 @@
     <input type="password" ng-model="lobbyCreate.lobbySettings.password"
            placeholder="Password for slots">
   </md-input-container>
+  <md-input-container md-no-float>
+    <input ng-model="lobbyCreate.lobbySettings.twitchWhitelist"
+           placeholder="Restrict lobby to Twitch subscribers for this channel">
+  </md-input-container>
   <md-input-container md-no-float
                       ng-show="showPassword">
     <input type="text" ng-model="lobbyCreate.lobbySettings.password"
