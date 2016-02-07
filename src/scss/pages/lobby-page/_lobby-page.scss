@@ -158,6 +158,9 @@ md-icon.big {
     .slot-misc {
       flex-direction: row-reverse;
       text-align: right;
+
+      padding: 0;
+      padding-right: 3px;
     }
 
     .slot-playername {
