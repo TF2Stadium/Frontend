@@ -1,21 +1,21 @@
 <div class="header-image" ng-style="{'background-image':'url(assets/img/maps/header/' + header.lobbyInformation.map + '.jpg)'}"
-  ng-show="header.shouldShowLobbyInformation()">
+     ng-show="header.shouldShowLobbyInformation()">
   <div class="header-text">
     <div class="lobbypage-text">
       <div class="row">
         <span class="lobbypage-map"
               title="{{header.lobbyInformation.map}}"
               ><md-icon class="big"
-                        md-svg-icon="material:lock-closed-white"
-                        ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">
+                             md-svg-icon="material:lock-closed-white"
+                             ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">
             <md-tooltip>Private lobby</md-tooltip>
-        </md-icon>{{header.lobbyInformation.map}}</span>
+          </md-icon>{{header.lobbyInformation.map}}</span>
         <div class="lobbypage-lobby-closed"
-          ng-if="header.lobbyInformation.state>=5">
+             ng-if="header.lobbyInformation.state>=5">
           FINISHED
         </div>
         <div class="lobbypage-lobby-controls"
-          ng-if="header.shouldShowLobbyControls()">
+             ng-if="header.shouldShowLobbyControls()">
           <md-button class="md-raised" ng-click="header.closeLobby()">
             Close lobby
           </md-button>
@@ -50,4 +50,4 @@
   asdfasdf
 </div>
 <md-progress-linear md-mode="indeterminate"
-    ng-if="header.shouldShowProgress()"></md-progress-linear>
+                    ng-if="header.shouldShowProgress()"></md-progress-linear>

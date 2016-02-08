@@ -8,6 +8,7 @@
   // TODO: Change the icons to either be font based, or to be a single
   // SVG icon set file (SVG file with groups with ids that are the
   // icons' names)
+  var materialIconsBase = '/assets/img/icons/material/';
   var materialIcons = [
     {name: 'add', file: 'add.svg'},
     {name: 'clear', file: 'clear.svg'},
@@ -20,13 +21,22 @@
     {name: 'settings', file: 'settings.svg'}
   ];
 
-  var materialIconsBase = '/assets/img/icons/material/';
+  var logosBase = '/assets/img/logos/';
+  var logoIcons = [
+    {name: 'twitch', file: 'twitch.svg'},
+    {name: 'steam', file: 'steam.svg'}
+  ];
 
   /** @ngInject */
   function registerIcons($mdIconProvider) {
     materialIcons.forEach(function (desc) {
       $mdIconProvider
         .icon('material:' + desc.name, materialIconsBase + desc.file);
+    });
+
+    logoIcons.forEach(function (desc) {
+      $mdIconProvider
+        .icon('logo:' + desc.name, logosBase + desc.file);
     });
   }
 

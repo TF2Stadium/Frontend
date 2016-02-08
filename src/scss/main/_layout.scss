@@ -241,3 +241,15 @@ md-input-container {
     min-height: 0 !important;
   }
 }
+
+.inline-logo {
+  height: 1.5em;
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 0.1em;
+
+  // md-icon's get a transparent color set by default... in order for
+  // fill: currentColor (which they have from angular-material) to
+  // correctly use the color of the surrounding text.
+  color: inherit;
+}

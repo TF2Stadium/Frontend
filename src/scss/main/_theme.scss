@@ -380,5 +380,13 @@ $themes-list: (
       border-color: $sheet-color !important;
     }
 
+    .slot-requirement-met {
+      color: #42bd41;
+    }
+
+    .slot-requirement-failed {
+      color: $warn-color;
+    }
+
   }
 }

@@ -1,3 +1,28 @@
+<div class="sheet twitch-sheet"
+     ng-if="lobbyPage.lobbyInformation.twitchChannel">
+  <p>
+    This lobby is only for
+    <a href="https://twitch.tv/{{lobbyPage.lobbyInformation.twitchChannel}}"
+       ><img class="inline-logo"
+             src="/assets/img/logos/twitch-glitch.png"
+             alt="twitch"
+             />{{lobbyPage.lobbyInformation.twitchChannel}}</a>
+    subscribers.
+  </p>
+</div>
+
+<div class="sheet steam-group-sheet"
+     ng-if="lobbyPage.lobbyInformation.steamGroup">
+  <p>
+    This lobby is only for
+    <a href="https://steamcommunity.com/groups/{{::lobbyPage.lobbyInformation.steamGroup}}"
+       target="_blank"
+       ><md-icon class="inline-logo"
+                 md-svg-icon="logo:steam"></md-icon>{{::lobbyPage.lobbyInformation.steamGroup}}</a>
+    Steam Group members.
+  </p>
+</div>
+
 <div id="lobby-join-information" class="sheet"
   ng-if="lobbyPage.lobbyJoinInformation.id && lobbyPage.lobbyJoinInformation.id==lobbyPage.lobbyInformation.id">
   <div class="row">
@@ -34,7 +59,7 @@
     <div aria-label="Join {{::team}} {{::class.class | stripSlotNameNumber}}"
          ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
          ng-click="!slot.filled && lobbyPage.slotClicked(this, $event)"
-         ng-class="{'sheet low clickable' : !slot.filled}"
+         ng-class="{'sheet low clickable slot-filled' : !slot.filled}"
          class="slot-button"
          md-ink-ripple>
       <div ng-if="slot.filled">
@@ -87,6 +112,7 @@
            aria-label="Player ready">
         </md-checkbox>
       </div>
+
       <div flex class="slot-info" ng-if="slot.filled">
         <span class="slot-playername">{{::slot.player.name}}</span>
         <div class="slot-misc">
@@ -96,21 +122,113 @@
           <div><span>{{::slot.player.lobbiesPlayed}}</span><span>lobbies</span></div>
         </div>
       </div>
+
       <img ng-if="slot.filled" ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}" class="slot-avatar">
+
       <md-icon
-        md-svg-icon="material:lock-closed"
-        ng-if="!showPasswordBox && !slot.filled && lobbyPage.lobbyInformation.password">
+         class="slot-locked"
+         md-svg-icon="material:lock-closed"
+         ng-if="!showPasswordBox && !slot.filled && lobbyPage.lobbyInformation.password">
       </md-icon>
+
+      <div class="slot-requirements"
+           ng-if="!showPasswordBox && !slot.filled">
+        <md-menu ng-show="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'"
+                 class="slot-menu">
+          <md-button class="more-button"
+                     aria-label="More"
+                     ng-click="$mdOpenMenu($event);$event.stopPropagation();">
+            <md-icon md-svg-icon="material:more-vert"></md-icon>
+          </md-button>
+          <md-menu-content width="4">
+            <md-menu-item
+               ng-if="slot.requirements.hours">
+              <md-button
+                 ng-click="lobbyPage.setRequirements(slot, 'hours', 0)">
+                Clear Hours Requirement
+              </md-button>
+            </md-menu-item>
+            <md-menu-item
+               ng-if="slot.requirements.hours">
+              <md-button
+                 ng-click="lobbyPage.slotRequirementValue=slot.requirements.hours;lobbyPage.setRequirements(slot, 'hours')">
+                Change Hours Requirement
+              </md-button>
+            </md-menu-item>
+            <md-menu-item
+               ng-if="!slot.requirements.hours">
+              <md-button
+                 ng-click="lobbyPage.slotRequirementValue=null;lobbyPage.setRequirements(slot, 'hours')">
+                Set Hours Requirement
+              </md-button>
+            </md-menu-item>
+            <md-menu-item
+               ng-if="slot.requirements.lobbies">
+              <md-button
+                 ng-click="lobbyPage.setRequirements(slot, 'lobbies', 0)">
+                Clear Lobbies Requirement
+              </md-button>
+            </md-menu-item>
+            <md-menu-item
+               ng-if="slot.requirements.lobbies">
+              <md-button
+                 ng-click="lobbyPage.slotRequirementValue=slot.requirements.lobbies;lobbyPage.setRequirements(slot, 'lobbies')">
+                Change Lobbies Requirement
+              </md-button>
+            </md-menu-item>
+            <md-menu-item
+               ng-if="!slot.requirements.lobbies">
+              <md-button
+                 ng-click="lobbyPage.slotRequirementValue=null;lobbyPage.setRequirements(slot, 'lobbies')">
+                Set Lobbies Requirement
+              </md-button>
+            </md-menu-item>
+          </md-menu-content>
+        </md-menu>
+      </div>
+
+      <div class="slot-requirements"
+           ng-if="!showPasswordBox && !slot.filled">
+        <md-input-container
+           md-no-float
+           class="req-input"
+           ng-if="lobbyPage.showRequirementInput === slot.slotId">
+          <input
+             autofocus
+             ng-model="lobbyPage.slotRequirementValue"
+             aria-label="slot requirement value input"
+             type="number"
+             placeholder="{{lobbyPage.requirementInputName === 'hours'? 'Hours':'Lobbies'}}"
+             step="{{lobbyPage.requirementInputName === 'hours'? 100:10}}"
+             min="0"
+             class="slot-requirement-input"
+             ng-blur="lobbyPage.requirementInputDeferred.reject()"
+             ng-click="$event.stopPropagation()"
+             ng-keydown="lobbyPage.keydownRequirementInput(lobbyPage.slotRequirementValue, $event)">
+        </md-input-container>
+
+        <span ng-if="lobbyPage.showRequirementInput !== slot.slotId && slot.requirements.hours && vm.showRequirementInput !== slot.slotId"
+              ng-class="{'slot-requirement-met': $root.userProfile && $root.userProfile.gameHours >= slot.requirements.hours,
+                         'slot-requirement-failed': $root.userProfile && $root.userProfile.gameHours < slot.requirements.hours}"
+              >{{slot.requirements.hours}}+ Hours</span><!--
+        --><br ng-if="lobbyPage.showRequirementInput !== slot.slotId && slot.requirements.lobbies && slot.requirements.hours" /><!--
+     --><span ng-if="lobbyPage.showRequirementInput !== slot.slotId && slot.requirements.lobbies && vm.showRequirementInput !== slot.slotId"
+              ng-class="{'slot-requirement-met':$root.userProfile && $root.userProfile.stats.lobbiesPlayed >= slot.requirements.lobbies,
+                         'slot-requirement-failed': $root.userProfile && $root.userProfile.stats.lobbiesPlayed < slot.requirements.lobbies}"
+              >{{slot.requirements.lobbies}}+ Lobbies</span>
+      </div>
+
       <md-input-container
         md-no-float
         class="slot-password"
         ng-if="showPasswordBox && !slot.filled && lobbyPage.lobbyInformation.password">
         <input
-          placeholder="Password"
-          class="slot-password-input"
-          ng-blur="lobbyPage.onPasswordInputBlur($parent)"
-          ng-model="$parent.slotPassword"
-          ng-keydown="lobbyPage.onPasswordInputKeydown($parent, $event)">
+           aria-label="slot password"
+           placeholder="Password"
+           class="slot-password-input"
+           ng-blur="lobbyPage.onPasswordInputBlur($parent)"
+           ng-model="$parent.slotPassword"
+           ng-keydown="lobbyPage.onPasswordInputKeydown($parent, $event)">
       </md-input-container>
     </div>
     <div class="class-button lobby-icon-{{::class.class | stripSlotNameNumber}}">

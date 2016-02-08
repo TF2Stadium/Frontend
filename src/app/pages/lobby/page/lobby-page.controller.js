@@ -6,8 +6,8 @@
     .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
-  function LobbyPageController($mdDialog, $scope, $state, $window, LobbyService, $timeout) {
-
+  function LobbyPageController($q, $mdDialog, $scope, $state, $window,
+                               $timeout, LobbyService) {
     var vm = this;
 
     var buildConnectString = function () {
@@ -139,6 +139,49 @@
         .then(function () {
           LobbyService.setLobbyLeader(vm.lobbyInformation.id, player.steamid);
         });
+    };
+
+    vm.showRequirementInput = false;
+    vm.reqInputField = false;
+    vm.requirementInputPromise = null;
+
+    vm.setRequirements = function (slot, reqName, val) {
+      // If a value is supplied, directly set it. Else prompt the user
+      // to enter a value.
+      if (angular.isDefined(val)) {
+        setReq(val);
+      } else {
+        vm.showRequirementInput = slot.slotId;
+        vm.requirementInputName = reqName;
+        vm.reqInputField = reqName;
+
+        var deferred = $q.defer();
+        vm.requirementInputDeferred = deferred;
+
+        deferred.promise.then(function (value) {
+          vm.showRequirementInput = false;
+          setReq(value);
+        }, function () {
+          vm.showRequirementInput = false;
+        });
+      }
+
+      function setReq(value) {
+        LobbyService.setSlotRequirement(vm.lobbyInformation.id,
+                                        slot.slotId,
+                                        reqName,
+                                        value < 0? 0 : value);
+      }
+    };
+
+    vm.keydownRequirementInput = function (val, e) {
+      if (e.keyCode !== 13) {
+        return;
+      }
+
+      e.stopPropagation();
+      e.preventDefault();
+      vm.requirementInputDeferred.resolve(val);
     };
 
     LobbyService.spectate(parseInt($state.params.lobbyID));

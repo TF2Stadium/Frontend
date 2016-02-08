@@ -34,7 +34,7 @@
   }
 }
 
-md-icon.big {
+.big {
   height: 60px;
   width: 60px;
   margin: 0;
@@ -124,6 +124,7 @@ md-icon.big {
   padding: 0 $padding-medium;
 }
 
+
 .slot-button {
   @include flex (row, space-between, center);
   height: 100%;
@@ -136,6 +137,10 @@ md-icon.big {
   border-radius: 3px; //overriding .class-button .md-button
   transition: all .3s ease-out;
   overflow: hidden;
+
+  input.slot-requirement-input {
+    width: 80px;
+  }
 
   &:focus .slot-password {
     display: block;
@@ -166,11 +171,27 @@ md-icon.big {
     .slot-playername {
       text-align: left;
     }
+
+    .slot-requirements {
+      text-align: left;
+      margin: 0;
+      margin-left: $padding-small;
+    }
   }
 
   md-icon {
     svg {
       fill: #666;
+    }
+
+    &.slot-locked {
+      width: 24px;
+      height: 24px;
+
+      position: absolute;
+      top: ($class-button-height/2) - 12px;
+      left: 50%;
+      margin-left: -12px;
     }
   }
 
@@ -201,6 +222,11 @@ md-icon.big {
 
   &:not(.sheet) > .md-ripple-container {
     display: none;
+  }
+
+  .slot-requirements {
+    text-align: right;
+    margin-right: $padding-small;
   }
 }
 
@@ -294,5 +320,19 @@ md-menu.slot-menu {
     height: 20px;
 
     @extend .fill-parent;
+  }
+}
+
+.twitch-sheet,
+.steam-group-sheet {
+  padding: $padding-small $padding-medium;
+
+  p {
+    margin: 0;
+  }
+
+  margin-top: $padding-small;
+  &:first-of-type {
+    margin: 0;
   }
 }
