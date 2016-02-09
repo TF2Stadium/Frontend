@@ -19,18 +19,19 @@
 </div>
 <div class="settings-section">
   <h1>Twitch</h1>
-  <p>Twitch Integration</p>
+  <p>Connect with Twitch to join subscriber-restricted lobbies.</p>
+
   <md-button
-    ng-if="$root.userProfile.twitchName"
+     ng-if="$root.userProfile.twitchName"
      class="md-raised md-primary"
      ng-click="settings.twitchLogout()">
-    Logout
+    Disconnect Twitch
   </md-button>
 
   <md-button
     ng-if="!$root.userProfile.twitchName"
     ng-href="{{config.endpoints.api}}/startTwitchLogin"
-    class="twitch-login">
+    class="twitch-login"></md-button>
 </div>
 <div class="settings-section">
   <h1>Account</h1>

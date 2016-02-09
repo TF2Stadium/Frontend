@@ -1,34 +1,51 @@
 <div class="restrictions-form">
   <h2>Lobby restrictions</h2>
-  <p>All fields are optional.</p>
-  <md-input-container md-no-float>
-    <input ng-model="lobbyCreate.lobbySettings.steamGroupWhitelist"
-           placeholder="Steam group whitelist">
+
+  <p>
+    All fields are optional.
+    <md-button
+       class="md-raised md-primary"
+       ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">
+      Continue
+    </md-button>
+  </p>
+
+  <md-input-container>
+    <input type="number"
+           ng-model="lobbyCreate.lobbySettings.requirements.general.hours"
+           min="0"
+           step="100"
+           placeholder="Minimum TF2 Hours">
   </md-input-container>
-  <md-input-container md-no-float
-                      ng-show="!showPassword">
-    <input type="password" ng-model="lobbyCreate.lobbySettings.password"
-           placeholder="Password for slots">
+
+  <md-input-container>
+    <input type="number"
+           ng-model="lobbyCreate.lobbySettings.requirements.general.lobbies"
+           min="0"
+           step="10"
+           placeholder="Minimum Played Lobbies">
   </md-input-container>
-  <md-input-container md-no-float>
-    <input ng-model="lobbyCreate.lobbySettings.twitchWhitelist"
-           placeholder="Restrict lobby to Twitch subscribers for this channel">
-  </md-input-container>
-  <md-input-container md-no-float
-                      ng-show="showPassword">
-    <input type="text" ng-model="lobbyCreate.lobbySettings.password"
-           placeholder="Password for slots">
+
+  <md-input-container>
+    <input type="{{showPassword? 'text' : 'password'}}"
+           ng-model="lobbyCreate.lobbySettings.password"
+           placeholder="Slot Password">
   </md-input-container>
   <md-checkbox ng-model="showPassword">Show password</md-checkbox>
-  <md-input-container md-no-float>
-    <input type="number" ng-model="lobbyCreate.lobbySettings.requirements.general.hours"
-      placeholder="Minimum hours required">
+
+  <md-input-container>
+    <input ng-model="lobbyCreate.lobbySettings.steamGroupWhitelist"
+           placeholder="Steam Group URL (Only members can join)">
   </md-input-container>
-  <md-input-container md-no-float>
-    <input type="number" ng-model="lobbyCreate.lobbySettings.requirements.general.lobbies"
-           placeholder="Minimum lobbies required">
+
+  <md-input-container>
+    <input ng-model="lobbyCreate.lobbySettings.twitchWhitelist"
+           placeholder="Twitch Channel URL (For subscriber-only games)">
   </md-input-container>
+
   <md-button
      class="md-raised md-primary"
-     ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">Continue</md-button>
+     ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">
+    Continue
+  </md-button>
 </div>
