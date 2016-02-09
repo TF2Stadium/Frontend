@@ -201,6 +201,12 @@
       Websocket.emitJSON('lobbyServerReset', {id: lobbyID});
     };
 
+    factory.setLobbyLeader = function (lobbyId, steamId) {
+      Websocket.emitJSON('lobbyChangeOwner',
+                         {id: lobbyId,
+                          steamid: steamId});
+    };
+
     factory.joinTF2Server = function () {
       $timeout(function (){
         $window.open('steam://connect/' + factory.lobbyJoinInformation.game.host + '/' + factory.lobbyJoinInformation.password, '_self');
