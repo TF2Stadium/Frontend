@@ -10,7 +10,7 @@
     </md-button>
   </p>
 
-  <md-input-container md-no-float>
+  <md-input-container>
     <input type="number"
            ng-model="lobbyCreate.lobbySettings.requirements.general.hours"
            min="0"
@@ -18,7 +18,7 @@
            placeholder="Minimum TF2 Hours">
   </md-input-container>
 
-  <md-input-container md-no-float>
+  <md-input-container>
     <input type="number"
            ng-model="lobbyCreate.lobbySettings.requirements.general.lobbies"
            min="0"
@@ -26,19 +26,19 @@
            placeholder="Minimum Played Lobbies">
   </md-input-container>
 
-  <md-input-container md-no-float>
+  <md-input-container>
     <input type="{{showPassword? 'text' : 'password'}}"
            ng-model="lobbyCreate.lobbySettings.password"
            placeholder="Slot Password">
   </md-input-container>
   <md-checkbox ng-model="showPassword">Show password</md-checkbox>
 
-  <md-input-container md-no-float>
+  <md-input-container>
     <input ng-model="lobbyCreate.lobbySettings.steamGroupWhitelist"
            placeholder="Steam Group URL (Only members can join)">
   </md-input-container>
 
-  <md-input-container md-no-float>
+  <md-input-container>
     <input ng-model="lobbyCreate.lobbySettings.twitchWhitelist"
            placeholder="Twitch Channel URL (For subscriber-only games)">
   </md-input-container>
