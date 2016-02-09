@@ -151,7 +151,7 @@
       if (angular.isDefined(val)) {
         setReq(val);
       } else {
-        vm.showRequirementInput = slot.slotId;
+        vm.showRequirementInput = slot.slot;
         vm.requirementInputName = reqName;
         vm.reqInputField = reqName;
 
@@ -168,7 +168,7 @@
 
       function setReq(value) {
         LobbyService.setSlotRequirement(vm.lobbyInformation.id,
-                                        slot.slotId,
+                                        slot.slot,
                                         reqName,
                                         value < 0? 0 : value);
       }

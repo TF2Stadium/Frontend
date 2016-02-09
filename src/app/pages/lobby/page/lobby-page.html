@@ -192,7 +192,7 @@
         <md-input-container
            md-no-float
            class="req-input"
-           ng-if="lobbyPage.showRequirementInput === slot.slotId">
+           ng-if="lobbyPage.showRequirementInput === slot.slot">
           <input
              autofocus
              ng-model="lobbyPage.slotRequirementValue"
@@ -207,12 +207,12 @@
              ng-keydown="lobbyPage.keydownRequirementInput(lobbyPage.slotRequirementValue, $event)">
         </md-input-container>
 
-        <span ng-if="lobbyPage.showRequirementInput !== slot.slotId && slot.requirements.hours && vm.showRequirementInput !== slot.slotId"
+        <span ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.hours && vm.showRequirementInput !== slot.slot"
               ng-class="{'slot-requirement-met': $root.userProfile && $root.userProfile.gameHours >= slot.requirements.hours,
                          'slot-requirement-failed': $root.userProfile && $root.userProfile.gameHours < slot.requirements.hours}"
               >{{slot.requirements.hours}}+ Hours</span><!--
-        --><br ng-if="lobbyPage.showRequirementInput !== slot.slotId && slot.requirements.lobbies && slot.requirements.hours" /><!--
-     --><span ng-if="lobbyPage.showRequirementInput !== slot.slotId && slot.requirements.lobbies && vm.showRequirementInput !== slot.slotId"
+        --><br ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.lobbies && slot.requirements.hours" /><!--
+     --><span ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.lobbies && vm.showRequirementInput !== slot.slot"
               ng-class="{'slot-requirement-met':$root.userProfile && $root.userProfile.stats.lobbiesPlayed >= slot.requirements.lobbies,
                          'slot-requirement-failed': $root.userProfile && $root.userProfile.stats.lobbiesPlayed < slot.requirements.lobbies}"
               >{{slot.requirements.lobbies}}+ Lobbies</span>
