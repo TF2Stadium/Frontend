@@ -18,44 +18,47 @@
       </div>
     </a>
 
-    <a href="{{userProfile.steamUrl}}"
-       target="_blank"
-       class="player-name"
-       ng-mouseover="hover_steam = true"
-       ng-mouseout="hover_steam = false"
-       ng-focus="hover_steam=true"
-       ng-blur="hover_steam=false"
-       tabindex="-1">
-      <h1>
+    <h1 class="player-name">
+      <a href="{{userProfile.steamUrl}}"
+         target="_blank"
+         ng-mouseover="hover_steam = true"
+         ng-mouseout="hover_steam = false"
+         ng-focus="hover_steam=true"
+         ng-blur="hover_steam=false"
+         tabindex="-1">
         <img class="badge"
              ng-if="userProfile.profile.role !== 'player'"
              src="/assets/img/badges/{{userProfile.profile.role}}.png">
         {{::userProfile.profile.name}}
-      </h1>
-    </a>
+      </a>
+    </h1>
     <p class="player-details">
       TF2 Hours: {{::userProfile.profile.gameHours}}
       <br />
-      Playing TF2Stadium since: February 10, 2010
+      Playing TF2Stadium since: {{userProfile.profile.createdAt.fromNow()}}
       <br />
       <br />
-      <a href="http://logs.tf/profile/{{::userProfile.steamId}}">
+
+      <a ng-repeat="link in userProfile.profile.external_links"
+         href="{{link.url}}"
+         target="_blank">
         <img class="logo"
              height="24"
-             src="/assets/img/logos/logs.tf.png"
-             alt="logs.tf Profile" />
+             src="{{link.img}}"
+             alt="{{link.name}} Profile" />
       </a>
-      <a href="http://www.ugcleague.com/players_page.cfm?player_id={{::userProfile.steamId}}">
+      <a href="{{link.url}}"
+         target="_blank">
         <img class="logo"
              height="24"
-             src="/assets/img/logos/ugc.png"
-             alt="United Gaming Clans Profile" />
+             src="/assets/img/logos/etf2l.png"
+             alt="etf2l Profile" />
       </a>
     </p>
 
     <div class="clearfix"></div>
   </div>
-  <div class="lobbies-sheet">
+  <div>
     <h1 class="lobbies-played">{{userProfile.profile.stats.lobbiesPlayed}} Lobbies</h1>
     <h1 class="karma">
       <md-tooltip class="karma-tooltip" md-direction="bottom">
@@ -103,22 +106,9 @@
           <span class="lobby-map">{{::lobbyInformation.map}}</span>
         </div>
         <div flex class="lobby-main">
-          <div flex class="lobby-classes">
-            <div ng-repeat="class in lobbyInformation.classes track by $index"
-                 class="flex-max-margin">
-              <div class="class-button no-animate lobby-icon-{{::class.class | stripSlotNameNumber}}"
-                   ng-class="{'sheet' : !class.blu.filled || !class.red.filled}">
-                <md-button ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
-                           ng-if="!slot.filled"
-                           ng-class="['join-slot', team]"
-                           ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)">
-                  <md-tooltip md-direction="bottom">
-                    Join {{::team}} {{::class.class | stripSlotNameNumber}} slot
-                  </md-tooltip>
-                  <span></span>
-                </md-button>
-              </div>
-            </div>
+          <div>
+            {{lobbyInformation.playerInfo.team}}
+            {{lobbyInformation.playerInfo.class}}
           </div>
           <div class="lobby-info">
             <div class="lobby-info-row top">

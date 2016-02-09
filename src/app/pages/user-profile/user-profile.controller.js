@@ -21,6 +21,8 @@
         vm.profile = profile;
         vm.loadingError = false;
 
+        vm.profile.createdAt = moment(vm.profile.createdAt * 1000);
+
         vm.profile.lobbyTypes = [
           {key: 'playedSixesCount', abbr: '6s'},
           {key: 'playedHighlanderCount', abbr: 'HL'},
@@ -49,6 +51,17 @@
             name: className,
             cnt: vm.profile.stats[className] || 0
           };
+        });
+
+        vm.profile.external_links = [
+          { name: 'logstf', img: '/assets/img/logos/logs.tf.png' },
+          { name: 'ugc', img: '/assets/img/logos/ugc.png' },
+          { name: 'etf2l', img: '/assets/img/logos/etf2l.png' }
+        ].filter(function (l) {
+          return vm.profile.external_links.hasOwnProperty(l.name);
+        }).map(function (l) {
+          l.url = vm.profile.external_links[l];
+          return l;
         });
 
         // TODO: TEST DATA, remove once the backend supplies this
@@ -171,7 +184,22 @@
             }
           ]
         }];
-       // }
+        // }
+
+        vm.profile.lobbies = vm.profile.lobbies.map(function (map) {
+          map.createdAt = moment(map.createdAt * 1000);
+
+          map.playerInfo = map.classes.map(function (klass) {
+            if (klass.blu.player.steamid === vm.steamId) {
+              return { 'team': 'blu', 'class': klass.class };
+            } else if (klass.red.player.steamid === vm.steamId) {
+              return { 'team': 'red', 'class': klass.class };
+            }
+            return false;
+          }).filter(function (x) { return x; })[0];
+
+          return map;
+        });
       }, function (err) {
         vm.error = err;
         vm.loadingError = true;
