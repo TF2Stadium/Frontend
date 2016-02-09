@@ -5,16 +5,24 @@
     All fields are optional.
     <md-button
        class="md-raised md-primary"
-       ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">Skip</md-button>
+       ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">
+      Skip
+    </md-button>
   </p>
 
   <md-input-container md-no-float>
-    <input type="number" ng-model="lobbyCreate.lobbySettings.requirements.general.hours"
-      placeholder="Minimum TF2 Hours">
+    <input type="number"
+           ng-model="lobbyCreate.lobbySettings.requirements.general.hours"
+           min="0"
+           step="100"
+           placeholder="Minimum TF2 Hours">
   </md-input-container>
 
   <md-input-container md-no-float>
-    <input type="number" ng-model="lobbyCreate.lobbySettings.requirements.general.lobbies"
+    <input type="number"
+           ng-model="lobbyCreate.lobbySettings.requirements.general.lobbies"
+           min="0"
+           step="10"
            placeholder="Minimum Played Lobbies">
   </md-input-container>
 
@@ -37,5 +45,7 @@
 
   <md-button
      class="md-raised md-primary"
-     ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">Continue</md-button>
+     ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">
+    Continue
+  </md-button>
 </div>
