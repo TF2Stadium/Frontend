@@ -68,6 +68,13 @@
                 Ban player from lobby
               </md-button>
             </md-menu-item>
+
+            <md-menu-item
+               ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
+              <md-button ng-click="lobbyPage.promote(slot.player)">
+                Make Lobby Leader
+              </md-button>
+            </md-menu-item>
           </md-menu-content>
         </md-menu>
         <md-checkbox
