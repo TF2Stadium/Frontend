@@ -6,7 +6,7 @@
     .controller('LobbyPageController', LobbyPageController);
 
   /** @ngInject */
-  function LobbyPageController($scope, $state, $window, LobbyService, $timeout) {
+  function LobbyPageController($mdDialog, $scope, $state, $window, LobbyService, $timeout) {
 
     var vm = this;
 
@@ -121,6 +121,24 @@
 
     vm.shouldShowLobbyInformation = function () {
       return vm.lobbyInformation && vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID);
+    };
+
+    vm.promote = function (player) {
+      var confirmBox = $mdDialog.confirm()
+            .title('Are you sure?')
+            .textContent(
+              'Are you sure you want to make ' +
+                player.name +
+                ' the lobby leader?'
+            )
+            .ok('Change Lobby Leader')
+            .cancel('Cancel');
+
+      $mdDialog
+        .show(confirmBox)
+        .then(function () {
+          LobbyService.setLobbyLeader(vm.lobbyInformation.id, player.steamid);
+        });
     };
 
     LobbyService.spectate(parseInt($state.params.lobbyID));
