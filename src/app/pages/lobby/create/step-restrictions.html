@@ -1,6 +1,13 @@
 <div class="restrictions-form">
   <h2>Lobby restrictions</h2>
-  <p>All fields are optional.</p>
+
+  <p>
+    All fields are optional.
+    <md-button
+       class="md-raised md-primary"
+       ng-click="lobbyCreate.select(lobbyCreate.restrictions, true)">Skip</md-button>
+  </p>
+
   <md-input-container md-no-float>
     <input ng-model="lobbyCreate.lobbySettings.steamGroupWhitelist"
            placeholder="Steam group whitelist">
