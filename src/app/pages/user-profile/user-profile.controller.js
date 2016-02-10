@@ -24,16 +24,24 @@
         vm.profile.createdAt = moment(vm.profile.createdAt * 1000);
 
         vm.profile.lobbyTypes = [
-          {key: 'playedSixesCount', abbr: '6s'},
-          {key: 'playedHighlanderCount', abbr: 'HL'},
-          {key: 'PlayedFoursCount', abbr: '4s'},
-          {key: 'PlayedBballCount', abbr: 'BB'},
-          {key: 'PlayedUltiduoCount', abbr: 'UD'}
+          {key: 'playedSixesCount',
+           abbr: '6s',
+           name: '6v6' },
+          {key: 'playedHighlanderCount',
+           abbr: 'HL',
+           name: 'Highlander' },
+          {key: 'PlayedFoursCount',
+           abbr: '4s',
+           name: '4v4'},
+          {key: 'PlayedBballCount',
+           abbr: 'BB',
+           name: 'BBall'},
+          {key: 'PlayedUltiduoCount',
+           abbr: 'UD',
+           name: 'Ultiduo'}
         ].map(function (o) {
-          return {
-            cnt: vm.profile.stats[o.key],
-            abbr: o.abbr
-          };
+          o.cnt = vm.profile.stats[o.key];
+          return o;
         });
 
         vm.profile.classes = [
@@ -54,11 +62,18 @@
         });
 
         vm.profile.external_links = [
-          { name: 'logstf', img: '/assets/img/logos/logs.tf.png' },
-          { name: 'ugc', img: '/assets/img/logos/ugc.png' },
-          { name: 'etf2l', img: '/assets/img/logos/etf2l.png' }
+          { name: 'logstf',
+            img: '/assets/img/logos/logstf.svg',
+            description: 'Logs.TF Match Logs'},
+          { name: 'ugc',
+            img: '/assets/img/logos/ugc.png',
+            description: 'United Gaming Clans' },
+          { name: 'etf2l',
+            img: '/assets/img/logos/etf2l.png',
+            description: 'European TF2 League' }
         ].filter(function (l) {
-          return vm.profile.external_links.hasOwnProperty(l.name);
+          return vm.profile.external_links &&
+            vm.profile.external_links.hasOwnProperty(l.name);
         }).map(function (l) {
           l.url = vm.profile.external_links[l];
           return l;
@@ -69,7 +84,6 @@
           vm.profile.stats.leaves = 0;
         }
 
-        //        if (angular.isUndefined(vm.profile.stats.lobbies)) {
         vm.profile.lobbies = [{
           "id": 364,
           "gamemode": "unknown",
@@ -184,7 +198,6 @@
             }
           ]
         }];
-        // }
 
         vm.profile.lobbies = vm.profile.lobbies.map(function (map) {
           map.createdAt = moment(map.createdAt * 1000);
@@ -200,6 +213,10 @@
 
           return map;
         });
+
+        vm.profile.twitchChannel = "gcommer";
+
+        vm.profile.stats.karma = vm.profile.stats.substitutes - vm.profile.stats.leaves;
       }, function (err) {
         vm.error = err;
         vm.loadingError = true;

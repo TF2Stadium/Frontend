@@ -339,7 +339,7 @@ $animation-options-list: (
 
     .settings-section,
     .user-profile,
-    .lobbies-sheet {
+    .profile-sheet {
       @include animation(slide-from-top fade-in, $stagger: $animation-stagger);
     }
 
