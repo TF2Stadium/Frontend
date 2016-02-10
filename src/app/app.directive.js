@@ -2,7 +2,8 @@
   'use strict';
 
   angular.module('tf2stadium.directives')
-    .directive('whitelist', WhitelistDirective);
+    .directive('whitelist', WhitelistDirective)
+    .directive('autofocus', AutofocusDirective);
 
   function WhitelistDirective() {
     return {
@@ -16,4 +17,20 @@
         + '</a>'
     };
   }
+
+  /** @ngInject */
+  function AutofocusDirective($timeout) {
+    // Directive for automatically an element when it is added, such
+    // as via `ng-if`
+    return {
+      restrict: 'A',
+      link: function link(scope, element) {
+        $timeout(function () {
+          element.focus();
+        });
+      }
+    };
+  }
+
+
 })();

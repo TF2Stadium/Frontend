@@ -224,6 +224,15 @@
       }, 1000);
     };
 
+    factory.setSlotRequirement = function (lobbyId, slotId, reqName, val) {
+      Websocket.emitJSON('lobbySetRequirement', {
+        id: lobbyId,
+        slot: slotId,
+        type: reqName,
+        value: val
+      });
+    };
+
     Websocket.onJSON('lobbyReadyUp', function () {
       $rootScope.$emit('lobby-ready-up');
       if (playerPreReady) {
