@@ -56,6 +56,9 @@
       $mdIconProvider
         .icon('class:' + name, classesBase + name + '.svg');
     });
+
+    $mdIconProvider.icon('logo:mumble', '/assets/img/mumble.svg');
+    $mdIconProvider.icon('logo:not-mumble', '/assets/img/not-mumble.svg');
   }
 
   /** @ngInject */
