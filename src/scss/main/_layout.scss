@@ -279,6 +279,15 @@ md-input-container {
   color: inherit;
 }
 
+.sponsor-tag {
+  float: right;
+  font-size: small;
+  margin-top: 0.2em;
+
+  a {
+    text-decoration: underline;
+  }
+}
 
 // md-buttons by default make their labels all uppercase; that's fine,
 // except for buttons with a player's name
