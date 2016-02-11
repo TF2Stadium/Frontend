@@ -59,11 +59,11 @@
   }
 
   &.blu > span:before {
-    background-color: #9cf;
+    background-color: $tf2-blue;
   }
 
   &.red > span:before {
-    background-color: #f99;
+    background-color: $tf2-red;
   }
 }
 

@@ -1,6 +1,13 @@
 .user-profile {
+  $avatar-side-len: 200px;
+  $avatar-vertical-offset: -50px;
+
+  // the avatar is moved via float, so use min-height to ensure
+  // this card never gets so small that the bottom border of the
+  // card is too close to the bottom of the avatar
+  min-height: ($avatar-side-len + $avatar-vertical-offset);
+
   .avatar {
-    $avatar-vertical-offset: -50px;
 
     float: left;
     margin-top: $avatar-vertical-offset;
@@ -8,8 +15,8 @@
     margin-bottom: $padding-medium;
 
     &, img, div {
-      width: 200px;
-      height: 200px;
+      width: $avatar-side-len;
+      height: $avatar-side-len;
     }
 
     div {
@@ -108,17 +115,11 @@
     margin: 0;
   }
 
-  h1 {
-    &.lobbies-played {
-      float: left;
-    }
+  h1.karma {
+    float: right;
 
-    &.karma {
-      float: right;
-//      float: left;
-      ~ .karma {
-        margin-left: $padding-big;
-      }
+    ~ .karma {
+      margin-left: $padding-big;
     }
   }
 
@@ -156,15 +157,27 @@ ul.class-types {
     display: inline;
   }
 
-  img.icon {
+  md-icon {
     width: 1.3em;
     height: 1.3em;
-    vertical-align: middle;
+    color: inherit;
+
+    margin-right: 0.1em;
+
+    // The class icons have the fill property set on the path
+    // elements, not on the <svg> tag... so we need the wildcard
+    // here.
+    svg * {
+      fill: currentColor;
+    }
   }
 
   .format {
     font-size: 1.3em;
     font-weight: bold;
+  }
+
+  md-icon, .format, .count {
     vertical-align: middle;
   }
 }
@@ -175,4 +188,47 @@ ul.lobby-types {
 
 md-tooltip.karma-tooltip {
   font-size: 20px;
+}
+
+$recent-lobby-card-height: (2 * $lobby-card-height/3);
+.recent-lobbies {
+  a.lobby-row {
+    height: $recent-lobby-card-height;
+  }
+
+  .lobby-image {
+    background-position-y: (-1 * ($lobby-card-height - $recent-lobby-card-height)/2);
+  }
+
+  .lobby-region,
+  .lobby-league {
+    font-size: $recent-lobby-card-height * 0.66;
+    text-transform: uppercase;
+    line-height: 1em;
+  }
+
+  .lobby-region,
+  .lobby-league,
+  md-icon {
+    vertical-align: middle;
+  }
+
+  md-icon {
+    height: $recent-lobby-card-height * 0.66;
+    width: auto;
+
+    margin: 0;
+
+    svg {
+      width: auto;
+    }
+
+    &.red svg * {
+      fill: $tf2-red;
+    }
+
+    &.blu svg * {
+      fill: $tf2-blue;
+    }
+  }
 }

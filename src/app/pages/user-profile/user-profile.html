@@ -73,22 +73,24 @@
                class="logo"
                height="50"
                src="{{link.img}}"
-               alt="{{link.description}} Profile" />
+               alt="{{link.description}}" />
           <md-icon ng-if="link.name === 'logstf'"
                    class="logo logo-{{link.name}}"
                    md-svg-src="{{link.img}}"
                    aria-label="{{link.desc}}"></md-icon>
-          </a>
+        </a>
+        <md-tooltip>{{link.description}} Profile</md-tooltip>
       </li>
 
       <li>
-        <a href="{{link.url}}"
+        <a href="#"
            target="_blank">
           <img class="logo"
                height="50"
                src="/assets/img/logos/etf2l.png"
                alt="etf2l Profile" />
         </a>
+        <md-tooltip>European TF2 League Profile</md-tooltip>
       </li>
     </ul>
 
@@ -122,66 +124,25 @@
 
   <ul class="lobby-types">
     <li ng-repeat="lobbyType in userProfile.profile.lobbyTypes">
-      <span class="format">{{lobbyType.abbr}}</span>
-      <span class="count">{{lobbyType.cnt | numberOrDash:'&mdash;'}}</span>
-      <md-tooltip>{{lobbyType.name}}</md-tooltip>
+      <span> <!-- dummy class for positioning the tooltip correctly -->
+        <span class="format">{{lobbyType.abbr}}</span>
+        <span class="count">{{lobbyType.cnt | numberOrDash:'&mdash;'}}</span>
+        <md-tooltip>{{lobbyType.name}}</md-tooltip>
+      </span>
     </li>
   </ul>
 
   <ul class="class-types">
     <li ng-repeat="klass in userProfile.profile.classes">
-      <img class="icon"
-           alt="{{klass.name}}"
-           src="/assets/img/class/class-icon-{{klass.name}}.svg" />
-      <span class="count">{{klass.cnt | numberOrDash:'&mdash;'}}</span>
-      <md-tooltip>{{klass.name}}</md-tooltip>
+      <span>
+        <md-icon md-svg-icon="class:{{klass.name}}"
+                 alt="{{klass.name}}"></md-icon>
+        <span class="count">{{klass.cnt | numberOrDash:'&mdash;'}}</span>
+        <md-tooltip>{{klass.name | capitalize}}</md-tooltip>
+      </span>
     </li>
   </ul>
 </div>
-
-<!--
-><div class="profile-sheet">
-  <h2 class="game-hours">TF2 Hours: {{userProfile.profile.gameHours}}</h2>
-  <h1 class="lobbies-played">Lobbies: {{userProfile.profile.stats.lobbiesPlayed}}</h1>
-  <h1 class="karma">
-    Karma:
-    <span ng-class="{'karma-good': userProfile.profile.stats.karma > 0,
-                     'karma-bad': userProfile.profile.stats.karma < 0}">
-      {{userProfile.profile.stats.karma}}
-
-      <md-tooltip class="karma-tooltip" md-direction="bottom">
-        <span class="karma-good">{{userProfile.profile.stats.substitutes}}</span> Subs
-        -
-        <span class="karma-bad">{{userProfile.profile.stats.leaves}}</span> Leaves
-      </md-tooltip>
-    </span>
-  </h1>
-  <h1 class="karma">
-    Subs: <span class="karma-good">{{userProfile.profile.stats.substitutes}}</span>
-  </h1>
-  <h1 class="karma">
-    Leaves: <span class="karma-bad">{{userProfile.profile.stats.leaves}}</span>
-  </h1>
-
-  <div class="clearfix"></div>
-
-  <ul class="lobby-types">
-    <li ng-repeat="lobbyType in userProfile.profile.lobbyTypes">
-      <span class="format">{{lobbyType.abbr}}</span>
-      <span class="count">{{lobbyType.cnt}}</span>
-    </li>
-  </ul>
-
-  <ul class="class-types">
-    <li ng-repeat="klass in userProfile.profile.classes">
-      <img class="icon"
-           alt="{{klass.name}}"
-           src="/assets/img/class/class-icon-{{klass.name}}.svg" />
-      <span class="count">{{klass.cnt}}</span>
-    </li>
-  </ul>
-</div>
--->
 
 <div class="profile-sheet">
   <h1>Recent Lobbies</h1>
@@ -201,37 +162,30 @@
         <span class="lobby-map">{{::lobbyInformation.map}}</span>
       </div>
       <div flex class="lobby-main">
-        <div>
-          {{lobbyInformation.playerInfo.team}}
-          {{lobbyInformation.playerInfo.class}}
-        </div>
-        <div class="lobby-info">
-          <div class="lobby-info-row top">
-            <div class="lobby-mumble" ng-class="{'not-required': !lobbyInformation.mumbleRequired}">
-              <md-tooltip md-direction="top">
-                Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}}mandatory
-              </md-tooltip>
-            </div>
-          </div>
-          <div class="lobby-info-row">
-            <span>
-              {{::lobbyInformation.region.code}}
-              <md-tooltip md-direction="bottom">
-                Server located in {{::lobbyInformation.region.name}}
-              </md-tooltip>
-            </span>
-          </div>
-          <div class="lobby-info-row">
-            <span class="lobby-league">
-              {{::lobbyInformation.league}}
-              <md-tooltip md-direction="bottom">
-                {{::lobbyInformation.league | uppercase}} rules and whitelist
-              </md-tooltip>
-            </span>
-          </div>
-        </div>
+        <md-icon
+           class="{{::lobbyInformation.playerInfo.team}}"
+           md-svg-icon="class:{{::lobbyInformation.playerInfo.class}}"
+           aria-label="{{::lobbyInformation.playerInfo.team}} {{::lobbyInformation.playerInfo.class}}"></md-icon>
+        <span class="lobby-region">
+          {{::lobbyInformation.region.code}}
+          <md-tooltip md-direction="bottom">
+            Server located in {{::lobbyInformation.region.name}}
+          </md-tooltip>
+        </span>
+        <span class="lobby-league">
+          {{::lobbyInformation.league}}
+          <md-tooltip md-direction="bottom">
+            {{::lobbyInformation.league | uppercase}} rules and whitelist
+          </md-tooltip>
+        </span>
+        <md-icon
+           md-svg-icon="logo:{{!lobbyInformation.mumbleRequired? 'not-':''}}mumble"
+           aria-label="Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}} Required">
+          <md-tooltip>
+            Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}}mandatory
+          </md-tooltip>
+        </md-icon>
       </div>
     </a>
-    <!--  <div class="lobby-summary" ng-repeat="lobby in userProfile.profile.lobbies"></div> -->
   </div>
 </div>

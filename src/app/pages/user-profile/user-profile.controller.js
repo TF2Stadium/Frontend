@@ -64,7 +64,7 @@
         vm.profile.external_links = [
           { name: 'logstf',
             img: '/assets/img/logos/logstf.svg',
-            description: 'Logs.TF Match Logs'},
+            description: 'Logs.TF'},
           { name: 'ugc',
             img: '/assets/img/logos/ugc.png',
             description: 'United Gaming Clans' },
@@ -75,7 +75,7 @@
           return vm.profile.external_links &&
             vm.profile.external_links.hasOwnProperty(l.name);
         }).map(function (l) {
-          l.url = vm.profile.external_links[l];
+          l.url = vm.profile.external_links[l.name];
           return l;
         });
 
