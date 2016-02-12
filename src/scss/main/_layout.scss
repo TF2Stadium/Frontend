@@ -96,17 +96,21 @@ body {
   }
 }
 
-.header-text {
+.header-text,
+.header-text-no-darken {
   width: $full-width;
   height: 100%;
   padding: 0 $commentbox-width 0 $left-sidebar-width;
+}
+
+.header-text {
   background-image: linear-gradient(
-      to right,
-      rgba(0, 0, 0, 0) 0%,
-      rgba(0, 0, 0, .4) 10%,
-      rgba(0, 0, 0, .4) 90%,
-      rgba(0, 0, 0, 0) 100%
-  );
+                        to right,
+                        rgba(0, 0, 0, 0) 0%,
+                        rgba(0, 0, 0, .4) 10%,
+                        rgba(0, 0, 0, .4) 90%,
+                        rgba(0, 0, 0, 0) 100%
+                      );
 }
 
 #fab {
