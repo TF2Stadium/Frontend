@@ -34,10 +34,10 @@
            abbr: '4s',
            name: '4v4'},
           {key: 'PlayedBballCount',
-           abbr: 'BB',
-           name: 'BBall'},
+           abbr: 'BBall',
+           name: 'BasketBall'},
           {key: 'PlayedUltiduoCount',
-           abbr: 'UD',
+           abbr: 'Ulti',
            name: 'Ultiduo'}
         ].map(function (o) {
           o.cnt = vm.profile.stats[o.key];
