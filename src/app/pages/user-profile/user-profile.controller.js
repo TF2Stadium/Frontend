@@ -34,10 +34,10 @@
            abbr: '4s',
            name: '4v4'},
           {key: 'PlayedBballCount',
-           abbr: 'BB',
-           name: 'BBall'},
+           abbr: 'BBall',
+           name: 'BasketBall'},
           {key: 'PlayedUltiduoCount',
-           abbr: 'UD',
+           abbr: 'Ulti',
            name: 'Ultiduo'}
         ].map(function (o) {
           o.cnt = vm.profile.stats[o.key];
@@ -88,9 +88,9 @@
           map.createdAt = moment(map.createdAt * 1000);
 
           map.playerInfo = map.classes.map(function (klass) {
-            if (klass.blu.player.steamid === vm.steamId) {
+            if (klass.blu.filled && klass.blu.player.steamid === vm.steamId) {
               return { 'team': 'blu', 'class': klass.class };
-            } else if (klass.red.player.steamid === vm.steamId) {
+            } else if (klass.red.filled && klass.red.player.steamid === vm.steamId) {
               return { 'team': 'red', 'class': klass.class };
             }
             return false;
