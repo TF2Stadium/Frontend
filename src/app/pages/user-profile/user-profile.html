@@ -44,21 +44,9 @@
         <md-tooltip>Twitch: {{userProfile.profile.twitchChannel}}</md-tooltip>
       </li>
 
-      <li>
+      <li ng-if="userProfile.profile.role !== 'player'">
         <img class="badge"
-             src="/assets/img/badges/contributor.svg" />
-        <md-tooltip>Contributor</md-tooltip>
-      </li>
-
-      <li>
-        <img class="badge"
-             src="/assets/img/badges/moderator.svg" />
-        <md-tooltip>Moderator</md-tooltip>
-      </li>
-
-      <li>
-        <img class="badge"
-             src="/assets/img/badges/administrator.svg" />
+             src="/assets/img/badges/{userProfile.profile.role}.svg" />
         <md-tooltip>Administrator</md-tooltip>
       </li>
     </ul>
@@ -81,19 +69,7 @@
         </a>
         <md-tooltip>{{link.description}} Profile</md-tooltip>
       </li>
-
-      <li>
-        <a href="#"
-           target="_blank">
-          <img class="logo"
-               height="50"
-               src="/assets/img/logos/etf2l.png"
-               alt="etf2l Profile" />
-        </a>
-        <md-tooltip>European TF2 League Profile</md-tooltip>
-      </li>
     </ul>
-
   </div>
 </div>
 
