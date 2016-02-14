@@ -249,19 +249,23 @@
       });
     }
 
+    var loadedStyle = null;
     function loadSettings(settings) {
       var promise;
 
-      if (settings.emoteStyle === 'none') {
-        promise = $q.when({data: []});
-      } else {
-        promise = $http.get('/assets/' + settings.emoteStyle + '.json');
-      }
+      if (settings.emoteStyle !== loadedStyle) {
+        loadedStyle = settings.emoteStyle;
+        if (settings.emoteStyle === 'none') {
+          promise = $q.when({data: []});
+        } else {
+          promise = $http.get('/assets/' + settings.emoteStyle + '.json');
+        }
 
-      promise.then(function (data) {
-        emotesToHTML = makeEmotesTransformer(data.data);
-        reapplyEmotes();
-      });
+        promise.then(function (data) {
+          emotesToHTML = makeEmotesTransformer(data.data);
+          reapplyEmotes();
+        });
+      }
     }
 
     Settings.getSettings(loadSettings);
@@ -343,7 +347,7 @@
       }
 
       $rootScope.$emit('chat-message', message);
-    });
+    }, true);
 
     Websocket.onJSON('chatHistoryClear', function (data) {
       // Note: ChatRooms may have pointers to the arrays in

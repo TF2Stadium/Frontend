@@ -7,10 +7,8 @@
              class="chat-tabs"
              md-selected="currentTab"
              md-autoselect="true"
-             md-enable-disconnect="true"
              md-stretch-tabs="always">
-      <md-tab ng-repeat="room in commentBox.rooms | unique:'id'"
-              ng-if="room.id > -1">
+      <md-tab ng-repeat="room in commentBox.rooms | unique:'id' | greaterThan:'id':-1 track by room.id">
         <md-tab-label>
           <span ng-class="{'tab-title': true,
                            'changed': commentBox.showRoomNotification[room.id]}">

@@ -103,8 +103,13 @@
     };
 
     var factory = {};
-    factory.onJSON = function (name, callback) {
-      callback = asyncAngularify(callback || angular.noop);
+    factory.onJSON = function (name, callback, dontApply) {
+      if (console && console.timeStamp) {
+        console.timeStamp('WS'+name);
+      }
+
+      callback = callback || angular.noop;
+      var wrappedCallback = asyncAngularify(callback);
 
       // Dispatch queued messages for the initialization
       // workaround. Technically it is possible for messages to arrive
@@ -114,19 +119,25 @@
       // asyncAngularify). We can't skip the timeout here because event
       // handlers are not generally defined with the intention of being
       // called before their enclosing scope finishes executing.
+      function dispatchQueuedMessages() {
+        queuedMessages[name].forEach(function (data) {
+          $log.log('Received: ' + name, data);
+          callback(data);
+        });
+      }
+
       registeredHandlers[name] = true;
       if (queuedMessages[name]) {
-        asyncAngularify(function () {
-          queuedMessages[name].forEach(function (data) {
-            $log.log('Received: ' + name, data);
-            callback(data);
-          });
-        })();
+        if (dontApply) {
+          dispatchQueuedMessages();
+        } else {
+          asyncAngularify(dispatchQueuedMessages)();
+        }
       }
 
       socket.On(name, function (data) {
         $log.log('Received: ' + name, data);
-        callback(data);
+        wrappedCallback(data);
       });
     };
 
@@ -136,6 +147,11 @@
 
       socket.Emit(data, function (jsonIn) {
         var dataIn = angular.fromJson(jsonIn);
+
+        if (console && console.timeStamp) {
+          console.timeStamp('WS'+name);
+        }
+
         $log.log('Response to ' + name, dataIn);
         $log.log(dataIn);
         if (!dataIn.success) {

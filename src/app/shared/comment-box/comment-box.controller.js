@@ -60,6 +60,10 @@
         vm.lastSeenIds[roomId] = 0;
       }
 
+      if (!vm.rooms) {
+        return;
+      }
+
       if (roomId === vm.rooms[currentTabId()].id) {
         vm.lastSeenIds[roomId] = Math.max(vm.lastSeenIds[roomId], message.id);
       }

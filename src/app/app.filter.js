@@ -9,7 +9,8 @@
     .filter('slotNameToClassName', slotNameToClassName)
     .filter('ifNumeric', ifNumeric)
     .filter('secondsToMinutes', secondsToMinutes)
-    .filter('unique', unique);
+    .filter('unique', unique)
+    .filter('greaterThan', greaterThan);
 
   /** @ngInject */
   function capitalize() {
@@ -102,6 +103,15 @@
         }
       }
       return uniqueArray;
+    };
+  }
+
+  /** @ngInject */
+  function greaterThan() {
+    return function greaterThanImpl(items, prop, val) {
+      return items.filter(function (item) {
+        return item[prop] > val;
+      });
     };
   }
 

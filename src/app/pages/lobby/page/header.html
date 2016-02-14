@@ -1,4 +1,5 @@
-<div class="header-image" ng-style="{'background-image':'url(assets/img/maps/header/' + header.lobbyInformation.map + '.jpg)'}"
+<div class="header-image"
+     ng-style="{'background-image':(header.lobbyInformation.map && ('url(assets/img/maps/header/' + header.lobbyInformation.map + '.jpg)'))}"
      ng-show="header.shouldShowLobbyInformation()">
   <div class="header-text">
     <div class="lobbypage-text">
@@ -6,8 +7,8 @@
         <span class="lobbypage-map"
               title="{{header.lobbyInformation.map}}"
               ><md-icon class="big"
-                             md-svg-icon="material:lock-closed-white"
-                             ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">
+                        md-svg-icon="material:lock-closed-white"
+                        ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">
             <md-tooltip>Private lobby</md-tooltip>
           </md-icon>{{header.lobbyInformation.map}}</span>
         <div class="lobbypage-lobby-closed"

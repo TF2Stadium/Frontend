@@ -9,6 +9,12 @@
   function LobbyPageController($q, $mdDialog, $scope, $state, $window,
                                $timeout, LobbyService) {
     var vm = this;
+    var lobbyPageId = parseInt($state.params.lobbyID);
+
+    var joined = LobbyService.getLobbyJoined();
+    if (joined && joined.id !== lobbyPageId) {
+      LobbyService.spectate(lobbyPageId);
+    }
 
     var buildConnectString = function () {
       if (!vm.lobbyJoinInformation.game) {
@@ -36,9 +42,22 @@
     vm.playerPreReady = LobbyService.getPlayerPreReady();
     vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
 
-    LobbyService.subscribe('lobby-spectated-updated', $scope, function () {
-      vm.lobbyInformation = LobbyService.getLobbySpectated();
-    });
+    function updateLobby() {
+      var newLobby = LobbyService.getLobbySpectated();
+
+      if (newLobby.id === lobbyPageId) {
+        vm.lobbyInformation = newLobby;
+      } else {
+        newLobby = LobbyService.getLobbyJoined();
+        if (newLobby.id === lobbyPageId) {
+          vm.lobbyInformation = newLobby;
+        }
+      }
+    }
+
+    LobbyService.subscribe('lobby-spectated-updated', $scope, updateLobby);
+    LobbyService.subscribe('lobby-joined-updated', $scope, updateLobby);
+    updateLobby();
 
     LobbyService.subscribe('lobby-start', $scope, function (){
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
@@ -54,8 +73,11 @@
       vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
     });
 
-    $scope.$on('$destroy', function (){
-      LobbyService.leaveSpectatedLobby();
+    $scope.$on('$destroy', function () {
+      joined = LobbyService.getLobbyJoined();
+      if (joined && joined.id !== lobbyPageId) {
+        LobbyService.leaveSpectatedLobby();
+      }
     });
 
     vm.slotClicked = function (slotScope, event) {
@@ -183,8 +205,6 @@
       e.preventDefault();
       vm.requirementInputDeferred.resolve(val);
     };
-
-    LobbyService.spectate(parseInt($state.params.lobbyID));
   }
 
 })();
