@@ -46,7 +46,7 @@
 
       <li ng-if="userProfile.profile.role !== 'player'">
         <img class="badge"
-             src="/assets/img/badges/{userProfile.profile.role}.svg" />
+             src="/assets/img/badges/{{userProfile.profile.role}}.svg" />
         <md-tooltip>Administrator</md-tooltip>
       </li>
     </ul>
