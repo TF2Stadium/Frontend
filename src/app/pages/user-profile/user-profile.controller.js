@@ -88,9 +88,9 @@
           map.createdAt = moment(map.createdAt * 1000);
 
           map.playerInfo = map.classes.map(function (klass) {
-            if (klass.blu.player.steamid === vm.steamId) {
+            if (klass.blu.filled && klass.blu.player.steamid === vm.steamId) {
               return { 'team': 'blu', 'class': klass.class };
-            } else if (klass.red.player.steamid === vm.steamId) {
+            } else if (klass.red.filled && klass.red.player.steamid === vm.steamId) {
               return { 'team': 'red', 'class': klass.class };
             }
             return false;
