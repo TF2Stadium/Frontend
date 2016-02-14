@@ -3,7 +3,8 @@
     "angular": false,
     "Socket": false,
     "Clipboard": false,
-    "xssFilters": true
+    "xssFilters": false,
+    "moment": false
   },
   "rules": {
     "no-console": 0,

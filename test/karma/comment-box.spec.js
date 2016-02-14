@@ -69,13 +69,13 @@ describe('Controller: CommentBoxController', function () {
     $timeout.flush();
   }
 
-  describe('goToProfile()', function () {
-    it('should open a profile page', function () {
+  describe('goToSteamProfile()', function () {
+    it('should open a steam profile page', function () {
       setupBareController();
 
       var steamId = '1234567890';
 
-      ctrl.goToProfile(steamId);
+      ctrl.goToSteamProfile(steamId);
 
       expect(mockWindow.open).to.be.calledOnce;
       expect(mockWindow.open).to.be.calledWith(

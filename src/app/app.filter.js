@@ -3,6 +3,7 @@
 
   angular.module('tf2stadium.filters')
     .filter('capitalize', capitalize)
+    .filter('numberOrDash', numberOrDash)
     .filter('reverse', reverse)
     .filter('trusted', trusted)
     .filter('stripSlotNameNumber', stripSlotNameNumber)
@@ -19,6 +20,20 @@
         return input;
       }
       return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
+    };
+  }
+
+  /** @ngInject */
+  function numberOrDash() {
+    return function (input, dash) {
+      if (angular.isUndefined(dash)) {
+        dash = '-';
+      }
+
+      if (angular.isUndefined(input) || isNaN(input)) {
+        return input;
+      }
+      return (+input) === 0? dash:input;
     };
   }
 

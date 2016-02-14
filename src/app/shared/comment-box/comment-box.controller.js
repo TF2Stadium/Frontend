@@ -102,7 +102,7 @@
       }
     };
 
-    vm.goToProfile = function (steamId) {
+    vm.goToSteamProfile = function (steamId) {
       $window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
     };
 

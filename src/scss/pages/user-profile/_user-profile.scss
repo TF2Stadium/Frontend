@@ -1,0 +1,234 @@
+.user-profile {
+  $avatar-side-len: 200px;
+  $avatar-vertical-offset: -50px;
+
+  // the avatar is moved via float, so use min-height to ensure
+  // this card never gets so small that the bottom border of the
+  // card is too close to the bottom of the avatar
+  min-height: ($avatar-side-len + $avatar-vertical-offset);
+
+  .avatar {
+
+    float: left;
+    margin-top: $avatar-vertical-offset;
+    margin-right: $padding-medium;
+    margin-bottom: $padding-medium;
+
+    &, img, div {
+      width: $avatar-side-len;
+      height: $avatar-side-len;
+    }
+
+    div {
+      position: absolute;
+      top: $avatar-vertical-offset;
+
+      background-image: url(/assets/img/logos/steam-cover.svg);
+      background-size: 100% 100%;
+      background-position: 0 0;
+      background-repeat: no-repeat;
+
+      transition: 0.25s;
+      transition-property: opacity;
+      transition-timing-function: ease-in-out;
+
+      opacity: 0;
+
+      &:hover,
+      &.focused {
+        opacity: 0.8;
+      }
+    }
+  }
+
+  .badge {
+    height: 50px;
+    width: 50px;
+    vertical-align: top;
+  }
+
+  h1.player-name {
+    line-neight: 1em;
+    margin-bottom: 0;
+  }
+
+  a {
+    text-decoration: none;
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  ul.external-links,
+  ul.badges {
+    @include flex (row, space-around, center);
+    flex-wrap: nowrap;
+
+    &.badges {
+      justify-content: flex-start;
+    }
+
+    margin: 0;
+    padding: 0;
+
+    li {
+      display: inline;
+      vertical-align: middle;
+
+      .logo {
+        vertical-align: middle;
+      }
+
+      md-icon.logo {
+        color: inherit;
+
+        &.logo-logstf {
+          height: 32px;
+          width: auto;
+        }
+
+        svg {
+          fill: currentColor;
+
+          // md-icon by default sets width="100%" on the svg
+          // element; making logos way wider than they need to be when
+          // in a flexbox.
+          width: auto;
+        }
+      }
+
+      &:first-of-type {
+        margin-left: 0;
+      }
+    }
+  }
+}
+
+.profile-sheet {
+  @extend .sheet;
+  padding: $padding-medium 70px;
+
+  margin-top: $padding-medium;
+
+  h1, h2 {
+    margin: 0;
+  }
+
+  h1.karma {
+    float: right;
+
+    ~ .karma {
+      margin-left: $padding-big;
+    }
+  }
+
+  .karma {
+    float: right;
+    h1 {
+      text-align: right;
+    }
+
+    h2 {
+      margin-left: $padding-medium;
+      float: right;
+    }
+  }
+
+  p {
+    word-break: break-all;
+  }
+}
+
+ul.lobby-types,
+ul.class-types {
+  @include flex (row, space-between, center);
+  flex-wrap: nowrap;
+
+  margin-top: 0;
+  padding: 0;
+
+  font-size: 20px;
+
+  margin-top: $padding-small;
+  margin-bottom: 0;
+
+  li {
+    display: inline;
+  }
+
+  md-icon {
+    width: 1.3em;
+    height: 1.3em;
+    color: inherit;
+
+    margin-right: 0.1em;
+
+    // The class icons have the fill property set on the path
+    // elements, not on the <svg> tag... so we need the wildcard
+    // here.
+    svg * {
+      fill: currentColor;
+    }
+  }
+
+  .format {
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+  md-icon, .format, .count {
+    vertical-align: middle;
+  }
+}
+
+ul.lobby-types {
+  padding: 0 $padding-big;
+}
+
+md-tooltip.karma-tooltip {
+  font-size: 20px;
+}
+
+$recent-lobby-card-height: (2 * $lobby-card-height/3);
+.recent-lobbies {
+  a.lobby-row {
+    height: $recent-lobby-card-height;
+  }
+
+  .lobby-image {
+    background-position-y: (-1 * ($lobby-card-height - $recent-lobby-card-height)/2);
+  }
+
+  .lobby-region,
+  .lobby-league {
+    font-size: $recent-lobby-card-height * 0.66;
+    text-transform: uppercase;
+    line-height: 1em;
+  }
+
+  .lobby-region,
+  .lobby-league,
+  md-icon {
+    vertical-align: middle;
+  }
+
+  md-icon {
+    height: $recent-lobby-card-height * 0.66;
+    width: auto;
+
+    margin: 0;
+
+    svg {
+      width: auto;
+    }
+
+    &.red svg * {
+      fill: $tf2-red;
+    }
+
+    &.blu svg * {
+      fill: $tf2-blue;
+    }
+  }
+}

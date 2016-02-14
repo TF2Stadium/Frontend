@@ -13,8 +13,13 @@
     </md-button>
     <md-menu-content width="3">
       <md-menu-item>
-        <md-button ng-click="spectators.goToProfile(spectator.steamid)">
+        <md-button ng-click="spectators.goToSteamProfile(spectator.steamid)">
           Steam profile
+        </md-button>
+      </md-menu-item>
+      <md-menu-item ui-sref="user-profile({userID: spectator.steamid})">
+        <md-button>
+          Stadium profile
         </md-button>
       </md-menu-item>
       <md-menu-item ng-if="$root.userProfile.steamid==spectators.lobbyInformation.leader.steamid">

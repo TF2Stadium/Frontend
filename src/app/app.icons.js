@@ -27,6 +27,19 @@
     {name: 'steam', file: 'steam.svg'}
   ];
 
+  var classesBase = '/assets/img/class/class-icon-';
+  var classes = [
+    'scout',
+    'soldier',
+    'pyro',
+    'demoman',
+    'heavy',
+    'engineer',
+    'medic',
+    'sniper',
+    'spy'
+  ];
+
   /** @ngInject */
   function registerIcons($mdIconProvider) {
     materialIcons.forEach(function (desc) {
@@ -38,6 +51,14 @@
       $mdIconProvider
         .icon('logo:' + desc.name, logosBase + desc.file);
     });
+
+    classes.forEach(function (name) {
+      $mdIconProvider
+        .icon('class:' + name, classesBase + name + '.svg');
+    });
+
+    $mdIconProvider.icon('logo:mumble', '/assets/img/mumble.svg');
+    $mdIconProvider.icon('logo:not-mumble', '/assets/img/not-mumble.svg');
   }
 
   /** @ngInject */
