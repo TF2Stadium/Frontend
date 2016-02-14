@@ -104,7 +104,9 @@
 
     var factory = {};
     factory.onJSON = function (name, callback, dontApply) {
-      console.timeStamp('WS'+name);
+      if (console && console.timeStamp) {
+        console.timeStamp('WS'+name);
+      }
 
       callback = callback || angular.noop;
       var wrappedCallback = asyncAngularify(callback);
@@ -145,7 +147,11 @@
 
       socket.Emit(data, function (jsonIn) {
         var dataIn = angular.fromJson(jsonIn);
-        console.timeStamp('WSr'+name);
+
+        if (console && console.timeStamp) {
+          console.timeStamp('WS'+name);
+        }
+
         $log.log('Response to ' + name, dataIn);
         $log.log(dataIn);
         if (!dataIn.success) {
