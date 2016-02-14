@@ -74,7 +74,7 @@
     });
 
     $scope.$on('$destroy', function () {
-      var joined = LobbyService.getLobbyJoined();
+      joined = LobbyService.getLobbyJoined();
       if (joined && joined.id !== lobbyPageId) {
         LobbyService.leaveSpectatedLobby();
       }
