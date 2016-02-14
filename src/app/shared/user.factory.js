@@ -19,6 +19,7 @@
         { steamid: steamid },
         function (response) {
           if (response.success) {
+            callback(response.data);
             deferred.resolve(response.data);
           } else {
             deferred.reject(response.message);
