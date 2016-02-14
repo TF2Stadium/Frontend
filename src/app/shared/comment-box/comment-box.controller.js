@@ -72,12 +72,14 @@
           return roomId === r.id;
         })[0];
 
-        // not done as a function declaration to satisfy the linter :\
-        var isFresh = function isFresh(msg) {
-          return msg.id > latest && msg.player.steamid !== steamid;
-        };
+        if (room) {
+          // not done as a function declaration to satisfy the linter :\
+          var isFresh = function isFresh(msg) {
+            return msg.id > latest && msg.player.steamid !== steamid;
+          };
 
-        vm.showRoomNotification[roomId] = room.messages.filter(isFresh).length > 0;
+          vm.showRoomNotification[roomId] = room.messages.filter(isFresh).length > 0;
+        }
       }
     });
 
