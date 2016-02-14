@@ -79,6 +79,8 @@
           return l;
         });
 
+        vm.profile.stats.karma = vm.profile.stats.substitutes - vm.profile.stats.leaves;
+
         // TODO: TEST DATA, remove once the backend supplies this
         if (angular.isUndefined(vm.profile.stats.leaves)) {
           vm.profile.stats.leaves = 0;
@@ -88,9 +90,9 @@
           map.createdAt = moment(map.createdAt * 1000);
 
           map.playerInfo = map.classes.map(function (klass) {
-            if (klass.blu.filled && klass.blu.player.steamid === vm.steamId) {
+            if (klass.blu.filled && klass.blu.player && klass.blu.player.steamid === vm.steamId) {
               return { 'team': 'blu', 'class': klass.class };
-            } else if (klass.red.filled && klass.red.player.steamid === vm.steamId) {
+            } else if (klass.red.filled && klass.red.player && klass.red.player.steamid === vm.steamId) {
               return { 'team': 'red', 'class': klass.class };
             }
             return false;
@@ -99,16 +101,11 @@
           if (map.playerInfo.length > 0) {
             map.playerInfo = map.playerInfo[0];
           } else {
-            // the backend sent back a lobby we weren't in :|
-            return false;
+            map.playerInfo = { team: '', 'class': '' };
           }
 
           return map;
-        }).filter(function (x) { return x !== false; });
-
-//        vm.profile.twitchChannel = "gcommer";
-
-        vm.profile.stats.karma = vm.profile.stats.substitutes - vm.profile.stats.leaves;
+        });
       }, function (err) {
         vm.error = err;
         vm.loadingError = true;
