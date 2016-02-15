@@ -310,7 +310,7 @@
       spectatedChatRoom.changeRoom(LobbyService.getLobbySpectatedId());
     });
 
-    Websocket.onJSON('chatReceive', function (message) {
+    function receiveMessage(message, noEvent) {
       var msg = xssFilters.inHTMLData(message.message);
 
       message.rawMessage = msg;
@@ -346,7 +346,17 @@
         Notifications.titleNotification();
       }
 
-      $rootScope.$emit('chat-message', message);
+      if (!noEvent) {
+        $rootScope.$emit('chat-message', message);
+      }
+    }
+
+    Websocket.onJSON('chatReceive', receiveMessage, true);
+
+    Websocket.onJSON('chatScrollback', function (messages) {
+      messages.forEach(function (msg) {
+        receiveMessage(msg);
+      });
     }, true);
 
     Websocket.onJSON('chatHistoryClear', function (data) {
