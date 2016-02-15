@@ -79,12 +79,12 @@
           return l;
         });
 
-        vm.profile.stats.karma = vm.profile.stats.substitutes - vm.profile.stats.leaves;
-
         // TODO: TEST DATA, remove once the backend supplies this
         if (angular.isUndefined(vm.profile.stats.leaves)) {
           vm.profile.stats.leaves = 0;
         }
+
+        vm.profile.stats.karma = vm.profile.stats.substitutes - vm.profile.stats.leaves;
 
         vm.profile.lobbies = vm.profile.lobbies.map(function (map) {
           map.createdAt = moment(map.createdAt * 1000);
