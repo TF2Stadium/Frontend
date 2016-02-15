@@ -8,20 +8,31 @@
   min-height: ($avatar-side-len + $avatar-vertical-offset);
 
   .avatar {
-
     float: left;
-    margin-top: $avatar-vertical-offset;
+
+    position: relative;
+    top: $avatar-vertical-offset;
+
     margin-right: $padding-medium;
     margin-bottom: $padding-medium;
 
-    &, img, div {
+    // This container is floating; other elements will be flowed
+    // around it based on its base position and width/height without
+    // its relative position, so adjust the height to be an "effective
+    // height" so that the other elements of this user-profile card
+    // flow properly.
+    width: $avatar-side-len;
+    height: ($avatar-side-len +
+             $avatar-vertical-offset);
+
+    img, div {
       width: $avatar-side-len;
       height: $avatar-side-len;
     }
 
     div {
       position: absolute;
-      top: $avatar-vertical-offset;
+      top: 0;
 
       background-image: url(/assets/img/logos/steam-cover.svg);
       background-size: 100% 100%;

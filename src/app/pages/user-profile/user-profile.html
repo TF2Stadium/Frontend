@@ -4,73 +4,69 @@
   <p>{{userProfile.error}}</p>
 </div>
 
-<div class="profile-sheet">
-  <div class="user-profile"
-       ng-if="!userProfile.loadingError">
+<div class="profile-sheet user-profile"
+     ng-if="!userProfile.loadingError">
+  <a href="{{userProfile.steamUrl}}"
+     target="_blank"
+     tabindex="0"
+     ng-focus="hover_steam=true"
+     ng-blur="hover_steam=false">
+    <div class="avatar">
+      <img alt="avatar"
+           src="{{userProfile.profile.avatar.replace('.jpg', '_full.jpg')}}" />
+      <div ng-class="{'focused': hover_steam}"></div>
+    </div>
+  </a>
+
+  <h1 class="player-name">
     <a href="{{userProfile.steamUrl}}"
        target="_blank"
-       tabindex="0"
+       ng-mouseover="hover_steam = true"
+       ng-mouseout="hover_steam = false"
        ng-focus="hover_steam=true"
-       ng-blur="hover_steam=false">
-      <div class="avatar">
-        <img alt="avatar"
-             src="{{userProfile.profile.avatar.replace('.jpg', '_full.jpg')}}" />
-        <div ng-class="{'focused': hover_steam}"></div>
-      </div>
+       ng-blur="hover_steam=false"
+       tabindex="-1">
+      {{::userProfile.profile.name}}
     </a>
+  </h1>
 
-    <h1 class="player-name">
-      <a href="{{userProfile.steamUrl}}"
-         target="_blank"
-         ng-mouseover="hover_steam = true"
-         ng-mouseout="hover_steam = false"
-         ng-focus="hover_steam=true"
-         ng-blur="hover_steam=false"
-         tabindex="-1">
-        {{::userProfile.profile.name}}
-      </a>
-    </h1>
+  <p class="player-details">
+    Playing TF2Stadium since {{userProfile.profile.createdAt.format('MMMM Do, YYYY')}}
+  </p>
 
-    <p class="player-details">
-      Playing TF2Stadium since {{userProfile.profile.createdAt.format('MMMM Do, YYYY')}}
-    </p>
-
-    <ul class="badges">
-      <li ng-if="userProfile.profile.twitchChannel">
-        <a href="https://twitch.tv/{{userProfile.profile.twitchChannel}}">
-          <img class="badge"
-               src="/assets/img/logos/twitch-glitch.png" />
-        </a>
-        <md-tooltip>Twitch: {{userProfile.profile.twitchChannel}}</md-tooltip>
-      </li>
-
-      <li ng-if="userProfile.profile.role !== 'player'">
+  <ul class="badges">
+    <li ng-if="userProfile.profile.twitchChannel">
+      <a href="https://twitch.tv/{{userProfile.profile.twitchChannel}}">
         <img class="badge"
-             src="/assets/img/badges/{{userProfile.profile.role}}.svg" />
-        <md-tooltip>Administrator</md-tooltip>
-      </li>
-    </ul>
+             src="/assets/img/logos/twitch-glitch.png" />
+      </a>
+      <md-tooltip>Twitch: {{userProfile.profile.twitchChannel}}</md-tooltip>
+    </li>
 
-    <div class="clearfix"></div>
+    <li ng-if="userProfile.profile.role !== 'player'">
+      <img class="badge"
+           src="/assets/img/badges/{{userProfile.profile.role}}.svg" />
+      <md-tooltip>Administrator</md-tooltip>
+    </li>
+  </ul>
 
-    <ul class="external-links">
-      <li ng-repeat="link in userProfile.profile.external_links">
-        <a href="{{link.url}}"
-           target="_blank">
-          <img ng-if="link.name !== 'logstf'"
-               class="logo"
-               height="50"
-               src="{{link.img}}"
-               alt="{{link.description}}" />
-          <md-icon ng-if="link.name === 'logstf'"
-                   class="logo logo-{{link.name}}"
-                   md-svg-src="{{link.img}}"
-                   aria-label="{{link.desc}}"></md-icon>
-        </a>
-        <md-tooltip>{{link.description}} Profile</md-tooltip>
-      </li>
-    </ul>
-  </div>
+  <ul class="external-links clear-floats">
+    <li ng-repeat="link in userProfile.profile.external_links">
+      <a href="{{link.url}}"
+         target="_blank">
+        <img ng-if="link.name !== 'logstf'"
+             class="logo"
+             height="50"
+             src="{{link.img}}"
+             alt="{{link.description}}" />
+        <md-icon ng-if="link.name === 'logstf'"
+                 class="logo logo-{{link.name}}"
+                 md-svg-src="{{link.img}}"
+                 aria-label="{{link.desc}}"></md-icon>
+      </a>
+      <md-tooltip>{{link.description}} Profile</md-tooltip>
+    </li>
+  </ul>
 </div>
 
 <div class="profile-sheet">
