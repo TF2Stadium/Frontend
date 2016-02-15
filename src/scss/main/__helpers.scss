@@ -6,8 +6,12 @@
   }
 
   &:after {
-      clear: both;
+    clear: both;
   }
+}
+
+.clear-floats {
+  clear: both;
 }
 
 /**
@@ -72,7 +76,7 @@
       @extend .fill-parent;
       content: '';
       border-radius: 3px;
-      box-sizing: border-box;  
+      box-sizing: border-box;
     }
   }
 

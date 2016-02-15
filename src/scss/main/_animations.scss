@@ -335,11 +335,14 @@ $animation-options-list: (
       }
     }
 
-    //SETTINGS
+    //Profile and Settings
+
+    .profile-sheet {
+      @include animation(slide-from-top fade-in);
+    }
 
     .settings-section,
-    .user-profile,
-    .profile-sheet {
+    .profile-lobbies-sheet {
       @include animation(slide-from-top fade-in, $stagger: $animation-stagger);
     }
 
