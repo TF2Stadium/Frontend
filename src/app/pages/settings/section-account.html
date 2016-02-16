@@ -28,10 +28,14 @@
     Disconnect Twitch
   </md-button>
 
-  <md-button
-    ng-if="!$root.userProfile.twitchName"
-    ng-href="{{config.endpoints.api}}/startTwitchLogin"
-    class="twitch-login"></md-button>
+  <a ng-href="{{::config.endpoints.api}}/startTwitchLogin"
+     ng-if="!$root.userProfile.twitchName"
+     class="twitch-login">
+    <img src="/assets/img/twitch-login.png"
+         alt="Connect With Twitch"
+         width="170"
+         height="32" />
+  </a>
 </div>
 <div class="settings-section">
   <h1>Account</h1>
