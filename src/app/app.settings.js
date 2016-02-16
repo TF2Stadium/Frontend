@@ -96,7 +96,6 @@
     setDefaultValues();
   }
 
-  /** @ngInject */
   function Settings() {
     var settingsProvider = {};
 
@@ -109,7 +108,7 @@
       during and after the run phase.
     */
     /** @ngInject */
-    var settingsService = function (Websocket, $rootScope, $log) {
+    var settingsService = function (Websocket, $rootScope, $log, $q) {
 
       //Private properties
       var settings = settingsProvider.settings;
@@ -145,9 +144,17 @@
         Saves a setting into the service and into the backend and
         fires an optional callback with the response from the backend as an argument.
       */
-      settingsService.set = function (key, value, callback) {
+      settingsService.set = function (key, newValue, callback, revertOnFail) {
+        var oldValue = settings[key];
+
+        if (oldValue === newValue) {
+          return $q.when({});
+        }
+
+        var deferred = $q.defer();
+
         callback = callback || angular.noop;
-        settings[key] = value;
+        settings[key] = newValue;
 
         // TODO: we don't rollback settings changes on commit
         // failures, so it makes sense to always emit this, but that
@@ -155,21 +162,29 @@
         // speculative updates
         $rootScope.$emit('settings-updated');
 
-        localStorage.setItem(key, value);
+        localStorage.setItem(key, newValue);
 
         Websocket.emitJSON('playerSettingsSet',
           //Backend only accepts strings!
-          {key: key.toString(), value: value.toString()},
+          {key: key.toString(), value: newValue.toString()},
           function (response) {
             if (response.success) {
               $log.log('Setting "' + key + '" saved correctly on the backend!');
+              deferred.resolve(response);
             } else {
+              if (revertOnFail) {
+                settings[key] = oldValue;
+                $rootScope.$emit('settings-updated');
+              }
+
               $log.log('Error setting key ' + key + ' with value ' +
-                       value + '. Reason: ' + response.message);
+                       newValue + '. Reason: ' + response.message);
+              deferred.reject(response);
             }
             callback(response);
-          }
-        );
+          });
+
+        return deferred.promise;
       };
 
       settingsService.getConstants = function (key) {
