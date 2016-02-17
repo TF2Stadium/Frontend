@@ -1,0 +1,9 @@
+.about-section {
+  @extend .sheet;
+  padding: $padding-medium $padding-big;
+  margin-bottom: $padding-medium;
+
+  h1 {
+    margin-top: 0;
+  }
+}

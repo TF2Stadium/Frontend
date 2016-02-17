@@ -3,16 +3,17 @@
   <p>Set a name that will be displayed on the site instead of your steam one.</p>
   <form name="siteAliasForm">
     <md-input-container md-no-float>
-      <input
-         name="siteAlias"
-         ng-model="settings.siteAlias"
-         placeholder="Alias"
-         required>
+      <input name="siteAlias"
+             ng-model="settings.siteAlias"
+             md-maxlength="32"
+             maxlength="64"
+             placeholder="Alias"
+             required>
     </md-input-container>
     <md-button
        class="md-raised md-primary"
-       ng-disabled="siteAliasForm.$invalid"
-       ng-click="settings.saveSetting('siteAlias', settings.siteAlias, true)">
+       ng-disabled="siteAliasForm.$invalid || (settings.originalSettings && settings.siteAlias === settings.originalSettings.siteAlias)"
+       ng-click="settings.saveSetting('siteAlias', settings.siteAlias)">
       Save
     </md-button>
   </form>

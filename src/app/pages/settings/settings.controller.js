@@ -14,17 +14,17 @@
 
     vm.sections = SettingsPage.getSections();
 
-    vm.saveSetting = function (key, value, showNotification) {
-      Settings.set(key, value, function () {
-        if (showNotification) {
-          var msg = 'Setting updated.';
-          if (key ===  'siteAlias') {
-            msg = 'Alias updated.';
-          }
+    vm.saveSetting = function (key, value, showNotification){
+      var msg = 'Setting updated.';
+      var promise = Settings.set(key, value);
 
+      if (showNotification) {
+        promise.then(function () {
           Notifications.toast({message: msg});
-        }
-      });
+        }, function () {
+          Notifications.toast({message: msg, error: true});
+        });
+      }
     };
 
     vm.setCurrent = function (key) {
@@ -162,20 +162,22 @@
       );
     }
 
-    function receiveSettings(settings) {
-      populateFilters(settings);
-      vm.soundVolume = settings.soundVolume;
-      vm.siteAlias = settings.siteAlias;
+    function syncSettings() {
+      Settings.getSettings(function (settings) {
+        vm.originalSettings = settings;
 
-      vm.savedServers = deserializeServers(settings.savedServers);
+        populateFilters(settings);
+        vm.soundVolume = settings.soundVolume;
+        vm.siteAlias = settings.siteAlias;
 
-      vm.emoteStyle = settings.emoteStyle;
+        vm.savedServers = deserializeServers(settings.savedServers);
+
+        vm.emoteStyle = settings.emoteStyle;
+      });
     }
 
-    Settings.getSettings(receiveSettings);
-    var handler = $rootScope.$on('settings-updated', function () {
-      Settings.getSettings(receiveSettings);
-    });
+    syncSettings();
+    var handler = $rootScope.$on('settings-updated', syncSettings);
     $scope.$on('$destroy', handler);
   }
 })();

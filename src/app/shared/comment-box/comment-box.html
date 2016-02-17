@@ -74,6 +74,7 @@
                   ng-keydown="commentBox.sendMessage($event)"
                   ng-model="commentBox.messageBox"
                   md-maxlength="150"
+                  maxlength="300"
                   required></textarea>
         <div class="chat-error"
              ng-show="chatForm.chatMessage.$error['md-maxlength']">
