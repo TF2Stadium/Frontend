@@ -1,13 +1,14 @@
 table {
   &.punishment-grid-legend {
     width: 100%;
+    text-align: center;
   }
 
-  .ban-tiny { color: black; background-color: gray; }
-  .ban-minor { color: black; background-color: green; }
-  .ban-medium { color: black; background-color: yellow; }
-  .ban-major { color: black; background-color: orange; }
-  .ban-severe { color: black; background-color: red; }
-  .ban-critical { color: black; background-color: maroon; }
-  .ban-permanent { color: white; background-color: black; }
+  .ban-tiny { color: black; background-color: #9E9E9E; }
+  .ban-minor { color: black; background-color: #4CAF50; }
+  .ban-medium { color: black; background-color: #FB8C00; } // #FFEB3B; }
+  .ban-major { color: black; background-color: #FF6D00; }
+  .ban-severe { color: black; background-color: #F44336; }
+  .ban-critical { color: black; background-color: #5D4037; }
+  .ban-permanent { color: #999; background-color: #212121; }
 }
