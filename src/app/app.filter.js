@@ -24,7 +24,9 @@
   }
 
   /** @ngInject */
-  function numberOrDash() {
+  function numberOrDash($filter) {
+    var numberFilter = $filter('number');
+
     return function (input, dash) {
       if (angular.isUndefined(dash)) {
         dash = '-';
@@ -33,12 +35,12 @@
       if (angular.isUndefined(input) || isNaN(input)) {
         return input;
       }
-      return (+input) === 0? dash:input;
+      return (+input) === 0? dash : numberFilter(input);
     };
   }
 
   /** @ngInject */
-  function reverse(){
+  function reverse() {
     return function (items) {
       return items.slice().reverse();
     };

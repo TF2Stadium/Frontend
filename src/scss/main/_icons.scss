@@ -34,10 +34,10 @@ $classes: (scout soldier pocket roamer pyro demoman heavy engineer medic sniper 
   //makes a class named .lobby-icon-classname for each of the nine classes
   @each $class in $classes {
     &-#{$class} {
-      background-image:url(../assets/img/class/class-icon-#{$class}.svg);
+      background-image:url(../assets/img/icons/class/#{$class}.svg);
 
       span:after {
-        background-image: url(../assets/img/class/class-icon-#{$class}-white.svg);
+        background-image: url(../assets/img/class/#{$class}-white.svg);
       }
     }
   }
@@ -51,10 +51,10 @@ $classes: (scout soldier pocket roamer pyro demoman heavy engineer medic sniper 
 
   @each $class in $classes {
     &-#{$class} {
-      background-image:url(../assets/img/class/class-icon-#{$class}.svg);
+      background-image:url(../assets/img/icons/class/#{$class}.svg);
 
       span:after {
-        background-image: url(../assets/img/class/class-icon-#{$class}-white.svg);
+        background-image: url(../assets/img/icons/class/#{$class}-white.svg);
       }
     }
   }

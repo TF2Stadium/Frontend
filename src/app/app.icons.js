@@ -27,7 +27,7 @@
     {name: 'steam', file: 'steam.svg'}
   ];
 
-  var classesBase = '/assets/img/class/class-icon-';
+  var classesBase = '/assets/img/icons/class/';
   var classes = [
     'scout',
     'soldier',
