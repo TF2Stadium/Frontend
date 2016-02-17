@@ -26,7 +26,8 @@
       sections: [
         'about',
         'privacy',
-        'servers'
+        'servers',
+        'credits'
       ]
     };
 
