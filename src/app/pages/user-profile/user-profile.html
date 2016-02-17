@@ -98,8 +98,8 @@
     <li ng-repeat="lobbyType in userProfile.profile.lobbyTypes">
       <span> <!-- dummy class for positioning the tooltip correctly -->
         <span class="format">{{lobbyType.abbr}}</span>
-        <span class="count">{{lobbyType.cnt | numberOrDash:'&mdash;'}}</span>
-        <md-tooltip>{{lobbyType.name}}</md-tooltip>
+        <span class="count">{{lobbyType.cnt | numberOrDash:'&mdash;' }}</span>
+        <md-tooltip>{{lobbyType.name}} matches played</md-tooltip>
       </span>
     </li>
   </ul>
@@ -110,7 +110,7 @@
         <md-icon md-svg-icon="class:{{klass.name}}"
                  alt="{{klass.name}}"></md-icon>
         <span class="count">{{klass.cnt | numberOrDash:'&mdash;'}}</span>
-        <md-tooltip>{{klass.name | capitalize}}</md-tooltip>
+        <md-tooltip>{{klass.name | capitalize}} matches played</md-tooltip>
       </span>
     </li>
   </ul>
@@ -147,7 +147,7 @@
         <span class="lobby-league">
           {{::lobbyInformation.league}}
           <md-tooltip md-direction="bottom">
-            {{::lobbyInformation.league | uppercase}} rules and whitelist
+            {{::lobbyInformation.league | uppercase}} rules
           </md-tooltip>
         </span>
         <md-icon
