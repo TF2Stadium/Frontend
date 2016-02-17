@@ -19,86 +19,100 @@
     find an abridged &ldquo;Punishment Guidelines Grid&rdquo; that we
     share with our staff to assist them with their duties.</p>
 
-  <table class="punishment-grid">
+
+  <table
+     ng-class="{colorblind: colorblindMode}"
+     class="punishment-grid">
     <thead>
-      <th></th>
-      <th>First Offence</th>
-      <th>Second Offence</th>
-      <th>Third Offence</th>
+      <th class="labels">
+        <md-checkbox ng-model="colorblindMode"
+                     aria-label="colorblindMode">
+          Color Blind Grid
+        </md-checkbox>
+      </th>
+      <th>1st Offence</th>
+      <th>2nd Offence</th>
+      <th>3rd Offence</th>
     </thead>
     <tbody>
       <tr>
         <td>Trolling, Spamming, etc. in chat</td>
         <td class="ban-tiny">30min Chat Ban</td>
-        <td class="ban-minor">Chat Ban</td>
-        <td class="ban-medium">Chat Ban</td>
+        <td class="ban-minor"><span ng-if="colorblindMode">Minor&nbsp;</span>Chat Ban</td>
+        <td class="ban-medium"><span ng-if="colorblindMode">Medium&nbsp;</span>Chat Ban</td>
       </tr>
       <tr>
         <td>Creating troll lobbies/excessive kicking</td>
-        <td class="ban-minor">Lobby Creation Ban</td>
-        <td class="ban-medium">Lobby Creation Ban</td>
-        <td class="ban-major">Lobby Creation Ban</td>
+        <td class="ban-minor">
+          <span ng-if="colorblindMode">Minor&nbsp;</span>Lobby Creation Ban</td>
+        <td class="ban-medium">
+          <span ng-if="colorblindMode">Medium&nbsp;</span>Lobby Creation Ban</td>
+        <td class="ban-major">
+          <span ng-if="colorblindMode">Major&nbsp;</span>Lobby Creation Ban</td>
       </tr>
       <tr>
         <td>Flaming (minor raging, non-derogatory personal attacks)</td>
-        <td class="ban-minor"></td>
-        <td class="ban-medium"></td>
-        <td class="ban-major"></td>
+        <td class="ban-minor"><span ng-if="colorblindMode">Minor</span></td>
+        <td class="ban-medium"><span ng-if="colorblindMode">Medium</span></td>
+        <td class="ban-major"><span ng-if="colorblindMode">Major</span></td>
       </tr>
       <tr>
         <td>Minor Exploit</td>
-        <td class="ban-minor"></td>
-        <td class="ban-medium"></td>
-        <td class="ban-major"></td>
+        <td class="ban-minor"><span ng-if="colorblindMode">Minor</span></td>
+        <td class="ban-medium"><span ng-if="colorblindMode">Medium</span></td>
+        <td class="ban-major"><span ng-if="colorblindMode">Major</span></td>
       </tr>
       <tr>
         <td>Major Exploit</td>
-        <td class="ban-medium"></td>
-        <td class="ban-major"></td>
-        <td class="ban-severe"></td>
+        <td class="ban-medium"><span ng-if="colorblindMode">Medium</span></td>
+        <td class="ban-major"><span ng-if="colorblindMode">Major</span></td>
+        <td class="ban-severe"><span ng-if="colorblindMode">Severe</span></td>
       </tr>
       <tr>
         <td>Major Flaming (unprovoked, racist, and/or derogatory)</td>
-        <td class="ban-medium"></td>
-        <td class="ban-major"></td>
-        <td class="ban-severe"></td>
+        <td class="ban-medium"><span ng-if="colorblindMode">Medium</span></td>
+        <td class="ban-major"><span ng-if="colorblindMode">Major</span></td>
+        <td class="ban-severe"><span ng-if="colorblindMode">Severe</span></td>
       </tr>
       <tr>
         <td>Trolling/Griefing lobbies</td>
-        <td class="ban-medium"></td>
-        <td class="ban-major"></td>
-        <td class="ban-severe"></td>
+        <td class="ban-medium"><span ng-if="colorblindMode">Medium</span></td>
+        <td class="ban-major"><span ng-if="colorblindMode">Major</span></td>
+        <td class="ban-severe"><span ng-if="colorblindMode">Severe</span></td>
       </tr>
       <tr>
         <td>Hacking</td>
-        <td class="ban-critical"></td>
-        <td class="ban-permanent"></td>
-        <td class="ban-permanent"></td>
+        <td class="ban-critical"><span ng-if="colorblindMode">Critical</span></td>
+        <td class="ban-permanent"><span ng-if="colorblindMode">Permanent</span></td>
+        <td class="ban-permanent"><span ng-if="colorblindMode">Permanent</span></td>
       </tr>
       <tr>
         <td>Attacks against the website</td>
-        <td class="ban-permanent"></td>
-        <td class="ban-permanent"></td>
-        <td class="ban-permanent"></td>
+        <td class="ban-permanent"><span ng-if="colorblindMode">Permanent</span></td>
+        <td class="ban-permanent"><span ng-if="colorblindMode">Permanent</span></td>
+        <td class="ban-permanent"><span ng-if="colorblindMode">Permanent</span></td>
       </tr>
       <tr>
         <td>Illegal activity, Doxing</td>
-        <td class="ban-permanent"></td>
-        <td class="ban-permanent"></td>
-        <td class="ban-permanent"></td>
+        <td class="ban-permanent"><span ng-if="colorblindMode">Permanent</span></td>
+        <td class="ban-permanent"><span ng-if="colorblindMode">Permanent</span></td>
+        <td class="ban-permanent"><span ng-if="colorblindMode">Permanent</span></td>
       </tr>
     </tbody>
   </table>
 
-  <table class="punishment-grid-legend">
+  <table
+     ng-class="{colorblind: colorblindMode}"
+     class="punishment-grid-legend">
     <tbody>
       <tr>
-        <td class="ban-minor">1 Day</td>
-        <td class="ban-medium">1 Week</td>
-        <td class="ban-major">1 Month</td>
-        <td class="ban-severe">3 Months</td>
-        <td class="ban-critical">6 Months</td>
-        <td class="ban-permanent">Permanent</td>
+        <td class="ban-minor"><span ng-if="colorblindMode">Minor<br /></span>1 Day</td>
+        <td class="ban-medium"><span ng-if="colorblindMode">Medium<br /></span>1 Week</td>
+        <td class="ban-major"><span ng-if="colorblindMode">Major<br /></span>1 Month</td>
+        <td class="ban-severe"><span ng-if="colorblindMode">Severe<br /></span>3 Months</td>
+        <td class="ban-critical"><span ng-if="colorblindMode">Critical<br /></span>6 Months</td>
+        <td class="ban-permanent"
+            ng-if="!colorblindMode">Permanent</td>
       </tr>
     </tbody>
   </table>

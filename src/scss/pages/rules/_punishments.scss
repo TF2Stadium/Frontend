@@ -1,14 +1,66 @@
 table {
   &.punishment-grid-legend {
+    margin-top: 1em;
+    font-weight: bold;
     width: 100%;
-    text-align: center;
   }
 
-  .ban-tiny { color: black; background-color: #9E9E9E; }
-  .ban-minor { color: black; background-color: #4CAF50; }
-  .ban-medium { color: black; background-color: #FB8C00; } // #FFEB3B; }
-  .ban-major { color: black; background-color: #FF6D00; }
-  .ban-severe { color: black; background-color: #F44336; }
-  .ban-critical { color: black; background-color: #5D4037; }
-  .ban-permanent { color: #999; background-color: #212121; }
+  thead {
+    th {
+      font-weight: bold;
+
+      md-checkbox {
+        margin: 0;
+      }
+
+      &.labels {
+        width: 40%;
+      }
+    }
+  }
+
+  &.punishment-grid {
+    border-collapse: collapse;
+
+    td, th {
+      padding: 0.4em 0;
+      border-bottom: 1px solid;
+    }
+  }
+
+
+  $severities: (
+    tiny: #9E9E9E,
+    minor: #4CAF50,
+    medium: #FFEB3B,
+    major: #FF6D00,
+    severe: #D32F2F,
+    critical: #5D4037,
+    permanent: #212121
+  );
+
+  @each $label, $color in $severities {
+    .ban-#{$label} {
+      font-size: small;
+      text-align: center;
+
+      &::before {
+        content: " ";
+        display: block;
+        width: 20px;
+        height: 20px;
+        border-radius: 10px;
+        background-color: $color;
+
+        margin: 0.2em auto 0.2em;
+      }
+    }
+
+    &.colorblind {
+      .ban-#{$label}::before {
+        content: "";
+        display: none;
+      }
+    }
+  }
 }
