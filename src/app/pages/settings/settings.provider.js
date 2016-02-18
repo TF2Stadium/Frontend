@@ -45,7 +45,8 @@
       settingsPageProvider.sections = {
         theme: {
           theme: Settings.getConstants('themesList'),
-          animationOptions: Settings.getConstants('animationOptions')
+          animationOptions: Settings.getConstants('animationOptions'),
+          videoBackground: Settings.getConstants('videoBackground')
         },
         chat: {
           emotes: Settings.getConstants('emoteStyle'),

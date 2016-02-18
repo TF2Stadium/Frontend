@@ -12,7 +12,8 @@
     'ngMaterial',
     'md.data.table',
     'luegg.directives',
-    'ngAudio'
+    'ngAudio',
+    'ngMedia'
   ]);
 
   angular.module('tf2stadium.controllers', []);

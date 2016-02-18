@@ -165,15 +165,3 @@
   height: 50%;
   text-align: center;
 }
-
-.lobby-location {
-  height: 100%;
-  min-width: 30px;
-  //todo: make classes for each flag
-  background: {
-    image: url(../assets/img/flag-eu.png);
-    size: contain;
-    repeat: no-repeat;
-    position: center;
-  }
-}

@@ -167,6 +167,7 @@
         vm.originalSettings = settings;
 
         populateFilters(settings);
+        vm.videoBackground = settings.videoBackground;
         vm.soundVolume = settings.soundVolume;
         vm.siteAlias = settings.siteAlias;
 

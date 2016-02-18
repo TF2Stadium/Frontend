@@ -9,13 +9,24 @@
   </md-radio-group>
 </div>
 <div class="settings-section">
-  <h1>Animations</h1>
+  <h1>UI Animations</h1>
   <md-radio-group
      ng-model="$root.animationLength"
      ng-change="settings.saveSetting('animationLength', $root.animationLength)">
     <md-radio-button
        ng-repeat="(key, opt) in settings.sections.theme.animationOptions track by opt.selector"
        ng-value="opt.selector">
+      {{opt.name}}
+    </md-radio-button>
+  </md-radio-group>
+
+  <h2>Animated Header</h2>
+  <md-radio-group
+     ng-model="settings.videoBackground"
+     ng-change="settings.saveSetting('videoBackground', settings.videoBackground)">
+    <md-radio-button
+       ng-repeat="(key, opt) in settings.sections.theme.videoBackground track by opt.value"
+       ng-value="opt.value">
       {{opt.name}}
     </md-radio-button>
   </md-radio-group>

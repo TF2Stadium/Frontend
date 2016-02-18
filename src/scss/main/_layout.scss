@@ -83,17 +83,35 @@ body {
   }
 }
 
-.header-info {
-  @include flex (column, flex-end, center);
+.header-bg-wrapper {
   height: $header-image-height;
   width: 100%;
   position: relative;
+
+  overflow: hidden;
 
   background: {
     image: url(../assets/img/header-bg.jpg);
     position: 50% 55%;
     size: cover;
   }
+
+  video.cinemagraph {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) translateY(-50%);
+
+    min-height: $header-image-height;
+    min-width: 100%;
+  }
+}
+
+.header-info {
+  @include flex (column, flex-end, center);
+  height: $header-image-height;
+  width: 100%;
+  position: relative;
 }
 
 .header-text,
