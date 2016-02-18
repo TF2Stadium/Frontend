@@ -13,7 +13,9 @@
      ng-blur="hover_steam=false">
     <div class="avatar">
       <img alt="avatar"
-           src="{{userProfile.profile.avatar.replace('.jpg', '_full.jpg')}}" />
+           ng-src="{{userProfile.profile.avatar.replace('.jpg', '_full.jpg')}}"
+           width="200"
+           height="200" />
       <div ng-class="{'focused': hover_steam}"></div>
     </div>
   </a>
@@ -45,7 +47,7 @@
 
     <li ng-if="userProfile.profile.role !== 'player'">
       <img class="badge"
-           src="/assets/img/badges/{{userProfile.profile.role}}.svg" />
+           ng-src="/assets/img/badges/{{userProfile.profile.role}}.svg" />
       <md-tooltip>Administrator</md-tooltip>
     </li>
   </ul>
@@ -135,6 +137,7 @@
       </div>
       <div flex class="lobby-main">
         <md-icon
+           ng-if="lobbyInformation.playerInfo.class"
            class="{{::lobbyInformation.playerInfo.team}}"
            md-svg-icon="class:{{::lobbyInformation.playerInfo.class}}"
            aria-label="{{::lobbyInformation.playerInfo.team}} {{::lobbyInformation.playerInfo.class}}"></md-icon>

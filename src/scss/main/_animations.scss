@@ -261,6 +261,10 @@ $animation-options-list: (
 
     //LOBBY-PAGE
 
+    .header-image {
+      @include animation(fade-in, $animation-slow);
+    }
+
     .lobbypage-text {
       @include animation(slide-from-bottom fade-in, $animation-slow);
     }
