@@ -134,7 +134,11 @@
           <md-button ui-sref="lobby-page({lobbyID: vm.lobbyInformation.id})">Go back</md-button>
         </div>
       </div>
-      <div ui-view="headerInfo" class="header-info"></div>
+
+      <div class="header-bg-wrapper">
+        <videobg></videobg>
+        <div ui-view="headerInfo" class="header-info"></div>
+      </div>
     </header>
 
     <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'" ng-if="$root.backendAuthenticated"></aside>

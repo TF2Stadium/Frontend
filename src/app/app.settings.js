@@ -52,6 +52,11 @@
       dark:     {name: 'TF2Stadium Dark', selector: 'dark-theme'}
     };
 
+    SettingsProvider.constants.videoBackground = {
+      on:    {name: 'On',     value: 'on'},
+      off:   {name: 'Off',    value: 'off'}
+    };
+
     SettingsProvider.constants.animationOptions = {
       slow:     {name: 'Slow',      selector: 'animation-slow'},
       normal:   {name: 'Normal',    selector: 'animation-normal'},
@@ -80,6 +85,7 @@
       SettingsProvider.settings.emoteStyle = 'emojione';
       SettingsProvider.settings.animationLength = 'animation-normal';
       SettingsProvider.settings.savedServers = '{}';
+      SettingsProvider.settings.videoBackground = 'true';
 
       /*
         Defaults every value found in the filters to true.
