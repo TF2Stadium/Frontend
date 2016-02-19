@@ -85,7 +85,7 @@
       SettingsProvider.settings.emoteStyle = 'emojione';
       SettingsProvider.settings.animationLength = 'animation-normal';
       SettingsProvider.settings.savedServers = '{}';
-      SettingsProvider.settings.videoBackground = 'true';
+      SettingsProvider.settings.videoBackground = 'on';
 
       /*
         Defaults every value found in the filters to true.
