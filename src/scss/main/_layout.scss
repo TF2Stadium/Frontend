@@ -275,3 +275,12 @@ md-input-container {
   // correctly use the color of the surrounding text.
   color: inherit;
 }
+
+
+// md-buttons by default make their labels all uppercase; that's fine,
+// except for buttons with a player's name
+.md-button.player-button {
+  span {
+    text-transform: none;
+  }
+}

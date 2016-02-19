@@ -104,8 +104,7 @@
           </md-button>
           <div flex></div>
           <div class="toolbar-buttons">
-            <md-button ng-if="$root.currentState!=='lobby-list'"
-              ui-sref="lobby-list">
+            <md-button ui-sref="lobby-list">
               Home
             </md-button>
             <md-button ui-sref="about">
@@ -114,10 +113,21 @@
             <md-button ui-sref="rules">
               Rules
             </md-button>
+
             <md-button ng-if="$root.userProfile.steamid" ui-sref="settings">
-              <img src="/assets/img/icons/material/settings.svg">
+              Settings
+              <!--<md-icon md-svg-icon="material:settings"></md-icon>-->
+            </md-button>
+
+            <md-button
+               class="player-button"
+               ng-if="$root.userProfile.steamid"
+               ui-sref="user-profile({userID: $root.userProfile.steamid})">
               {{$root.userProfile.name}}
-              <img ng-src="{{::$root.userProfile.avatar}}">
+              <img ng-src="{{::$root.userProfile.avatar}}"
+                   width="32"
+                   height="32"
+                   alt="Your steam avatar" />
             </md-button>
             <md-button ng-if="!$root.userProfile.steamid"
               ng-href="{{config.endpoints.api}}/startLogin"
