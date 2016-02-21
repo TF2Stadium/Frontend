@@ -124,7 +124,7 @@
           <div flex ng-if="!slot.ready && $root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state<4">
             <span>{{lobbyPage.playerPreReady ? 'Ready for ' + (lobbyPage.preReadyUpTimer | secondsToMinutes) : 'Pre-ready up!'}}</span>
           </div>
-          <div><span>{{slot.player.lobbiesPlayed}}</span><span>{{(slot.player.lobbiesPlayed===1)? 'lobby':'lobbies}}</span></div>
+          <div><span>{{slot.player.lobbiesPlayed}}</span><span>{{(slot.player.lobbiesPlayed===1)? 'lobby':'lobbies'}}</span></div>
         </div>
       </div>
 
