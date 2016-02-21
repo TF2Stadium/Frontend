@@ -88,15 +88,13 @@ describe('Service: LobbyService', function () {
       var mumbleInfo = {
         nick: 'name with multiple  spaces',
         password: 'password',
-        address: 'example.org',
-        port: 12345
+        address: 'example.org:12345'
       };
 
       var cleanedMumbleURL = 'mumble://' +
             mumbleInfo.nick.replace(/ +/g, '_') + ':' +
             mumbleInfo.password + '@' +
-            mumbleInfo.address + ':' +
-            mumbleInfo.port + '/';
+            mumbleInfo.address + '/';
 
       callbacks['lobbyStart']({ mumble: mumbleInfo });
       LobbyService.joinMumbleServer();
@@ -115,15 +113,13 @@ describe('Service: LobbyService', function () {
       var mumbleInfo = {
         nick: 'Ññáéíóúü',
         password: 'password',
-        address: 'example.org',
-        port: 12345
+        address: 'example.org:12345'
       };
 
       var cleanedMumbleURL = 'mumble://' +
             mumbleInfo.nick + ':' +
             mumbleInfo.password + '@' +
-            mumbleInfo.address + ':' +
-            mumbleInfo.port + '/';
+            mumbleInfo.address + '/';
 
       callbacks['lobbyStart']({ mumble: mumbleInfo });
       LobbyService.joinMumbleServer();

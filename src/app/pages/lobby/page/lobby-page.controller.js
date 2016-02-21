@@ -30,8 +30,7 @@
         return;
       }
       vm.lobbyJoinInformation.mumbleInformation =
-        'IP address: ' + vm.lobbyJoinInformation.mumble.address +
-        ', port ' + vm.lobbyJoinInformation.mumble.port +
+        'Address: ' + vm.lobbyJoinInformation.mumble.address +
         ', password ' + vm.lobbyJoinInformation.mumble.password;
     };
 
