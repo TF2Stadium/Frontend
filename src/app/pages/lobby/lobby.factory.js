@@ -216,10 +216,11 @@
     factory.joinMumbleServer = function () {
       $timeout(function (){
         var connectString = 'mumble://' +
-          cleanForMumble(factory.lobbyJoinInformation.mumble.nick) + ':' +
-          factory.lobbyJoinInformation.mumble.password + '@' +
-          factory.lobbyJoinInformation.mumble.address + ':' +
-          factory.lobbyJoinInformation.mumble.port + '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
+              cleanForMumble(factory.lobbyJoinInformation.mumble.nick) + ':' +
+              factory.lobbyJoinInformation.mumble.password + '@' +
+              factory.lobbyJoinInformation.mumble.address +
+              '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
+
         $window.open(connectString, '_self');
       }, 1000);
     };
