@@ -230,7 +230,7 @@
         id: lobbyId,
         slot: slotId,
         type: reqName,
-        value: val
+        value: val || 0
       });
     };
 
