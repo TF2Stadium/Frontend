@@ -34,7 +34,7 @@
     };
 
     userService.twitchLogout = function () {
-      $window.open(Config.endpoints.api+'/twitchLogout', '_self');
+      $window.open(Config.endpoints.api + '/twitchLogout', '_self');
     };
 
     userService.init = function () {
