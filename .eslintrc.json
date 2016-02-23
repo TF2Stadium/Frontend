@@ -4,7 +4,8 @@
     "Socket": false,
     "Clipboard": false,
     "xssFilters": false,
-    "moment": false
+    "moment": false,
+    "Kefir": false
   },
   "rules": {
     "no-console": 0,
