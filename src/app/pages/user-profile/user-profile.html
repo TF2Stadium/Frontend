@@ -59,7 +59,7 @@
         <img ng-if="link.name !== 'logstf'"
              class="logo"
              height="50"
-             src="{{link.img}}"
+             ng-src="{{link.img}}"
              alt="{{link.description}}" />
         <md-icon ng-if="link.name === 'logstf'"
                  class="logo logo-{{link.name}}"
