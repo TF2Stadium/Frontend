@@ -30,3 +30,6 @@ After making changes, run `gulp lint` to check for common errors or whitespace f
 ##License
 
 Released under the [GPLv3 License (GPLv3)](https://github.com/TF2Stadium/Frontend/blob/master/LICENSE).
+
+The assets have a variety of licenses, see src/assets/README.md for
+their licensing information.
