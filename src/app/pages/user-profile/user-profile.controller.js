@@ -89,6 +89,10 @@
 
         vm.profile.stats.karma = vm.profile.stats.substitutes - vm.profile.stats.leaves;
 
+        if (!vm.profile.lobbies) {
+          vm.profile.lobbies = [];
+        }
+
         vm.profile.lobbies = vm.profile.lobbies.map(function (map) {
           map.createdAt = moment(map.createdAt * 1000);
 
