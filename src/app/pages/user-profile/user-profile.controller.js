@@ -62,6 +62,9 @@
         });
 
         vm.profile.external_links = [
+          { name: 'tftv',
+            img: '/assets/img/logos/tftv.png',
+            description: 'TeamfortressTV'},
           { name: 'logstf',
             img: '/assets/img/logos/logstf.svg',
             description: 'Logs.TF'},
