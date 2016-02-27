@@ -349,6 +349,8 @@
       lobbyCreateService.create = function (lobbySettings, callback) {
         callback = callback || angular.noop;
 
+        lobbySettings.serverType = 'server';
+
         Websocket.emitJSON('lobbyCreate',
           lobbySettings,
           function (response) {
