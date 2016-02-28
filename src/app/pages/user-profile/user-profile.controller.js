@@ -21,7 +21,7 @@
         vm.profile = profile;
         vm.loadingError = false;
 
-        vm.profile.createdAt = moment(vm.profile.createdAt * 1000);
+        vm.profile.createdAt = moment(vm.profile.createdAt);
 
         vm.profile.lobbyTypes = [
           {key: 'playedSixesCount',
@@ -94,7 +94,7 @@
         }
 
         vm.profile.lobbies = vm.profile.lobbies.map(function (map) {
-          map.createdAt = moment(map.createdAt * 1000);
+          map.createdAt = moment(map.createdAt);
 
           map.playerInfo = map.classes.map(function (klass) {
             if (klass.blu.filled && klass.blu.player && klass.blu.player.steamid === vm.steamId) {
