@@ -73,7 +73,11 @@
             description: 'United Gaming Clans' },
           { name: 'etf2l',
             img: '/assets/img/logos/etf2l.png',
-            description: 'European TF2 League' }
+            description: 'European TF2 League' },
+          { name: 'twitch',
+            img: '/assets/img/logos/twitch-glitch.png',
+            description: 'Twitch'
+          }
         ].filter(function (l) {
           return vm.profile.external_links &&
             vm.profile.external_links.hasOwnProperty(l.name);
