@@ -37,6 +37,6 @@ deployment:
       - cp src/app/app.config.js.template src/app/app.config.js
       - gulp build
       - cp -r dist docker/source/dist
-      - cd docker && docker build -t tf2stadium/frontend:dev .
+      - docker build -t tf2stadium/frontend:dev docker/
       - docker login -e $DOCKER_EMAIL -u $DOCKER_USER -p $DOCKER_PASS
       - docker push tf2stadium/frontend
