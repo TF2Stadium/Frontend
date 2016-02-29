@@ -2,6 +2,7 @@ FROM phusion/baseimage:0.9.18
 
 # Use baseimage-docker's init system.
 CMD ["/sbin/my_init"]
+EXPOSE 80
 
 # Build process
 RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold" && \
@@ -15,5 +16,3 @@ RUN chmod +x /etc/service/nginx/run
 
 # Add resources
 ADD source/dist/ /var/www/html
-
-EXPOSE 80
