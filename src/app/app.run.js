@@ -6,8 +6,8 @@
   /** @ngInject */
 
   function runBlock($timeout, $window, $state, $rootScope, $log,
-    Config, User, Settings, LobbyService, Notifications, $mdDialog) {
-
+                    $mdDialog, Websocket, PreloadService, Config,
+                    User, Settings, LobbyService, Notifications) {
     $log.debug('runBlock end');
 
     /*eslint-disable angular/on-watch */
@@ -93,6 +93,12 @@
       });
     }, 2000);
 
+    Websocket.onJSON('socketInitialized', function () {
+      $timeout(function () {
+        PreloadService.queuePreloadAudio('/assets/sound/lobby-start.wav');
+        PreloadService.queuePreloadAudio('/assets/sound/lobby-readyup.wav');
+      }, 1000);
+    });
   }
 
 })();
