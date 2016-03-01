@@ -1,3 +1,17 @@
+<div class="rent-server-form">
+  <h2>Rent from TF2Stadium:</h2>
+  <md-progress-circular
+     ng-if="lobbyCreate.storedServers === null"
+     md-mode="indeterminate"></md-progress-circular>
+  <p>{{lobbyCreate.storedServers.length}} available</p>
+</div>
+<div class="rent-server-form">
+  <h2>Rent from serveme.tf:</h2>
+  <md-progress-circular
+     ng-if="lobbyCreate.servemeServers === null"
+     md-mode="indeterminate"></md-progress-circular>
+  <p>{{lobbyCreate.servemeServers.servers}}</p>
+</div>
 <div class="tile-form">
   <form name="serverCreateForm" class="server-form">
     <h2>Server information</h2>

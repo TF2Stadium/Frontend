@@ -162,7 +162,27 @@
       });
     };
 
+    vm.storedServers = null;
+    vm.servemeServers = null;
+
+    console.log('create lc controller');
     $scope.$on('$destroy', $rootScope.$on('$stateChangeSuccess', function () {
+      if ($state.current.name === 'server') {
+        LobbyCreate
+          .getStoredServers()
+          .then(function (data) {
+            console.log('stored servers data', data);
+            vm.storedServers = data;
+          });
+
+        LobbyCreate
+          .getServemeServers()
+          .then(function (data) {
+            console.log('serverme servers data', data);
+            vm.servemeServers = data;
+          });
+      }
+
       // clear search input when navigating to a page
       vm.searchString = null;
       var searchInput = $document[0].getElementById('search-input');

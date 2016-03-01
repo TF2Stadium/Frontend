@@ -49,8 +49,8 @@
     lobbyCreateProvider.wizardSteps = {};
 
     /** @ngInject */
-    var lobbyCreateService = function (Websocket, $state, $rootScope, $filter) {
-
+    var lobbyCreateService = function (Websocket, $state, $rootScope,
+                                       $filter, $q) {
       var lobbySettingsList = {
         formats: {
           key: 'type',
@@ -375,16 +375,35 @@
       lobbyCreateService.verifyServer = function (callback) {
         callback = callback || angular.noop;
 
-        Websocket.emitJSON('serverVerify',
-          {
-            server: lobbyCreateService.settings.server,
-            rconpwd: lobbyCreateService.settings.rconpwd,
-            map: lobbyCreateService.settings.map
-          },
-          function (response) {
-            callback(response);
-          }
-        );
+        Websocket.emitJSON('serverVerify', {
+          server: lobbyCreateService.settings.server,
+          rconpwd: lobbyCreateService.settings.rconpwd,
+          map: lobbyCreateService.settings.map
+        }, function (response) {
+          callback(response);
+        });
+      };
+
+      lobbyCreateService.getStoredServers = function () {
+        var deferred = $q.defer();
+
+        Websocket.emitJSON('getStoredServers', {}, function (data) {
+          console.log('stored', data);
+          deferred.resolve(data);
+        });
+
+        return deferred.promise;
+      };
+
+      lobbyCreateService.getServemeServers = function () {
+        var deferred = $q.defer();
+
+        Websocket.emitJSON('getServemeServers', {}, function (data) {
+          console.log('serveme', data);
+          deferred.resolve(data);
+        });
+
+        return deferred.promise;
       };
 
       lobbyCreateService.getSettingsList = function () {
