@@ -23,21 +23,26 @@
     // image (since 404s aren't cached).
     var alreadyQueued = Object.create(null);
 
-    return {
-      queuePreload: function preload(src) {
+    function makePreloader(elementConstructor) {
+      return function (src) {
         if (!alreadyQueued[src]) {
           var deferred = $q.defer();
-          var img = new $window.Image();
-          img.src = src;
+          var el = new elementConstructor();
+          el.src = src;
 
-          once(img, 'load', deferred.resolve.bind(deferred));
-          once(img, 'error', deferred.reject.bind(deferred));
+          once(el, 'load', deferred.resolve.bind(deferred));
+          once(el, 'error', deferred.reject.bind(deferred));
 
           alreadyQueued[src] = deferred.promise;
         }
 
         return alreadyQueued[src];
-      }
+      };
+    }
+
+    return {
+      queuePreload: makePreloader($window.Image),
+      queuePreloadAudio: makePreloader($window.Audio)
     };
   }
 
