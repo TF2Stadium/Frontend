@@ -18,6 +18,25 @@
     </md-button>
   </form>
 </div>
+
+<div class="settings-section">
+  <h1>Mumble Username</h1>
+  <p>Set a unique Mumble username</p>
+  <form name="mumbleUsernameForm">
+    <md-input-container md-no-float>
+      <input name="mumbleUsername"
+             ng-model="$root.userProfile.mumbleUsername"
+             md-maxlength="32"
+             maxlength="64"
+             placeholder="Mumble Username">
+    </md-input-container>
+    <md-button
+      class="md-raised md-primary"
+      ng-click="settings.saveSetting('mumbleNick', $root.userProfile.mumbleUsername)">
+      Save
+    </md-button>
+</div>
+
 <div class="settings-section">
   <h1>Twitch</h1>
   <p>Connect with Twitch to join subscriber-restricted lobbies.</p>
