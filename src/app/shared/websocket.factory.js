@@ -5,7 +5,8 @@
     .factory('Websocket', Websocket);
 
   /** @ngInject */
-  function Websocket($rootScope, $timeout, $log, Config, Notifications) {
+  function Websocket($rootScope, $timeout, $log, $q,
+                     Config, Notifications) {
     var connected = false;
     var reconnecting = false;
     var socket = null;
@@ -141,39 +142,52 @@
       });
     };
 
-    function emitJSON(name, data, callback) {
-      $log.log('Sending ' + name, data);
-      data.request = name;
-
-      socket.Emit(data, function (jsonIn) {
-        var dataIn = angular.fromJson(jsonIn);
-
-        if (console && console.timeStamp) {
-          console.timeStamp('WS'+name);
-        }
-
-        $log.log('Response to ' + name, dataIn);
-        $log.log(dataIn);
-        if (!dataIn.success) {
-          Notifications.toast({
-            message: dataIn.message,
-            error: true,
-            hideDelay: 5000
-          });
-        }
-        callback(dataIn);
-      });
-    }
-
     factory.emitJSON = function (name, data, callback) {
+      var deferred = $q.defer();
       callback = asyncAngularify(callback || angular.noop);
 
+      if (angular.isUndefined(data)) {
+        data = {};
+      }
+
       if (connected) {
-        emitJSON(name, data, callback);
+        emitJSONImpl();
       } else {
         var deregister = $rootScope.$on('socket-opened', function () {
-          emitJSON(name, data, callback);
+          emitJSONImpl();
           deregister();
+        });
+      }
+
+      return deferred.promise;
+
+      function emitJSONImpl() {
+        $log.log('Sending ' + name, data);
+        data.request = name;
+
+        socket.Emit(data, function (jsonIn) {
+          var dataIn = angular.fromJson(jsonIn);
+
+          if (console && console.timeStamp) {
+            console.timeStamp('WS'+name);
+          }
+
+          $log.log('Response to ' + name, dataIn);
+          if (!dataIn.success) {
+            Notifications.toast({
+              message: dataIn.message,
+              error: true,
+              hideDelay: 5000
+            });
+          }
+
+          if (dataIn.success) {
+            deferred.resolve(dataIn.data);
+          } else {
+            deferred.reject(dataIn.data);
+          }
+
+          callback(dataIn);
         });
       }
     };

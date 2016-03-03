@@ -50,7 +50,7 @@
 
     /** @ngInject */
     var lobbyCreateService = function (Websocket, $state, $rootScope,
-                                       $filter, $q) {
+                                       $filter) {
       var lobbySettingsList = {
         formats: {
           key: 'type',
@@ -385,25 +385,11 @@
       };
 
       lobbyCreateService.getStoredServers = function () {
-        var deferred = $q.defer();
-
-        Websocket.emitJSON('getStoredServers', {}, function (data) {
-          console.log('stored', data);
-          deferred.resolve(data);
-        });
-
-        return deferred.promise;
+        return Websocket.emitJSON('getStoredServers');
       };
 
       lobbyCreateService.getServemeServers = function () {
-        var deferred = $q.defer();
-
-        Websocket.emitJSON('getServemeServers', {}, function (data) {
-          console.log('serveme', data);
-          deferred.resolve(data);
-        });
-
-        return deferred.promise;
+        return Websocket.emitJSON('getServemeServers');
       };
 
       lobbyCreateService.getSettingsList = function () {
