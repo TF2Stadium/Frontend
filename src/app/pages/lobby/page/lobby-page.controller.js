@@ -16,28 +16,8 @@
       LobbyService.spectate(lobbyPageId);
     }
 
-    var buildConnectString = function () {
-      if (!vm.lobbyJoinInformation.game) {
-        return;
-      }
-      vm.lobbyJoinInformation.connectString =
-        'connect ' + vm.lobbyJoinInformation.game.host +
-        '; password ' + vm.lobbyJoinInformation.password;
-    };
-
-    var buildMumbleString = function () {
-      if (!vm.lobbyJoinInformation.mumble) {
-        return;
-      }
-      vm.lobbyJoinInformation.mumbleInformation =
-        'Address: ' + vm.lobbyJoinInformation.mumble.address +
-        ', password ' + vm.lobbyJoinInformation.mumble.password;
-    };
-
     vm.lobbyInformation = LobbyService.getLobbySpectated();
     vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
-    buildConnectString();
-    buildMumbleString();
     vm.playerPreReady = LobbyService.getPlayerPreReady();
     vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
 
@@ -60,8 +40,6 @@
 
     LobbyService.subscribe('lobby-start', $scope, function (){
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
-      buildConnectString();
-      buildMumbleString();
     });
 
     $scope.$watch(LobbyService.getPlayerPreReady, function () {
@@ -128,12 +106,14 @@
       LobbyService.leaveSlot(vm.lobbyInformation.id);
     };
 
-    vm.joinTF2Server = function () {
-      LobbyService.joinTF2Server();
-    };
+    vm.delayedLaunch = function delayedLaunch(url, delay) {
+      if (angular.isUndefined(delay)) {
+        delay = 1000;
+      }
 
-    vm.joinMumbleServer = function () {
-      LobbyService.joinMumbleServer();
+      $timeout(function (){
+        $window.open(url, '_self');
+      }, delay);
     };
 
     vm.preReadyUp = function () {

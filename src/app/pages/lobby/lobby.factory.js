@@ -207,24 +207,6 @@
                           steamid: steamId});
     };
 
-    factory.joinTF2Server = function () {
-      $timeout(function (){
-        $window.open('steam://connect/' + factory.lobbyJoinInformation.game.host + '/' + factory.lobbyJoinInformation.password, '_self');
-      }, 1000);
-    };
-
-    factory.joinMumbleServer = function () {
-      $timeout(function (){
-        var connectString = 'mumble://' +
-              cleanForMumble(factory.lobbyJoinInformation.mumble.nick) + ':' +
-              factory.lobbyJoinInformation.mumble.password + '@' +
-              factory.lobbyJoinInformation.mumble.address +
-              '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
-
-        $window.open(connectString, '_self');
-      }, 1000);
-    };
-
     factory.setSlotRequirement = function (lobbyId, slotId, reqName, val) {
       Websocket.emitJSON('lobbySetRequirement', {
         id: lobbyId,
@@ -277,6 +259,20 @@
 
     Websocket.onJSON('lobbyStart', function (data) {
       factory.lobbyJoinInformation = data;
+
+      if (data.game) {
+        factory.lobbyJoinInformation.connectUrl = 'steam://connect/' +
+          data.game.host + '/' + data.password;
+
+        factory.lobbyJoinInformation.connectString =
+          'connect ' + data.game.host + '; password ' + data.password;
+      }
+
+      factory.lobbyJoinInformation.mumbleUrl = 'mumble://' +
+        'unnamed' + ':' + data.mumble.password + '@' +
+        data.mumble.address + '/' + data.mumble.channel +
+        '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
+
       $rootScope.$emit('lobby-start');
       Notifications.toast({
         message: 'Your lobby has started!',

@@ -97,16 +97,9 @@ describe('Service: LobbyService', function () {
             mumbleInfo.address + '/';
 
       callbacks['lobbyStart']({ mumble: mumbleInfo });
-      LobbyService.joinMumbleServer();
-      $timeout.flush();
 
-      expect(mock$window.open).to.be.calledOnce;
-      expect(mock$window.open).to.be.calledWith(
-        sinon.match(function (s) {
-          return startsWith(s, cleanedMumbleURL);
-        }, 'nick without spaces'),
-        '_self'
-      );
+      expect(LobbyService.getLobbyJoinInformation().mumbleUrl.split('?')[0]).
+        to.equal(cleanedMumbleURL);
     });
 
     it('should not remove accents', function () {
@@ -122,16 +115,9 @@ describe('Service: LobbyService', function () {
             mumbleInfo.address + '/';
 
       callbacks['lobbyStart']({ mumble: mumbleInfo });
-      LobbyService.joinMumbleServer();
-      $timeout.flush();
 
-      expect(mock$window.open).to.be.calledOnce;
-      expect(mock$window.open).to.be.calledWith(
-        sinon.match(function (s) {
-          return startsWith(s, cleanedMumbleURL);
-        }, 'URL with nick: Ññáéíóúü'),
-        '_self'
-      );
+      expect(LobbyService.getLobbyJoinInformation().mumbleUrl.split('?')[0]).
+        to.equal(cleanedMumbleURL);
     });
   });
 });
