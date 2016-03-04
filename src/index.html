@@ -119,6 +119,12 @@
               <!--<md-icon md-svg-icon="material:settings"></md-icon>-->
             </md-button>
 
+            <md-button ng-if="$root.userProfile.role === 'administrator'"
+                       ng-href="{{config.endpoints.api}}/admin"
+                       target="_blank">
+              Admin
+            </md-button>
+
             <md-button
                class="player-button"
                ng-if="$root.userProfile.steamid"
