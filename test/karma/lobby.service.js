@@ -3,15 +3,11 @@
 describe('Service: LobbyService', function () {
   'use strict';
 
-  var LobbyService, $rootScope, $timeout, $q;
+  var LobbyService, $rootScope, $q;
   var mockWebsocket, mockNotifications, mockSettings;
   var mock$state, mock$mdDialog, mock$window;
 
   var callbacks = {};
-
-  function startsWith(str, searchString) {
-    return str.indexOf(searchString) === 0;
-  }
 
   beforeEach(function () {
     mockWebsocket = {
@@ -52,9 +48,8 @@ describe('Service: LobbyService', function () {
       $provide.value('$window', mock$window);
     });
 
-    inject(function (_LobbyService_, _$rootScope_, _$timeout_, _$q_) {
+    inject(function (_LobbyService_, _$rootScope_, _$q_) {
       $q = _$q_;
-      $timeout = _$timeout_;
       $rootScope = _$rootScope_;
       LobbyService = _LobbyService_;
     });
@@ -84,35 +79,16 @@ describe('Service: LobbyService', function () {
   });
 
   describe('mumble', function () {
-    it('should clean mumble names', function () {
+    it('should build mumble url', function () {
       var mumbleInfo = {
-        nick: 'name with multiple  spaces',
         password: 'password',
-        address: 'example.org:12345'
+        address: 'example.org:12345',
+        channel: 'chan1'
       };
 
-      var cleanedMumbleURL = 'mumble://' +
-            mumbleInfo.nick.replace(/ +/g, '_') + ':' +
+      var cleanedMumbleURL = 'mumble://unnamed:' +
             mumbleInfo.password + '@' +
-            mumbleInfo.address + '/';
-
-      callbacks['lobbyStart']({ mumble: mumbleInfo });
-
-      expect(LobbyService.getLobbyJoinInformation().mumbleUrl.split('?')[0]).
-        to.equal(cleanedMumbleURL);
-    });
-
-    it('should not remove accents', function () {
-      var mumbleInfo = {
-        nick: 'Ññáéíóúü',
-        password: 'password',
-        address: 'example.org:12345'
-      };
-
-      var cleanedMumbleURL = 'mumble://' +
-            mumbleInfo.nick + ':' +
-            mumbleInfo.password + '@' +
-            mumbleInfo.address + '/';
+            mumbleInfo.address + '/' + mumbleInfo.channel + '/';
 
       callbacks['lobbyStart']({ mumble: mumbleInfo });
 
