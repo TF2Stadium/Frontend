@@ -1,10 +1,17 @@
 (function () {
   'use strict';
 
-  angular.module('tf2stadium').run(runBlock);
+  angular.module('tf2stadium')
+    .config(configBlock)
+    .run(runBlock);
+
 
   /** @ngInject */
+  function configBlock($compileProvider) {
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|steam|mumble):/);
+  }
 
+  /** @ngInject */
   function runBlock($timeout, $window, $state, $rootScope, $log,
                     $mdDialog, Websocket, PreloadService, Config,
                     User, Settings, LobbyService, Notifications) {

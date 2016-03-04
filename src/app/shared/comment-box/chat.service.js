@@ -342,7 +342,8 @@
       }
 
       if (!$rootScope.userProfile ||
-          $rootScope.userProfile.steamid !== message.player.steamid) {
+          (message.player.steamid &&
+           $rootScope.userProfile.steamid !== message.player.steamid)) {
         Notifications.titleNotification();
       }
 
