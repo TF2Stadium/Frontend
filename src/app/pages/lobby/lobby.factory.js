@@ -257,7 +257,8 @@
 
       factory.lobbyJoinInformation.mumbleUrl = 'mumble://' +
         'unnamed' + ':' + data.mumble.password + '@' +
-        data.mumble.address + '/' + data.mumble.channel +
+        data.mumble.address + '/' +
+        encodeURIComponent(data.mumble.channel).replace('%2F', '/') +
         '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
 
       $rootScope.$emit('lobby-start');
