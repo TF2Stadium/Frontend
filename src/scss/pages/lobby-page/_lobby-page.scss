@@ -73,8 +73,9 @@
 
     span {
       text-overflow: ellipsis;
-      overflow: hidden;
+      // overflow: hidden;
       margin: $padding-small 0;
+      word-break: break-all;
     }
   }
 }
