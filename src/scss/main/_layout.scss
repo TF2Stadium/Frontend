@@ -48,6 +48,9 @@ body {
   @extend .sheet;
   min-height: $navbar-height;
 
+  // Override the border-radius set by .sheet
+  border-radius: 0;
+
   .header-toolbar-content {
     @include flex (row, center, center);
     width: $full-width;
