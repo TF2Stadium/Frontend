@@ -103,7 +103,7 @@
     };
 
     vm.goToSteamProfile = function (steamId) {
-      $window.open('http://steamcommunity.com/profiles/' + steamId, '_blank');
+      $window.open('https://steamcommunity.com/profiles/' + steamId, '_blank');
     };
 
     vm.deleteMessage = function (message) {

@@ -10,7 +10,7 @@
     var vm = this;
 
     vm.steamId = $state.params.userID;
-    vm.steamUrl = 'http://steamcommunity.com/profiles/' + vm.steamId;
+    vm.steamUrl = 'https://steamcommunity.com/profiles/' + vm.steamId;
 
     vm.profile = {};
     vm.loadingError = false;
