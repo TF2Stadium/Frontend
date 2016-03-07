@@ -28,7 +28,7 @@
 
     var timer = $interval(function () {
       increaseCounter();
-    }, 1000);
+    }, 100);
 
     $scope.$on('$destroy', function readyUpDialogDestroyed() {
       $interval.cancel(timer);

@@ -23,6 +23,11 @@
   </p>
 </div>
 
+<md-progress-linear
+   md-mode="determinate"
+   ng-if="lobbyPage.readyUp"
+   value="{{lobbyPage.readyUpPercent}}"></md-progress-linear>
+
 <div id="lobby-join-information" class="sheet"
   ng-if="lobbyPage.lobbyJoinInformation.id && lobbyPage.lobbyJoinInformation.id==lobbyPage.lobbyInformation.id">
   <div class="row">
