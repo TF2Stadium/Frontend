@@ -102,19 +102,19 @@
                 Stadium profile
               </md-button>
             </md-menu-item>
-            <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
+            <md-menu-item ng-if="(lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5) && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')">
               <md-button ng-click="lobbyPage.kick(slot.player)">
                 Kick player from slot
               </md-button>
             </md-menu-item>
-            <md-menu-item ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
+            <md-menu-item ng-if="(lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5) && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')">
               <md-button ng-click="lobbyPage.ban(slot.player)">
                 Ban player from lobby
               </md-button>
             </md-menu-item>
 
             <md-menu-item
-               ng-if="$root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator'">
+               ng-if="(lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5) && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')">
               <md-button ng-click="lobbyPage.promote(slot.player)">
                 Make Lobby Leader
               </md-button>
