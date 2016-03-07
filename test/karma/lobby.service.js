@@ -70,7 +70,7 @@ describe('Service: LobbyService', function () {
     it('should emit a lobby-ready-up event', function () {
       sinon.stub($rootScope, '$emit');
 
-      callbacks['lobbyReadyUp']();
+      callbacks['lobbyReadyUp']({timeout: 30});
       expect($rootScope.$emit).to.be.calledOnce;
       expect($rootScope.$emit).to.be.calledWith('lobby-ready-up');
 

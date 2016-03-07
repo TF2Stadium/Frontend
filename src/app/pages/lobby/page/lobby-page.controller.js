@@ -7,7 +7,7 @@
 
   /** @ngInject */
   function LobbyPageController($q, $mdDialog, $scope, $state, $window,
-                               $timeout, LobbyService) {
+                               $timeout, $interval, LobbyService) {
     var vm = this;
     var lobbyPageId = parseInt($state.params.lobbyID);
 
@@ -21,8 +21,22 @@
     vm.playerPreReady = LobbyService.getPlayerPreReady();
     vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
 
+    vm.readyUp = false;
+    vm.readyUpTime = 0;
+    vm.readyUpPercent = 0;
+    vm.readyUpInterval = false;
+
     function updateLobby() {
       var newLobby = LobbyService.getLobbySpectated();
+
+      if (newLobby.state === 1 && angular.isDefined(vm.readyUpInterval)) {
+        $interval.cancel(vm.readyUpInterval);
+        vm.readyUpInterval = null;
+      }
+
+      if (newLobby.state !== 2) {
+        vm.readyUp = false;
+      }
 
       if (newLobby.id === lobbyPageId) {
         vm.lobbyInformation = newLobby;
@@ -38,8 +52,31 @@
     LobbyService.subscribe('lobby-joined-updated', $scope, updateLobby);
     updateLobby();
 
-    LobbyService.subscribe('lobby-start', $scope, function (){
+    LobbyService.subscribe('lobby-start', $scope, function () {
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
+      vm.readyUp = false;
+    });
+
+    LobbyService.subscribe('lobby-ready-up', $scope, function (e, data) {
+      var startTime = data.startTime;
+      var readyUpMs = data.timeout * 1000;
+
+      vm.readyUp = true;
+      vm.readyUpTime = startTime;
+      vm.readyUpPercent = 0;
+      vm.readyUpInterval = $interval(
+        function () {
+          var d = (Date.now() - vm.readyUpTime);
+          vm.readyUpPercent = 100 * (d / readyUpMs);
+          vm.readyUpPercent = Math.min(vm.readyUpPercent, 100);
+
+          if (vm.readyUpPercent === 100) {
+            $interval.cancel(vm.readyUpInterval);
+            vm.readyUpInterval = null;
+          }
+        },
+        100
+      );
     });
 
     $scope.$watch(LobbyService.getPlayerPreReady, function () {

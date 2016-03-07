@@ -203,8 +203,11 @@
       });
     };
 
-    Websocket.onJSON('lobbyReadyUp', function () {
-      $rootScope.$emit('lobby-ready-up');
+    Websocket.onJSON('lobbyReadyUp', function (data) {
+      $rootScope.$emit('lobby-ready-up', {
+        startTime: Date.now(),
+        timeout: data.timeout
+      });
       if (playerPreReady) {
         Websocket.emitJSON('playerReady', {});
         return;
