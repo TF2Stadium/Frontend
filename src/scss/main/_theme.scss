@@ -124,6 +124,16 @@ $themes-list: (
                   INITIALIZING
      =======================================*/
 
+    md-progress-linear {
+      .md-bar {
+        @if themeVar(type) == 'light' {
+          background-color: $main-color;
+        } @else {
+          background-color: $secondary-color;
+        }
+      }
+    }
+
     md-content {
       background-color: $sheet-color;
       color: $text-color-medium;
