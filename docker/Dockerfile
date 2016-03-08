@@ -12,6 +12,7 @@ RUN apt-get update && apt-get upgrade -y -o Dpkg::Options::="--force-confold" &&
 
 # Add NGINX startup script
 ADD source/nginx.sh /etc/service/nginx/run
+ADD source/nginx.conf /etc/nginx/sites-enabled/default
 RUN chmod +x /etc/service/nginx/run
 
 # Add resources
