@@ -79,7 +79,7 @@ describe('Controller: CommentBoxController', function () {
 
       expect(mockWindow.open).to.be.calledOnce;
       expect(mockWindow.open).to.be.calledWith(
-        'http://steamcommunity.com/profiles/' + steamId,
+        'https://steamcommunity.com/profiles/' + steamId,
         '_blank'
       );
     });
