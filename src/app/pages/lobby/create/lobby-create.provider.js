@@ -359,7 +359,9 @@
       lobbyCreateService.create = function (lobbySettings, callback) {
         callback = callback || angular.noop;
 
-        lobbySettings.serverType = 'server';
+        if (angular.isUndefined(lobbySettings.serverType)) {
+          lobbySettings.serverType = 'server';
+        }
 
         Websocket.emitJSON('lobbyCreate',
           lobbySettings,

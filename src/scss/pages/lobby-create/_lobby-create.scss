@@ -197,14 +197,27 @@ md-grid-tile.tile-card {
               SERVER STEP
  =======================================*/
 
-.rent-server-form {
+.rent-server-form,
+.rent-server-back-button {
   @include flex(row, center, center);
   @extend .sheet;
+
+  cursor: pointer;
 
   position: relative;
   padding: $padding-medium $padding-big * 2;
   z-index: 1;
   margin-bottom: $padding-medium;
+
+  animation: none;
+
+  &.ng-hide-remove {
+//    @include animation(fade-out);
+  }
+
+  &.ng-hide-add {
+//    @include animation(fade-in);
+  }
 
   h2 {
     margin: 0;
@@ -212,9 +225,13 @@ md-grid-tile.tile-card {
 
   p {
     margin: 0;
-    margin-left: 1em;
+    margin-left: 0.5em;
     font-size: 1.5em;
   }
+}
+
+ul.rent-servers-list {
+  margin-top: 0;
 }
 
 .tile-form,

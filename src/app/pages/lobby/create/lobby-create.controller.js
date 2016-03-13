@@ -108,13 +108,39 @@
       return nextStep;
     };
 
-    vm.create = function () {
-      LobbyCreate.create(vm.lobbySettings, function (response) {
+    function createHelper(settings) {
+      LobbyCreate.create(angular.copy(settings), function (response) {
         if (!response.success) {
           vm.requestSent = false;
         }
       });
       vm.requestSent = true;
+    }
+
+    vm.create = function () {
+      createHelper(vm.lobbySettings);
+    };
+
+    vm.rentServeme = function rentServeme(startTime, endTime, server) {
+      var settings = angular.extend({}, vm.lobbySettings, {
+        serverType: 'serveme',
+        serveme: {
+          startsAt: startTime,
+          endsAt: endTime,
+          server: server
+        }
+      });
+
+      createHelper(settings);
+    };
+
+    vm.rentStored = function rentStored(id) {
+      var settings = angular.extend({}, vm.lobbySettings, {
+        serverType: 'storedServer',
+        server: id+''
+      });
+
+      createHelper(settings);
     };
 
     vm.verifyServer = function () {
@@ -165,9 +191,17 @@
     vm.storedServers = null;
     vm.servemeServers = null;
 
-    console.log('create lc controller');
+    vm.servemeRegionToFlag = {
+      'fr': '/assets/img/emotes/emojione/1f1eb-1f1f7.png',
+      'de': '/assets/img/emotes/emojione/1f1e9-1f1ea.png',
+      'nl': '/assets/img/emotes/emojione/1f1f3-1f1f1.png'
+    };
+
     $scope.$on('$destroy', $rootScope.$on('$stateChangeSuccess', function () {
       if ($state.current.name === 'server') {
+        // see the step-server.html template for what this does
+        vm.serverState = null;
+
         LobbyCreate
           .getStoredServers()
           .then(function (data) {
