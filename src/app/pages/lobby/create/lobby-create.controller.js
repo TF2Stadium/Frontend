@@ -205,14 +205,12 @@
         LobbyCreate
           .getStoredServers()
           .then(function (data) {
-            console.log('stored servers data', data);
             vm.storedServers = data;
           });
 
         LobbyCreate
           .getServemeServers()
           .then(function (data) {
-            console.log('serverme servers data', data);
             vm.servemeServers = data;
           });
       }
