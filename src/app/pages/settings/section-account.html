@@ -19,6 +19,14 @@
   </form>
 </div>
 <div class="settings-section">
+  <h1>Account</h1>
+  <md-button
+     class="md-raised md-primary"
+     ng-click="settings.logout()">
+    Logout
+  </md-button>
+</div>
+<div class="settings-section">
   <h1>Twitch</h1>
   <p>Connect with Twitch to join subscriber-restricted lobbies.</p>
 
@@ -62,14 +70,5 @@
     class="md-raised md-primary"
     ng-click="settings.resetMumblePassword()">
     Reset
-  </md-button>
-</div>
-<div class="settings-section">
-  <h1>Account</h1>
-  <p>You can logout here.</p>
-  <md-button
-     class="md-raised md-primary"
-     ng-click="settings.logout()">
-    Logout
   </md-button>
 </div>
