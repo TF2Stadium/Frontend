@@ -37,6 +37,18 @@
          width="170"
          height="32" />
   </a>
+  <md-button
+    ng-if="$root.userProfile.twitchName"
+    class="md-raised md-primary"
+    ng-click="settings.enableTwitchBot()">
+    Enable Twitch Bot
+  </md-button>
+  <md-button
+    ng-if="$root.userProfile.twitchName"
+    class="md-raised md-primary"
+    ng-click="settings.disableTwitchBot()">
+    Disable Twitch Bot
+  </md-button>
 </div>
 <div class="settings-section">
   <h1>Reset Mumble Password</h1>

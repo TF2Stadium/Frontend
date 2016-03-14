@@ -49,6 +49,14 @@
       User.resetMumblePassword();
     };
 
+    vm.enableTwitchBot = function () {
+      User.enableTwitchBot();
+    };
+
+    vm.disableTwitchBot = function () {
+      User.disableTwitchBot();
+    };
+
     /*
       Iterates through all the settings in the list and compares
       them to the stored settings.
