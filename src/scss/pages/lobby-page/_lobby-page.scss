@@ -139,84 +139,34 @@
   transition: all .3s ease-out;
   overflow: hidden;
 
-  input.slot-requirement-input {
-    width: 80px;
-  }
-
-  &:focus .slot-password {
-    display: block;
-  }
-
   &:nth-child(2) {
-    flex-direction: row-reverse;
     order: 3;
 
-    .firefox-bug-container {
+    >.slot-button--container {
       flex-direction: row-reverse;
-    }
 
-    .slot-info {
-      align-items: flex-start;
-      margin-right: 0;
-      margin-left: 5px;
-    }
-
-    .slot-misc {
-      flex-direction: row-reverse;
-      text-align: right;
-
-      padding: 0;
-      padding-right: 3px;
-    }
-
-    .slot-playername {
-      text-align: left;
-    }
-
-    .slot-requirements {
-      text-align: left;
-      margin: 0;
-      margin-left: $padding-small;
-    }
-  }
-
-  md-icon {
-    svg {
-      fill: #666;
-    }
-
-    &.slot-locked {
-      width: 24px;
-      height: 24px;
-
-      position: absolute;
-      top: ($class-button-height/2) - 12px;
-      left: 50%;
-      margin-left: -12px;
-    }
-  }
-
-  md-checkbox {
-    margin: 0 auto;
-    width: 20px;
-    padding: 5px 0 5px;
-
-    &.no-click {
-      cursor: auto;
-    }
-
-    div.md-container {
-      width: 20px;
-      height: 20px;
-
-      // Fix the checkbox having an oversized click-hitbox
-      &:after {
-        pointer-events: none;
+      .slot-info {
+        align-items: flex-start;
+        margin-right: 0;
+        margin-left: 5px;
       }
 
-      .md-icon {
-        width: 20px;
-        height: 20px;
+      .slot-misc {
+        flex-direction: row-reverse;
+        text-align: right;
+
+        padding: 0;
+        padding-right: 3px;
+      }
+
+      .slot-playername {
+        text-align: left;
+      }
+
+      .slot-requirements {
+        text-align: left;
+        margin: 0;
+        margin-left: $padding-small;
       }
     }
   }
@@ -225,9 +175,72 @@
     display: none;
   }
 
-  .slot-requirements {
-    text-align: right;
-    margin-right: $padding-small;
+  >.slot-button--container {
+    @include flex (row, space-between, center);
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    flex: 1;
+    position: relative;
+    line-height: normal !important; //otherwise can't multiline inside md-button
+    border-radius: 3px; //overriding .class-button .md-button
+    transition: all .3s ease-out;
+    overflow: hidden;
+
+    input.slot-requirement-input {
+      width: 80px;
+    }
+
+    &:focus .slot-password {
+      display: block;
+    }
+
+    md-icon {
+      svg {
+        fill: #666;
+      }
+
+      &.slot-locked {
+        width: 24px;
+        height: 24px;
+
+        position: absolute;
+        top: ($class-button-height/2) - 12px;
+        left: 50%;
+        margin-left: -12px;
+      }
+    }
+
+    md-checkbox {
+      margin: 0 auto;
+      width: 20px;
+      padding: 5px 0 5px;
+
+      &.no-click {
+        cursor: auto;
+      }
+
+      div.md-container {
+        width: 20px;
+        height: 20px;
+
+        // Fix the checkbox having an oversized click-hitbox
+        &:after {
+          pointer-events: none;
+        }
+
+        .md-icon {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+
+    .slot-requirements {
+      text-align: right;
+      margin-right: $padding-small;
+    }
   }
 }
 
@@ -243,10 +256,6 @@
   md-icon {
     @extend .fill-parent;
   }
-}
-
-.firefox-bug-container {
-  @include flex (row, space-between, center);
 }
 
 .slot-info {
