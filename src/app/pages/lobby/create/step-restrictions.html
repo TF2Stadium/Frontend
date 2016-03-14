@@ -38,10 +38,16 @@
            placeholder="Steam Group URL (Only members can join)">
   </md-input-container>
 
-  <md-input-container>
-    <input ng-model="lobbyCreate.lobbySettings.twitchWhitelist"
-           placeholder="Twitch Channel URL (For subscriber-only games)">
-  </md-input-container>
+  <md-checkbox
+    type="md-checkbox"
+    ng-if="$root.userProfile.twitchName"
+    ng-model="lobbyCreate.lobbySettings.twitchWhitelistSubs">
+    Restrict lobby to subscribers of my Twitch channel</md-checkbox>
+  <md-checkbox
+    type="md-checkbox"
+    ng-if="$root.userProfile.twitchName"
+    ng-model="lobbyCreate.lobbySettings.twitchWhitelistFollows">
+    Restrict lobby to followers of my Twitch channel</md-checkbox>
 
   <md-button
      class="md-raised md-primary"
