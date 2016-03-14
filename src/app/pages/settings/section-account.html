@@ -37,12 +37,14 @@
          width="170"
          height="32" />
   </a>
+
   <md-button
     ng-if="$root.userProfile.twitchName"
     class="md-raised md-primary"
     ng-click="settings.enableTwitchBot()">
     Enable Twitch Bot
   </md-button>
+
   <md-button
     ng-if="$root.userProfile.twitchName"
     class="md-raised md-primary"
@@ -52,6 +54,10 @@
 </div>
 <div class="settings-section">
   <h1>Reset Mumble Password</h1>
+  <p>You are identified to the Mumble server via a long, randomly
+  generated password. If anyone gets your password they may be able to
+  impersonate you. If that happens, you can click this button to
+  regenerate the password.</p>
   <md-button
     class="md-raised md-primary"
     ng-click="settings.resetMumblePassword()">
