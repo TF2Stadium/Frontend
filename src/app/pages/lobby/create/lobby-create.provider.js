@@ -220,6 +220,11 @@
               title: 'AsiaFortress',
               description: '',
               '6s': true
+            },{
+              value: 'bballtf',
+              title: 'bball.tf',
+              description: '',
+              bball: true
             }
           ],
           dependsOn: [
@@ -282,6 +287,11 @@
               title: 'ETF2L BBall',
               etf2l: true,
               bball: true
+            },{
+              value: 'bballtf',
+              title: 'bball.tf',
+              bball: true,
+              bballtf: true
             }
           ],
           dependsOn: [
