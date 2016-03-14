@@ -77,6 +77,10 @@
       content: '';
       border-radius: 3px;
       box-sizing: border-box;
+
+      // Needed, otherwise in Firefox when clicking on a clickable
+      // sheet, 2 clicks are necessary instead of one
+      pointer-events: none;
     }
   }
 
