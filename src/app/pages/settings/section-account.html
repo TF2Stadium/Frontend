@@ -28,7 +28,8 @@
 </div>
 <div class="settings-section">
   <h1>Twitch</h1>
-  <p>Connect with Twitch to join subscriber-restricted lobbies.</p>
+  <p>Connect with Twitch to join and create subscriber-restricted or
+  follower-restricted lobbies.</p>
 
   <md-button
      ng-if="$root.userProfile.twitchName"
@@ -46,13 +47,17 @@
          height="32" />
   </a>
 
+  <p>We run a Twitch bot that announces when you join lobbies in your
+    Twitch stream chat. You can enable or disable it for your
+    stream.</p>
+
   <md-button
     ng-if="$root.userProfile.twitchName"
     class="md-raised md-primary"
     ng-click="settings.enableTwitchBot()">
     Enable Twitch Bot
   </md-button>
-
+  <br />
   <md-button
     ng-if="$root.userProfile.twitchName"
     class="md-raised md-primary"
