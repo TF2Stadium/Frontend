@@ -45,6 +45,10 @@
       User.twitchLogout();
     };
 
+    vm.resetMumblePassword = function () {
+      User.resetMumblePassword();
+    };
+
     /*
       Iterates through all the settings in the list and compares
       them to the stored settings.
