@@ -37,6 +37,18 @@
       $window.open(Config.endpoints.api + '/twitchLogout', '_self');
     };
 
+    userService.resetMumblePassword = function () {
+      $window.open(Config.endpoints.api + '/resetMumblePassword', '_self');
+    };
+
+    userService.enableTwitchBot = function () {
+      Websocket.emitJSON('playerEnableTwitchBot', {});
+    };
+
+    userService.disableTwitchBot = function () {
+      Websocket.emitJSON('playerDisableTwitchBot', {});
+    };
+
     userService.init = function () {
       Websocket.onJSON('playerProfile', function (data) {
         $rootScope.userProfile = data;

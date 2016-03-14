@@ -24,6 +24,9 @@
       vm.lobbySettings = LobbyCreate.getLobbySettings();
     });
 
+    // used on the restrictions step
+    vm.twitchRestriction = false;
+
     vm.showServers = false;
     vm.savedServers = {};
     vm.serverName = '';
@@ -76,6 +79,13 @@
           hideDelay: 3000
         });
       });
+    };
+
+    vm.updateTwitchRestriction = function () {
+      vm.lobbySettings.twitchWhitelistSubs =
+        vm.twitchRestriction === 'subs';
+      vm.lobbySettings.twitchWhitelistFollows =
+        vm.twitchRestriction === 'follows';
     };
 
     var getCurrentWizardStep = function () {

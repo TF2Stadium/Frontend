@@ -19,8 +19,17 @@
   </form>
 </div>
 <div class="settings-section">
+  <h1>Account</h1>
+  <md-button
+     class="md-raised md-primary"
+     ng-click="settings.logout()">
+    Logout
+  </md-button>
+</div>
+<div class="settings-section">
   <h1>Twitch</h1>
-  <p>Connect with Twitch to join subscriber-restricted lobbies.</p>
+  <p>Connect with Twitch to join and create subscriber-restricted or
+  follower-restricted lobbies.</p>
 
   <md-button
      ng-if="$root.userProfile.twitchName"
@@ -37,13 +46,34 @@
          width="170"
          height="32" />
   </a>
+
+  <p>We run a Twitch bot that announces when you join lobbies in your
+    Twitch stream chat. You can enable or disable it for your
+    stream.</p>
+
+  <md-button
+    ng-if="$root.userProfile.twitchName"
+    class="md-raised md-primary"
+    ng-click="settings.enableTwitchBot()">
+    Enable Twitch Bot
+  </md-button>
+  <br />
+  <md-button
+    ng-if="$root.userProfile.twitchName"
+    class="md-raised md-primary"
+    ng-click="settings.disableTwitchBot()">
+    Disable Twitch Bot
+  </md-button>
 </div>
 <div class="settings-section">
-  <h1>Account</h1>
-  <p>You can logout here.</p>
+  <h1>Reset Mumble Password</h1>
+  <p>You are identified to the Mumble server via a long, randomly
+  generated password. If anyone gets your password they may be able to
+  impersonate you. If that happens, you can click this button to
+  regenerate the password.</p>
   <md-button
-     class="md-raised md-primary"
-     ng-click="settings.logout()">
-    Logout
+    class="md-raised md-primary"
+    ng-click="settings.resetMumblePassword()">
+    Reset
   </md-button>
 </div>

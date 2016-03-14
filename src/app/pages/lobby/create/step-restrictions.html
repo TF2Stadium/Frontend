@@ -38,10 +38,16 @@
            placeholder="Steam Group URL (Only members can join)">
   </md-input-container>
 
-  <md-input-container>
-    <input ng-model="lobbyCreate.lobbySettings.twitchWhitelist"
-           placeholder="Twitch Channel URL (For subscriber-only games)">
-  </md-input-container>
+  <h2>Restrict to your Twitch Stream</h2>
+
+  <md-radio-group
+     ng-if="$root.userProfile.twitchName"
+     ng-model="lobbyCreate.twitchRestriction"
+     ng-change="lobbyCreate.updateTwitchRestriction()">
+    <md-radio-button value="subs">Subscribers-only</md-radio-button>
+    <md-radio-button value="follows">Followers-only</md-radio-button>
+    <md-radio-button ng-value="false">None</md-radio-button>
+  </md-radio-group>
 
   <md-button
      class="md-raised md-primary"
