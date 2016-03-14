@@ -15,7 +15,7 @@
   <md-progress-circular
      ng-if="lobbyCreate.storedServers === null"
      md-mode="indeterminate"></md-progress-circular>
-  <p ng-if="lobbyCreate.servemeServers !== null">{{lobbyCreate.storedServers.length}} available</p>
+  <p ng-if="lobbyCreate.storedServers !== null">{{lobbyCreate.storedServers.length}} available</p>
 </div>
 <div class="tile-form no-animate"
      ng-show="lobbyCreate.serverState === 'stored'">
@@ -53,17 +53,24 @@
              ng-src="{{lobbyCreate.servemeRegionToFlag[server.flag]}}"
              height="16"
              width="16"
-             alt="server.flag"
-             title="server.flag" />{{server.name}}</a>
+             alt="{{server.flag}}"
+             title="{{server.flag}}" />{{server.name}}</a>
     </li>
   </ul>
 </div>
 
 
+<div
+   md-ink-ripple
+   class="rent-server-form no-animate"
+   ng-click="lobbyCreate.serverState='custom'"
+   ng-show="!lobbyCreate.serverState">
+  <h2>Use Your Own Server</h2>
+</div>
 <div class="tile-form no-animate"
-     ng-show="!lobbyCreate.serverState">
+     ng-show="lobbyCreate.serverState==='custom'">
   <form name="serverCreateForm" class="server-form">
-    <h2>Server information {{lobbyCreate.serverState}}</h2>
+    <h2>Server Information</h2>
 
     <md-input-container
        md-no-float
@@ -121,29 +128,29 @@
       Verify server
     </md-button>
   </form>
-  <div class="server-verify-message"
-       ng-if="lobbyCreate.verifyServerError">
-    <md-icon md-svg-icon="material:error-red"></md-icon>
-    <span>{{lobbyCreate.verifyServerErrorMessage}}</span>
-  </div>
-  <div class="server-verify-message"
-       ng-if="lobbyCreate.verifiedServer">
-    <md-icon
-       ng-if="!lobbyCreate.requestSent"
-       md-svg-icon="material:check-blue"></md-icon>
-    <span ng-if="!lobbyCreate.requestSent">
-      The server is ready to be configured and used
-    </span>
-    <md-button class="md-raised md-primary"
-      ng-if="!lobbyCreate.requestSent"
-      ng-click="lobbyCreate.create()">
-      Create the lobby!
-    </md-button>
-    <span ng-if="lobbyCreate.requestSent">
-      Configuring server...
-    </span>
-    <md-progress-circular md-mode="indeterminate"
-      ng-if="lobbyCreate.requestSent">
-    </md-progress-circular>
-  </div>
+</div>
+<div class="server-verify-message"
+     ng-if="lobbyCreate.verifyServerError">
+  <md-icon md-svg-icon="material:error-red"></md-icon>
+  <span>{{lobbyCreate.verifyServerErrorMessage}}</span>
+</div>
+<div class="server-verify-message"
+     ng-if="lobbyCreate.verifiedServer">
+  <md-icon
+     ng-if="!lobbyCreate.requestSent"
+     md-svg-icon="material:check-blue"></md-icon>
+  <span ng-if="!lobbyCreate.requestSent">
+    The server is ready to be configured and used
+  </span>
+  <md-button class="md-raised md-primary"
+             ng-if="!lobbyCreate.requestSent"
+             ng-click="lobbyCreate.create()">
+    Create the lobby!
+  </md-button>
+  <span ng-if="lobbyCreate.requestSent">
+    Configuring server...
+  </span>
+  <md-progress-circular md-mode="indeterminate"
+                        ng-if="lobbyCreate.requestSent">
+  </md-progress-circular>
 </div>
