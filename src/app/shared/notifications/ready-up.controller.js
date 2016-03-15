@@ -7,13 +7,14 @@
   function ReadyUpDialogController($scope, $mdDialog, $interval) {
     var vm = this;
 
-    vm.seconds = 0;
+    vm.percentage = 0;
+    vm.readyUpMs = vm.timeout * 1000;
 
     var increaseCounter = function () {
-      vm.seconds++;
-      vm.percentage = 100 * vm.seconds / vm.timeout;
+      var d = (Date.now() - vm.startTime);
+      vm.percentage = 100 * (d / vm.readyUpMs);
 
-      if (vm.seconds >= vm.timeout) {
+      if (vm.percentage > 100) {
         $mdDialog.hide('leave');
       }
     };
@@ -33,7 +34,6 @@
     $scope.$on('$destroy', function readyUpDialogDestroyed() {
       $interval.cancel(timer);
     });
-
   }
 
 })();
