@@ -204,21 +204,23 @@
     };
 
     Websocket.onJSON('lobbyReadyUp', function (data) {
-      $rootScope.$emit('lobby-ready-up', {
+      var eventData = {
         startTime: Date.now(),
         timeout: data.timeout
-      });
+      };
+
+      $rootScope.$emit('lobby-ready-up', eventData);
+
       if (playerPreReady) {
         Websocket.emitJSON('playerReady', {});
         return;
       }
+
       $mdDialog.show({
         templateUrl: 'app/shared/notifications/ready-up.html',
         controller: 'ReadyUpDialogController',
         controllerAs: 'dialog',
-        locals: {
-          timeout: 30
-        },
+        locals: eventData,
         bindToController: true
       }).then(function (response) {
         if (response.readyUp) {
@@ -237,7 +239,7 @@
           body: 'All the slots are filled, ready up to start',
           soundFile: '/assets/sound/lobby-readyup.wav',
           soundVolume: settings.soundVolume * 0.01,
-          timeout: 30,
+          timeout: data.timeout,
           callbacks: {
             onclick: function () {
               $window.focus();
