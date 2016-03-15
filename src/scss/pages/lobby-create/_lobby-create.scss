@@ -197,24 +197,42 @@ md-grid-tile.tile-card {
               SERVER STEP
  =======================================*/
 
-.tile-form {
-   @include flex(column, flex-start, stretch);
-   position: relative;
-}
+.rent-server-form,
+.rent-server-back-button {
+  @include flex(row, center, center);
+  @extend .sheet;
 
-.restrictions-form {
-  p {
-    margin-bottom: $padding-medium;
-  }
+  cursor: pointer;
+
+  position: relative;
+  padding: $padding-medium $padding-big * 2;
+  z-index: 1;
+  margin-bottom: $padding-medium;
+
+  animation: none;
 
   h2 {
-    margin-bottom: 0;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    margin-left: 0.5em;
+    font-size: 1.5em;
   }
 }
 
-.server-form, .restrictions-form {
+ul.rent-servers-list {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.tile-form,
+.restrictions-form {
   @include flex(column, center, center);
   @extend .sheet;
+
+  position: relative;
   padding: $padding-medium $padding-big * 2;
   z-index: 1;
 
@@ -260,6 +278,22 @@ md-grid-tile.tile-card {
       text-align: center; // Centers the placeholder text
     }
   }
+
+}
+
+.restrictions-form {
+  p {
+    margin-bottom: $padding-medium;
+  }
+
+  h2 {
+    margin-bottom: 0;
+  }
+}
+
+.server-form {
+  @include flex(column, center, center);
+  width: 100%;
 }
 
 .server-verify-message {
