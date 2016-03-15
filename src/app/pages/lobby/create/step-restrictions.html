@@ -38,7 +38,7 @@
            placeholder="Steam Group URL (Only members can join)">
   </md-input-container>
 
-  <h2>Restrict to your Twitch Stream</h2>
+  <h2 ng-if="$root.userProfile.twitchName">Restrict to your Twitch Stream</h2>
 
   <md-radio-group
      ng-if="$root.userProfile.twitchName"
