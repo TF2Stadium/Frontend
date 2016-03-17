@@ -287,6 +287,22 @@ $themes-list: (
       color: $text-color-hard;
     }
 
+    .sponsor-tag {
+      @if themeVar(type) == 'light' {
+        color: $text-color-hard;
+
+        a {
+          color: $secondary-color;
+        }
+      } @else {
+        color: $text-color-light;
+
+        a {
+          color: $main-color;
+        }
+      }
+    }
+
     #header-title > span {
       color: $main-color;
 
