@@ -6,15 +6,18 @@
 
   /** @ngInject */
   function LobbyPageHeaderController($scope, $rootScope, $state,
-                                     LobbyService) {
+                                     safeApply, LobbyService) {
     var vm = this;
+    var lobbyPageId = parseInt($state.params.lobbyID);
     var error = false;
 
-    vm.lobbyInformation = LobbyService.getLobbySpectated();
-
-    LobbyService.subscribe('lobby-spectated-updated', $scope, function () {
-      vm.lobbyInformation = LobbyService.getLobbySpectated();
-    });
+    LobbyService
+      .observeLobby(lobbyPageId)
+      .onValue(function (lobbyData) {
+        safeApply($scope, function () {
+          vm.lobbyInformation = lobbyData;
+        });
+      });
 
     vm.closeLobby = function () {
       LobbyService.closeLobby(vm.lobbyInformation.id);

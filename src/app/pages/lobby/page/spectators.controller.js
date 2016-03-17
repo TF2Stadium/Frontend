@@ -6,14 +6,17 @@
 
   /** @ngInject */
   function LobbyPageSpectatorsController($scope, $state, $window,
-                                         LobbyService) {
+                                         safeApply, LobbyService) {
     var vm = this;
+    var lobbyPageId = parseInt($state.params.lobbyID);
 
-    vm.lobbyInformation = LobbyService.getLobbySpectated();
-
-    LobbyService.subscribe('lobby-spectated-updated', $scope, function () {
-      vm.lobbyInformation = LobbyService.getLobbySpectated();
-    });
+    LobbyService
+      .observeLobby(lobbyPageId)
+      .onValue(function (lobbyData) {
+        safeApply($scope, function () {
+          vm.lobbyInformation = lobbyData;
+        });
+      });
 
     vm.goToSteamProfile = function (steamId) {
       $window.open('https://steamcommunity.com/profiles/' + steamId, '_blank');

@@ -7,16 +7,33 @@
 
   /** @ngInject */
   function LobbyPageController($q, $mdDialog, $scope, $state, $window,
-                               $timeout, $interval, LobbyService) {
+                               $timeout, $interval, safeApply, LobbyService) {
     var vm = this;
     var lobbyPageId = parseInt($state.params.lobbyID);
 
-    var joined = LobbyService.getLobbyJoined();
-    if (joined && joined.id !== lobbyPageId) {
-      LobbyService.spectate(lobbyPageId);
+    LobbyService.spectate(lobbyPageId);
+
+    vm.lobbyInformation = false;
+
+    function updateLobby(lobbyData) {
+      safeApply($scope, function () {
+        if (lobbyData.state === 1 && angular.isDefined(vm.readyUpInterval)) {
+          $interval.cancel(vm.readyUpInterval);
+          vm.readyUpInterval = null;
+        }
+
+        if (lobbyData.state !== 2) {
+          vm.readyUp = false;
+        }
+
+        vm.lobbyInformation = lobbyData;
+      });
     }
 
-    vm.lobbyInformation = LobbyService.getLobbySpectated();
+    var lobbyStream = LobbyService.observeLobby(lobbyPageId);
+    lobbyStream.onValue(updateLobby);
+    $scope.$on('$destroy', function () { lobbyStream.offValue(updateLobby); });
+
     vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
     vm.playerPreReady = LobbyService.getPlayerPreReady();
     vm.preReadyUpTimer = LobbyService.getPreReadyUpTimer();
@@ -25,32 +42,6 @@
     vm.readyUpTime = 0;
     vm.readyUpPercent = 0;
     vm.readyUpInterval = false;
-
-    function updateLobby() {
-      var newLobby = LobbyService.getLobbySpectated();
-
-      if (newLobby.state === 1 && angular.isDefined(vm.readyUpInterval)) {
-        $interval.cancel(vm.readyUpInterval);
-        vm.readyUpInterval = null;
-      }
-
-      if (newLobby.state !== 2) {
-        vm.readyUp = false;
-      }
-
-      if (newLobby.id === lobbyPageId) {
-        vm.lobbyInformation = newLobby;
-      } else {
-        newLobby = LobbyService.getLobbyJoined();
-        if (newLobby.id === lobbyPageId) {
-          vm.lobbyInformation = newLobby;
-        }
-      }
-    }
-
-    LobbyService.subscribe('lobby-spectated-updated', $scope, updateLobby);
-    LobbyService.subscribe('lobby-joined-updated', $scope, updateLobby);
-    updateLobby();
 
     LobbyService.subscribe('lobby-start', $scope, function () {
       vm.lobbyJoinInformation = LobbyService.getLobbyJoinInformation();
@@ -88,7 +79,7 @@
     });
 
     $scope.$on('$destroy', function () {
-      joined = LobbyService.getLobbyJoined();
+      var joined = LobbyService.getLobbyJoined();
       if (joined && joined.id !== lobbyPageId) {
         LobbyService.leaveSpectatedLobby();
       }
@@ -124,7 +115,10 @@
     };
 
     vm.join = function (slotScope) {
-      LobbyService.join(vm.lobbyInformation.id, slotScope.team, slotScope.class.class, slotScope.slotPassword);
+      LobbyService.join(vm.lobbyInformation.id,
+                        slotScope.team,
+                        slotScope.class.class,
+                        slotScope.slotPassword);
     };
 
     vm.goToSteamProfile = function (steamId) {
@@ -158,7 +152,9 @@
     };
 
     vm.shouldShowLobbyInformation = function () {
-      return vm.lobbyInformation && vm.lobbyInformation.id && vm.lobbyInformation.id === parseInt($state.params.lobbyID);
+      return vm.lobbyInformation &&
+        vm.lobbyInformation.id &&
+        vm.lobbyInformation.id === parseInt($state.params.lobbyID);
     };
 
     vm.promote = function (player) {
