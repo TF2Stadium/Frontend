@@ -3,8 +3,26 @@
 
   angular.module('tf2stadium')
     .config(configBlock)
-    .run(runBlock);
+    .run(runBlock)
+    .factory('safeApply', safeApply);
 
+  /** @ngInject */
+  function safeApply($rootScope) {
+    return function($scope, fn) {
+      var phase = $rootScope.$$phase;
+      if(phase == '$apply' || phase == '$digest') {
+        if (fn) {
+          $scope.$eval(fn);
+        }
+      } else {
+        if (fn) {
+          $scope.$apply(fn);
+        } else {
+          $scope.$apply();
+        }
+      }
+    };
+  }
 
   /** @ngInject */
   function configBlock($compileProvider) {
