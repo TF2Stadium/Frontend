@@ -215,7 +215,7 @@
       var cacheObj = getCachedLobby(lobbyId);
 
       var ongoingStream = Kefir.stream(function (emitter) {
-        var emit = function(data) {
+        var emit = function (data) {
           emitter.emit(data);
         };
 

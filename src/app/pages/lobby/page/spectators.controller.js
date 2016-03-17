@@ -9,7 +9,6 @@
                                          safeApply, LobbyService) {
     var vm = this;
     var lobbyPageId = parseInt($state.params.lobbyID);
-    var error = false;
 
     LobbyService
       .observeLobby(lobbyPageId)
