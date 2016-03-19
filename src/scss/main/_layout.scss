@@ -214,7 +214,11 @@ main {
 
   // Never be shorter than the comment box, which has height: 500px but is
   // also offset by margin-top: -100px
-  min-height: $commentbox-height + ($commentbox-top + $navbar-height - $header-height);
+  //
+  // also add ~30px for the sponsor message (this can be done better later,
+  // we need a quick fix now)
+
+  min-height: $commentbox-height + ($commentbox-top + $navbar-height - $header-height) + 30px;
 }
 
 #page-content {
