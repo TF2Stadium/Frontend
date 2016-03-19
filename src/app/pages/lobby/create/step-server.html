@@ -1,7 +1,7 @@
 <div
    md-ink-ripple
    class="rent-server-back-button no-animate"
-   ng-click="lobbyCreate.serverState=undefined"
+   ng-click="lobbyCreate.verifiedServer=false;lobbyCreate.serverState=undefined"
    ng-show="!!lobbyCreate.serverState">
   <h2>Go Back</h2>
 </div>
@@ -19,13 +19,17 @@
 </div>
 <div class="tile-form no-animate"
      ng-show="lobbyCreate.serverState === 'stored'">
-  <ul class="rent-servers-list">
+  <ul class="rent-servers-list"
+       ng-if="lobbyCreate.storedServers.length > 0">
     <li ng-repeat="server in lobbyCreate.storedServers">
       <a href="#"
          ng-click="$event.preventDefault();lobbyCreate.rentStored(server.id)"
          target="_blank">{{server.name}}</a>
     </li>
   </ul>
+  <p ng-if="lobbyCreate.storedServers.length === 0">
+    No servers currently available for rent.
+  </p>
 </div>
 
 
@@ -57,6 +61,9 @@
              title="{{server.flag}}" />{{server.name}}</a>
     </li>
   </ul>
+  <p ng-if="lobbyCreate.servemeServers.servers.length === 0">
+    No servers currently available for rent.
+  </p>
 </div>
 
 
@@ -129,11 +136,13 @@
     </md-button>
   </form>
 </div>
+
 <div class="server-verify-message"
      ng-if="lobbyCreate.verifyServerError">
   <md-icon md-svg-icon="material:error-red"></md-icon>
   <span>{{lobbyCreate.verifyServerErrorMessage}}</span>
 </div>
+
 <div class="server-verify-message"
      ng-if="lobbyCreate.verifiedServer">
   <md-icon
