@@ -108,10 +108,13 @@
       return nextStep;
     };
 
-    function createHelper(settings) {
+    function createHelper(settings, cb) {
       LobbyCreate.create(angular.copy(settings), function (response) {
         if (!response.success) {
           vm.requestSent = false;
+        }
+        if (cb) {
+          cb(response);
         }
       });
       vm.requestSent = true;
@@ -131,7 +134,12 @@
         }
       });
 
-      createHelper(settings);
+      vm.verifiedServer = true;
+      createHelper(settings, function (response) {
+        if (!response.success) {
+          vm.verifiedServer = false;
+        }
+      });
     };
 
     vm.rentStored = function rentStored(id) {
@@ -140,7 +148,12 @@
         server: id+''
       });
 
-      createHelper(settings);
+      vm.verifiedServer = true;
+      createHelper(settings, function (response) {
+        if (!response.success) {
+          vm.verifiedServer = false;
+        }
+      });
     };
 
     vm.verifyServer = function () {
