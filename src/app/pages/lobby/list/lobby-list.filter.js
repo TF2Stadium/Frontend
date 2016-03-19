@@ -74,9 +74,13 @@
         // break if the backend doesn't have GeoIP configured.
         var regionOk = regionCode === '' || settings[regionCode];
 
+        var effectiveMapName = lobby.map
+              .replace('ultiduo_', 'koth_')
+              .replace('bball_', 'ctf_');
+
         return regionOk &&
           settings[lobby.type] &&
-          playerPlaysGamemode(lobby.map) &&
+          playerPlaysGamemode(effectiveMapName) &&
           playerWantsMumble(lobby) &&
           availableClasses.some(playerPlaysClass) ||
           (Config.debug && lobby.type === 'Debug');
