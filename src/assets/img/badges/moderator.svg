@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" []>
-<svg version="1.1" xmlns:x="&ns_extend;" xmlns:i="&ns_ai;" xmlns:graph="&ns_graphs;"
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1"
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="485.334px"
 	 height="485.332px" viewBox="0 0 485.334 485.332" enable-background="new 0 0 485.334 485.332" xml:space="preserve">
 	<polygon fill="#4E9CD5" points="24,0 0,23.667 119.667,145 72.667,193 97,218 218.333,96.333 194.333,72.333 144,121 			"/>
