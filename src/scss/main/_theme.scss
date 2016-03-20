@@ -57,10 +57,14 @@ $themes-list: (
   $toast-error-color:     themeVar(toast-error-background);
   $shadow-multiplier:     themeVar(shadow-multiplier);
 
-  body.#{themeVar(selector)} {
+  #app-container.#{themeVar(selector)} {
 
     main {
       background: $body-color;
+    }
+
+    #main-content {
+      background: transparent;
     }
 
     color: $text-color-medium;

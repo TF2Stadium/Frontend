@@ -20,162 +20,164 @@
     <!-- endbuild -->
 
   </head>
-  <body class="{{$root.currentTheme || 'default-theme'}} {{$root.animationLength || 'animation-normal'}}">
-    <!-- Splash screen style goes here to ensure it loads as fast as possible -->
-    <div id="splash-screen" style="
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      will-change: transform;
-      transition: all .3s cubic-bezier(0.215, 0.61, 0.355, 1);
-      background: #6BB5FF;"
-         ng-hide="$root.themeLoaded && $root.backendAuthenticated">
-      <img src="/assets/img/logo-beta.svg">
-      <noscript style="max-width: 600px;
-                  font-size: 20px;
-                  min-height: 2em;
-                  text-align: center;
-                  color: #f5f5f5;
-                  padding-top: 20px;">
-        TF2Stadium requires JavaScript to be enabled.
-        <a href="http://www.enable-javascript.com/"
-          style="display:block;
-                padding-top:10px;
-                font-size: 20px;">
-          Click here to learn how
-        </a>
-      </noscript>
-      <div id="loading-quote"
-           style="max-width: 600px;
-                  font-size: 25px;
-                  min-height: 2em;
-                  text-align: center;
-                  color: #f5f5f5;
-                  padding-bottom: 20px;
-                  font-style: italic">
-        <script type="text/javascript">
+  <body>
+    <div id="app-container" class="{{$root.currentTheme || 'default-theme'}} {{$root.animationLength || 'animation-normal'}}">
+      <!-- Splash screen style goes here to ensure it loads as fast as possible -->
+      <div id="splash-screen" style="display: flex;
+                                     flex-direction: column;
+                                     align-items: center;
+                                     justify-content: center;
+                                     position: fixed;
+                                     top: 0;
+                                     bottom: 0;
+                                     left: 0;
+                                     right: 0;
+                                     z-index: 1000;
+                                     will-change: transform;
+                                     transition: all .3s cubic-bezier(0.215, 0.61, 0.355, 1);
+                                     background: #6BB5FF;"
+           ng-hide="$root.themeLoaded && $root.backendAuthenticated">
+        <img src="/assets/img/logo-beta.svg">
+        <noscript style="max-width: 600px;
+                         font-size: 20px;
+                         min-height: 2em;
+                         text-align: center;
+                         color: #f5f5f5;
+                         padding-top: 20px;">
+          TF2Stadium requires JavaScript to be enabled.
+          <a href="http://www.enable-javascript.com/"
+             style="display:block;
+                    padding-top:10px;
+                    font-size: 20px;">
+            Click here to learn how
+          </a>
+        </noscript>
+        <div id="loading-quote"
+             style="max-width: 600px;
+                    font-size: 25px;
+                    min-height: 2em;
+                    text-align: center;
+                    color: #f5f5f5;
+                    padding-bottom: 20px;
+                    font-style: italic">
+          <script type="text/javascript">
             //Inlined script so it shows as soon as possible
-          var quotes = [
-            'You can make lobbies with custom whitelists based on steam groups. Use this to play lobbies with friends or your TF2 communities!',
-            'Be sure to set a permanent alias inside settings > user so people can recognize you even if you’re aliasing on steam.',
-            'Follow @TF2Stadium on twitter!',
-            '“Our backend developer has been banned from tftv chat 8 times.” -lyreix',
-            'Have twitch subs? You can make a sub-restricted lobby! Simply check the box in the lobby creation wizard.',
-            'Stream a lot? You can make a follower-restricted lobby! Simply check the box in the lobby creation wizard.',
-            'Run a community? You can make a steam group restricted lobby! Simply paste the URL of the group in the lobby creation wizard.',
-            'Got a favorite map that isn’t listed in the wizard? Feel free to type it in the search bar to use non-standard maps.',
-            'To leave a lobby that’s in progress with minimal consequences, type “!sub” into chat.',
-            'You can type “!admin” into chat if someone is being disruptive or breaking the rules.',
-            'Monitor too bright for our default theme? Try switching to “TF2Stadium Dark” in your settings.',
-            'Remember to turn your notification volume up in your settings to be sure you get into lobbies you join.',
-            'Be sure to connect your twitch account so you can play in follower- and subscriber- only lobbies.'
+            var quotes = [
+              'You can make lobbies with custom whitelists based on steam groups. Use this to play lobbies with friends or your TF2 communities!',
+              'Be sure to set a permanent alias inside settings > user so people can recognize you even if you’re aliasing on steam.',
+              'Follow @TF2Stadium on twitter!',
+              '“Our backend developer has been banned from tftv chat 8 times.” -lyreix',
+              'Have twitch subs? You can make a sub-restricted lobby! Simply check the box in the lobby creation wizard.',
+              'Stream a lot? You can make a follower-restricted lobby! Simply check the box in the lobby creation wizard.',
+              'Run a community? You can make a steam group restricted lobby! Simply paste the URL of the group in the lobby creation wizard.',
+              'Got a favorite map that isn’t listed in the wizard? Feel free to type it in the search bar to use non-standard maps.',
+              'To leave a lobby that’s in progress with minimal consequences, type “!sub” into chat.',
+              'You can type “!admin” into chat if someone is being disruptive or breaking the rules.',
+              'Monitor too bright for our default theme? Try switching to “TF2Stadium Dark” in your settings.',
+              'Remember to turn your notification volume up in your settings to be sure you get into lobbies you join.',
+              'Be sure to connect your twitch account so you can play in follower- and subscriber- only lobbies.'
             ];
             var i = Math.floor(Math.random()*quotes.length);
             document.write(quotes[i]);
-        </script>
-      </div>
-      <div style="height:0">
-        <md-button class="md-raised"
-                   aria-label="Login"
-                   ng-href="{{::config.endpoints.api}}/startLogin"
-                   style="display:none"
-                   ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}"
-                   ng-bind="'Login'">
-        </md-button>
-      </div>
-    </div>
-    <!--[if lt IE 10]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <aside id="toasts"></aside>
-
-    <header id="header" ng-if="$root.backendAuthenticated">
-      <md-toolbar id="header-toolbar">
-        <div class="header-toolbar-content">
-          <md-button ui-sref="lobby-list" id="header-title" aria-label="Go to index">
-            <img src="/assets/img/logo-inline.svg">
+          </script>
+        </div>
+        <div style="height:0">
+          <md-button class="md-raised"
+                     aria-label="Login"
+                     ng-href="{{::config.endpoints.api}}/startLogin"
+                     style="display:none"
+                     ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}"
+                     ng-bind="'Login'">
           </md-button>
-          <div flex></div>
-          <div class="toolbar-buttons">
-            <md-button ui-sref="lobby-list">
-              Home
-            </md-button>
-            <md-button ui-sref="about">
-              About
-            </md-button>
-            <md-button ui-sref="rules">
-              Rules
-            </md-button>
+        </div>
+      </div>
+      <!--[if lt IE 10]>
+          <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+          <![endif]-->
+      <aside id="toasts"></aside>
 
-            <md-button ng-if="$root.userProfile.steamid" ui-sref="settings">
-              Settings
-              <!--<md-icon md-svg-icon="material:settings"></md-icon>-->
+      <header id="header" ng-if="$root.backendAuthenticated">
+        <md-toolbar id="header-toolbar">
+          <div class="header-toolbar-content">
+            <md-button ui-sref="lobby-list" id="header-title" aria-label="Go to index">
+              <img src="/assets/img/logo-inline.svg">
             </md-button>
+            <div flex></div>
+            <div class="toolbar-buttons">
+              <md-button ui-sref="lobby-list">
+                Home
+              </md-button>
+              <md-button ui-sref="about">
+                About
+              </md-button>
+              <md-button ui-sref="rules">
+                Rules
+              </md-button>
 
-            <md-button ng-if="$root.userProfile.role === 'administrator'"
-                       ng-href="{{config.endpoints.api}}/admin"
-                       target="_blank">
-              Admin
-            </md-button>
+              <md-button ng-if="$root.userProfile.steamid" ui-sref="settings">
+                Settings
+                <!--<md-icon md-svg-icon="material:settings"></md-icon>-->
+              </md-button>
 
-            <md-button
-               class="player-button"
-               ng-if="$root.userProfile.steamid"
-               ui-sref="user-profile({userID: $root.userProfile.steamid})">
-              {{$root.userProfile.name}}
-              <img ng-src="{{::$root.userProfile.avatar}}"
-                   width="32"
-                   height="32"
-                   alt="Your steam avatar" />
-            </md-button>
-            <md-button ng-if="!$root.userProfile.steamid"
-              ng-href="{{config.endpoints.api}}/startLogin"
-              class="steam-login">
-              Login
-            </md-button>
+              <md-button ng-if="$root.userProfile.role === 'administrator'"
+                         ng-href="{{config.endpoints.api}}/admin"
+                         target="_blank">
+                Admin
+              </md-button>
+
+              <md-button
+                 class="player-button"
+                 ng-if="$root.userProfile.steamid"
+                 ui-sref="user-profile({userID: $root.userProfile.steamid})">
+                {{$root.userProfile.name}}
+                <img ng-src="{{::$root.userProfile.avatar}}"
+                     width="32"
+                     height="32"
+                     alt="Your steam avatar" />
+              </md-button>
+              <md-button ng-if="!$root.userProfile.steamid"
+                         ng-href="{{config.endpoints.api}}/startLogin"
+                         class="steam-login">
+                Login
+              </md-button>
+            </div>
+          </div>
+        </md-toolbar>
+        <div id="current-lobby-info" ng-controller="CurrentLobbyController as vm">
+          <div class="current-lobby" ng-if="vm.visible">
+            <span>Your lobby has</span>
+            <span>{{vm.lobbyInformation.players}}/{{vm.lobbyInformation.maxPlayers}} players</span>
+            <md-button ui-sref="lobby-page({lobbyID: vm.lobbyInformation.id})">Go back</md-button>
           </div>
         </div>
-      </md-toolbar>
-      <div id="current-lobby-info" ng-controller="CurrentLobbyController as vm">
-        <div class="current-lobby" ng-if="vm.visible">
-          <span>Your lobby has</span>
-          <span>{{vm.lobbyInformation.players}}/{{vm.lobbyInformation.maxPlayers}} players</span>
-          <md-button ui-sref="lobby-page({lobbyID: vm.lobbyInformation.id})">Go back</md-button>
+
+        <div class="header-bg-wrapper">
+          <videobg></videobg>
+          <div ui-view="headerInfo" class="header-info"></div>
         </div>
+      </header>
+
+      <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'" ng-if="$root.backendAuthenticated"></aside>
+
+      <div id="fab"
+           ng-if="$root.backendAuthenticated"
+           ng-controller="LobbyCreateButtonController as lcbc">
+        <md-button ui-sref="lobby-create"
+                   class="md-fab md-primary"
+                   aria-label="create a lobby"
+                   ng-mouseover="lcbc.preloadLobbyCreate()">
+          <md-icon md-svg-icon="/assets/img/icons/material/add.svg"></md-icon>
+        </md-button>
       </div>
 
-      <div class="header-bg-wrapper">
-        <videobg></videobg>
-        <div ui-view="headerInfo" class="header-info"></div>
-      </div>
-    </header>
+      <main flex ng-if="$root.backendAuthenticated">
+        <div flex id="page-content">
+          <div ui-view="leftSidebar" id="left-sidebar"></div>
+          <md-content flex ui-view="content" id="main-content"></md-content>
+        </div>
+      </main>
 
-    <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'" ng-if="$root.backendAuthenticated"></aside>
-
-    <div id="fab"
-         ng-if="$root.backendAuthenticated"
-         ng-controller="LobbyCreateButtonController as lcbc">
-      <md-button ui-sref="lobby-create"
-                 class="md-fab md-primary"
-                 aria-label="create a lobby"
-                 ng-mouseover="lcbc.preloadLobbyCreate()">
-        <md-icon md-svg-icon="/assets/img/icons/material/add.svg"></md-icon>
-      </md-button>
     </div>
-
-    <main flex ng-if="$root.backendAuthenticated">
-      <div flex id="page-content">
-        <div ui-view="leftSidebar" id="left-sidebar"></div>
-        <md-content flex ui-view="content" id="main-content"></md-content>
-      </div>
-    </main>
 
     <!-- build:js(src) scripts/vendor.js -->
     <!-- bower:js -->
