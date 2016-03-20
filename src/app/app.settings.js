@@ -87,7 +87,7 @@
       SettingsProvider.settings.savedServers = '{}';
       SettingsProvider.settings.videoBackground = 'on';
 
-      SettingsProvider.settings.soundVolume = 30;
+      SettingsProvider.settings.soundVolume = 10;
 
       /*
         Defaults every value found in the filters to true.
