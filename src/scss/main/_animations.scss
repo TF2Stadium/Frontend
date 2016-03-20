@@ -222,7 +222,7 @@ $animation-options-list: (
   //Default value for animation mixin
   $animation-duration:        $animation-regular;
 
-  body.#{themeVar(selector)} {
+  #app-container.#{themeVar(selector)} {
 
     //SPLASH-SCREEN
 
