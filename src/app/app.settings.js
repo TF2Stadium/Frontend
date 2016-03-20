@@ -87,6 +87,8 @@
       SettingsProvider.settings.savedServers = '{}';
       SettingsProvider.settings.videoBackground = 'on';
 
+      SettingsProvider.settings.soundVolume = 30;
+
       /*
         Defaults every value found in the filters to true.
         It gets overwritten with the loaded settings in the SettingsRunBlock
