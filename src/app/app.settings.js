@@ -97,6 +97,10 @@
           SettingsProvider.settings[setting] = true;
         }
       }
+
+      // show all lobbies (even non-Mumble-required) by default
+      SettingsProvider.settings.mumbleRequired = false;
+
     }
 
     setDefaultValues();
