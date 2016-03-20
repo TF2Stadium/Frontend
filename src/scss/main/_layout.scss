@@ -230,6 +230,7 @@ main {
 #left-sidebar {
   min-width: initial;
   padding-top: $padding-medium;
+  overflow-y: auto;
 }
 
 #main-content {
