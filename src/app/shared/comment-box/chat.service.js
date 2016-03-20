@@ -341,6 +341,14 @@
         }
       }
 
+      // Don't let the log grow too large, or render performance
+      // tanks. There are better solutions to this perf issue, but
+      // this is quick to implement for now.
+      var maxLogSize = 80;
+      if (log.length > maxLogSize) {
+        log.splice(0, log.length - maxLogSize);
+      }
+
       if (!$rootScope.userProfile ||
           (message.player &&
            message.player.steamid &&
