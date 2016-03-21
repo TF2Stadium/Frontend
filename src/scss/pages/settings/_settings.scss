@@ -1,3 +1,6 @@
+@import "../../_variables.scss";
+@import "../../main/__helpers.scss";
+
 .settings-section {
   @extend .sheet;
   padding: $padding-medium $padding-big;

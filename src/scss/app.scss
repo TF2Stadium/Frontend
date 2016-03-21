@@ -1,5 +1,16 @@
-//@import url("../../../bower_components/angular-material/angular-material.css");
-
-
-// injector
-// endinjector
+@import '_variables.scss';
+@import 'main/_theme.scss';
+@import 'main/__helpers.scss';
+@import 'main/_elements.scss';
+@import 'main/_icons.scss';
+@import 'main/_layout.scss';
+@import 'main/_typography.scss';
+@import 'main/_animations.scss';
+@import 'pages/settings/_settings.scss';
+@import 'pages/lobby-list/_lobby-list.scss';
+@import 'pages/lobby-page/_lobby-page.scss';
+@import 'pages/lobby-create/_lobby-create.scss';
+@import 'pages/rules/_punishments.scss';
+@import 'pages/shared/_commentbox.scss';
+@import 'pages/user-profile/_user-profile.scss';
+@import 'pages/about/_about.scss';
