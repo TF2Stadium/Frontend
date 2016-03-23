@@ -36,6 +36,14 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
     });
   };
 
+  vm.fetchMumblePassword = function () {
+    User
+      .getMumblePassword()
+      .then(function (data) {
+        vm.mumblePassword = data.password;
+      });
+  };
+
   vm.resetMumblePassword = function () {
     User.resetMumblePassword();
   };
