@@ -139,7 +139,8 @@
         </div>
 
         <div flex class="slot-info" ng-if="slot.filled">
-          <span class="slot-playername">{{slot.player.name}}</span>
+          <span class="slot-playername"
+                ui-sref="user-profile({userID: slot.player.steamid})">{{slot.player.name}}</span>
           <div class="slot-misc">
             <div flex ng-if="!slot.ready && $root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state<4">
               <span>{{lobbyPage.playerPreReady ? 'Ready for ' + (lobbyPage.preReadyUpTimer | secondsToMinutes) : 'Pre-ready up!'}}</span>
@@ -150,6 +151,7 @@
 
         <img ng-if="slot.filled"
              ng-src="{{::slot.player.avatar.replace('.jpg', '_medium.jpg') | trusted}}"
+             ui-sref="user-profile({userID: slot.player.steamid})"
              class="slot-avatar" />
 
         <md-icon
