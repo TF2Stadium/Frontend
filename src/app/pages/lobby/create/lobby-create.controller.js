@@ -207,7 +207,8 @@
     vm.servemeRegionToFlag = {
       'fr': '/assets/img/emotes/emojione/1f1eb-1f1f7.png',
       'de': '/assets/img/emotes/emojione/1f1e9-1f1ea.png',
-      'nl': '/assets/img/emotes/emojione/1f1f3-1f1f1.png'
+      'nl': '/assets/img/emotes/emojione/1f1f3-1f1f1.png',
+      'us': '/assets/img/emotes/emojione/1f1fa-1f1f8.png'
     };
 
     $scope.$on('$destroy', $rootScope.$on('$stateChangeSuccess', function () {
