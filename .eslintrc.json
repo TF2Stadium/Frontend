@@ -1,11 +1,13 @@
 {
+  "parser": "babel-eslint",
   "globals": {
     "angular": false,
     "Socket": false,
     "Clipboard": false,
     "xssFilters": false,
     "moment": false,
-    "Kefir": false
+    "Kefir": false,
+    "require": false
   },
   "rules": {
     "no-console": 0,
@@ -13,6 +15,21 @@
     "eqeqeq": 2,
     "strict": 2,
     "no-shadow": 2,
+    "space-before-blocks": 2,
+    "no-confusing-arrow": [
+      2,
+      {
+        "allowParens": true
+      }
+    ],
+    "keyword-spacing": [
+      2,
+      {
+        "before": true,
+        "after": true,
+        "overrides": {}
+      }
+    ],
     "space-before-function-paren": [
       2,
       {
@@ -33,11 +50,16 @@
       "always"
     ]
   },
-  "env": {
-    "browser": true
-  },
   "plugins": [
     "angular"
   ],
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "sourceType": "module"
+  },
+  "env": {
+    "browser": true,
+    "es6": true
+  },
   "extends": "eslint:recommended"
 }
