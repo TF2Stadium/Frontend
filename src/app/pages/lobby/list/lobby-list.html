@@ -27,7 +27,7 @@
     <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
     <span>
       {{sub.region.name}} {{sub.type}} {{sub.class | stripSlotNameNumber}} needed in {{sub.map}}.
-      Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required
+      Mumble {{sub.mumbleRequired ? '': 'not '}}required
     </span>
     <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
   </div>
