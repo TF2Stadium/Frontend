@@ -80,7 +80,7 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
       var html5notification = new Notification(options.title, options);
 
       if (options.timeout) {
-        $timeout(function (){
+        $timeout(function () {
           html5notification.close();
         }, options.timeout * 1000);
       }

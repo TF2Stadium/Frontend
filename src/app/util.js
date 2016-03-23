@@ -9,7 +9,7 @@ export function safeApply($rootScope) {
     // not
     var phase = $rootScope.$$phase;
 
-    if(phase === '$apply' || phase === '$digest') {
+    if (phase === '$apply' || phase === '$digest') {
       if (fn) {
         $scope.$eval(fn);
       }

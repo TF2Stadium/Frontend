@@ -66,6 +66,7 @@ angular
   .config(allowMumbleHref);
 
 angular.module('tf2stadium.controllers', []);
+
 require('./shared/comment-box/comment-box.controller');
 require('./shared/notifications/ready-up.controller');
 require('./shared/notifications/toast.controller');
