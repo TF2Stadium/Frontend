@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.5.2",
+    "array.prototype.find": "^2.0.0",
     "babel-eslint": "^6.0.0-beta.6",
     "babel-loader": "^6.2.4",
     "babel-plugin-lodash": "^2.2.1",
