@@ -1,12 +1,10 @@
-/*global describe,beforeEach,module,inject,it,expect */
+/*global describe,beforeEach,inject,it,expect */
 
 describe('Filters', function () {
-  'use strict';
-
   var $filter;
 
   beforeEach(function () {
-    module('tf2stadium.filters');
+    angular.mock.module('tf2stadium.filters');
 
     inject(function (_$filter_) {
       $filter = _$filter_;

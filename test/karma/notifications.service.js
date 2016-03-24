@@ -1,8 +1,6 @@
-/*global describe,beforeEach,sinon,module,inject,it,expect */
+/*global describe,beforeEach,sinon,inject,it,expect */
 
 describe('Service: Notifications', function () {
-  'use strict';
-
   var Notifications, $rootScope, $q;
   var mock$mdToast, mock$window, mockNgAudio;
   var toastShowPromise, hasFocus;
@@ -21,7 +19,7 @@ describe('Service: Notifications', function () {
       play: function () { return -1; }
     });
 
-    module('tf2stadium.services', function ($provide) {
+    angular.mock.module('tf2stadium.services', function ($provide) {
       mock$mdToast = {
         show: sinon.spy(function () {
           return toastShowPromise;

@@ -1,8 +1,8 @@
-/*global describe,beforeEach,it,sinon,expect,module,inject */
+/*global before,after,describe,beforeEach,it,sinon,expect,inject */
+
+import WebSocketModule from '../../src/app/shared/websocket.factory.js';
 
 describe('Service: ChatService', function () {
-  'use strict';
-
   function makeTestPlayer(p) {
     return {
       avatar: '',
@@ -41,6 +41,20 @@ describe('Service: ChatService', function () {
 
   var onJSONCallbacks = {};
 
+  before(function () {
+    var mockConnection = sinon.stub({
+      connect: function () {},
+      On: function () {},
+      Emit: function () {}
+    });
+
+    WebSocketModule.__Rewire__('Socket', () => mockConnection);
+  });
+
+  after(function () {
+    WebSocketModule.__ResetDependency__('Socket');
+  });
+
   beforeEach(function () {
     mockWebsocket = {
       onJSON: sinon.spy(function (eventName, callback) {
@@ -60,7 +74,8 @@ describe('Service: ChatService', function () {
       titleNotification: sinon.spy()
     };
 
-    module('tf2stadium.services', function ($provide) {
+    angular.mock.module('tf2stadium.services', function ($provide) {
+
       $provide.value('Websocket', mockWebsocket);
       $provide.value('LobbyService', mockLobbyService);
       $provide.value('Notifications', mockNotifications);
