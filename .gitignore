@@ -5,5 +5,7 @@ bower_components/
 .tmp/
 dist/
 app.config.json
+app.config.js
+src/app/app.config.js
 Frontend.iml
 coverage/

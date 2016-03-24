@@ -49,8 +49,7 @@ require('../scss/app.scss');
 import { allowMumbleHref, safeApply } from './util';
 import { routeConfig } from './app.route';
 
-angular
-  .module('tf2stadium', [
+var mainModule = angular.module('tf2stadium', [
     'tf2stadium.directives',
     'tf2stadium.controllers',
     'tf2stadium.services',
@@ -63,10 +62,20 @@ angular
     'luegg.directives',
     'ngMedia'
   ])
-  .constant('Config', require('app-config'))
   .factory('safeApply', safeApply)
   .config(routeConfig)
   .config(allowMumbleHref);
+
+// app-config is a webpack resolve.alias pointing to the preferred
+// configuration file.
+//
+// Old-style config files (which we still support), when require()'d,
+// will register themselves as tf2stadium.constant('Config', ...), but
+// new style configs just return a value. This supports both, because
+// module.constant(...) is actually constant (aka, won't be
+// overwritten by a second .constant call).
+angular.module('tf2stadium')
+  .constant('Config', require('app-config'));
 
 angular.module('tf2stadium.controllers', []);
 

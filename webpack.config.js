@@ -32,9 +32,15 @@ function fileExists(path) {
 }
 
 var configFile = [
+  toPath('src/app/app.config.js'),
+  toPath('app.config.js'),
   toPath('app.config.json'),
+  toPath('src/app/app.config.js.template'),
+  toPath('app.config.js.template'),
   toPath('app.config.template.json'),
 ].find(fileExists);
+
+console.log('Using config file:', configFile);
 
 var babelSettings = {
 	presets: ['es2015'],

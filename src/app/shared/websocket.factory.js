@@ -20,6 +20,7 @@ function Websocket($rootScope, $timeout, $log, $q,
     };
   }
 
+  console.log('WS Config:', Config);
   socket = new Socket(Config.endpoints.websocket, {
     extractor: extractor,
     maxRetries: 0
