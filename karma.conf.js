@@ -21,7 +21,7 @@ function toPath(p) {
 
 module.exports = function (config) {
   config.set({
-    browsers,
+    browsers: browsers,
     frameworks: ['mocha', 'chai-sinon'],
 
     singleRun: true,
