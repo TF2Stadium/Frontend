@@ -49,19 +49,19 @@ require('../scss/app.scss');
 import { allowMumbleHref, safeApply } from './util';
 import { routeConfig } from './app.route';
 
-var mainModule = angular.module('tf2stadium', [
-    'tf2stadium.directives',
-    'tf2stadium.controllers',
-    'tf2stadium.services',
-    'tf2stadium.filters',
-    'ngAnimate',
-    'ui.router',
-    'ui.validate',
-    'ngMaterial',
-    'md.data.table',
-    'luegg.directives',
-    'ngMedia'
-  ])
+angular.module('tf2stadium', [
+  'tf2stadium.directives',
+  'tf2stadium.controllers',
+  'tf2stadium.services',
+  'tf2stadium.filters',
+  'ngAnimate',
+  'ui.router',
+  'ui.validate',
+  'ngMaterial',
+  'md.data.table',
+  'luegg.directives',
+  'ngMedia'
+])
   .factory('safeApply', safeApply)
   .config(routeConfig)
   .config(allowMumbleHref);
