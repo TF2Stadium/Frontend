@@ -1,4 +1,4 @@
-var Socket = require('wsevent.js');
+import { Socket } from 'wsevent.js';
 
 angular
   .module('tf2stadium.services')

@@ -43,9 +43,8 @@ Have `git`, '`node`, and `npm` installed, and then follow these steps:
     # Install dependencies
     npm install
 
-VERY IMPORTANT: In the directory `src/app`, copy the
-`app.config.js.template` to `app.config.js` and replace the
-placeholders with your setup.
+VERY IMPORTANT: copy the `app.config.template.json` to
+`app.config.json` and replace the placeholders with your setup.
 
 ## Development
 

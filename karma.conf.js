@@ -15,6 +15,10 @@ if (process.env.TEST_ENV === 'BROWSERS') {
 
 var webpackConfig = require('./webpack.config.js');
 
+function toPath(p) {
+  return path.resolve(path.join(__dirname, p));
+}
+
 module.exports = function (config) {
   config.set({
     browsers,
@@ -39,11 +43,19 @@ module.exports = function (config) {
     webpack: {
       context: webpackConfig.context,
       devtool: 'inline-source-map',
+      resolve: {
+        alias: {
+          'app-config': toPath('app.config.template.json')
+        }
+      },
       module: {
         loaders: [{
           test: /\.js$/,
           exclude: /(node_modules|vendor\.js)/,
           loader: 'babel?' + JSON.stringify(babelSettings)
+        }, {
+          test: /\.json$/,
+          loader: 'json'
         }, {
           test: /\.(s?[ac]ss|html?)$/,
           include: [

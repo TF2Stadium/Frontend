@@ -7,6 +7,7 @@ var ResolverPlugin = webpack.ResolverPlugin;
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 var path = require('path');
+var fs = require('fs');
 
 // This webpack config is known to be very anti-webpack in how it
 // works. This is for legacy reasons and is being gradually updated.
@@ -19,8 +20,21 @@ var SRC = __dirname + '/src';
 var OUT = __dirname + '/dist';
 
 function toPath(p) {
-  return path.resolve(__dirname + p);
+  return path.resolve(path.join(__dirname, p));
 }
+
+function fileExists(path) {
+  try {
+    return fs.statSync(path).isFile();
+  } catch(err) {
+    return !(err && err.code === 'ENOENT');
+  }
+}
+
+var configFile = [
+  toPath('app.config.json'),
+  toPath('app.config.template.json'),
+].find(fileExists);
 
 var babelSettings = {
 	presets: ['es2015'],
@@ -37,6 +51,8 @@ var babelSettings = {
 
 var extractAppStyles = new ExtractTextPlugin('app.css');
 var extractVendorStyles = new ExtractTextPlugin('vendor.css');
+
+var min = '';
 
 module.exports = {
   name: 'js',
@@ -64,7 +80,7 @@ module.exports = {
       'angular',
       'angular-animate',
       'angular-ui-router',
-      '../node_modules/angular-material/angular-material.min.js',
+      '../node_modules/angular-material/angular-material' + min + '.js',
       'angular-aria',
       'angular-material-data-table',
       'angular-messages',
@@ -96,7 +112,9 @@ module.exports = {
 
   resolve: {
     alias: {
-      angular: toPath('/node_modules/angular/angular.min.js'),
+      'app-config': configFile,
+
+      angular: toPath('/node_modules/angular/angular' + min + '.js'),
       'angular-material':
       toPath('/node_modules/angular-material/angular-material.min.js'),
       'angular-material-data-table':
@@ -131,6 +149,9 @@ module.exports = {
         'ng-annotate',
         'babel?' + JSON.stringify(babelSettings)
       ]
+		}, {
+			test: /\.json$/,
+			loader: 'json'
 		}, {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
       loader: 'file?name=[path][name].[ext]'

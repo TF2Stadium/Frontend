@@ -46,7 +46,6 @@ require('./pages/about/section-faq.html');
 
 require('../scss/app.scss');
 
-import config from './app.config';
 import { allowMumbleHref, safeApply } from './util';
 import { routeConfig } from './app.route';
 
@@ -64,7 +63,7 @@ angular
     'luegg.directives',
     'ngMedia'
   ])
-  .constant('Config', config)
+  .constant('Config', require('app-config'))
   .factory('safeApply', safeApply)
   .config(routeConfig)
   .config(allowMumbleHref);
