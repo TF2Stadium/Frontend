@@ -1,8 +1,6 @@
-/*global describe,beforeEach,it,sinon,expect,module,inject */
+/*global describe,beforeEach,it,sinon,expect,inject */
 
 describe('Service: User', function () {
-  'use strict';
-
   var User, $rootScope;
   var mockWebsocket, mockConfig, mock$window;
 
@@ -29,7 +27,7 @@ describe('Service: User', function () {
       }
     };
 
-    module('tf2stadium.services', function ($provide) {
+    angular.mock.module('tf2stadium.services', function ($provide) {
       $provide.value('Websocket', mockWebsocket);
       $provide.value('Config', mockConfig);
       $provide.value('$window', mock$window);

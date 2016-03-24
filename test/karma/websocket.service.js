@@ -1,8 +1,8 @@
-/*global describe,beforeEach,it,sinon,expect,module,inject,afterEach */
+/*global describe,beforeEach,it,sinon,expect,inject,afterEach */
 
-describe('Service: ChatService', function () {
-  'use strict';
+import WebSocketModule from '../../src/app/shared/websocket.factory.js';
 
+describe('Service: Websocket', function () {
   var Websocket;
   var $rootScope;
   var $timeout;
@@ -29,11 +29,12 @@ describe('Service: ChatService', function () {
       Emit: function () {}
     });
 
-    stubSocket = sinon.stub(window, 'Socket', function () {
+    stubSocket = sinon.spy(function () {
       return mockConnection;
     });
+    WebSocketModule.__Rewire__('Socket', stubSocket);
 
-    module('tf2stadium.services', function ($provide) {
+    angular.mock.module('tf2stadium.services', function ($provide) {
       $provide.value('Notifications', mockNotifications);
       $provide.constant('Config',  mockConfig);
     });
@@ -46,12 +47,12 @@ describe('Service: ChatService', function () {
   });
 
   afterEach(function () {
-    stubSocket.restore();
+    WebSocketModule.__ResetDependency__('Socket');
   });
 
   it('should only construct one socket', function () {
-    expect(Socket).to.be.calledOnce;
-    expect(Socket).to.be.calledWithNew;
+    expect(stubSocket).to.be.calledOnce;
+    expect(stubSocket).to.be.calledWithNew;
     expect(mockConnection.connect).to.not.be.called;
   });
 

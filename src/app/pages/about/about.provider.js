@@ -1,51 +1,46 @@
-(function () {
-  'use strict';
+angular.module('tf2stadium')
+  .config(AboutPageConfig)
+  .provider('AboutPage', AboutPage);
 
-  angular.module('tf2stadium')
-    .config(AboutPageConfig)
-    .provider('AboutPage', AboutPage);
-
-  /** @ngInject */
-  function AboutPageConfig($stateProvider, AboutPageProvider) {
-    AboutPageProvider.sections.forEach(function (section) {
-      $stateProvider.state('about-' + section, {
-        url: '/' + section,
-        parent: 'about',
-        views: {
-          'about-section': {
-            templateUrl: 'app/pages/about/section-' + section + '.html'
-          }
+/** @ngInject */
+function AboutPageConfig($stateProvider, AboutPageProvider) {
+  AboutPageProvider.sections.forEach(function (section) {
+    $stateProvider.state('about-' + section, {
+      url: '/' + section,
+      parent: 'about',
+      views: {
+        'about-section': {
+          templateUrl: 'app/pages/about/section-' + section + '.html'
         }
-      });
+      }
     });
-  }
+  });
+}
+
+/** @ngInject */
+function AboutPage() {
+  var aboutPageProvider = {
+    sections: [
+      'about',
+      'faq',
+      'privacy',
+      'servers',
+      'credits'
+    ]
+  };
 
   /** @ngInject */
-  function AboutPage() {
-    var aboutPageProvider = {
-      sections: [
-        'about',
-        'faq',
-        'privacy',
-        'servers',
-        'credits'
-      ]
+  var aboutPageService = function () {
+    var service = {};
+
+    service.getSections = function () {
+      return aboutPageProvider.sections;
     };
 
-    /** @ngInject */
-    var aboutPageService = function () {
-      var service = {};
+    return service;
+  };
 
-      service.getSections = function () {
-        return aboutPageProvider.sections;
-      };
+  aboutPageProvider.$get = aboutPageService;
 
-      return service;
-    };
-
-    aboutPageProvider.$get = aboutPageService;
-
-    return aboutPageProvider;
-  }
-
-})();
+  return aboutPageProvider;
+}

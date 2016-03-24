@@ -1,19 +1,14 @@
-(function () {
-  'use strict';
+angular
+  .module('tf2stadium')
+  .controller('AboutPageController', AboutPageController);
 
-  angular
-    .module('tf2stadium')
-    .controller('AboutPageController', AboutPageController);
+/** @ngInject */
+function AboutPageController(AboutPage) {
+  var vm = this;
 
-  /** @ngInject */
-  function AboutPageController(AboutPage) {
-    var vm = this;
+  vm.setCurrent = function (key) {
+    vm.current = key;
+  };
 
-    vm.setCurrent = function (key) {
-      vm.current = key;
-    };
-
-    vm.sections = AboutPage.getSections();
-  }
-
-})();
+  vm.sections = AboutPage.getSections();
+}

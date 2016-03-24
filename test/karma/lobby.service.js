@@ -1,8 +1,6 @@
-/*global describe,beforeEach,it,sinon,expect,module,inject */
+/*global describe,beforeEach,it,sinon,expect,inject */
 
 describe('Service: LobbyService', function () {
-  'use strict';
-
   var LobbyService, $rootScope, $q;
   var mockWebsocket, mockNotifications, mockSettings;
   var mock$state, mock$mdDialog, mock$window;
@@ -35,7 +33,7 @@ describe('Service: LobbyService', function () {
       open: function () {}
     });
 
-    module('tf2stadium.services', function ($provide) {
+    angular.mock.module('tf2stadium.services', function ($provide) {
       mock$mdDialog = {
         show: sinon.spy(function () { return $q.when({}); })
       };

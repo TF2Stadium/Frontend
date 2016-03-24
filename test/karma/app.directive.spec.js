@@ -1,12 +1,10 @@
-/*global describe,beforeEach,module,inject,it,expect */
+/*global describe,beforeEach,inject,it,expect */
 
 describe('Directives', function () {
-  'use strict';
-
   var $compile, $rootScope;
 
   beforeEach(function () {
-    module('tf2stadium.directives');
+    angular.mock.module('tf2stadium.directives');
 
     inject(function (_$compile_, _$rootScope_) {
       $compile = _$compile_;

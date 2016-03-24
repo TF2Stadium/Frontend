@@ -1,0 +1,30 @@
+{
+  "endpoints": {
+    "websocket": "<<WS_ENDPOINT>>",
+    "api": "<<API_ENDPOINT>>"
+  },
+  "debug": true,
+  "allowedChatDomains": [
+    "logs.tf",
+    "teamfortress.tv",
+    "teamfortress.com",
+    "steamcommunity.com",
+    "steampowered.com",
+    "valvesoftware.com",
+    "imgur.com",
+    "bball.tf",
+    "jump.tf",
+    "twitch.tv",
+    "tf2stadium.com",
+    "tragicservers.com",
+    "playcomp.tf",
+    "etf2l.com",
+    "ugcleague.com",
+    "esea.com",
+    "esea.net",
+    "asiafortress.com",
+    "ozfortress.com",
+    "tf2center.com",
+    "tf2lobby.com"
+  ]
+}

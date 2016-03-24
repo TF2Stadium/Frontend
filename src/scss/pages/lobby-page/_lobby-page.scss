@@ -1,3 +1,6 @@
+@import "../../_variables.scss";
+@import "../../main/__helpers.scss";
+
 .header-image {
   @include flex (column, center, center);
   width: 100%;

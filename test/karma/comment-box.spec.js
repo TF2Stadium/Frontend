@@ -1,8 +1,6 @@
-/*global describe,beforeEach,sinon,module,inject,it,expect,afterEach */
+/*global describe,beforeEach,sinon,inject,it,expect,afterEach */
 
 describe('Controller: CommentBoxController', function () {
-  'use strict';
-
   var $rootScope, $compile, $scope, $controller, $timeout;
   var mockRooms, mockChatService, mockWindow;
   var ctrl, page, textarea;
@@ -32,7 +30,7 @@ describe('Controller: CommentBoxController', function () {
       document: document
     });
 
-    module('tf2stadium.controllers', function ($provide) {
+    angular.mock.module('tf2stadium.controllers', function ($provide) {
       $provide.value('$window', mockWindow);
       $provide.value('ChatService', mockChatService);
     });
