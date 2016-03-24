@@ -1,31 +1,75 @@
-#TF2Stadium Frontend
+# TF2Stadium Frontend
 
-TF2Stadium Frontend is the frontend server component for the [TF2Stadium](tf2stadium.com) project.
+TF2Stadium Frontend is the frontend server component for the
+[TF2Stadium](https://tf2stadium.com) project.
 
-It uses [AngularJS](https://angularjs.org/) as its framework, [Gulp](http://gulpjs.com) for the enviroment automation and [Bower](http://bower.io) for managing dependencies.
+It uses [AngularJS](https://angularjs.org/) as its framework,
+[NPM](https://www.npmjs.com/) for package management,
+[webpack](https://webpack.github.io/) for builds, and
+[Karma](https://karma-runner.github.io/) for testing.
 
-##Requirements
+## Usage
 
-* [NodeJS](http://nodejs.org).
+    # Run a dev server at localhost:8080
+    npm start
 
-##Installation
+    # Full production build, in dist/
+    npm run build
+    # not-quite-production build (in dist/), but way way faster
+    npm run build-dev
 
-1. Make sure you installed all the dependencies above.
-2. Clone the the git repository. If you're using git, just run `git clone https://github.com/TF2Stadium/Frontend.git`. Otherwise, get it from [here](https://github.com/TF2Stadium/Frontend/archive/master.zip) and unpack it somewhere in your drive.
-3. Change to the directory to where you cloned the repository and execute `npm install` to install dependencies
-4. In the directory `src/app`, copy the `app.config.js.template` to `app.config.js` and replace the placeholders with your setup.
+    # Clean up any prior builds
+    npm run clean
 
-##Use
+    # Run test cases
+    npm run test
+    # Run test cases (and try to fix simple issues)
+    npm run test-browsers
 
-TODO: building instructions
+    # Style-check the source code
+    npm run lint
+    # Style-check the source code (and try to fix simple issues)
+    npm run lint-fix
 
-##Development
+## Installation
 
-TODO: linting instructions
+Have `git`, '`node`, and `npm` installed, and then follow these steps:
 
-##License
+    # Download this repository via git
+    git clone https://github.com/TF2Stadium/Frontend.git
+    # or download a zip from: https://github.com/TF2Stadium/Frontend/archive/master.zip
+    # Move to the fetched directory
+    cd Frontend
+    # Install dependencies
+    npm install
 
-Released under the [GPLv3 License (GPLv3)](https://github.com/TF2Stadium/Frontend/blob/master/LICENSE).
+VERY IMPORTANT: In the directory `src/app`, copy the
+`app.config.js.template` to `app.config.js` and replace the
+placeholders with your setup.
 
-The assets have a variety of licenses, see src/assets/README.md for
+## Development
+
+    # Start a new feature branch, based on dev
+    git checkout -b my-feature dev
+
+    # Start a dev server and make your changes
+    npm start
+
+    # Test them, these should pass with 0 issues:
+    npm run lint
+    npm run test
+
+    # Silly whitespace errors? This can fix most of them:
+    npm run lint-fix
+
+    # Commit your changes
+    git commit -m "I did some cool stuff"
+    git push my-github my-feature
+
+## License
+
+Source code released under the
+[GPLv3 License (GPLv3)](https://github.com/TF2Stadium/Frontend/blob/master/LICENSE).
+
+The assets have a variety of licenses, see `src/assets/README.md` for
 their licensing information.
