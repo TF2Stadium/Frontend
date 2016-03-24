@@ -1,3 +1,7 @@
+if (window && !window.angular) {
+  require('angular');
+}
+
 require('./scrollglue');
 
 require('./shared/comment-box/comment-box.html');

@@ -13,7 +13,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
 
   vm.sections = SettingsPage.getSections();
 
-  vm.saveSetting = function (key, value, showNotification){
+  vm.saveSetting = function (key, value, showNotification) {
     var msg = 'Setting updated.';
     var promise = Settings.set(key, value);
 

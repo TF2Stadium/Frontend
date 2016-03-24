@@ -42,6 +42,7 @@ module.exports = {
   name: 'js',
 	context: SRC,
 
+  babelSettings: babelSettings,
 
   devtool: 'source-map',
 
@@ -69,7 +70,6 @@ module.exports = {
       'angular-messages',
       'angular-ui-validate',
       '../node_modules/ng-media-events/src/ng-media-events.js',
-      'wsevent.js',
       'clipboard',
       'kefir',
       'moment',
@@ -173,7 +173,14 @@ module.exports = {
         minifyJS: true
 			}
 		}),
-    new webpack.optimize.UglifyJsPlugin({ exclude: /vendor\.js/i }),
+    new webpack.optimize.UglifyJsPlugin({
+      exclude: /vendor\.js/i,
+      compress: {
+        // I'm not a fan of hiding warnings, but UglifyJS's are often
+        // both hard to avoid and rarely useful
+        warnings: false
+      }
+    }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
 		new CopyWebpackPlugin([{ from: 'assets/', to: 'assets/' }]),
     new webpack.optimize.DedupePlugin(),

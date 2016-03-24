@@ -1,4 +1,4 @@
-import { Socket } from 'wsevent.js';
+var Socket = require('wsevent.js');
 
 angular
   .module('tf2stadium.services')
@@ -11,20 +11,19 @@ function Websocket($rootScope, $timeout, $log, $q,
   var reconnecting = false;
   var socket = null;
 
-  var asyncAngularify = function (callback) {
+  function asyncAngularify(callback) {
     return function asyncAngularifedFn() {
       var args = arguments;
       $timeout(function () {
         callback.apply(null, args);
       }, 0);
     };
-  };
+  }
 
-  socket = new Socket(Config.endpoints.websocket,
-                      {
-                        extractor: extractor,
-                        maxRetries: 0
-                      });
+  socket = new Socket(Config.endpoints.websocket, {
+    extractor: extractor,
+    maxRetries: 0
+  });
 
   socket.onopen = function (e) {
     // Note: connected=true must come before we emit the event,

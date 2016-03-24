@@ -52,6 +52,10 @@ function CommentBoxController($rootScope, $scope, $window, $log, $timeout,
   }
 
   var clearChatMessage = $rootScope.$on('chat-message', function (e, message) {
+    function isFresh(msg) {
+      return msg.id > latest && msg.player.steamid !== steamid;
+    }
+
     var roomId = message.room;
     if (angular.isUndefined(vm.lastSeenIds[roomId])) {
       vm.lastSeenIds[roomId] = 0;
@@ -74,12 +78,8 @@ function CommentBoxController($rootScope, $scope, $window, $log, $timeout,
       })[0];
 
       if (room) {
-        // not done as a function declaration to satisfy the linter :\
-        var isFresh = function isFresh(msg) {
-          return msg.id > latest && msg.player.steamid !== steamid;
-        };
-
-        vm.showRoomNotification[roomId] = room.messages.filter(isFresh).length > 0;
+        vm.showRoomNotification[roomId] =
+          room.messages.filter(isFresh).length > 0;
       }
     }
   });
