@@ -75,7 +75,6 @@
     "node-sass": "^3.4.2",
     "null-loader": "^0.1.1",
     "phantomjs": "^1.9.19",
-    "preact": "^4.5.1",
     "raw-loader": "^0.5.1",
     "sass-loader": "^3.2.0",
     "script-loader": "^0.6.1",
