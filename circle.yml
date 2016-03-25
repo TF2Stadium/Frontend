@@ -16,7 +16,6 @@ deployment:
   dev:
     branch: dev
     commands:
-      - cp src/app/app.config.js.template src/app/app.config.js
       - npm run build
       - cp -r dist docker/source/dist
       - docker build -t tf2stadium/frontend:dev docker/
