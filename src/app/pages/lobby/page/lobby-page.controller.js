@@ -203,6 +203,12 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     }
   };
 
+  vm.clearTwitchRestriction = () =>
+    LobbyService.clearTwitchRestriction(vm.lobbyInformation.id);
+
+  vm.clearSteamRestriction = () =>
+    LobbyService.clearSteamRestriction(vm.lobbyInformation.id);
+
   vm.keydownRequirementInput = function (val, e) {
     if (e.keyCode !== 13) {
       return;
