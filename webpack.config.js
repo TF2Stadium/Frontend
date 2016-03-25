@@ -86,7 +86,7 @@ module.exports = {
 	entry: {
     app: './app/app',
     vendor: [
-      'angular',
+      'angular', // see angular-min alias and comment in lib/angular-min.js
       'angular-animate',
       'angular-ui-router',
       '../node_modules/angular-material/angular-material' + min + '.js',
@@ -125,7 +125,7 @@ module.exports = {
     alias: {
       'app-config': configFile,
 
-      angular: toPath('lib/angular-min'),
+      angular: toPath('lib/angular-min.js'),
       'angular-min': toPath('/node_modules/angular/angular.min.js'),
 
       'angular-material':
