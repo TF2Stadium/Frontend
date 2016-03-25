@@ -1,8 +1,9 @@
+// Only technically needed for tests, normally the global 'angular'
+// object is created by default and this require statement triggers a
+// 'loading angular twice' warning.
 if (window && !window.angular) {
   require('angular');
 }
-
-require('./scrollglue');
 
 require('./shared/comment-box/comment-box.html');
 require('./shared/notifications/ready-up.html');
@@ -55,11 +56,12 @@ angular.module('tf2stadium', [
   'tf2stadium.services',
   'tf2stadium.filters',
   'ngAnimate',
+  require('ngreact').name,
   'ui.router',
   'ui.validate',
   'ngMaterial',
   'md.data.table',
-  'luegg.directives',
+  require('./scrollglue').name,
   'ngMedia'
 ])
   .factory('safeApply', safeApply)

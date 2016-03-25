@@ -1,3 +1,4 @@
+/*global module */
 /* angularjs Scroll Glue
  * version 2.0.6
  * https://github.com/Luegg/angularjs-scroll-glue
@@ -80,8 +81,8 @@ function createActivationState($parse, attr, scope) {
   }
 }
 
-function createDirective(module, attrName, direction) {
-  module.directive(attrName, ['$parse', '$window', '$timeout', function ($parse, $window, $timeout) {
+function createDirective(scrollglue, attrName, direction) {
+  scrollglue.directive(attrName, ['$parse', '$window', '$timeout', function ($parse, $window, $timeout) {
     return {
       priority: 1,
       restrict: 'A',
@@ -158,10 +159,12 @@ var left = {
   }
 };
 
-var module = angular.module('luegg.directives', []);
+var scrollglue = angular.module('luegg.directives', []);
 
-createDirective(module, 'scrollGlue', bottom);
-createDirective(module, 'scrollGlueTop', top);
-createDirective(module, 'scrollGlueBottom', bottom);
-createDirective(module, 'scrollGlueLeft', left);
-createDirective(module, 'scrollGlueRight', right);
+createDirective(scrollglue, 'scrollGlue', bottom);
+createDirective(scrollglue, 'scrollGlueTop', top);
+createDirective(scrollglue, 'scrollGlueBottom', bottom);
+createDirective(scrollglue, 'scrollGlueLeft', left);
+createDirective(scrollglue, 'scrollGlueRight', right);
+
+module.exports = scrollglue;

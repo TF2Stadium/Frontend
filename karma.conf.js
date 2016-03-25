@@ -28,10 +28,10 @@ module.exports = function (config) {
     reporters: ['progress', 'coverage'],
 
     files: [
-      'src/app/app.js',
-      'node_modules/angular-mocks/angular-mocks.js',
       // shims for phantomjs (until we have v2):
       'node_modules/es5-shim/es5-shim.js',
+      'src/app/app.js',
+      'node_modules/angular-mocks/angular-mocks.js',
       'test/karma/**/*.js'
     ],
 
