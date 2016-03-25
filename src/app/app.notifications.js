@@ -50,6 +50,12 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
   };
 
   notificationsService.notifyBrowser = function (options) {
+    if (options.soundFile) {
+      audio.play(options.soundFile, options.soundVolume);
+    }
+
+    notificationsService.titleNotification();
+
     if (!('Notification' in $window)) {
       $log.log('Browser doesn\'t support HTML5 notifications');
       return;
@@ -57,14 +63,12 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
 
     var Notification = $window.Notification;
 
-    if (($document[0].hasFocus() && !options.showAlways) || Notification.permission === 'denied') {
+    if (($document[0].hasFocus() && !options.showAlways)
+        || Notification.permission === 'denied') {
       return;
     }
 
-    notificationsService.titleNotification();
-
     Notification.requestPermission(function () {
-
       if (Notification.permission !== 'granted') {
         return;
       }
@@ -73,22 +77,16 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
       options.icon = options.icon || '/assets/img/logo-no-text.png';
       options.tag = options.tag || 'tf2stadium';
 
-      if (options.soundFile) {
-        audio.play(options.soundFile, options.soundVolume);
-      }
-
       var html5notification = new Notification(options.title, options);
 
       if (options.timeout) {
-        $timeout(function () {
-          html5notification.close();
-        }, options.timeout * 1000);
+        $timeout(() => html5notification.close(),
+                 options.timeout * 1000);
       }
 
       for (var callback in options.callbacks) {
         html5notification[callback] = options.callbacks[callback];
       }
-
     });
   };
 
