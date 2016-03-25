@@ -61,7 +61,7 @@ var babelSettings = {
 var extractAppStyles = new ExtractTextPlugin('app.css');
 var extractVendorStyles = new ExtractTextPlugin('vendor.css');
 
-var min = '';
+var min = '.min';
 
 module.exports = {
   name: 'js',
@@ -99,7 +99,9 @@ module.exports = {
       'kefir',
       'moment',
       '../node_modules/angular-material/angular-material.min.css',
-      '../node_modules/angular-material-data-table/dist/md-data-table.min.css'
+      '../node_modules/angular-material-data-table/dist/md-data-table.min.css',
+      'preact',
+      'preact-compat',
     ]
   },
 
@@ -116,14 +118,16 @@ module.exports = {
       /node_modules\/kefir/,
       /node_modules\/wsevent.js/,
       /node_modules\/clipboard/,
-      /node_modules\/ng-media-events/
+      /node_modules\/ng-media-events/,
   ],
 
   resolve: {
     alias: {
       'app-config': configFile,
 
-      angular: toPath('/node_modules/angular/angular' + min + '.js'),
+      angular: toPath('lib/angular-min'),
+      'angular-min': toPath('/node_modules/angular/angular.min.js'),
+
       'angular-material':
       toPath('/node_modules/angular-material/angular-material.min.js'),
       'angular-material-data-table':
@@ -141,7 +145,9 @@ module.exports = {
       'angular-messages':
       toPath('/node_modules/angular-messages/angular-messages.min.js'),
       kefir: toPath('/node_modules/kefir/dist/kefir.min.js'),
-      moment: toPath('/node_modules/moment/min/moment.min.js')
+      moment: toPath('/node_modules/moment/min/moment.min.js'),
+//      preact: toPath('/node_modules/preact/dist/preact.min.js'),
+//      'preact-compat': toPath('/node_modules/preact-compat/dist/preact-compat.min.js'),
     }
   },
 
@@ -214,6 +220,17 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js'),
 		new CopyWebpackPlugin([{ from: 'assets/', to: 'assets/' }]),
     new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
-	]
+    new webpack.optimize.OccurenceOrderPlugin(),
+    // Ignore meaningless moment build warnings:
+    new webpack.IgnorePlugin(/locale/, /moment/),
+    new webpack.NormalModuleReplacementPlugin(
+        /^react$/,
+      toPath('/node_modules/preact-compat/dist/preact-compat.js')
+    )
+	],
+
+  devServer: {
+    historyApiFallback: true,
+    contentBase: toPath('dist/'),
+  }
 };
