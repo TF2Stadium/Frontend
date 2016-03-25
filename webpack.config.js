@@ -11,6 +11,8 @@ var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 
 var path = require('path');
 var fs = require('fs');
+var os = require("os");
+var gitRev = require('git-rev-sync');
 
 // This webpack config is known to be very anti-webpack in how it
 // works. This is for legacy reasons and is being gradually updated.
@@ -146,8 +148,8 @@ module.exports = {
       toPath('/node_modules/angular-messages/angular-messages.min.js'),
       kefir: toPath('/node_modules/kefir/dist/kefir.min.js'),
       moment: toPath('/node_modules/moment/min/moment.min.js'),
-//      preact: toPath('/node_modules/preact/dist/preact.min.js'),
-//      'preact-compat': toPath('/node_modules/preact-compat/dist/preact-compat.min.js'),
+      //      preact: toPath('/node_modules/preact/dist/preact.min.js'),
+      //      'preact-compat': toPath('/node_modules/preact-compat/dist/preact-compat.min.js'),
     }
   },
 
@@ -198,7 +200,15 @@ module.exports = {
       'process.env': {
         // This has effect on the react lib size
         'NODE_ENV': JSON.stringify('production')
-      }
+      },
+      '__BUILD_STATS__': JSON.stringify({
+        gitCommit: {
+          hash: gitRev.long() + '',
+          branch: gitRev.branch() + ''
+        },
+        host: os.hostname(),
+        time: +(new Date())
+      })
     }),
     new HtmlWebpackPlugin({
 			template: 'index.html',
@@ -224,7 +234,11 @@ module.exports = {
     // Ignore meaningless moment build warnings:
     new webpack.IgnorePlugin(/locale/, /moment/),
     new webpack.NormalModuleReplacementPlugin(
-        /^react$/,
+        /^angular$/,
+      toPath('/lib/angular-min.js')
+    ),
+    new webpack.NormalModuleReplacementPlugin(
+        /^angular$/,
       toPath('/node_modules/preact-compat/dist/preact-compat.js')
     )
 	],

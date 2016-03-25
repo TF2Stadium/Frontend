@@ -5,6 +5,17 @@ if (window && !window.angular) {
   require('angular');
 }
 
+import moment from 'moment';
+
+if (typeof __BUILD_STATS__ !== 'undefined') {
+  console.log(
+    'Built on ' + __BUILD_STATS__.host +
+      ' at ' + moment(__BUILD_STATS__.time).format('LLLL ZZ') +
+      ' from hash ' + __BUILD_STATS__.gitCommit.hash +
+      ' on branch ' + __BUILD_STATS__.gitCommit.branch
+  );
+}
+
 require('./shared/comment-box/comment-box.html');
 require('./shared/notifications/ready-up.html');
 require('./shared/notifications/toast.html');
