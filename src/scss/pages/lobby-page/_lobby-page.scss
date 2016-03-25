@@ -350,4 +350,22 @@ md-menu.slot-menu {
   &:first-of-type {
     margin: 0;
   }
+
+  .disable-lobby-restriction {
+    float: right;
+    margin: 0;
+    padding: 0;
+
+    min-width: 0;
+    min-height: 0;
+    width: 24px;
+    height: 24px;
+
+    md-icon {
+      svg {
+        @extend .fill-parent;
+        fill: #666;
+      }
+    }
+  }
 }

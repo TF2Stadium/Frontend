@@ -8,6 +8,12 @@
              alt="twitch"
              />{{lobbyPage.lobbyInformation.twitchChannel}}</a>
     {{lobbyPage.lobbyInformation.twitchRestriction}}.
+    <md-button
+       ng-if="lobbyPage.lobbyInformation.leader.steamid === $root.userProfile.steamid"
+       class="disable-lobby-restriction"
+       aria-label="Clear Twitch Restriction"
+       ng-click="lobbyPage.clearTwitchRestriction()"
+       ><md-icon md-svg-icon="material:clear"></md-icon></md-button>
   </p>
 </div>
 
@@ -20,6 +26,12 @@
        ><md-icon class="inline-logo"
                  md-svg-icon="logo:steam"></md-icon>{{::lobbyPage.lobbyInformation.steamGroup}}</a>
     Steam Group members.
+    <md-button
+       ng-if="lobbyPage.lobbyInformation.leader.steamid === $root.userProfile.steamid"
+       class="disable-lobby-restriction"
+       aria-label="Clear Twitch Restriction"
+       ng-click="lobbyPage.clearSteamRestriction()"
+       ><md-icon md-svg-icon="material:clear"></md-icon></md-button>
   </p>
 </div>
 
@@ -50,6 +62,7 @@
   </div>
   <div class="row">
     <md-button
+       ng-click="$event.preventDefault();lobbyPage.delayedLaunch(lobbyPage.lobbyJoinInformation.mumbleUrl, 500);"
        ng-href="{{lobbyPage.lobbyJoinInformation.mumbleUrl}}"
        target="_self">
       Join Mumble

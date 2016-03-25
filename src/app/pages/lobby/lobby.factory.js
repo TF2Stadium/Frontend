@@ -50,6 +50,13 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
     return preReadyUpTimer;
   };
 
+  factory.clearTwitchRestriction = function (id) {
+    return Websocket.emitJSON('lobbyRemoveTwitchRestriction', {id});
+  };
+
+  factory.clearSteamRestriction = function (id) {
+    return Websocket.emitJSON('lobbyRemoveSteamRestriction', {id});
+  };
 
   ////////////////////////////////////////////////
   // Lobby summaries list
