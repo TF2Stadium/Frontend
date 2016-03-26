@@ -78,6 +78,7 @@ angular.module('tf2stadium', [
   'ngMaterial',
   'md.data.table',
   require('./scrollglue').name,
+  'pasvaz.bindonce',
   'ngMedia'
 ])
   .config(disableDebug)
