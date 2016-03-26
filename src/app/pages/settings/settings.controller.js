@@ -32,17 +32,8 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
 
   vm.playSoundSample = function () {
     Settings.getSettings(function (settings) {
-      console.log(audio, require('../../audio'));
       audio.play('/assets/sound/lobby-readyup.wav', settings.soundVolume / 100);
     });
-  };
-
-  vm.logout = function () {
-    User.logout();
-  };
-
-  vm.twitchLogout = function () {
-    User.twitchLogout();
   };
 
   vm.resetMumblePassword = function () {

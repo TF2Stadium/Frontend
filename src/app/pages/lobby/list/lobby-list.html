@@ -11,9 +11,8 @@
          ng-change="settings.saveSetting(key, field.selected)">
         <i ng-if="keyName === 'classes'"
            class="filter-icon filter-icon-{{key}}"></i>
-        <span ng-if="keyName !== 'classes'">
-          {{field.name}}
-        </span>
+        <span ng-if="keyName !== 'classes'"
+              ng-bind="field.name"></span>
       </md-checkbox>
     </md-tab>
   </md-tabs>
@@ -25,10 +24,8 @@
        ng-repeat="sub in vm.subList | LobbyListSettingsFilter"
        ng-click="lobbyList.join(sub.id, sub.team, sub.class, $event)">
     <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
-    <span>
-      {{sub.region.name}} {{sub.type}} {{sub.class | stripSlotNameNumber}} needed in {{sub.map}}.
-      Mumble {{sub.mumbleRequired ? '': 'not '}}required
-    </span>
+    <span
+       ng-bind-template="{{sub.region.name}} {{sub.type}} {{sub.class | stripSlotNameNumber}} needed in {{sub.map}}. Mumble {{sub.mumbleRequired ? '': 'not '}}required"></span>
     <div class="icon lobby-icon-{{::sub.class | stripSlotNameNumber}}"></div>
   </div>
 </div>
@@ -57,6 +54,7 @@
 
 <a md-ink-ripple
    ng-repeat="lobbyInformation in lobbyList.lobbies | LobbyListSettingsFilter as filteredLobbies track by lobbyInformation.id"
+   bindonce="lobbyInformation"
    class="lobby-row"
    ui-sref="lobby-page({lobbyID: lobbyInformation.id})">
   <div class="lobby-image"
@@ -67,16 +65,17 @@
   <div flex class="lobby-main">
     <div flex class="lobby-classes">
       <div ng-repeat="class in lobbyInformation.classes track by $index"
+           bindonce
            class="flex-max-margin">
         <div class="class-button no-animate lobby-icon-{{::class.class | stripSlotNameNumber}}"
              ng-class="{'sheet' : !class.blu.filled || !class.red.filled}">
-          <md-button ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
-                     ng-if="!slot.filled"
-                     ng-class="['join-slot', team]"
-                     ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)">
-            <md-tooltip md-direction="bottom">
-              Join {{::team}} {{::class.class | stripSlotNameNumber}} slot
-            </md-tooltip>
+          <md-button
+             ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
+             ng-if="!slot.filled"
+             ng-class="['join-slot', team]"
+             ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)"
+             aria-label="Join {{::team}} {{::class.class}}">
+            <md-tooltip md-direction="bottom">Join {{::team}} {{::class.class | stripSlotNameNumber}} slot</md-tooltip>
             <span></span>
           </md-button>
         </div>
@@ -84,27 +83,22 @@
     </div>
     <div class="lobby-info">
       <div class="lobby-info-row top">
-        <span class="lobby-info-players">{{lobbyInformation.players}}</span>
-        <span class="lobby-info-maxplayers">/{{::lobbyInformation.maxPlayers}}</span>
+        <span class="lobby-info-players" ng-bind="lobbyInformation.players"></span>
+        <span class="lobby-info-maxplayers"
+              bo-bind="'/' + lobbyInformation.maxPlayers"></span>
         <div flex></div>
-        <div class="lobby-mumble" ng-class="{'not-required': !lobbyInformation.mumbleRequired}">
-          <md-tooltip md-direction="top">
-            Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}}mandatory
-          </md-tooltip>
+        <div class="lobby-mumble" bo-class="{'not-required': !lobbyInformation.mumbleRequired}">
+          <md-tooltip md-direction="top">Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}}mandatory</md-tooltip>
         </div>
       </div>
       <div class="lobby-info-row">
         <span>
           {{::lobbyInformation.region.code}}
-          <md-tooltip md-direction="bottom">
-            Server located in {{::lobbyInformation.region.name}}
-          </md-tooltip>
+          <md-tooltip md-direction="bottom">Server located in {{::lobbyInformation.region.name}}</md-tooltip>
         </span>
         <span class="lobby-league">
           {{::lobbyInformation.league}}
-          <md-tooltip md-direction="bottom">
-            {{::lobbyInformation.league | uppercase}} rules and whitelist
-          </md-tooltip>
+          <md-tooltip md-direction="bottom">{{::lobbyInformation.league | uppercase}} rules and whitelist</md-tooltip>
         </span>
       </div>
     </div>

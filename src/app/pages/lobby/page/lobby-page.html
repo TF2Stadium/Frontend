@@ -6,7 +6,7 @@
        ><img class="inline-logo"
              src="/assets/img/logos/twitch-glitch.png"
              alt="twitch"
-             />{{lobbyPage.lobbyInformation.twitchChannel}}</a>
+             ng-bind="lobbyPage.lobbyInformation.twitchChannel"/></a>
     {{lobbyPage.lobbyInformation.twitchRestriction}}.
     <md-button
        ng-if="lobbyPage.lobbyInformation.leader.steamid === $root.userProfile.steamid"
@@ -53,9 +53,9 @@
                ng-click="lobbyPage.showConnectString=true">
       Show TF2 connect string
     </md-button>
-    <span flex ng-if="lobbyPage.showConnectString">
-      {{lobbyPage.lobbyJoinInformation.connectString}}
-    </span>
+    <span flex
+          ng-if="lobbyPage.showConnectString"
+          ng-bind="lobbyPage.lobbyJoinInformation.connectString"></span>
     <md-button
        data-clipboard-text="{{lobbyPage.lobbyJoinInformation.connectString}}"
        class="clipboard-button">Copy to clipboard</md-button>
@@ -156,9 +156,9 @@
                 ui-sref="user-profile({userID: slot.player.steamid})">{{slot.player.name}}</span>
           <div class="slot-misc">
             <div flex ng-if="!slot.ready && $root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state<4">
-              <span>{{lobbyPage.playerPreReady ? 'Ready for ' + (lobbyPage.preReadyUpTimer | secondsToMinutes) : 'Pre-ready up!'}}</span>
+              <span ng-bind="lobbyPage.playerPreReady ? 'Ready for ' + (lobbyPage.preReadyUpTimer | secondsToMinutes) : 'Pre-ready up!'"></span>
             </div>
-            <div><span>{{slot.player.lobbiesPlayed}}</span><span>{{(slot.player.lobbiesPlayed===1)? 'lobby':'lobbies'}}</span></div>
+            <div><span ng-bind="slot.player.lobbiesPlayed"></span><span ng-bind="(slot.player.lobbiesPlayed===1)? 'lobby':'lobbies'"></span></div>
           </div>
         </div>
 
@@ -252,12 +252,12 @@
           <span ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.hours && vm.showRequirementInput !== slot.slot"
                 ng-class="{'slot-requirement-met': $root.userProfile && $root.userProfile.gameHours >= slot.requirements.hours,
                           'slot-requirement-failed': $root.userProfile && $root.userProfile.gameHours < slot.requirements.hours}"
-                >{{slot.requirements.hours}}+ Hours</span><!--
-                                                            --><br ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.lobbies && slot.requirements.hours" /><!--
-                                                                                                                                                                                    --><span ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.lobbies && vm.showRequirementInput !== slot.slot"
-                                                                                                                                                                                             ng-class="{'slot-requirement-met':$root.userProfile && $root.userProfile.stats.lobbiesPlayed >= slot.requirements.lobbies,
-                                                                                                                                                                                                       'slot-requirement-failed': $root.userProfile && $root.userProfile.stats.lobbiesPlayed < slot.requirements.lobbies}"
-                                                                                                                                                                                             >{{slot.requirements.lobbies}}+ Lobbies</span>
+                ng-bind-template="{{slot.requirements.hours}}+ Hours"
+                ></span><br ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.lobbies && slot.requirements.hours" /><!--
+    --><span ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.lobbies && vm.showRequirementInput !== slot.slot"
+             ng-class="{'slot-requirement-met':$root.userProfile && $root.userProfile.stats.lobbiesPlayed >= slot.requirements.lobbies,
+                       'slot-requirement-failed': $root.userProfile && $root.userProfile.stats.lobbiesPlayed < slot.requirements.lobbies}"
+             ng-bind-template="{{slot.requirements.lobbies}}+ Lobbies"></span>
         </div>
 
         <md-input-container

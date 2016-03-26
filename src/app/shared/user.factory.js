@@ -27,14 +27,6 @@ function User(Websocket, $rootScope, $window, $q, Config) {
     return deferred.promise;
   };
 
-  userService.logout = function () {
-    $window.open(Config.endpoints.api + '/logout', '_self');
-  };
-
-  userService.twitchLogout = function () {
-    $window.open(Config.endpoints.api + '/twitchLogout', '_self');
-  };
-
   userService.resetMumblePassword = function () {
     $window.open(Config.endpoints.api + '/resetMumblePassword', '_self');
   };

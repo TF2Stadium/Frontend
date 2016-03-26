@@ -95,6 +95,7 @@ module.exports = {
       'angular-aria',
       'angular-material-data-table',
       'angular-messages',
+      'angular-bindonce',
       'angular-ui-validate',
       '../node_modules/ng-media-events/src/ng-media-events.js',
       'clipboard',
@@ -113,9 +114,10 @@ module.exports = {
       /node_modules\/angular-material-data-table/,
       /node_modules\/angular-animate/,
       /node_modules\/angular-aria/,
+      /node_modules\/angular-messages/,
+      /node_modules\/angular-bindonce/,
       /node_modules\/angular-ui-router/,
       /node_modules\/angular-ui-validate/,
-      /node_modules\/angular-messages/,
       /node_modules\/moment/,
       /node_modules\/kefir/,
       /node_modules\/wsevent.js/,
@@ -146,6 +148,9 @@ module.exports = {
       toPath('/node_modules/angular-ui-validate/dist/validate.min.js'),
       'angular-messages':
       toPath('/node_modules/angular-messages/angular-messages.min.js'),
+      'angular-bindonce':
+      toPath('/node_modules/angular-bindonce/bindonce.min.js'),
+
       kefir: toPath('/node_modules/kefir/dist/kefir.min.js'),
       moment: toPath('/node_modules/moment/min/moment.min.js'),
       //      preact: toPath('/node_modules/preact/dist/preact.min.js'),

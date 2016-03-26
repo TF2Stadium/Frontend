@@ -58,6 +58,11 @@ require('./pages/about/section-faq.html');
 
 require('../scss/app.scss');
 
+/** @ngInject */
+function disableDebug($compileProvider) {
+  $compileProvider.debugInfoEnabled(false);
+}
+
 import { allowMumbleHref, safeApply } from './util';
 import { routeConfig } from './app.route';
 
@@ -73,8 +78,10 @@ angular.module('tf2stadium', [
   'ngMaterial',
   'md.data.table',
   require('./scrollglue').name,
+  'pasvaz.bindonce',
   'ngMedia'
 ])
+  .config(disableDebug)
   .factory('safeApply', safeApply)
   .config(routeConfig)
   .config(allowMumbleHref);

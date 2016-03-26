@@ -81,11 +81,4 @@ describe('Service: User', function () {
       expect(cb).to.be.calledWith(data);
     });
   });
-
-  describe('logout()', function () {
-    it('should navigate to logout url', function () {
-      User.logout();
-      expect(mock$window.open).to.be.calledOnce;
-    });
-  });
 });
