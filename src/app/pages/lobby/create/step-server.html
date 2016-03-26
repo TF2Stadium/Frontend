@@ -18,6 +18,15 @@
   <p ng-if="lobbyCreate.storedServers !== null"
      ng-bind-template="{{lobbyCreate.storedServers.length}} available"></p>
 </div>
+<div class="tile-form no-animate serveme-ad"
+     ng-show="lobbyCreate.serverState === 'stored'">
+  <p>
+    Want a TF2 server of your own? Buy
+    from <a href="https://www.tragicservers.com/link.php?id=28"
+    target="_blank">TragicServers</a> and use coupon
+    code <b>STADIUM</b> for 50% off your first month!
+  </p>
+</div>
 <div class="tile-form no-animate"
      ng-show="lobbyCreate.serverState === 'stored'">
   <ul class="rent-servers-list"
@@ -48,6 +57,14 @@
   <p ng-if="lobbyCreate.servemeServers !== null"
      ng-bind-template="{{lobbyCreate.servemeServers.servers.length}} available"></p>
 </div>
+<div class="tile-form no-animate serveme-ad"
+     ng-show="lobbyCreate.serverState === 'serveme'">
+  <p>
+    Donate to <a href="https://serveme.tf"
+    target="_blank">serveme.tf</a> to gain access to more of their
+    servers!
+  </p>
+</div>
 <div class="tile-form no-animate"
      ng-show="lobbyCreate.serverState === 'serveme'">
   <h2>Serveme.tf Servers:</h2>
@@ -70,13 +87,21 @@
   </p>
 </div>
 
-
 <div
    md-ink-ripple
    class="rent-server-form no-animate"
    ng-click="lobbyCreate.serverState='custom'"
    ng-show="!lobbyCreate.serverState">
   <h2>Use Your Own Server</h2>
+</div>
+<div class="tile-form no-animate serveme-ad"
+     ng-show="!lobbyCreate.serverState">
+  <p>
+    Want a TF2 server of your own? Buy
+    from <a href="https://www.tragicservers.com/link.php?id=28"
+    target="_blank">TragicServers</a> and use coupon
+    code <b>STADIUM</b> for 50% off your first month!
+  </p>
 </div>
 <div class="tile-form no-animate"
      ng-show="lobbyCreate.serverState==='custom'">
