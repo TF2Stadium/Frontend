@@ -15,7 +15,8 @@
   <md-progress-circular
      ng-if="lobbyCreate.storedServers === null"
      md-mode="indeterminate"></md-progress-circular>
-  <p ng-if="lobbyCreate.storedServers !== null">{{lobbyCreate.storedServers.length}} available</p>
+  <p ng-if="lobbyCreate.storedServers !== null"
+     ng-bind-template="{{lobbyCreate.storedServers.length}} available"></p>
 </div>
 <div class="tile-form no-animate"
      ng-show="lobbyCreate.serverState === 'stored'">
@@ -24,7 +25,8 @@
     <li ng-repeat="server in lobbyCreate.storedServers">
       <a href="#"
          ng-click="$event.preventDefault();lobbyCreate.rentStored(server.id)"
-         target="_blank">{{server.name}}</a>
+         target="_blank"
+         ng-bind="server.name"></a>
     </li>
   </ul>
   <p ng-if="lobbyCreate.storedServers.length === 0">
@@ -43,7 +45,8 @@
      md-ink-ripple
      ng-if="lobbyCreate.servemeServers === null"
      md-mode="indeterminate"></md-progress-circular>
-  <p ng-if="lobbyCreate.servemeServers !== null">{{lobbyCreate.servemeServers.servers.length}} available</p>
+  <p ng-if="lobbyCreate.servemeServers !== null"
+     ng-bind-template="{{lobbyCreate.servemeServers.servers.length}} available"></p>
 </div>
 <div class="tile-form no-animate"
      ng-show="lobbyCreate.serverState === 'serveme'">
@@ -58,7 +61,8 @@
              height="16"
              width="16"
              alt="{{server.flag}}"
-             title="{{server.flag}}" />{{server.name}}</a>
+             title="{{server.flag}}"/>
+        <span ng-bind="server.name"></span></a>
     </li>
   </ul>
   <p ng-if="lobbyCreate.servemeServers.servers.length === 0">
@@ -88,7 +92,8 @@
          ng-change="lobbyCreate.loadSavedServer(selectedServer)">
         <md-option
            ng-repeat="(name, _) in lobbyCreate.savedServers"
-           ng-value="name">{{name}}</md-option>
+           ng-value="name"
+           ng-bind="name"></md-option>
       </md-select>
     </md-input-container>
 
@@ -140,7 +145,7 @@
 <div class="server-verify-message"
      ng-if="lobbyCreate.verifyServerError">
   <md-icon md-svg-icon="material:error-red"></md-icon>
-  <span>{{lobbyCreate.verifyServerErrorMessage}}</span>
+  <span ng-bind="lobbyCreate.verifyServerErrorMessage"></span>
 </div>
 
 <div class="server-verify-message"

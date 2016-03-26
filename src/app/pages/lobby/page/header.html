@@ -27,28 +27,24 @@
       </div>
       <div class="left">
         <span class="lobbypage-rules">
-          <span>
-            {{header.lobbyInformation.type}}
-          </span>
+          <span ng-bind="header.lobbyInformation.type"></span>
           <span>
             ,&nbsp;whitelist&nbsp;<whitelist id="header.lobbyInformation.whitelistId" />
           </span>
-          <span>
-            , {{header.lobbyInformation.league | uppercase}} rules
-          </span>
+          <span ng-bind-template=", {{header.lobbyInformation.league | uppercase}} rules"></span>
         </span>
-        <span class="lobbypage-leader">Leader: {{header.lobbyInformation.leader.name}}</span>
+        <span class="lobbypage-leader"
+              ng-bind-template="Leader: {{header.lobbyInformation.leader.name}}"></span>
       </div>
       <div class="right">
-        <span class="lobbypage-mumble">Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required</span>
-        <span class="lobbypage-region">{{header.lobbyInformation.region.name}}</span>
+        <span class="lobbypage-mumble"
+              ng-bind-template="Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required"></span>
+        <span class="lobbypage-region" ng-bind="header.lobbyInformation.region.name"></span>
         <span ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">Private lobby</span>
       </div>
     </div>
   </div>
 </div>
-<div ng-if="header.shouldShowError()">
-  asdfasdf
-</div>
+<div ng-if="header.shouldShowError()"></div>
 <md-progress-linear md-mode="indeterminate"
                     ng-if="header.shouldShowProgress()"></md-progress-linear>

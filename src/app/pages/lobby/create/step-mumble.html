@@ -1,12 +1,19 @@
-<md-grid-tile md-ink-ripple class="tile-card tile-card-mumble"
-  md-colspan="6"  md-rowspan="4"
-  ng-repeat="option in lobbyCreate.mumble.options"
-  ng-click="lobbyCreate.select(lobbyCreate.mumble, option)"
-  ng-class="{'no-animate': !lobbyCreate.searchString, 'selected': lobbyCreate.isSelected(lobbyCreate.mumble, option)}">
+<md-grid-tile
+   md-ink-ripple
+   class="tile-card tile-card-mumble"
+
+   md-colspan="6"
+   md-rowspan="4"
+
+   bindonce
+   ng-repeat="option in lobbyCreate.mumble.options"
+
+   ng-click="lobbyCreate.select(lobbyCreate.mumble, option)"
+   ng-class="{'no-animate': !lobbyCreate.searchString, 'selected': lobbyCreate.isSelected(lobbyCreate.mumble, option)}">
   <div class="circle"></div>
   <div class="tile-text">
-  	<img ng-src="{{option.value ? '/assets/img/mumble.svg' : '/assets/img/not-mumble.svg'}}">
-    <span>{{::option.title}}</span>
-    <span>{{::option.description}}</span>
+  	<img bo-src="option.value ? '/assets/img/mumble.svg' : '/assets/img/not-mumble.svg'">
+    <span bo-bind="option.title"></span>
+    <span bo-bind="option.description"></span>
   </div>
 </md-grid-tile>

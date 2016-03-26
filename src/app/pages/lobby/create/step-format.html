@@ -1,5 +1,6 @@
 <md-grid-tile
    md-ink-ripple
+   bindonce
    class="tile-card"
 
    ng-repeat="format in lobbyCreate.formats.options | LobbyCreateOptionFilter:'formats':lobbyCreate.searchString | orderBy:'title'"
@@ -13,13 +14,13 @@
 
    ng-class="{'no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.formats, format)}">
   <div class="tile-image"
-       ng-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg),
+       bo-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg),
                  linear-gradient(
                  to top,
                  rgba(0, 0, 0, .2) 0%,
                  rgba(0, 0, 0, .6) 80px
                  )'}"></div>
   <div class="tile-text">
-    <span class="title">{{::format.title}}</span>
+    <span class="title" bo-bind="format.title"></span>
   </div>
 </md-grid-tile>

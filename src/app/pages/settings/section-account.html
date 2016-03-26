@@ -22,7 +22,7 @@
   <h1>Account</h1>
   <md-button
      class="md-raised md-primary"
-     ng-click="settings.logout()">
+     ng-href="{{::config.endpoints.api}}/logout">
     Logout
   </md-button>
 </div>
@@ -34,7 +34,7 @@
   <md-button
      ng-if="$root.userProfile.twitchName"
      class="md-raised md-primary"
-     ng-click="settings.twitchLogout()">
+     ng-href="{{::config.endpoints.api}}/twitchLogout">
     Disconnect Twitch
   </md-button>
 

@@ -87,8 +87,7 @@
                      ng-href="{{::config.endpoints.api}}/startLogin"
                      style="display:none"
                      ng-class="{'visible' : $root.themeLoaded && !$root.backendAuthenticated}"
-                     ng-bind="'Login'">
-          </md-button>
+                     >Login</md-button>
         </div>
       </div>
       <!--[if lt IE 10]>
@@ -120,7 +119,7 @@
               </md-button>
 
               <md-button ng-if="$root.userProfile.role === 'administrator'"
-                         ng-href="{{config.endpoints.api}}/admin"
+                         ng-href="{{::config.endpoints.api}}/admin"
                          target="_blank">
                 Admin
               </md-button>
@@ -128,15 +127,16 @@
               <md-button
                  class="player-button"
                  ng-if="$root.userProfile.steamid"
-                 ui-sref="user-profile({userID: $root.userProfile.steamid})">
-                {{$root.userProfile.name}}
-                <img ng-src="{{::$root.userProfile.avatar}}"
+                 ui-sref="user-profile({userID: $root.userProfile.steamid})"
+                 aria-label="Your Profile">
+                <span ng-bind="$root.userProfile.name"></span>
+                <img ng-src="{{$root.userProfile.avatar}}"
                      width="32"
                      height="32"
                      alt="Your steam avatar" />
               </md-button>
               <md-button ng-if="!$root.userProfile.steamid"
-                         ng-href="{{config.endpoints.api}}/startLogin"
+                         ng-href="{{::config.endpoints.api}}/startLogin"
                          class="steam-login">
                 Login
               </md-button>
@@ -146,7 +146,7 @@
         <div id="current-lobby-info" ng-controller="CurrentLobbyController as vm">
           <div class="current-lobby" ng-if="vm.visible">
             <span>Your lobby has</span>
-            <span>{{vm.lobbyInformation.players}}/{{vm.lobbyInformation.maxPlayers}} players</span>
+            <span ng-bind-template="{{vm.lobbyInformation.players}}/{{::vm.lobbyInformation.maxPlayers}} players"></span>
             <md-button ui-sref="lobby-page({lobbyID: vm.lobbyInformation.id})">Go back</md-button>
           </div>
         </div>
