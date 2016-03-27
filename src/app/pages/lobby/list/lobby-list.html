@@ -96,8 +96,11 @@
           {{::lobbyInformation.region.code}}
           <md-tooltip md-direction="bottom">Server located in {{::lobbyInformation.region.name}}</md-tooltip>
         </span>
-        <span class="lobby-league">
-          {{::lobbyInformation.league}}
+        <span
+           bindonce="lobbyInformation"
+           class="lobby-league"
+           bo-style="lobbyInformation.league.length > 6 ? {'font-size': 'small'}:{}">
+          <span bo-bind="lobbyInformation.league"></span>
           <md-tooltip md-direction="bottom">{{::lobbyInformation.league | uppercase}} rules and whitelist</md-tooltip>
         </span>
       </div>
