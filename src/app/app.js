@@ -98,6 +98,8 @@ angular.module('tf2stadium')
   .constant('Config', require('app-config'));
 
 angular.module('tf2stadium.controllers', []);
+angular.module('tf2stadium.filters', []);
+angular.module('tf2stadium.services', []);
 
 require('./shared/comment-box/comment-box.controller');
 require('./shared/notifications/ready-up.controller');
@@ -116,9 +118,6 @@ require('./pages/lobby/list/sub-list.controller');
 require('./pages/user-profile/user-profile.controller');
 require('./pages/about/about.controller');
 
-angular.module('tf2stadium.filters', []);
-
-angular.module('tf2stadium.services', []);
 require('./app.notifications');
 require('./shared/websocket.factory');
 require('./shared/user.factory');
