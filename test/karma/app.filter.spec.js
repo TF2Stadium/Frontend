@@ -96,7 +96,7 @@ describe('Filters', function () {
       [60, '1:00', 'convert seconds to minutes and 0-pad only the seconds'],
       [600, '10:00', 'only 0-pad 2 digits'],
       [6000, '100:00', 'handle >99 minutes 99 seconds'],
-      [12, '0:12', 'handle less than 1 minute']
+      [12, '0:12', 'handle less than 1 minute'],
     ].forEach(function (description) {
       var input = description[0];
       var expectedOutput = description[1];
@@ -120,7 +120,7 @@ describe('Filters', function () {
        'remove duplicate elements and leave the rest in order'],
 
       [[{a: 1}, {a: 2}, {a: 3}], 'a', [{a: 1}, {a: 2}, {a: 3}],
-       'do nothing if no elements are duplicate']
+       'do nothing if no elements are duplicate'],
     ].forEach(function (description) {
       var input = description[0];
       var inputKey = description[1];

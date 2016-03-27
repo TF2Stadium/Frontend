@@ -7,7 +7,7 @@
   "version": "0.7.0",
   "scripts": {
     "start": "webpack-dev-server",
-    "build": "webpack -p",
+    "build": "cross-env NODE_ENV=production webpack -p",
     "build-dev": "webpack",
     "clean": "rimraf dist",
     "lint": "eslint src test",

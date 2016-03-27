@@ -66,14 +66,14 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
 
   vm.saveServer = function (name) {
     vm.savedServers[name] = {
-      url: vm.lobbySettings.server // ,
+      url: vm.lobbySettings.server,
       // password: vm.lobbySettings.rconpwd
     };
 
     Settings.set('savedServers', angular.toJson(vm.savedServers), function () {
       Notifications.toast({
         message: 'Server saved.',
-        hideDelay: 3000
+        hideDelay: 3000,
       });
     });
   };
@@ -127,8 +127,8 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
       serveme: {
         startsAt: startTime,
         endsAt: endTime,
-        server: server
-      }
+        server: server,
+      },
     });
 
     vm.verifiedServer = true;
@@ -142,7 +142,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   vm.rentStored = function rentStored(id) {
     var settings = angular.extend({}, vm.lobbySettings, {
       serverType: 'storedServer',
-      server: id+''
+      server: id + '',
     });
 
     vm.verifiedServer = true;
@@ -205,7 +205,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     'fr': '/assets/img/emotes/emojione/1f1eb-1f1f7.png',
     'de': '/assets/img/emotes/emojione/1f1e9-1f1ea.png',
     'nl': '/assets/img/emotes/emojione/1f1f3-1f1f1.png',
-    'us': '/assets/img/emotes/emojione/1f1fa-1f1f8.png'
+    'us': '/assets/img/emotes/emojione/1f1fa-1f1f8.png',
   };
 
   $scope.$on('$destroy', $rootScope.$on('$stateChangeSuccess', function () {

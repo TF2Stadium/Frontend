@@ -5,15 +5,15 @@ angular.module('tf2stadium')
 function ThemeConfig($mdThemingProvider) {
 
   var darkBlueMap = $mdThemingProvider.extendPalette('light-blue', {
-    '500': '4b9cd4'
+    '500': '4b9cd4',
   });
 
   var lightBlueMap = $mdThemingProvider.extendPalette('light-blue', {
-    '500': '99ccff'
+    '500': '99ccff',
   });
 
   var lightRedMap = $mdThemingProvider.extendPalette('red', {
-    '500': 'ff9999'
+    '500': 'ff9999',
   });
 
   $mdThemingProvider.definePalette('darkBluePalette', darkBlueMap);

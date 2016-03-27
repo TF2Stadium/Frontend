@@ -14,17 +14,17 @@ describe('Service: User', function () {
       }),
       emitJSON: sinon.spy(function (name, data, callback) {
         emitJSONCallbacks.push(callback);
-      })
+      }),
     };
 
     mock$window = sinon.stub({
-      open: function () {}
+      open: function () {},
     });
 
     mockConfig = {
       endpoints: {
-        'api': ''
-      }
+        'api': '',
+      },
     };
 
     angular.mock.module('tf2stadium.services', function ($provide) {
@@ -73,7 +73,7 @@ describe('Service: User', function () {
       var data = {a: 1, b: 2};
       var response = {
         success: true,
-        data: data
+        data,
       };
       emitJSONCallbacks[0](response);
 

@@ -10,9 +10,9 @@ function RulesPageConfig($stateProvider, RulesPageProvider) {
       parent: 'rules',
       views: {
         'rules-section': {
-          templateUrl: 'app/pages/rules/section-' + section + '.html'
-        }
-      }
+          templateUrl: 'app/pages/rules/section-' + section + '.html',
+        },
+      },
     });
   });
 }
@@ -22,8 +22,8 @@ function RulesPage() {
   var rulesPageProvider = {
     sections: [
       'rules',
-      'punishments'
-    ]
+      'punishments',
+    ],
   };
 
   /** @ngInject */

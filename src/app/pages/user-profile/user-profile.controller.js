@@ -37,7 +37,7 @@ function UserProfileController($state, User) {
          name: 'BasketBall'},
         {key: 'PlayedUltiduoCount',
          abbr: 'Ulti',
-         name: 'Ultiduo'}
+         name: 'Ultiduo'},
       ].map(function (o) {
         o.cnt = vm.profile.stats[o.key];
         return o;
@@ -52,11 +52,11 @@ function UserProfileController($state, User) {
         'engineer',
         'medic',
         'sniper',
-        'spy'
+        'spy',
       ].map(function (className) {
         return {
           name: className,
-          cnt: vm.profile.stats[className] || 0
+          cnt: vm.profile.stats[className] || 0,
         };
       });
 
@@ -75,8 +75,8 @@ function UserProfileController($state, User) {
           description: 'European TF2 League' },
         { name: 'twitch',
           img: '/assets/img/logos/twitch-glitch.png',
-          description: 'Twitch'
-        }
+          description: 'Twitch',
+        },
       ].filter(function (l) {
         return vm.profile.external_links &&
           vm.profile.external_links.hasOwnProperty(l.name);

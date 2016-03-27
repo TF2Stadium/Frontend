@@ -281,16 +281,13 @@ function ChatService($rootScope, $sce, $log, $http, $q,
   };
 
   factory.send = function (message, room) {
-    Websocket.emitJSON('chatSend', {
-      message: message,
-      room: room
-    });
+    Websocket.emitJSON('chatSend', { message, room });
   };
 
   factory.deleteMessage = function (messageID, room) {
     var payload = {
       'id': messageID,
-      'room': room
+      'room': room,
     };
 
     Websocket.emitJSON('chatDelete', payload);

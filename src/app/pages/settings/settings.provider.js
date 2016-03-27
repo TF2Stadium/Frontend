@@ -13,7 +13,7 @@ function SettingsPageConfig($stateProvider, SettingsPageProvider) {
     'filters',
     'sound',
     'servers',
-    'account'
+    'account',
   ];
 
   for (var settingSectionKey in SettingsPageProvider.sections) {
@@ -23,9 +23,9 @@ function SettingsPageConfig($stateProvider, SettingsPageProvider) {
       parent: 'settings',
       views: {
         'setting-section': {
-          templateUrl: 'app/pages/settings/section-' + settingSection + '.html'
-        }
-      }
+          templateUrl: 'app/pages/settings/section-' + settingSection + '.html',
+        },
+      },
     });
   }
 }
@@ -43,16 +43,16 @@ function SettingsPage() {
       theme: {
         theme: Settings.getConstants('themesList'),
         animationOptions: Settings.getConstants('animationOptions'),
-        videoBackground: Settings.getConstants('videoBackground')
+        videoBackground: Settings.getConstants('videoBackground'),
       },
       chat: {
         emotes: Settings.getConstants('emoteStyle'),
-        timestamps: Settings.getConstants('timestampOptions')
+        timestamps: Settings.getConstants('timestampOptions'),
       },
       filters: Settings.getConstants('filters'),
       sound: Settings.getConstants('sound'),
       servers: null,
-      account: null
+      account: null,
     };
 
     settingsPageService.getSections = () => settingsPageProvider.sections;

@@ -7,14 +7,14 @@ export function routeConfig($stateProvider, $urlRouterProvider, $locationProvide
         'content': {
           templateUrl: 'app/pages/lobby/list/lobby-list.html',
           controller: 'LobbyListController',
-          controllerAs: 'lobbyList'
+          controllerAs: 'lobbyList',
         },
         'headerInfo': {
           templateUrl: 'app/pages/lobby/list/header.html',
           controller: 'LobbyListHeaderController',
-          controllerAs: 'header'
-        }
-      }
+          controllerAs: 'header',
+        },
+      },
     })
     .state('lobby-create', {
       url: '/create',
@@ -22,19 +22,19 @@ export function routeConfig($stateProvider, $urlRouterProvider, $locationProvide
         'content': {
           templateUrl: 'app/pages/lobby/create/lobby-create.html',
           controller: 'LobbyCreateController',
-          controllerAs: 'lobbyCreate'
+          controllerAs: 'lobbyCreate',
         },
         'headerInfo': {
           templateUrl: 'app/pages/lobby/create/header.html',
           controller: 'LobbyCreateHeaderController',
-          controllerAs: 'header'
+          controllerAs: 'header',
         },
         'leftSidebar': {
           templateUrl: 'app/pages/lobby/create/lobby-create-steps.html',
           controller: 'WizardStepsController',
-          controllerAs: 'wizardSteps'
-        }
-      }
+          controllerAs: 'wizardSteps',
+        },
+      },
     })
     .state('lobby-page', {
       url: '/lobby/{lobbyID}',
@@ -42,19 +42,19 @@ export function routeConfig($stateProvider, $urlRouterProvider, $locationProvide
         'content': {
           templateUrl: 'app/pages/lobby/page/lobby-page.html',
           controller: 'LobbyPageController',
-          controllerAs: 'lobbyPage'
+          controllerAs: 'lobbyPage',
         },
         'headerInfo': {
           templateUrl: 'app/pages/lobby/page/header.html',
           controller: 'LobbyPageHeaderController',
-          controllerAs: 'header'
+          controllerAs: 'header',
         },
         'leftSidebar': {
           templateUrl: 'app/pages/lobby/page/spectators.html',
           controller: 'LobbyPageSpectatorsController',
-          controllerAs: 'spectators'
-        }
-      }
+          controllerAs: 'spectators',
+        },
+      },
     })
     .state('user-profile', {
       url: '/user/{userID}',
@@ -62,9 +62,9 @@ export function routeConfig($stateProvider, $urlRouterProvider, $locationProvide
         'content': {
           templateUrl: 'app/pages/user-profile/user-profile.html',
           controller: 'UserProfileController',
-          controllerAs: 'userProfile'
-        }
-      }
+          controllerAs: 'userProfile',
+        },
+      },
     })
     .state('settings', {
       url: '/settings',
@@ -73,14 +73,14 @@ export function routeConfig($stateProvider, $urlRouterProvider, $locationProvide
         'content': {
           templateUrl: 'app/pages/settings/settings.html',
           controller: 'SettingsPageController',
-          controllerAs: 'settings'
+          controllerAs: 'settings',
         },
         'leftSidebar': {
           templateUrl: 'app/pages/settings/settings-sidebar.html',
           controller: 'SettingsPageController',
-          controllerAs: 'settings'
-        }
-      }
+          controllerAs: 'settings',
+        },
+      },
     })
     .state('about', {
       url: '/about',
@@ -89,14 +89,14 @@ export function routeConfig($stateProvider, $urlRouterProvider, $locationProvide
         'content': {
           templateUrl: 'app/pages/about/about.html',
           controller: 'AboutPageController',
-          controllerAs: 'about'
+          controllerAs: 'about',
         },
         'leftSidebar': {
           templateUrl: 'app/pages/about/about-sidebar.html',
           controller: 'AboutPageController',
-          controllerAs: 'about'
-        }
-      }
+          controllerAs: 'about',
+        },
+      },
     })
     .state('rules', {
       url: '/rules',
@@ -105,14 +105,14 @@ export function routeConfig($stateProvider, $urlRouterProvider, $locationProvide
         'content': {
           templateUrl: 'app/pages/rules/rules.html',
           controller: 'RulesPageController',
-          controllerAs: 'rules'
+          controllerAs: 'rules',
         },
         'leftSidebar': {
           templateUrl: 'app/pages/rules/rules-sidebar.html',
           controller: 'RulesPageController',
-          controllerAs: 'rules'
-        }
-      }
+          controllerAs: 'rules',
+        },
+      },
     });
 
   $urlRouterProvider.otherwise('/');

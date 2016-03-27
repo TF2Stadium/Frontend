@@ -11,8 +11,8 @@ describe('Service: Websocket', function () {
   var mockConfig = {
     'endpoints': {
       'websocket': 'ws://api.tf2stadium.gcommer.com/websocket/',
-      'api': 'http://api.tf2stadium.gcommer.com'
-    }
+      'api': 'http://api.tf2stadium.gcommer.com',
+    },
   };
 
   var stubSocket;
@@ -20,13 +20,13 @@ describe('Service: Websocket', function () {
 
   beforeEach(function () {
     mockNotifications = sinon.stub({
-      toast: function () {}
+      toast: function () {},
     });
 
     mockConnection = sinon.stub({
       connect: function () {},
       On: function () {},
-      Emit: function () {}
+      Emit: function () {},
     });
 
     stubSocket = sinon.spy(function () {
@@ -95,7 +95,7 @@ describe('Service: Websocket', function () {
     it('should be made when the socket closes', function () {
       expect(mockNotifications.toast).to.have.been.calledOnce;
       expect(mockNotifications.toast).to.have.been.calledWithMatch({
-        error: true
+        error: true,
       });
     });
 
@@ -149,7 +149,7 @@ describe('Service: Websocket', function () {
       expect(mockConnection.Emit).to.be.calledOnce;
       expect(mockConnection.Emit).to.be.calledWithMatch({
         test: 'test',
-        request: testName
+        request: testName,
       });
     });
 
@@ -163,7 +163,7 @@ describe('Service: Websocket', function () {
       expect(mockConnection.Emit).to.be.calledOnce;
       expect(mockConnection.Emit).to.be.calledWithMatch({
         test: 'test',
-        request: testName
+        request: testName,
       });
 
       var msg = {success: false, message: 'abc'};

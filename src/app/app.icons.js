@@ -15,13 +15,13 @@ var materialIcons = [
   {name: 'search', file: 'search.svg'},
   {name: 'check-blue', file: 'check-blue.svg'},
   {name: 'lock-closed', file: 'lock-closed.svg'},
-  {name: 'settings', file: 'settings.svg'}
+  {name: 'settings', file: 'settings.svg'},
 ];
 
 var logosBase = '/assets/img/logos/';
 var logoIcons = [
   {name: 'twitch', file: 'twitch.svg'},
-  {name: 'steam', file: 'steam.svg'}
+  {name: 'steam', file: 'steam.svg'},
 ];
 
 var classesBase = '/assets/img/icons/class/';
@@ -34,7 +34,7 @@ var classes = [
   'engineer',
   'medic',
   'sniper',
-  'spy'
+  'spy',
 ];
 
 /** @ngInject */

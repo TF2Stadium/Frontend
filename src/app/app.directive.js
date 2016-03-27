@@ -3,12 +3,12 @@ export function WhitelistDirective() {
   return {
     restrict: 'E',
     scope: {
-      whitelistId: '=id'
+      whitelistId: '=id',
     },
     template: '{{whitelistId | ifNumeric:"#"}}'
       + '<a target="_blank" href="http://whitelist.tf/{{whitelistId}}">'
       + '{{whitelistId}}'
-      + '</a>'
+      + '</a>',
   };
 }
 
@@ -22,6 +22,6 @@ export function AutofocusDirective($timeout) {
       $timeout(function () {
         element.focus();
       });
-    }
+    },
   };
 }

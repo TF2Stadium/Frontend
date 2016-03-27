@@ -141,7 +141,7 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
       actionMessage: 'Go back',
       action: function () {
         factory.goToLobby(factory.lobbyJoinedId);
-      }
+      },
     });
 
     Settings.getSettings(function (settings) {
@@ -152,10 +152,8 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
         soundVolume: settings.soundVolume * 0.01,
         timeout: 5,
         callbacks: {
-          onclick: function () {
-            $window.focus();
-          }
-        }
+          onclick: () => $window.focus(),
+        },
       });
     });
   });
@@ -168,7 +166,7 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
     if (!lobbyDataCache[id]) {
       lobbyDataCache[id] = {
         data: false,
-        listeners: []
+        listeners: [],
       };
     }
 
@@ -285,7 +283,7 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
   factory.kick = function (lobbyID, steamID) {
     var payload = {
       'id': lobbyID,
-      'steamid': steamID
+      'steamid': steamID,
     };
 
     Websocket.emitJSON('lobbyKick', payload, function (response) {
@@ -298,7 +296,7 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
   factory.ban = function (lobbyID, steamID) {
     var payload = {
       'id': lobbyID,
-      'steamid': steamID
+      'steamid': steamID,
     };
 
     Websocket.emitJSON('lobbyBan', payload, function (response) {
@@ -313,16 +311,14 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
       'id': lobbyID,
       'team': team,
       'class': position,
-      'password': password
+      'password': password,
     };
 
     Websocket.emitJSON('lobbyJoin', payload);
   };
 
   factory.leaveSlot = function (lobbyID) {
-    var payload = {
-      'id': lobbyID
-    };
+    var payload = { 'id': lobbyID };
 
     Websocket.emitJSON('lobbyLeave', payload);
   };
@@ -375,14 +371,14 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
       id: lobbyId,
       slot: slotId,
       type: reqName,
-      value: val || 0
+      value: val || 0,
     });
   };
 
   Websocket.onJSON('lobbyReadyUp', function (data) {
     var eventData = {
       startTime: Date.now(),
-      timeout: data.timeout
+      timeout: data.timeout,
     };
 
     $rootScope.$emit('lobby-ready-up', eventData);
@@ -397,7 +393,7 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
       controller: 'ReadyUpDialogController',
       controllerAs: 'dialog',
       locals: eventData,
-      bindToController: true
+      bindToController: true,
     }).then(function (response) {
       if (response.readyUp) {
         Websocket.emitJSON('playerReady', {});
@@ -417,10 +413,8 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
         soundVolume: settings.soundVolume * 0.01,
         timeout: data.timeout,
         callbacks: {
-          onclick: function () {
-            $window.focus();
-          }
-        }
+          onclick: () => $window.focus(),
+        },
       });
     });
   });
