@@ -140,6 +140,14 @@ function Websocket($rootScope, $timeout, $log, $q,
       wrappedCallback(data);
     });
   };
+  factory.on = factory.onJSON.bind(factory);
+
+  factory.off = function () {
+    // During transition to kefir this may be theoretically needed,
+    // but currently none of our uses of Kefir fromEvent streams are
+    // expected to actually call this.
+    console.log('NOT IMPLEMENTED');
+  };
 
   factory.emitJSON = function (name, data, callback) {
     var deferred = $q.defer();

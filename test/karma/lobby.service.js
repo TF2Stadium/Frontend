@@ -12,6 +12,10 @@ describe('Service: LobbyService', function () {
       onJSON: sinon.spy(function (eventName, cb) {
         callbacks[eventName] = cb;
       }),
+      on: sinon.spy(function (eventName, cb) {
+        callbacks[eventName] = cb;
+      }),
+      off: function() {},
       emitJSON: sinon.spy(function () {
       })
     };
