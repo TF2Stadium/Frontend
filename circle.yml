@@ -8,7 +8,7 @@ dependencies:
     - docker info
     - npm install
     - npm rebuild node-sass
-    - npm ls
+    - npm ls || true
 test:
   override:
     - npm run lint
