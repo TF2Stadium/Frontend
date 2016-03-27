@@ -162,18 +162,18 @@ module.exports = {
     filename: 'app.js',
   },
 
-	module: {
-		loaders: [{
-			test: /\.js$/,
-			exclude: /(moment|node_modules|bower_components|lib|angular|angular-material)/,
-			loaders: [
+  module: {
+    loaders: [{
+      test: /\.js$/,
+      exclude: /(moment|node_modules|bower_components|lib|angular|angular-material)/,
+      loaders: [
         'ng-annotate',
-        'babel?' + JSON.stringify(babelSettings)
-      ]
-		}, {
-			test: /\.json$/,
-			loader: 'json'
-		}, {
+        'babel?' + JSON.stringify(babelSettings),
+      ],
+    }, {
+      test: /\.json$/,
+      loader: 'json',
+    }, {
       test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
       loader: 'file?name=[path][name].[ext]',
     }, {
