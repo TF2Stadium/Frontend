@@ -239,11 +239,7 @@ module.exports = {
         /^angular$/,
       toPath('/lib/angular-min.js')
     ),
-    new webpack.NormalModuleReplacementPlugin(
-        /^angular$/,
-      toPath('/node_modules/preact-compat/dist/preact-compat.js')
-    )
-	],
+  ],
 
   devServer: {
     historyApiFallback: true,
