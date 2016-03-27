@@ -1,23 +1,25 @@
 angular.module('tf2stadium.filters')
-  .filter('capitalize', capitalize)
+  .filter('capitalize', capitalize_AngularWrapper)
   .filter('numberOrDash', numberOrDash)
-  .filter('reverse', reverse)
+  .filter('reverse', reverse_AngularWrapper)
   .filter('trusted', trusted)
-  .filter('stripSlotNameNumber', stripSlotNameNumber)
-  .filter('slotNameToClassName', slotNameToClassName)
+  .filter('stripSlotNameNumber', stripSlotNameNumber_AngularWrapper)
+  .filter('slotNameToClassName', slotNameToClassName_AngularWrapper)
   .filter('ifNumeric', ifNumeric)
-  .filter('secondsToMinutes', secondsToMinutes)
+  .filter('secondsToMinutes', secondsToMinutes_AngularWrapper)
   .filter('unique', unique)
   .filter('greaterThan', greaterThan);
 
+export function capitalize(input) {
+  if (angular.isUndefined(input) || input === '') {
+    return input;
+  }
+  return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
+}
+
 /** @ngInject */
-function capitalize() {
-  return function (input) {
-    if (angular.isUndefined(input) || input === '') {
-      return input;
-    }
-    return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
-  };
+function capitalize_AngularWrapper() {
+  return capitalize;
 }
 
 /** @ngInject */
@@ -36,11 +38,13 @@ function numberOrDash($filter) {
   };
 }
 
+function reverse(items) {
+  return items.slice().reverse();
+}
+
 /** @ngInject */
-function reverse() {
-  return function (items) {
-    return items.slice().reverse();
-  };
+function reverse_AngularWrapper() {
+  return reverse;
 }
 
 /** @ngInject */
@@ -50,32 +54,34 @@ function trusted($sce) {
   };
 }
 
-/** @ngInject */
-function stripSlotNameNumber() {
-  return function (slotName) {
-    return slotName.replace(/\d+$/, '');
-  };
+export function stripSlotNameNumber(slotName) {
+  return slotName.replace(/\d+$/, '');
 }
 
 /** @ngInject */
-function slotNameToClassName() {
-  var classSynonyms = {
-    roamer: 'soldier',
-    pocket: 'soldier'
-  };
+function stripSlotNameNumber_AngularWrapper() {
+  return stripSlotNameNumber;
+}
 
-  var stripNumberFilter = stripSlotNameNumber();
+var classSynonyms = {
+  roamer: 'soldier',
+  pocket: 'soldier',
+};
 
-  return function (slotName) {
-    slotName = stripNumberFilter(slotName);
+export function slotNameToClassName(slotName) {
+  slotName = stripSlotNameNumber(slotName);
 
-    var className = slotName;
-    if (classSynonyms.hasOwnProperty(slotName)) {
-      className = classSynonyms[slotName];
-    }
+  var className = slotName;
+  if (classSynonyms.hasOwnProperty(slotName)) {
+    className = classSynonyms[slotName];
+  }
 
-    return className;
-  };
+  return className;
+}
+
+/** @ngInject */
+function slotNameToClassName_AngularWrapper() {
+  return slotNameToClassName;
 }
 
 /** @ngInject */
@@ -91,14 +97,16 @@ function ifNumeric() {
   };
 }
 
+export function secondsToMinutes(seconds) {
+  var minutes = Math.floor(seconds / 60);
+  seconds = seconds % 60;
+  seconds = seconds < 10 ? '0' + seconds : seconds;
+  return minutes + ':' + seconds;
+}
+
 /** @ngInject */
-function secondsToMinutes() {
-  return function (seconds) {
-    var minutes = Math.floor(seconds / 60);
-    seconds = seconds % 60;
-    seconds = seconds < 10 ? '0' + seconds : seconds;
-    return minutes + ':' + seconds;
-  };
+function secondsToMinutes_AngularWrapper() {
+  return secondsToMinutes;
 }
 
 /** @ngInject */
