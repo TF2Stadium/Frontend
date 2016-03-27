@@ -10,9 +10,9 @@ function AboutPageConfig($stateProvider, AboutPageProvider) {
       parent: 'about',
       views: {
         'about-section': {
-          templateUrl: 'app/pages/about/section-' + section + '.html'
-        }
-      }
+          templateUrl: 'app/pages/about/section-' + section + '.html',
+        },
+      },
     });
   });
 }
@@ -25,8 +25,8 @@ function AboutPage() {
       'faq',
       'privacy',
       'servers',
-      'credits'
-    ]
+      'credits',
+    ],
   };
 
   /** @ngInject */

@@ -7,7 +7,7 @@ angular.module('tf2stadium.directives')
 function VideoBackgroundDirective($rootScope, Settings) {
   var focused = Kefir.merge([
     Kefir.fromEvents(window, 'focus').map(function () { return true; }),
-    Kefir.fromEvents(window, 'blur').map(function () { return false; })
+    Kefir.fromEvents(window, 'blur').map(function () { return false; }),
   ]);
 
   return {
@@ -52,6 +52,6 @@ function VideoBackgroundDirective($rootScope, Settings) {
 
       var handler = $rootScope.$on('settings-updated', syncSettings);
       scope.$on('$destroy', handler);
-    }
+    },
   };
 }

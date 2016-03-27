@@ -13,20 +13,20 @@ function SettingsConfigBlock(SettingsProvider) {
       as:             {name: 'Asia'},
       oc:             {name: 'Oceania'},
       ru:             {name: 'Russia'},
-      af:             {name: 'Africa'}
+      af:             {name: 'Africa'},
     },
     formats: {
       '6s':           {name: '6s'},
       Highlander:     {name: 'Highlander'},
       '4v4':          {name: '4v4'},
       Bball:          {name: 'Bball'},
-      Ultiduo:        {name: 'Ultiduo'}
+      Ultiduo:        {name: 'Ultiduo'},
     },
     gamemodes: {
       cp:             {name: 'Control Points'},
       pl:             {name: 'Payload'},
       koth:           {name: 'King of the hill'},
-      otherGamemodes: {name: 'Other gamemodes'}
+      otherGamemodes: {name: 'Other gamemodes'},
     },
     classes: {
       scout:          {name: 'Scout' },
@@ -37,43 +37,43 @@ function SettingsConfigBlock(SettingsProvider) {
       engineer:       {name: 'Engineer' },
       medic:          {name: 'Medic' },
       sniper:         {name: 'Sniper' },
-      spy:            {name: 'Spy' }
+      spy:            {name: 'Spy' },
     },
     misc: {
-      mumbleRequired: {name: 'Mumble required'}
-    }
+      mumbleRequired: {name: 'Mumble required'},
+    },
   };
 
   SettingsProvider.constants.themesList = {
     light:    {name: 'TF2Stadium', selector: 'default-theme'},
-    dark:     {name: 'TF2Stadium Dark', selector: 'dark-theme'}
+    dark:     {name: 'TF2Stadium Dark', selector: 'dark-theme'},
   };
 
   SettingsProvider.constants.videoBackground = {
     on:    {name: 'On',     value: 'on'},
-    off:   {name: 'Off',    value: 'off'}
+    off:   {name: 'Off',    value: 'off'},
   };
 
   SettingsProvider.constants.animationOptions = {
     slow:     {name: 'Slow',      selector: 'animation-slow'},
     normal:   {name: 'Normal',    selector: 'animation-normal'},
     fast:     {name: 'Fast',      selector: 'animation-fast'},
-    none:     {name: 'None',      selector: 'animation-none'}
+    none:     {name: 'None',      selector: 'animation-none'},
   };
 
   SettingsProvider.constants.timestampOptions = {
     hours12:  {name: '12-hour'},
     hours24:  {name: '24-hour'},
-    none:     {name: 'None'}
+    none:     {name: 'None'},
   };
 
   SettingsProvider.constants.emoteStyle = {
     emojione: {name: 'EmojiOne'},
-    none:     {name: 'None'}
+    none:     {name: 'None'},
   };
 
   SettingsProvider.constants.sound = {
-    soundVolume: {name: 'Notifications volume'}
+    soundVolume: {name: 'Notifications volume'},
   };
 
   function setDefaultValues() {

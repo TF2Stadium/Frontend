@@ -18,7 +18,7 @@ describe('Controller: CommentBoxController', function () {
 
     mockChatService = sinon.stub({
       getRooms: function () {},
-      send: function () {}
+      send: function () {},
     });
 
     mockChatService.getRooms.returns(mockRooms);
@@ -27,7 +27,7 @@ describe('Controller: CommentBoxController', function () {
       open: function () {},
       // We need this, or angular internals that do
       // document.createElement, etc., will break
-      document: document
+      document: document,
     });
 
     angular.mock.module('tf2stadium.controllers', function ($provide) {
@@ -51,9 +51,7 @@ describe('Controller: CommentBoxController', function () {
   });
 
   function setupBareController() {
-    ctrl = $controller('CommentBoxController', {
-      $scope: $scope
-    });
+    ctrl = $controller('CommentBoxController', { $scope });
     $timeout.flush();
   }
 
@@ -89,7 +87,7 @@ describe('Controller: CommentBoxController', function () {
     beforeEach(function () {
       mockEvent = sinon.stub({
         preventDefault: function () {},
-        keyCode: 13
+        keyCode: 13,
       });
     });
 
@@ -136,7 +134,7 @@ describe('Controller: CommentBoxController', function () {
 
       mockEvent = sinon.stub({
         preventDefault: function () {},
-        keyCode: 69
+        keyCode: 69,
       });
 
       ctrl.sendMessage(mockEvent);
@@ -151,7 +149,7 @@ describe('Controller: CommentBoxController', function () {
 
       $rootScope.$emit('chat-message', {
         room: globalRoomId,
-        id: 123
+        id: 123,
       });
 
       expect(ctrl.lastSeenIds[0]).to.equal(123);

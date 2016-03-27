@@ -41,7 +41,7 @@ function createActivationState($parse, attr, scope) {
       },
       setValue: function (value) {
         activated = value;
-      }
+      },
     };
   }
 
@@ -50,7 +50,7 @@ function createActivationState($parse, attr, scope) {
       getValue: function () {
         return getter(scope_);
       },
-      setValue: function () {}
+      setValue: function () {},
     };
   }
 
@@ -65,7 +65,7 @@ function createActivationState($parse, attr, scope) {
             setter(scope_, value);
           });
         }
-      }
+      },
     };
   }
 
@@ -117,7 +117,7 @@ function createDirective(scrollglue, attrName, direction) {
         scope.$on('$destroy', function () {
           $window.removeEventListener('resize',scrollIfGlued, false);
         });
-      }
+      },
     };
   }]);
 }
@@ -129,7 +129,7 @@ var bottom = {
   },
   scroll: function (el) {
     el.scrollTop = el.scrollHeight;
-  }
+  },
 };
 
 var top = {
@@ -138,7 +138,7 @@ var top = {
   },
   scroll: function (el) {
     el.scrollTop = 0;
-  }
+  },
 };
 
 var right = {
@@ -147,7 +147,7 @@ var right = {
   },
   scroll: function (el) {
     el.scrollLeft = el.scrollWidth;
-  }
+  },
 };
 
 var left = {
@@ -156,7 +156,7 @@ var left = {
   },
   scroll: function (el) {
     el.scrollLeft = 0;
-  }
+  },
 };
 
 var scrollglue = angular.module('luegg.directives', []);

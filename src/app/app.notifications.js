@@ -20,7 +20,7 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
     error: false,
     parent: $document[0].querySelector('#toasts'),
     autoWrap: false,
-    hideDelay: 5000
+    hideDelay: 5000,
   };
 
   notificationsService.toast = function (options) {

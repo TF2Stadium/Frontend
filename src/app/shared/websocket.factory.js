@@ -22,7 +22,7 @@ function Websocket($rootScope, $timeout, $log, $q,
 
   socket = new Socket(Config.endpoints.websocket, {
     extractor: extractor,
-    maxRetries: 0
+    maxRetries: 0,
   });
 
   socket.onopen = function (e) {
@@ -42,7 +42,7 @@ function Websocket($rootScope, $timeout, $log, $q,
     if (reconnecting) {
       Notifications.toast({
         message: 'Connected to TF2Stadium!',
-        actionMessage: 'Ok'
+        actionMessage: 'Ok',
       });
     }
   };
@@ -67,7 +67,7 @@ function Websocket($rootScope, $timeout, $log, $q,
         reconnecting = true;
         socket.connect();
       },
-      hideDelay: 0
+      hideDelay: 0,
     });
   };
 
@@ -184,7 +184,7 @@ function Websocket($rootScope, $timeout, $log, $q,
           Notifications.toast({
             message: dataIn.message,
             error: true,
-            hideDelay: 5000
+            hideDelay: 5000,
           });
         }
 

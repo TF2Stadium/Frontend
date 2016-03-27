@@ -39,6 +39,6 @@ function PreloadService($window, $q) {
 
   return {
     queuePreload: makePreloader($window.Image),
-    queuePreloadAudio: makePreloader($window.Audio)
+    queuePreloadAudio: makePreloader($window.Audio),
   };
 }

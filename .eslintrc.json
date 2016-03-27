@@ -17,6 +17,10 @@
     "strict": 2,
     "no-shadow": 2,
     "space-before-blocks": 2,
+    "comma-dangle": [
+      2,
+      "always-multiline"
+    ],
     "no-confusing-arrow": [
       2,
       {

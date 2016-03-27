@@ -11,12 +11,12 @@ describe('Service: Notifications', function () {
     mock$window = {
       document: {
         hasFocus: function () { return hasFocus; },
-        querySelector: function () {}
-      }
+        querySelector: function () {},
+      },
     };
 
     mockNgAudio = sinon.stub({
-      play: function () { return -1; }
+      play: function () { return -1; },
     });
 
     angular.mock.module('tf2stadium.services', function ($provide) {
@@ -24,7 +24,7 @@ describe('Service: Notifications', function () {
         show: sinon.spy(function () {
           return toastShowPromise;
         }),
-        hide: sinon.spy()
+        hide: sinon.spy(),
       };
 
       $provide.value('$window', mock$window);

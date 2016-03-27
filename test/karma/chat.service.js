@@ -12,7 +12,7 @@ describe('Service: ChatService', function () {
       profileUrl: '',
       role: '',
       steamid: '' + p,
-      tags: ['player']
+      tags: ['player'],
     };
   }
 
@@ -32,7 +32,7 @@ describe('Service: ChatService', function () {
       message: 'hi' + n,
       room: 0,
       timestamp: 1449001384 + n*1000,
-      player: makeTestPlayer(p)
+      player: makeTestPlayer(p),
     };
   }
 
@@ -45,7 +45,7 @@ describe('Service: ChatService', function () {
     var mockConnection = sinon.stub({
       connect: function () {},
       On: function () {},
-      Emit: function () {}
+      Emit: function () {},
     });
 
     WebSocketModule.__Rewire__('Socket', () => mockConnection);
@@ -60,18 +60,18 @@ describe('Service: ChatService', function () {
       onJSON: sinon.spy(function (eventName, callback) {
         onJSONCallbacks[eventName] = callback;
       }),
-      emitJSON: sinon.spy(function () {})
+      emitJSON: sinon.spy(function () {}),
     };
 
     mockLobbyService = sinon.stub({
       getLobbySpectatedId: function () { return -1; },
       getLobbyJoinedId: function () { return -1; },
       getLobbyJoined: function () { return undefined; },
-      getLobbySpectated: function () { return undefined; }
+      getLobbySpectated: function () { return undefined; },
     });
 
     mockNotifications = {
-      titleNotification: sinon.spy()
+      titleNotification: sinon.spy(),
     };
 
     angular.mock.module('tf2stadium.services', function ($provide) {
@@ -82,12 +82,12 @@ describe('Service: ChatService', function () {
       $provide.constant('Settings', {
         getSettings: function (cb) {
           cb({
-            emoteStyle: 'none'
+            emoteStyle: 'none',
           });
-        }
+        },
       });
       $provide.constant('Config', {
-        'allowedChatDomains': []
+        'allowedChatDomains': [],
       });
     });
 
@@ -289,7 +289,7 @@ describe('Service: ChatService', function () {
       'chatSend',
       sinon.match({
         message: message,
-        room: roomId
+        room: roomId,
       })
     );
   });

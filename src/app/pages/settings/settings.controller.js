@@ -82,9 +82,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
   vm.editServerField = function editServerField(e, server, field) {
     e.stopPropagation(); // prevent auto row-select
 
-    var validators = {
-      'md-maxlength': field === 'name'? 50:100
-    };
+    var validators = { 'md-maxlength': field === 'name'? 50 : 100 };
 
     $mdEditDialog.small({
       modelValue: server[field],
@@ -108,7 +106,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
             return s;
           }
         }));
-      }
+      },
     }).then(function (ctrl) {
       if (field === 'name') {
         var input = ctrl.getInput();
@@ -132,7 +130,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
   vm.saveNewServer = function saveNewServer() {
     saveServers(vm.savedServers.concat({
       name: vm.newServerName,
-      url: vm.newServerAddress
+      url: vm.newServerAddress,
     }));
 
     $timeout(function () {
@@ -150,7 +148,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
       var server = serversObj[name];
       return {
         name: name,
-        url: server.url //,
+        url: server.url,
         // password: server.password
       };
     });

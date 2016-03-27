@@ -93,10 +93,10 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
         Notifications.notifyBrowser({
           title: 'HTML5 notifications enabled!',
           timeout: 3,
-          showAlways: true
+          showAlways: true,
         });
       },
-      hideDelay: 0
+      hideDelay: 0,
     });
   }, 2000);
 

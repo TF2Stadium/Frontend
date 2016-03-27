@@ -15,31 +15,30 @@ describe('Service: LobbyService', function () {
       on: sinon.spy(function (eventName, cb) {
         callbacks[eventName] = cb;
       }),
-      off: function() {},
-      emitJSON: sinon.spy(function () {
-      })
+      off: function () {},
+      emitJSON: sinon.spy(function () {}),
     };
 
     mockNotifications = sinon.stub({
       toast: function () { },
-      notifyBrowser: function () { }
+      notifyBrowser: function () { },
     });
 
     mockSettings = sinon.stub({
-      getSettings: function () {}
+      getSettings: function () {},
     });
 
     mock$state = sinon.stub({
-      go: function () {}
+      go: function () {},
     });
 
     mock$window = sinon.stub({
-      open: function () {}
+      open: function () {},
     });
 
     angular.mock.module('tf2stadium.services', function ($provide) {
       mock$mdDialog = {
-        show: sinon.spy(function () { return $q.when({}); })
+        show: sinon.spy(function () { return $q.when({}); }),
       };
 
       $provide.value('Websocket', mockWebsocket);
@@ -85,7 +84,7 @@ describe('Service: LobbyService', function () {
       var mumbleInfo = {
         password: 'password',
         address: 'example.org:12345',
-        channel: 'chan1'
+        channel: 'chan1',
       };
 
       var cleanedMumbleURL = 'mumble://unnamed:' +
