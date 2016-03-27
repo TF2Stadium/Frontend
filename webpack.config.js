@@ -201,11 +201,7 @@ module.exports = {
 	plugins: [
     extractAppStyles,
     extractVendorStyles,
-    new webpack.DefinePlugin({
-      'process.env': {
-        // This has effect on the react lib size
-        'NODE_ENV': JSON.stringify('production')
-      },
+		new webpack.DefinePlugin({
       '__BUILD_STATS__': JSON.stringify({
         gitCommit: {
           hash: gitRev.long() + '',
