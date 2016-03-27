@@ -106,9 +106,7 @@ module.exports = {
       'moment',
       '../node_modules/angular-material/angular-material.min.css',
       '../node_modules/angular-material-data-table/dist/md-data-table.min.css',
-      'preact',
-      'preact-compat',
-    ]
+    ],
   },
 
   noParse: [
