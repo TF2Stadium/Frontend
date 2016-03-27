@@ -6,8 +6,9 @@ machine:
 dependencies:
   override:
     - docker info
-    - npm install
+    - npm prune && npm install
     - npm rebuild node-sass
+    - npm ls || true
 test:
   override:
     - npm run lint

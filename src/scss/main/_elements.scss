@@ -93,7 +93,7 @@
 #chat .chat-message {
 
   //In order from low priority to high priority to appear
-  $chatBadges: (contributor moderator administrator tf2stadium);
+  $chatBadges: (contributor moderator administrator tf2stadium twitch);
 
   @each $badge in $chatBadges {
     .md-button.#{$badge}:before {
