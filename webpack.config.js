@@ -71,7 +71,9 @@ module.exports = {
 
   babelSettings: babelSettings,
 
-  devtool: 'source-map',
+  devtool:
+  (process.env.NODE_ENV === 'production')?
+    'source-map' : 'inline-source-map',
 
   quiet: false,
   noInfo: false,
