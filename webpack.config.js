@@ -46,8 +46,6 @@ var configFile = [
   toPath('app.config.template.json'),
 ].find(fileExists);
 
-console.log('Using config file:', configFile);
-
 var babelSettings = {
   presets: ['es2015'],
   plugins: [
@@ -64,7 +62,10 @@ var babelSettings = {
 var extractAppStyles = new ExtractTextPlugin('app.css');
 var extractVendorStyles = new ExtractTextPlugin('vendor.css');
 
-var min = '.min';
+var isDev = process.env.NODE_ENV !== 'production';
+
+console.log('Using config file:', configFile);
+console.log('Build type:', isDev? 'development':'production');
 
 module.exports = {
   name: 'js',
@@ -72,9 +73,7 @@ module.exports = {
 
   babelSettings: babelSettings,
 
-  devtool:
-  (process.env.NODE_ENV === 'production')?
-    'source-map' : 'inline-source-map',
+  devtool: (isDev? 'inline-' : '') + 'source-map',
 
   quiet: false,
   noInfo: false,
@@ -94,7 +93,7 @@ module.exports = {
       'angular', // see angular-min alias and comment in lib/angular-min.js
       'angular-animate',
       'angular-ui-router',
-      '../node_modules/angular-material/angular-material' + min + '.js',
+      '../node_modules/angular-material/angular-material.js',
       'angular-aria',
       'angular-material-data-table',
       'angular-messages',
