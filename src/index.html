@@ -118,7 +118,7 @@
                 <!--<md-icon md-svg-icon="material:settings"></md-icon>-->
               </md-button>
 
-              <md-button ng-if="$root.userProfile.role === 'administrator'"
+              <md-button ng-if="$root.userProfile.role === 'administrator' || $root.userProfile.role === 'moderator'"
                          ng-href="{{::config.endpoints.api}}/admin"
                          target="_blank">
                 Admin
