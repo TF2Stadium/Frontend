@@ -2,17 +2,21 @@
      ng-if="lobbyList.shouldShowFilters()"
      ng-controller="SettingsPageController as settings">
   <md-tabs md-stretch-tabs="always" md-dynamic-height="true">
-    <md-tab label="{{keyName}}"
-            ng-repeat="(keyName, settingsGroup) in settings.sections.filters">
+    <md-tab
+       label="{{::keyName}}"
+       ng-repeat="(keyName, settingsGroup) in settings.sections.filters track by keyName">
       <md-checkbox
          ng-repeat="(key, field) in settingsGroup track by key"
          ng-model="field.selected"
-         aria-label="{{field.name}}"
-         ng-change="settings.saveSetting(key, field.selected)">
-        <i ng-if="keyName === 'classes'"
-           class="filter-icon filter-icon-{{key}}"></i>
-        <span ng-if="keyName !== 'classes'"
-              ng-bind="field.name"></span>
+         ng-change="settings.saveSetting(key, field.selected)"
+         bindonce
+         bo-attr bo-attr-aria-label="field.name">
+        <i bindonce="keyName"
+           bo-if="keyName === 'classes'"
+           bo-class="'filter-icon filter-icon-'+ key"></i>
+        <span bindonce="field"
+              bo-if="keyName !== 'classes'"
+              bo-bind="field.name"></span>
       </md-checkbox>
     </md-tab>
   </md-tabs>
@@ -57,10 +61,15 @@
    bindonce="lobbyInformation"
    class="lobby-row"
    ui-sref="lobby-page({lobbyID: lobbyInformation.id})">
-  <div class="lobby-image"
-       ng-style="{'background-image':'url(/assets/img/maps/lobby-row/' + lobbyInformation.map + '.jpg)'}">
-    <span class="lobby-type">{{::lobbyInformation.type}}</span>
-    <span class="lobby-map">{{::lobbyInformation.map}}</span>
+  <div bindonce="lobbyInformation"
+       class="lobby-image"
+       bo-style="{'background-image':'url(/assets/img/maps/lobby-row/' + lobbyInformation.map + '.jpg)'}">
+    <span bindonce="lobbyInformation"
+          class="lobby-type"
+          bo-bind="lobbyInformation.type"></span>
+    <span bindonce="lobbyInformation"
+          class="lobby-map"
+          bo-bind="lobbyInformation.map"></span>
   </div>
   <div flex class="lobby-main">
     <div flex class="lobby-classes">
@@ -83,21 +92,27 @@
     </div>
     <div class="lobby-info">
       <div class="lobby-info-row top">
-        <span class="lobby-info-players" ng-bind="lobbyInformation.players"></span>
+        <span class="lobby-info-players"
+              ng-bind="lobbyInformation.players"></span>
         <span class="lobby-info-maxplayers"
               bo-bind="'/' + lobbyInformation.maxPlayers"></span>
         <div flex></div>
-        <div class="lobby-mumble" bo-class="{'not-required': !lobbyInformation.mumbleRequired}">
+        <div class="lobby-mumble"
+             bo-class="{'not-required': !lobbyInformation.mumbleRequired}">
           <md-tooltip md-direction="top">Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}}mandatory</md-tooltip>
         </div>
       </div>
       <div class="lobby-info-row">
         <span>
-          {{::lobbyInformation.region.code}}
+          <span bindonce="lobbyInformation"
+                bo-bind="lobbyInformation.region.code"></span>
           <md-tooltip md-direction="bottom">Server located in {{::lobbyInformation.region.name}}</md-tooltip>
         </span>
-        <span class="lobby-league">
-          {{::lobbyInformation.league}}
+        <span
+           bindonce="lobbyInformation"
+           class="lobby-league"
+           bo-style="lobbyInformation.league.length > 6 ? {'font-size': 'small'}:{}">
+          <span bo-bind="lobbyInformation.league"></span>
           <md-tooltip md-direction="bottom">{{::lobbyInformation.league | uppercase}} rules and whitelist</md-tooltip>
         </span>
       </div>
