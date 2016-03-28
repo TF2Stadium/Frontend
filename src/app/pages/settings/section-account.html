@@ -71,6 +71,20 @@
   generated password. If anyone gets your password they may be able to
   impersonate you. If that happens, you can click this button to
   regenerate the password.</p>
+  {{settings.mumblePassword}}
+  <md-button
+     class="md-raised md-primary"
+     ng-if="!settings.mumblePassword"
+     ng-click="settings.fetchMumblePassword()">
+    View Mumble Password
+  </md-button>
+    <md-button
+     class="md-raised md-primary"
+     ng-if="settings.mumblePassword"
+     ng-click="settings.mumblePassword=''">
+    Hide Mumble Password
+  </md-button>
+  <br />
   <md-button
     class="md-raised md-primary"
     ng-click="settings.resetMumblePassword()">

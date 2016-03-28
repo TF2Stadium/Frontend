@@ -27,6 +27,10 @@ function User(Websocket, $rootScope, $window, $q, Config) {
     return deferred.promise;
   };
 
+  userService.getMumblePassword = function () {
+    return Websocket.emitJSON('getMumblePassword', {});
+  };
+
   userService.resetMumblePassword = function () {
     $window.open(Config.endpoints.api + '/resetMumblePassword', '_self');
   };
