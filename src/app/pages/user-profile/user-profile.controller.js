@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { slotNameToClassName } from '../../app.filter';
 
 angular
   .module('tf2stadium.controllers')
@@ -53,12 +54,10 @@ function UserProfileController($state, User) {
         'medic',
         'sniper',
         'spy',
-      ].map(function (className) {
-        return {
-          name: className,
-          cnt: vm.profile.stats[className] || 0,
-        };
-      });
+      ].map((className) => ({
+        name: className,
+        cnt: vm.profile.stats[className] || 0,
+      }));
 
       vm.profile.external_links = [
         { name: 'tftv',
@@ -106,13 +105,15 @@ function UserProfileController($state, User) {
             return { 'team': 'red', 'class': klass.class };
           }
           return false;
-        }).filter(function (x) { return x; });
+        }).filter((x) => x);
 
         if (map.playerInfo.length > 0) {
           map.playerInfo = map.playerInfo[0];
         } else {
           map.playerInfo = { team: '', 'class': '' };
         }
+
+        map.playerInfo.class = slotNameToClassName(map.playerInfo.class);
 
         return map;
       });
