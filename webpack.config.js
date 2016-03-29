@@ -8,7 +8,9 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var webpack = require('webpack');
+var DefinePlugin = webpack.DefinePlugin;
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
+var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 var path = require('path');
 var fs = require('fs');
@@ -199,7 +201,7 @@ module.exports = {
   plugins: [
     extractAppStyles,
     extractVendorStyles,
-    new webpack.DefinePlugin({
+    new DefinePlugin({
       '__BUILD_STATS__': JSON.stringify({
         gitCommit: {
           hash: gitRev.long() + '',
@@ -218,25 +220,28 @@ module.exports = {
         minifyJS: true,
       },
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      exclude: /vendor\.js/i,
-      compress: {
-        // I'm not a fan of hiding warnings, but UglifyJS's are often
-        // both hard to avoid and rarely useful
-        warnings: false,
-      },
-    }),
     new CommonsChunkPlugin('vendor', 'vendor.js'),
     new CopyWebpackPlugin([{ from: 'assets/', to: 'assets/' }]),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     // Ignore meaningless moment build warnings:
     new webpack.IgnorePlugin(/locale/, /moment/),
-    new webpack.NormalModuleReplacementPlugin(
-        /^angular$/,
-      toPath('/lib/angular-min.js')
-    ),
-  ],
+  ].concat(
+    isDev? [] : [
+      new UglifyJsPlugin({
+        exclude: /vendor\.js/i,
+        compress: {
+          // I'm not a fan of hiding warnings, but UglifyJS's are often
+          // both hard to avoid and rarely useful
+          warnings: false,
+        },
+      }),
+      new webpack.NormalModuleReplacementPlugin(
+          /^angular$/,
+        toPath('/lib/angular-min.js')
+      ),
+    ]
+  ),
 
   devServer: {
     historyApiFallback: true,
