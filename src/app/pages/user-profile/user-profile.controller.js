@@ -1,8 +1,29 @@
+import Kefir from 'kefir';
 import moment from 'moment';
+import { slotNameToClassName } from '../../app.filter';
 
 angular
   .module('tf2stadium.controllers')
-  .controller('UserProfileController', UserProfileController);
+  .controller('UserProfileController', UserProfileController)
+  .controller('UserProfileHeaderController', UserProfileHeaderController);
+
+const {
+  pub: updateProfileLoadingStatus,
+  stream: profileLoadingStatus$,
+} = (function () {
+  var pubFn = ()=>{};
+
+  function pub(x) {
+    pubFn(x);
+  }
+
+  var stream = Kefir.stream(emitter => {
+    pubFn = (x) => emitter.emit(x);
+    return () => {};
+  });
+
+  return { pub, stream };
+})();
 
 /** @ngInject */
 function UserProfileController($state, User) {
@@ -11,12 +32,14 @@ function UserProfileController($state, User) {
   vm.steamId = $state.params.userID;
   vm.steamUrl = 'https://steamcommunity.com/profiles/' + vm.steamId;
 
-  vm.profile = {};
+  vm.profile = false;
   vm.loadingError = false;
 
+  updateProfileLoadingStatus(true);
   User
     .getProfile(vm.steamId)
     .then(function (profile) {
+      updateProfileLoadingStatus(false);
       vm.profile = profile;
       vm.loadingError = false;
 
@@ -53,12 +76,10 @@ function UserProfileController($state, User) {
         'medic',
         'sniper',
         'spy',
-      ].map(function (className) {
-        return {
-          name: className,
-          cnt: vm.profile.stats[className] || 0,
-        };
-      });
+      ].map((className) => ({
+        name: className,
+        cnt: vm.profile.stats[className] || 0,
+      }));
 
       vm.profile.external_links = [
         { name: 'tftv',
@@ -106,7 +127,7 @@ function UserProfileController($state, User) {
             return { 'team': 'red', 'class': klass.class };
           }
           return false;
-        }).filter(function (x) { return x; });
+        }).filter((x) => x);
 
         if (map.playerInfo.length > 0) {
           map.playerInfo = map.playerInfo[0];
@@ -114,10 +135,25 @@ function UserProfileController($state, User) {
           map.playerInfo = { team: '', 'class': '' };
         }
 
+        map.playerInfo.class = slotNameToClassName(map.playerInfo.class);
+
         return map;
       });
     }, function (err) {
       vm.error = err;
       vm.loadingError = true;
     });
+}
+
+/** @ngInject */
+function UserProfileHeaderController($scope, safeApply) {
+  var vm = this;
+
+  vm.showLoadingBar = false;
+  function updateStatus(x) {
+    safeApply($scope, () => vm.showLoadingBar = x);
+  }
+
+  profileLoadingStatus$.onValue(updateStatus);
+  $scope.$on('$destroy', () => profileLoadingStatus$.offValue(updateStatus));
 }

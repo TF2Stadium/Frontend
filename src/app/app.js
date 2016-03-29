@@ -48,6 +48,7 @@ require('./pages/rules/rules.html');
 require('./pages/rules/section-punishments.html');
 require('./pages/rules/section-rules.html');
 require('./pages/user-profile/user-profile.html');
+require('./pages/user-profile/header.html');
 require('./pages/about/about-sidebar.html');
 require('./pages/about/section-about.html');
 require('./pages/about/section-privacy.html');

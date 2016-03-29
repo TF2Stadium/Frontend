@@ -8,13 +8,14 @@ function LobbyPageHeaderController($scope, $rootScope, $state,
   var lobbyPageId = parseInt($state.params.lobbyID);
   var error = false;
 
-  LobbyService
-    .observeLobby(lobbyPageId)
-    .onValue(function (lobbyData) {
-      safeApply($scope, function () {
-        vm.lobbyInformation = lobbyData;
-      });
-    });
+  var lobbyData$ = LobbyService.observeLobby(lobbyPageId);
+
+  function updateLobbyData(lobbyData) {
+    safeApply($scope, () => vm.lobbyInformation = lobbyData);
+  }
+
+  lobbyData$.onValue(updateLobbyData);
+  $scope.$on('$destroy', () => lobbyData$.offValue(updateLobbyData));
 
   vm.closeLobby = function () {
     LobbyService.closeLobby(vm.lobbyInformation.id);

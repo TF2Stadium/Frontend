@@ -5,7 +5,7 @@
 </div>
 
 <div class="profile-sheet user-profile"
-     ng-if="!userProfile.loadingError">
+     ng-if="!userProfile.loadingError && userProfile.profile">
   <a href="{{userProfile.steamUrl}}"
      target="_blank"
      tabindex="0"
@@ -33,14 +33,14 @@
   </h1>
 
   <p class="player-details">
-    Playing TF2Stadium since {{userProfile.profile.createdAt.format('MMMM Do, YYYY')}}
+    Playing TF2Stadium since {{::userProfile.profile.createdAt.format('MMMM Do, YYYY')}}
   </p>
 
   <ul class="badges">
     <li ng-if="userProfile.profile.role !== 'player'">
       <img class="badge"
            ng-src="/assets/img/badges/{{userProfile.profile.role}}.svg" />
-      <md-tooltip>{{userProfile.profile.role | capitalize}}</md-tooltip>
+      <md-tooltip>{{::userProfile.profile.role | capitalize}}</md-tooltip>
     </li>
   </ul>
 
@@ -58,12 +58,13 @@
                  md-svg-src="{{link.img}}"
                  aria-label="{{link.desc}}"></md-icon>
       </a>
-      <md-tooltip>{{link.description}} Profile</md-tooltip>
+      <md-tooltip>{{::link.description}} Profile</md-tooltip>
     </li>
   </ul>
 </div>
 
-<div class="profile-sheet">
+<div class="profile-sheet"
+     ng-if="!userProfile.loadingError && userProfile.profile">
   <div style="float: left">
     <h1 class="lobbies-played">Lobbies: {{userProfile.profile.stats.lobbiesPlayed | number}}</h1>
     <h2 class="game-hours">TF2 Hours: {{userProfile.profile.gameHours | number}}</h2>
@@ -110,7 +111,8 @@
   </ul>
 </div>
 
-<div class="profile-sheet profile-lobbies-sheet">
+<div class="profile-sheet profile-lobbies-sheet"
+     ng-if="!userProfile.loadingError && userProfile.profile">
   <h1>Recent Lobbies</h1>
   <p class="no-recent-lobbies"
      ng-if="!userProfile.profile.lobbies || userProfile.profile.lobbies.length === 0">
