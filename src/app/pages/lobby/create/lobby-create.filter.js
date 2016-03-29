@@ -39,5 +39,4 @@ function LobbyCreateOptionFilter(LobbyCreate, $filter) {
 
     return options;
   };
-
 }
