@@ -1,9 +1,29 @@
+import Kefir from 'kefir';
 import moment from 'moment';
 import { slotNameToClassName } from '../../app.filter';
 
 angular
   .module('tf2stadium.controllers')
-  .controller('UserProfileController', UserProfileController);
+  .controller('UserProfileController', UserProfileController)
+  .controller('UserProfileHeaderController', UserProfileHeaderController);
+
+const {
+  pub: updateProfileLoadingStatus,
+  stream: profileLoadingStatus$,
+} = (function () {
+  var pubFn = ()=>{};
+
+  function pub(x) {
+    pubFn(x);
+  }
+
+  var stream = Kefir.stream(emitter => {
+    pubFn = (x) => emitter.emit(x);
+    return () => {};
+  });
+
+  return { pub, stream };
+})();
 
 /** @ngInject */
 function UserProfileController($state, User) {
@@ -12,12 +32,14 @@ function UserProfileController($state, User) {
   vm.steamId = $state.params.userID;
   vm.steamUrl = 'https://steamcommunity.com/profiles/' + vm.steamId;
 
-  vm.profile = {};
+  vm.profile = false;
   vm.loadingError = false;
 
+  updateProfileLoadingStatus(true);
   User
     .getProfile(vm.steamId)
     .then(function (profile) {
+      updateProfileLoadingStatus(false);
       vm.profile = profile;
       vm.loadingError = false;
 
@@ -121,4 +143,17 @@ function UserProfileController($state, User) {
       vm.error = err;
       vm.loadingError = true;
     });
+}
+
+/** @ngInject */
+function UserProfileHeaderController($scope, safeApply) {
+  var vm = this;
+
+  vm.showLoadingBar = false;
+  function updateStatus(x) {
+    safeApply($scope, () => vm.showLoadingBar = x);
+  }
+
+  profileLoadingStatus$.onValue(updateStatus);
+  $scope.$on('$destroy', () => profileLoadingStatus$.offValue(updateStatus));
 }

@@ -64,6 +64,11 @@ export function routeConfig($stateProvider, $urlRouterProvider, $locationProvide
           controller: 'UserProfileController',
           controllerAs: 'userProfile',
         },
+        'headerInfo': {
+          templateUrl: 'app/pages/user-profile/header.html',
+          controller: 'UserProfileHeaderController',
+          controllerAs: 'header',
+        },
       },
     })
     .state('settings', {
