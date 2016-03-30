@@ -10,26 +10,28 @@
              md-stretch-tabs="always">
       <md-tab ng-repeat="room in commentBox.rooms | unique:'id' | greaterThan:'id':-1 track by room.id">
         <md-tab-label>
-          <span ng-class="{'tab-title': true,
-                           'changed': commentBox.showRoomNotification[room.id]}">
-            {{room.id === 0? 'CHAT' : ((room.joined? 'YOUR':'THIS') + ' Lobby #' + room.id)}}
-          </span>
+          <span
+             ng-class="{'tab-title': true,
+                       'changed': commentBox.showRoomNotification[room.id]}"
+             ng-bind="room.id === 0? 'CHAT' : ((room.joined? 'YOUR':'THIS') + ' Lobby #' + room.id)"></span>
         </md-tab-label>
         <md-tab-body>
           <md-content scroll-glue>
             <div ng-repeat="message in room.messages track by $index"
                  class="chat-message">
               <span class="chat-message-time"
-                    ng-if="$root.currentTimestampsOption !== 'none'">{{message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:mm')}}</span>
+                    ng-if="$root.currentTimestampsOption !== 'none'"
+                    ng-bind="message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:mm')"></span>
               <md-menu>
                 <md-button
                    class="chat-player-name"
                    ng-class="[message.player.tags]"
                    ng-click="$mdOpenMenu($event)"
                    tabindex="-1"
-                   md-menu-origin>
-                  {{message.player.name}}:
-                </md-button>
+                   md-menu-origin
+                   bindonce="message"
+                   aria-label="{{::message.player.name}}"
+                   bo-bind="message.player.name + ':'"></md-button>
                 <md-menu-content width="3">
                   <md-menu-item>
                     <md-button
