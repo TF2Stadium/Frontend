@@ -222,6 +222,11 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
       LobbyCreate
         .getServemeServers()
         .then(function (data) {
+          // Normalized some weird backend data formatting:
+          if (data.servers === null) {
+            data.servers = [];
+          }
+
           vm.servemeServers = data;
         });
     }
