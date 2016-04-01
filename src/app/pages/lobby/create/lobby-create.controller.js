@@ -33,7 +33,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   function loadServers(settings) {
     vm.savedServers = angular.fromJson(settings.savedServers);
     vm.showServers = Object.keys(vm.savedServers).length > 0;
-  };
+  }
 
   Settings.getSettings(loadServers);
   var handler = $rootScope.$on('settings-updated', function () {
@@ -117,7 +117,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
       }
     });
     vm.requestSent = true;
-  };
+  }
 
   vm.create = function () {
     createHelper(vm.lobbySettings);
