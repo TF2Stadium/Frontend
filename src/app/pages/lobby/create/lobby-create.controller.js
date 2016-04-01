@@ -117,7 +117,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
       }
     });
     vm.requestSent = true;
-  }
+  };
 
   vm.create = function () {
     createHelper(vm.lobbySettings);
@@ -129,8 +129,8 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
       serveme: {
         startsAt: startTime,
         endsAt: endTime,
-        server: server
-      }
+        server: server,
+      },
     });
 
     vm.verifiedServer = true;
