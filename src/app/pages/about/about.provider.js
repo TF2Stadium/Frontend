@@ -23,6 +23,7 @@ function AboutPage() {
     sections: [
       'about',
       'faq',
+      'changelog',
       'privacy',
       'servers',
       'credits',
