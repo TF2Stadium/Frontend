@@ -321,3 +321,26 @@ ul.rent-servers-list {
     margin: 0;
   }
 }
+
+#serveme-list {
+  width: 100%;
+
+  .serveme-list-item {
+    width: 50%;
+    float: left;
+
+    .serveme-list-icon {
+      margin-left: 5px;
+    }
+  }
+}
+
+.serveme-selected-server {
+  cursor: default !important;
+}
+
+.serveme-selected-icon {
+  position: relative;
+  top: 7px;
+  margin-right:5px;
+}
