@@ -114,14 +114,17 @@
 <div class="profile-sheet profile-lobbies-sheet"
      ng-if="!userProfile.loadingError && userProfile.profile">
   <h1>Recent Lobbies</h1>
+  <p class="no-recent-lobbies" ng-if="!userProfile.lobbies">
+    Loading...
+  </p>
   <p class="no-recent-lobbies"
-     ng-if="!userProfile.profile.lobbies || userProfile.profile.lobbies.length === 0">
+     ng-if="userProfile.lobbies && userProfile.lobbies.length === 0">
     No lobbies played!
   </p>
   <div class="recent-lobbies"
-       ng-if="userProfile.profile.lobbies && userProfile.profile.lobbies.length > 0">
+       ng-if="userProfile.lobbies && userProfile.lobbies.length > 0">
     <a md-ink-ripple
-       ng-repeat="lobbyInformation in userProfile.profile.lobbies track by lobbyInformation.id"
+       ng-repeat="lobbyInformation in userProfile.lobbies track by lobbyInformation.id"
        class="lobby-row"
        ui-sref="lobby-page({lobbyID: lobbyInformation.id})">
       <div class="lobby-image"
