@@ -27,6 +27,13 @@ function User(Websocket, $rootScope, $window, $q, Config) {
     return deferred.promise;
   };
 
+  userService.getLobbies = function (steamid, cnt) {
+    return Websocket.emitJSON('playerRecentLobbies', {
+      steamid,
+      lobbies: cnt,
+    });
+  };
+
   userService.getMumblePassword = function () {
     return Websocket.emitJSON('getMumblePassword', {});
   };

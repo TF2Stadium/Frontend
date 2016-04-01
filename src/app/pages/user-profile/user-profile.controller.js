@@ -35,6 +35,39 @@ function UserProfileController($state, User) {
   vm.profile = false;
   vm.loadingError = false;
 
+  vm.lobbies = false;
+  vm.lobbiesLoadingError = false;
+  User
+    .getLobbies(vm.steamId, 5)
+    .then(function (lobbies) {
+      vm.lobbies = lobbies.map(function (map) {
+        map.createdAt = moment(map.createdAt);
+
+        map.playerInfo = map.classes.map(function (klass) {
+          if (klass.blu.filled && klass.blu.player && klass.blu.player.steamid === vm.steamId) {
+            return { 'team': 'blu', 'class': klass.class };
+          } else if (klass.red.filled && klass.red.player && klass.red.player.steamid === vm.steamId) {
+            return { 'team': 'red', 'class': klass.class };
+          }
+          return false;
+        }).filter((x) => x);
+
+        if (map.playerInfo.length > 0) {
+          map.playerInfo = map.playerInfo[0];
+        } else {
+          map.playerInfo = { team: '', 'class': '' };
+        }
+
+        map.playerInfo.class = slotNameToClassName(map.playerInfo.class);
+
+        return map;
+      });
+
+    }, function (err) {
+      vm.lobbiesLoadingError = err;
+    });
+
+
   updateProfileLoadingStatus(true);
   User
     .getProfile(vm.steamId)
@@ -112,33 +145,6 @@ function UserProfileController($state, User) {
       }
 
       vm.profile.stats.karma = vm.profile.stats.substitutes - vm.profile.stats.leaves;
-
-      if (!vm.profile.lobbies) {
-        vm.profile.lobbies = [];
-      }
-
-      vm.profile.lobbies = vm.profile.lobbies.map(function (map) {
-        map.createdAt = moment(map.createdAt);
-
-        map.playerInfo = map.classes.map(function (klass) {
-          if (klass.blu.filled && klass.blu.player && klass.blu.player.steamid === vm.steamId) {
-            return { 'team': 'blu', 'class': klass.class };
-          } else if (klass.red.filled && klass.red.player && klass.red.player.steamid === vm.steamId) {
-            return { 'team': 'red', 'class': klass.class };
-          }
-          return false;
-        }).filter((x) => x);
-
-        if (map.playerInfo.length > 0) {
-          map.playerInfo = map.playerInfo[0];
-        } else {
-          map.playerInfo = { team: '', 'class': '' };
-        }
-
-        map.playerInfo.class = slotNameToClassName(map.playerInfo.class);
-
-        return map;
-      });
     }, function (err) {
       vm.error = err;
       vm.loadingError = true;
