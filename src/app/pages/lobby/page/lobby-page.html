@@ -188,6 +188,24 @@
               <md-icon md-svg-icon="material:more-vert"></md-icon>
             </md-button>
             <md-menu-content width="4">
+              <md-menu-item ng-if="slot.password">
+                <md-button
+                   ng-click="lobbyPage.setRequirements(slot, 'password', '')">
+                  Remove Password
+                </md-button>
+              </md-menu-item>
+              <md-menu-item ng-if="slot.password">
+                <md-button
+                   ng-click="lobbyPage.slotRequirementValue='';lobbyPage.setRequirements(slot, 'password')">
+                  Change Password
+                </md-button>
+              </md-menu-item>
+              <md-menu-item ng-if="!slot.password">
+                <md-button
+                   ng-click="lobbyPage.slotRequirementValue='';lobbyPage.setRequirements(slot, 'password')">
+                  Set Password
+                </md-button>
+              </md-menu-item>
               <md-menu-item
                  ng-if="slot.requirements.hours">
                 <md-button
@@ -244,8 +262,8 @@
                autofocus
                ng-model="lobbyPage.slotRequirementValue"
                aria-label="slot requirement value input"
-               type="number"
-               placeholder="{{lobbyPage.requirementInputName === 'hours'? 'Hours':'Lobbies'}}"
+               type="typeof lobbyPage.slotRequirementValue === 'string? 'text':'number'"
+               placeholder="{{lobbyPage.requirementInputName === 'hours'? 'Hours':(lobbyPage.requirementInputName === 'lobbies'? 'Lobbies':'Password')}}"
                step="{{lobbyPage.requirementInputName === 'hours'? 100:10}}"
                min="0"
                class="slot-requirement-input"
