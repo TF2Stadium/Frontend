@@ -11,13 +11,13 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
                   User, Settings, LobbyService, Notifications) {
   // Google Analytics
   // big TODO: move this to a build variable
-  //    $window.ga('create', 'UA-65920939-1', 'auto');
+  $window.ga('create', 'UA-65920939-1', 'auto');
 
   /*eslint-disable angular/on-watch */
   /* the angular/on-watch warning doesn't apply to run blocks */
-  //    $rootScope.$on('$stateChangeSuccess', function () {
-  //      $window.ga('send', 'pageview', $location.path());
-  //    });
+  $rootScope.$on('$stateChangeSuccess', function () {
+        $window.ga('send', 'pageview', $location.path());
+  });
 
   $rootScope.$on('$stateChangeStart',
                  function (event, toState, toParams, fromState) {
