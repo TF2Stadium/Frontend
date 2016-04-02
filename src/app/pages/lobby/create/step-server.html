@@ -43,7 +43,6 @@
   </p>
 </div>
 
-
 <div
    md-ink-ripple
    class="rent-server-form no-animate"
@@ -66,25 +65,42 @@
   </p>
 </div>
 <div class="tile-form no-animate"
-     ng-show="lobbyCreate.serverState === 'serveme'">
+     ng-show="lobbyCreate.serverState === 'serveme' && !lobbyCreate.verifiedServer">
   <h2>Serveme.tf Servers:</h2>
-  <ul class="rent-servers-list">
-    <li ng-repeat="server in lobbyCreate.servemeServers.servers">
-      <a href="#"
-         ng-click="$event.preventDefault();lobbyCreate.rentServeme(lobbyCreate.servemeServers.startsAt, lobbyCreate.servemeServers.endsAt, server)"
-         target="_blank">
-        <img class="emote"
+  <md-list class="md-dense" flex id="serveme-list">
+    <md-list-item
+      class="serveme-list-item"
+      aria-label="{{server.name}}"
+      ng-repeat-start="server in lobbyCreate.servemeServers.servers"
+      ng-click="lobbyCreate.rentServeme(lobbyCreate.servemeServers.startsAt, lobbyCreate.servemeServers.endsAt, server)">
+        <img class="emote serveme-list-icon"
              ng-src="{{lobbyCreate.servemeRegionToFlag[server.flag]}}"
              height="16"
              width="16"
              alt="{{server.flag}}"
              title="{{server.flag}}"/>
-        <span ng-bind="server.name"></span></a>
-    </li>
-  </ul>
+        <span ng-bind="server.name"></span>
+    </md-list-item>
+    <md-divider ng-repeat-end ng-if="$index % 2" style="clear:both"></md-divider>
+  </md-list>
   <p ng-if="lobbyCreate.servemeServers.servers.length === 0">
     No servers currently available for rent.
   </p>
+</div>
+
+<div
+  class="tile-form rent-server-form no-animate serveme-selected-server"
+  ng-show="lobbyCreate.serverState === 'serveme' && lobbyCreate.verifiedServer">
+  <h2>
+    Selected Server:
+    <img class="emote serveme-selected-icon"
+       ng-src="{{lobbyCreate.servemeRegionToFlag[lobbyCreate.serveMeServer.flag]}}"
+       height="32"
+       width="32"
+       alt="{{lobbyCreate.serveMeServer.flag}}"
+       title="{{lobbyCreate.serveMeServer.flag}}"
+       />
+    <span ng-bind="lobbyCreate.serveMeServer.name"></span></h2>
 </div>
 
 <div
@@ -94,6 +110,7 @@
    ng-show="!lobbyCreate.serverState">
   <h2>Use Your Own Server</h2>
 </div>
+
 <div class="tile-form no-animate serveme-ad"
      ng-show="!lobbyCreate.serverState">
   <p>
@@ -103,6 +120,8 @@
     code <b>STADIUM</b> for 50% off your first month!
   </p>
 </div>
+
+<!-- OWN SERVER START -->
 <div class="tile-form no-animate"
      ng-show="lobbyCreate.serverState==='custom'">
   <form name="serverCreateForm" class="server-form">
@@ -166,14 +185,15 @@
     </md-button>
   </form>
 </div>
-
+<!-- OWN SERVER END -->
+<!-- VERIFICATION START -->
 <div class="server-verify-message"
      ng-if="lobbyCreate.verifyServerError">
   <md-icon md-svg-icon="material:error-red"></md-icon>
   <span ng-bind="lobbyCreate.verifyServerErrorMessage"></span>
 </div>
 
-<div class="server-verify-message"
+<div class="server-verify-message" id="server-verify-box"
      ng-if="lobbyCreate.verifiedServer">
   <md-icon
      ng-if="!lobbyCreate.requestSent"
@@ -193,3 +213,4 @@
                         ng-if="lobbyCreate.requestSent">
   </md-progress-circular>
 </div>
+<!-- VERIFICATION END -->

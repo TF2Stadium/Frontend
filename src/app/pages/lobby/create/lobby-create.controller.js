@@ -3,6 +3,7 @@ angular.module('tf2stadium.controllers')
 
 /** @ngInject */
 function LobbyCreateController($document, $state, $scope, $rootScope,
+                               $anchorScroll, $location,
                                LobbyCreate, Settings, Notifications,
                                PreloadService) {
   PreloadService.queuePreload('/assets/img/mumble.svg');
@@ -27,6 +28,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   vm.showServers = false;
   vm.savedServers = {};
   vm.serverName = '';
+  vm.servemeServer = {};
 
   function loadServers(settings) {
     vm.savedServers = angular.fromJson(settings.savedServers);
@@ -137,6 +139,10 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
         vm.verifiedServer = false;
       }
     });
+
+    vm.serveMeServer = server;
+    $location.hash('server-verify-box');
+    $anchorScroll();
   };
 
   vm.rentStored = function rentStored(id) {
