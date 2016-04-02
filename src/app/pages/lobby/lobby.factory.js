@@ -367,11 +367,20 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
   };
 
   factory.setSlotRequirement = function (lobbyId, slotId, reqName, val) {
+    if (!val) {
+      if (reqName === 'password') {
+        val = '';
+      } else {
+        val = 0;
+      }
+    }
+
     Websocket.emitJSON('lobbySetRequirement', {
       id: lobbyId,
       slot: slotId,
       type: reqName,
-      value: val || 0,
+      value: 0, // may be overriden, but we always have to send a 'value' param
+      [reqName === 'password'? 'password':'value']: val,
     });
   };
 
