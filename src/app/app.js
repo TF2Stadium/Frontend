@@ -55,6 +55,7 @@ require('./pages/about/section-privacy.html');
 require('./pages/about/section-servers.html');
 require('./pages/about/about.html');
 require('./pages/about/section-credits.html');
+require('./pages/about/section-changelog.html');
 require('./pages/about/section-faq.html');
 
 require('../scss/app.scss');
