@@ -155,10 +155,15 @@
           <span class="slot-playername"
                 ui-sref="user-profile({userID: slot.player.steamid})">{{slot.player.name}}</span>
           <div class="slot-misc">
-            <div flex ng-if="!slot.ready && $root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state<4">
+            <div flex ng-if="!slot.ready && $root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state<3">
               <span ng-bind="lobbyPage.playerPreReady ? 'Ready for ' + (lobbyPage.preReadyUpTimer | secondsToMinutes) : 'Pre-ready up!'"></span>
             </div>
-            <div><span ng-bind="slot.player.lobbiesPlayed"></span><span ng-bind="(slot.player.lobbiesPlayed===1)? 'lobby':'lobbies'"></span></div>
+            <div flex ng-if="lobbyPage.lobbyInformation.state == 3">
+              <span ng-bind="slot.ingame ? 'Ingame' : 'Not Ingame'"></span>
+            </div>
+            <div>
+              <span ng-bind="slot.player.lobbiesPlayed"></span><span ng-bind="(slot.player.lobbiesPlayed===1)? 'lobby':'lobbies'"></span>
+            </div>
           </div>
         </div>
 
