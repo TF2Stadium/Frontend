@@ -83,7 +83,7 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
   });
 
   vm.slotClicked = function (slotScope, event) {
-    if (vm.lobbyInformation.password) {
+    if (slotScope.slot.password) {
       slotScope.showPasswordBox = true;
       //Wrapped in a timeout because of ng-if DOM manipulation
       $timeout((function () {

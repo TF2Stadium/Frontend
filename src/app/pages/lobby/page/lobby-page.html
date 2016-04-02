@@ -175,7 +175,7 @@
         <md-icon
            class="slot-locked"
            md-svg-icon="material:lock-closed"
-           ng-if="!showPasswordBox && !slot.filled && lobbyPage.lobbyInformation.password">
+           ng-if="!showPasswordBox && !slot.filled && slot.password">
         </md-icon>
 
         <div class="slot-requirements"
@@ -268,7 +268,7 @@
         <md-input-container
            md-no-float
            class="slot-password"
-           ng-if="showPasswordBox && !slot.filled && lobbyPage.lobbyInformation.password">
+           ng-if="showPasswordBox && !slot.filled && slot.password">
           <input
              aria-label="slot password"
              placeholder="Password"
