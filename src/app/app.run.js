@@ -16,7 +16,7 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
   /*eslint-disable angular/on-watch */
   /* the angular/on-watch warning doesn't apply to run blocks */
   $rootScope.$on('$stateChangeSuccess', function () {
-      $window.ga('send', 'pageview', $location.path());
+    $window.ga('send', 'pageview', $location.path());
   });
 
   $rootScope.$on('$stateChangeStart',
