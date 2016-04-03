@@ -244,6 +244,11 @@ $themes-list: (
       color: $text-color-light;
     }
 
+    md-radio-button:not(.md-checked) {
+      .md-off {
+        border-color: $text-color-light;
+      }
+    }
 
     /*======================================
                     LAYOUT
