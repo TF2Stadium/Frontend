@@ -17,7 +17,7 @@
         </md-tab-label>
         <md-tab-body>
           <md-content scroll-glue>
-            <div ng-repeat="message in room.messages track by $index"
+            <div ng-repeat="message in room.messages track by message.id"
                  class="chat-message">
               <span class="chat-message-time"
                     ng-if="$root.currentTimestampsOption !== 'none'"
