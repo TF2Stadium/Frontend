@@ -33,8 +33,12 @@
           </span>
           <span ng-bind-template=", {{header.lobbyInformation.league | uppercase}} rules"></span>
         </span>
-        <span class="lobbypage-leader"
-              ng-bind-template="Leader: {{header.lobbyInformation.leader.name}}"></span>
+        <span>
+        Leader:
+        <a class="lobbypage-leader"
+              ui-sref="user-profile({userID: header.lobbyInformation.leader.steamid})"
+           ng-bind="header.lobbyInformation.leader.name"></a>
+        </span>
       </div>
       <div class="right">
         <span class="lobbypage-mumble"
