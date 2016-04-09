@@ -101,9 +101,6 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
   }, 2000);
 
   Websocket.onJSON('socketInitialized', function () {
-    $timeout(function () {
-      PreloadService.queuePreloadAudio('/assets/sound/lobby-start.wav');
-      PreloadService.queuePreloadAudio('/assets/sound/lobby-readyup.wav');
-    }, 1000);
+    
   });
 }

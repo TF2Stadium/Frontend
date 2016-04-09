@@ -101,7 +101,7 @@ content listed at the top:
 * **img/logos/{etf2l,ugc,logstf}.{svg,png}**: Logos of other TF2
   community sites, used for linking to their respective leagues.
 
-* **sounds/lobby-{start,readyup}.wav**: From TF2
+* **sounds/default/{start,readyup}.wav**: From TF2
 
 <!--  LocalWords:  metadata
  -->

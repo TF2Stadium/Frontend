@@ -32,7 +32,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
 
   vm.playSoundSample = function () {
     Settings.getSettings(function (settings) {
-      audio.play('/assets/sound/lobby-readyup.wav', settings.soundVolume / 100);
+      audio.play(Notifications.getSound("preview", settings), settings.soundVolume / 100);
     });
   };
 
@@ -179,6 +179,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
       vm.videoBackground = settings.videoBackground;
       vm.soundVolume = settings.soundVolume;
       vm.siteAlias = settings.siteAlias;
+      vm.soundPack = settings.soundPack
 
       vm.savedServers = deserializeServers(settings.savedServers);
 
@@ -186,6 +187,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
     });
   }
 
+  vm.availableSoundPacks = ["Muselk", "Uncle Dane", "King Raja", "KevinIsPwn", "KritzKast"];
   syncSettings();
   var handler = $rootScope.$on('settings-updated', syncSettings);
   $scope.$on('$destroy', handler);

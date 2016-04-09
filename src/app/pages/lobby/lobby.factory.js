@@ -148,7 +148,7 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
       Notifications.notifyBrowser({
         title: 'Lobby is starting!',
         body: 'Come back to the site to join the server',
-        soundFile: '/assets/sound/lobby-start.wav',
+        soundFile: Notifications.getSound("gameStart", settings),
         soundVolume: settings.soundVolume * 0.01,
         timeout: 5,
         callbacks: {
@@ -418,7 +418,7 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
       Notifications.notifyBrowser({
         title: 'Click here to ready up!',
         body: 'All the slots are filled, ready up to start',
-        soundFile: '/assets/sound/lobby-readyup.wav',
+        soundFile: Notifications.getSound("readyUp", settings),
         soundVolume: settings.soundVolume * 0.01,
         timeout: data.timeout,
         callbacks: {
