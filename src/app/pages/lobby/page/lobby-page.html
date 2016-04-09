@@ -5,8 +5,8 @@
     <a href="https://twitch.tv/{{lobbyPage.lobbyInformation.twitchChannel}}"
        ><img class="inline-logo"
              src="/assets/img/logos/twitch-glitch.png"
-             alt="twitch"
-             ng-bind="lobbyPage.lobbyInformation.twitchChannel"/></a>
+             alt="twitch"/>
+    {{lobbyPage.lobbyInformation.twitchChannel}}</a>
     {{lobbyPage.lobbyInformation.twitchRestriction}}.
     <md-button
        ng-if="lobbyPage.lobbyInformation.leader.steamid === $root.userProfile.steamid"
