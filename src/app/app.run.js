@@ -101,6 +101,6 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
   }, 2000);
 
   Websocket.onJSON('socketInitialized', function () {
-    
+
   });
 }
