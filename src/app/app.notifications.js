@@ -53,6 +53,14 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
       readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpA03.ogg','ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg'],
       preview: ['PreviewSound.ogg'],
     },
+
+    'GGGLYGY': {
+      path: '/assets/sound/ggglygy/',
+      countdown: ['Countdown01.wav','Countdown02.wav','Countdown03.wav'],
+      gameStart: ['GameStart01.wav','GameStart02.wav','GameStart03.wav'],
+      readyUp: ['ReadyUpA01.wav','ReadyUpA02.wav','ReadyUpA03.wav','ReadyUpA04.wav','ReadyUpA05.wav','ReadyUpB01.wav','ReadyUpB02.wav','ReadyUpB03.wav'],
+      preview: ['PreviewSound01.wav'],
+    },
   };
 
   var notificationsService = {};
