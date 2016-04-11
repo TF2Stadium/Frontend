@@ -59,6 +59,13 @@ $themes-list: (
   $toast-error-color:     themeVar(toast-error-background);
   $shadow-multiplier:     themeVar(shadow-multiplier);
 
+  body.md-menu-#{themeVar(selector)} {
+    md-menu-content {
+      background-color: $sheet-color;
+      color: $text-color-medium;
+    }
+  }
+
   #app-container.#{themeVar(selector)} {
 
     main {
@@ -232,10 +239,6 @@ $themes-list: (
 
     md-input-container.md-input-invalid .md-input {
       border-color: $warn-color;
-    }
-
-    md-menu-content {
-      background-color: $sheet-color;
     }
 
     md-select md-select-value,
