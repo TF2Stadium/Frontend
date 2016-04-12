@@ -7,20 +7,8 @@
     <meta name="viewport" content="width=1200">
     <link rel="icon" href="/assets/img/favicon.ico">
     <base href="/">
-    <!-- build:css({.tmp/serve,src}) styles/vendor.css -->
-    <!-- bower:css -->
-    <!-- run `gulp inject` to automatically populate bower styles dependencies -->
-    <!-- endbower -->
-    <!-- endbuild -->
-
-    <!-- build:css({.tmp/serve,src}) styles/app.css -->
-    <!-- inject:css -->
-    <!-- css files will be automatically insert here -->
-    <!-- endinject -->
-    <!-- endbuild -->
-
   </head>
-  <body>
+  <body class="md-menu-{{$root.currentTheme || 'default-theme'}}">
     <div id="app-container" class="{{$root.currentTheme || 'default-theme'}} {{$root.animationLength || 'animation-normal'}}">
       <!-- Splash screen style goes here to ensure it loads as fast as possible -->
       <div id="splash-screen" style="display: flex;
