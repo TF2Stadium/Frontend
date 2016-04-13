@@ -37,10 +37,10 @@
   </p>
 
   <ul class="badges">
-    <li ng-if="userProfile.profile.role !== 'player'">
-      <img class="badge"
-           ng-src="/assets/img/badges/{{userProfile.profile.role}}.svg" />
-      <md-tooltip>{{::userProfile.profile.role | capitalize}}</md-tooltip>
+    <li ng-repeat="tag in userProfile.profile.tags"
+        ng-if="tag !== 'player'">
+      <img class="badge" ng-src="/assets/img/badges/{{tag}}.svg" />
+      <md-tooltip>{{::tag | capitalize}}</md-tooltip>
     </li>
   </ul>
 
