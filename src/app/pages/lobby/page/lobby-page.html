@@ -277,12 +277,12 @@
           <span ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.hours && vm.showRequirementInput !== slot.slot"
                 ng-class="{'slot-requirement-met': $root.userProfile && $root.userProfile.gameHours >= slot.requirements.hours,
                           'slot-requirement-failed': $root.userProfile && $root.userProfile.gameHours < slot.requirements.hours}"
-                ng-bind-template="{{slot.requirements.hours}}+ Hours"
+                ng-bind-template="{{slot.requirements.hours | number}}+ Hours"
                 ></span><br ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.lobbies && slot.requirements.hours" /><!--
     --><span ng-if="lobbyPage.showRequirementInput !== slot.slot && slot.requirements.lobbies && vm.showRequirementInput !== slot.slot"
              ng-class="{'slot-requirement-met':$root.userProfile && $root.userProfile.stats.lobbiesPlayed >= slot.requirements.lobbies,
                        'slot-requirement-failed': $root.userProfile && $root.userProfile.stats.lobbiesPlayed < slot.requirements.lobbies}"
-             ng-bind-template="{{slot.requirements.lobbies}}+ Lobbies"></span>
+             ng-bind-template="{{slot.requirements.lobbies | number}}+ Lobbies"></span>
         </div>
 
         <md-input-container
