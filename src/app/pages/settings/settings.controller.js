@@ -187,7 +187,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
     });
   }
 
-  vm.availableSoundPacks = ['Muselk', 'Uncle Dane', 'King Raja', 'KevinIsPwn', 'KritzKast', 'GGGLYGY'];
+  vm.availableSoundPacks = Notifications.availableSoundPacks;
   syncSettings();
   var handler = $rootScope.$on('settings-updated', syncSettings);
   $scope.$on('$destroy', handler);

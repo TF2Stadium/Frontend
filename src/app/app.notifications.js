@@ -79,6 +79,8 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
     hideDelay: 5000,
   };
 
+  notificationsService.availableSoundPacks = Object.keys(vocalNotifications);
+
   notificationsService.getSound = function (event, settings) {
     var soundPack = settings['soundPack'];
     if (soundPack && vocalNotifications[soundPack][event]) {
