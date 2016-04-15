@@ -4,7 +4,7 @@ angular.module('tf2stadium')
 
 
 /** @ngInject */
-function SettingsConfigBlock(SettingsProvider) {
+function SettingsConfigBlock(SettingsProvider, VocalNotifications) {
   SettingsProvider.constants.filters = {
     regions: {
       eu:             {name: 'Europe'},
@@ -84,7 +84,14 @@ function SettingsConfigBlock(SettingsProvider) {
     SettingsProvider.settings.savedServers = '{}';
     SettingsProvider.settings.videoBackground = 'on';
 
+    // Use Array.find(arrVal,..) vs arrValue.find(..) to avoid using a
+    // prototype polyfill for now...
+    var defaultSoundPack =
+          Array.find(Object.entries(VocalNotifications),
+                     ([k, o]) => (o._default ? k : false))[0];
+
     SettingsProvider.settings.soundVolume = 10;
+    SettingsProvider.settings.soundPack = defaultSoundPack;
 
     /*
      Defaults every value found in the filters to true.

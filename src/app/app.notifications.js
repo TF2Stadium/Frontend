@@ -4,65 +4,79 @@ angular
   .module('tf2stadium.services')
   .factory('Notifications', NotificationsFactory);
 
+// TODO: move to config (putting this off until we do some sort of
+// default configurations)
+const VOCAL_NOTIFICATIONS = {
+  'Default': {
+    _default: true,
+    path: '/assets/sound/default/',
+    gameStart: ['start.wav'],
+    readyUp: ['readyup.wav'],
+    preview: ['readyup.wav'],
+  },
+
+  'Muselk': {
+    path: '/assets/sound/muselk/',
+    countdown: ['Countdown01.ogg', 'Countdown02.ogg', 'CountDown03.ogg'],
+    gameStart: ['GameStart01.ogg', 'GameStart02.ogg', 'GameStart03.ogg'],
+    readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg','ReadyUpB04.ogg'],
+    resetAddUp: ['ResetAddUp01.ogg','ResetAddUp02.ogg','ResetAddUp03.ogg'],
+    notReady: ['NotReady01.ogg', 'NotReady02.ogg'],
+    preview: ['PreviewSound01.ogg', 'PreviewSound02.ogg'],
+  },
+
+  'Uncle Dane': {
+    path: '/assets/sound/uncledane/',
+    countdown: ['Countdown01.ogg'],
+    gameStart: ['GameStart01.ogg'],
+    kicked: ['KickedByLeader01.ogg'],
+    readyUp: ['ReadyUpA01.ogg', 'ReadyUpB01.ogg'],
+    resetAddUp: ['ResetAddUp01.ogg'],
+    preview: ['PreviewSound01.ogg'],
+  },
+
+  'King Raja': {
+    path: '/assets/sound/kingraja/',
+    countdown: ['Countdown01.ogg'],
+    gameStart: ['GameStart01.ogg'],
+    kicked: ['KickedByLeader01.ogg'],
+    readyUp: ['ReadyUpA01.ogg', 'ReadyUpB01.ogg'],
+    notReady: ['NotReady01.ogg'],
+    preview: ['PreviewSound01.ogg'],
+  },
+
+  'KevinIsPwn': {
+    path: '/assets/sound/kevinispwn/',
+    countdown: ['Countdown01.ogg'],
+    gameStart: ['GameStart01.ogg'],
+    readyUp: ['ReadyUpA01.ogg', 'ReadyUpB01.ogg'],
+    preview: ['PreviewSound01.ogg'],
+  },
+
+  'KritzKast': {
+    path: '/assets/sound/kritzkast/',
+    countdown: ['Countdown01.ogg','Countdown02.ogg','Countdown03.ogg'],
+    gameStart: ['GameStart01.ogg', 'GameStart02.ogg', 'GameStart03.ogg'],
+    readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpA03.ogg','ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg'],
+    preview: ['PreviewSound.ogg'],
+  },
+
+  'GGGLYGY': {
+    path: '/assets/sound/ggglygy/',
+    countdown: ['Countdown01.wav','Countdown02.wav','Countdown03.wav'],
+    gameStart: ['GameStart01.wav','GameStart02.wav','GameStart03.wav'],
+    readyUp: ['ReadyUpA01.wav','ReadyUpA02.wav','ReadyUpA03.wav','ReadyUpA04.wav','ReadyUpA05.wav','ReadyUpB01.wav','ReadyUpB02.wav','ReadyUpB03.wav'],
+    preview: ['PreviewSound01.wav'],
+  },
+};
+
+angular
+  .module('tf2stadium.services')
+  .constant('VocalNotifications', VOCAL_NOTIFICATIONS);
+
 /** @ngInject */
 export function NotificationsFactory($rootScope, $mdToast, $window, $document,
                                      $timeout, $log) {
-  var vocalNotifications = {
-    'Muselk': {
-      path: '/assets/sound/muselk/',
-      countdown: ['Countdown01.ogg', 'Countdown02.ogg', 'CountDown03.ogg'],
-      gameStart: ['GameStart01.ogg', 'GameStart02.ogg', 'GameStart03.ogg'],
-      readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg','ReadyUpB04.ogg'],
-      resetAddUp: ['ResetAddUp01.ogg','ResetAddUp02.ogg','ResetAddUp03.ogg'],
-      notReady: ['NotReady01.ogg', 'NotReady02.ogg'],
-      preview: ['PreviewSound01.ogg', 'PreviewSound02.ogg'],
-    },
-
-    'Uncle Dane': {
-      path: '/assets/sound/uncledane/',
-      countdown: ['Countdown01.ogg'],
-      gameStart: ['GameStart01.ogg'],
-      kicked: ['KickedByLeader01.ogg'],
-      readyUp: ['ReadyUpA01.ogg', 'ReadyUpB01.ogg'],
-      resetAddUp: ['ResetAddUp01.ogg'],
-      preview: ['PreviewSound01.ogg'],
-    },
-
-    'King Raja': {
-      path: '/assets/sound/kingraja/',
-      countdown: ['Countdown01.ogg'],
-      gameStart: ['GameStart01.ogg'],
-      kicked: ['KickedByLeader01.ogg'],
-      readyUp: ['ReadyUpA01.ogg', 'ReadyUpB01.ogg'],
-      notReady: ['NotReady01.ogg'],
-      preview: ['PreviewSound01.ogg'],
-    },
-
-    'KevinIsPwn': {
-      path: '/assets/sound/kevinispwn/',
-      countdown: ['Countdown01.ogg'],
-      gameStart: ['GameStart01.ogg'],
-      readyUp: ['ReadyUpA01.ogg', 'ReadyUpB01.ogg'],
-      preview: ['PreviewSound01.ogg'],
-    },
-
-    'KritzKast': {
-      path: '/assets/sound/kritzkast/',
-      countdown: ['Countdown01.ogg','Countdown02.ogg','Countdown03.ogg'],
-      gameStart: ['GameStart01.ogg', 'GameStart02.ogg', 'GameStart03.ogg'],
-      readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpA03.ogg','ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg'],
-      preview: ['PreviewSound.ogg'],
-    },
-
-    'GGGLYGY': {
-      path: '/assets/sound/ggglygy/',
-      countdown: ['Countdown01.wav','Countdown02.wav','Countdown03.wav'],
-      gameStart: ['GameStart01.wav','GameStart02.wav','GameStart03.wav'],
-      readyUp: ['ReadyUpA01.wav','ReadyUpA02.wav','ReadyUpA03.wav','ReadyUpA04.wav','ReadyUpA05.wav','ReadyUpB01.wav','ReadyUpB02.wav','ReadyUpB03.wav'],
-      preview: ['PreviewSound01.wav'],
-    },
-  };
-
   var notificationsService = {};
 
   var toastDefault = {
@@ -79,17 +93,17 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
     hideDelay: 5000,
   };
 
-  notificationsService.availableSoundPacks = Object.keys(vocalNotifications);
+  notificationsService.availableSoundPacks = Object.keys(VOCAL_NOTIFICATIONS);
 
   notificationsService.getSound = function (event, settings) {
-    var soundPack = settings['soundPack'];
-    if (soundPack && vocalNotifications[soundPack][event]) {
-      var sounds = vocalNotifications[soundPack][event];
-      return vocalNotifications[soundPack].path + sounds[Math.floor(Math.random() * sounds.length)];
-    } else if (event === 'readyUp') {
-      return '/assets/sound/default/readyup.wav';
-    } else if (event === 'gameStart') {
-      return '/assets/sound/default/start.wav';
+    var soundPackName = settings.soundPack,
+      soundPack = VOCAL_NOTIFICATIONS[soundPackName];
+
+    if (soundPack) {
+      var sounds = soundPack[event];
+      if (sounds) {
+        return soundPack.path + sounds[Math.floor(Math.random() * sounds.length)];
+      }
     }
 
     return;
