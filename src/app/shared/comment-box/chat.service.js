@@ -1,5 +1,7 @@
 import xssFilters from 'xss-filters';
 
+const requireJson = require.context('../../../assets/', false, /^.*\.json$/);
+
 angular
   .module('tf2stadium.services')
   .factory('ChatService', ChatService);
@@ -256,7 +258,7 @@ function ChatService($rootScope, $sce, $log, $http, $q,
       if (settings.emoteStyle === 'none') {
         promise = $q.when({data: []});
       } else {
-        promise = $http.get('/assets/' + settings.emoteStyle + '.json');
+        promise = $q.when({data: requireJson('./' + settings.emoteStyle + '.json')});
       }
 
       promise.then(function (data) {
