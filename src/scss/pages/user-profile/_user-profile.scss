@@ -5,6 +5,8 @@
   $avatar-side-len: 200px;
   $avatar-vertical-offset: -50px;
 
+  margin-top: $padding-medium;
+
   // the avatar is moved via float, so use min-height to ensure
   // this card never gets so small that the bottom border of the
   // card is too close to the bottom of the avatar
@@ -122,7 +124,7 @@
   @extend .sheet;
   padding: $padding-medium 70px;
 
-  margin-top: $padding-medium;
+  margin-bottom: $padding-medium;
 
   h1, h2 {
     margin: 0;
