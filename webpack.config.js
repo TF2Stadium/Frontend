@@ -175,7 +175,7 @@ module.exports = {
       test: /\.json$/,
       loader: 'json',
     }, {
-      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot)$/,
+      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|otf)$/,
       loader: 'file?name=[path][name].[ext]',
     }, {
       test: /\.html$/,
