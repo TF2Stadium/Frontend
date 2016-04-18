@@ -2,10 +2,13 @@ angular.module('tf2stadium')
   .config(registerIcons)
   .run(preloadIcons);
 
+const requireImage = require.context('../assets/img/', true, /^.*\.(svg|png)$/);
+
 // TODO: Change the icons to either be font based, or to be a single
 // SVG icon set file (SVG file with groups with ids that are the
 // icons' names)
-var materialIconsBase = '/assets/img/icons/material/';
+
+var materialIconsBase = './icons/material/';
 var materialIcons = [
   {name: 'add', file: 'add.svg'},
   {name: 'clear', file: 'clear.svg'},
@@ -18,13 +21,13 @@ var materialIcons = [
   {name: 'settings', file: 'settings.svg'},
 ];
 
-var logosBase = '/assets/img/logos/';
+var logosBase = './logos/';
 var logoIcons = [
   {name: 'twitch', file: 'twitch.svg'},
   {name: 'steam', file: 'steam.svg'},
 ];
 
-var classesBase = '/assets/img/icons/class/';
+var classesBase = './icons/class/';
 var classes = [
   'scout',
   'soldier',
@@ -41,30 +44,30 @@ var classes = [
 function registerIcons($mdIconProvider) {
   materialIcons.forEach(function (desc) {
     $mdIconProvider
-      .icon('material:' + desc.name, materialIconsBase + desc.file);
+      .icon('material:' + desc.name,
+            requireImage(materialIconsBase + desc.file));
   });
 
   logoIcons.forEach(function (desc) {
     $mdIconProvider
-      .icon('logo:' + desc.name, logosBase + desc.file);
+      .icon('logo:' + desc.name, requireImage(logosBase + desc.file));
   });
 
-  classes.forEach(function (name) {
-    $mdIconProvider
-      .icon('class:' + name, classesBase + name + '.svg');
-  });
+  classes
+    .forEach(name =>
+             $mdIconProvider.icon('class:' + name,
+                                  requireImage(classesBase + name + '.svg')));
 
-  $mdIconProvider.icon('logo:mumble', '/assets/img/mumble.svg');
-  $mdIconProvider.icon('logo:not-mumble', '/assets/img/not-mumble.svg');
+  $mdIconProvider.icon('logo:mumble', requireImage('./mumble.svg'));
+  $mdIconProvider.icon('logo:not-mumble', requireImage('./not-mumble.svg'));
 }
 
 /** @ngInject */
 function preloadIcons($http, $templateCache) {
-  materialIcons.map(descToURL).forEach(preload);
-
-  function descToURL(desc) {
-    return materialIconsBase + desc.file;
-  }
+  materialIcons
+    .map(desc => materialIconsBase + desc.file)
+    .map(requireImage)
+    .forEach(preload);
 
   function preload(url) {
     $http.get(url, {cache: $templateCache});

@@ -3914,7 +3914,8 @@
         },
         "assert-plus": {
           "version": "0.2.0",
-          "from": "assert-plus@>=0.2.0 <0.3.0"
+          "from": "assert-plus@0.2.0",
+          "resolved": "https://registry.npmjs.org/assert-plus/-/assert-plus-0.2.0.tgz"
         }
       }
     },
@@ -4019,6 +4020,11 @@
       "version": "0.6.3",
       "from": "svgo@>=0.6.1 <0.7.0",
       "resolved": "https://registry.npmjs.org/svgo/-/svgo-0.6.3.tgz"
+    },
+    "svgo-loader": {
+      "version": "1.1.0",
+      "from": "svgo-loader@latest",
+      "resolved": "https://registry.npmjs.org/svgo-loader/-/svgo-loader-1.1.0.tgz"
     },
     "swap-case": {
       "version": "1.1.2",
@@ -4414,7 +4420,8 @@
     },
     "wsevent.js": {
       "version": "1.0.2",
-      "from": "wsevent.js@>=1.0.2 <2.0.0"
+      "from": "wsevent.js@1.0.2",
+      "resolved": "https://registry.npmjs.org/wsevent.js/-/wsevent.js-1.0.2.tgz"
     },
     "x-is-array": {
       "version": "0.1.0",
