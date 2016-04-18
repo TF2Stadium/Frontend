@@ -61,6 +61,8 @@ var babelSettings = {
   cacheDirectory: true,
 };
 
+var svgoSettings = require('./svgo.config.js');
+
 var extractAppStyles = new ExtractTextPlugin('app.css');
 var extractVendorStyles = new ExtractTextPlugin('vendor.css');
 
@@ -175,7 +177,13 @@ module.exports = {
       test: /\.json$/,
       loader: 'json',
     }, {
-      test: /\.(png|jpg|jpeg|gif|svg|woff|woff2|ttf|eot|otf)$/,
+      test: /\.svg$/,
+      loaders: [
+        'file?name=[path][name].[ext]',
+        'svgo?' + JSON.stringify(svgoSettings),
+      ],
+    }, {
+      test: /\.(png|jpg|jpeg|gif|woff|woff2|ttf|eot|otf)$/,
       loader: 'file?name=[path][name].[ext]',
     }, {
       test: /\.html$/,
@@ -221,7 +229,12 @@ module.exports = {
       },
     }),
     new CommonsChunkPlugin('vendor', 'vendor.js'),
-    new CopyWebpackPlugin([{ from: 'assets/', to: 'assets/' }]),
+    // The copy plugin is a hack until we get all assets properly require'd by JS
+    new CopyWebpackPlugin([{
+      from: 'assets/',
+      to: 'assets/',
+      ignore: ['*.svg', '*.png'],
+    }]),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     // Ignore meaningless moment build warnings:
