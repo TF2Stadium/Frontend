@@ -61,12 +61,17 @@ const VOCAL_NOTIFICATIONS = {
     preview: ['PreviewSound.ogg'],
   },
 
-  'GGGLYGY': {
-    path: '/assets/sound/ggglygy/',
-    countdown: ['Countdown01.wav','Countdown02.wav','Countdown03.wav'],
-    gameStart: ['GameStart01.wav','GameStart02.wav','GameStart03.wav'],
-    readyUp: ['ReadyUpA01.wav','ReadyUpA02.wav','ReadyUpA03.wav','ReadyUpA04.wav','ReadyUpA05.wav','ReadyUpB01.wav','ReadyUpB02.wav','ReadyUpB03.wav'],
-    preview: ['PreviewSound01.wav'],
+  'Getawhale': {
+    path: '/assets/sound/getawhale/',
+    countdown: ['Countdown01.ogg'],
+    gameStart: ['GameStart01.ogg'],
+    readyUp: ['ReadyUpA01.ogg', 'ReadyUpB01.ogg'],
+    preview: ['PreviewSound01.ogg'],
+    notReady: ['NotReady01.ogg'],
+    kicked: ['KickedByLeader01.ogg'],
+    //LiftedRestrict01.ogg
+    //LobbyClosed01.ogg
+    //ReserAddup01.ogg
   },
 };
 
