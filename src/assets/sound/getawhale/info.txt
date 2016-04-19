@@ -1,0 +1,25 @@
+// WHO: GETAWHALE
+//
+// Number equals how many files there are.
+// 0 means the file is missing.
+
+ReadyUpA = 1
+ReadyUpB = 1
+NotReady = 1
+GameStart = 1
+KickedByLeader = 0
+LobbyClosed = 1
+ResetAddUp = 1
+LiftedRestrict = 1
+Countdown = 1
+
+AddedToSpot = 0
+ReAddedToQueue = 0
+SlotAvailable = 0
+LobbyAvailable = 0
+
+ThisIsTF2S = 0
+WelcomeToTF2S = 0
+TF2S = 0
+
+PreviewSound = 1
