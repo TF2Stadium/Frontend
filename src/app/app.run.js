@@ -8,7 +8,7 @@ angular
 function runBlock($timeout, $window, $state, $rootScope, $log,
                   $location, $mdDialog,
                   Websocket, PreloadService, Config,
-                  User, Settings, LobbyService, Notifications) {
+                  User, Settings, LobbyService, Notifications, safeApply) {
   // Google Analytics
   // big TODO: move this to a build variable
   $window.ga('create', 'UA-65920939-1', 'auto');
@@ -43,12 +43,24 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
   User.init();
 
   $rootScope.config = Config;
-  Settings.getSettings(function (settings) {
-    $rootScope.currentTheme = settings.currentTheme;
-    $rootScope.currentTimestampsOption = settings.timestamps;
-    $rootScope.animationLength = settings.animationLength;
-    $rootScope.themeLoaded = true;
-  });
+
+  var syncHandler = false;
+  function syncGlobalSettings() {
+    Settings.getSettings((settings) => {
+      safeApply($rootScope, () => {
+        $rootScope.currentTheme = settings.currentTheme;
+        $rootScope.currentTimestamppsOption = settings.timestamps;
+        $rootScope.animationLength = settings.animationLength;
+        $rootScope.themeLoaded = true;
+      });
+    });
+
+    if (!syncHandler) {
+      syncHandler = $rootScope.$on('settings-updated', (e, data) => syncGlobalSettings(data));
+    }
+  }
+
+  syncGlobalSettings();
 
   //If the websocket is dead, we still need to show the page.
   $timeout(function () {

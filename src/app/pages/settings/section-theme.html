@@ -11,8 +11,8 @@
 <div class="settings-section">
   <h1>UI Animations</h1>
   <md-radio-group
-     ng-model="$root.animationLength"
-     ng-change="settings.saveSetting('animationLength', $root.animationLength)">
+     ng-model="settings.animationLength"
+     ng-change="settings.saveSetting('animationLength', settings.animationLength)">
     <md-radio-button
        ng-repeat="(key, opt) in settings.sections.theme.animationOptions track by opt.selector"
        ng-value="opt.selector">

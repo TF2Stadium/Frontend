@@ -8,21 +8,32 @@ angular
 function SettingsPageController($rootScope, $scope, $mdEditDialog,
                                 $timeout,
                                 SettingsPage, Settings,
-                                User, Notifications) {
+                                User, Notifications, safeApply) {
   var vm = this;
 
   vm.sections = SettingsPage.getSections();
 
   vm.saveSetting = function (key, value, showNotification) {
-    var msg = 'Setting updated.';
-    var promise = Settings.set(key, value);
+    function updateSettings() {
+      var msg = 'Setting updated.';
+      var promise = Settings.set(key, value);
 
-    if (showNotification) {
-      promise.then(function () {
-        Notifications.toast({message: msg});
-      }, function () {
-        Notifications.toast({message: msg, error: true});
-      });
+      if (showNotification) {
+        promise.then(function () {
+          Notifications.toast({message: msg});
+        }, function () {
+          Notifications.toast({message: msg, error: true});
+        });
+      }
+    }
+
+    if (key === 'animationLength') {
+      $rootScope.animationLength = 'none';
+      setTimeout(() => {
+        safeApply($rootScope, updateSettings);
+      }, 1);
+    } else {
+      updateSettings();
     }
   };
 
@@ -176,6 +187,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
       vm.originalSettings = settings;
 
       populateFilters(settings);
+      vm.animationLength = settings.animationLength;
       vm.videoBackground = settings.videoBackground;
       vm.soundVolume = +settings.soundVolume;
       vm.siteAlias = settings.siteAlias;
