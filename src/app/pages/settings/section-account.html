@@ -57,7 +57,7 @@
     ng-click="settings.enableTwitchBot()">
     Enable Twitch Bot
   </md-button>
-  <br />
+  <br ng-if="$root.userProfile.twitchName" />
   <md-button
     ng-if="$root.userProfile.twitchName"
     class="md-raised md-primary"
