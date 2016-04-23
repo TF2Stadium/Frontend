@@ -1,3 +1,5 @@
+/*global __dirname, module, process */
+
 var path = require('path');
 
 var babelSettings = {
@@ -5,7 +7,7 @@ var babelSettings = {
   extends: path.join(__dirname, '/.babelrc'),
   // For testing, especially useful for angular-style modules in the
   // process of being converted
-  plugins: ['rewire']
+  plugins: ['rewire'],
 };
 
 var browsers = ['PhantomJS'];
@@ -32,12 +34,12 @@ module.exports = function (config) {
       'node_modules/es5-shim/es5-shim.js',
       'src/app/app.js',
       'node_modules/angular-mocks/angular-mocks.js',
-      'test/karma/**/*.js'
+      'test/karma/**/*.js',
     ],
 
     preprocessors: {
       'src/app/**/*.js': ['webpack', 'sourcemap'],
-      'test/karma/**/*.js': ['webpack']
+      'test/karma/**/*.js': ['webpack'],
     },
 
     webpack: {
@@ -45,30 +47,30 @@ module.exports = function (config) {
       devtool: 'inline-source-map',
       resolve: {
         alias: {
-          'app-config': toPath('app.config.template.json')
-        }
+          'app-config': toPath('test/app.config.test.json'),
+        },
       },
       module: {
         loaders: [{
           test: /\.js$/,
           exclude: /(node_modules|vendor\.js)/,
-          loader: 'babel?' + JSON.stringify(babelSettings)
+          loader: 'babel?' + JSON.stringify(babelSettings),
         }, {
           test: /\.json$/,
-          loader: 'json'
+          loader: 'json',
         }, {
           test: /\.(s?[ac]ss|html?)$/,
           include: [
             path.resolve(__dirname, 'src/'),
             path.resolve(__dirname, 'src/app/pages'),
-            path.resolve(__dirname, 'src/app/shared')
+            path.resolve(__dirname, 'src/app/shared'),
           ],
-          loader: 'null'
-        }]
-      }
+          loader: 'null',
+        }],
+      },
     },
     webpackMiddleware: {
-      noInfo: true
-    }
+      noInfo: true,
+    },
   });
 };
