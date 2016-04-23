@@ -16,6 +16,7 @@ var path = require('path');
 var fs = require('fs');
 var os = require('os');
 var gitRev = require('git-rev-sync');
+var marked = require('marked');
 
 // This webpack config is known to be very anti-webpack in how it
 // works. This is for legacy reasons and is being gradually updated.
@@ -38,6 +39,17 @@ function fileExists(f) {
     return !(err && err.code === 'ENOENT');
   }
 }
+
+var markdownRenderer = new marked.Renderer();
+markdownRenderer.link = function (href, title, text) {
+  var out = '<a href="' + href + '" target="_blank"';
+  if (title && title !== 'newWindow') {
+    out += ' title="' + title + '"';
+  }
+  out += '>' + text + '</a>';
+
+  return out;
+};
 
 var configFile = [
   toPath('src/app/app.config.js'),
@@ -194,7 +206,11 @@ module.exports = {
       loader: 'ngtemplate?relativeTo=app/&prefix=app/!html',
     }, {
       test: /\.md$/,
-      loader: 'ngtemplate?relativeTo=app/&prefix=app/!html!markdown',
+      loaders: [
+        'ngtemplate?relativeTo=app/&prefix=app/',
+        'html',
+        'markdown?config=markdownLoader',
+      ],
     }, {
       test: /\.css$/,
       include: /(material\.css|angular|angular-material)/,
@@ -262,5 +278,9 @@ module.exports = {
   devServer: {
     historyApiFallback: true,
     contentBase: toPath('dist/'),
+  },
+
+  markdownLoader: {
+    renderer: markdownRenderer,
   },
 };
