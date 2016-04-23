@@ -2,15 +2,30 @@ angular.module('tf2stadium')
   .config(AboutPageConfig)
   .provider('AboutPage', AboutPage);
 
+const requireAbout = require.context('./', true, /\.md$/);
+
+const SECTIONS = [
+  'about',
+  'faq',
+  'changelog',
+  'privacy',
+  'servers',
+  'credits',
+];
+
+// Needs to run at module load time to properly initialized the
+// angular templateCache
+SECTIONS.forEach(s => requireAbout('./section-' + s + '.md'));
+
 /** @ngInject */
-function AboutPageConfig($stateProvider, AboutPageProvider) {
-  AboutPageProvider.sections.forEach(function (section) {
+function AboutPageConfig($stateProvider) {
+  SECTIONS.forEach((section) => {
     $stateProvider.state('about-' + section, {
       url: '/' + section,
       parent: 'about',
       views: {
         'about-section': {
-          templateUrl: 'app/pages/about/section-' + section + '.html',
+          templateUrl: requireAbout('./section-' + section + '.md'),
         },
       },
     });
@@ -19,16 +34,7 @@ function AboutPageConfig($stateProvider, AboutPageProvider) {
 
 /** @ngInject */
 function AboutPage() {
-  var aboutPageProvider = {
-    sections: [
-      'about',
-      'faq',
-      'changelog',
-      'privacy',
-      'servers',
-      'credits',
-    ],
-  };
+  var aboutPageProvider = { sections: SECTIONS };
 
   /** @ngInject */
   var aboutPageService = function () {
