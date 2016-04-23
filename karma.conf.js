@@ -52,6 +52,15 @@ module.exports = function (config) {
       },
       module: {
         loaders: [{
+          test: /\.svg$/,
+          loaders: [
+            'file?name=[path][name].[ext]',
+            'svgo',
+          ],
+        }, {
+          test: /\.(png|jpg|jpeg|gif|woff|woff2|ttf|eot|otf)$/,
+          loader: 'file?name=[path][name].[ext]',
+        }, {
           test: /\.js$/,
           exclude: /(node_modules|vendor\.js)/,
           loader: 'babel?' + JSON.stringify(babelSettings),
@@ -59,7 +68,7 @@ module.exports = function (config) {
           test: /\.json$/,
           loader: 'json',
         }, {
-          test: /\.(s?[ac]ss|html?)$/,
+          test: /\.(s?[ac]ss|html?|md)$/,
           include: [
             path.resolve(__dirname, 'src/'),
             path.resolve(__dirname, 'src/app/pages'),
