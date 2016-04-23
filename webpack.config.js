@@ -113,7 +113,7 @@ module.exports = {
   },
 
   noParse: [
-    /node_modules\/angular/,
+//    /node_modules\/angular/,
     /node_modules\/angular-material/,
     /node_modules\/angular-material-data-table/,
     /node_modules\/angular-animate/,
@@ -133,8 +133,8 @@ module.exports = {
     alias: {
       'app-config': configFile,
 
-      angular: toPath('lib/angular-min.js'),
-      'angular-min': toPath('/node_modules/angular/angular.min.js'),
+//      angular: toPath('lib/angular-min.js'),
+  //    'angular-min': toPath('/node_modules/angular/angular.min.js'),
 
       'angular-material':
       toPath('/node_modules/angular-material/angular-material.min.js'),
@@ -192,6 +192,9 @@ module.exports = {
         toPath('src/app/shared'),
       ],
       loader: 'ngtemplate?relativeTo=app/&prefix=app/!html',
+    }, {
+      test: /\.md$/,
+      loader: 'ngtemplate?relativeTo=app/&prefix=app/!html!markdown',
     }, {
       test: /\.css$/,
       include: /(material\.css|angular|angular-material)/,

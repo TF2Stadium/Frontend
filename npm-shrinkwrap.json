@@ -2639,6 +2639,23 @@
       "from": "map-stream@>=0.1.0 <0.2.0",
       "resolved": "https://registry.npmjs.org/map-stream/-/map-stream-0.1.0.tgz"
     },
+    "markdown-loader": {
+      "version": "0.1.7",
+      "from": "markdown-loader@latest",
+      "resolved": "https://registry.npmjs.org/markdown-loader/-/markdown-loader-0.1.7.tgz",
+      "dependencies": {
+        "object-assign": {
+          "version": "2.1.1",
+          "from": "object-assign@>=2.0.0 <3.0.0",
+          "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-2.1.1.tgz"
+        }
+      }
+    },
+    "marked": {
+      "version": "0.3.5",
+      "from": "marked@>=0.3.2 <0.4.0",
+      "resolved": "https://registry.npmjs.org/marked/-/marked-0.3.5.tgz"
+    },
     "matches-selector": {
       "version": "0.0.1",
       "from": "matches-selector@0.0.1",

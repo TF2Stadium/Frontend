@@ -28,6 +28,7 @@
     "clipboard": "1.5.9",
     "kefir": "3.2.1",
     "lodash": "3.10.1",
+    "markdown-loader": "^0.1.7",
     "moment": "2.12.0",
     "ng-media-events": "1.0.1",
     "ngreact": "0.2.0",

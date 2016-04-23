@@ -2,6 +2,11 @@ angular.module('tf2stadium')
   .config(AboutPageConfig)
   .provider('AboutPage', AboutPage);
 
+const IS_MD = {
+  changelog: true,
+  privacy: true,
+};
+
 /** @ngInject */
 function AboutPageConfig($stateProvider, AboutPageProvider) {
   AboutPageProvider.sections.forEach(function (section) {
@@ -10,7 +15,8 @@ function AboutPageConfig($stateProvider, AboutPageProvider) {
       parent: 'about',
       views: {
         'about-section': {
-          templateUrl: 'app/pages/about/section-' + section + '.html',
+          templateUrl: 'app/pages/about/section-' +
+            section + (IS_MD[section]? '.md' : '.html'),
         },
       },
     });
