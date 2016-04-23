@@ -113,7 +113,7 @@ module.exports = {
   },
 
   noParse: [
-//    /node_modules\/angular/,
+    /node_modules\/angular/,
     /node_modules\/angular-material/,
     /node_modules\/angular-material-data-table/,
     /node_modules\/angular-animate/,
@@ -133,8 +133,8 @@ module.exports = {
     alias: {
       'app-config': configFile,
 
-//      angular: toPath('lib/angular-min.js'),
-  //    'angular-min': toPath('/node_modules/angular/angular.min.js'),
+      angular: toPath('lib/angular-min.js'),
+      'angular-min': toPath('/node_modules/angular/angular.min.js'),
 
       'angular-material':
       toPath('/node_modules/angular-material/angular-material.min.js'),

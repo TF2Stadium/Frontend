@@ -50,13 +50,7 @@ require('./pages/rules/section-rules.html');
 require('./pages/user-profile/user-profile.html');
 require('./pages/user-profile/header.html');
 require('./pages/about/about-sidebar.html');
-require('./pages/about/section-about.html');
-require('./pages/about/section-privacy.md');
-require('./pages/about/section-servers.html');
 require('./pages/about/about.html');
-require('./pages/about/section-credits.html');
-require('./pages/about/section-changelog.md');
-require('./pages/about/section-faq.html');
 
 require('../scss/app.scss');
 
