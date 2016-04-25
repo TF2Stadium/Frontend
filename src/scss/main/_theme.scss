@@ -11,7 +11,7 @@ $themes-list: (
     body-background:      $white-dirty,
     header-background:    $white-dirty,
     text-color-hard:      $grey-hard,
-    text-color-medium:    $grey-medium,
+    text-color-medium:    #666, // $grey-medium,
     text-color-light:     $grey-light,
     shadow-multiplier:    1,
     toast-background:     #323232,
