@@ -2,6 +2,16 @@ angular.module('tf2stadium')
   .config(SettingsPageConfig)
   .provider('SettingsPage', SettingsPage);
 
+require('./section-filters.html');
+require('./section-chat.html');
+require('./section-servers.html');
+require('./settings.html');
+require('./section-sound.html');
+require('./section-general.html');
+require('./settings-sidebar.html');
+require('./section-theme.html');
+require('./section-account.html');
+
 /** @ngInject */
 function SettingsPageConfig($stateProvider, SettingsPageProvider) {
   /*

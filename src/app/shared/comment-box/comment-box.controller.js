@@ -2,6 +2,8 @@ angular
   .module('tf2stadium.controllers')
   .controller('CommentBoxController', CommentBoxController);
 
+require('./comment-box.html');
+
 /** @ngInject */
 function CommentBoxController($rootScope, $scope, $window, $log, $timeout,
                               ChatService) {
