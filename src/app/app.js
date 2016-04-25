@@ -16,18 +16,8 @@ if (typeof __BUILD_STATS__ !== 'undefined') {
   );
 }
 
-require('./shared/comment-box/comment-box.html');
 require('./shared/notifications/ready-up.html');
 require('./shared/notifications/toast.html');
-require('./pages/settings/section-filters.html');
-require('./pages/settings/section-chat.html');
-require('./pages/settings/section-servers.html');
-require('./pages/settings/settings.html');
-require('./pages/settings/section-sound.html');
-require('./pages/settings/section-general.html');
-require('./pages/settings/settings-sidebar.html');
-require('./pages/settings/section-theme.html');
-require('./pages/settings/section-account.html');
 require('./pages/lobby/page/spectators.html');
 require('./pages/lobby/page/header.html');
 require('./pages/lobby/page/lobby-page.html');
