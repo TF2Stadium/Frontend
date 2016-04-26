@@ -7,7 +7,7 @@ function User(Websocket, $rootScope, $window, $q, Config) {
 
   var userService = {};
 
-  userService.getProfile = function (steamid, callback) {
+  userService.getProfile = (steamid, callback) => {
     callback = callback || angular.noop;
 
     var deferred = $q.defer();
@@ -27,34 +27,28 @@ function User(Websocket, $rootScope, $window, $q, Config) {
     return deferred.promise;
   };
 
-  userService.getLobbies = function (steamid, cnt) {
-    return Websocket.emitJSON('playerRecentLobbies', {
+  userService.getLobbies = (steamid, cnt) =>
+    Websocket.emitJSON('playerRecentLobbies', {
       steamid,
       lobbies: cnt,
     });
-  };
 
-  userService.getMumblePassword = function () {
-    return Websocket.emitJSON('getMumblePassword', {});
-  };
+  userService.getMumblePassword =
+    () => Websocket.emitJSON('getMumblePassword', {});
 
-  userService.resetMumblePassword = function () {
-    $window.open(Config.endpoints.api + '/resetMumblePassword', '_self');
-  };
+  userService.resetMumblePassword =
+    () => $window.open(Config.endpoints.api + '/resetMumblePassword', '_self');
 
-  userService.enableTwitchBot = function () {
-    Websocket.emitJSON('playerEnableTwitchBot', {});
-  };
+  userService.enableTwitchBot =
+    () => Websocket.emitJSON('playerEnableTwitchBot', {});
 
-  userService.disableTwitchBot = function () {
-    Websocket.emitJSON('playerDisableTwitchBot', {});
-  };
+  userService.disableTwitchBot =
+    () => Websocket.emitJSON('playerDisableTwitchBot', {});
 
-  userService.init = function () {
+  userService.init = () =>
     Websocket.onJSON('playerProfile', function (data) {
       $rootScope.userProfile = data;
     });
-  };
 
   return userService;
 }

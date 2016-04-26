@@ -14,9 +14,7 @@ function Websocket($rootScope, $timeout, $log, $q,
   function asyncAngularify(callback) {
     return function asyncAngularifedFn() {
       var args = arguments;
-      $timeout(function () {
-        callback.apply(null, args);
-      }, 0);
+      $timeout(() => callback.apply(null, args), 0);
     };
   }
 
@@ -25,7 +23,7 @@ function Websocket($rootScope, $timeout, $log, $q,
     maxRetries: 0,
   });
 
-  socket.onopen = function (e) {
+  socket.onopen = (e) => {
     // Note: connected=true must come before we emit the event,
     // otherwise listeners might try to send data in response to the
     // event and it will never get sent (because when
@@ -47,22 +45,20 @@ function Websocket($rootScope, $timeout, $log, $q,
     }
   };
 
-  socket.onclose = function () {
+  socket.onclose = () => {
     // this callback is called both when an opened connection is
     // closed and when a closed connection attempts a reconnect, but
     // fails.
     $log.log('WebSocket closed');
     connected = false;
 
-    asyncAngularify(function () {
-      $rootScope.$emit('socket-closed');
-    })();
+    asyncAngularify(() => $rootScope.$emit('socket-closed'))();
 
     Notifications.toast({
       message: 'Disconnected from server',
       error: true,
       actionMessage: 'Reconnect',
-      action: function () {
+      action: () => {
         $log.log('WebSocket reconnecting');
         reconnecting = true;
         socket.connect();
@@ -90,7 +86,7 @@ function Websocket($rootScope, $timeout, $log, $q,
   // before the socket is connected.
   var queuedMessages = Object.create(null);
   var registeredHandlers = Object.create(null);
-  socket.onmessage = function (name, data) {
+  socket.onmessage = (name, data) => {
     if (!registeredHandlers[name]) {
       $log.log('Received message with no registered handler: ' + name,
                data);
@@ -103,7 +99,7 @@ function Websocket($rootScope, $timeout, $log, $q,
   };
 
   var factory = {};
-  factory.onJSON = function (name, callback, dontApply) {
+  factory.onJSON = (name, callback, dontApply) => {
     if (console && console.timeStamp) {
       console.timeStamp('WS'+name);
     }
@@ -142,14 +138,14 @@ function Websocket($rootScope, $timeout, $log, $q,
   };
   factory.on = factory.onJSON.bind(factory);
 
-  factory.off = function () {
+  factory.off = () => {
     // During transition to kefir this may be theoretically needed,
     // but currently none of our uses of Kefir fromEvent streams are
     // expected to actually call this.
     console.log('NOT IMPLEMENTED');
   };
 
-  factory.emitJSON = function (name, data, callback) {
+  factory.emitJSON = (name, data, callback) => {
     var deferred = $q.defer();
     callback = asyncAngularify(callback || angular.noop);
 
@@ -160,7 +156,7 @@ function Websocket($rootScope, $timeout, $log, $q,
     if (connected) {
       emitJSONImpl();
     } else {
-      var deregister = $rootScope.$on('socket-opened', function () {
+      var deregister = $rootScope.$on('socket-opened', () => {
         emitJSONImpl();
         deregister();
       });
@@ -172,7 +168,7 @@ function Websocket($rootScope, $timeout, $log, $q,
       $log.log('Sending ' + name, data);
       data.request = name;
 
-      socket.Emit(data, function (jsonIn) {
+      socket.Emit(data, (jsonIn) => {
         var dataIn = angular.fromJson(jsonIn);
 
         if (console && console.timeStamp) {
