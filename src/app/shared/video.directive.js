@@ -24,8 +24,8 @@ function VideoBackgroundDirective($rootScope, Settings) {
       scope.showVideo = false;
       scope.pageFocused = true;
 
-      focused.onValue(function (isFocused) {
-        scope.$apply(function () {
+      focused.onValue((isFocused) => {
+        scope.$apply(() => {
           if (!scope.pageFocused && isFocused) {
             scope.videoReady = false;
           }
@@ -37,12 +37,10 @@ function VideoBackgroundDirective($rootScope, Settings) {
       // use ng-show to prevent a black flash from displaying
       // an unloaded video when the videoBackground setting changes
       scope.videoReady = false;
-      scope.canPlay = function () {
-        scope.videoReady = true;
-      };
+      scope.canPlay = () => scope.videoReady = true;
 
       function syncSettings() {
-        Settings.getSettings(function (settings) {
+        Settings.getSettings((settings) => {
           scope.showVideo = (settings.videoBackground === 'on');
           if (!scope.showVideo) {
             scope.videoReady = false;
