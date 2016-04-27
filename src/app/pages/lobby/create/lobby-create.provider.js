@@ -1,3 +1,14 @@
+require('./step-restrictions.html');
+require('./step-server.html');
+require('./step-mumble.html');
+require('./header.html');
+require('./lobby-create-steps.html');
+require('./step-map.html');
+require('./lobby-create.html');
+require('./step-whitelist.html');
+require('./step-format.html');
+require('./step-league.html');
+
 angular
   .module('tf2stadium')
   .config(LobbyCreateConfig);
