@@ -2,6 +2,11 @@ angular.module('tf2stadium')
   .config(RulesPageConfig)
   .provider('RulesPage', RulesPage);
 
+require('./rules-sidebar.html');
+require('./rules.html');
+require('./section-punishments.html');
+require('./section-rules.html');
+
 /** @ngInject */
 function RulesPageConfig($stateProvider, RulesPageProvider) {
   RulesPageProvider.sections.forEach(function (section) {
