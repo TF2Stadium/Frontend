@@ -16,19 +16,7 @@ if (typeof __BUILD_STATS__ !== 'undefined') {
   );
 }
 
-require('./shared/notifications/ready-up.html');
-require('./shared/notifications/toast.html');
-require('./pages/lobby/page/spectators.html');
-require('./pages/lobby/page/header.html');
-require('./pages/lobby/page/lobby-page.html');
-require('./pages/lobby/list/header.html');
-require('./pages/lobby/list/lobby-list.html');
-require('./pages/user-profile/user-profile.html');
-require('./pages/user-profile/header.html');
-require('./pages/about/about-sidebar.html');
-require('./pages/about/about.html');
-
-require('../scss/app.scss');
+import '../scss/app.scss';
 
 /** @ngInject */
 function disableDebug($compileProvider) {

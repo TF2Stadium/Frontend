@@ -1,3 +1,6 @@
+require('./about-sidebar.html');
+require('./about.html');
+
 angular
   .module('tf2stadium')
   .controller('AboutPageController', AboutPageController);

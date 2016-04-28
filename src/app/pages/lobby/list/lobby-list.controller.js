@@ -1,3 +1,6 @@
+require('./header.html');
+require('./lobby-list.html');
+
 angular
   .module('tf2stadium.controllers')
   .controller('LobbyListController', LobbyListController);
