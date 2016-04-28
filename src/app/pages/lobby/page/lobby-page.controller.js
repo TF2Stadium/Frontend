@@ -1,3 +1,7 @@
+require('./spectators.html');
+require('./header.html');
+require('./lobby-page.html');
+
 angular
   .module('tf2stadium.controllers')
   .controller('LobbyPageController', LobbyPageController);
