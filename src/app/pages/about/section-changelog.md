@@ -1,5 +1,11 @@
 # Changelog
 
+## 28. April 2016
+
+ * Lots of stability fixes!
+ * Fix not using NA serveme properly
+ * Re-added Ggglygy sound pack
+
 ## 19. April 2016
 
  * Add vocal notifications
