@@ -12,6 +12,8 @@
   $delay: defaults to 0s -null so it doesn't appear in the property.
   $stagger: meant for staggering children of the same parent.
 */
+$animation-duration: 2;
+$set-delay: 0;
 @mixin animation($names, $duration: $animation-duration, $delay: null, $stagger: null) {
   $animation:; //declare variable
 
@@ -210,11 +212,14 @@ $animation-options-list: (
   )
 );
 
+$animation-option: ();
 @function themeVar ($varName) {
   @return map-get($animation-option, $varName);
 }
 
-@each $animation-label, $animation-option in $animation-options-list {
+@each $animation-label, $animation-option2 in $animation-options-list {
+  $animation-option: $animation-option2;
+
   $speed-multiplier:          themeVar(speed-multiplier);
   $animation-fast:            $animation-duration-default * $speed-multiplier * 0.5;
   $animation-regular:         $animation-duration-default * $speed-multiplier;

@@ -35,17 +35,22 @@ $themes-list: (
   )
 );
 
+$theme: ();
+
 @function themeVar ($varName) {
   @return map-get($theme, $varName);
 }
 
-@each $theme-label, $theme in $themes-list {
+@each $theme-label, $theme2 in $themes-list {
+  $theme: $theme2;
+
   $main-color:            themeVar(main-color);
   $secondary-color:       themeVar(secondary-color);
   $warn-color:            themeVar(warn-color);
   $good-color:          themeVar(good-color);
   $body-color:            themeVar(body-background);
   $sheet-color:           lighten($body-color, 6.5%);
+  $hover-color: '';
   @if themeVar(type) == 'light' {
     $hover-color:           lighten($body-color, 3.25%);
   } @else {
