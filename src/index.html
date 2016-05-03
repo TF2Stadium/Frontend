@@ -112,6 +112,12 @@
                 Admin
               </md-button>
 
+              <md-button ng-if="$root.userProfile.role === 'administrator' || $root.userProfile.role === 'moderator'"
+                         ng-href="/admin.html"
+                         target="_blank">
+                Admin2
+              </md-button>
+
               <md-button
                  class="player-button"
                  ng-if="$root.userProfile.steamid"
