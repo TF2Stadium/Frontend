@@ -84,7 +84,6 @@ console.log('Using config file:', configFile);
 console.log('Build type:', isDev? 'development':'production');
 
 module.exports = {
-  name: 'js',
   context: SRC,
 
   babelSettings: babelSettings,
@@ -105,6 +104,7 @@ module.exports = {
 
   entry: {
     app: './app/app',
+    admin: './admin/app',
     vendor: [
       'angular', // see angular-min alias and comment in lib/angular-min.js
       'angular-animate',
@@ -174,7 +174,7 @@ module.exports = {
 
   output: {
     path: OUT,
-    filename: 'app.js',
+    filename: '[name].js',
   },
 
   module: {
@@ -228,6 +228,16 @@ module.exports = {
   plugins: [
     extractAppStyles,
     extractVendorStyles,
+    new CommonsChunkPlugin({
+      name: 'vendor',
+      filename: 'vendor.js',
+      chunks: ['app', 'vendor'],
+    }),
+    new CommonsChunkPlugin({
+      name: 'admin',
+      filename: 'admin.js',
+      chunks: ['admin'],
+    }),
     new DefinePlugin({
       '__BUILD_STATS__': JSON.stringify({
         gitCommit: {
@@ -246,8 +256,19 @@ module.exports = {
         minifyCSS: true,
         minifyJS: true,
       },
+      chunks: ['vendor', 'app'],
     }),
-    new CommonsChunkPlugin('vendor', 'vendor.js'),
+    new HtmlWebpackPlugin({
+      template: 'admin/index.html',
+      filename: 'admin.html',
+      hash: true,
+      minify: {
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+      },
+      chunks: ['admin'],
+    }),
     // The copy plugin is a hack until we get all assets properly require'd by JS
     new CopyWebpackPlugin([{
       from: 'assets/',
