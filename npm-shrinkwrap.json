@@ -65,19 +65,19 @@
       "resolved": "https://registry.npmjs.org/amdefine/-/amdefine-1.0.0.tgz"
     },
     "angular": {
-      "version": "1.5.3",
-      "from": "angular@1.5.3",
-      "resolved": "https://registry.npmjs.org/angular/-/angular-1.5.3.tgz"
+      "version": "1.5.5",
+      "from": "angular@1.5.5",
+      "resolved": "https://registry.npmjs.org/angular/-/angular-1.5.5.tgz"
     },
     "angular-animate": {
-      "version": "1.5.3",
-      "from": "angular-animate@1.5.3",
-      "resolved": "https://registry.npmjs.org/angular-animate/-/angular-animate-1.5.3.tgz"
+      "version": "1.5.5",
+      "from": "angular-animate@1.5.5",
+      "resolved": "https://registry.npmjs.org/angular-animate/-/angular-animate-1.5.5.tgz"
     },
     "angular-aria": {
-      "version": "1.5.3",
-      "from": "angular-aria@1.5.3",
-      "resolved": "https://registry.npmjs.org/angular-aria/-/angular-aria-1.5.3.tgz"
+      "version": "1.5.5",
+      "from": "angular-aria@1.5.5",
+      "resolved": "https://registry.npmjs.org/angular-aria/-/angular-aria-1.5.5.tgz"
     },
     "angular-bindonce": {
       "version": "0.3.1",
@@ -85,9 +85,9 @@
       "resolved": "https://registry.npmjs.org/angular-bindonce/-/angular-bindonce-0.3.1.tgz"
     },
     "angular-material": {
-      "version": "1.0.6",
-      "from": "angular-material@>=1.0.6 <2.0.0",
-      "resolved": "https://registry.npmjs.org/angular-material/-/angular-material-1.0.6.tgz"
+      "version": "1.0.8",
+      "from": "angular-material@1.0.8",
+      "resolved": "https://registry.npmjs.org/angular-material/-/angular-material-1.0.8.tgz"
     },
     "angular-material-data-table": {
       "version": "0.9.15",
@@ -95,9 +95,19 @@
       "resolved": "https://registry.npmjs.org/angular-material-data-table/-/angular-material-data-table-0.9.15.tgz"
     },
     "angular-messages": {
-      "version": "1.5.3",
-      "from": "angular-messages@1.5.3",
-      "resolved": "https://registry.npmjs.org/angular-messages/-/angular-messages-1.5.3.tgz"
+      "version": "1.5.5",
+      "from": "angular-messages@1.5.5",
+      "resolved": "https://registry.npmjs.org/angular-messages/-/angular-messages-1.5.5.tgz"
+    },
+    "angular-route": {
+      "version": "1.5.5",
+      "from": "angular-route@latest",
+      "resolved": "https://registry.npmjs.org/angular-route/-/angular-route-1.5.5.tgz"
+    },
+    "angular-sanitize": {
+      "version": "1.5.5",
+      "from": "angular-sanitize@latest",
+      "resolved": "https://registry.npmjs.org/angular-sanitize/-/angular-sanitize-1.5.5.tgz"
     },
     "angular-ui-router": {
       "version": "0.2.18",
@@ -2438,9 +2448,9 @@
       "resolved": "https://registry.npmjs.org/loader-utils/-/loader-utils-0.2.12.tgz"
     },
     "lodash": {
-      "version": "4.11.1",
-      "from": "lodash@4.11.1",
-      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.11.1.tgz"
+      "version": "4.11.2",
+      "from": "lodash@4.11.2",
+      "resolved": "https://registry.npmjs.org/lodash/-/lodash-4.11.2.tgz"
     },
     "lodash._baseassign": {
       "version": "3.2.0",
