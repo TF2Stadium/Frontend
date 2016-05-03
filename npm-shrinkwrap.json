@@ -90,9 +90,9 @@
       "resolved": "https://registry.npmjs.org/angular-material/-/angular-material-1.0.8.tgz"
     },
     "angular-material-data-table": {
-      "version": "0.9.15",
-      "from": "angular-material-data-table@0.9.15",
-      "resolved": "https://registry.npmjs.org/angular-material-data-table/-/angular-material-data-table-0.9.15.tgz"
+      "version": "0.10.9",
+      "from": "angular-material-data-table@0.10.9",
+      "resolved": "https://registry.npmjs.org/angular-material-data-table/-/angular-material-data-table-0.10.9.tgz"
     },
     "angular-messages": {
       "version": "1.5.5",

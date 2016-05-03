@@ -18,6 +18,7 @@
      ng-if="settings.savedServers.length > 0">
     <table md-table
            md-row-select="true"
+           multiple
            ng-model="settings.selectedServerNames">
       <thead md-head>
         <tr md-row>
@@ -28,8 +29,7 @@
       <tbody md-body>
         <tr md-row
             ng-repeat="server in settings.savedServers"
-            md-select="server.name"
-            md-select-id="{{server.name}}">
+            md-select="server.name">
           <td md-cell ng-click="settings.editServerField($event, server, 'name')">
             <span>{{server.name}}</span>
           </td>
