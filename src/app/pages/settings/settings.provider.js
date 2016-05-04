@@ -19,6 +19,7 @@ function SettingsPageConfig($stateProvider, SettingsPageProvider) {
    */
   SettingsPageProvider.sections = [
     'theme',
+    'general',
     'chat',
     'filters',
     'sound',
@@ -54,6 +55,9 @@ function SettingsPage() {
         theme: Settings.getConstants('themesList'),
         animationOptions: Settings.getConstants('animationOptions'),
         videoBackground: Settings.getConstants('videoBackground'),
+      },
+      general: {
+        autoOpenLogs: Settings.getConstants('autoOpenLogs'),
       },
       chat: {
         emotes: Settings.getConstants('emoteStyle'),

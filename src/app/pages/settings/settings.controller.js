@@ -189,6 +189,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
       populateFilters(settings);
       vm.animationLength = settings.animationLength;
       vm.videoBackground = settings.videoBackground;
+      vm.autoOpenLogs = settings.autoOpenLogs;
       vm.soundVolume = +settings.soundVolume;
       vm.siteAlias = settings.siteAlias;
       vm.soundPack = settings.soundPack;
