@@ -192,6 +192,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
       vm.soundVolume = +settings.soundVolume;
       vm.siteAlias = settings.siteAlias;
       vm.soundPack = settings.soundPack;
+      vm.timestamps = settings.timestamps;
 
       vm.savedServers = deserializeServers(settings.savedServers);
 

@@ -1,8 +1,8 @@
 <div class="settings-section">
   <h1>Timestamps</h1>
   <md-radio-group
-     ng-model="$root.currentTimestampsOption"
-     ng-change="settings.saveSetting('timestamps', $root.currentTimestampsOption)">
+     ng-model="settings.timestamps"
+     ng-change="settings.saveSetting('timestamps', settings.timestamps)">
     <md-radio-button
        ng-repeat="(key, opt) in settings.sections.chat.timestamps track by opt.name"
        ng-value="key">
