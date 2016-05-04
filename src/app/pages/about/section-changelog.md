@@ -11,6 +11,7 @@
  * Add vocal notifications
  * Allow per-slot password restrictions
  * Many bug fixes
+ * Darkened the text on the light theme
 
 ## 02. April 2016
 
