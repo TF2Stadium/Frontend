@@ -49,7 +49,7 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
     Settings.getSettings((settings) => {
       safeApply($rootScope, () => {
         $rootScope.currentTheme = settings.currentTheme;
-        $rootScope.currentTimestamppsOption = settings.timestamps;
+        $rootScope.currentTimestampsOption = settings.timestamps;
         $rootScope.animationLength = settings.animationLength;
         $rootScope.themeLoaded = true;
       });
