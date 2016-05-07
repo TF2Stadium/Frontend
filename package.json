@@ -10,8 +10,8 @@
     "build": "cross-env NODE_ENV=production webpack -p",
     "build-dev": "webpack",
     "clean": "rimraf dist",
-    "lint": "eslint src test",
-    "lint-fix": "eslint --fix src test",
+    "lint": "eslint --cache src test",
+    "lint-fix": "eslint --cache --fix src test",
     "test": "karma start",
     "test-browsers": "cross-env TEST_ENV=BROWSERS karma start"
   },
