@@ -251,9 +251,13 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
       return;
     }
 
-    if (!joinedIds[lobbyID]) {
-      $timeout(() => $window.open(logs, '_self'), 500);
-    }
+    Settings.getSettings(function (settings) {
+      if (settings.autoOpenLogs === 'on') {
+        if (!joinedIds[lobbyID]) {
+          $timeout(() => $window.open(logs, '_self'), 500);
+        }
+      }
+    });
   });
 
   Websocket.onJSON('lobbyData', (newLobby) => {
