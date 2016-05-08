@@ -226,6 +226,36 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
     return Kefir.merge(streams);
   };
 
+  ////////////////////////////////////////////////
+  // Auto-open logs
+  //
+  // We prevent spamming auto-log opens from multiple tabs by only
+  // opening logs from the window that the user clicked to join tf2
+  // from. This leaves open some edges cases if a user tries joining
+  // tf2 from multiple different tabs. That would require some extra
+
+  // Map from lobby id -> didOpenLogs bool. This enables testing
+  // "Should we auto-open logs" both for the
+  // only-open-from-tf2-launching-window restriction and the
+  // only-open-once restriction.
+  var joinedIds = {};
+
+  factory.setJoinedId = (lobbyId) => {
+    if (angular.isUndefined(joinedIds[lobbyId])) {
+      joinedIds[lobbyId] = false;
+    }
+  };
+
+  Websocket.onJSON('lobbyLogs', ({lobbyID, logs}) => {
+    if (angular.isUndefined(joinedIds[lobbyID])) {
+      return;
+    }
+
+    if (!joinedIds[lobbyID]) {
+      $timeout(() => $window.open(logs, '_self'), 500);
+    }
+  });
+
   Websocket.onJSON('lobbyData', (newLobby) => {
     var id = newLobby.id;
 
