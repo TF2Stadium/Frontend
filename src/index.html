@@ -154,7 +154,7 @@
       <aside id="commentbox" ng-include="'app/shared/comment-box/comment-box.html'" ng-if="$root.backendAuthenticated"></aside>
 
       <div id="fab"
-           ng-if="$root.backendAuthenticated"
+           ng-if="$root.backendAuthenticated && $root.userProfile.steamid"
            ng-controller="LobbyCreateButtonController as lcbc">
         <md-button ui-sref="lobby-create"
                    class="md-fab md-primary"
