@@ -3,22 +3,44 @@ import Kefir from 'kefir';
 angular.module('tf2stadium.directives')
   .directive('videobg', VideoBackgroundDirective);
 
+const VIDEOS = [
+  {
+    src: require('../../assets/video/koth_suijin.vp9.webm'),
+    type: 'video/webm;codecs="vp9"',
+  },
+  {
+    src: require('../../assets/video/koth_suijin.vp8.webm'),
+    type: 'video/webm;codecs="vp8"',
+  },
+  {
+    src: require('../../assets/video/koth_suijin.h264.mp4'),
+    type: 'video/mp4',
+  },
+];
+
+const VIDEO_HTML = `
+  <video ng-if="showVideo && pageFocused"
+         ng-show="videoReady"
+         ng-canplay="canPlay()"
+         autoplay
+         autostart
+         loop
+         class="cinemagraph">
+    ${VIDEOS.map(o => `<source src="${o.src}" type='${o.type}' />`).join('')}
+  </video>
+`;
+
 /** @ngInject */
 function VideoBackgroundDirective($rootScope, Settings) {
   var focused = Kefir.merge([
-    Kefir.fromEvents(window, 'focus').map(function () { return true; }),
-    Kefir.fromEvents(window, 'blur').map(function () { return false; }),
+    Kefir.fromEvents(window, 'focus').map(() => true),
+    Kefir.fromEvents(window, 'blur').map(() => false),
   ]);
 
   return {
     restrict: 'E',
     scope: {},
-    template:
-    '<video ng-if="showVideo && pageFocused" ng-show="videoReady" ng-canplay="canPlay()" autoplay autostart loop class="cinemagraph">' +
-      '<source src="/assets/video/koth_suijin.vp9.webm" type=\'video/webm;codecs="vp9"\' />'+
-      '<source src="/assets/video/koth_suijin.vp8.webm" type=\'video/webm;codecs="vp8"\' />' +
-      '<source src="/assets/video/koth_suijin.h264.mp4" type="video/mp4" />' +
-      '</video>',
+    template: VIDEO_HTML,
 
     link: function (scope) {
       scope.showVideo = false;
