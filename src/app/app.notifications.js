@@ -4,19 +4,22 @@ angular
   .module('tf2stadium.services')
   .factory('Notifications', NotificationsFactory);
 
+const requireSound =
+        require.context('../assets/sound/', true, /^.*\.(ogg|wav)$/);
+
 // TODO: move to config (putting this off until we do some sort of
 // default configurations)
 const VOCAL_NOTIFICATIONS = {
   'Default': {
     _default: true,
-    path: '/assets/sound/default/',
+    path: './default/',
     gameStart: ['start.wav'],
     readyUp: ['readyup.wav'],
     preview: ['readyup.wav'],
   },
 
   'Muselk': {
-    path: '/assets/sound/muselk/',
+    path: './muselk/',
     countdown: ['Countdown01.ogg', 'Countdown02.ogg', 'CountDown03.ogg'],
     gameStart: ['GameStart01.ogg', 'GameStart02.ogg', 'GameStart03.ogg'],
     readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg','ReadyUpB04.ogg'],
@@ -26,7 +29,7 @@ const VOCAL_NOTIFICATIONS = {
   },
 
   'Uncle Dane': {
-    path: '/assets/sound/uncledane/',
+    path: './uncledane/',
     countdown: ['Countdown01.ogg'],
     gameStart: ['GameStart01.ogg'],
     kicked: ['KickedByLeader01.ogg'],
@@ -36,7 +39,7 @@ const VOCAL_NOTIFICATIONS = {
   },
 
   'King Raja': {
-    path: '/assets/sound/kingraja/',
+    path: './kingraja/',
     countdown: ['Countdown01.ogg'],
     gameStart: ['GameStart01.ogg'],
     kicked: ['KickedByLeader01.ogg'],
@@ -46,7 +49,7 @@ const VOCAL_NOTIFICATIONS = {
   },
 
   'KevinIsPwn': {
-    path: '/assets/sound/kevinispwn/',
+    path: './kevinispwn/',
     countdown: ['Countdown01.ogg'],
     gameStart: ['GameStart01.ogg'],
     readyUp: ['ReadyUpA01.ogg', 'ReadyUpB01.ogg'],
@@ -54,7 +57,7 @@ const VOCAL_NOTIFICATIONS = {
   },
 
   'KritzKast': {
-    path: '/assets/sound/kritzkast/',
+    path: './kritzkast/',
     countdown: ['Countdown01.ogg','Countdown02.ogg','Countdown03.ogg'],
     gameStart: ['GameStart01.ogg', 'GameStart02.ogg', 'GameStart03.ogg'],
     readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpA03.ogg','ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg'],
@@ -62,7 +65,7 @@ const VOCAL_NOTIFICATIONS = {
   },
 
   'Getawhale': {
-    path: '/assets/sound/getawhale/',
+    path: './getawhale/',
     countdown: ['Countdown01.ogg'],
     gameStart: ['GameStart01.ogg'],
     readyUp: ['ReadyUpA01.ogg', 'ReadyUpB01.ogg'],
@@ -75,7 +78,7 @@ const VOCAL_NOTIFICATIONS = {
   },
 
   'GGGLYGY': {
-    path: '/assets/sound/ggglygy/',
+    path: './ggglygy/',
     countdown: ['Countdown01.wav','Countdown02.wav','Countdown03.wav'],
     gameStart: ['GameStart01.wav','GameStart02.wav','GameStart03.wav'],
     readyUp: ['ReadyUpA01.wav','ReadyUpA02.wav','ReadyUpA03.wav','ReadyUpA04.wav','ReadyUpA05.wav','ReadyUpB01.wav','ReadyUpB02.wav','ReadyUpB03.wav'],
@@ -115,7 +118,8 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
     if (soundPack) {
       var sounds = soundPack[event];
       if (sounds) {
-        return soundPack.path + sounds[Math.floor(Math.random() * sounds.length)];
+        var sound = sounds[Math.floor(Math.random() * sounds.length)];
+        return requireSound(soundPack.path + sound);
       }
     }
 
