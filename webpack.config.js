@@ -195,7 +195,7 @@ module.exports = {
         'svgo?' + JSON.stringify(svgoSettings),
       ],
     }, {
-      test: /\.(png|jpg|jpeg|gif|woff|woff2|ttf|eot|otf|webm|mp4)$/,
+      test: /\.(png|jpg|jpeg|gif|woff|woff2|ttf|eot|otf|webm|mp4|ogg|wav)$/,
       loader: 'file?name=[path][name].[ext]',
     }, {
       test: /\.html$/,
@@ -273,7 +273,7 @@ module.exports = {
     new CopyWebpackPlugin([{
       from: 'assets/',
       to: 'assets/',
-      ignore: ['*.svg', '*.png', '*.webm', '*.mp4'],
+      ignore: ['*.svg', '*.png', '*.webm', '*.mp4', '*.ogg', '*.wav'],
     }]),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),

@@ -58,7 +58,7 @@ module.exports = function (config) {
             'svgo',
           ],
         }, {
-          test: /\.(png|jpg|jpeg|gif|woff|woff2|ttf|eot|otf|webm|mp4)$/,
+          test: /\.(png|jpg|jpeg|gif|woff|woff2|ttf|eot|otf|webm|mp4|ogg|wav)$/,
           loader: 'file?name=[path][name].[ext]',
         }, {
           test: /\.js$/,
