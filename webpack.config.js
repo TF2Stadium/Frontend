@@ -282,7 +282,6 @@ module.exports = {
   ].concat(
     isDev? [] : [
       new UglifyJsPlugin({
-        exclude: /vendor\.js/i,
         compress: {
           // I'm not a fan of hiding warnings, but UglifyJS's are often
           // both hard to avoid and rarely useful
