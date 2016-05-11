@@ -33,7 +33,7 @@ It uses [AngularJS](https://angularjs.org/) as its framework,
 
 ## Installation
 
-Have `git`, '`node`, and `npm` installed, and then follow these steps:
+Have `git`, `node`, and `npm` installed, and then follow these steps:
 
     # Download this repository via git
     git clone https://github.com/TF2Stadium/Frontend.git
