@@ -52,13 +52,13 @@ markdownRenderer.link = function (href, title, text) {
 };
 
 var configFile = [
-  toPath('src/app/app.config.js'),
-  toPath('app.config.js'),
-  toPath('app.config.json'),
-  toPath('src/app/app.config.js.template'),
-  toPath('app.config.js.template'),
-  toPath('app.config.template.json'),
-].find(fileExists);
+  'src/app/app.config.js',
+  'app.config.js',
+  'app.config.json',
+  'src/app/app.config.js.template',
+  'app.config.js.template',
+  'app.config.template.json',
+].map(toPath).find(fileExists);
 
 var babelSettings = {
   presets: ['es2015'],
