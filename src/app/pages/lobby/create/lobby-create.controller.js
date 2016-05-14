@@ -44,10 +44,8 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   vm.preloadMaps = function (format) {
     lobbySettingsList['maps']
       .options
-      .filter(function (map) { return map[format]; })
-      .map(function (map) {
-        return '/assets/img/maps/lobby-create/' + map.value + '.jpg';
-      })
+      .filter(map => map[format].value)
+      .map(map => '/assets/img/maps/lobby-create/' + map + '.jpg')
       .forEach(PreloadService.queuePreload);
   };
 
@@ -89,7 +87,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
 
   var getCurrentWizardStep = function () {
     var currentStep = vm.wizardSteps[0];
-    vm.wizardSteps.forEach(function (wizardStep) {
+    vm.wizardSteps.forEach((wizardStep) => {
       if (wizardStep.name === $state.current.name) {
         currentStep = wizardStep;
       }
@@ -99,7 +97,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
 
   var getNextWizardStep = function () {
     var nextStep = vm.wizardSteps[0];
-    vm.wizardSteps.forEach(function (wizardStep, index) {
+    vm.wizardSteps.forEach((wizardStep, index) => {
       if (wizardStep.name === $state.current.name) {
         nextStep = vm.wizardSteps[index + 1];
       }
