@@ -34,6 +34,7 @@
     "moment": "2.13.0",
     "ng-media-events": "1.0.1",
     "ngreact": "0.3.0",
+    "raven-js": "^3.0.4",
     "react": "15.0.2",
     "react-dom": "15.0.2",
     "react-hyperscript": "2.4.0",
