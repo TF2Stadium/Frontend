@@ -5,16 +5,14 @@ angular.module('tf2stadium.controllers')
 function LobbyCreateButtonController($q, PreloadService, LobbyCreate) {
   var vm = this;
 
-  vm.preloadLobbyCreate = function () {
+  vm.preloadLobbyCreate = () => {
     // TODO: we could make this not rely on the lobby format being
     // the first lobby-create step (wiuth
     // LobbyCreate.getSteps()[0]), but we need to know the image URL
     // to preload (which is only defined in the templates...)
     LobbyCreate.getSettingsList()['formats'].options
-      .filter(function (v) { return v.value !== 'debug'; })
-      .map(function (opt) {
-        return '/assets/img/formats/' + opt.value + '.jpg';
-      })
+      .filter(v => v.value !== 'debug')
+      .map(opt => '/assets/img/formats/' + opt.value + '.jpg')
       .forEach(PreloadService.queuePreload);
   };
 }
