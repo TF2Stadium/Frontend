@@ -1,3 +1,6 @@
+import Raven from 'raven-js';
+import {pick} from 'lodash';
+
 angular
   .module('tf2stadium.services')
   .factory('User', User);
@@ -47,6 +50,7 @@ function User(Websocket, $rootScope, $window, $q, Config) {
 
   userService.init = () =>
     Websocket.onJSON('playerProfile', function (data) {
+      Raven.setUserContext(pick(data, ['id', 'steamid']));
       $rootScope.userProfile = data;
     });
 

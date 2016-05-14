@@ -1,3 +1,13 @@
+import Raven from 'raven-js';
+import RavenAngularPlugin from 'raven-js/plugins/angular';
+
+if (__SENTRY_DSN__) {
+  Raven
+    .config(__SENTRY_DSN__)
+    .addPlugin(RavenAngularPlugin)
+    .install();
+}
+
 // Only technically needed for tests, normally the global 'angular'
 // object is created by default and this require statement triggers a
 // 'loading angular twice' warning.
@@ -31,6 +41,7 @@ angular.module('tf2stadium', [
   'tf2stadium.controllers',
   'tf2stadium.services',
   'tf2stadium.filters',
+  'ngRaven',
   'ngAnimate',
   require('ngreact').name,
   'ui.router',
