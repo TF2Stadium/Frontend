@@ -1,7 +1,7 @@
 import Raven from 'raven-js';
 import RavenAngularPlugin from 'raven-js/plugins/angular';
 
-if (__SENTRY_DSN__) {
+if (typeof __SENTRY_DNS__ !== 'undefined') {
   Raven
     .config(__SENTRY_DSN__)
     .addPlugin(RavenAngularPlugin)
