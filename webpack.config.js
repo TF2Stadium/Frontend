@@ -12,6 +12,7 @@ var DefinePlugin = webpack.DefinePlugin;
 var CommonsChunkPlugin = webpack.optimize.CommonsChunkPlugin;
 var UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
+var _ = require('lodash');
 var path = require('path');
 var fs = require('fs');
 var os = require('os');
@@ -240,6 +241,7 @@ module.exports = {
     }),
     new DefinePlugin({
       '__SENTRY_DSN__': '\'https://77db81e470d549d28eef22a56786c518@sentry.tf2stadium.gcommer.com/2\'',
+      'process.env': JSON.stringify(_.pick(process.env, 'NODE_ENV')),
       '__BUILD_STATS__': JSON.stringify({
         gitCommit: {
           hash: gitRev.long() + '',
