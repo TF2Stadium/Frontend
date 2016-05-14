@@ -14,8 +14,7 @@ function flatten(arrays) {
 // a regular expression. This involves escaping all special regex
 // characters.
 function regexSafe(raw) {
-  return raw.replace(/[\\\[\]\^\$\*\+\?\.\(\)\|\{\}]/g,
-                     function (c) { return '\\' + c; });
+  return raw.replace(/[\\\[\]\^\$\*\+\?\.\(\)\|\{\}]/g, c => '\\' + c);
 }
 
 //
@@ -105,19 +104,18 @@ function makeEmotesTransformer(emotesConfig) {
             emotesConfig.map(emoteDescriptorToReplacer)));
 
   return function emotesToHTML_impl(str) {
-    return replacements.reduce(function (s, replaceFn) {
-      return replaceFn(s);
-    }, str);
+    return replacements.reduce((s, replaceFn) => replaceFn(s), str);
   };
 
   function emoteDescriptorToHTML(desc) {
     var imgDesc = desc.image;
 
     if (imgDesc.type === 'img') {
-      return '<img class="emote" src="assets/img/emotes/' + imgDesc.src +
-        '" height="16" width="16"' +
-        ' alt="' + desc.names[0] +'" title="' + desc.names[0] + '" />' +
-        '<emote type="' + imgDesc.src + '"/>';
+      return `
+        <img class="emote" src="assets/img/emotes/${imgDesc.src}"
+             height="16" width="16" alt="${desc.names[0]}"
+             title="${desc.names[0]}" />
+        <emote type="${imgDesc.src}" />`;
     }
     // TODO: other emote image sources (spritesheets, ...)
 
@@ -135,20 +133,16 @@ function makeEmotesTransformer(emotesConfig) {
 
   function makeColonReplacer(imgHTML, name) {
     var regexpr = new RegExp('(\\s|^):' + regexSafe(name) + ':(\\s|$)', 'g');
-    return setPriority(name.length, function (str) {
-      return str.replace(regexpr, function (matched, leadingWhitespace) {
-        return leadingWhitespace + imgHTML;
-      });
-    });
+    return setPriority(name.length, str =>
+                       str.replace(regexpr, (matched, leadingWhitespace) =>
+                                   leadingWhitespace + imgHTML));
   }
 
   function makeShortcutReplacer(imgHTML, name) {
     var regexpr = new RegExp('(\\s|^)' + regexSafe(name) + '(?=\\s|$)', 'g');
-    return setPriority(name.length,function (str) {
-      return str.replace(regexpr, function (matched, leadingWhitespace) {
-        return leadingWhitespace + imgHTML;
-      });
-    });
+    return setPriority(name.length, str =>
+                       str.replace(regexpr, (matched, leadingWhitespace) =>
+                                   leadingWhitespace + imgHTML));
   }
 
   // Takes a emote descriptor (see app.config.js.template)
