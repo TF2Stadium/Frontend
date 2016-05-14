@@ -239,7 +239,6 @@ module.exports = {
       chunks: ['admin'],
     }),
     new DefinePlugin({
-      '__SENTRY_DSN__': '\'https://77db81e470d549d28eef22a56786c518@sentry.tf2stadium.gcommer.com/2\'',
       '__BUILD_STATS__': JSON.stringify({
         gitCommit: {
           hash: gitRev.long() + '',

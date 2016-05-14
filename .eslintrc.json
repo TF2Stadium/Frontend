@@ -8,8 +8,7 @@
     "moment": false,
     "Kefir": false,
     "require": false,
-    "__BUILD_STATS__": false,
-    "__SENTRY_DSN__": false
+    "__BUILD_STATS__": false
   },
   "rules": {
     "no-console": 0,
