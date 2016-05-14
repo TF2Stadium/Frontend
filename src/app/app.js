@@ -1,11 +1,14 @@
 import Raven from 'raven-js';
 import RavenAngularPlugin from 'raven-js/plugins/angular';
 
-if (typeof __SENTRY_DNS__ !== 'undefined') {
+var modules = [];
+
+if (typeof __SENTRY_DSN__ !== 'undefined') {
   Raven
     .config(__SENTRY_DSN__)
     .addPlugin(RavenAngularPlugin)
     .install();
+  modules.push('ngRaven');
 }
 
 // Only technically needed for tests, normally the global 'angular'
@@ -41,7 +44,6 @@ angular.module('tf2stadium', [
   'tf2stadium.controllers',
   'tf2stadium.services',
   'tf2stadium.filters',
-  'ngRaven',
   'ngAnimate',
   require('ngreact').name,
   'ui.router',
@@ -51,7 +53,7 @@ angular.module('tf2stadium', [
   require('./scrollglue').name,
   'pasvaz.bindonce',
   'ngMedia',
-])
+].concat(modules))
   .config(disableDebug)
   .factory('safeApply', safeApply)
   .config(routeConfig)
