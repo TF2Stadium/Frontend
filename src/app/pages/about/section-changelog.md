@@ -1,5 +1,13 @@
 # Changelog
 
+## 15. May 2016
+
+ * More stability
+ * Add error logging (via Sentry)
+ * Fix hiding lobby-create fab for logged out users
+ * Hover chat timestamps (or player's name if you have timestamps
+   disabled) to get a message's full date.
+
 ## 28. April 2016
 
  * Lots of stability fixes!
