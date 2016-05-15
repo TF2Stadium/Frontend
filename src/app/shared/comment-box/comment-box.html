@@ -21,9 +21,11 @@
                  class="chat-message">
               <span class="chat-message-time"
                     ng-if="$root.currentTimestampsOption !== 'none'"
-                    ng-bind="message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:mm')"></span>
+                    ng-bind="message.timestamp | date:($root.currentTimestampsOption === 'hours12'? 'shortTime' : 'H:mm')"
+                    title="{{message.timestamp | date:'medium'}}"></span>
               <md-menu>
                 <md-button
+                   ng-attr-title="{{$root.currentTimestampsOption === 'none' ? (message.timestamp | date:'medium') : ''}}"
                    class="chat-player-name"
                    ng-class="[message.player.tags]"
                    ng-click="$mdOpenMenu($event)"
