@@ -42,10 +42,11 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   $scope.$on('$destroy', handler);
 
   vm.preloadMaps = function (format) {
-    lobbySettingsList['maps']
+    lobbySettingsList
+      .maps
       .options
-      .filter(map => map[format].value)
-      .map(map => '/assets/img/maps/lobby-create/' + map + '.jpg')
+      .filter(map => map[format])
+      .map(map => `/assets/img/maps/lobby-create/${map.value}.jpg`)
       .forEach(PreloadService.queuePreload);
   };
 
