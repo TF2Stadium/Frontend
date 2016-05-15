@@ -1,15 +1,9 @@
+import config from 'app-config';
+import { isEmpty } from 'lodash';
 import Raven from 'raven-js';
 import RavenAngularPlugin from 'raven-js/plugins/angular';
-
-var modules = [];
-
-if (typeof __SENTRY_DSN__ !== 'undefined') {
-  Raven
-    .config(__SENTRY_DSN__)
-    .addPlugin(RavenAngularPlugin)
-    .install();
-  modules.push('ngRaven');
-}
+import moment from 'moment';
+import '../scss/app.scss';
 
 // Only technically needed for tests, normally the global 'angular'
 // object is created by default and this require statement triggers a
@@ -18,7 +12,7 @@ if (window && !window.angular) {
   require('angular');
 }
 
-import moment from 'moment';
+var modules = [], release = 'development';
 
 if (typeof __BUILD_STATS__ !== 'undefined') {
   console.log(
@@ -27,9 +21,19 @@ if (typeof __BUILD_STATS__ !== 'undefined') {
       ' from hash ' + __BUILD_STATS__.gitCommit.hash +
       ' on branch ' + __BUILD_STATS__.gitCommit.branch
   );
+  release = __BUILD_STATS__.gitCommit.hash;
 }
 
-import '../scss/app.scss';
+if (!isEmpty(config.sentryDSN)) {
+  Raven
+    .config(config.sentryDSN, { release })
+    .addPlugin(RavenAngularPlugin)
+    .install();
+  modules.push('ngRaven');
+
+  // TODO: Remove once prod setup is verified
+  console.log('Logging to ' + config.sentryDSN);
+}
 
 /** @ngInject */
 function disableDebug($compileProvider) {

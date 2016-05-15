@@ -3,6 +3,7 @@
     "websocket": "<<WS_ENDPOINT>>",
     "api": "<<API_ENDPOINT>>"
   },
+  "sentryDSN": "<<SENTRY_ENDPOINT>>",
   "debug": true,
   "allowedChatDomains": [
     "logs.tf",
