@@ -44,7 +44,11 @@ Have `git`, `node`, and `npm` installed, and then follow these steps:
     npm install
 
 VERY IMPORTANT: copy the `app.config.template.json` to
-`app.config.json` and replace the placeholders with your setup.
+`app.config.json` and replace the placeholders with your desired
+values. All the `<<ENDPOINT>>` templates MUST be filled in. The
+WebSocket and API endpoints are required. Set `sentryDSN` to a blank
+string if you do not want to use
+[Senty](https://github.com/getsentry/sentry).
 
 ## Development
 
