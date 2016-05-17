@@ -2884,9 +2884,9 @@
           "resolved": "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz"
         },
         "readable-stream": {
-          "version": "1.1.13",
+          "version": "1.1.14",
           "from": "readable-stream@>=1.1.13 <2.0.0",
-          "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.1.13.tgz"
+          "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.1.14.tgz"
         }
       }
     },
@@ -3355,9 +3355,9 @@
       "resolved": "https://registry.npmjs.org/private/-/private-0.1.6.tgz"
     },
     "process": {
-      "version": "0.11.2",
+      "version": "0.11.3",
       "from": "process@>=0.11.0 <0.12.0",
-      "resolved": "https://registry.npmjs.org/process/-/process-0.11.2.tgz"
+      "resolved": "https://registry.npmjs.org/process/-/process-0.11.3.tgz"
     },
     "process-nextick-args": {
       "version": "1.0.6",
@@ -3977,9 +3977,9 @@
           "resolved": "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz"
         },
         "readable-stream": {
-          "version": "1.1.13",
-          "from": "readable-stream@>=1.0.27-1 <2.0.0",
-          "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.1.13.tgz"
+          "version": "1.1.14",
+          "from": "readable-stream@^1.0.27-1",
+          "resolved": "https://registry.npmjs.org/readable-stream/-/readable-stream-1.1.14.tgz"
         }
       }
     },
@@ -4372,6 +4372,18 @@
       "version": "1.0.0",
       "from": "weakmap-shim@>=1.0.0 <1.1.0",
       "resolved": "https://registry.npmjs.org/weakmap-shim/-/weakmap-shim-1.0.0.tgz"
+    },
+    "webpack": {
+      "version": "1.13.0",
+      "from": "webpack@1.13.0",
+      "resolved": "https://registry.npmjs.org/webpack/-/webpack-1.13.0.tgz",
+      "dependencies": {
+        "supports-color": {
+          "version": "3.1.2",
+          "from": "supports-color@>=3.1.0 <4.0.0",
+          "resolved": "https://registry.npmjs.org/supports-color/-/supports-color-3.1.2.tgz"
+        }
+      }
     },
     "webpack-core": {
       "version": "0.6.8",

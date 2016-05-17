@@ -40,6 +40,7 @@
     "react-dom": "15.0.2",
     "react-hyperscript": "2.4.0",
     "svgo-loader": "1.1.0",
+    "webpack": "^1.13.0",
     "wsevent.js": "1.0.2",
     "xss-filters": "1.2.6"
   },
