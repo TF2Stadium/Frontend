@@ -19,26 +19,25 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
     $window.ga('send', 'pageview', $location.path());
   });
 
-  $rootScope.$on('$stateChangeStart',
-                 function (event, toState, toParams, fromState) {
-                   $rootScope.currentState = toState.name;
+  $rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState) => {
+    $rootScope.currentState = toState.name;
 
-                   // Forbid direct navigation to children states
-                   if (toState.parent === 'lobby-create') {
-                     // We allow navigation from the children states to other
-                     // children states
-                     if (fromState.parent !== 'lobby-create' &&
-                         fromState.name !== 'lobby-create') {
-                       event.preventDefault();
-                       $state.go(toState.parent, toParams);
-                     }
-                   }
+    // Forbid direct navigation to children states
+    if (toState.parent === 'lobby-create') {
+      // We allow navigation from the children states to other
+      // children states
+      if (fromState.parent !== 'lobby-create' &&
+          fromState.name !== 'lobby-create') {
+        event.preventDefault();
+        $state.go(toState.parent, toParams);
+      }
+    }
 
-                   if (toState.redirectTo) {
-                     event.preventDefault();
-                     $state.go(toState.redirectTo);
-                   }
-                 });
+    if (toState.redirectTo) {
+      event.preventDefault();
+      $state.go(toState.redirectTo);
+    }
+  });
 
   User.init();
 
@@ -56,7 +55,8 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
     });
 
     if (!syncHandler) {
-      syncHandler = $rootScope.$on('settings-updated', (e, data) => syncGlobalSettings(data));
+      syncHandler = $rootScope.$on('settings-updated',
+                                   (e, data) => syncGlobalSettings(data));
     }
   }
 
