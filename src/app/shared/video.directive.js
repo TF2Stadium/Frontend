@@ -31,7 +31,7 @@ const VIDEO_HTML = `
 `;
 
 /** @ngInject */
-function VideoBackgroundDirective($rootScope, Settings) {
+function VideoBackgroundDirective($rootScope, Settings, safeApply) {
   var focused = Kefir.merge([
     Kefir.fromEvents(window, 'focus').map(() => true),
     Kefir.fromEvents(window, 'blur').map(() => false),
@@ -47,7 +47,7 @@ function VideoBackgroundDirective($rootScope, Settings) {
       scope.pageFocused = true;
 
       focused.onValue((isFocused) => {
-        scope.$apply(() => {
+        safeApply(scope, () => {
           if (!scope.pageFocused && isFocused) {
             scope.videoReady = false;
           }
