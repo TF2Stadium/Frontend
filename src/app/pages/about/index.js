@@ -1,11 +1,27 @@
-import aboutPage from '!!html!./about.html';
-import aboutPageSidebar from '!!html!./about-sidebar.html';
-
 export let module = angular.module('tf2stadium.about', ['ui.router']);
 
 module
   .config(AboutPageConfig)
   .controller('AboutPageController', AboutPageController);
+
+const aboutPage = `
+<div id="about-wrapper" ui-view="about-section" class="settings-section">
+</div>
+`;
+
+const aboutPageSidebar = `
+<div id="sidebar-links">
+  <h1 class="steps-title">
+    Sections
+  </h1>
+  <md-button class="sidebar-link"
+             ng-repeat="aboutSection in about.sections"
+             ng-class="{'active' : $root.currentState==='about-'+aboutSection}"
+             ui-sref="about-{{::aboutSection}}">
+    {{::aboutSection}}
+  </md-button>
+</div>
+`;
 
 export let route = {
   url: '/about',
