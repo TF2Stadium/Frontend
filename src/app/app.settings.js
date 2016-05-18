@@ -139,14 +139,11 @@ function Settings() {
     Websocket.onJSON('playerSettings', function (data) {
       for (var setting in data) {
         var value = data[setting];
-        /*
-         The backend can only store strings, so we need to convert them
-         to booleans if they are one.
-         It could be an actual string, so we have to check for both true and false.
-         */
+        // coerce true/false for conveniece
         if (value === 'true' || value === 'false') {
           value = (value === 'true');
         }
+
         localStorage.setItem(setting, value);
         settings[setting] = value;
       }
@@ -156,10 +153,9 @@ function Settings() {
       $rootScope.$emit('settings-updated');
     });
 
-    /*
-     Saves a setting into the service and into the backend and
-     fires an optional callback with the response from the backend as an argument.
-     */
+    // Saves a setting into the service and into the backend and fires
+    // an optional callback with the response from the backend as an
+    // argument.
     settingsService.set = function (key, newValue, callback, revertOnFail) {
       var oldValue = settings[key];
 
@@ -203,15 +199,13 @@ function Settings() {
       return deferred.promise;
     };
 
-    settingsService.getConstants = function (key) {
-      return settingsProvider.constants[key];
-    };
+    settingsService.getConstants = (key) => settingsProvider.constants[key];
 
     /*
      Returns all settings and fires an optional callback
      when they are loaded from the backend.
      */
-    settingsService.getSettings = function (callback) {
+    settingsService.getSettings = (callback) => {
       callback = callback || angular.noop;
 
       if (!alreadyLoadedFromBackend) {
