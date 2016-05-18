@@ -80,6 +80,7 @@ var extractAppStyles = new ExtractTextPlugin('app.css');
 var extractVendorStyles = new ExtractTextPlugin('vendor.css');
 
 var isDev = process.env.NODE_ENV !== 'production';
+var ext = (isDev ? '' : '.min') + '.js';
 
 console.log('Using config file:', configFile);
 console.log('Build type:', isDev? 'development':'production');
@@ -125,7 +126,7 @@ module.exports = {
     ],
   },
 
-  noParse: [
+  noParse: isDev? [] : [
     /node_modules\/angular/,
     /node_modules\/angular-material/,
     /node_modules\/angular-material-data-table/,
@@ -147,29 +148,28 @@ module.exports = {
       'app-config': configFile,
 
       angular: toPath('lib/angular-min.js'),
-      'angular-min': toPath('/node_modules/angular/angular.min.js'),
+      'angular-min': toPath('/node_modules/angular/angular' + ext),
 
       'angular-material':
-      toPath('/node_modules/angular-material/angular-material.min.js'),
+      toPath('/node_modules/angular-material/angular-material' + ext),
       'angular-material-data-table':
       toPath('/node_modules/angular-material-data-table/' +
-             'dist/md-data-table.min.js'),
-      'angular-aria':
-      toPath('/node_modules/angular-aria/angular-aria.min.js'),
+             'dist/md-data-table' + ext),
+      'angular-aria': toPath('/node_modules/angular-aria/angular-aria' + ext),
       'angular-animate':
-      toPath('/node_modules/angular-animate/angular-animate.min.js'),
+      toPath('/node_modules/angular-animate/angular-animate' + ext),
       'angular-ui-router':
-      toPath('/node_modules/angular-ui-router/release/' +
-             'angular-ui-router.min.js'),
+      toPath('/node_modules/angular-ui-router/release/angular-ui-router' + ext),
       'angular-ui-validate':
-      toPath('/node_modules/angular-ui-validate/dist/validate.min.js'),
+      toPath('/node_modules/angular-ui-validate/dist/validate' + ext),
       'angular-messages':
-      toPath('/node_modules/angular-messages/angular-messages.min.js'),
+      toPath('/node_modules/angular-messages/angular-messages' + ext),
       'angular-bindonce':
-      toPath('/node_modules/angular-bindonce/bindonce.min.js'),
+      toPath('/node_modules/angular-bindonce/bindonce' + ext),
 
-      kefir: toPath('/node_modules/kefir/dist/kefir.min.js'),
-      moment: toPath('/node_modules/moment/min/moment.min.js'),
+      kefir: toPath('/node_modules/kefir/dist/kefir' + ext),
+      moment: toPath('/node_modules/moment/' + (isDev? '' : 'min/')
+                     + 'moment' + ext),
     },
   },
 
