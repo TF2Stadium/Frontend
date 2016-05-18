@@ -1,5 +1,7 @@
+import {route as about} from './pages/about';
+
 /** @ngInject */
-export function routeConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+export default function routeConfig($stateProvider, $urlRouterProvider, $locationProvider) {
   $stateProvider
     .state('lobby-list', {
       url: '/',
@@ -87,22 +89,7 @@ export function routeConfig($stateProvider, $urlRouterProvider, $locationProvide
         },
       },
     })
-    .state('about', {
-      url: '/about',
-      redirectTo: 'about-about',
-      views: {
-        'content': {
-          templateUrl: 'app/pages/about/about.html',
-          controller: 'AboutPageController',
-          controllerAs: 'about',
-        },
-        'leftSidebar': {
-          templateUrl: 'app/pages/about/about-sidebar.html',
-          controller: 'AboutPageController',
-          controllerAs: 'about',
-        },
-      },
-    })
+    .state('about', about)
     .state('rules', {
       url: '/rules',
       redirectTo: 'rules-rules',
