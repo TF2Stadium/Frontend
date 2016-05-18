@@ -1,16 +1,13 @@
+import angular from 'angular';
 import config from 'app-config';
 import { isEmpty } from 'lodash';
 import Raven from 'raven-js';
 import RavenAngularPlugin from 'raven-js/plugins/angular';
 import moment from 'moment';
-import '../scss/app.scss';
+import routeConfig from './app.route';
+import {module as aboutPage} from './pages/about';
 
-// Only technically needed for tests, normally the global 'angular'
-// object is created by default and this require statement triggers a
-// 'loading angular twice' warning.
-if (window && !window.angular) {
-  require('angular');
-}
+import '../scss/app.scss';
 
 var modules = [], release = 'development';
 
@@ -41,9 +38,9 @@ function disableDebug($compileProvider) {
 }
 
 import { allowMumbleHref, safeApply } from './util';
-import { routeConfig } from './app.route';
 
 angular.module('tf2stadium', [
+  aboutPage.name,
   'tf2stadium.directives',
   'tf2stadium.controllers',
   'tf2stadium.services',
@@ -93,7 +90,6 @@ require('./pages/lobby/create/wizard-steps.controller');
 require('./pages/lobby/list/lobby-list.controller');
 require('./pages/lobby/list/sub-list.controller');
 require('./pages/user-profile/user-profile.controller');
-require('./pages/about/about.controller');
 
 require('./app.notifications');
 require('./shared/websocket.factory');
@@ -119,7 +115,6 @@ require('./pages/settings/settings.provider');
 require('./pages/lobby/list/header.controller');
 require('./pages/rules/rules.controller');
 require('./pages/rules/rules.provider');
-require('./pages/about/about.provider');
 require('./app.preloading');
 require('./app.theme');
 require('./app.settings');
