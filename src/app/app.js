@@ -1,3 +1,4 @@
+import angular from 'angular';
 import config from 'app-config';
 import { isEmpty } from 'lodash';
 import Raven from 'raven-js';
@@ -7,13 +8,6 @@ import routeConfig from './app.route';
 import {module as aboutPage} from './pages/about';
 
 import '../scss/app.scss';
-
-// Only technically needed for tests, normally the global 'angular'
-// object is created by default and this require statement triggers a
-// 'loading angular twice' warning.
-if (window && !window.angular) {
-  require('angular');
-}
 
 var modules = [], release = 'development';
 
