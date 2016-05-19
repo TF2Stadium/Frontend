@@ -27,3 +27,8 @@ export function safeApply($rootScope) {
 export function allowMumbleHref($compileProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|steam|mumble):/);
 }
+
+/** @ngInject */
+export function disableDebug($compileProvider) {
+  $compileProvider.debugInfoEnabled(false);
+}
