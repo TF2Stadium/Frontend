@@ -12,23 +12,13 @@ function ReadyUpDialogController($scope, $mdDialog, $interval) {
     vm.percentage = 100 * (d / vm.readyUpMs);
 
     if (vm.percentage > 100) {
-      $mdDialog.hide('leave');
+      $mdDialog.cancel();
     }
   };
 
-  vm.cancel = function () {
-    $mdDialog.cancel();
-  };
+  vm.cancel = () => $mdDialog.cancel();
+  vm.accept = () => $mdDialog.hide({ readyUp: true });
 
-  vm.accept = function () {
-    $mdDialog.hide({readyUp: true});
-  };
-
-  var timer = $interval(function () {
-    increaseCounter();
-  }, 100);
-
-  $scope.$on('$destroy', function readyUpDialogDestroyed() {
-    $interval.cancel(timer);
-  });
+  var timer = $interval(increaseCounter, 100);
+  $scope.$on('$destroy', () => $interval.cancel(timer));
 }
