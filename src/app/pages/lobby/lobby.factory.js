@@ -403,8 +403,8 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
       controllerAs: 'dialog',
       locals: eventData,
       bindToController: true,
-    }).then(function (response) {
-      if (response.readyUp) {
+    }).then((response) => {
+      if (response && response.readyUp) {
         Websocket.emitJSON('playerReady', {});
         localStorage.setItem('tabCommunication', '');
         localStorage.setItem('tabCommunication', 'closeDialog');
