@@ -5,20 +5,23 @@ import Raven from 'raven-js';
 import RavenAngularPlugin from 'raven-js/plugins/angular';
 import moment from 'moment';
 import routeConfig from './app.route';
-import {module as aboutPage} from './pages/about';
+import { module as aboutPage } from './pages/about';
+import { allowMumbleHref, safeApply, disableDebug } from './util';
+import { WhitelistDirective, AutofocusDirective } from './app.directive';
 
 import '../scss/app.scss';
 
 var modules = [], release = 'development';
 
 if (typeof __BUILD_STATS__ !== 'undefined') {
+  let { host, time, gitCommit: { hash, branch } } = __BUILD_STATS__;
+  time = moment(__BUILD_STATS__.time).format('LLLL ZZ');
+
   console.log(
-    'Built on ' + __BUILD_STATS__.host +
-      ' at ' + moment(__BUILD_STATS__.time).format('LLLL ZZ') +
-      ' from hash ' + __BUILD_STATS__.gitCommit.hash +
-      ' on branch ' + __BUILD_STATS__.gitCommit.branch
+    `Built on ${host} at ${time} from hash ${hash} on branch ${branch}`
   );
-  release = __BUILD_STATS__.gitCommit.hash;
+
+  release = hash;
 }
 
 if (!isEmpty(config.sentryDSN)) {
@@ -31,13 +34,6 @@ if (!isEmpty(config.sentryDSN)) {
   // TODO: Remove once prod setup is verified
   console.log('Logging to ' + config.sentryDSN);
 }
-
-/** @ngInject */
-function disableDebug($compileProvider) {
-  $compileProvider.debugInfoEnabled(false);
-}
-
-import { allowMumbleHref, safeApply } from './util';
 
 angular.module('tf2stadium', [
   aboutPage.name,
@@ -58,18 +54,8 @@ angular.module('tf2stadium', [
   .config(disableDebug)
   .factory('safeApply', safeApply)
   .config(routeConfig)
-  .config(allowMumbleHref);
-
-// app-config is a webpack resolve.alias pointing to the preferred
-// configuration file.
-//
-// Old-style config files (which we still support), when require()'d,
-// will register themselves as tf2stadium.constant('Config', ...), but
-// new style configs just return a value. This supports both, because
-// module.constant(...) is actually constant (aka, won't be
-// overwritten by a second .constant call).
-angular.module('tf2stadium')
-  .constant('Config', require('app-config'));
+  .config(allowMumbleHref)
+  .constant('Config', config);
 
 angular.module('tf2stadium.controllers', []);
 angular.module('tf2stadium.filters', []);
@@ -98,8 +84,6 @@ require('./shared/comment-box/chat.service');
 require('./pages/lobby/lobby.factory');
 require('./pages/lobby/create/lobby-create.provider');
 require('./pages/lobby/create/lobby-create.filter');
-
-import { WhitelistDirective, AutofocusDirective } from './app.directive';
 
 angular
   .module('tf2stadium.directives', ['tf2stadium.filters'])
