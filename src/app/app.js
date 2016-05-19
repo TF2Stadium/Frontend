@@ -6,6 +6,7 @@ import RavenAngularPlugin from 'raven-js/plugins/angular';
 import moment from 'moment';
 import routeConfig from './app.route';
 import { module as aboutPage } from './pages/about';
+import { module as rulesPage } from './pages/rules';
 import { allowMumbleHref, safeApply, disableDebug } from './util';
 import { WhitelistDirective, AutofocusDirective } from './app.directive';
 
@@ -37,6 +38,7 @@ if (!isEmpty(config.sentryDSN)) {
 
 angular.module('tf2stadium', [
   aboutPage.name,
+  rulesPage.name,
   'tf2stadium.directives',
   'tf2stadium.controllers',
   'tf2stadium.services',
@@ -97,8 +99,6 @@ require('./pages/lobby/list/lobby-list.filter');
 require('./app.icons');
 require('./pages/settings/settings.provider');
 require('./pages/lobby/list/header.controller');
-require('./pages/rules/rules.controller');
-require('./pages/rules/rules.provider');
 require('./app.preloading');
 require('./app.theme');
 require('./app.settings');
