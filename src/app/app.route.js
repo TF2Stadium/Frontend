@@ -1,4 +1,5 @@
 import {route as about} from './pages/about';
+import {route as rules} from './pages/rules';
 
 /** @ngInject */
 export default function routeConfig($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -90,22 +91,7 @@ export default function routeConfig($stateProvider, $urlRouterProvider, $locatio
       },
     })
     .state('about', about)
-    .state('rules', {
-      url: '/rules',
-      redirectTo: 'rules-rules',
-      views: {
-        'content': {
-          templateUrl: 'app/pages/rules/rules.html',
-          controller: 'RulesPageController',
-          controllerAs: 'rules',
-        },
-        'leftSidebar': {
-          templateUrl: 'app/pages/rules/rules-sidebar.html',
-          controller: 'RulesPageController',
-          controllerAs: 'rules',
-        },
-      },
-    });
+    .state('rules', rules);
 
   $urlRouterProvider.otherwise('/');
 
