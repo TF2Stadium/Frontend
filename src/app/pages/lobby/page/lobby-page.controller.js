@@ -184,6 +184,10 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
       setReq(val);
     } else {
       vm.inputType = typeof vm.slotRequirementValue === 'string'? 'text':'number';
+      if (reqName === 'password') {
+        vm.inputType = 'password';
+      }
+
       vm.showRequirementInput = slot.slot;
       vm.requirementInputName = reqName;
 
