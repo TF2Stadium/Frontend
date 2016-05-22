@@ -175,7 +175,6 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
   };
 
   vm.showRequirementInput = false;
-  vm.reqInputField = false;
   vm.requirementInputPromise = null;
 
   vm.setRequirements = function (slot, reqName, val) {
@@ -184,9 +183,9 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     if (angular.isDefined(val)) {
       setReq(val);
     } else {
+      vm.inputType = typeof vm.slotRequirementValue === 'string'? 'text':'number';
       vm.showRequirementInput = slot.slot;
       vm.requirementInputName = reqName;
-      vm.reqInputField = reqName;
 
       var deferred = $q.defer();
       vm.requirementInputDeferred = deferred;
