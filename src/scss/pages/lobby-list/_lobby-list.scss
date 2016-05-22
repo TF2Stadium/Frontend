@@ -113,6 +113,28 @@
     padding-right: $padding-medium;
     z-index: 1; //on top of the image
   }
+
+  .lobby-type-twitch,
+  .lobby-type-steam {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    &, img {
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  .lobby-type-steam {
+    top: auto;
+    bottom: 0;
+
+    svg {
+      @extend .fill-parent;
+      fill: white;
+    }
+  }
 }
 
 .lobby-main {
