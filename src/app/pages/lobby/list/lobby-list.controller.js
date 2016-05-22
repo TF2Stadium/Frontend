@@ -6,12 +6,27 @@ angular
   .controller('LobbyListController', LobbyListController);
 
 /** @ngInject */
-function LobbyListController($scope, LobbyService, Settings) {
+function LobbyListController($rootScope, $scope, LobbyService, Settings, User) {
   var vm = this;
+
+  function doesUserMeet(req) {
+    if ($rootScope.userProfile && $rootScope.userProfile.steamid) {
+      console.log('compare', req, 'with',
+                  $rootScope.userProfile.lobbiesPlayed,
+                  $rootScope.userProfile.gameHours,
+                  ' result',
+                  ($rootScope.userProfile.lobbiesPlayed > req.lobbies && $rootScope.userProfile.gameHours > req.hours));
+      return $rootScope.userProfile.lobbiesPlayed >= req.lobbies &&
+        $rootScope.userProfile.gameHours >= req.hours;
+    } else {
+      return true;
+    }
+  }
 
   function slotHasRestriction(slot) {
     return slot.requirements && (
-      slot.requirements.hours || slot.requirements.lobbies);
+      slot.requirements.hours || slot.requirements.lobbies) &&
+      !doesUserMeet(slot.requirements);
   }
 
   function transformLobby(lobbyData) {
@@ -32,9 +47,15 @@ function LobbyListController($scope, LobbyService, Settings) {
     return lobbyListData.map(transformLobby);
   }
 
-  vm.lobbies = transform(LobbyService.getList());
-  LobbyService.subscribe('lobby-list-updated', $scope, function () {
+  function update() {
     vm.lobbies = transform(LobbyService.getList());
+  }
+  update();
+  LobbyService.subscribe('lobby-list-updated', $scope, update);
+
+  User.userProfile$.onValue(profile => {
+    console.log('asdf', profile);
+    update();
   });
 
   vm.shouldShowFilters = function () {
