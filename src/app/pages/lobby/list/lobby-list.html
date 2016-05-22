@@ -64,6 +64,17 @@
   <div bindonce="lobbyInformation"
        class="lobby-image"
        bo-style="{'background-image':'url(/assets/img/maps/lobby-row/' + lobbyInformation.map + '.jpg)'}">
+    <span class="lobby-type-twitch">
+      <img ng-if="true || lobbyInformation.twitchChannel"
+           src="/assets/img/logos/twitch-glitch-filled.png"
+           alt="twitch" />
+      <md-tooltip md-direction="top">Twitch: {{lobbyInformation.twitchChannel}}</md-tooltip>
+    </span>
+    <md-icon class="lobby-type-steam"
+             md-svg-icon="logo:steam"
+             ng-if="true || lobbyInformation.steamGroup">
+      <md-tooltip md-direction="bottom">Steam group: {{lobbyInformation.steamGroup}}</md-tooltip>
+    </md-icon>
     <span bindonce="lobbyInformation"
           class="lobby-type"
           bo-bind="lobbyInformation.type"></span>
@@ -81,13 +92,27 @@
           <md-button
              ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
              ng-if="!slot.filled"
-             ng-class="['join-slot', team]"
+             ng-class="['join-slot', slot.isRestricted?'restricted':team]"
              ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)"
              aria-label="Join {{::team}} {{::class.class}}">
-            <md-tooltip md-direction="bottom">Join {{::team}} {{::class.class | stripSlotNameNumber}} slot</md-tooltip>
+            <md-tooltip md-direction="{{lobbyInformation.hasAnyPasswords? 'top':'bottom'}}">Join {{::team}} {{::class.class | stripSlotNameNumber}} slot</md-tooltip>
             <span></span>
           </md-button>
         </div>
+        <div class="placeholder-slot-locked" ng-if="lobbyInformation.hasAnyPasswords">
+        </div>
+        <md-icon
+           class="blu-slot-locked"
+           ng-if="class.blu.password"
+           md-svg-icon="material:lock-closed">
+          <md-tooltip md-direction="bottom">Password required</md-tooltip>
+        </md-icon>
+        <md-icon
+           class="red-slot-locked"
+           ng-if="class.red.password"
+           md-svg-icon="material:lock-closed">
+          <md-tooltip md-direction="bottom">Password required</md-tooltip>
+        </md-icon>
       </div>
     </div>
     <div class="lobby-info">
