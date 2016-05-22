@@ -9,9 +9,32 @@ angular
 function LobbyListController($scope, LobbyService, Settings) {
   var vm = this;
 
-  vm.lobbies = LobbyService.getList();
+  function slotHasRestriction(slot) {
+    return slot.requirements && (
+      slot.requirements.hours || slot.requirements.lobbies);
+  }
+
+  function transformLobby(lobbyData) {
+    lobbyData.hasAnyPasswords = lobbyData.classes.some((klass) => {
+      return klass.red.password || klass.blue.password;
+    });
+
+    lobbyData.classes = lobbyData.classes.map((klass) => {
+      klass.red.isRestricted = slotHasRestriction(klass.red);
+      klass.blu.isRestricted = slotHasRestriction(klass.blu);
+      return klass;
+    });
+
+    return lobbyData;
+  }
+
+  function transform(lobbyListData) {
+    return lobbyListData.map(transformLobby);
+  }
+
+  vm.lobbies = transform(LobbyService.getList());
   LobbyService.subscribe('lobby-list-updated', $scope, function () {
-    vm.lobbies = LobbyService.getList();
+    vm.lobbies = transform(LobbyService.getList());
   });
 
   vm.shouldShowFilters = function () {

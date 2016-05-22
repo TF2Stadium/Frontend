@@ -92,13 +92,27 @@
           <md-button
              ng-repeat="(team, slot) in {blu: class.blu, red: class.red} track by team"
              ng-if="!slot.filled"
-             ng-class="['join-slot', team]"
+             ng-class="['join-slot', slot.isRestricted?'restricted':team]"
              ng-click="lobbyList.join(lobbyInformation.id, team, class.class, $event)"
              aria-label="Join {{::team}} {{::class.class}}">
-            <md-tooltip md-direction="bottom">Join {{::team}} {{::class.class | stripSlotNameNumber}} slot</md-tooltip>
+            <md-tooltip md-direction="{{lobbyInformation.hasAnyPasswords? 'top':'bottom'}}">Join {{::team}} {{::class.class | stripSlotNameNumber}} slot</md-tooltip>
             <span></span>
           </md-button>
         </div>
+        <div class="placeholder-slot-locked" ng-if="lobbyInformation.hasAnyPasswords">
+        </div>
+        <md-icon
+           class="blu-slot-locked"
+           ng-if="class.blu.password"
+           md-svg-icon="material:lock-closed">
+          <md-tooltip md-direction="bottom">Password required</md-tooltip>
+        </md-icon>
+        <md-icon
+           class="red-slot-locked"
+           ng-if="class.red.password"
+           md-svg-icon="material:lock-closed">
+          <md-tooltip md-direction="bottom">Password required</md-tooltip>
+        </md-icon>
       </div>
     </div>
     <div class="lobby-info">

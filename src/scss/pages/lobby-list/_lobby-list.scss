@@ -142,9 +142,39 @@
   padding: 0 $padding-medium;
 }
 
-
 .lobby-classes {
   @include flex (row, center, center);
+
+  .placeholder-slot-locked {
+    float: left;
+    display: block;
+    height: 29px;
+  }
+
+  .red-slot-locked,
+  .blu-slot-locked {
+    height: 24px;
+    width: 24px;
+    padding-top: 5px;
+  }
+
+  .red-slot-locked {
+    float: right;
+    margin-right: 4px;
+
+    svg {
+      color: $tf2-red;
+    }
+  }
+
+  .blu-slot-locked {
+    float: left;
+    margin-left: 4px;
+
+    svg {
+      color: $tf2-blue;
+    }
+  }
 }
 
 .flex-max-margin {
@@ -259,5 +289,9 @@
 
   &.red > span:before {
     background-color: $tf2-red;
+  }
+
+  &.restricted > span:before {
+    background-color: gray;
   }
 }
