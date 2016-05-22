@@ -24,10 +24,10 @@ function LobbyListController($rootScope, $scope, LobbyService, Settings, User) {
       !doesUserMeet(slot.requirements);
   }
 
+  var classHasPassword = klass => klass.red.password || klass.blu.password;
+
   function transformLobby(lobbyData) {
-    lobbyData.hasAnyPasswords = lobbyData.classes.some((klass) => {
-      return klass.red.password || klass.blue.password;
-    });
+    lobbyData.hasAnyPasswords = lobbyData.classes.some(classHasPassword);
 
     lobbyData.classes = lobbyData.classes.map((klass) => {
       klass.red.isRestricted = slotHasRestriction(klass.red);
