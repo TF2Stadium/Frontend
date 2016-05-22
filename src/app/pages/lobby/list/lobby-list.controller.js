@@ -11,11 +11,6 @@ function LobbyListController($rootScope, $scope, LobbyService, Settings, User) {
 
   function doesUserMeet(req) {
     if ($rootScope.userProfile && $rootScope.userProfile.steamid) {
-      console.log('compare', req, 'with',
-                  $rootScope.userProfile.lobbiesPlayed,
-                  $rootScope.userProfile.gameHours,
-                  ' result',
-                  ($rootScope.userProfile.lobbiesPlayed > req.lobbies && $rootScope.userProfile.gameHours > req.hours));
       return $rootScope.userProfile.lobbiesPlayed >= req.lobbies &&
         $rootScope.userProfile.gameHours >= req.hours;
     } else {
@@ -51,10 +46,9 @@ function LobbyListController($rootScope, $scope, LobbyService, Settings, User) {
     vm.lobbies = transform(LobbyService.getList());
   }
   update();
-  LobbyService.subscribe('lobby-list-updated', $scope, update);
 
-  User.userProfile$.onValue(profile => {
-    console.log('asdf', profile);
+  LobbyService.subscribe('lobby-list-updated', $scope, update);
+  User.userProfile$.onValue(() => {
     update();
   });
 
