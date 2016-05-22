@@ -225,7 +225,7 @@
               <md-menu-item
                  ng-if="!slot.requirements.hours">
                 <md-button
-                   ng-click="lobbyPage.slotRequirementValue=null;lobbyPage.setRequirements(slot, 'hours')">
+                   ng-click="lobbyPage.slotRequirementValue=0;lobbyPage.setRequirements(slot, 'hours')">
                   Set Hours Requirement
                 </md-button>
               </md-menu-item>
@@ -246,7 +246,7 @@
               <md-menu-item
                  ng-if="!slot.requirements.lobbies">
                 <md-button
-                   ng-click="lobbyPage.slotRequirementValue=null;lobbyPage.setRequirements(slot, 'lobbies')">
+                   ng-click="lobbyPage.slotRequirementValue=0;lobbyPage.setRequirements(slot, 'lobbies')">
                   Set Lobbies Requirement
                 </md-button>
               </md-menu-item>
@@ -264,7 +264,7 @@
                autofocus
                ng-model="lobbyPage.slotRequirementValue"
                aria-label="slot requirement value input"
-               type="typeof lobbyPage.slotRequirementValue === 'string? 'text':'number'"
+               type="{{lobbyPage.inputType}}"
                placeholder="{{lobbyPage.requirementInputName === 'hours'? 'Hours':(lobbyPage.requirementInputName === 'lobbies'? 'Lobbies':'Password')}}"
                step="{{lobbyPage.requirementInputName === 'hours'? 100:10}}"
                min="0"
