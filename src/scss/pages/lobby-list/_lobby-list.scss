@@ -168,3 +168,74 @@
   height: 50%;
   text-align: center;
 }
+
+
+
+/* ==================================
+      CLASS AND JOIN CLASS BUTTONS
+   ================================== */
+
+.class-button {
+  @include flex(row, space-between, stretch);
+  width: $class-button-width;
+  min-width: $class-button-width; //override md-button
+  min-height: $class-button-height;
+  background:{
+    size: $class-button-background-width;
+    position: center;
+    repeat: no-repeat;
+  }
+  overflow: hidden;
+  border-radius: 3px;
+  padding: 0;
+  margin: 0px;
+}
+
+.join-slot {
+  min-width: $class-button-width/2;
+  min-height: $class-button-height;
+  padding: 0;
+  margin: 0;
+  border-radius: 0;
+
+  span {
+    @extend .fill-width;
+    height: 10%;
+    overflow: hidden;
+    transition: height 0.1s ease-out;
+
+    &:before, &:after {
+      @extend .fill-parent;
+      content: "";
+      background:{
+        size: $class-button-background-width;
+        position: ($class-button-width - $class-button-background-width) / 2
+                  ($class-button-height - $class-button-background-height) / 2;
+        repeat: no-repeat;
+      }
+    }
+  }
+
+  &:only-child {
+    min-width: 50px; //only way for it to work in IE
+  }
+
+  &:nth-child(2) {
+    span::after{
+      background-position: - $class-button-background-width / 2
+              ($class-button-height - $class-button-background-height) / 2;
+    }
+  }
+
+  &:hover > span {
+    height: $class-button-height;
+  }
+
+  &.blu > span:before {
+    background-color: $tf2-blue;
+  }
+
+  &.red > span:before {
+    background-color: $tf2-red;
+  }
+}
