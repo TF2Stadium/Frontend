@@ -1,3 +1,4 @@
+import Kefir from 'kefir';
 import Raven from 'raven-js';
 import {pick} from 'lodash';
 
@@ -7,8 +8,28 @@ angular
 
 /** @ngInject */
 function User(Websocket, $rootScope, $window, $q, Config) {
-
   var userService = {};
+
+  const {
+    pub: updateUserProfile,
+    stream: userProfile$,
+  } = (function () {
+    var pubFn = ()=>{};
+
+    function pub(x) {
+      pubFn(x);
+    }
+
+    var stream = Kefir.stream(emitter => {
+      pubFn = (x) => emitter.emit(x);
+      return () => {};
+    });
+
+    return { pub, stream };
+  })();
+
+  userService.userProfile$ = userProfile$;
+  updateUserProfile({});
 
   userService.getProfile = (steamid, callback) => {
     callback = callback || angular.noop;
@@ -52,6 +73,7 @@ function User(Websocket, $rootScope, $window, $q, Config) {
     Websocket.onJSON('playerProfile', function (data) {
       Raven.setUserContext(pick(data, ['id', 'steamid']));
       $rootScope.userProfile = data;
+      updateUserProfile(data);
     });
 
   return userService;
