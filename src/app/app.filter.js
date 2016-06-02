@@ -38,7 +38,7 @@ function numberOrDash($filter) {
   };
 }
 
-function reverse(items) {
+export function reverse(items) {
   return items.slice().reverse();
 }
 
