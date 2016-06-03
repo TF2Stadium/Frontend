@@ -215,9 +215,9 @@
       "resolved": "https://registry.npmjs.org/arrify/-/arrify-1.0.1.tgz"
     },
     "asap": {
-      "version": "2.0.3",
+      "version": "2.0.4",
       "from": "asap@>=2.0.3 <2.1.0",
-      "resolved": "https://registry.npmjs.org/asap/-/asap-2.0.3.tgz"
+      "resolved": "https://registry.npmjs.org/asap/-/asap-2.0.4.tgz"
     },
     "asn1": {
       "version": "0.1.11",
@@ -383,23 +383,6 @@
       "version": "6.5.0",
       "from": "babel-plugin-syntax-async-functions@>=6.3.13 <7.0.0",
       "resolved": "https://registry.npmjs.org/babel-plugin-syntax-async-functions/-/babel-plugin-syntax-async-functions-6.5.0.tgz"
-    },
-    "babel-plugin-syntax-flow": {
-      "version": "6.8.0",
-      "from": "babel-plugin-syntax-flow@>=6.5.0 <7.0.0",
-      "resolved": "https://registry.npmjs.org/babel-plugin-syntax-flow/-/babel-plugin-syntax-flow-6.8.0.tgz",
-      "dependencies": {
-        "babel-runtime": {
-          "version": "6.6.1",
-          "from": "babel-runtime@>=6.0.0 <7.0.0",
-          "resolved": "https://registry.npmjs.org/babel-runtime/-/babel-runtime-6.6.1.tgz"
-        },
-        "core-js": {
-          "version": "2.3.0",
-          "from": "core-js@>=2.1.0 <3.0.0",
-          "resolved": "https://registry.npmjs.org/core-js/-/core-js-2.3.0.tgz"
-        }
-      }
     },
     "babel-plugin-transform-es2015-arrow-functions": {
       "version": "6.5.2",
@@ -1671,9 +1654,16 @@
       "resolved": "https://registry.npmjs.org/faye-websocket/-/faye-websocket-0.10.0.tgz"
     },
     "fbjs": {
-      "version": "0.8.1",
+      "version": "0.8.3",
       "from": "fbjs@>=0.8.0 <0.9.0",
-      "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.8.1.tgz"
+      "resolved": "https://registry.npmjs.org/fbjs/-/fbjs-0.8.3.tgz",
+      "dependencies": {
+        "object-assign": {
+          "version": "4.1.0",
+          "from": "object-assign@^4.1.0",
+          "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz"
+        }
+      }
     },
     "fd-slicer": {
       "version": "1.0.1",
@@ -2091,6 +2081,11 @@
       "version": "3.1.2",
       "from": "ignore@>=3.1.2 <4.0.0",
       "resolved": "https://registry.npmjs.org/ignore/-/ignore-3.1.2.tgz"
+    },
+    "immutable": {
+      "version": "3.8.1",
+      "from": "immutable@>=3.7.6 <4.0.0",
+      "resolved": "https://registry.npmjs.org/immutable/-/immutable-3.8.1.tgz"
     },
     "imurmurhash": {
       "version": "0.1.4",
@@ -2869,9 +2864,9 @@
       "resolved": "https://registry.npmjs.org/node-dir/-/node-dir-0.1.11.tgz"
     },
     "node-fetch": {
-      "version": "1.5.1",
+      "version": "1.5.3",
       "from": "node-fetch@>=1.0.1 <2.0.0",
-      "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-1.5.1.tgz"
+      "resolved": "https://registry.npmjs.org/node-fetch/-/node-fetch-1.5.3.tgz"
     },
     "node-gyp": {
       "version": "3.3.1",
@@ -3481,14 +3476,21 @@
       "resolved": "https://registry.npmjs.org/raw-loader/-/raw-loader-0.5.1.tgz"
     },
     "react": {
-      "version": "15.0.2",
-      "from": "react@15.0.2",
-      "resolved": "https://registry.npmjs.org/react/-/react-15.0.2.tgz"
+      "version": "15.1.0",
+      "from": "react@15.1.0",
+      "resolved": "https://registry.npmjs.org/react/-/react-15.1.0.tgz",
+      "dependencies": {
+        "object-assign": {
+          "version": "4.1.0",
+          "from": "object-assign@>=4.1.0 <5.0.0",
+          "resolved": "https://registry.npmjs.org/object-assign/-/object-assign-4.1.0.tgz"
+        }
+      }
     },
     "react-dom": {
-      "version": "15.0.2",
-      "from": "react-dom@15.0.2",
-      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.0.2.tgz"
+      "version": "15.1.0",
+      "from": "react-dom@15.1.0",
+      "resolved": "https://registry.npmjs.org/react-dom/-/react-dom-15.1.0.tgz"
     },
     "react-hyperscript": {
       "version": "2.4.0",
