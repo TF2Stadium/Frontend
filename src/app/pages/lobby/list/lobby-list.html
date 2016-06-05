@@ -22,6 +22,17 @@
   </md-tabs>
 </div>
 
+<div class="hours-notif"
+     ng-if="$root.userProfile.steamid && $root.userProfile.gameHours <
+  150">Not enough TF2 hours! You need over 150 hours of TF2 to join
+  lobbies. If you have more and are still seeing this notification,
+  please make your Steam profile public temporarily and then login
+  again.
+  <br>
+  You can logout in Settings > Account, or by
+  clicking <a href="{{::config.endpoints.api}}/logout">here</a>
+</div>
+
 <div id="subList" ng-controller="SubListController as vm">
   <div class="substitute md-button"
        md-ink-ripple
