@@ -225,4 +225,9 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     e.preventDefault();
     vm.requirementInputDeferred.resolve(val);
   };
+
+  vm.launchTF2 =() => {
+    LobbyService.setJoinedId(vm.lobbyInformation.id);
+    vm.delayedLaunch(vm.lobbyJoinInformation.connectUrl, 500);
+  };
 }

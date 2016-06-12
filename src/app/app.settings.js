@@ -54,6 +54,11 @@ function SettingsConfigBlock(SettingsProvider, VocalNotifications) {
     off:   {name: 'Off',    value: 'off'},
   };
 
+  SettingsProvider.constants.autoOpenLogs = {
+    on:    {name: 'On',     value: 'on'},
+    off:   {name: 'Off',    value: 'off'},
+  };
+
   SettingsProvider.constants.animationOptions = {
     slow:     {name: 'Slow',      selector: 'animation-slow'},
     normal:   {name: 'Normal',    selector: 'animation-normal'},
@@ -83,6 +88,7 @@ function SettingsConfigBlock(SettingsProvider, VocalNotifications) {
     SettingsProvider.settings.animationLength = 'animation-normal';
     SettingsProvider.settings.savedServers = '{}';
     SettingsProvider.settings.videoBackground = 'on';
+    SettingsProvider.settings.autoOpenLogs = 'on';
 
     // Use Array.find(arrVal,..) vs arrValue.find(..) to avoid using a
     // prototype polyfill for now...

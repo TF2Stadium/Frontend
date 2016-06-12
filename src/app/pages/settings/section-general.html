@@ -1,1 +1,12 @@
-asdf
+<div class="settings-section">
+  <h1>Auto open logs</h1>
+  <p>Automatically open logs.tf in a new window after a lobby
+  ends.</p>
+  <md-radio-group ng-model="settings.autoOpenLogs"
+                  ng-change="settings.saveSetting('autoOpenLogs', settings.autoOpenLogs)">
+    <md-radio-button ng-value="s.value"
+                     ng-repeat="s in settings.sections.general.autoOpenLogs track by s.value">
+      {{s.name}}
+    </md-radio-button>
+  </md-radio-group>
+</div>

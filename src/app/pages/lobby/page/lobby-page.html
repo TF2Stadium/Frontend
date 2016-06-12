@@ -44,7 +44,7 @@
      ng-if="lobbyPage.lobbyJoinInformation.id && lobbyPage.lobbyJoinInformation.id==lobbyPage.lobbyInformation.id">
   <div class="row">
     <md-button
-       ng-click="$event.preventDefault();lobbyPage.delayedLaunch(lobbyPage.lobbyJoinInformation.connectUrl, 500);"
+       ng-click="$event.preventDefault();lobbyPage.launchTF2();"
        ng-href="{{lobbyPage.lobbyJoinInformation.connectUrl}}"
        target="_self">
       Join Game
