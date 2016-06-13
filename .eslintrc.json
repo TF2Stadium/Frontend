@@ -12,6 +12,9 @@
     "__SENTRY_DSN__": false
   },
   "rules": {
+    "one-var": 0,
+    "no-var": 0,
+    "import/no-unresolved": 0,
     "no-console": 0,
     "no-trailing-spaces": 2,
     "eqeqeq": 2,
@@ -67,5 +70,5 @@
     "browser": true,
     "es6": true
   },
-  "extends": "eslint:recommended"
+  "extends": "airbnb-base"
 }
