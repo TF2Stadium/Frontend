@@ -16,6 +16,7 @@
     "no-var": 0,
     "import/no-unresolved": 0,
     "space-infix-ops": 2,
+    "import/no-mutable-exports": 2,
     "no-console": 0,
     "no-trailing-spaces": 2,
     "eqeqeq": 2,
@@ -61,7 +62,8 @@
     ]
   },
   "plugins": [
-    "angular"
+    "angular",
+    "import"
   ],
   "parserOptions": {
     "ecmaVersion": 6,
@@ -71,5 +73,5 @@
     "browser": true,
     "es6": true
   },
-  "extends": "airbnb-base"
+  "comment": { "extends": "airbnb-base" }
 }
