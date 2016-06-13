@@ -15,6 +15,7 @@
     "one-var": 0,
     "no-var": 0,
     "import/no-unresolved": 0,
+    "space-infix-ops": 2,
     "no-console": 0,
     "no-trailing-spaces": 2,
     "eqeqeq": 2,

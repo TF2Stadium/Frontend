@@ -6,7 +6,7 @@ describe('Service: ChatService', function () {
   function makeTestPlayer(p) {
     return {
       avatar: '',
-      gameHours: 1201 + p*100,
+      gameHours: 1201 + p * 100,
       lobbiesPlayed: 0,
       name: 'player' + p,
       profileUrl: '',
@@ -31,7 +31,7 @@ describe('Service: ChatService', function () {
       id: n,
       message: 'hi' + n,
       room: 0,
-      timestamp: 1449001384 + n*1000,
+      timestamp: 1449001384 + n * 1000,
       player: makeTestPlayer(p),
     };
   }

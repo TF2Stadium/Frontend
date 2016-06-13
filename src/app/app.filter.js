@@ -34,7 +34,7 @@ function numberOrDash($filter) {
     if (angular.isUndefined(input) || isNaN(input)) {
       return input;
     }
-    return (+input) === 0? dash : numberFilter(input);
+    return (+input) === 0 ? dash : numberFilter(input);
   };
 }
 

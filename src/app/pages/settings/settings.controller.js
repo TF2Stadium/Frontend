@@ -101,7 +101,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
   vm.editServerField = function editServerField(e, server, field) {
     e.stopPropagation(); // prevent auto row-select
 
-    var validators = { 'md-maxlength': field === 'name'? 50 : 100 };
+    var validators = { 'md-maxlength': field === 'name' ? 50 : 100 };
 
     $mdEditDialog.small({
       modelValue: server[field],
