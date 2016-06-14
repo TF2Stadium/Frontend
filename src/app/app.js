@@ -1,5 +1,7 @@
 import angular from 'angular';
 import config from 'app-config';
+import ngreact from 'ngreact';
+import scrollglue from './scrollglue';
 import { isEmpty } from 'lodash';
 import Raven from 'raven-js';
 import RavenAngularPlugin from 'raven-js/plugins/angular';
@@ -12,14 +14,15 @@ import { WhitelistDirective, AutofocusDirective } from './app.directive';
 
 import '../scss/app.scss';
 
-var modules = [], release = 'development';
+var modules = [],
+  release = 'development';
 
 if (typeof __BUILD_STATS__ !== 'undefined') {
-  let { host, time, gitCommit: { hash, branch } } = __BUILD_STATS__;
-  time = moment(__BUILD_STATS__.time).format('LLLL ZZ');
+  const { host, time, gitCommit: { hash, branch } } = __BUILD_STATS__,
+    timeStr = moment(time).format('LLLL ZZ');
 
   console.log(
-    `Built on ${host} at ${time} from hash ${hash} on branch ${branch}`
+    `Built on ${host} at ${timeStr} from hash ${hash} on branch ${branch}`
   );
 
   release = hash;
@@ -33,7 +36,7 @@ if (!isEmpty(config.sentryDSN)) {
   modules.push('ngRaven');
 
   // TODO: Remove once prod setup is verified
-  console.log('Logging to ' + config.sentryDSN);
+  console.log(`Logging to ${config.sentryDSN}`);
 }
 
 angular.module('tf2stadium', [
@@ -44,12 +47,12 @@ angular.module('tf2stadium', [
   'tf2stadium.services',
   'tf2stadium.filters',
   'ngAnimate',
-  require('ngreact').name,
+  ngreact.name,
   'ui.router',
   'ui.validate',
   'ngMaterial',
   'md.data.table',
-  require('./scrollglue').name,
+  scrollglue.name,
   'pasvaz.bindonce',
   'ngMedia',
 ].concat(modules))

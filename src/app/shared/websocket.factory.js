@@ -101,7 +101,7 @@ function Websocket($rootScope, $timeout, $log, $q,
   var factory = {};
   factory.onJSON = (name, callback, dontApply) => {
     if (console && console.timeStamp) {
-      console.timeStamp('WS'+name);
+      console.timeStamp('WS' + name);
     }
 
     callback = callback || angular.noop;
@@ -172,7 +172,7 @@ function Websocket($rootScope, $timeout, $log, $q,
         var dataIn = angular.fromJson(jsonIn);
 
         if (console && console.timeStamp) {
-          console.timeStamp('WS'+name);
+          console.timeStamp('WS' + name);
         }
 
         $log.log('Response to ' + name, dataIn);

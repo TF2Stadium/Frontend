@@ -1,4 +1,4 @@
-export let module = angular.module('tf2stadium.rules', ['ui.router']);
+export const module = angular.module('tf2stadium.rules', ['ui.router']);
 
 module
   .config(RulesPageConfig)
@@ -22,7 +22,7 @@ const rulesPageSidebar = `
 </div>
 `;
 
-export let route = {
+export const route = {
   url: '/rules',
   redirectTo: 'rules-rules',
   views: {

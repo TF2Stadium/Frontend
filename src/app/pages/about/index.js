@@ -1,4 +1,4 @@
-export let module = angular.module('tf2stadium.about', ['ui.router']);
+export const module = angular.module('tf2stadium.about', ['ui.router']);
 
 module
   .config(AboutPageConfig)
@@ -23,7 +23,7 @@ const aboutPageSidebar = `
 </div>
 `;
 
-export let route = {
+export const route = {
   url: '/about',
   redirectTo: 'about-about',
   views: {

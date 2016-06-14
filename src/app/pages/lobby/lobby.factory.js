@@ -396,7 +396,7 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
       slot: slotId,
       type: reqName,
       value: 0, // may be overriden, but we always have to send a 'value' param
-      [reqName === 'password'? 'password':'value']: val,
+      [reqName === 'password' ? 'password' : 'value']: val,
     });
   };
 

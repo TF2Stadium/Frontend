@@ -183,7 +183,7 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     if (angular.isDefined(val)) {
       setReq(val);
     } else {
-      vm.inputType = typeof vm.slotRequirementValue === 'string'? 'text':'number';
+      vm.inputType = typeof vm.slotRequirementValue === 'string' ? 'text' : 'number';
       if (reqName === 'password') {
         vm.inputType = 'password';
       }
@@ -206,7 +206,7 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
       LobbyService.setSlotRequirement(vm.lobbyInformation.id,
                                       slot.slot,
                                       reqName,
-                                      value < 0? 0 : value);
+                                      value < 0 ? 0 : value);
     }
   };
 
@@ -226,7 +226,7 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     vm.requirementInputDeferred.resolve(val);
   };
 
-  vm.launchTF2 =() => {
+  vm.launchTF2 = () => {
     LobbyService.setJoinedId(vm.lobbyInformation.id);
     vm.delayedLaunch(vm.lobbyJoinInformation.connectUrl, 500);
   };

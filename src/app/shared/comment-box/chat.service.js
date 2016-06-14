@@ -149,10 +149,10 @@ function makeEmotesTransformer(emotesConfig) {
   function emoteDescriptorToReplacer(desc) {
     var imgHTML = emoteDescriptorToHTML(desc);
 
-    var colons = angular.isArray(desc.names)? desc.names : [];
+    var colons = angular.isArray(desc.names) ? desc.names : [];
     colons = colons.map(makeColonReplacer.bind(null, imgHTML));
 
-    var shortcuts = angular.isArray(desc.shortcuts)? desc.shortcuts : [];
+    var shortcuts = angular.isArray(desc.shortcuts) ? desc.shortcuts : [];
     shortcuts = shortcuts.map(makeShortcutReplacer.bind(null, imgHTML));
 
     return colons.concat(shortcuts);
@@ -173,7 +173,7 @@ function ChatService($rootScope, $sce, $log, $http, $q,
   }
 
   function ChatRoom(id) {
-    this.changeRoom(angular.isDefined(id)? id : -1);
+    this.changeRoom(angular.isDefined(id) ? id : -1);
   }
 
   ChatRoom.prototype.changeRoom = function chageRoom(id) {
