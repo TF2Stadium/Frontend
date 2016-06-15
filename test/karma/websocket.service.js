@@ -1,4 +1,4 @@
-/*global describe,beforeEach,it,sinon,expect,inject,afterEach */
+/* global describe,beforeEach,it,sinon,expect,inject,afterEach */
 
 import WebSocketModule from '../../src/app/shared/websocket.factory.js';
 
@@ -220,6 +220,6 @@ describe('Service: Websocket', function () {
   });
 
   describe('Message Events', function () {
-    //TODO
+    // TODO
   });
 });

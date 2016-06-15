@@ -423,8 +423,8 @@ function LobbyCreate() {
       lobbyCreateService.settings[key] = value;
       $rootScope.$emit('lobby-create-settings-updated');
 
-      //If we select something, we need to check if the next steps
-      //have already been selected, and if they have, check that they're valid
+      // If we select something, we need to check if the next steps
+      // have already been selected, and if they have, check that they're valid
       var checks = [
         {fieldKey: 'maps', optionName: lobbyCreateService.settings.map},
         {fieldKey: 'leagues', optionName: lobbyCreateService.settings.league},

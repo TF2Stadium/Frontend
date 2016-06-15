@@ -132,7 +132,7 @@ function Settings() {
   /** @ngInject */
   var settingsService = function (Websocket, $rootScope, $log, $q) {
 
-    //Private properties
+    // Private properties
     var settings = settingsProvider.settings;
     var alreadyLoadedFromBackend = false;
 
@@ -183,7 +183,7 @@ function Settings() {
       localStorage.setItem(key, newValue);
 
       Websocket.emitJSON('playerSettingsSet',
-                         //Backend only accepts strings!
+                         // Backend only accepts strings!
                          {key: key.toString(), value: newValue.toString()},
                          function (response) {
                            if (response.success) {

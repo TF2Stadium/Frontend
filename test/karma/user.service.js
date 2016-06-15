@@ -1,4 +1,4 @@
-/*global describe,beforeEach,it,sinon,expect,inject */
+/* global describe,beforeEach,it,sinon,expect,inject */
 
 describe('Service: User', function () {
   var User, $rootScope;

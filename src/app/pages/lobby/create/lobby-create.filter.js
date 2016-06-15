@@ -5,7 +5,7 @@ angular
 /** @ngInject */
 function LobbyCreateOptionFilter(LobbyCreate, $filter) {
   return function (options, optionGroupKey, searchString) {
-    searchString = searchString || ''; //maybe it's null for animations
+    searchString = searchString || ''; // maybe it's null for animations
     var searchFilter = $filter('filter');
 
     var lobbySettingsList = LobbyCreate.getSettingsList();
@@ -18,13 +18,13 @@ function LobbyCreateOptionFilter(LobbyCreate, $filter) {
      then checks for each one of them
      */
     var shouldShowOption = function (option) {
-      var shouldShow = option; //checks for empty option
+      var shouldShow = option; // checks for empty option
       if (!optionGroup.dependsOn) {
         return true;
       }
-      optionGroup.dependsOn.forEach(function (dependencyName) { //e.g. 'formats'
-        var dependencyKey = lobbySettingsList[dependencyName].key; //e.g. 'type'
-        var dependency = lobbySettings[dependencyKey]; //e.g. 'highlander'
+      optionGroup.dependsOn.forEach(function (dependencyName) { // e.g. 'formats'
+        var dependencyKey = lobbySettingsList[dependencyName].key; // e.g. 'type'
+        var dependency = lobbySettings[dependencyKey]; // e.g. 'highlander'
 
         shouldShow = shouldShow && option[dependency];
       });

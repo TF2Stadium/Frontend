@@ -13,7 +13,7 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
   // big TODO: move this to a build variable
   $window.ga('create', 'UA-65920939-1', 'auto');
 
-  /*eslint-disable angular/on-watch */
+  /* eslint-disable angular/on-watch */
   /* the angular/on-watch warning doesn't apply to run blocks */
   $rootScope.$on('$stateChangeSuccess', function () {
     $window.ga('send', 'pageview', $location.path());
@@ -62,7 +62,7 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
 
   syncGlobalSettings();
 
-  //If the websocket is dead, we still need to show the page.
+  // If the websocket is dead, we still need to show the page.
   $timeout(function () {
     $rootScope.themeLoaded = true;
   }, 1000);
@@ -92,8 +92,8 @@ function runBlock($timeout, $window, $state, $rootScope, $log,
     }
   }
 
-  //We check if the user allowed us to show notifications
-  //If he didn't set the permissions yet, we ask him to do so
+  // We check if the user allowed us to show notifications
+  // If he didn't set the permissions yet, we ask him to do so
   $timeout(function () {
     if (typeof Notification === 'undefined' ||
         Notification.permission !== 'default') {

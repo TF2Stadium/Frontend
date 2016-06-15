@@ -1,4 +1,4 @@
-/*global describe,beforeEach,sinon,inject,it,expect,afterEach */
+/* global describe,beforeEach,sinon,inject,it,expect,afterEach */
 
 describe('Controller: CommentBoxController', function () {
   var $rootScope, $compile, $scope, $controller, $timeout;

@@ -89,7 +89,7 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
   vm.slotClicked = function (slotScope, event) {
     if (slotScope.slot.password) {
       slotScope.showPasswordBox = true;
-      //Wrapped in a timeout because of ng-if DOM manipulation
+      // Wrapped in a timeout because of ng-if DOM manipulation
       $timeout((function () {
         var input = event.target.getElementsByClassName('slot-password-input')[0];
         input.focus();
@@ -106,7 +106,7 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
   };
 
   vm.onPasswordInputKeydown = function (slotScope, event) {
-    if (event.keyCode !== 13) { //not Enter
+    if (event.keyCode !== 13) { // not Enter
       return;
     }
 

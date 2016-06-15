@@ -265,7 +265,7 @@ function ChatService($rootScope, $sce, $log, $http, $q,
   Settings.getSettings(loadSettings);
 
   /* the angular/on-watch warning doesn't apply to services */
-  /*eslint-disable angular/on-watch */
+  /* eslint-disable angular/on-watch */
   $rootScope.$on('settings-updated', () => {
     Settings.getSettings(loadSettings);
   });
