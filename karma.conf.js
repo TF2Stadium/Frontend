@@ -30,6 +30,7 @@ module.exports = function (config) {
     reporters: ['progress', 'coverage'],
 
     files: [
+      'node_modules/babel-polyfill/dist/polyfill.js',
       'src/app/app.js',
       'node_modules/angular-mocks/angular-mocks.js',
       'test/karma/**/*.js',

@@ -22,7 +22,8 @@ const VOCAL_NOTIFICATIONS = {
     path: './muselk/',
     countdown: ['Countdown01.ogg', 'Countdown02.ogg', 'CountDown03.ogg'],
     gameStart: ['GameStart01.ogg', 'GameStart02.ogg', 'GameStart03.ogg'],
-    readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg','ReadyUpB04.ogg'],
+    readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpB01.ogg',
+              'ReadyUpB02.ogg','ReadyUpB03.ogg','ReadyUpB04.ogg'],
     resetAddUp: ['ResetAddUp01.ogg','ResetAddUp02.ogg','ResetAddUp03.ogg'],
     notReady: ['NotReady01.ogg', 'NotReady02.ogg'],
     preview: ['PreviewSound01.ogg', 'PreviewSound02.ogg'],
@@ -60,7 +61,8 @@ const VOCAL_NOTIFICATIONS = {
     path: './kritzkast/',
     countdown: ['Countdown01.ogg','Countdown02.ogg','Countdown03.ogg'],
     gameStart: ['GameStart01.ogg', 'GameStart02.ogg', 'GameStart03.ogg'],
-    readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpA03.ogg','ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg'],
+    readyUp: ['ReadyUpA01.ogg','ReadyUpA02.ogg','ReadyUpA03.ogg',
+              'ReadyUpB01.ogg','ReadyUpB02.ogg','ReadyUpB03.ogg'],
     preview: ['PreviewSound.ogg'],
   },
 
@@ -72,16 +74,18 @@ const VOCAL_NOTIFICATIONS = {
     preview: ['PreviewSound01.ogg'],
     notReady: ['NotReady01.ogg'],
     kicked: ['KickedByLeader01.ogg'],
-    //LiftedRestrict01.ogg
-    //LobbyClosed01.ogg
-    //ReserAddup01.ogg
+    // LiftedRestrict01.ogg
+    // LobbyClosed01.ogg
+    // ReserAddup01.ogg
   },
 
   'GGGLYGY': {
     path: './ggglygy/',
     countdown: ['Countdown01.wav','Countdown02.wav','Countdown03.wav'],
     gameStart: ['GameStart01.wav','GameStart02.wav','GameStart03.wav'],
-    readyUp: ['ReadyUpA01.wav','ReadyUpA02.wav','ReadyUpA03.wav','ReadyUpA04.wav','ReadyUpA05.wav','ReadyUpB01.wav','ReadyUpB02.wav','ReadyUpB03.wav'],
+    readyUp: ['ReadyUpA01.wav','ReadyUpA02.wav','ReadyUpA03.wav',
+              'ReadyUpA04.wav','ReadyUpA05.wav','ReadyUpB01.wav',
+              'ReadyUpB02.wav','ReadyUpB03.wav'],
     preview: ['PreviewSound01.wav'],
   },
 };
@@ -188,9 +192,9 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
                  options.timeout * 1000);
       }
 
-      for (var callback in options.callbacks) {
+      Object.keys(options.callbacks).forEach((callback) => {
         html5notification[callback] = options.callbacks[callback];
-      }
+      });
     });
   };
 

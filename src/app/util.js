@@ -1,7 +1,7 @@
 /** @ngInject */
 export function safeApply($rootScope) {
   return function ($scope, fn) {
-    /*eslint-disable angular/no-private-call */
+    /* eslint-disable angular/no-private-call */
     // I know that using $$phase like this is nasty and can lead to
     // bad code in general, but it significantly simplifies
     // integration with Kefir because we no longer have to know if

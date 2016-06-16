@@ -1,4 +1,4 @@
-/*global before,after,describe,beforeEach,it,sinon,expect,inject */
+/* global before,after,describe,beforeEach,it,sinon,expect,inject */
 
 import WebSocketModule from '../../src/app/shared/websocket.factory.js';
 

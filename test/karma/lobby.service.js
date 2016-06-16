@@ -1,4 +1,4 @@
-/*global describe,beforeEach,it,sinon,expect,inject */
+/* global describe,beforeEach,it,sinon,expect,inject */
 
 describe('Service: LobbyService', function () {
   var LobbyService, $rootScope, $q;

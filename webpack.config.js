@@ -105,7 +105,7 @@ module.exports = {
   },
 
   entry: {
-    app: './app/app',
+    app: ['babel-polyfill', './app/app'],
     admin: './admin/app',
     vendor: [
       'angular', // see angular-min alias and comment in lib/angular-min.js

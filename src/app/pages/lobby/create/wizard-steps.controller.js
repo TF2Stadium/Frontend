@@ -21,8 +21,8 @@ function WizardStepsController(LobbyCreate, $rootScope, $scope) {
   };
 
   vm.isAlreadyFilled = function (step) {
-    var settingGroup = lobbySettingsList[step.groupKey]; //e.g. lobbySettingsList.formats
-    return settingGroup && lobbySettings.hasOwnProperty(settingGroup.key); //might be a boolean
+    var settingGroup = lobbySettingsList[step.groupKey]; // e.g. lobbySettingsList.formats
+    return settingGroup && lobbySettings.hasOwnProperty(settingGroup.key); // might be a boolean
   };
 
 }

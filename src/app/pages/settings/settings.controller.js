@@ -75,9 +75,9 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
    If it doesn't, it defaults to true.
    */
   var populateFilters = function (userSettings) {
-    for (var settingsGroupKey in vm.sections.filters) {
+    for (var settingsGroupKey of Object.keys(vm.sections.filters)) {
       var settingsGroup = vm.sections.filters[settingsGroupKey];
-      for (var fieldKey in settingsGroup) {
+      for (var fieldKey of Object.keys(settingsGroup)) {
         settingsGroup[fieldKey].selected = userSettings[fieldKey];
       }
     }
