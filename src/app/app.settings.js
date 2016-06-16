@@ -103,16 +103,14 @@ function SettingsConfigBlock(SettingsProvider, VocalNotifications) {
      Defaults every value found in the filters to true.
      It gets overwritten with the loaded settings in the SettingsRunBlock
      */
-    for (var settingsGroupKey in SettingsProvider.constants.filters) {
-      var settingsGroup = SettingsProvider.constants.filters[settingsGroupKey];
-      for (var setting in settingsGroup) {
+    Object.keys(SettingsProvider.constants.filters).forEach(settingsGroupKey => {
+      Object.keys(SettingsProvider.constants.filters[settingsGroupKey]).forEach(setting => {
         SettingsProvider.settings[setting] = true;
-      }
-    }
+      });
+    });
 
     // show all lobbies (even non-Mumble-required) by default
     SettingsProvider.settings.mumbleRequired = false;
-
   }
 
   setDefaultValues();
@@ -136,14 +134,14 @@ function Settings() {
     var settings = settingsProvider.settings;
     var alreadyLoadedFromBackend = false;
 
-    for (var settingKey in localStorage) {
+    for (var settingKey of Object.keys(localStorage)) {
       settings[settingKey] = localStorage.getItem(settingKey);
     }
 
     $rootScope.$emit('settings-updated');
 
     Websocket.onJSON('playerSettings', function (data) {
-      for (var setting in data) {
+      for (var setting of Object.keys(data)) {
         var value = data[setting];
         // coerce true/false for conveniece
         if (value === 'true' || value === 'false') {

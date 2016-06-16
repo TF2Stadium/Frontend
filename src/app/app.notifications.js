@@ -192,9 +192,9 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
                  options.timeout * 1000);
       }
 
-      for (var callback in options.callbacks) {
+      Object.keys(options.callbacks).forEach((callback) => {
         html5notification[callback] = options.callbacks[callback];
-      }
+      });
     });
   };
 

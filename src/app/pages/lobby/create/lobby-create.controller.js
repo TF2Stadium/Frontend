@@ -12,7 +12,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   var vm = this;
 
   var lobbySettingsList = LobbyCreate.getSettingsList();
-  for (var key in lobbySettingsList) {
+  for (var key of Object.keys(lobbySettingsList)) {
     vm[key] = lobbySettingsList[key];
   }
 

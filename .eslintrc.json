@@ -65,6 +65,13 @@
     "semi": [
       2,
       "always"
+    ],
+    "no-restricted-syntax": [
+      2,
+      "DebuggerStatement",
+      "ForInStatement",
+      "LabeledStatement",
+      "WithStatement"
     ]
   },
   "plugins": [

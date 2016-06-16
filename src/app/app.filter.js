@@ -112,19 +112,14 @@ function secondsToMinutes_AngularWrapper() {
 /** @ngInject */
 function unique() {
   return function (array, uniqueKey) {
-    var uniqueArray = [];
-    for (var key in array) {
-      var existsInArray = false;
-      for (var j in uniqueArray) {
-        if (uniqueArray[j][uniqueKey] === array[key][uniqueKey]) {
-          existsInArray = true;
-        }
+    return array.reduce(([out, seen], o) => {
+      let { [uniqueKey]: v } = o;
+      if (!seen.has(v)) {
+        seen.add(v);
+        out.push(o);
       }
-      if (!existsInArray) {
-        uniqueArray.push(array[key]);
-      }
-    }
-    return uniqueArray;
+      return [out, seen];
+    }, [[], new Set()])[0];
   };
 }
 
