@@ -129,7 +129,7 @@ function makeEmotesTransformer(emotesConfig) {
   }
 
   function sortDescendingPriority(arr) {
-    return arr.sort((a, b) => a.priority < b.priority);
+    return arr.sort((a, b) => b.priority - a.priority);
   }
 
   function makeColonReplacer(imgHTML, name) {

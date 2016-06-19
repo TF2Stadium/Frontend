@@ -96,8 +96,8 @@ function SettingsConfigBlock(SettingsProvider, VocalNotifications) {
     // Use Array.find(arrVal,..) vs arrValue.find(..) to avoid using a
     // prototype polyfill for now...
     var defaultSoundPack =
-          Array.find(Object.entries(VocalNotifications),
-                     ([k, o]) => (o._default ? k : false))[0];
+          Object.entries(VocalNotifications)
+          .find(([k, o]) => (o._default ? k : false))[0];
 
     SettingsProvider.settings.soundVolume = 10;
     SettingsProvider.settings.soundPack = defaultSoundPack;
