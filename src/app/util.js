@@ -25,11 +25,11 @@ export function safeApply($rootScope: AngularJSScope) {
 }
 
 /** @ngInject */
-export function allowMumbleHref($compileProvider) {
+export function allowMumbleHref($compileProvider: AngularJSCompileProvider) {
   $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|steam|mumble):/);
 }
 
 /** @ngInject */
-export function disableDebug($compileProvider) {
+export function disableDebug($compileProvider: AngularJSCompileProvider) {
   $compileProvider.debugInfoEnabled(false);
 }
