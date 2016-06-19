@@ -1,0 +1,4 @@
+// @flow
+
+// Files return a URL
+export default "";

@@ -1,3 +1,4 @@
+/* @flow */
 require('./ready-up.html');
 require('./toast.html');
 

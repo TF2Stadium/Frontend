@@ -1,3 +1,4 @@
+/* @flow */
 /** @ngInject */
 export function safeApply($rootScope) {
   return function ($scope, fn) {

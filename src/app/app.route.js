@@ -1,3 +1,4 @@
+/* @flow */
 import {route as about} from './pages/about';
 import {route as rules} from './pages/rules';
 

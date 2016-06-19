@@ -1,3 +1,4 @@
+/* @flow */
 import { Socket } from 'wsevent.js';
 
 angular

@@ -1,3 +1,4 @@
+/* @flow */
 export const module = angular.module('tf2stadium.about', ['ui.router']);
 
 module

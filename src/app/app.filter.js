@@ -1,3 +1,4 @@
+/* @flow */
 angular.module('tf2stadium.filters')
   .filter('capitalize', capitalize_AngularWrapper)
   .filter('numberOrDash', numberOrDash)

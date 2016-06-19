@@ -1,3 +1,4 @@
+/* @flow */
 /** @ngInject */
 export function WhitelistDirective() {
   return {

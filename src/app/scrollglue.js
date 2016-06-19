@@ -1,3 +1,4 @@
+/* @flow */
 /* global module */
 /* angularjs Scroll Glue
  * version 2.0.6

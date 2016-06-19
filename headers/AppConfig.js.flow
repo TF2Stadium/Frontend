@@ -1,0 +1,18 @@
+// @flow
+
+type AppConfig = {
+  endpoint: {
+    websocket: string,
+    api: string
+  },
+  sentryDSN: string,
+  debug: boolean,
+  allowedChatDomains: Array<string>
+};
+
+export default ({
+  endpoint: { websocket: '', api: '' },
+  sentryDSN: '',
+  debug: true,
+  allowedChatDomains: ['']
+}: AppConfig);

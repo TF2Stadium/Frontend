@@ -1,3 +1,4 @@
+/* @flow */
 require('./spectators.html');
 require('./header.html');
 require('./lobby-page.html');

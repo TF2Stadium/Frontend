@@ -1,3 +1,4 @@
+/* @flow */
 import Kefir from 'kefir';
 
 angular

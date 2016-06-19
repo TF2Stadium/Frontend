@@ -1,3 +1,4 @@
+/* @flow */
 import angular from 'angular';
 import config from 'app-config';
 import ngreact from 'ngreact';
@@ -12,13 +13,17 @@ import { module as rulesPage } from './pages/rules';
 import { allowMumbleHref, safeApply, disableDebug } from './util';
 import { WhitelistDirective, AutofocusDirective } from './app.directive';
 
+import buildStats from '../../lib/build-stats';
+
 import '../scss/app.scss';
 
 var modules = [],
   release = 'development';
 
-if (typeof __BUILD_STATS__ !== 'undefined') {
-  const { host, time, gitCommit: { hash, branch } } = __BUILD_STATS__,
+var x = 1 + 'a';
+
+if (typeof buildStats !== 'undefined') {
+  const { host, time, gitCommit: { hash, branch } } = buildStats,
     timeStr = moment(time).format('LLLL ZZ');
 
   console.log(

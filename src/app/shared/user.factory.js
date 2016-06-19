@@ -1,3 +1,4 @@
+/* @flow */
 import Kefir from 'kefir';
 import Raven from 'raven-js';
 import {pick} from 'lodash';

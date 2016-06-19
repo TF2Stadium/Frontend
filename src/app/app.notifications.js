@@ -1,3 +1,4 @@
+/* @flow */
 import * as audio from './audio';
 
 angular

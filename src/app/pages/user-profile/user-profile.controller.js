@@ -1,3 +1,4 @@
+/* @flow */
 import Kefir from 'kefir';
 import moment from 'moment';
 import { slotNameToClassName } from '../../app.filter';

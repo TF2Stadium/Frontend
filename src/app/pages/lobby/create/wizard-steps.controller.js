@@ -1,3 +1,4 @@
+/* @flow */
 import {isEmpty} from 'lodash';
 
 angular.module('tf2stadium.controllers')

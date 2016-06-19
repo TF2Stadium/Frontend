@@ -1,3 +1,4 @@
+/* @flow */
 angular.module('tf2stadium')
   .provider('Settings', Settings)
   .config(SettingsConfigBlock);

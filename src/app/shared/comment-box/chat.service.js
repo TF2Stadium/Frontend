@@ -1,3 +1,4 @@
+/* @flow */
 import xssFilters from 'xss-filters';
 
 const requireJson = require.context('../../../assets/', false, /^.*\.json$/);

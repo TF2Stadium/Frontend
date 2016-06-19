@@ -66,6 +66,8 @@
     "event-stream": "3.3.2",
     "extract-text-webpack-plugin": "1.0.1",
     "file-loader": "0.8.5",
+    "flow-bin": "^0.27.0",
+    "flow-interfaces-angular": "github:gpittarelli/flow-interfaces-angular#master",
     "git-rev-sync": "1.6.0",
     "html-loader": "0.4.3",
     "html-webpack-plugin": "2.14.0",

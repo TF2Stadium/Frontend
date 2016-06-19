@@ -1,3 +1,4 @@
+/* @flow */
 import Clipboard from 'clipboard';
 
 angular
