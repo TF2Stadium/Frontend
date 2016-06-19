@@ -1,7 +1,7 @@
 /* @flow */
 /** @ngInject */
-export function safeApply($rootScope) {
-  return function ($scope, fn) {
+export function safeApply($rootScope: AngularJSScope) {
+  return function ($scope: AngularJSScope, fn: () => any) {
     /* eslint-disable angular/no-private-call */
     // I know that using $$phase like this is nasty and can lead to
     // bad code in general, but it significantly simplifies

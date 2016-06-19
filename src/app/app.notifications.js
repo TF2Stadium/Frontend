@@ -96,7 +96,7 @@ angular
   .constant('VocalNotifications', VOCAL_NOTIFICATIONS);
 
 /** @ngInject */
-export function NotificationsFactory($rootScope, $mdToast, $window: typeof window, $document,
+export function NotificationsFactory($rootScope: AngularJSScope, $mdToast, $window: typeof window, $document,
                                      $timeout: AngularJSTimeout, $log) {
   var notificationsService = {};
 
