@@ -5,12 +5,19 @@ angular
   .module('tf2stadium.services')
   .factory('Websocket', Websocket);
 
+function extractor(data) {
+  return data.request;
+}
+
 /** @ngInject */
 function Websocket($rootScope, $timeout: AngularJSTimeout, $log, $q,
                    Config, Notifications) {
   var connected = false;
   var reconnecting = false;
-  var socket = null;
+  var socket = new Socket(Config.endpoints.websocket, {
+    extractor: extractor,
+    maxRetries: 0,
+  });
 
   function asyncAngularify(callback) {
     return function asyncAngularifedFn() {
@@ -18,11 +25,6 @@ function Websocket($rootScope, $timeout: AngularJSTimeout, $log, $q,
       $timeout(() => callback.apply(null, args), 0);
     };
   }
-
-  socket = new Socket(Config.endpoints.websocket, {
-    extractor: extractor,
-    maxRetries: 0,
-  });
 
   socket.onopen = (e) => {
     // Note: connected=true must come before we emit the event,
@@ -67,10 +69,6 @@ function Websocket($rootScope, $timeout: AngularJSTimeout, $log, $q,
       hideDelay: 0,
     });
   };
-
-  function extractor(data) {
-    return data.request;
-  }
 
   // Hack to work around our shitty app state handling: we want to
   // start the socket as soon as possible, and the server also sends
