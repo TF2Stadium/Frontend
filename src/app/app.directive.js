@@ -14,7 +14,7 @@ export function WhitelistDirective() {
 }
 
 /** @ngInject */
-export function AutofocusDirective($timeout) {
+export function AutofocusDirective($timeout: AngularJSTimeout) {
   // Directive for automatically an element when it is added, such
   // as via `ng-if`
   return {

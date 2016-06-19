@@ -6,7 +6,7 @@ angular
   .factory('Websocket', Websocket);
 
 /** @ngInject */
-function Websocket($rootScope, $timeout, $log, $q,
+function Websocket($rootScope, $timeout: AngularJSTimeout, $log, $q,
                    Config, Notifications) {
   var connected = false;
   var reconnecting = false;

@@ -6,7 +6,7 @@ angular
   .run(runBlock);
 
 /** @ngInject */
-function runBlock($timeout, $window, $state, $rootScope, $log,
+function runBlock($timeout: AngularJSTimeout, $window, $state, $rootScope, $log,
                   $location, $mdDialog,
                   Websocket, PreloadService, Config,
                   User, Settings, LobbyService, Notifications, safeApply) {

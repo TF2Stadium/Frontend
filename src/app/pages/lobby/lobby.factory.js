@@ -6,7 +6,7 @@ angular
   .factory('LobbyService', LobbyService);
 
 /** @ngInject */
-function LobbyService($rootScope, $state, $mdDialog, $timeout, $interval,
+function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout, $interval,
                       $window, Websocket, Notifications, Settings) {
   var factory = {};
 

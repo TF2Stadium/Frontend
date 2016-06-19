@@ -7,7 +7,7 @@ angular
 
 /** @ngInject */
 function SettingsPageController($rootScope, $scope, $mdEditDialog,
-                                $timeout,
+                                $timeout: AngularJSTimeout,
                                 SettingsPage, Settings,
                                 User, Notifications, safeApply) {
   var vm = this;

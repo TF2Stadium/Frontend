@@ -9,7 +9,7 @@ angular
 
 /** @ngInject */
 function LobbyPageController($q, $mdDialog, $scope, $state, $window,
-                             $timeout, $interval, safeApply, LobbyService) {
+                             $timeout: AngularJSTimeout, $interval, safeApply, LobbyService) {
   var vm = this;
   var lobbyPageId = parseInt($state.params.lobbyID);
 
