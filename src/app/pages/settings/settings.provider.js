@@ -28,7 +28,7 @@ function SettingsPageConfig($stateProvider, SettingsPageProvider) {
     'account',
   ];
 
-  for (var settingSectionKey of Object.keys(SettingsPageProvider.sections)) {
+  for (var settingSectionKey of SettingsPageProvider.sections) {
     var settingSection = SettingsPageProvider.sections[settingSectionKey];
     $stateProvider.state(settingSection, {
       url: '/' + settingSection,

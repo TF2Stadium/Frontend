@@ -19,7 +19,7 @@ export function AutofocusDirective($timeout: AngularJSTimeout) {
   // as via `ng-if`
   return {
     restrict: 'A',
-    link: function link(scope, element) {
+    link: function link(scope: AngularJSScope, element: AngularJSJQueryLite) {
       $timeout(function () {
         element.focus();
       });

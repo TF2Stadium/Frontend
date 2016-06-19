@@ -339,6 +339,8 @@ function LobbyCreate() {
           lobbies: 0,
         },
       },
+      league: '',
+      whitelistID: '',
       map: '',
       server: '',
       rconpwd: '',

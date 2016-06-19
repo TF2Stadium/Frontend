@@ -114,9 +114,10 @@ export function NotificationsFactory($rootScope: AngularJSScope, $mdToast, $wind
     hideDelay: 5000,
   };
 
-  notificationsService.availableSoundPacks = Object.keys(VOCAL_NOTIFICATIONS);
+  notificationsService.availableSoundPacks =
+    (Object.keys(VOCAL_NOTIFICATIONS): Array<string>);
 
-  notificationsService.getSound = function (event, settings) {
+  notificationsService.getSound = function (event: string, settings: Object) {
     var soundPackName = settings.soundPack,
       soundPack = VOCAL_NOTIFICATIONS[soundPackName];
 
@@ -131,7 +132,7 @@ export function NotificationsFactory($rootScope: AngularJSScope, $mdToast, $wind
     return;
   };
 
-  notificationsService.toast = function (options) {
+  notificationsService.toast = function (options: Object) {
     var toastOptions = angular.extend({}, toastDefault, options);
 
     $mdToast
@@ -157,7 +158,7 @@ export function NotificationsFactory($rootScope: AngularJSScope, $mdToast, $wind
     }
   };
 
-  notificationsService.notifyBrowser = function (options) {
+  notificationsService.notifyBrowser = function (options: Object) {
     if (options.soundFile) {
       audio.play(options.soundFile, options.soundVolume);
     }

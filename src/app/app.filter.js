@@ -11,8 +11,8 @@ angular.module('tf2stadium.filters')
   .filter('unique', unique)
   .filter('greaterThan', greaterThan);
 
-export function capitalize(input) {
-  if (angular.isUndefined(input) || input === '') {
+export function capitalize(input: ?string) {
+  if (angular.isUndefined(input) || !input || input === '') {
     return input;
   }
   return input.charAt(0).toUpperCase() + input.substr(1).toLowerCase();
@@ -39,7 +39,7 @@ function numberOrDash($filter) {
   };
 }
 
-export function reverse(items) {
+export function reverse(items: Array<any>) {
   return items.slice().reverse();
 }
 
@@ -55,7 +55,7 @@ function trusted($sce) {
   };
 }
 
-export function stripSlotNameNumber(slotName) {
+export function stripSlotNameNumber(slotName: string) {
   return slotName.replace(/\d+$/, '');
 }
 
@@ -69,7 +69,7 @@ var classSynonyms = {
   pocket: 'soldier',
 };
 
-export function slotNameToClassName(slotName) {
+export function slotNameToClassName(slotName: string) {
   slotName = stripSlotNameNumber(slotName);
 
   var className = slotName;
@@ -98,10 +98,10 @@ function ifNumeric() {
   };
 }
 
-export function secondsToMinutes(seconds) {
+export function secondsToMinutes(seconds: number) {
   var minutes = Math.floor(seconds / 60);
   seconds = seconds % 60;
-  seconds = seconds < 10 ? '0' + seconds : seconds;
+  var secondsStr = (seconds < 10 ? '0' : '') + seconds;
   return minutes + ':' + seconds;
 }
 
@@ -112,13 +112,13 @@ function secondsToMinutes_AngularWrapper() {
 
 /** @ngInject */
 function unique() {
-  return function (array, uniqueKey) {
+  return function (array: ?Array<Object>, uniqueKey: string) {
     if (!array) {
       return [];
     }
 
     return array.reduce(([out, seen], o) => {
-      let { [uniqueKey]: v } = o;
+      let v = o[uniqueKey];
       if (!seen.has(v)) {
         seen.add(v);
         out.push(o);
