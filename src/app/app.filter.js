@@ -112,6 +112,10 @@ function secondsToMinutes_AngularWrapper() {
 /** @ngInject */
 function unique() {
   return function (array, uniqueKey) {
+    if (!array) {
+      return [];
+    }
+
     return array.reduce(([out, seen], o) => {
       let { [uniqueKey]: v } = o;
       if (!seen.has(v)) {
