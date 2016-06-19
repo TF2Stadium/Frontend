@@ -14,7 +14,9 @@
     "lint": "eslint --cache src test",
     "lint-fix": "eslint --cache --fix src test",
     "test": "karma start",
-    "test-browsers": "cross-env TEST_ENV=BROWSERS karma start"
+    "test-browsers": "cross-env TEST_ENV=BROWSERS karma start",
+    "flow": "flow",
+    "flow-single": "flow check"
   },
   "dependencies": {
     "angular": "1.5.7",
