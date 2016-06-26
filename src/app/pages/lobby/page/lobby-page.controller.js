@@ -90,10 +90,12 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     if (slotScope.slot.password) {
       slotScope.showPasswordBox = true;
       // Wrapped in a timeout because of ng-if DOM manipulation
-      $timeout((function () {
+      $timeout(() => {
         var input = event.target.getElementsByClassName('slot-password-input')[0];
-        input.focus();
-      }), 0);
+        if (input) {
+          input.focus();
+        }
+      }, 5);
       return;
     }
 
