@@ -193,7 +193,6 @@
 
   .red-slot-locked {
     float: right;
-    margin-right: 4px;
 
     svg {
       color: $tf2-red;
@@ -202,7 +201,6 @@
 
   .blu-slot-locked {
     float: left;
-    margin-left: 4px;
 
     svg {
       color: $tf2-blue;
@@ -259,6 +257,10 @@
 /* ==================================
       CLASS AND JOIN CLASS BUTTONS
    ================================== */
+
+.class-button-column {
+  width: 50px;
+}
 
 .class-button {
   @include flex(row, space-between, stretch);
