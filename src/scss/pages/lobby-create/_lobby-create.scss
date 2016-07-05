@@ -344,3 +344,43 @@ ul.rent-servers-list {
   top: 7px;
   margin-right:5px;
 }
+
+
+.configurations-form {
+  ul, h2 {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul, li {
+    width: 100%;
+  }
+
+  li {
+    list-style: none;
+    margin-top: 10px;
+  }
+
+  .config-col {
+    display: flex;
+    flex-direction: row;
+
+    md-icon {
+      margin-right: 8px;
+    }
+  }
+
+  .lobby-main {
+    padding: 0 10px;
+  }
+
+  .lobby-row {
+    height: 60px;
+    margin: 0;
+  }
+
+  .lobby-group-restrictions {
+    display: flex;
+    flex-direction: column;
+  }
+}

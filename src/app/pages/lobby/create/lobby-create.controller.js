@@ -1,3 +1,5 @@
+import {isEmpty, omit} from 'lodash';
+
 angular.module('tf2stadium.controllers')
   .controller('LobbyCreateController', LobbyCreateController);
 
@@ -12,7 +14,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   var vm = this;
 
   var lobbySettingsList = LobbyCreate.getSettingsList();
-  for (var key of Object.keys(lobbySettingsList)) {
+  for (let key of Object.keys(lobbySettingsList)) {
     vm[key] = lobbySettingsList[key];
   }
 
@@ -27,18 +29,24 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
 
   vm.showServers = false;
   vm.savedServers = {};
+  vm.recentConfigurations = [];
+  vm.savedConfigurations = {};
   vm.serverName = '';
   vm.servemeServer = {};
 
-  function loadServers(settings) {
-    vm.savedServers = angular.fromJson(settings.savedServers);
-    vm.showServers = Object.keys(vm.savedServers).length > 0;
+  function syncSettings() {
+    Settings.getSettings((settings) => {
+      vm.savedServers = angular.fromJson(settings.savedServers);
+      vm.recentConfigurations = angular.fromJson(settings.recentConfigurations);
+      vm.savedConfigurations = angular.fromJson(settings.savedConfigurations);
+      vm.showServers = !isEmpty(vm.savedServers);
+      vm.hasRecentConfigurations = !isEmpty(vm.recentConfigurations);
+      vm.hasSavedConfigurations = !isEmpty(vm.savedConfigurations);
+    });
   }
 
-  Settings.getSettings(loadServers);
-  var handler = $rootScope.$on('settings-updated', function () {
-    Settings.getSettings(loadServers);
-  });
+  syncSettings();
+  var handler = $rootScope.$on('settings-updated', syncSettings);
   $scope.$on('$destroy', handler);
 
   vm.preloadMaps = function (format) {
@@ -106,8 +114,23 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     return nextStep;
   };
 
-  function createHelper(settings, cb) {
-    LobbyCreate.create(angular.copy(settings), function (response) {
+  function createHelper(lobbySettings, cb) {
+    let newRecentConfigurations = vm.recentConfigurations.slice(0, 7);
+    if (!angular.isArray(newRecentConfigurations)) {
+      newRecentConfigurations = [];
+    }
+    newRecentConfigurations.unshift(omit(
+      angular.copy(lobbySettings),
+      'server',
+      'rconpwd',
+      'serverType',
+      'serveme'
+    ));
+
+    Settings.set('recentConfigurations',
+                 angular.toJson(newRecentConfigurations));
+
+    LobbyCreate.create(angular.copy(lobbySettings), function (response) {
       if (!response.success) {
         vm.requestSent = false;
       }
@@ -171,6 +194,16 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     vm.goToNext();
   };
 
+  vm.loadSettings = function (newSettings) {
+    Object.keys(newSettings).forEach(key => {
+      LobbyCreate.set(key, newSettings[key]);
+    });
+    LobbyCreate.set('saved', true);
+    LobbyCreate.set('restrictionsSet', true);
+
+    $state.go(vm.wizardSteps[vm.wizardSteps.length - 1].name);
+  };
+
   vm.isSelected = function (field, option) {
     return LobbyCreate.settings[field.key] === option.value;
   };
@@ -180,7 +213,11 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   };
 
   vm.goToStart = function () {
-    $state.go(vm.wizardSteps[0].name);
+    if (vm.hasSavedConfigurations || vm.hasRecentConfigurations) {
+      $state.go(vm.wizardSteps[0].name);
+    } else {
+      $state.go(vm.wizardSteps[1].name);
+    }
   };
 
   vm.shouldShowSearch = function () {
@@ -254,7 +291,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   }));
 
   if ($state.current.name === 'lobby-create') {
-    // Also redirect on initial laod of this controller, since the
+    // Also redirect on initial load of this controller, since the
     // stateChangeStart handler won't have been registered yet.
     vm.goToStart();
   }
