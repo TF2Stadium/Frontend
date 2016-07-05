@@ -41,7 +41,9 @@
                       Steam profile
                     </md-button>
                   </md-menu-item>
-                  <md-menu-item ui-sref="user-profile({userID: message.player.steamid})">
+                  <md-menu-item
+                    ng-if="message.player.tags[0] !== 'tf2stadium'"
+                    ui-sref="user-profile({userID: message.player.steamid})">
                     <md-button>
                       Stadium profile
                     </md-button>
