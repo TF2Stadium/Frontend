@@ -82,6 +82,19 @@ for a TF2 server (or other game servers like Minecraft and
 Counterstrike, among others), please show your appreciation by using
 coupon code STADIUM to get 50% off the first month.
 
+## Voice-overs
+
+Voices for our site (see them [here](/settings/sound)) were provided by:
+
+* TF2 assets
+* Muselk
+* Uncle Dane
+* King Raja
+* KevinIsPwn
+* [KritzKast](http://www.kritzkast.com/)
+* Getawhale
+* GGGLYGY
+
 ## Emoji
 
 Generic emojis provided by [Emoji One](http://emojione.com/). Other
