@@ -1,4 +1,4 @@
-import {isEmpty, omit} from 'lodash';
+import {isEmpty, isEqual, uniqWith, omit} from 'lodash';
 
 angular.module('tf2stadium.controllers')
   .controller('LobbyCreateController', LobbyCreateController);
@@ -115,10 +115,11 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   };
 
   function createHelper(lobbySettings, cb) {
-    let newRecentConfigurations = vm.recentConfigurations.slice(0, 7);
+    let newRecentConfigurations = vm.recentConfigurations.slice();
     if (!angular.isArray(newRecentConfigurations)) {
       newRecentConfigurations = [];
     }
+
     newRecentConfigurations.unshift(omit(
       angular.copy(lobbySettings),
       'server',
@@ -126,9 +127,10 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
       'serverType',
       'serveme'
     ));
+    newRecentConfigurations = uniqWith(newRecentConfigurations, isEqual);
 
     Settings.set('recentConfigurations',
-                 angular.toJson(newRecentConfigurations));
+                 angular.toJson(newRecentConfigurations.slice(0, 8)));
 
     LobbyCreate.create(angular.copy(lobbySettings), function (response) {
       if (!response.success) {
