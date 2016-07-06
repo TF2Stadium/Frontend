@@ -374,7 +374,8 @@ ul.rent-servers-list {
     padding: 0 10px;
   }
 
-  .lobby-row {
+  div.lobby-row {
+    animation: none;
     height: 60px;
     margin: 0;
   }
@@ -382,5 +383,20 @@ ul.rent-servers-list {
   .lobby-group-restrictions {
     display: flex;
     flex-direction: column;
+  }
+
+  .saved-configs {
+    margin-bottom: 1em;
+  }
+
+  .add-favorite-config {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    fill: $grey-medium;
+
+    &:hover {
+      fill: $hover-white;
+    }
   }
 }

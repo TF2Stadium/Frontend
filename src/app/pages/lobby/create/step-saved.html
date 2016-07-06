@@ -7,15 +7,82 @@
       Continue
     </md-button>
   </p>
-  <h2 ng-if="lobbyCreate.hasSavedConfigurations">Saved Configurations</h2>
-  <h2 ng-if="lobbyCreate.hasRecentConfigurations">Recent Configurations</h2>
-  <ul>
-    <li ng-repeat="config in lobbyCreate.recentConfigurations">
+  <h2 ng-if="lobbyCreate.hasSavedConfigurations">Favorite Configurations</h2>
+  <ul ng-if="lobbyCreate.hasSavedConfigurations" class="saved-configs">
+    <li ng-repeat="config in lobbyCreate.savedConfigurations track by $index">
       <div md-ink-ripple
            class="lobby-row"
            ng-click="lobbyCreate.loadSettings(config)">
         <div class="lobby-image"
              ng-style="{'background-image':'url(/assets/img/maps/lobby-row/' + config.map + '.jpg)'}">
+          <md-icon
+            ng-click="lobbyCreate.removeFavoriteSettings($index);$event.stopPropagation();"
+            class="add-favorite-config"
+            md-svg-icon="material:clear"
+            aria-label="Remove from Favorites">
+            <md-tooltip>Remove from Favorites</md-tooltip>
+          </md-icon>
+          <span class="lobby-type">{{::config.type}}</span>
+          <span class="lobby-map">{{::config.map}}</span>
+        </div>
+        <div flex class="lobby-main">
+          <div class="config-col">
+            <md-icon
+              md-svg-icon="logo:{{!config.mumbleRequired? 'not-':''}}mumble"
+              aria-label="Mumble {{!config.mumbleRequired? 'not ':''}} Required">
+              <md-tooltip>
+                Mumble {{!config.mumbleRequired? 'not ':''}}mandatory
+              </md-tooltip>
+            </md-icon>
+            <span class="lobby-league">
+              <span>{{::config.league | uppercase}}<md-tooltip>
+                  League: {{::config.league | uppercase}}
+              </md-tooltip></span><br /><span ng-click="$event.stopPropagation();">
+                <md-tooltip>Whitelist ID: {{::config.whitelistID}}</md-tooltip>
+                <whitelist id="config.whitelistID" />
+              </span>
+            </span>
+          </div>
+          <span class="lobby-league">
+            <span ng-if="config.requirements && config.requirements.general && config.requirements.general.hours">{{config.requirements.general.hours}}+&nbsp;Hours</span>
+            <br />
+            <span ng-if="config.requirements && config.requirements.general && config.requirements.general.lobbies">
+              {{config.requirements.general.lobbies}}+&nbsp;Lobbies
+            </span>
+          </span>
+          <span class="lobby-league lobby-group-restrictions">
+            <span ng-if="config.steamGroupWhitelist">
+              <md-icon md-svg-icon="logo:steam"></md-icon>
+              <md-tooltip>{{::config.steamGroupWhitelist}}</md-tooltip>
+            </span>
+            <span ng-if="config.twitchWhitelistSubs || config.twitchWhitelistFollows">
+              <img width="25" height="25"
+                   src="/assets/img/logos/twitch-glitch.png"
+                   alt="twitch"/>
+              <md-tooltip>{{config.twitchWhitelistSubs ? 'Subscriber-only' :
+               (config.twitchWhitelistFollows ? 'Follower-only' : '')}}</md-tooltip>
+            </span>
+          </span>
+        </div>
+      </div>
+    </li>
+  </ul>
+
+  <h2 ng-if="lobbyCreate.hasRecentConfigurations">Recent Configurations</h2>
+  <ul>
+    <li ng-repeat="config in lobbyCreate.recentConfigurations track by $index">
+      <div md-ink-ripple
+           class="lobby-row"
+           ng-click="lobbyCreate.loadSettings(config)">
+        <div class="lobby-image"
+             ng-style="{'background-image':'url(/assets/img/maps/lobby-row/' + config.map + '.jpg)'}">
+          <md-icon
+            ng-click="lobbyCreate.addFavoriteSettings(config);$event.stopPropagation();"
+            class="add-favorite-config"
+            md-svg-icon="material:favorite-border"
+            aria-label="Add to Favorites">
+            <md-tooltip>Add to Favorites</md-tooltip>
+          </md-icon>
           <span class="lobby-type">{{::config.type}}</span>
           <span class="lobby-map">{{::config.map}}</span>
         </div>

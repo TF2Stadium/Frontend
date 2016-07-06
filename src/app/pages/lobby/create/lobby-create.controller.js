@@ -30,7 +30,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   vm.showServers = false;
   vm.savedServers = {};
   vm.recentConfigurations = [];
-  vm.savedConfigurations = {};
+  vm.savedConfigurations = [];
   vm.serverName = '';
   vm.servemeServer = {};
 
@@ -202,6 +202,28 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     LobbyCreate.set('restrictionsSet', true);
 
     $state.go(vm.wizardSteps[vm.wizardSteps.length - 1].name);
+  };
+
+  vm.addFavoriteSettings = function (newSettings) {
+    let newFavoriteConfigurations = angular.copy(vm.savedConfigurations);
+    if (!angular.isArray(newFavoriteConfigurations)) {
+      newFavoriteConfigurations = [];
+    }
+    newFavoriteConfigurations.push(angular.copy(newSettings));
+
+    Settings.set('savedConfigurations',
+                 angular.toJson(newFavoriteConfigurations));
+  };
+
+  vm.removeFavoriteSettings = function (index) {
+    let newFavoriteConfigurations = angular.copy(vm.savedConfigurations);
+    if (!angular.isArray(newFavoriteConfigurations)) {
+      newFavoriteConfigurations = [];
+    }
+    newFavoriteConfigurations.splice(index, 1);
+
+    Settings.set('savedConfigurations',
+                 angular.toJson(newFavoriteConfigurations));
   };
 
   vm.isSelected = function (field, option) {
