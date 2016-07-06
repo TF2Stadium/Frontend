@@ -19,7 +19,7 @@ We may also collect and store your computer&rsquo;s Internet Protocol
 administration of the site.
 
 We respect your privacy and, as such, we will not distribute any
-information to 3rd parties unless where required to by law.
+information to 3rd parties unless required by law.
 
 ## Cookies
 
@@ -31,7 +31,7 @@ avoid you having to login each time you visit the site.
 Our service may contain links to third party sites not operated by
 us. We have no control over the Privacy Policies, content, or
 practices of these third party sites. We encourage you to review the
-ivacy Policy of any third party sites you visit as a result of using
+Privacy Policy of any third party sites you visit as a result of using
 our service.
 
 ## Service Guarantee

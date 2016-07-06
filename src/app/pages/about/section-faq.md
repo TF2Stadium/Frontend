@@ -77,7 +77,7 @@ launches. We want to make sure that no matter what happens, those who
 want to make the step from public play to competitive play will always
 have a place to learn, improve, and have fun.
 
-## How do I report people during game?
+## How do I report people during a game?
 
 Say: !rep _team_ _slot-name_
 
