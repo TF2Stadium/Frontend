@@ -364,10 +364,28 @@ ul.rent-servers-list {
   .config-col {
     display: flex;
     flex-direction: row;
+  }
 
-    md-icon {
-      margin-right: 8px;
+  md-icon {
+    svg {
+      fill: #888;
     }
+
+    &.mumble {
+      width: 20px;
+      height: 20px;
+      margin: 2px;
+    }
+  }
+
+  p > md-icon {
+    margin: 0;
+  }
+
+  .icon-stack {
+    display: flex;
+    flex-direction: column;
+    margin-right: 8px;
   }
 
   .lobby-main {

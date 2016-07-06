@@ -7,6 +7,12 @@
       Continue
     </md-button>
   </p>
+  <p>
+    Warning: Hovering the password icon
+    <md-icon md-svg-icon="material:lock-closed"
+             aria-label="Password Required"></md-icon>
+    will reveal the plaintext password.
+  </p>
   <h2 ng-if="lobbyCreate.hasSavedConfigurations">Favorite Configurations</h2>
   <ul ng-if="lobbyCreate.hasSavedConfigurations" class="saved-configs">
     <li ng-repeat="config in lobbyCreate.savedConfigurations track by $index">
@@ -27,13 +33,24 @@
         </div>
         <div flex class="lobby-main">
           <div class="config-col">
-            <md-icon
-              md-svg-icon="logo:{{!config.mumbleRequired? 'not-':''}}mumble"
-              aria-label="Mumble {{!config.mumbleRequired? 'not ':''}} Required">
-              <md-tooltip>
-                Mumble {{!config.mumbleRequired? 'not ':''}}mandatory
-              </md-tooltip>
-            </md-icon>
+            <div class="icon-stack">
+              <md-icon
+                class="mumble"
+                md-svg-icon="logo:{{!config.mumbleRequired? 'not-':''}}mumble"
+                aria-label="Mumble {{!config.mumbleRequired? 'not ':''}}Required">
+                <md-tooltip>
+                  Mumble {{!config.mumbleRequired? 'not ':''}}mandatory
+                </md-tooltip>
+              </md-icon>
+              <md-icon
+                ng-if="!!config.password"
+                md-svg-icon="material:lock-closed"
+                aria-label="Password Required">
+                <md-tooltip>
+                  Password: {{config.password}}
+                </md-tooltip>
+              </md-icon>
+            </div>
             <span class="lobby-league">
               <span>{{::config.league | uppercase}}<md-tooltip>
                   League: {{::config.league | uppercase}}
@@ -88,13 +105,24 @@
         </div>
         <div flex class="lobby-main">
           <div class="config-col">
-            <md-icon
-              md-svg-icon="logo:{{!config.mumbleRequired? 'not-':''}}mumble"
-              aria-label="Mumble {{!config.mumbleRequired? 'not ':''}} Required">
-              <md-tooltip>
-                Mumble {{!config.mumbleRequired? 'not ':''}}mandatory
-              </md-tooltip>
-            </md-icon>
+            <div class="icon-stack">
+              <md-icon
+                class="mumble"
+                md-svg-icon="logo:{{!config.mumbleRequired? 'not-':''}}mumble"
+                aria-label="Mumble {{!config.mumbleRequired? 'not ':''}}Required">
+                <md-tooltip>
+                  Mumble {{!config.mumbleRequired? 'not ':''}}mandatory
+                </md-tooltip>
+              </md-icon>
+              <md-icon
+                ng-if="!!config.password"
+                md-svg-icon="material:lock-closed"
+                aria-label="Password {{!config.mumbleRequired? 'not ':''}}Required">
+                <md-tooltip>
+                  Password: {{config.password}}
+                </md-tooltip>
+              </md-icon>
+            </div>
             <span class="lobby-league">
               <span>{{::config.league | uppercase}}<md-tooltip>
                   League: {{::config.league | uppercase}}
