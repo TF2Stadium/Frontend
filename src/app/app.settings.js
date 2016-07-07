@@ -87,6 +87,8 @@ function SettingsConfigBlock(SettingsProvider, VocalNotifications) {
     SettingsProvider.settings.emoteStyle = 'emojione';
     SettingsProvider.settings.animationLength = 'animation-normal';
     SettingsProvider.settings.savedServers = '{}';
+    SettingsProvider.settings.recentConfigurations = '[]';
+    SettingsProvider.settings.savedConfigurations = '[]';
     SettingsProvider.settings.videoBackground = 'on';
     SettingsProvider.settings.autoOpenLogs = 'on';
 

@@ -19,6 +19,8 @@ var materialIcons = [
   {name: 'check-blue', file: 'check-blue.svg'},
   {name: 'lock-closed', file: 'lock-closed.svg'},
   {name: 'settings', file: 'settings.svg'},
+  {name: 'favorite', file: 'favorite.svg'},
+  {name: 'favorite-border', file: 'favorite-border.svg'},
 ];
 
 var logosBase = './logos/';

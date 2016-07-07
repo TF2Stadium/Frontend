@@ -1,6 +1,7 @@
 require('./step-restrictions.html');
 require('./step-server.html');
 require('./step-mumble.html');
+require('./step-saved.html');
 require('./header.html');
 require('./lobby-create-steps.html');
 require('./step-map.html');
@@ -28,6 +29,8 @@ function LobbyCreateConfig($stateProvider, LobbyCreateProvider) {
    because they're nested states
    */
   LobbyCreateProvider.wizardSteps = [
+    {name: 'saved',             groupKey: 'saved',
+     header: 'Load Config'},
     {name: 'format',            groupKey: 'formats'},
     {name: 'map',               groupKey: 'maps'},
     {name: 'league',            groupKey: 'leagues'},
@@ -62,6 +65,7 @@ function LobbyCreate() {
   var lobbyCreateService = function (Websocket, $state, $rootScope,
                                      $filter) {
     var lobbySettingsList = {
+      saved: { key: 'saved' },
       formats: {
         key: 'type',
         title: 'Format',

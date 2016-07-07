@@ -344,3 +344,77 @@ ul.rent-servers-list {
   top: 7px;
   margin-right:5px;
 }
+
+
+.configurations-form {
+  ul, h2 {
+    margin: 0;
+    padding: 0;
+  }
+
+  ul, li {
+    width: 100%;
+  }
+
+  li {
+    list-style: none;
+    margin-top: 10px;
+  }
+
+  .config-col {
+    display: flex;
+    flex-direction: row;
+  }
+
+  md-icon {
+    svg {
+      fill: #888;
+    }
+
+    &.mumble {
+      width: 20px;
+      height: 20px;
+      margin: 2px;
+    }
+  }
+
+  p > md-icon {
+    margin: 0;
+  }
+
+  .icon-stack {
+    display: flex;
+    flex-direction: column;
+    margin-right: 8px;
+  }
+
+  .lobby-main {
+    padding: 0 10px;
+  }
+
+  div.lobby-row {
+    animation: none;
+    height: 60px;
+    margin: 0;
+  }
+
+  .lobby-group-restrictions {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .saved-configs {
+    margin-bottom: 1em;
+  }
+
+  .add-favorite-config {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    fill: $grey-medium;
+
+    &:hover {
+      fill: $hover-white;
+    }
+  }
+}

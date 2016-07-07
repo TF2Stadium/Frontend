@@ -1,11 +1,26 @@
+import {isEmpty} from 'lodash';
+
 angular.module('tf2stadium.controllers')
   .controller('WizardStepsController', WizardStepsController);
 
 /** @ngInject */
-function WizardStepsController(LobbyCreate, $rootScope, $scope) {
-
+function WizardStepsController(LobbyCreate, $rootScope, $scope, Settings) {
   var vm = this;
   vm.steps = LobbyCreate.getSteps();
+
+  vm.showSavedConfigurations = false;
+  function syncSettings(settings) {
+    var savedConfigurations = angular.fromJson(settings.savedConfigurations);
+    var recentConfigurations = angular.fromJson(settings.recentConfigurations);
+    vm.showSavedConfigurations = !isEmpty(recentConfigurations) ||
+      !isEmpty(savedConfigurations);
+  }
+
+  Settings.getSettings(syncSettings);
+  var handler = $rootScope.$on('settings-updated', () => {
+    Settings.getSettings(syncSettings);
+  });
+  $scope.$on('$destroy', handler);
 
   var lobbySettingsList = LobbyCreate.getSettingsList();
 
