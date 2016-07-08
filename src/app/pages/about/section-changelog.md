@@ -1,5 +1,12 @@
 # Changelog
 
+## 6. July 2016
+
+ * Save and reload previously used lobby configurations
+ * Various graphical and UI fixes, code cleanup
+ * Option to auto open logs after a lobby ends
+ * show per slot password restrictions on lobby list
+
 ## 15. May 2016
 
  * More stability
