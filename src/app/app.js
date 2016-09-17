@@ -13,7 +13,7 @@ import { module as rulesPage } from './pages/rules';
 import { allowMumbleHref, safeApply, disableDebug } from './util';
 import { WhitelistDirective, AutofocusDirective } from './app.directive';
 
-import buildStats from '../../lib/build-stats';
+import buildStats from './build-stats';
 
 import '../scss/app.scss';
 
