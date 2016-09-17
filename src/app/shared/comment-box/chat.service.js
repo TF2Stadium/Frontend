@@ -161,7 +161,7 @@ function makeEmotesTransformer(emotesConfig) {
 }
 
 /** @ngInject */
-function ChatService($rootScope, $sce, $log, $http, $q,
+function ChatService($rootScope, $sce, $log: AngularJSLog, $http, $q,
                      Websocket, LobbyService, Config,
                      Notifications, Settings) {
   // Persistent map of room id -> messages list

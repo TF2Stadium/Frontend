@@ -6,7 +6,7 @@ angular
 require('./comment-box.html');
 
 /** @ngInject */
-function CommentBoxController($rootScope, $scope, $window, $log, $timeout: AngularJSTimeout,
+function CommentBoxController($rootScope, $scope, $window, $log: AngularJSLog, $timeout: AngularJSTimeout,
                               ChatService) {
   var vm = this;
 

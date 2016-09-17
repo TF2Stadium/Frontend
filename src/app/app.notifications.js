@@ -97,7 +97,7 @@ angular
 
 /** @ngInject */
 export function NotificationsFactory($rootScope: AngularJSScope, $mdToast, $window: typeof window, $document,
-                                     $timeout: AngularJSTimeout, $log) {
+                                     $timeout: AngularJSTimeout, $log: AngularJSLog) {
   var notificationsService = {};
 
   var toastDefault = {

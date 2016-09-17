@@ -10,7 +10,8 @@ function extractor(data) {
 }
 
 /** @ngInject */
-function Websocket($rootScope, $timeout: AngularJSTimeout, $log, $q,
+function Websocket($rootScope, $timeout: AngularJSTimeout,
+                   $log: AngularJSLog, $q,
                    Config, Notifications) {
   var connected = false;
   var reconnecting = false;

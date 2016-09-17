@@ -131,7 +131,7 @@ function Settings() {
    during and after the run phase.
    */
   /** @ngInject */
-  var settingsService = function (Websocket, $rootScope, $log, $q) {
+  var settingsService = function (Websocket, $rootScope, $log: AngularJSLog, $q) {
 
     // Private properties
     var settings = settingsProvider.settings;
