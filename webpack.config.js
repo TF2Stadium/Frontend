@@ -1,4 +1,4 @@
-/*global __dirname, module, process */
+/* global __dirname, module, process */
 
 // Support building with older node.js versions:
 require('array.prototype.find');
@@ -82,15 +82,17 @@ var extractVendorStyles = new ExtractTextPlugin('vendor.css');
 var isDev = process.env.NODE_ENV !== 'production';
 var ext = (isDev ? '' : '.min') + '.js';
 
-console.log('Using config file:', configFile);
-console.log('Build type:', isDev? 'development':'production');
+if (process.env.BUILD_QUIET !== 'true') {
+  console.log('Using config file:', configFile);
+  console.log('Build type:', isDev ? 'development':'production');
+}
 
 module.exports = {
   context: SRC,
 
   babelSettings: babelSettings,
 
-  devtool: (isDev? 'inline-' : '') + 'source-map',
+  devtool: (isDev ? 'inline-' : '') + 'source-map',
 
   quiet: false,
   noInfo: false,
@@ -126,7 +128,7 @@ module.exports = {
     ],
   },
 
-  noParse: isDev? [] : [
+  noParse: isDev ? [] : [
     /node_modules\/angular/,
     /node_modules\/angular-material/,
     /node_modules\/angular-material-data-table/,
@@ -168,7 +170,7 @@ module.exports = {
       toPath('/node_modules/angular-bindonce/bindonce' + ext),
 
       kefir: toPath('/node_modules/kefir/dist/kefir' + ext),
-      moment: toPath('/node_modules/moment/' + (isDev? '' : 'min/')
+      moment: toPath('/node_modules/moment/' + (isDev ? '' : 'min/')
                      + 'moment' + ext),
     },
   },
@@ -282,7 +284,7 @@ module.exports = {
     // Ignore meaningless moment build warnings:
     new webpack.IgnorePlugin(/locale/, /moment/),
   ].concat(
-    isDev? [] : [
+    isDev ? [] : [
       new UglifyJsPlugin({
         compress: {
           // I'm not a fan of hiding warnings, but UglifyJS's are often

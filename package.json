@@ -8,6 +8,7 @@
   "scripts": {
     "start": "webpack-dev-server",
     "build": "cross-env NODE_ENV=production webpack",
+    "build:size": "cross-env BUILD_QUIET=true NODE_ENV=production webpack --json | webpack-bundle-size-analyzer",
     "build-dev": "webpack",
     "clean": "rimraf dist",
     "lint": "eslint --cache src test",
@@ -42,6 +43,7 @@
     "react-dom": "15.2.0",
     "react-hyperscript": "2.4.0",
     "svgo-loader": "1.1.0",
+    "webpack-bundle-size-analyzer": "2.0.2",
     "wsevent.js": "1.0.2",
     "xss-filters": "1.2.7"
   },
