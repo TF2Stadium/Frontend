@@ -79,7 +79,7 @@
     "karma-sourcemap-loader": "0.3.7",
     "karma-webpack": "1.7.0",
     "marked": "0.3.6",
-    "mocha": "2.4.5",
+    "mocha": "3.0.2",
     "ng-annotate-loader": "0.1.0",
     "ng-cache-loader": "0.0.15",
     "ng-dependencies": "0.5.0",
