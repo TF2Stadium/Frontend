@@ -10,7 +10,7 @@ const requireSound =
 
 // TODO: move to config (putting this off until we do some sort of
 // default configurations)
-const VOCAL_NOTIFICATIONS = {
+export const vocalNotifications = {
   'Default': {
     _default: true,
     path: './default/',
@@ -92,12 +92,17 @@ const VOCAL_NOTIFICATIONS = {
 };
 
 angular
-  .module('tf2stadium.services')
-  .constant('VocalNotifications', VOCAL_NOTIFICATIONS);
+  .module('tf2stadium.services');
 
 /** @ngInject */
-export function NotificationsFactory($rootScope: AngularJSScope, $mdToast, $window: typeof window, $document,
-                                     $timeout: AngularJSTimeout, $log: AngularJSLog) {
+export function NotificationsFactory(
+  $rootScope: Object,
+  $mdToast: Object,
+  $window: typeof window,
+  $document: [typeof document],
+  $timeout: AngularJSTimeout,
+  $log: AngularJSLog
+) {
   var notificationsService = {};
 
   var toastDefault = {
@@ -114,12 +119,11 @@ export function NotificationsFactory($rootScope: AngularJSScope, $mdToast, $wind
     hideDelay: 5000,
   };
 
-  notificationsService.availableSoundPacks =
-    (Object.keys(VOCAL_NOTIFICATIONS): Array<string>);
+  notificationsService.availableSoundPacks = Object.keys(vocalNotifications);
 
   notificationsService.getSound = function (event: string, settings: Object) {
     var soundPackName = settings.soundPack,
-      soundPack = VOCAL_NOTIFICATIONS[soundPackName];
+      soundPack = vocalNotifications[soundPackName];
 
     if (soundPack) {
       var sounds = soundPack[event];

@@ -7,6 +7,33 @@ angular
   .module('tf2stadium.services')
   .factory('User', User);
 
+type SlotDetails = {
+  name: string;
+  steamid: string;
+  player: {steamid: string};
+};
+
+export type LobbyData = {
+  createdAt: string;
+	id: number;
+	mode: string;
+	type: string;
+	players: number;
+	map: string;
+	league: string;
+	mumble: string;
+	twitchChannel: string;
+	twitchRestriction: string;
+  classes: Array<{
+    class: string;
+    blu: SlotDetails;
+    red: SlotDetails;
+  }>;
+	regionLock: string;
+	steamGroup: string;
+};
+export type UserLobbyData = Array<LobbyData>;
+
 /** @ngInject */
 function User(Websocket, $rootScope, $window, $q, Config) {
   var userService = {};
@@ -52,7 +79,7 @@ function User(Websocket, $rootScope, $window, $q, Config) {
     return deferred.promise;
   };
 
-  userService.getLobbies = (steamid, cnt) =>
+  userService.getLobbies = (steamid, cnt): Promise<UserLobbyData> =>
     Websocket.emitJSON('playerRecentLobbies', {
       steamid,
       lobbies: cnt,

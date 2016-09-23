@@ -61,29 +61,6 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout,
 
   factory.getList = () => factory.lobbyList;
 
-  Websocket.onJSON('lobbyListData', function (data) {
-    if (angular.isArray(data)) {
-      factory.lobbyList = data;
-    } else {
-      factory.lobbyList = data.lobbies;
-    }
-
-    $rootScope.$emit('lobby-list-updated');
-
-    if (factory.lobbyJoinedId === -1) {
-      return;
-    }
-
-    factory.lobbyList.forEach(function (lobby) {
-      if (lobby.id === factory.lobbyJoinedId) {
-        factory.getLobbyJoined().players = lobby.players;
-        factory.getLobbyJoined().maxPlayers = lobby.maxPlayers;
-      }
-    });
-    $rootScope.$emit('lobby-joined-updated');
-  });
-
-
   ////////////////////////////////////////////////
   // Substitutes list
   factory.subList = [];
@@ -392,13 +369,16 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout,
       }
     }
 
-    Websocket.emitJSON('lobbySetRequirement', {
+    const data = {
       id: lobbyId,
       slot: slotId,
       type: reqName,
-      value: 0, // may be overriden, but we always have to send a 'value' param
+      value: val, // may be overriden, but we always have to send a
+                  // 'value' param
       [reqName === 'password' ? 'password' : 'value']: val,
-    });
+    };
+
+    Websocket.emitJSON('lobbySetRequirement', data);
   };
 
   Websocket.onJSON('lobbyReadyUp', function (data) {
@@ -449,6 +429,32 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout,
   Websocket.onJSON('lobbyClosed', () => {
     Notifications.toast({message: 'The lobby was closed'});
     $rootScope.$emit('lobby-closed');
+  });
+
+  Websocket.onJSON('lobbyListData', function (data) {
+    if (angular.isArray(data)) {
+      factory.lobbyList = data;
+    } else {
+      factory.lobbyList = data.lobbies;
+    }
+
+    $rootScope.$emit('lobby-list-updated');
+
+    if (factory.lobbyJoinedId === -1) {
+      return;
+    }
+
+    factory.lobbyList.forEach(function (lobby) {
+      if (lobby.id === factory.lobbyJoinedId) {
+        const joinedLobby: ?Object =
+          factory.getLobbyJoined();
+        if (joinedLobby !== undefined && joinedLobby !== null) {
+          joinedLobby.players = lobby.players;
+          joinedLobby.maxPlayers = lobby.maxPlayers;
+        }
+      }
+    });
+    $rootScope.$emit('lobby-joined-updated');
   });
 
   return factory;

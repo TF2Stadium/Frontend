@@ -96,8 +96,8 @@ function runBlock($timeout: AngularJSTimeout, $window, $state, $rootScope, $log:
   // We check if the user allowed us to show notifications
   // If he didn't set the permissions yet, we ask him to do so
   $timeout(function () {
-    if (typeof Notification === 'undefined' ||
-        Notification.permission !== 'default') {
+    if (typeof window.Notification === 'undefined' ||
+        window.Notification.permission !== 'default') {
       return;
     }
     Notifications.toast({

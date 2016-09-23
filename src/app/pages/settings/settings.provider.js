@@ -28,8 +28,7 @@ function SettingsPageConfig($stateProvider, SettingsPageProvider) {
     'account',
   ];
 
-  for (var settingSectionKey of SettingsPageProvider.sections) {
-    var settingSection = SettingsPageProvider.sections[settingSectionKey];
+  SettingsPageProvider.sections.forEach((settingSection) => {
     $stateProvider.state(settingSection, {
       url: '/' + settingSection,
       parent: 'settings',
@@ -39,7 +38,7 @@ function SettingsPageConfig($stateProvider, SettingsPageProvider) {
         },
       },
     });
-  }
+  });
 }
 
 /** @ngInject */

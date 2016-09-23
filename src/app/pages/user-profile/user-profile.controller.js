@@ -1,7 +1,9 @@
 /* @flow */
 import Kefir from 'kefir';
 import moment from 'moment';
+import { update } from 'lodash';
 import { slotNameToClassName } from '../../app.filter';
+import type { UserLobbyData } from '../../shared/user.factory';
 
 require('./user-profile.html');
 require('./header.html');
@@ -29,6 +31,24 @@ const {
   return { pub, stream };
 })();
 
+const gameModes = [
+  {key: 'playedSixesCount',
+   abbr: '6s',
+   name: '6v6'},
+  {key: 'playedHighlanderCount',
+   abbr: 'HL',
+   name: 'Highlander' },
+  {key: 'PlayedFoursCount',
+   abbr: '4s',
+   name: '4v4'},
+  {key: 'PlayedBballCount',
+   abbr: 'BBall',
+   name: 'BasketBall'},
+  {key: 'PlayedUltiduoCount',
+   abbr: 'Ulti',
+   name: 'Ultiduo'},
+];
+
 /** @ngInject */
 function UserProfileController($state, User) {
   var vm = this;
@@ -43,34 +63,25 @@ function UserProfileController($state, User) {
   vm.lobbiesLoadingError = false;
   User
     .getLobbies(vm.steamId, 5)
-    .then(function (lobbies) {
-      vm.lobbies = lobbies.map(function (map) {
-        map.createdAt = moment(map.createdAt);
-
-        map.playerInfo = map.classes.map(function (klass) {
-          if (klass.blu.filled && klass.blu.player && klass.blu.player.steamid === vm.steamId) {
-            return { 'team': 'blu', 'class': klass.class };
-          } else if (klass.red.filled && klass.red.player && klass.red.player.steamid === vm.steamId) {
-            return { 'team': 'red', 'class': klass.class };
-          }
-          return false;
-        }).filter((x) => x);
-
-        if (map.playerInfo.length > 0) {
-          map.playerInfo = map.playerInfo[0];
-        } else {
-          map.playerInfo = { team: '', 'class': '' };
-        }
-
-        map.playerInfo.class = slotNameToClassName(map.playerInfo.class);
-
-        return map;
-      });
-
+    .then(function (lobbies: UserLobbyData) {
+      vm.lobbies = lobbies.map(map => Object.assign({}, map, {
+        createdAt: moment(map.createdAt),
+        playerInfo: update(
+          map.classes.map(function (klass) {
+            if (klass.blu.filled && klass.blu.player && klass.blu.player.steamid === vm.steamId) {
+              return { 'team': 'blu', 'class': klass.class };
+            } else if (klass.red.filled && klass.red.player && klass.red.player.steamid === vm.steamId) {
+              return { 'team': 'red', 'class': klass.class };
+            }
+            return false;
+          }).find(x => x) || { team: '', 'class': '' },
+          'class',
+          slotNameToClassName
+        )
+      }));
     }, function (err) {
       vm.lobbiesLoadingError = err;
     });
-
 
   updateProfileLoadingStatus(true);
   User
@@ -82,26 +93,9 @@ function UserProfileController($state, User) {
 
       vm.profile.createdAt = moment(vm.profile.createdAt);
 
-      vm.profile.lobbyTypes = [
-        {key: 'playedSixesCount',
-         abbr: '6s',
-         name: '6v6' },
-        {key: 'playedHighlanderCount',
-         abbr: 'HL',
-         name: 'Highlander' },
-        {key: 'PlayedFoursCount',
-         abbr: '4s',
-         name: '4v4'},
-        {key: 'PlayedBballCount',
-         abbr: 'BBall',
-         name: 'BasketBall'},
-        {key: 'PlayedUltiduoCount',
-         abbr: 'Ulti',
-         name: 'Ultiduo'},
-      ].map(function (o) {
-        o.cnt = vm.profile.stats[o.key];
-        return o;
-      });
+      vm.profile.lobbyTypes = gameModes.map(o => Object.assign({}, o, {
+        cnt: vm.profile.stats[o.key]
+      }));
 
       vm.profile.classes = [
         'scout',
@@ -138,10 +132,9 @@ function UserProfileController($state, User) {
       ].filter(function (l) {
         return vm.profile.external_links &&
           vm.profile.external_links.hasOwnProperty(l.name);
-      }).map(function (l) {
-        l.url = vm.profile.external_links[l.name];
-        return l;
-      });
+      }).map(l => Object.assign(
+        {}, l, {url: vm.profile.external_links[l.name]}
+      ));
 
       // TODO: TEST DATA, remove once the backend supplies this
       if (angular.isUndefined(vm.profile.stats.leaves)) {
