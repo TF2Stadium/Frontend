@@ -77,11 +77,9 @@ function UserProfileController($state, User) {
           }).find(x => x) || { team: '', 'class': '' },
           'class',
           slotNameToClassName
-        )
+        ),
       }));
-    }, function (err) {
-      vm.lobbiesLoadingError = err;
-    });
+    }, (err) => vm.lobbiesLoadingError = err);
 
   updateProfileLoadingStatus(true);
   User
@@ -93,9 +91,9 @@ function UserProfileController($state, User) {
 
       vm.profile.createdAt = moment(vm.profile.createdAt);
 
-      vm.profile.lobbyTypes = gameModes.map(o => Object.assign({}, o, {
-        cnt: vm.profile.stats[o.key]
-      }));
+      vm.profile.lobbyTypes = gameModes.map(o => (
+        Object.assign({}, o, {cnt: vm.profile.stats[o.key]})
+      ));
 
       vm.profile.classes = [
         'scout',
