@@ -4,10 +4,12 @@ var path = require('path');
 
 var babelSettings = {
   presets: ['es2015'],
-  extends: path.join(__dirname, '/.babelrc'),
   // For testing, especially useful for angular-style modules in the
   // process of being converted
-  plugins: ['rewire'],
+  plugins: [
+    "transform-flow-strip-types",
+    'rewire'
+  ],
 };
 
 var browsers = ['PhantomJS'];
