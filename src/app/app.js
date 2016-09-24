@@ -20,8 +20,6 @@ import '../scss/app.scss';
 var modules = [],
   release = 'development';
 
-var x = 1 + 'a';
-
 if (typeof buildStats !== 'undefined') {
   const { host, time, gitCommit: { hash, branch } } = buildStats,
     timeStr = moment(time).format('LLLL ZZ');
