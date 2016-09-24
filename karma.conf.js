@@ -18,6 +18,8 @@ if (process.env.TEST_ENV === 'BROWSERS') {
 }
 
 var webpackConfig = require('./webpack.config.js');
+var webpack = require('webpack');
+var DefinePlugin = webpack.DefinePlugin;
 
 function toPath(p) {
   return path.resolve(path.join(__dirname, p));
@@ -78,6 +80,19 @@ module.exports = function (config) {
           loader: 'null',
         }],
       },
+      plugins: [
+        new DefinePlugin({
+          'process.env': JSON.stringify({NODE_ENV: 'testing'}),
+          '__BUILD_STATS__': JSON.stringify({
+            gitCommit: {
+              hash: 'githash',
+              branch: 'gitbranch',
+            },
+            host: 'buildhost',
+            time: +(new Date()),
+          }),
+        }),
+      ],
     },
     webpackMiddleware: {
       noInfo: true,
