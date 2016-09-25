@@ -1,3 +1,4 @@
+/* @flow */
 import * as audio from './audio';
 
 angular
@@ -9,7 +10,7 @@ const requireSound =
 
 // TODO: move to config (putting this off until we do some sort of
 // default configurations)
-const VOCAL_NOTIFICATIONS = {
+export const vocalNotifications = {
   'Default': {
     _default: true,
     path: './default/',
@@ -91,12 +92,17 @@ const VOCAL_NOTIFICATIONS = {
 };
 
 angular
-  .module('tf2stadium.services')
-  .constant('VocalNotifications', VOCAL_NOTIFICATIONS);
+  .module('tf2stadium.services');
 
 /** @ngInject */
-export function NotificationsFactory($rootScope, $mdToast, $window, $document,
-                                     $timeout, $log) {
+export function NotificationsFactory(
+  $rootScope: Object,
+  $mdToast: Object,
+  $window: typeof window,
+  $document: [typeof document],
+  $timeout: AngularJSTimeout,
+  $log: AngularJSLog
+) {
   var notificationsService = {};
 
   var toastDefault = {
@@ -113,11 +119,11 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
     hideDelay: 5000,
   };
 
-  notificationsService.availableSoundPacks = Object.keys(VOCAL_NOTIFICATIONS);
+  notificationsService.availableSoundPacks = Object.keys(vocalNotifications);
 
-  notificationsService.getSound = function (event, settings) {
+  notificationsService.getSound = function (event: string, settings: Object) {
     var soundPackName = settings.soundPack,
-      soundPack = VOCAL_NOTIFICATIONS[soundPackName];
+      soundPack = vocalNotifications[soundPackName];
 
     if (soundPack) {
       var sounds = soundPack[event];
@@ -130,7 +136,7 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
     return;
   };
 
-  notificationsService.toast = function (options) {
+  notificationsService.toast = function (options: Object) {
     var toastOptions = angular.extend({}, toastDefault, options);
 
     $mdToast
@@ -156,7 +162,7 @@ export function NotificationsFactory($rootScope, $mdToast, $window, $document,
     }
   };
 
-  notificationsService.notifyBrowser = function (options) {
+  notificationsService.notifyBrowser = function (options: Object) {
     if (options.soundFile) {
       audio.play(options.soundFile, options.soundVolume);
     }

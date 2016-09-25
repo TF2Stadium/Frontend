@@ -1,3 +1,4 @@
+/* @flow */
 require('./header.html');
 require('./lobby-list.html');
 

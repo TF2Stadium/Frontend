@@ -64,6 +64,7 @@ var configFile = [
 var babelSettings = {
   presets: ['es2015'],
   plugins: [
+    'transform-flow-strip-types',
     // Include the Babel runtime functions once for all source
     // files
     'transform-runtime',

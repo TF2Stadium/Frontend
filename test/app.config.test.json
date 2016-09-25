@@ -3,6 +3,7 @@
     "websocket": "",
     "api": ""
   },
+  "sentryDSN": "",
   "debug": true,
   "allowedChatDomains": [
     "logs.tf",

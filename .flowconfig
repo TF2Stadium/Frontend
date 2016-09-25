@@ -1,0 +1,15 @@
+[ignore]
+
+[include]
+headers/
+
+[libs]
+node_modules/flow-interfaces-angular/interfaces
+node_modules/react/node_modules/fbjs/flow/lib/
+fixes/
+
+[options]
+suppress_type=$FlowIssue
+module.name_mapper='.*\.html$' -> '<PROJECT_ROOT>/headers/HTMLModule.js'
+module.name_mapper='.*\.\(css\|scss\)' -> '<PROJECT_ROOT>/headers/CSSModule.js'
+module.name_mapper='app-config' -> '<PROJECT_ROOT>/headers/AppConfig.js.flow'

@@ -1,0 +1,16 @@
+// @flow
+
+declare class WSeventSocket {
+  On(event: string, callback: () => any): void;
+  on(event: string, callback: () => any): void;
+
+  Off(event: string, callback: () => any): void;
+  off(event: string, callback: () => any): void;
+
+  Emit(data: Object, callback: () => any): void;
+  emit(data: Object, callback: () => any): void;
+
+  connect(): void;
+}
+
+declare var Socket: WSeventSocket;

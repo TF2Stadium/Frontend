@@ -1,3 +1,4 @@
+/* @flow */
 /* global module */
 /* angularjs Scroll Glue
  * version 2.0.6
@@ -82,7 +83,7 @@ function createActivationState($parse, attr, scope) {
 }
 
 function createDirective(scrollglue, attrName, direction) {
-  scrollglue.directive(attrName, ['$parse', '$window', '$timeout', function ($parse, $window, $timeout) {
+  scrollglue.directive(attrName, ['$parse', '$window', '$timeout', function ($parse, $window, $timeout: AngularJSTimeout) {
     return {
       priority: 1,
       restrict: 'A',

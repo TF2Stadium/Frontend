@@ -1,3 +1,4 @@
+/* @flow */
 angular.module('tf2stadium')
   .config(SettingsPageConfig)
   .provider('SettingsPage', SettingsPage);
@@ -27,8 +28,7 @@ function SettingsPageConfig($stateProvider, SettingsPageProvider) {
     'account',
   ];
 
-  for (var settingSectionKey of Object.keys(SettingsPageProvider.sections)) {
-    var settingSection = SettingsPageProvider.sections[settingSectionKey];
+  SettingsPageProvider.sections.forEach((settingSection) => {
     $stateProvider.state(settingSection, {
       url: '/' + settingSection,
       parent: 'settings',
@@ -38,7 +38,7 @@ function SettingsPageConfig($stateProvider, SettingsPageProvider) {
         },
       },
     });
-  }
+  });
 }
 
 /** @ngInject */

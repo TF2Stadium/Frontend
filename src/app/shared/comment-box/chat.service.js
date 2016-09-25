@@ -1,3 +1,4 @@
+/* @flow */
 import xssFilters from 'xss-filters';
 
 const requireJson = require.context('../../../assets/', false, /^.*\.json$/);
@@ -128,7 +129,7 @@ function makeEmotesTransformer(emotesConfig) {
   }
 
   function sortDescendingPriority(arr) {
-    return arr.sort((a, b) => a.priority < b.priority);
+    return arr.sort((a, b) => b.priority - a.priority);
   }
 
   function makeColonReplacer(imgHTML, name) {
@@ -160,7 +161,7 @@ function makeEmotesTransformer(emotesConfig) {
 }
 
 /** @ngInject */
-function ChatService($rootScope, $sce, $log, $http, $q,
+function ChatService($rootScope, $sce, $log: AngularJSLog, $http, $q,
                      Websocket, LobbyService, Config,
                      Notifications, Settings) {
   // Persistent map of room id -> messages list
@@ -173,7 +174,8 @@ function ChatService($rootScope, $sce, $log, $http, $q,
   }
 
   function ChatRoom(id) {
-    this.changeRoom(angular.isDefined(id) ? id : -1);
+    this.id = angular.isDefined(id) ? id : -1;
+    this.messages = [];
   }
 
   ChatRoom.prototype.changeRoom = function chageRoom(id) {

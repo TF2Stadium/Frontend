@@ -1,3 +1,4 @@
+/* @flow */
 import {isEmpty, isEqual, uniqWith, omit} from 'lodash';
 
 angular.module('tf2stadium.controllers')

@@ -1,3 +1,4 @@
+/* @flow */
 require('./step-restrictions.html');
 require('./step-server.html');
 require('./step-mumble.html');
@@ -338,6 +339,9 @@ function LobbyCreate() {
           lobbies: 0,
         },
       },
+      league: '',
+      whitelistID: '',
+      map: '',
       server: '',
       rconpwd: '',
     };

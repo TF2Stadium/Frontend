@@ -1,8 +1,13 @@
+/* @flow */
 import {route as about} from './pages/about';
 import {route as rules} from './pages/rules';
 
 /** @ngInject */
-export default function routeConfig($stateProvider, $urlRouterProvider, $locationProvider) {
+export default function routeConfig(
+  $stateProvider: Object,
+  $urlRouterProvider: Object,
+  $locationProvider: Object
+) {
   $stateProvider
     .state('lobby-list', {
       url: '/',

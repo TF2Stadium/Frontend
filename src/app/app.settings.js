@@ -1,10 +1,12 @@
+/* @flow */
+import { vocalNotifications } from './app.notifications.js';
+
 angular.module('tf2stadium')
   .provider('Settings', Settings)
   .config(SettingsConfigBlock);
 
-
 /** @ngInject */
-function SettingsConfigBlock(SettingsProvider, VocalNotifications) {
+function SettingsConfigBlock(SettingsProvider) {
   SettingsProvider.constants.filters = {
     regions: {
       eu:             {name: 'Europe'},
@@ -94,9 +96,10 @@ function SettingsConfigBlock(SettingsProvider, VocalNotifications) {
 
     // Use Array.find(arrVal,..) vs arrValue.find(..) to avoid using a
     // prototype polyfill for now...
-    var defaultSoundPack =
-          Array.find(Object.entries(VocalNotifications),
-                     ([k, o]) => (o._default ? k : false))[0];
+    const packs = Object.entries(vocalNotifications),
+      defaultMarkedPacks = packs.find(([k, o]) => (o._default ? k : false)),
+      defaultSoundPack = defaultMarkedPacks ?
+        defaultMarkedPacks[0] : packs[0][1];
 
     SettingsProvider.settings.soundVolume = 10;
     SettingsProvider.settings.soundPack = defaultSoundPack;
@@ -130,7 +133,7 @@ function Settings() {
    during and after the run phase.
    */
   /** @ngInject */
-  var settingsService = function (Websocket, $rootScope, $log, $q) {
+  var settingsService = function (Websocket, $rootScope, $log: AngularJSLog, $q) {
 
     // Private properties
     var settings = settingsProvider.settings;
@@ -150,7 +153,7 @@ function Settings() {
           value = (value === 'true');
         }
 
-        localStorage.setItem(setting, value);
+        localStorage.setItem(setting, value.toString());
         settings[setting] = value;
       }
 
