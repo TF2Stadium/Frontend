@@ -56,7 +56,7 @@ function trusted($sce) {
 }
 
 export function stripSlotNameNumber(slotName: string) {
-  return slotName.replace(/\d+$/, '');
+  return angular.isString(slotName) ? slotName.replace(/\d+$/, '') : slotName;
 }
 
 /** @ngInject */
