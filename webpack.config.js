@@ -304,6 +304,7 @@ module.exports = {
     historyApiFallback: true,
     contentBase: toPath('dist/'),
     port: parseInt(_.get(process.env, 'DEV_PORT', '8080'), 10),
+    stats: 'minimal',
   },
 
   markdownLoader: {
