@@ -175,7 +175,7 @@ function ChatService($rootScope, $sce, $log: AngularJSLog, $http, $q,
 
   function ChatRoom(id) {
     this.id = angular.isDefined(id) ? id : -1;
-    this.messages = [];
+    this.messages = getChatRoom(this.id);
   }
 
   ChatRoom.prototype.changeRoom = function chageRoom(id) {
