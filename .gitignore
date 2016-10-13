@@ -9,3 +9,4 @@ app.config.js
 src/app/app.config.js
 Frontend.iml
 coverage/
+.eslintcache
