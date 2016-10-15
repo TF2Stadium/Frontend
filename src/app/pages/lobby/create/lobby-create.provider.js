@@ -251,6 +251,14 @@ function LobbyCreate() {
         allowCustomInput: true,
         options: [
           {
+            value: 'competitive_6v6',
+            title: 'Global Whitelist 6v6',
+            etf2l: true,
+            esea: true,
+            ugc: true,
+            ozfortress: true,
+            '6s': true,
+          },{
             value: 'ETF2L_9v9',
             title: 'ETF2L Highlander',
             etf2l: true,
