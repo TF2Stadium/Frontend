@@ -178,7 +178,7 @@ module.exports = {
 
   output: {
     path: OUT,
-    filename: '[name].js',
+    filename: '[name]-[hash].js',
   },
 
   module: {
@@ -195,12 +195,12 @@ module.exports = {
     }, {
       test: /\.svg$/,
       loaders: [
-        'file?name=[path][name].[ext]',
+        'file?name=[hash].[ext]',
         'svgo?' + JSON.stringify(svgoSettings),
       ],
     }, {
       test: /\.(png|jpg|jpeg|gif|woff|woff2|ttf|eot|otf|webm|mp4|ogg|wav)$/,
-      loader: 'file?name=[path][name].[ext]',
+      loader: 'file?name=[hash].[ext]',
     }, {
       test: /\.html$/,
       include: [
