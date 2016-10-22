@@ -38,6 +38,7 @@ function LobbyPageHeaderController($scope, $rootScope, $state,
     var lobby = vm.lobbyInformation;
     return user && lobby && lobby.state < 5 &&
       (user.steamid === lobby.leader.steamid ||
+       user.role === 'moderator' ||
        user.role === 'administrator');
   };
 
