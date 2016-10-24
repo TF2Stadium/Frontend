@@ -2,22 +2,6 @@
 @import "./__helpers.scss";
 
 /* ==================================
-      TOOLBAR STEAM LOGIN BUTTON
-   ================================== */
-
-.steam-login {
-  width: 154px;
-
-  //Don't show text, instead use steam's button
-  background: {
-    image: url(../assets/img/steam-login-small.png);
-    repeat: no-repeat;
-    position: center;
-  }
-}
-
-
-/* ==================================
           COMMENTBOX TAGS
    ================================== */
 

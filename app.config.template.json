@@ -4,6 +4,7 @@
     "api": "<<API_ENDPOINT>>"
   },
   "sentryDSN": "<<SENTRY_ENDPOINT>>",
+  "discordLink": "<<DISCORD_LINK>>",
   "debug": true,
   "allowedChatDomains": [
     "logs.tf",
