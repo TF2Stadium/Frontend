@@ -93,6 +93,26 @@ body {
       margin: 0 $padding-small;
       border-radius: 3px;
     }
+
+    &.discord-button {
+      padding: 0;
+
+      img {
+        margin: 0;
+        height: 2.5em;
+      }
+    }
+
+    &.steam-login {
+      width: 154px;
+
+      //Don't show text, instead use steam's button
+      background: {
+        image: url(../assets/img/steam-login-small.png);
+        repeat: no-repeat;
+        position: center;
+      }
+    }
   }
 }
 
