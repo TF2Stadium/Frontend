@@ -7,8 +7,10 @@ var babelSettings = {
   // For testing, especially useful for angular-style modules in the
   // process of being converted
   plugins: [
-    "transform-flow-strip-types",
-    'rewire'
+    'transform-flow-strip-types',
+    'transform-runtime',
+    'lodash',
+    'rewire',
   ],
 };
 
@@ -42,7 +44,7 @@ module.exports = function (config) {
 
     preprocessors: {
       'src/app/**/*.js': ['webpack', 'sourcemap'],
-      'test/karma/**/*.js': ['webpack'],
+      'test/karma/**/*.js': ['webpack', 'sourcemap'],
     },
 
     webpack: {
