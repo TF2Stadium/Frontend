@@ -85,7 +85,7 @@
      ng-show="lobbyPage.shouldShowLobbyInformation()">
   <div class="classes-title">
     <h1>Blu</h1>
-    <h1>Red</h1>
+    <h1 class="classes-title-right">Red</h1>
   </div>
   <div ng-repeat="class in lobbyPage.lobbyInformation.classes track by class.class" class="class-row">
     <div aria-label="Join {{::team}} {{::class.class | stripSlotNameNumber}}"

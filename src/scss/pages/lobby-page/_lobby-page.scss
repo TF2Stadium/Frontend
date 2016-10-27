@@ -69,7 +69,6 @@
 }
 
 #lobby-join-information {
-
   .row {
     @include flex(row, center, center);
     text-align: center;
@@ -99,10 +98,18 @@
 }
 
 .classes-title {
-  @include flex (row, center, stretch);
+  @include flex (row, center, center);
 
   h1 {
-    margin: $padding-small $class-button-width/2 + $padding-medium;
+    margin: $padding-small $class-button-width/2 + $padding-small;
+
+    min-width: 100px;
+    text-align: right;
+    &.classes-title-right {
+      text-align: left;
+    }
+
+    line-height: 1em;
   }
 }
 
