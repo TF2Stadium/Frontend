@@ -3,7 +3,28 @@
    bindonce
    class="tile-card"
 
-   ng-repeat="map in lobbyCreate.maps.options | LobbyCreateOptionFilter:'maps':lobbyCreate.searchString as filteredOptions"
+   ng-repeat="map in ::lobbyCreate.recentMaps"
+
+   ng-click="lobbyCreate.select(lobbyCreate.maps, map)"
+   ng-mouseover="lobbyCreate.preloadImage('/assets/img/maps/header/' + map.value + '.jpg')"
+
+   md-colspan="6"
+   md-rowspan="2"
+
+   ng-class="{'no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.maps, map)}">
+  <div class="tile-image"
+       bo-style="{'background-image': 'url(/assets/img/maps/lobby-create/' + map.value + '.jpg)'}"></div>
+  <div class="tile-text">
+    <span class="title" bo-bind="map.value"></span>
+  </div>
+</md-grid-tile>
+
+<md-grid-tile
+   md-ink-ripple
+   bindonce
+   class="tile-card"
+
+   ng-repeat="map in lobbyCreate.maps.options | notIn:'value':lobbyCreate.recentMaps | LobbyCreateOptionFilter:'maps':lobbyCreate.searchString as filteredOptions"
 
    ng-click="lobbyCreate.select(lobbyCreate.maps, map)"
    ng-mouseover="lobbyCreate.preloadImage('/assets/img/maps/header/' + map.value + '.jpg')"
