@@ -311,11 +311,11 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout,
     Websocket.emitJSON('lobbyJoin', payload);
   };
 
-  factory.leaveSlot = function (lobbyID) {
-    var payload = { 'id': lobbyID };
-
-    Websocket.emitJSON('lobbyLeave', payload);
+  factory.leaveSlot = function (id) {
+    Websocket.emitJSON('lobbyLeave', {id});
   };
+
+  factory.shuffleTeams = (id) => Websocket.emitJSON('shuffleTeams', {id});
 
   factory.goToLobby = function (lobby) {
     $state.go('lobby-page', {lobbyID: lobby});

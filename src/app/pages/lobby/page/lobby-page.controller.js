@@ -141,6 +141,8 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     LobbyService.leaveSlot(vm.lobbyInformation.id);
   };
 
+  vm.shuffleTeams = () => LobbyService.shuffleTeams(vm.lobbyInformation.id);
+
   vm.delayedLaunch = function delayedLaunch(url, delay) {
     if (angular.isUndefined(delay)) {
       delay = 1000;

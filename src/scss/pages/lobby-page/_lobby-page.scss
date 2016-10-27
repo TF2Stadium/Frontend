@@ -11,6 +11,24 @@
   }
 }
 
+.lobby-leader-menu {
+  width: 36px;
+  min-width: 36px;
+  margin: 0 -18px 6px;
+  padding: 0;
+
+  >button {
+    width: 36px;
+    min-width: 36px;
+    margin: 0;
+    padding: 0;
+
+    svg {
+      fill: #666;
+    }
+  }
+}
+
 .lobbypage-text {
   @include flex (row, space-between, center);
   flex-wrap: wrap;
