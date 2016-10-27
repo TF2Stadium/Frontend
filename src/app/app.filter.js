@@ -1,3 +1,5 @@
+import {property} from 'lodash/fp';
+
 /* @flow */
 angular.module('tf2stadium.filters')
   .filter('capitalize', capitalize_AngularWrapper)
@@ -9,6 +11,7 @@ angular.module('tf2stadium.filters')
   .filter('ifNumeric', ifNumeric)
   .filter('secondsToMinutes', secondsToMinutes_AngularWrapper)
   .filter('unique', unique)
+  .filter('notIn', notIn)
   .filter('greaterThan', greaterThan);
 
 export function capitalize(input: ?string) {
@@ -125,6 +128,18 @@ function unique() {
       }
       return [out, seen];
     }, [[], new Set()])[0];
+  };
+}
+
+/** @ngInject */
+function notIn() {
+  return function (array: Array<Object>, key: String, excludeList: Array<Object>) {
+    if (!array) {
+      return [];
+    }
+
+    const excludeSet = new Set(excludeList.map(property(key)));
+    return array.filter(({[key]: s}) => !excludeSet.has(s));
   };
 }
 
