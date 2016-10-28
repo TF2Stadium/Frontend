@@ -231,7 +231,8 @@ ul.rent-servers-list {
 }
 
 .tile-form,
-.restrictions-form {
+.restrictions-form,
+.discord-form {
   @include flex(column, center, center);
   @extend .sheet;
 
@@ -282,6 +283,27 @@ ul.rent-servers-list {
     }
   }
 
+}
+
+.discord-form {
+  // Don't ask; perfectly positioned to be under the mumble titles x.x
+  position: absolute;
+  top: 258px;
+  width: 100%;
+
+  img {
+    display: inline-block;
+    height: 1.5em;
+    vertical-align: middle;
+  }
+
+  md-icon {
+    height: 1em;
+    margin: 0;
+    svg {
+      fill: #666;
+    }
+  }
 }
 
 .restrictions-form {

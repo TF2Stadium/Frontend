@@ -11,6 +11,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
                                PreloadService) {
   PreloadService.queuePreload('/assets/img/mumble.svg');
   PreloadService.queuePreload('/assets/img/not-mumble.svg');
+  PreloadService.queuePreload('/assets/img/logos/discord-logo-blurple.svg');
 
   var vm = this;
 
@@ -34,6 +35,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   vm.savedConfigurations = [];
   vm.serverName = '';
   vm.servemeServer = {};
+  vm.discord = false;
 
   function syncSettings() {
     Settings.getSettings((settings) => {

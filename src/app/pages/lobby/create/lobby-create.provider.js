@@ -354,6 +354,10 @@ function LobbyCreate() {
           lobbies: 0,
         },
       },
+      discord: {
+        redChannel: '',
+        bluChannel: '',
+      },
       league: '',
       whitelistID: '',
       map: '',
