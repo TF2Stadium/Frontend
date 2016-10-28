@@ -327,11 +327,18 @@ function LobbyCreate() {
           {
             value: true,
             title: 'Mumble required',
-            description: 'All participants will need to join the mumble channel.',
+            image: '/assets/img/mumble.svg',
+            description: 'All participants will need to join Mumble channels',
           },{
             value: false,
             title: 'Mumble not required',
-            description: 'Participants will join the mumble only if they want to do so.',
+            image: '/assets/img/not-mumble.svg',
+            description: 'Participants will join Mumble only if they want to',
+          },{
+            value: 'discord',
+            title: 'Discord',
+            image: '/assets/img/logos/discord-logo-blurple.svg',
+            description: 'Participants will join Discord channels',
           },
         ],
       },

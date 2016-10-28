@@ -12,7 +12,7 @@
    ng-class="{'no-animate': !lobbyCreate.searchString, 'selected': lobbyCreate.isSelected(lobbyCreate.mumble, option)}">
   <div class="circle"></div>
   <div class="tile-text">
-  	<img bo-src="option.value ? '/assets/img/mumble.svg' : '/assets/img/not-mumble.svg'">
+  	<img bo-src="option.image">
     <span bo-bind="option.title"></span>
     <span bo-bind="option.description"></span>
   </div>
