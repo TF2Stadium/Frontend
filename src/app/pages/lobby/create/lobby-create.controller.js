@@ -135,7 +135,14 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     Settings.set('recentConfigurations',
                  angular.toJson(newRecentConfigurations.slice(0, 8)));
 
-    LobbyCreate.create(angular.copy(lobbySettings), function (response) {
+    const payload = angular.copy(lobbySettings);
+    if (payload.mumbleRequired === 'discord') {
+      payload.mumbleRequired = false;
+    } else {
+      delete payload.discord;
+    }
+
+    LobbyCreate.create(payload, function (response) {
       if (!response.success) {
         vm.requestSent = false;
       }
