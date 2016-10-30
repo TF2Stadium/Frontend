@@ -91,7 +91,8 @@
         ng-if="!lobbyPage.editBluTeamName && (lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5) && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')"
         ng-click="lobbyPage.editBluTeamName=true"
         ><md-icon md-svg-icon="material:edit"></md-icon></md-button>
-      <h1 ng-if="!lobbyPage.editBluTeamName">Blu</h1>
+      <h1 ng-if="!lobbyPage.editBluTeamName"
+          ng-bind="lobbyPage.lobbyInformation.bluTeamName || 'Blu'"></h1>
       <md-input-container
         md-no-float
         class="team-name-input"
@@ -123,7 +124,8 @@
     </md-menu>
 
     <div class="team-title team-title-right">
-      <h1 ng-if="!lobbyPage.editRedTeamName">Red</h1>
+      <h1 ng-if="!lobbyPage.editRedTeamName"
+          ng-bind="lobbyPage.lobbyInformation.redTeamName || 'Red'"></h1>
       <md-button
         ng-if="!lobbyPage.editRedTeamName && (lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5) && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')"
         class="edit-team-name"
