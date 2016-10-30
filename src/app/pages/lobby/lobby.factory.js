@@ -315,7 +315,7 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout,
     Websocket.emitJSON('lobbyLeave', {id});
   };
 
-  factory.shuffleTeams = (id) => Websocket.emitJSON('shuffleTeams', {id});
+  factory.shuffleTeams = (id) => Websocket.emitJSON('lobbyShuffle', {id});
 
   factory.goToLobby = function (lobby) {
     $state.go('lobby-page', {lobbyID: lobby});
