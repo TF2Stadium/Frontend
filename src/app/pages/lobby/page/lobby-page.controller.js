@@ -148,6 +148,7 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     LobbyService.leaveSlot(vm.lobbyInformation.id);
   };
 
+  vm.setTeamName = (team, name) => LobbyService.setTeamName(vm.lobbyInformation.id, team, name);
   vm.shuffleTeams = () => LobbyService.shuffleTeams(vm.lobbyInformation.id);
 
   vm.delayedLaunch = function delayedLaunch(url, delay) {
