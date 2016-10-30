@@ -60,7 +60,7 @@
        data-clipboard-text="{{lobbyPage.lobbyJoinInformation.connectString}}"
        class="clipboard-button">Copy to clipboard</md-button>
   </div>
-  <div class="row">
+  <div class="row" ng-if="!lobbyPage.lobbyJoinInformation.discordChannel">
     <md-button
        ng-click="$event.preventDefault();lobbyPage.delayedLaunch(lobbyPage.lobbyJoinInformation.mumbleUrl, 500);"
        ng-href="{{lobbyPage.lobbyJoinInformation.mumbleUrl}}"
@@ -77,6 +77,23 @@
     </span>
     <md-button
        data-clipboard-text="{{lobbyPage.lobbyJoinInformation.mumbleInformation}}"
+       class="clipboard-button">Copy to clipboard</md-button>
+  </div>
+  <div class="row" ng-if="lobbyPage.lobbyJoinInformation.discordChannel">
+    <md-button
+       ng-href="{{lobbyPage.lobbyJoinInformation.discordChannel}}"
+       target="_blank">
+      Join Discord
+    </md-button>
+    <md-button ng-if="!lobbyPage.showDiscordInformation"
+               ng-click="lobbyPage.showDiscordInformation=true">
+      Show Discord URL
+    </md-button>
+    <span flex ng-if="lobbyPage.showDiscordInformation">
+      Invite URL: {{lobbyPage.lobbyJoinInformation.discordChannel}}
+    </span>
+    <md-button
+       data-clipboard-text="{{lobbyPage.lobbyJoinInformation.discordChannel}}"
        class="clipboard-button">Copy to clipboard</md-button>
   </div>
 </div>
