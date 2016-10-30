@@ -1,5 +1,6 @@
 /* @flow */
 import * as audio from '../../audio';
+import {pick} from 'lodash';
 
 angular
   .module('tf2stadium.controllers')
@@ -102,16 +103,17 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
   vm.editServerField = function editServerField(e, server, field) {
     e.stopPropagation(); // prevent auto row-select
 
-    var validators = { 'md-maxlength': field === 'name' ? 50 : 100 };
+    const validators = { 'md-maxlength': field === 'name' ? 50 : 100 };
 
-    $mdEditDialog.small({
+    $mdEditDialog.large({
       modelValue: server[field],
+      title: 'Edit ' + field,
       placeholder: 'Edit ' + field,
+      type: field === 'password' ? 'password' : 'text',
       targetEvent: e,
       validators: validators,
       save: function (input) {
         var newValue = input.$modelValue;
-
         // We do all of this mapping instead of just `server[field]
         // = newValue;` (the server arg is a reference to that
         // element in the savedServers array) because we aren't
@@ -147,15 +149,18 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
 
   vm.newServerName = '';
   vm.newServerAddress = '';
+  vm.newServerPassword = '';
   vm.saveNewServer = function saveNewServer() {
     saveServers(vm.savedServers.concat({
       name: vm.newServerName,
       url: vm.newServerAddress,
+      password: vm.newServerPassword,
     }));
 
     $timeout(function () {
       vm.newServerName = '';
       vm.newServerAddress = '';
+      vm.newServerPassword = '';
 
       vm.newServerForm.$setPristine();
       vm.newServerForm.$setUntouched();
@@ -169,7 +174,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
       return {
         name: name,
         url: server.url,
-        // password: server.password
+        password: server.password,
       };
     });
   }
@@ -177,7 +182,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
   function serializeServers(servers) {
     return angular.toJson(
       servers.reduce(function (acc, server) {
-        acc[server.name] = { url: server.url };
+        acc[server.name] = pick(server, 'url', 'password');
         return acc;
       }, {})
     );

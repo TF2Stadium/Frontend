@@ -38,17 +38,14 @@
 }
 
 .new-server-form {
-  @include flex (row, space-between, center);
+  @include flex (column, space-between, flex-start);
 
   margin: 0;
   width: 100%;
 
-  .address-input {
-    flex: 1;
-  }
-
   md-input-container {
     margin-top: 0;
     margin-bottom: 0;
+    min-width: 350px;
   }
 }
