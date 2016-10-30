@@ -118,16 +118,37 @@
 .classes-title {
   @include flex (row, center, center);
 
-  h1 {
+  .team-title {
     margin: $padding-small $class-button-width/2 + $padding-small;
-
     min-width: 100px;
     text-align: right;
-    &.classes-title-right {
+    line-height: 1em;
+
+    &.team-title-right {
       text-align: left;
     }
 
-    line-height: 1em;
+    h1, .edit-team-name {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+    }
+
+    >.edit-team-name {
+      margin: 0;
+      min-width: 0;
+      vertical-align: text-bottom;
+
+      svg {
+        fill: #666;
+      }
+    }
+
+    >.team-name-input {
+      margin: 0;
+      width: 120px;
+    }
+>>>>>>> Add team name edit buttons
   }
 }
 
