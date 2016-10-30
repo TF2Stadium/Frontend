@@ -101,9 +101,10 @@
           ng-model="lobbyPage.newBluTeamName"
           aria-label="Blu team name input"
           type="text"
-          placeholder="New Blu team name"
+          placeholder="Blu team name"
           ng-blur="lobbyPage.editBluTeamName=false;lobbyPage.setTeamName('blu', lobbyPage.newBluTeamName);"
-          ng-click="$event.stopPropagation()">
+          ng-click="$event.stopPropagation()"
+          maxlength="12">
       </md-input-container>
     </div>
 
@@ -138,9 +139,10 @@
           ng-model="lobbyPage.newRedTeamName"
           aria-label="Red team name input"
           type="text"
-          placeholder="New Red team name"
+          placeholder="Red team name"
           ng-blur="lobbyPage.editRedTeamName=false;lobbyPage.setTeamName('red', lobbyPage.newRedTeamName);"
-          ng-click="$event.stopPropagation()">
+          ng-click="$event.stopPropagation()"
+          maxlength="12">
       </md-input-container>
     </div>
   </div>
