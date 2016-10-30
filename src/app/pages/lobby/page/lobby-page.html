@@ -89,7 +89,7 @@
         class="edit-team-name"
         aria-label="Edit Blu Team Name"
         ng-if="!lobbyPage.editBluTeamName && (lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5) && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')"
-        ng-click="lobbyPage.editBluTeamName=true"
+        ng-click="lobbyPage.editBluTeamName=true;lobbyPage.newBluTeamName='';"
         ><md-icon md-svg-icon="material:edit"></md-icon></md-button>
       <h1 ng-if="!lobbyPage.editBluTeamName"
           ng-bind="lobbyPage.lobbyInformation.bluTeamName || 'Blu'"></h1>
@@ -130,7 +130,7 @@
         ng-if="!lobbyPage.editRedTeamName && (lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5) && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')"
         class="edit-team-name"
         aria-label="Edit Red Team Name"
-        ng-click="lobbyPage.editRedTeamName=true"
+        ng-click="lobbyPage.editRedTeamName=true;lobbyPage.newRedTeamName='';"
         ><md-icon md-svg-icon="material:edit"></md-icon></md-button>
       <md-input-container
         md-no-float
