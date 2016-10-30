@@ -242,6 +242,18 @@
   }
 }
 
+.lobby-discord {
+  height: 100%;
+  color: #fff;
+  min-width: 30px;
+  background: {
+    image: url(/assets/img/logos/discord-logo-blurple.svg);
+    size: 25px;
+    repeat: no-repeat;
+    position: center;
+  }
+}
+
 .lobby-region {
   min-width: 30px;
 }

@@ -136,8 +136,13 @@
               bo-bind="'/' + lobbyInformation.maxPlayers"></span>
         <div flex></div>
         <div class="lobby-mumble"
+             ng-if="!lobbyInformation.discord"
              bo-class="{'not-required': !lobbyInformation.mumbleRequired}">
           <md-tooltip md-direction="top">Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}}mandatory</md-tooltip>
+        </div>
+        <div class="lobby-discord"
+             ng-if="lobbyInformation.discord">
+          <md-tooltip md-direction="top">Discord required</md-tooltip>
         </div>
       </div>
       <div class="lobby-info-row">

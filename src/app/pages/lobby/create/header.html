@@ -24,8 +24,12 @@
       </div>
       <div class="right">
         <span class="lobbypage-mumble"
-          ng-show="(header.lobbyInformation.mumbleRequired !== undefined)">
+          ng-show="(header.lobbyInformation.mumbleRequired !== undefined && !header.lobbyInformation.discord)">
           Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required
+        </span>
+        <span class="lobbypage-mumble"
+          ng-show="(header.lobbyInformation.mumbleRequired !== undefined && header.lobbyInformation.discord)">
+          Discord required
         </span>
       </div>
     </div>
