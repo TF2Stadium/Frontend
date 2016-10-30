@@ -37,12 +37,14 @@
   <md-input-container>
     <input type="text"
            ng-model="lobbyCreate.lobbySettings.discord.redChannel"
+           pattern="https:\/\/discord.gg\/[a-zA-Z0-9]+"
            placeholder="Red Team Channel Link">
   </md-input-container>
 
   <md-input-container>
     <input type="text"
            ng-model="lobbyCreate.lobbySettings.discord.bluChannel"
+           pattern="https:\/\/discord.gg\/[a-zA-Z0-9]+"
            placeholder="Blu Team Channel Link">
   </md-input-container>
 
