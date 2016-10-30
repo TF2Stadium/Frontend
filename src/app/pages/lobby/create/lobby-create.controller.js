@@ -123,13 +123,17 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
       newRecentConfigurations = [];
     }
 
-    newRecentConfigurations.unshift(omit(
+    const newRecentConfig = omit(
       angular.copy(lobbySettings),
       'server',
       'rconpwd',
       'serverType',
       'serveme'
-    ));
+    );
+    if (newRecentConfig.mumbleRequired !== 'discord') {
+      newRecentConfig.discord = {};
+    }
+    newRecentConfigurations.unshift(newRecentConfig);
     newRecentConfigurations = uniqWith(newRecentConfigurations, isEqual);
 
     Settings.set('recentConfigurations',
