@@ -120,7 +120,7 @@
 
   .team-title {
     margin: $padding-small $class-button-width/2 + $padding-small;
-    min-width: 100px;
+    min-width: 200px;
     text-align: right;
     line-height: 1em;
 
@@ -146,7 +146,7 @@
 
     >.team-name-input {
       margin: 0;
-      width: 120px;
+      width: 150px;
     }
   }
 }
