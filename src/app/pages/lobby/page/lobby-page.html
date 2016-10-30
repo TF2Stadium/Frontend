@@ -105,6 +105,7 @@
           placeholder="Blu team name"
           ng-blur="lobbyPage.editBluTeamName=false;lobbyPage.setTeamName('blu', lobbyPage.newBluTeamName);"
           ng-click="$event.stopPropagation()"
+          ng-keydown="$event.keyCode === 13 ? lobbyPage.editBluTeamName=false : ''; $event.keyCode === 13 ? lobbyPage.setTeamName('blu', lobbyPage.newBluTeamName) : ''"
           maxlength="12">
       </md-input-container>
     </div>
@@ -144,6 +145,7 @@
           placeholder="Red team name"
           ng-blur="lobbyPage.editRedTeamName=false;lobbyPage.setTeamName('red', lobbyPage.newRedTeamName);"
           ng-click="$event.stopPropagation()"
+          ng-keydown="$event.keyCode === 13 ? lobbyPage.editRedTeamName=false : ''; $event.keyCode === 13 ? lobbyPage.setTeamName('red', lobbyPage.newRedTeamName) : ''"
           maxlength="12">
       </md-input-container>
     </div>
