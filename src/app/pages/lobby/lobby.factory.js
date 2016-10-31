@@ -238,6 +238,10 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout,
     });
   });
 
+  Websocket.onJSON('lobbyShuffled', ({id}) => {
+    $rootScope.$emit('lobby-shuffled', {id});
+  });
+
   Websocket.onJSON('lobbyData', (newLobby) => {
     var id = newLobby.id;
 

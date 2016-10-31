@@ -72,6 +72,13 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     );
   });
 
+  LobbyService.subscribe('lobby-shuffled', $scope, function (e, {id}) {
+    var joined = LobbyService.getLobbyJoined();
+    if (joined && joined.id === id) {
+      LobbyService.setPlayerPreReady(false);
+    }
+  });
+
   $scope.$watch(LobbyService.getPlayerPreReady, function () {
     vm.playerPreReady = LobbyService.getPlayerPreReady();
   });
