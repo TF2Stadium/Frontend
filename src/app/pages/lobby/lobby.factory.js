@@ -106,6 +106,10 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout,
         '/?version=1.2.0&title=TF2Stadium&url=tf2stadium.com';
     }
 
+    if (data.discordChannel) {
+      factory.lobbyJoinInformation.discordChannel = data.discordChannel;
+    }
+
     $rootScope.$emit('lobby-start');
 
     Notifications.toast({

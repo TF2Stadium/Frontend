@@ -151,10 +151,19 @@
           </md-tooltip>
         </span>
         <md-icon
-           md-svg-icon="logo:{{!lobbyInformation.mumbleRequired? 'not-':''}}mumble"
-           aria-label="Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}} Required">
+          ng-if="!lobbyInformation.discord"
+          md-svg-icon="logo:{{!lobbyInformation.mumbleRequired? 'not-':''}}mumble"
+          aria-label="Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}} Required">
           <md-tooltip>
             Mumble {{!lobbyInformation.mumbleRequired? 'not ':''}}mandatory
+          </md-tooltip>
+        </md-icon>
+        <md-icon
+           ng-if="lobbyInformation.discord"
+           md-svg-icon="logo:discord"
+           aria-label="Discord required">
+          <md-tooltip>
+            Discord required
           </md-tooltip>
         </md-icon>
       </div>

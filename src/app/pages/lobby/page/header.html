@@ -42,7 +42,10 @@
       </div>
       <div class="right">
         <span class="lobbypage-mumble"
+              ng-if="!header.lobbyInformation.discord"
               ng-bind-template="Mumble {{header.lobbyInformation.mumbleRequired ? '': 'not '}}required"></span>
+        <span class="lobbypage-mumble"
+              ng-if="header.lobbyInformation.discord">Discord required</span>
         <span class="lobbypage-region" ng-bind="header.lobbyInformation.region.name"></span>
         <span ng-if="header.lobbyInformation.whitelisted || header.lobbyInformation.password">Private lobby</span>
       </div>

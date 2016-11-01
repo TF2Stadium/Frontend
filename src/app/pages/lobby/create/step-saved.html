@@ -36,11 +36,19 @@
             <div class="icon-stack">
               <md-icon
                 class="mumble"
+                ng-if="!config.discord"
                 md-svg-icon="logo:{{!config.mumbleRequired? 'not-':''}}mumble"
                 aria-label="Mumble {{!config.mumbleRequired? 'not ':''}}Required">
                 <md-tooltip>
-                  Mumble {{!config.mumbleRequired? 'not ':''}}mandatory
+                  Mumble {{!config.mumbleRequired? 'not ':''}}mandatory {{config.discord}}
                 </md-tooltip>
+              </md-icon>
+              <md-icon
+                class="mumble"
+                ng-if="config.discord"
+                md-svg-icon="logo:discord"
+                aria-label="Discord Required">
+                <md-tooltip>Discord lobby</md-tooltip>
               </md-icon>
               <md-icon
                 ng-if="!!config.password"
@@ -108,11 +116,17 @@
             <div class="icon-stack">
               <md-icon
                 class="mumble"
+                ng-if="config.mumbleRequired !== 'discord'"
                 md-svg-icon="logo:{{!config.mumbleRequired? 'not-':''}}mumble"
                 aria-label="Mumble {{!config.mumbleRequired? 'not ':''}}Required">
-                <md-tooltip>
-                  Mumble {{!config.mumbleRequired? 'not ':''}}mandatory
-                </md-tooltip>
+                <md-tooltip>Mumble {{!config.mumbleRequired? 'not ':''}}mandatory</md-tooltip>
+              </md-icon>
+              <md-icon
+                class="mumble"
+                ng-if="config.mumbleRequired === 'discord'"
+                md-svg-icon="logo:discord"
+                aria-label="Discord Required">
+                <md-tooltip>Discord lobby</md-tooltip>
               </md-icon>
               <md-icon
                 ng-if="!!config.password"

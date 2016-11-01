@@ -12,6 +12,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
                                PreloadService) {
   PreloadService.queuePreload('/assets/img/mumble.svg');
   PreloadService.queuePreload('/assets/img/not-mumble.svg');
+  PreloadService.queuePreload('/assets/img/logos/discord-logo-blurple.svg');
 
   var vm = this;
 
@@ -36,6 +37,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   vm.savedConfigurations = [];
   vm.serverName = '';
   vm.servemeServer = {};
+  vm.discord = false;
 
   function syncSettings() {
     Settings.getSettings((settings) => {
@@ -119,13 +121,17 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
       newRecentConfigurations = [];
     }
 
-    newRecentConfigurations.unshift(omit(
+    const newRecentConfig = omit(
       angular.copy(lobbySettings),
       'server',
       'rconpwd',
       'serverType',
       'serveme'
-    ));
+    );
+    if (newRecentConfig.mumbleRequired !== 'discord') {
+      newRecentConfig.discord = {};
+    }
+    newRecentConfigurations.unshift(newRecentConfig);
     newRecentConfigurations = uniqWith(newRecentConfigurations, isEqual);
 
     Settings.set('recentConfigurations',
@@ -134,7 +140,13 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     vm.recentMaps = uniqBy([{value: lobbySettings.map}].concat(vm.recentMaps), 'value').slice(0, 5);
     Settings.set('recentMaps', angular.toJson(vm.recentMaps.map(property('value'))));
 
-    LobbyCreate.create(angular.copy(lobbySettings), function (response) {
+    const payload = angular.copy(lobbySettings);
+    if (payload.mumbleRequired === 'discord') {
+      payload.mumbleRequired = false;
+    } else {
+      delete payload.discord;
+    }
+    LobbyCreate.create(payload, function (response) {
       if (!response.success) {
         vm.requestSent = false;
       }

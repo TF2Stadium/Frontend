@@ -8,12 +8,50 @@
    bindonce
    ng-repeat="option in lobbyCreate.mumble.options"
 
-   ng-click="lobbyCreate.select(lobbyCreate.mumble, option)"
+   ng-if="option.value !== 'discord' || !lobbyCreate.discord"
+   ng-click="option.value !== 'discord' ? lobbyCreate.select(lobbyCreate.mumble, option) : lobbyCreate.discord=true"
    ng-class="{'no-animate': !lobbyCreate.searchString, 'selected': lobbyCreate.isSelected(lobbyCreate.mumble, option)}">
   <div class="circle"></div>
   <div class="tile-text">
-  	<img bo-src="option.value ? '/assets/img/mumble.svg' : '/assets/img/not-mumble.svg'">
+  	<img bo-src="option.image">
     <span bo-bind="option.title"></span>
     <span bo-bind="option.description"></span>
   </div>
 </md-grid-tile>
+
+<div class="discord-form"
+     ng-if="lobbyCreate.discord">
+
+  <h2>
+    <img src="/assets/img/logos/discord-logo-blurple.svg">
+    Discord Settings
+  </h2>
+
+  <p>
+    For each of your discord channels, click the invite
+    button&nbsp;<md-icon md-svg-icon="discord:invite"></md-icon> for that channel
+    and and copy a never-expiring invite link into the below input
+    fields.
+  </p>
+
+  <md-input-container>
+    <input type="text"
+           ng-model="lobbyCreate.lobbySettings.discord.redChannel"
+           pattern="https:\/\/discord.gg\/[a-zA-Z0-9]+"
+           placeholder="Red Team Channel Link">
+  </md-input-container>
+
+  <md-input-container>
+    <input type="text"
+           ng-model="lobbyCreate.lobbySettings.discord.bluChannel"
+           pattern="https:\/\/discord.gg\/[a-zA-Z0-9]+"
+           placeholder="Blu Team Channel Link">
+  </md-input-container>
+
+  <md-button
+     class="md-raised md-primary"
+     ng-disabled="!lobbyCreate.lobbySettings.discord.redChannel || !lobbyCreate.lobbySettings.discord.bluChannel"
+     ng-click="lobbyCreate.select(lobbyCreate.mumble, {value: 'discord'})">
+    Continue
+  </md-button>
+</div>

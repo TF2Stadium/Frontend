@@ -30,6 +30,7 @@ var logosBase = './logos/';
 var logoIcons = [
   {name: 'twitch', file: 'twitch.svg'},
   {name: 'steam', file: 'steam.svg'},
+  {name: 'discord', file: 'discord-logo-blurple.svg'},
 ];
 
 var classesBase = './icons/class/';
@@ -65,6 +66,7 @@ function registerIcons($mdIconProvider) {
 
   $mdIconProvider.icon('logo:mumble', requireImage('./mumble.svg'));
   $mdIconProvider.icon('logo:not-mumble', requireImage('./not-mumble.svg'));
+  $mdIconProvider.icon('discord:invite', requireImage('./icons/discord/invite-button.svg'));
 }
 
 /** @ngInject */
