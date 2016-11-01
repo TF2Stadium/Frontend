@@ -101,8 +101,71 @@
 <div id="slots"
      ng-show="lobbyPage.shouldShowLobbyInformation()">
   <div class="classes-title">
-    <h1>Blu</h1>
-    <h1>Red</h1>
+    <div class="team-title">
+      <md-button
+        class="edit-team-name"
+        aria-label="Edit Blu Team Name"
+        ng-if="!lobbyPage.editBluTeamName && (lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5) && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')"
+        ng-click="lobbyPage.editBluTeamName=true;lobbyPage.newBluTeamName='';"
+        ><md-icon md-svg-icon="material:edit"></md-icon></md-button>
+      <h1 ng-if="!lobbyPage.editBluTeamName"
+          ng-bind="lobbyPage.lobbyInformation.bluTeamName || 'Blu'"></h1>
+      <md-input-container
+        md-no-float
+        class="team-name-input"
+        ng-if="lobbyPage.editBluTeamName">
+        <input
+          autofocus
+          ng-model="lobbyPage.newBluTeamName"
+          aria-label="Blu team name input"
+          type="text"
+          placeholder="Blu team name"
+          ng-blur="lobbyPage.editBluTeamName=false;lobbyPage.setTeamName('blu', lobbyPage.newBluTeamName);"
+          ng-click="$event.stopPropagation()"
+          ng-keydown="$event.keyCode === 13 ? lobbyPage.editBluTeamName=false : ''; $event.keyCode === 13 ? lobbyPage.setTeamName('blu', lobbyPage.newBluTeamName) : ''"
+          maxlength="12">
+      </md-input-container>
+    </div>
+
+    <md-menu ng-if="($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator') && (lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5)"
+             class="lobby-leader-menu">
+      <md-button aria-label="Leader menu" ng-click="$mdOpenMenu($event)">
+        <md-icon md-svg-icon="material:menu"></md-icon>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ng-click="lobbyPage.shuffleTeams()">
+            Shuffle Teams
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>
+
+    <div class="team-title team-title-right">
+      <h1 ng-if="!lobbyPage.editRedTeamName"
+          ng-bind="lobbyPage.lobbyInformation.redTeamName || 'Red'"></h1>
+      <md-button
+        ng-if="!lobbyPage.editRedTeamName && (lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5) && ($root.userProfile.steamid==lobbyPage.lobbyInformation.leader.steamid || $root.userProfile.role=='administrator')"
+        class="edit-team-name"
+        aria-label="Edit Red Team Name"
+        ng-click="lobbyPage.editRedTeamName=true;lobbyPage.newRedTeamName='';"
+        ><md-icon md-svg-icon="material:edit"></md-icon></md-button>
+      <md-input-container
+        md-no-float
+        class="team-name-input"
+        ng-if="lobbyPage.editRedTeamName">
+        <input
+          autofocus
+          ng-model="lobbyPage.newRedTeamName"
+          aria-label="Red team name input"
+          type="text"
+          placeholder="Red team name"
+          ng-blur="lobbyPage.editRedTeamName=false;lobbyPage.setTeamName('red', lobbyPage.newRedTeamName);"
+          ng-click="$event.stopPropagation()"
+          ng-keydown="$event.keyCode === 13 ? lobbyPage.editRedTeamName=false : ''; $event.keyCode === 13 ? lobbyPage.setTeamName('red', lobbyPage.newRedTeamName) : ''"
+          maxlength="12">
+      </md-input-container>
+    </div>
   </div>
   <div ng-repeat="class in lobbyPage.lobbyInformation.classes track by class.class" class="class-row">
     <div aria-label="Join {{::team}} {{::class.class | stripSlotNameNumber}}"
@@ -114,7 +177,7 @@
       <div class="slot-button--container">
         <div ng-if="slot.filled">
           <md-button
-             ng-if="$root.userProfile.steamid==slot.player.steamid && lobbyPage.lobbyInformation.state < 5"
+             ng-if="$root.userProfile.steamid==slot.player.steamid && (lobbyPage.lobbyInformation.state > 0 && lobbyPage.lobbyInformation.state < 5)"
              class="leave-slot"
              aria-label="Leave Slot"
              ng-click="lobbyPage.leaveSlot()"

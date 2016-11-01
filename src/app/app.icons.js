@@ -13,6 +13,8 @@ var materialIconsBase = './icons/material/';
 var materialIcons = [
   {name: 'add', file: 'add.svg'},
   {name: 'clear', file: 'clear.svg'},
+  {name: 'menu', file: 'menu.svg'},
+  {name: 'edit', file: 'edit.svg'},
   {name: 'lock-closed-white', file: 'lock-closed-white.svg'},
   {name: 'error-red', file: 'error-red.svg'},
   {name: 'more-vert', file: 'more-vert.svg'},
