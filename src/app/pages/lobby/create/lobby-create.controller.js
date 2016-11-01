@@ -1,5 +1,6 @@
 /* @flow */
-import {isEmpty, isEqual, uniqWith, omit} from 'lodash';
+import {isEmpty, isEqual, uniqWith, uniqBy, omit} from 'lodash';
+import {property, identity} from 'lodash/fp';
 
 angular.module('tf2stadium.controllers')
   .controller('LobbyCreateController', LobbyCreateController);
@@ -32,6 +33,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   vm.showServers = false;
   vm.savedServers = {};
   vm.recentConfigurations = [];
+  vm.recentMaps = [];
   vm.savedConfigurations = [];
   vm.serverName = '';
   vm.servemeServer = {};
@@ -41,6 +43,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     Settings.getSettings((settings) => {
       vm.savedServers = angular.fromJson(settings.savedServers);
       vm.recentConfigurations = angular.fromJson(settings.recentConfigurations);
+      vm.recentMaps = angular.fromJson(settings.recentMaps).map(name => ({value: name}));
       vm.savedConfigurations = angular.fromJson(settings.savedConfigurations);
       vm.showServers = !isEmpty(vm.savedServers);
       vm.hasRecentConfigurations = !isEmpty(vm.recentConfigurations);
@@ -140,6 +143,9 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     } else {
       delete payload.discord;
     }
+
+    vm.recentMaps = uniqBy([{value: lobbySettings.map}].concat(vm.recentMaps), 'value').slice(0, 5);
+    Settings.set('recentMaps', angular.toJson(vm.recentMaps.map(property('value'))));
 
     LobbyCreate.create(payload, function (response) {
       if (!response.success) {
