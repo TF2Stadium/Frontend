@@ -69,8 +69,11 @@ to get started.
 
 When TF2Stadium began, matchmaking had not been formally
 announced. With matchmaking now having been released it has become 
-quite clear that whilst many players are happy to use it there are 
-some who still prefer to use lobbies. We want to make sure that
+quite clear that whilst many players are happy to use it there 
+are some who still prefer to use lobbies because of their enforcement 
+of the accepted competitive class meta through class limits, their use
+of whitelists used already in competitive play, and for the ability to 
+play other gamemodes such as Highlander. We want to make sure that
 everyone in the TF2 community is able to play the way they want 
 to which is why we've keep the site running even after the 
 introduction of matchmaking. 
