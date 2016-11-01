@@ -72,6 +72,13 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
     );
   });
 
+  LobbyService.subscribe('lobby-shuffled', $scope, function (e, {id}) {
+    var joined = LobbyService.getLobbyJoined();
+    if (joined && joined.id === id) {
+      LobbyService.setPlayerPreReady(false);
+    }
+  });
+
   $scope.$watch(LobbyService.getPlayerPreReady, function () {
     vm.playerPreReady = LobbyService.getPlayerPreReady();
   });
@@ -140,6 +147,9 @@ function LobbyPageController($q, $mdDialog, $scope, $state, $window,
   vm.leaveSlot = function () {
     LobbyService.leaveSlot(vm.lobbyInformation.id);
   };
+
+  vm.setTeamName = (team, name) => LobbyService.setTeamName(vm.lobbyInformation.id, team, name);
+  vm.shuffleTeams = () => LobbyService.shuffleTeams(vm.lobbyInformation.id);
 
   vm.delayedLaunch = function delayedLaunch(url, delay) {
     if (angular.isUndefined(delay)) {
