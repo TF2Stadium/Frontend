@@ -7,7 +7,6 @@
  * Lobby leaders may now set custom team names for their lobbies, however this will not (yet!) carry over into the server 
  * Recently used maps will now be saved and displayed at the top of the lobby creation list
 
-
 ## 06. July 2016
 
  * Save and reload previously used lobby configurations
