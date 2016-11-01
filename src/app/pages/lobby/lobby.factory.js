@@ -238,6 +238,10 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout,
     });
   });
 
+  Websocket.onJSON('lobbyShuffled', ({id}) => {
+    $rootScope.$emit('lobby-shuffled', {id});
+  });
+
   Websocket.onJSON('lobbyData', (newLobby) => {
     var id = newLobby.id;
 
@@ -311,11 +315,12 @@ function LobbyService($rootScope, $state, $mdDialog, $timeout: AngularJSTimeout,
     Websocket.emitJSON('lobbyJoin', payload);
   };
 
-  factory.leaveSlot = function (lobbyID) {
-    var payload = { 'id': lobbyID };
-
-    Websocket.emitJSON('lobbyLeave', payload);
+  factory.leaveSlot = function (id) {
+    Websocket.emitJSON('lobbyLeave', {id});
   };
+
+  factory.setTeamName = (id, team, name) => Websocket.emitJSON('lobbySetTeamName', {id, team, name});
+  factory.shuffleTeams = (id) => Websocket.emitJSON('lobbyShuffle', {id});
 
   factory.goToLobby = function (lobby) {
     $state.go('lobby-page', {lobbyID: lobby});

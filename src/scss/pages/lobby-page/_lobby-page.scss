@@ -11,6 +11,24 @@
   }
 }
 
+.lobby-leader-menu {
+  width: 36px;
+  min-width: 36px;
+  margin: 0 -18px 6px;
+  padding: 0;
+
+  >button {
+    width: 36px;
+    min-width: 36px;
+    margin: 0;
+    padding: 0;
+
+    svg {
+      fill: #666;
+    }
+  }
+}
+
 .lobbypage-text {
   @include flex (row, space-between, center);
   flex-wrap: wrap;
@@ -69,7 +87,6 @@
 }
 
 #lobby-join-information {
-
   .row {
     @include flex(row, center, center);
     text-align: center;
@@ -99,10 +116,38 @@
 }
 
 .classes-title {
-  @include flex (row, center, stretch);
+  @include flex (row, center, center);
 
-  h1 {
-    margin: $padding-small $class-button-width/2 + $padding-medium;
+  .team-title {
+    margin: $padding-small $class-button-width/2 + $padding-small;
+    min-width: 200px;
+    text-align: right;
+    line-height: 1em;
+
+    &.team-title-right {
+      text-align: left;
+    }
+
+    h1, .edit-team-name {
+      display: inline-block;
+      margin: 0;
+      padding: 0;
+    }
+
+    >.edit-team-name {
+      margin: 0;
+      min-width: 0;
+      vertical-align: text-bottom;
+
+      svg {
+        fill: #666;
+      }
+    }
+
+    >.team-name-input {
+      margin: 0;
+      width: 150px;
+    }
   }
 }
 
