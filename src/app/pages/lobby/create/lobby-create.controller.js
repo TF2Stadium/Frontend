@@ -1,5 +1,5 @@
 /* @flow */
-import {isEmpty, isEqual, uniqWith, uniqBy, omit} from 'lodash';
+import {isEmpty, isEqual, uniqWith, uniqBy, omit, get} from 'lodash';
 import {property, identity} from 'lodash/fp';
 
 angular.module('tf2stadium.controllers')
@@ -43,7 +43,9 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     Settings.getSettings((settings) => {
       vm.savedServers = angular.fromJson(settings.savedServers);
       vm.recentConfigurations = angular.fromJson(settings.recentConfigurations);
-      vm.recentMaps = angular.fromJson(settings.recentMaps).map(name => ({value: name}));
+      vm.recentMaps = angular.fromJson(
+        get(settings, 'recentMaps', [])
+      ).map(name => ({value: name}));
       vm.savedConfigurations = angular.fromJson(settings.savedConfigurations);
       vm.showServers = !isEmpty(vm.savedServers);
       vm.hasRecentConfigurations = !isEmpty(vm.recentConfigurations);
