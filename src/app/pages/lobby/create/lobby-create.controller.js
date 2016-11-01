@@ -137,16 +137,15 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     Settings.set('recentConfigurations',
                  angular.toJson(newRecentConfigurations.slice(0, 8)));
 
+    vm.recentMaps = uniqBy([{value: lobbySettings.map}].concat(vm.recentMaps), 'value').slice(0, 5);
+    Settings.set('recentMaps', angular.toJson(vm.recentMaps.map(property('value'))));
+
     const payload = angular.copy(lobbySettings);
     if (payload.mumbleRequired === 'discord') {
       payload.mumbleRequired = false;
     } else {
       delete payload.discord;
     }
-
-    vm.recentMaps = uniqBy([{value: lobbySettings.map}].concat(vm.recentMaps), 'value').slice(0, 5);
-    Settings.set('recentMaps', angular.toJson(vm.recentMaps.map(property('value'))));
-
     LobbyCreate.create(payload, function (response) {
       if (!response.success) {
         vm.requestSent = false;
