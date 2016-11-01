@@ -71,15 +71,12 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     // different options and their security implications.
     var server = vm.savedServers[name];
     vm.lobbySettings.server = server.url;
-    // vm.lobbySettings.rconpwd = server.password;
+    vm.lobbySettings.rconpwd = server.password;
   };
 
-  vm.saveServer = function (name) {
-    vm.savedServers[name] = {
-      url: vm.lobbySettings.server,
-      // password: vm.lobbySettings.rconpwd
-    };
-
+  vm.saveServer = function (name, url, password) {
+    console.log('save', name, url, password);
+    vm.savedServers[name] = {url, password};
     Settings.set('savedServers', angular.toJson(vm.savedServers), function () {
       Notifications.toast({
         message: 'Server saved.',
@@ -89,10 +86,8 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   };
 
   vm.updateTwitchRestriction = function () {
-    vm.lobbySettings.twitchWhitelistSubs =
-      vm.twitchRestriction === 'subs';
-    vm.lobbySettings.twitchWhitelistFollows =
-      vm.twitchRestriction === 'follows';
+    vm.lobbySettings.twitchWhitelistSubs = (vm.twitchRestriction === 'subs');
+    vm.lobbySettings.twitchWhitelistFollows = (vm.twitchRestriction === 'follows');
   };
 
   var getCurrentWizardStep = function () {

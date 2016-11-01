@@ -159,9 +159,9 @@
     <md-checkbox ng-model="showPassword">Show password</md-checkbox>
 
     <md-checkbox ng-model="saveServer">Save server address</md-checkbox>
+    <md-checkbox ng-show="saveServer" ng-model="savePassword">Save RCON password</md-checkbox>
 
-    <span class="save-server-form"
-          ng-if="saveServer">
+    <span class="save-server-form" ng-if="saveServer">
       <md-input-container md-no-float>
         <input type="text"
                md-maxlength="50"
@@ -171,7 +171,7 @@
 
       <md-button
          ng-class="{'md-raised md-primary': true}"
-         ng-click="lobbyCreate.saveServer(lobbyCreate.serverName)"
+         ng-click="lobbyCreate.saveServer(lobbyCreate.serverName, lobbyCreate.lobbySettings.server, savePassword ? lobbyCreate.lobbySettings.rconpwd : '')"
          ng-disabled="!lobbyCreate.lobbySettings.server || !lobbyCreate.serverName">
         Save Server
       </md-button>
