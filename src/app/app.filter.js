@@ -9,7 +9,8 @@ angular.module('tf2stadium.filters')
   .filter('ifNumeric', ifNumeric)
   .filter('secondsToMinutes', secondsToMinutes_AngularWrapper)
   .filter('unique', unique)
-  .filter('greaterThan', greaterThan);
+  .filter('greaterThan', greaterThan)
+  .filter('passwordDisplay', passwordDisplay_AngularWrapper);
 
 export function capitalize(input: ?string) {
   if (angular.isUndefined(input) || !input || input === '') {
@@ -135,4 +136,13 @@ function greaterThan() {
       return item[prop] > val;
     });
   };
+}
+
+export function passwordDisplay(password: string) {
+  return password.replace(/./g, '•');
+}
+
+/** @ngInject */
+function passwordDisplay_AngularWrapper() {
+  return passwordDisplay;
 }
