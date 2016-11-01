@@ -1,6 +1,6 @@
 /* @flow */
 import * as audio from '../../audio';
-import {pick} from 'lodash';
+import {pick, get} from 'lodash';
 
 angular
   .module('tf2stadium.controllers')
@@ -174,7 +174,9 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
       return {
         name: name,
         url: server.url,
-        password: server.password,
+        // settings blobs from before we added password saving might
+        // not have a password property
+        password: get(server, 'password', ''),
       };
     });
   }
