@@ -98,4 +98,5 @@ on the other team.
 
 If you need to leave the game at any point say "!sub" in chat - it
 will have an immediate effect of reporting yourself. Please use it
-only in case of emergency, when you can't finish the game otherwise.
+only responsibly and not use it as a justification to join lobbies 
+you don't think you can finish.
