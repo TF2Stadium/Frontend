@@ -65,17 +65,18 @@ As always the best way to get to know the formats and the way
 competitive is played is just by playing, and lobbies are a great way
 to get started.
 
-## Why make this when matchmaking is coming?
+## Why keep the site up when matchmaking is here?
 
 When TF2Stadium began, matchmaking had not been formally
-announced. After the announcement, the decision was made to continue
-the project regardless to ensure proper gameplay free of trolls and
-hackers.
-
-No one really knows how matchmaking will turn out when it eventually
-launches. We want to make sure that no matter what happens, those who
-want to make the step from public play to competitive play will always
-have a place to learn, improve, and have fun.
+announced. With matchmaking now having been released it has become 
+quite clear that whilst many players are happy to use it there 
+are some who still prefer to use lobbies because of their enforcement 
+of the accepted competitive class meta through class limits, their use
+of whitelists used already in competitive play, and for the ability to 
+play other gamemodes such as Highlander. We want to make sure that
+everyone in the TF2 community is able to play the way they want 
+to which is why we've keep the site running even after the 
+introduction of matchmaking. 
 
 ## How do I report people during a game?
 
