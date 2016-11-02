@@ -96,7 +96,7 @@ on the other team.
 
 ## Can I leave a game in progress?
 
-If you need to leave the game at any point say "!sub" in chat - it
+If you need to leave the game at any point type "!sub" in chat - it
 will have an immediate effect of reporting yourself. Please use it
-only responsibly and not use it as a justification to join lobbies 
+responsibly and not as a justification to join lobbies 
 you don't think you can finish.
