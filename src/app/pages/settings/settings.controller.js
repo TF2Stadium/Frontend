@@ -123,7 +123,7 @@ function SettingsPageController($rootScope, $scope, $mdEditDialog,
           if (s.name === server.name) {
             var newProps = {};
             newProps[field] = newValue;
-            return angular.extend({}, server, newProps);
+            return Object.assign({}, server, newProps);
           } else {
             return s;
           }

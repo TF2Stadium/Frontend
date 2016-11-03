@@ -137,7 +137,7 @@ export function NotificationsFactory(
   };
 
   notificationsService.toast = function (options: Object) {
-    var toastOptions = angular.extend({}, toastDefault, options);
+    var toastOptions = Object.assign({}, toastDefault, options);
 
     $mdToast
       .show(toastOptions)

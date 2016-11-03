@@ -164,7 +164,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   };
 
   vm.rentServeme = function rentServeme(startTime, endTime, server) {
-    var settings = angular.extend({}, vm.lobbySettings, {
+    var settings = Object.assign({}, vm.lobbySettings, {
       serverType: 'serveme',
       serveme: {
         startsAt: startTime,
@@ -186,7 +186,7 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   };
 
   vm.rentStored = function rentStored(id) {
-    var settings = angular.extend({}, vm.lobbySettings, {
+    var settings = Object.assign({}, vm.lobbySettings, {
       serverType: 'storedServer',
       server: id + '',
     });
