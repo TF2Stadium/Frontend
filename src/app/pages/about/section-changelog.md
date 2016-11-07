@@ -1,6 +1,14 @@
 # Changelog
 
-## 6. July 2016
+## 31. October 2016
+
+ * *Lobby Shuffling*: lobby leaders can shuffle lobbies, randomising team but not class of players
+ * *Discord Lobbies*: lobby leaders may now specify that the lobby use their own Discord channels instead of Mumble
+ * Lobby leaders may now set custom team names for their lobbies, however this will not (yet!) carry over into the server 
+ * Recently used maps will now be saved and displayed at the top of the lobby creation list
+ * Users now have the option to save RCON passwords along with saved server addresses
+
+## 06. July 2016
 
  * Save and reload previously used lobby configurations
  * Various graphical and UI fixes, code cleanup
@@ -13,7 +21,7 @@
  * Add error logging (via Sentry)
  * Fix hiding lobby-create fab for logged out users
  * Hover chat timestamps (or player's name if you have timestamps
-   disabled) to get a message's full date.
+   disabled) to get a message's full date
 
 ## 28. April 2016
 
