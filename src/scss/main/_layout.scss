@@ -224,6 +224,10 @@ body {
   //padding-left 5px in #main-content due to shadow
   margin: 0 $padding-medium - 5px 0 0;
   padding: 0;
+
+  &.lobby-create-sidebar-links {
+    margin-top: 1em;
+  }
 }
 
 .sidebar-link {
