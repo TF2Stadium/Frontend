@@ -100,6 +100,7 @@ function LobbyCreate() {
         title: 'Map',
         filterable: true,
         allowCustomInput: true,
+        searchLabel: 'Enter map name',
         options: [
           {
             value: 'cp_badlands',
@@ -249,6 +250,7 @@ function LobbyCreate() {
         title: 'Whitelist',
         filterable: true,
         allowCustomInput: true,
+        searchLabel: 'Enter whitelist.tf ID',
         options: [
           {
             value: 'competitive_6v6',

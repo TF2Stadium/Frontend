@@ -270,6 +270,13 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
     return settingsGroup && settingsGroup.allowCustomInput;
   };
 
+  vm.searchBoxPlaceholder = () => {
+    const settingsGroup = lobbySettingsList[getCurrentWizardStep().groupKey];
+    return settingsGroup.searchLabel || (
+      `Search${settingsGroup.allowCustomInput ? ' or Input' : ''}...`
+    );
+  };
+
   vm.shouldShowCustomOption = function (searchStr, options) {
     searchStr = vm.searchString && vm.searchString.toLowerCase();
 

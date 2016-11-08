@@ -1,7 +1,4 @@
-<div id="sidebar-links">
-  <h1 class="steps-title">
-    Steps
-  </h1>
+<div id="sidebar-links" class="lobby-create-sidebar-links">
   <md-button class="sidebar-link"
     ng-class="{'active' : $root.currentState===step.name, 'already-filled' : wizardSteps.isAlreadyFilled(step)}"
     ng-repeat="step in wizardSteps.steps"
