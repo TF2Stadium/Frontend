@@ -103,6 +103,15 @@ body {
       }
     }
 
+    &.steam-button {
+      padding: 0;
+
+      md-icon {
+        margin: 0 5px;
+        height: 2.1em;
+      }
+    }
+
     &.steam-login {
       width: 154px;
 
