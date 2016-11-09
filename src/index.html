@@ -127,6 +127,14 @@
               </md-button>
 
               <md-button
+                href="https://steamcommunity.com/groups/TF2StadiumLobbies"
+                aria-label="Join our Steam Group!"
+                target="_blank"
+                class="steam-button">
+                <md-icon md-svg-icon="logo:steam"></md-icon>
+              </md-button>
+
+              <md-button
                  class="player-button"
                  ng-if="$root.userProfile.steamid"
                  ui-sref="user-profile({userID: $root.userProfile.steamid})"
