@@ -254,6 +254,18 @@ module.exports = {
       }),
     }),
     new HtmlWebpackPlugin({
+      template: 'maintenance.html',
+      filename: 'maintenance.html',
+      hash: true,
+      minify: {
+        collapseWhitespace: true,
+        minifyCSS: true,
+        minifyJS: true,
+      },
+      inject: false,
+      excludeChunks: ['vendor', 'app'],
+    }),
+    new HtmlWebpackPlugin({
       template: 'index.html',
       hash: true,
       minify: {
