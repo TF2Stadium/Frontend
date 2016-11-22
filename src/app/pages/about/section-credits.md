@@ -80,7 +80,7 @@ without taking community donations if not for Tragic, and we really
 appreciate the generous support he gives us. If you're in the market
 for a TF2 server (or other game servers like Minecraft and
 Counterstrike, among others), please show your appreciation by using
-coupon code *STADIUM* to get 35% off recurring for life!
+coupon code *BRAWL* to get 35% off recurring for life!
 
 ## Voice-overs
 
