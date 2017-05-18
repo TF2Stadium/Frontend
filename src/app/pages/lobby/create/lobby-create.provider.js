@@ -92,6 +92,9 @@ function LobbyCreate() {
           },{
             value: 'debug',
             title: 'Debug',
+          },{
+            value: 'prolander',
+            title: 'Prolander',
           },
         ],
       },
@@ -130,45 +133,56 @@ function LobbyCreate() {
           },{
             value: 'koth_product_rc8',
             '6s': true,
+            'prolander': true,
             highlander: true,
             important: true,
           },{
             value: 'pl_upward',
+            'prolander': true,
             important: true,
             highlander: true,
           },{
             value: 'pl_badwater',
+            'prolander': true,
             important: true,
             highlander: true,
           },{
             value: 'pl_borneo',
+            'prolander': true,
             highlander: true,
           },{
             value: 'pl_swiftwater_ugc',
+            'prolander': true,
             highlander: true,
           },{
             value: 'pl_barnblitz_pro6',
+            'prolander': true,
             highlander: true,
           },{
             value: 'cp_steel',
             highlander: true,
           },{
             value: 'koth_lakeside_final',
+            'prolander': true,
             highlander: true,
           },{
             value: 'koth_ramjam_rc1',
+            'prolander': true,
             highlander: true,
           },{
             value: 'koth_badlands',
+            'prolander': true,
             '4v4': true,
           },{
             value: 'koth_highpass_rc1a',
+            'prolander': true,
             '4v4': true,
           },{
             value: 'cp_alamo',
             '4v4': true,
           },{
             value: 'koth_sandstone_pro_rc1',
+            'prolander': true,
             '4v4': true,
           },{
             value: 'cp_warmfrost_rc1',
@@ -178,6 +192,7 @@ function LobbyCreate() {
             '4v4': true,
           },{
             value: 'koth_airfield_b7',
+            'prolander': true,
             '4v4': true,
           },{
             value: 'ctf_ballin_sky',
@@ -194,6 +209,7 @@ function LobbyCreate() {
           },{
             value: 'koth_ultiduo_r_b7',
             important: true,
+            'prolander': true,
             'ultiduo': true,
           },
         ],
@@ -241,6 +257,11 @@ function LobbyCreate() {
             title: 'bball.tf',
             description: '',
             bball: true,
+          },{
+            value: 'rgl',
+            title: 'RGL.gg',
+            description: '',
+            'prolander': true,
           },
         ],
         dependsOn: [ 'formats' ],
