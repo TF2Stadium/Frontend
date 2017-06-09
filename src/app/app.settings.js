@@ -23,6 +23,7 @@ function SettingsConfigBlock(SettingsProvider) {
       '4v4':          {name: '4v4'},
       Bball:          {name: 'Bball'},
       Ultiduo:        {name: 'Ultiduo'},
+      Prolander:      {name: 'Prolander'},
     },
     gamemodes: {
       cp:             {name: 'Control Points'},
