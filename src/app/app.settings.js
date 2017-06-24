@@ -136,8 +136,12 @@ function Settings() {
     var settings = settingsProvider.settings;
     var alreadyLoadedFromBackend = false;
 
-    for (var settingKey of Object.keys(localStorage)) {
-      settings[settingKey] = localStorage.getItem(settingKey);
+    for (const [key, val] of Object.entries(localStorage)) {
+      if (key === 'filtersEnabled') {
+        settings[key] = (val === 'true');
+      } else {
+        settings[key] = val;
+      }
     }
 
     $rootScope.$emit('settings-updated');
@@ -182,25 +186,29 @@ function Settings() {
 
       localStorage.setItem(key, newValue);
 
-      Websocket.emitJSON('playerSettingsSet',
-                         // Backend only accepts strings!
-                         {key: key.toString(), value: newValue.toString()},
-                         function (response) {
-                           if (response.success) {
-                             $log.log('Setting "' + key + '" saved correctly on the backend!');
-                             deferred.resolve(response);
-                           } else {
-                             if (revertOnFail) {
-                               settings[key] = oldValue;
-                               $rootScope.$emit('settings-updated');
-                             }
+      if ($rootScope.userProfile.steamid) {
+        Websocket.emitJSON('playerSettingsSet',
+                           // Backend only accepts strings!
+                           {key: key.toString(), value: newValue.toString()},
+                           function (response) {
+                             if (response.success) {
+                               $log.log('Setting "' + key + '" saved correctly on the backend!');
+                               deferred.resolve(response);
+                             } else {
+                               if (revertOnFail) {
+                                 settings[key] = oldValue;
+                                 $rootScope.$emit('settings-updated');
+                               }
 
-                             $log.log('Error setting key ' + key + ' with value ' +
-                                      newValue + '. Reason: ' + response.message);
-                             deferred.reject(response);
-                           }
-                           callback(response);
-                         });
+                               $log.log('Error setting key ' + key + ' with value ' +
+                                        newValue + '. Reason: ' + response.message);
+                               deferred.reject(response);
+                             }
+                             callback(response);
+                           });
+      } else {
+        deferred.resolve();
+      }
 
       return deferred.promise;
     };
