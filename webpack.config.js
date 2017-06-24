@@ -85,7 +85,7 @@ var ext = (isDev ? '' : '.min') + '.js';
 
 if (process.env.BUILD_QUIET !== 'true') {
   console.log('Using config file:', configFile);
-  console.log('Build type:', isDev ? 'development':'production');
+  console.log('Build type:', isDev ? 'development' : 'production');
 }
 
 module.exports = {
@@ -121,6 +121,10 @@ module.exports = {
       'angular-bindonce',
       'angular-ui-validate',
       '../node_modules/ng-media-events/src/ng-media-events.js',
+      'react',
+      'lodash',
+      'babel-polyfill',
+      'xss-filters',
       'clipboard',
       'kefir',
       'moment',
