@@ -1,6 +1,6 @@
 /* @flow */
-require('./header.html');
-require('./lobby-list.html');
+import './header.html';
+import './lobby-list.html';
 
 angular
   .module('tf2stadium.controllers')
