@@ -53,17 +53,12 @@ function LobbyListController($rootScope, $scope, LobbyService, Settings, User) {
     update();
   });
 
-  vm.shouldShowFilters = function () {
-    var shouldShow;
-    Settings.getSettings(function (settings) {
-      shouldShow = settings.filtersEnabled;
-    });
-    return shouldShow;
-  };
-
-  vm.showFilters = function () {
-    Settings.set('filtersEnabled', true);
-  };
+  const updateSettings = ()  => Settings.getSettings((settings) => {
+    this.filtersEnabled = !!settings.filtersEnabled;
+  });
+  updateSettings();
+  const handler = $rootScope.$on('settings-updated', updateSettings);
+  $scope.$on('destroy', handler);
 
   vm.join = function (lobby, team, position, event) {
     event.preventDefault();
