@@ -66,7 +66,7 @@
       </md-tab>
     </md-tabs>
 
-    <form name="chatForm">
+    <form name="chatForm" ng-if="$root.userProfile.steamid">
       <!-- Yes, this md-is-error is almost the default invalid
            behavior, but a) we don't want an error if the field is empty,
            and b) without explicitly specifying it, the md-input-container
