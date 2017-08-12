@@ -4,7 +4,7 @@
 
 ### Project Leader
 
-[Kevin “IsPwn” Carpenter](https://steamcommunity.com/profiles/76561198027325929)
+[Kevin “IsPwn”](https://steamcommunity.com/profiles/76561198027325929)
 
 ### Graphic Design
 
@@ -36,7 +36,7 @@
 * [“Rand”](https://steamcommunity.com/profiles/76561198043745557)
 * [“Crayboff”](https://steamcommunity.com/profiles/76561198000009691)
 * [“Gcommer”](https://steamcommunity.com/profiles/76561197993836391)
-* [Kevin “IsPwn” Carpenter](https://steamcommunity.com/profiles/76561198027325929)
+* [Kevin “IsPwn”](https://steamcommunity.com/profiles/76561198027325929)
 * [“Tino_”](https://steamcommunity.com/profiles/76561198020662852)
 
 ### Anti-Cheat
@@ -59,7 +59,7 @@
 
 ### Public Relations
 
-* [Kevin “IsPwn” Carpenter](https://steamcommunity.com/profiles/76561198027325929)
+* [Kevin “IsPwn”](https://steamcommunity.com/profiles/76561198027325929)
 * [“Digresser”](https://steamcommunity.com/profiles/76561198016426367)
 * [Jay “Vanguard” Fothergill](https://steamcommunity.com/profiles/76561198047511390)
 
