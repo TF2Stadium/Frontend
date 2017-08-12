@@ -22,7 +22,7 @@
 ### Backend Coding
 
 * [Vibhav “vibhavp” Pant](https://steamcommunity.com/profiles/76561198038988384)
-* [Zygi “Nonagon” Straznickas](https://steamcommunity.com/profiles/76561197999073985)
+* [“Nonagon”](https://steamcommunity.com/profiles/76561197999073985)
 * \+ other contributors
 
 ### Development Operations
