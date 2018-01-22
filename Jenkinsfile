@@ -1,6 +1,8 @@
 #!/usr/bin/env groovy
 
 pipeline {
+	agent
+
   options {
     timestamps()
   }
