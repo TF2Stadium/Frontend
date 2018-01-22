@@ -34,10 +34,26 @@ pipeline {
 						sleep(5)
 					}
 				}
+				stage('Test 2d') {
+					steps {
+						sleep(5)
+					}
+				}
+				stage('Test 2e') {
+					steps {
+						sleep(5)
+					}
+				}
 			}
     }
 
 		stage('Test 3') {
+      steps {
+        sleep(3)
+      }
+    }
+
+		stage('Test 4') {
       steps {
         sleep(3)
       }
