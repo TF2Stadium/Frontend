@@ -17,23 +17,23 @@ pipeline {
 
 		stage('Test 2') {
 			parallel {
-			stage('Test 2a') {
-      steps {
-        sleep(3)
-      }
-			}
+				stage('Test 2a') {
+					steps {
+						sleep(3)
+					}
+				}
 
-			stage('Test 2b') {
-      steps {
-        sleep(3)
-      }
-			}
+				stage('Test 2b') {
+					steps {
+						sleep(3)
+					}
+				}
 
-			stage('Test 2c') {
-      steps {
-        sleep(5)
-      }
-			}
+				stage('Test 2c') {
+					steps {
+						sleep(5)
+					}
+				}
 			}
     }
 
