@@ -82,6 +82,7 @@ require('./pages/lobby/create/header.controller');
 require('./pages/lobby/create/lobby-create.controller');
 require('./pages/lobby/create/wizard-steps.controller');
 require('./pages/lobby/list/lobby-list.controller');
+require('./pages/tournament/list/tournament-list.controller');
 require('./pages/lobby/list/sub-list.controller');
 require('./pages/user-profile/user-profile.controller');
 

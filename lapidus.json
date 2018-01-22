@@ -1,0 +1,15 @@
+{
+  "backends": [{
+    "type": "postgresql",
+    "host": "127.0.0.1",
+    "user": "tf2stadium",
+    "database": "tf2stadium_prod",
+    "password": "dickbutt",
+    "slot": "lapidus_slot2"
+  }],
+  "plugins": {
+    "debug": {
+      "enabled": true
+    }
+  }
+}

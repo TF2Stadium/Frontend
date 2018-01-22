@@ -24,6 +24,16 @@ export default function routeConfig(
         },
       },
     })
+    .state('tournament-list', {
+      url: '/tournaments',
+      views: {
+        'content': {
+          templateUrl: 'app/pages/tournament/list/tournament-list.html',
+          controller: 'LobbyListController',
+          controllerAs: 'lobbyList',
+        },
+      },
+    })
     .state('lobby-create', {
       url: '/create',
       views: {
