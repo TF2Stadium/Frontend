@@ -43,10 +43,4 @@ pipeline {
       }
     }
   }
-
-  post {
-    always {
-      cleanupAndNotify(currentBuild.currentResult)
-    }
-  }
 }
