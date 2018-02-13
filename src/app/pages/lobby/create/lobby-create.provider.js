@@ -338,7 +338,7 @@ function LobbyCreate() {
             bballtf: true,
           },{
             value: '7082',
-            title: "RGL Prolander (Season 1)",
+            title: 'RGL Prolander (Season 1)',
             rgl: true,
             'prolander': true,
           },
