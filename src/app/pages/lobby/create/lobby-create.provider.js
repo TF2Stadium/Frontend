@@ -115,6 +115,7 @@ function LobbyCreate() {
             value: 'cp_process_final',
             important: true,
             '6s': true,
+            highlander: true,
           },{
             value: 'cp_snakewater_final1',
             '6s': true,
@@ -126,6 +127,16 @@ function LobbyCreate() {
           },{
             value: 'cp_metalworks_rc7',
             '6s': true,
+            highlander: true,
+          },{
+            value: 'cp_warmfront'
+            '6s': true,
+            highlander: true,
+          },{
+            value: 'cp_vanguard'
+            '6s': true,
+            'prolander': true,
+            highlander: true,
           },{
             value: 'cp_sunshine_rc9',
             '6s': true,
@@ -137,12 +148,16 @@ function LobbyCreate() {
             highlander: true,
             important: true,
           },{
+            value: 'koth_ashville_rc1'
+            '6s': true,
+            highlander: true,
+          },{
             value: 'pl_upward',
             'prolander': true,
             important: true,
             highlander: true,
           },{
-            value: 'pl_badwater',
+            value: 'pl_badwater_pro_v9',
             'prolander': true,
             important: true,
             highlander: true,
@@ -155,8 +170,15 @@ function LobbyCreate() {
             'prolander': true,
             highlander: true,
           },{
+            value: 'pl_millstone_ugc_7'
+            'prolander': true,
+            highlander: true,
+          },{
             value: 'pl_barnblitz_pro6',
             'prolander': true,
+            highlander: true, 
+          },{
+            value: 'pl_vigil_rc5',
             highlander: true,
           },{
             value: 'cp_steel',
@@ -169,6 +191,10 @@ function LobbyCreate() {
             value: 'koth_ramjam_rc1',
             'prolander': true,
             highlander: true,
+          },{
+            value: 'koth_bagel_b4'
+            '6s': true,
+            '4v4': true,
           },{
             value: 'koth_badlands',
             'prolander': true,
@@ -261,7 +287,9 @@ function LobbyCreate() {
             value: 'rgl',
             title: 'RGL.gg',
             description: '',
+            '6s': true
             'prolander': true,
+            highlander: true,
           },
         ],
         dependsOn: [ 'formats' ],
@@ -277,14 +305,20 @@ function LobbyCreate() {
             value: 'competitive_6v6',
             title: 'Global Whitelist 6v6',
             etf2l: true,
-            esea: true,
+            rgl: true,
             ugc: true,
             ozfortress: true,
+            tfcl: true,
             '6s': true,
           },{
             value: 'ETF2L_9v9',
             title: 'ETF2L Highlander',
             etf2l: true,
+            highlander: true,
+          },{
+            value: 'RGL_9v9',
+            title: 'RGL Highlander',
+            rgl: true,
             highlander: true,
           },{
             value: 'ETF2L_6v6',
@@ -300,6 +334,11 @@ function LobbyCreate() {
             value: 'UGC_6v6',
             title: 'UGC 6v6',
             ugc: true,
+            '6s': true,
+          },{
+            value: 'RGL_6v6',
+            title: 'RGL 6v6',
+            rgl: true,
             '6s': true,
           },{
             value: 'UGC_4v4',
@@ -337,8 +376,8 @@ function LobbyCreate() {
             bball: true,
             bballtf: true,
           },{
-            value: '7082',
-            title: 'RGL Prolander (Season 1)',
+            value: '9685',
+            title: 'RGL Prolander (Season 6)',
             rgl: true,
             'prolander': true,
           },
