@@ -18,7 +18,7 @@
   <p ng-if="lobbyCreate.storedServers !== null"
      ng-bind-template="{{lobbyCreate.storedServers.length}} available"></p>
 </div>
-<div class="tile-form no-animate serveme-ad"
+<div class="serveme-ad"
      ng-show="lobbyCreate.serverState === 'stored'">
   <p>
     Want a TF2 server of your own? Buy
@@ -29,6 +29,22 @@
 </div>
 <div class="tile-form no-animate"
      ng-show="lobbyCreate.serverState === 'stored'">
+  <md-list class="md-dense" flex id="serveme-list">
+    <md-list-item
+       class="serveme-list-item"
+       aria-label="{{server.name}}"
+       ng-repeat-start="server in lobbyCreate.servemeServers.servers"
+       ng-click="lobbyCreate.rentServeme(lobbyCreate.servemeServers.startsAt, lobbyCreate.servemeServers.endsAt, server)">
+      <img class="emote serveme-list-icon"
+           ng-src="{{lobbyCreate.servemeRegionToFlag[server.flag]}}"
+           height="16"
+           width="16"
+           alt="{{server.flag}}"
+           title="{{server.flag}}"/>
+      <span ng-bind="server.name"></span>
+    </md-list-item>
+    <md-divider ng-repeat-end ng-if="$index % 2" style="clear:both"></md-divider>
+  </md-list>
   <ul class="rent-servers-list"
        ng-if="lobbyCreate.storedServers.length > 0">
     <li ng-repeat="server in lobbyCreate.storedServers">
@@ -56,7 +72,7 @@
   <p ng-if="lobbyCreate.servemeServers !== null"
      ng-bind-template="{{lobbyCreate.servemeServers.servers.length}} available"></p>
 </div>
-<div class="tile-form no-animate serveme-ad"
+<div class="serveme-ad"
      ng-show="lobbyCreate.serverState === 'serveme'">
   <p>
     Donate to <a href="https://serveme.tf"
@@ -111,7 +127,7 @@
   <h2>Use Your Own Server</h2>
 </div>
 
-<div class="tile-form no-animate serveme-ad"
+<div class="serveme-ad"
      ng-show="!lobbyCreate.serverState">
   <p>
     Want a TF2 server of your own? Buy
