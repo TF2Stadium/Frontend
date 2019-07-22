@@ -129,11 +129,11 @@ function LobbyCreate() {
             '6s': true,
             highlander: true,
           },{
-            value: 'cp_warmfront'
+            value: 'cp_warmfront',
             '6s': true,
             highlander: true,
           },{
-            value: 'cp_vanguard'
+            value: 'cp_vanguard',
             '6s': true,
             'prolander': true,
             highlander: true,
@@ -148,7 +148,7 @@ function LobbyCreate() {
             highlander: true,
             important: true,
           },{
-            value: 'koth_ashville_rc1'
+            value: 'koth_ashville_rc1',
             '6s': true,
             highlander: true,
           },{
@@ -170,13 +170,13 @@ function LobbyCreate() {
             'prolander': true,
             highlander: true,
           },{
-            value: 'pl_millstone_ugc_7'
+            value: 'pl_millstone_ugc_7',
             'prolander': true,
             highlander: true,
           },{
             value: 'pl_barnblitz_pro6',
             'prolander': true,
-            highlander: true, 
+            highlander: true,
           },{
             value: 'pl_vigil_rc5',
             highlander: true,
@@ -192,7 +192,7 @@ function LobbyCreate() {
             'prolander': true,
             highlander: true,
           },{
-            value: 'koth_bagel_b4'
+            value: 'koth_bagel_b4',
             '6s': true,
             '4v4': true,
           },{
@@ -287,7 +287,7 @@ function LobbyCreate() {
             value: 'rgl',
             title: 'RGL.gg',
             description: '',
-            '6s': true
+            '6s': true,
             'prolander': true,
             highlander: true,
           },
