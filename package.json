@@ -44,7 +44,7 @@
     "babel-types": "6.16.0",
     "clipboard": "1.5.13",
     "kefir": "3.5.2",
-    "lodash": "4.16.4",
+    "lodash": "4.17.15",
     "markdown-loader": "0.1.7",
     "moment": "2.15.1",
     "ng-media-events": "1.0.1",
