@@ -15,7 +15,7 @@
 $animation-duration: 2;
 $set-delay: 0;
 @mixin animation($names, $duration: $animation-duration, $delay: null, $stagger: null) {
-  $animation:; //declare variable
+  $animation: ""; //declare variable
 
   // Doing it this way so $delay can be null and not show up in the property
   @if $delay {
