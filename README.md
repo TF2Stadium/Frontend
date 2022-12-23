@@ -8,10 +8,38 @@ It uses [AngularJS](https://angularjs.org/) as its framework,
 [webpack](https://webpack.github.io/) for builds, and
 [Karma](https://karma-runner.github.io/) for testing.
 
-## Usage
+## Developer Quickstart
+
+Have `git`, `node` (v18.12.1), and `npm` (v9.2.0) installed, and then
+follow these steps:
+
+    # Download this repository via git
+    git clone https://github.com/TF2Stadium/Frontend.git
+    cd Frontend
+
+    # Install dependencies
+    npm install
+
+    # Update API_ENDPOINT and WS_ENDPOINT
+    cp app.config.template.json app.config.json
+    $EDITOR app.config.json
 
     # Run a dev server at localhost:8080
     npm start
+
+## Configuration
+
+The frontend is configured in app.config.json. A template is
+provided. `SENTRY_ENDPOINT` and `DISCORD_LINK` are optional and not
+required for development.
+
+The easiest way to get a backend running is to use our docker-compose
+templates at https://github.com/TF2Stadium/docker. If you use that dev
+setup, then you just need to set `API_ENDPOIONT` to
+`http://localhost:4001/` and `WS_ENDPOINT` to
+`ws://localhost:4001/websocket/`.
+
+## More tasks
 
     # Full production build, in dist/
     npm run build
@@ -31,25 +59,6 @@ It uses [AngularJS](https://angularjs.org/) as its framework,
     # Style-check the source code (and try to fix simple issues)
     npm run lint-fix
 
-## Installation
-
-Have `git`, `node`, and `npm` installed, and then follow these steps:
-
-    # Download this repository via git
-    git clone https://github.com/TF2Stadium/Frontend.git
-    # or download a zip from: https://github.com/TF2Stadium/Frontend/archive/master.zip
-    # Move to the fetched directory
-    cd Frontend
-    # Install dependencies
-    npm install
-
-VERY IMPORTANT: copy the `app.config.template.json` to
-`app.config.json` and replace the placeholders with your desired
-values. All the `<<ENDPOINT>>` templates MUST be filled in. The
-WebSocket and API endpoints are required. Set `sentryDSN` to a blank
-string if you do not want to use
-[Senty](https://github.com/getsentry/sentry).
-
 ## Development
 
     # Start a new feature branch, based on dev
@@ -60,7 +69,9 @@ string if you do not want to use
 
     # Test them, these should pass with 0 issues:
     npm run lint
-    npm run test
+
+    # TODO: Tests are broken temporarily
+    # npm run test
 
     # Silly whitespace errors? This can fix most of them:
     npm run lint-fix
