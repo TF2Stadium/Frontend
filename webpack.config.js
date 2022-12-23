@@ -1,8 +1,5 @@
 /* global __dirname, module, process */
 
-// Support building with older node.js versions:
-require('array.prototype.find');
-
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
