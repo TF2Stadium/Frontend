@@ -106,7 +106,7 @@ export function secondsToMinutes(seconds: number) {
   var minutes = Math.floor(seconds / 60);
   seconds = seconds % 60;
   var secondsStr = (seconds < 10 ? '0' : '') + seconds;
-  return minutes + ':' + seconds;
+  return minutes + ':' + secondsStr;
 }
 
 /** @ngInject */
