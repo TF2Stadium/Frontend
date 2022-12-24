@@ -23,11 +23,14 @@
 </div>
 
 <div class="hours-notif"
-     ng-if="$root.userProfile.steamid && $root.userProfile.gameHours <
-  150">Not enough TF2 hours! You need over 150 hours of TF2 to join
-  lobbies. If you have more and are still seeing this notification,
-  please make your Steam profile public temporarily and then login
-  again.
+     ng-if="$root.userProfile.steamid && $root.userProfile.gameHours < 150"
+  >Not enough TF2 hours! You need over 150 hours of TF2 to join
+  lobbies.
+  <br>
+  If you have more and are still seeing this notification, please visit 
+  <a ng-href="https://steamcommunity.com/profile/{{$root.userProfile.steamid}}/edit/settings">your Steam privacy settings</a>
+  to make your profile and game details public, make sure that "Always keep my total playtime private" is unticked,
+  and then login again. It may take a few minutes for the changes to go through.
   <br>
   You can logout in Settings > Account, or by
   clicking <a href="{{::config.endpoints.api}}/logout">here</a>
