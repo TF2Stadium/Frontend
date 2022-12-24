@@ -109,10 +109,13 @@ function LobbyCreate() {
             value: 'cp_badlands',
             '6s': true,
           },{
-            value: 'cp_granary_pro_b10',
+            value: 'cp_reckoner_rc6',
             '6s': true,
           },{
-            value: 'cp_process_final',
+            value: 'cp_granary_pro_rc8',
+            '6s': true,
+          },{
+            value: 'cp_process_f11',
             important: true,
             '6s': true,
             highlander: true,
@@ -121,11 +124,11 @@ function LobbyCreate() {
             '6s': true,
             important: true,
           },{
-            value: 'cp_gullywash_final1',
+            value: 'cp_gullywash_f9',
             '6s': true,
             highlander: true,
           },{
-            value: 'cp_metalworks_rc7',
+            value: 'cp_metalworks_f4',
             '6s': true,
             highlander: true,
           },{
@@ -138,26 +141,34 @@ function LobbyCreate() {
             'prolander': true,
             highlander: true,
           },{
-            value: 'cp_sunshine_rc9',
+            value: 'cp_sunshine',
             '6s': true,
             highlander: true,
           },{
-            value: 'koth_product_rc8',
+            value: 'koth_product_final',
             '6s': true,
+            '4v4': true,
             'prolander': true,
             highlander: true,
             important: true,
           },{
-            value: 'koth_ashville_rc1',
-            '6s': true,
+            value: 'koth_proplant_v8',
             highlander: true,
           },{
-            value: 'pl_upward',
+            value: 'koth_proot_b4b',
+            highlander: true,
+          },{
+            value: 'koth_ashville_final',
+            '6s': true,
+            highlander: true,
+            prolander: true,
+          },{
+            value: 'pl_upward_f10',
             'prolander': true,
             important: true,
             highlander: true,
           },{
-            value: 'pl_badwater_pro_v9',
+            value: 'pl_badwater_pro_129',
             'prolander': true,
             important: true,
             highlander: true,
@@ -166,7 +177,7 @@ function LobbyCreate() {
             'prolander': true,
             highlander: true,
           },{
-            value: 'pl_swiftwater_ugc',
+            value: 'pl_swiftwater_final1',
             'prolander': true,
             highlander: true,
           },{
@@ -178,11 +189,14 @@ function LobbyCreate() {
             'prolander': true,
             highlander: true,
           },{
-            value: 'pl_vigil_rc5',
+            value: 'pl_vigil_rc9',
             highlander: true,
+            prolander: true,
           },{
-            value: 'cp_steel',
+            value: 'cp_steel_f12',
             highlander: true,
+            prolander: true,
+            important: true,
           },{
             value: 'koth_lakeside_final',
             'prolander': true,
@@ -192,15 +206,25 @@ function LobbyCreate() {
             'prolander': true,
             highlander: true,
           },{
-            value: 'koth_bagel_b4',
+            value: 'koth_bagel_rc5',
             '6s': true,
+            '4v4': true,
+          },{
+            value: 'koth_clearcut_b15d',
+            '6s': true,
+            '4v4': true,
+          },{
+            value: 'koth_maple_ridge_rc2',
+            '4v4': true,
+          },{
+            value: 'koth_undergrove_rc1',
             '4v4': true,
           },{
             value: 'koth_badlands',
             'prolander': true,
             '4v4': true,
           },{
-            value: 'koth_highpass_rc1a',
+            value: 'koth_highpass',
             'prolander': true,
             '4v4': true,
           },{
@@ -212,6 +236,9 @@ function LobbyCreate() {
             '4v4': true,
           },{
             value: 'cp_warmfrost_rc1',
+            '4v4': true,
+          },{
+            value: 'koth_brazil',
             '4v4': true,
           },{
             value: 'koth_artefact_v1',
@@ -235,7 +262,33 @@ function LobbyCreate() {
           },{
             value: 'koth_ultiduo_r_b7',
             important: true,
-            'prolander': true,
+            'ultiduo': true,
+          },{
+            value: 'ultiduo_obsidian_a10',
+            'ultiduo': true,
+          },
+          {
+            value: 'ultiduo_spytech_rc1',
+            'ultiduo': true,
+          },
+          {
+            value: 'ultiduo_grove_b4',
+            'ultiduo': true,
+          },
+          {
+            value: 'ultiduo_baloo_v2',
+            'ultiduo': true,
+          },
+          {
+            value: 'ultiduo_lookout_b1',
+            'ultiduo': true,
+          },
+          {
+            value: 'ultiduo_champions_legacy_a7',
+            'ultiduo': true,
+          },
+          {
+            value: 'ultiduo_gullywash_b2',
             'ultiduo': true,
           },
         ],
