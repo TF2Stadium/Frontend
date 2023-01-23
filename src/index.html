@@ -6,11 +6,11 @@
     <meta name="description" content="TF2Stadium, the free and open source TF2 Lobby website.">
     <meta name="keywords" content="tf2stadium tf2 lobby pug servers free open source opensource">
     <meta name="viewport" content="width=1200">
-    <link rel="icon" href="/assets/img/favicon.ico">
+    <link rel="icon" href="<%=require('./assets/img/favicon.ico')%>">
     <meta property="og:type" content="website"/>
     <meta property="og:description" content="TF2Stadium, the free and open source TF2 Lobby website."/>
-    <meta property="og:image" content="https://www.tf2stadium.com/assets/img/logo-beta.svg"/>
-    <meta property="og:image:secure_url" content="https://www.tf2stadium.com/assets/img/logo-beta.svg"/>
+    <meta property="og:image" content="https://www.tf2stadium.com<%=require('./assets/img/logo-beta.svg')%>"/>
+    <meta property="og:image:secure_url" content="https://www.tf2stadium.com<%=require('./assets/img/logo-beta.svg')%>"/>
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:site" content="@TF2Stadium"/>
     <meta name="twitter:title" content="TF2Stadium"/>
@@ -34,7 +34,7 @@
                                      transition: all .3s cubic-bezier(0.215, 0.61, 0.355, 1);
                                      background: #6BB5FF;"
            ng-hide="$root.themeLoaded && $root.backendAuthenticated">
-        <img src="/assets/img/logo-beta.svg" style="width:300px;margin-bottom: 20px;">
+        <img src="<%=require('./assets/img/logo-beta.svg')%>" style="width:300px;margin-bottom: 20px;">
         <noscript style="max-width: 600px;
                          font-family: FiraSansLight,sans-serif;
                          line-height: 1.5em;
@@ -99,7 +99,7 @@
         <md-toolbar id="header-toolbar">
           <div class="header-toolbar-content">
             <md-button ui-sref="lobby-list" id="header-title" aria-label="Go to index">
-              <img src="/assets/img/logo-inline.svg">
+              <img src="<%=require('./assets/img/logo-inline.svg')%>">
             </md-button>
             <div flex></div>
             <div class="toolbar-buttons">
@@ -135,7 +135,7 @@
                 aria-label="Join our Discord!"
                 target="_blank"
                 class="discord-button">
-                <img src="/assets/img/logos/discord-logo-blurple.svg" alt="Join our Discord!" />
+                <img src="<%=require('./assets/img/logos/discord-logo-blurple.svg')%>" alt="Join our Discord!" />
               </md-button>
 
               <md-button
@@ -188,7 +188,7 @@
                    class="md-fab md-primary"
                    aria-label="create a lobby"
                    ng-mouseover="lcbc.preloadLobbyCreate()">
-          <md-icon md-svg-icon="/assets/img/icons/material/add.svg"></md-icon>
+          <md-icon md-svg-icon="<%=require('./assets/img/icons/material/add.svg')%>"></md-icon>
         </md-button>
       </div>
 

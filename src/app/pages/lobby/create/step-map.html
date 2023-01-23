@@ -34,7 +34,7 @@
 
    ng-class="{'no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.maps, map)}">
   <div class="tile-image"
-       bo-style="{'background-image': 'url(/assets/img/maps/lobby-create/' + map.value + '.jpg)'}"></div>
+       bo-style="{'background-image': 'url(' + map.image + ')'}"></div>
   <div class="tile-text">
     <span class="title" bo-bind="map.value"></span>
   </div>

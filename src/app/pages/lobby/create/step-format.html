@@ -14,7 +14,7 @@
 
    ng-class="{'no-animate': lobbyCreate.searchString===null, 'selected': lobbyCreate.isSelected(lobbyCreate.formats, format)}">
   <div class="tile-image"
-       bo-style="{'background-image': 'url(/assets/img/formats/' + format.value + '.jpg),
+       bo-style="{'background-image': 'url(' + format.image + '),
                  linear-gradient(
                  to top,
                  rgba(0, 0, 0, .2) 0%,

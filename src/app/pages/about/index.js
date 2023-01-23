@@ -1,8 +1,9 @@
 /* @flow */
-export const module = angular.module('tf2stadium.about', ['ui.router']);
+import uiRouter from 'angular-ui-router';
+export const module = angular.module('tf2stadium.about', [uiRouter]);
 
 module
-  .config(AboutPageConfig)
+  .config(["$stateProvider", AboutPageConfig])
   .controller('AboutPageController', AboutPageController);
 
 const aboutPage = `

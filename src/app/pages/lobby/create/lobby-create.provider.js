@@ -19,6 +19,8 @@ angular
   .module('tf2stadium.services')
   .provider('LobbyCreate', LobbyCreate);
 
+const requireAsset = require.context('../../../../assets/img/maps/', true, /\.jpg$/);
+
 /** @ngInject */
 function LobbyCreateConfig($stateProvider, LobbyCreateProvider) {
   /*
@@ -65,6 +67,206 @@ function LobbyCreate() {
   /** @ngInject */
   var lobbyCreateService = function (Websocket, $state, $rootScope,
                                      $filter) {
+    const maps = [
+      {
+        value: 'cp_badlands',
+        '6s': true,
+      },{
+        value: 'cp_reckoner_rc6',
+        '6s': true,
+      },{
+        value: 'cp_granary_pro_rc8',
+        '6s': true,
+      },{
+        value: 'cp_process_f11',
+        important: true,
+        '6s': true,
+        highlander: true,
+      },{
+        value: 'cp_snakewater_final1',
+        '6s': true,
+        important: true,
+      },{
+        value: 'cp_gullywash_f9',
+        '6s': true,
+        highlander: true,
+      },{
+        value: 'cp_metalworks_f4',
+        '6s': true,
+        highlander: true,
+      },{
+        value: 'cp_warmfront',
+        '6s': true,
+        highlander: true,
+      },{
+        value: 'cp_vanguard',
+        '6s': true,
+        'prolander': true,
+        highlander: true,
+      },{
+        value: 'cp_sunshine',
+        '6s': true,
+        highlander: true,
+      },{
+        value: 'koth_product_final',
+        '6s': true,
+        '4v4': true,
+        'prolander': true,
+        highlander: true,
+        important: true,
+      },{
+        value: 'koth_proplant_v8',
+        highlander: true,
+      },{
+        value: 'koth_proot_b4b',
+        highlander: true,
+      },{
+        value: 'koth_ashville_final',
+        '6s': true,
+        highlander: true,
+        prolander: true,
+      },{
+        value: 'pl_upward_f10',
+        'prolander': true,
+        important: true,
+        highlander: true,
+      },{
+        value: 'pl_badwater_pro_129',
+        'prolander': true,
+        important: true,
+        highlander: true,
+      },{
+        value: 'pl_borneo',
+        'prolander': true,
+        highlander: true,
+      },{
+        value: 'pl_swiftwater_final1',
+        'prolander': true,
+        highlander: true,
+      },{
+        value: 'pl_millstone_ugc_7',
+        'prolander': true,
+        highlander: true,
+      },{
+        value: 'pl_barnblitz_pro6',
+        'prolander': true,
+        highlander: true,
+      },{
+        value: 'pl_vigil_rc9',
+        highlander: true,
+        prolander: true,
+      },{
+        value: 'cp_steel_f12',
+        highlander: true,
+        prolander: true,
+        important: true,
+      },{
+        value: 'koth_lakeside_final',
+        'prolander': true,
+        highlander: true,
+      },{
+        value: 'koth_ramjam_rc1',
+        'prolander': true,
+        highlander: true,
+      },{
+        value: 'koth_bagel_rc5',
+        '6s': true,
+        '4v4': true,
+      },{
+        value: 'koth_clearcut_b15d',
+        '6s': true,
+        '4v4': true,
+      },{
+        value: 'koth_maple_ridge_rc2',
+        '4v4': true,
+      },{
+        value: 'koth_undergrove_rc1',
+        '4v4': true,
+      },{
+        value: 'koth_badlands',
+        'prolander': true,
+        '4v4': true,
+      },{
+        value: 'koth_highpass',
+        'prolander': true,
+        '4v4': true,
+      },{
+        value: 'cp_alamo',
+        '4v4': true,
+      },{
+        value: 'koth_sandstone_pro_rc1',
+        'prolander': true,
+        '4v4': true,
+      },{
+        value: 'cp_warmfrost_rc1',
+        '4v4': true,
+      },{
+        value: 'koth_brazil',
+        '4v4': true,
+      },{
+        value: 'koth_artefact_v1',
+        '4v4': true,
+      },{
+        value: 'koth_airfield_b7',
+        'prolander': true,
+        '4v4': true,
+      },{
+        value: 'ctf_ballin_sky',
+        important: true,
+        'bball': true,
+      },{
+        value: 'ctf_bball_alpine_b4',
+        important: true,
+        'bball': true,
+      },{
+        value: 'ultiduo_baloo',
+        important: true,
+        'ultiduo': true,
+      },{
+        value: 'koth_ultiduo_r_b7',
+        important: true,
+        'ultiduo': true,
+      },{
+        value: 'ultiduo_obsidian_a10',
+        'ultiduo': true,
+      },
+      {
+        value: 'ultiduo_spytech_rc1',
+        'ultiduo': true,
+      },
+      {
+        value: 'ultiduo_grove_b4',
+        'ultiduo': true,
+      },
+      {
+        value: 'ultiduo_baloo_v2',
+        'ultiduo': true,
+      },
+      {
+        value: 'ultiduo_lookout_b1',
+        'ultiduo': true,
+      },
+      {
+        value: 'ultiduo_champions_legacy_a7',
+        'ultiduo': true,
+      },
+      {
+        value: 'ultiduo_gullywash_b2',
+        'ultiduo': true,
+      },
+    ];
+
+    const known = new Set(requireAsset.keys());
+    for (const m of maps) {
+      let url = `./lobby-create/${m.value}.jpg`;
+      if (!known.has(url)) {
+        url = url.replace(/_(final|f|rc|beta)\d*\.jpg$/, '.jpg');
+      }
+      if (known.has(url)) {
+        m.image = requireAsset(url);
+      }
+    }
+
     var lobbySettingsList = {
       saved: { key: 'saved' },
       formats: {
@@ -76,25 +278,32 @@ function LobbyCreate() {
             value: '6s',
             title: '6s',
             important: true,
+            image: require('../../../../assets/img/formats/6s.jpg'),
           },{
             value: 'highlander',
             title: 'Highlander',
             important: true,
+            image: require('../../../../assets/img/formats/highlander.jpg'),
           },{
             value: '4v4',
             title: '4v4',
+            image: require('../../../../assets/img/formats/4v4.jpg'),
           },{
             value: 'ultiduo',
             title: 'Ultiduo',
+            image: require('../../../../assets/img/formats/ultiduo.jpg'),
           },{
             value: 'bball',
             title: 'Bball',
+            image: require('../../../../assets/img/formats/bball.jpg'),
           },{
             value: 'debug',
             title: 'Debug',
+            image: require('../../../../assets/img/formats/6s.jpg'),
           },{
             value: 'prolander',
             title: 'Prolander',
+            image: require('../../../../assets/img/formats/prolander.jpg'),
           },
         ],
       },
@@ -104,194 +313,7 @@ function LobbyCreate() {
         filterable: true,
         allowCustomInput: true,
         searchLabel: 'Enter map name',
-        options: [
-          {
-            value: 'cp_badlands',
-            '6s': true,
-          },{
-            value: 'cp_reckoner_rc6',
-            '6s': true,
-          },{
-            value: 'cp_granary_pro_rc8',
-            '6s': true,
-          },{
-            value: 'cp_process_f11',
-            important: true,
-            '6s': true,
-            highlander: true,
-          },{
-            value: 'cp_snakewater_final1',
-            '6s': true,
-            important: true,
-          },{
-            value: 'cp_gullywash_f9',
-            '6s': true,
-            highlander: true,
-          },{
-            value: 'cp_metalworks_f4',
-            '6s': true,
-            highlander: true,
-          },{
-            value: 'cp_warmfront',
-            '6s': true,
-            highlander: true,
-          },{
-            value: 'cp_vanguard',
-            '6s': true,
-            'prolander': true,
-            highlander: true,
-          },{
-            value: 'cp_sunshine',
-            '6s': true,
-            highlander: true,
-          },{
-            value: 'koth_product_final',
-            '6s': true,
-            '4v4': true,
-            'prolander': true,
-            highlander: true,
-            important: true,
-          },{
-            value: 'koth_proplant_v8',
-            highlander: true,
-          },{
-            value: 'koth_proot_b4b',
-            highlander: true,
-          },{
-            value: 'koth_ashville_final',
-            '6s': true,
-            highlander: true,
-            prolander: true,
-          },{
-            value: 'pl_upward_f10',
-            'prolander': true,
-            important: true,
-            highlander: true,
-          },{
-            value: 'pl_badwater_pro_129',
-            'prolander': true,
-            important: true,
-            highlander: true,
-          },{
-            value: 'pl_borneo',
-            'prolander': true,
-            highlander: true,
-          },{
-            value: 'pl_swiftwater_final1',
-            'prolander': true,
-            highlander: true,
-          },{
-            value: 'pl_millstone_ugc_7',
-            'prolander': true,
-            highlander: true,
-          },{
-            value: 'pl_barnblitz_pro6',
-            'prolander': true,
-            highlander: true,
-          },{
-            value: 'pl_vigil_rc9',
-            highlander: true,
-            prolander: true,
-          },{
-            value: 'cp_steel_f12',
-            highlander: true,
-            prolander: true,
-            important: true,
-          },{
-            value: 'koth_lakeside_final',
-            'prolander': true,
-            highlander: true,
-          },{
-            value: 'koth_ramjam_rc1',
-            'prolander': true,
-            highlander: true,
-          },{
-            value: 'koth_bagel_rc5',
-            '6s': true,
-            '4v4': true,
-          },{
-            value: 'koth_clearcut_b15d',
-            '6s': true,
-            '4v4': true,
-          },{
-            value: 'koth_maple_ridge_rc2',
-            '4v4': true,
-          },{
-            value: 'koth_undergrove_rc1',
-            '4v4': true,
-          },{
-            value: 'koth_badlands',
-            'prolander': true,
-            '4v4': true,
-          },{
-            value: 'koth_highpass',
-            'prolander': true,
-            '4v4': true,
-          },{
-            value: 'cp_alamo',
-            '4v4': true,
-          },{
-            value: 'koth_sandstone_pro_rc1',
-            'prolander': true,
-            '4v4': true,
-          },{
-            value: 'cp_warmfrost_rc1',
-            '4v4': true,
-          },{
-            value: 'koth_brazil',
-            '4v4': true,
-          },{
-            value: 'koth_artefact_v1',
-            '4v4': true,
-          },{
-            value: 'koth_airfield_b7',
-            'prolander': true,
-            '4v4': true,
-          },{
-            value: 'ctf_ballin_sky',
-            important: true,
-            'bball': true,
-          },{
-            value: 'ctf_bball_alpine_b4',
-            important: true,
-            'bball': true,
-          },{
-            value: 'ultiduo_baloo',
-            important: true,
-            'ultiduo': true,
-          },{
-            value: 'koth_ultiduo_r_b7',
-            important: true,
-            'ultiduo': true,
-          },{
-            value: 'ultiduo_obsidian_a10',
-            'ultiduo': true,
-          },
-          {
-            value: 'ultiduo_spytech_rc1',
-            'ultiduo': true,
-          },
-          {
-            value: 'ultiduo_grove_b4',
-            'ultiduo': true,
-          },
-          {
-            value: 'ultiduo_baloo_v2',
-            'ultiduo': true,
-          },
-          {
-            value: 'ultiduo_lookout_b1',
-            'ultiduo': true,
-          },
-          {
-            value: 'ultiduo_champions_legacy_a7',
-            'ultiduo': true,
-          },
-          {
-            value: 'ultiduo_gullywash_b2',
-            'ultiduo': true,
-          },
-        ],
+        options: maps,
         dependsOn: [
           'formats',
         ],
@@ -447,17 +469,17 @@ function LobbyCreate() {
           {
             value: true,
             title: 'Mumble required',
-            image: '/assets/img/mumble.svg',
+            image: require('../../../../assets/img/mumble.svg'),
             description: 'All participants will need to join Mumble channels',
           },{
             value: false,
             title: 'Mumble not required',
-            image: '/assets/img/not-mumble.svg',
+            image: require('../../../../assets/img/not-mumble.svg'),
             description: 'Participants will join Mumble only if they want to',
           },{
             value: 'discord',
             title: 'Discord',
-            image: '/assets/img/logos/discord-logo-blurple.svg',
+            image: require('../../../../assets/img/logos/discord-logo-blurple.svg'),
             description: 'Participants will join Discord channels',
           },
         ],

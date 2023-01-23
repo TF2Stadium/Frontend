@@ -1,7 +1,6 @@
 /* @flow */
 import angular from 'angular';
-import config from 'app-config';
-import ngreact from 'ngreact';
+//import config from 'app-config';
 import scrollglue from './scrollglue';
 import { isEmpty } from 'lodash';
 import Raven from 'raven-js';
@@ -12,10 +11,25 @@ import { module as aboutPage } from './pages/about';
 import { module as rulesPage } from './pages/rules';
 import { allowMumbleHref, safeApply, disableDebug } from './util';
 import { WhitelistDirective, AutofocusDirective } from './app.directive';
+import ngAnimate from 'angular-animate';
+import "ng-media-events";
+import "angular-bindonce";
+import 'angular-ui-validate';
+import "angular-material-data-table";
+import 'angular-material';
 
 import buildStats from './build-stats';
 
+import 'angular-material/angular-material.min.css';
+import 'angular-material-data-table/dist/md-data-table.min.css';
 import '../scss/app.scss';
+
+const config = {
+  endpoints: {
+    websocket: process.env.HELEN_WEBSOCKET_ENDPOINT,
+    api: process.env.HELEN_ENDPOINT,
+  }
+};
 
 var modules = [],
   release = 'development';
@@ -49,10 +63,11 @@ angular.module('tf2stadium', [
   'tf2stadium.controllers',
   'tf2stadium.services',
   'tf2stadium.filters',
-  'ngAnimate',
-  ngreact.name,
+  //'ngAnimate',
+  ngAnimate,
+  //ngreact.name,
   'ui.router',
-  'ui.validate',
+  'ui.validate',//ngUiValidate.name,
   'ngMaterial',
   'md.data.table',
   scrollglue.name,
@@ -92,6 +107,8 @@ require('./shared/comment-box/chat.service');
 require('./pages/lobby/lobby.factory');
 require('./pages/lobby/create/lobby-create.provider');
 require('./pages/lobby/create/lobby-create.filter');
+
+// const requireAsset = require.context('../../../../assets/img/maps/lobby-create/', true, /\.jpg$/);
 
 angular
   .module('tf2stadium.directives', ['tf2stadium.filters'])

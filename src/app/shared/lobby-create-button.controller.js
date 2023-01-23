@@ -2,6 +2,9 @@
 angular.module('tf2stadium.controllers')
   .controller('LobbyCreateButtonController', LobbyCreateButtonController);
 
+
+const requireFormatImage = require.context('../../assets/img/formats/', true, /\.jpg$/);
+
 /** @ngInject */
 function LobbyCreateButtonController($q, PreloadService, LobbyCreate) {
   var vm = this;
@@ -13,7 +16,7 @@ function LobbyCreateButtonController($q, PreloadService, LobbyCreate) {
     // to preload (which is only defined in the templates...)
     LobbyCreate.getSettingsList()['formats'].options
       .filter(v => v.value !== 'debug')
-      .map(opt => '/assets/img/formats/' + opt.value + '.jpg')
+      .map(opt => requireFormatImage('./' + opt.value + '.jpg'))
       .forEach(PreloadService.queuePreload);
   };
 }

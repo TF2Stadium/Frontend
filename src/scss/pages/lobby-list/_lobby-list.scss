@@ -230,14 +230,14 @@
   color: #fff;
   min-width: 30px;
   background: {
-    image: url(/assets/img/mumble.svg);
+    image: url(../assets/img/mumble.svg);
     size: 25px;
     repeat: no-repeat;
     position: center;
   }
 
   &.not-required {
-    background-image: url(/assets/img/not-mumble.svg);
+    background-image: url(../assets/img/not-mumble.svg);
     opacity: .4;
   }
 }
@@ -247,7 +247,7 @@
   color: #fff;
   min-width: 30px;
   background: {
-    image: url(/assets/img/logos/discord-logo-blurple.svg);
+    image: url(../assets/img/logos/discord-logo-blurple.svg);
     size: 25px;
     repeat: no-repeat;
     position: center;

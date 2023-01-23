@@ -1,8 +1,7 @@
 {
-  "presets": ["es2015"],
+  "presets": ["@babel/preset-env", "@babel/preset-flow"],
   "plugins": [
-    "transform-flow-strip-types",
-    "transform-runtime",
-    "lodash",
+    "babel-plugin-lodash",
+    "babel-plugin-angularjs-annotate",
   ]
 }
