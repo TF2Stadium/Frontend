@@ -16,6 +16,7 @@
     <meta name="twitter:title" content="TF2Stadium"/>
     <meta name="twitter:description" content="The free and open source TF2 lobby website"/>
     <base href="/">
+    <script>window.config=<%=JSON.stringify(require('app-config'))%>;</script>
   </head>
   <body class="md-menu-{{$root.currentTheme || 'default-theme'}}">
     <div id="app-container" class="{{$root.currentTheme || 'default-theme'}} {{$root.animationLength || 'animation-normal'}}">

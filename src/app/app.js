@@ -1,6 +1,5 @@
 /* @flow */
 import angular from 'angular';
-import config from 'app-config';
 import ngreact from 'ngreact';
 import scrollglue from './scrollglue';
 import { isEmpty } from 'lodash';
@@ -16,6 +15,8 @@ import { WhitelistDirective, AutofocusDirective } from './app.directive';
 import buildStats from './build-stats';
 
 import '../scss/app.scss';
+
+const config = window.config;
 
 var modules = [],
   release = 'development';
