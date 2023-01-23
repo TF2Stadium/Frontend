@@ -15,7 +15,16 @@ function Websocket($rootScope, $timeout: AngularJSTimeout,
                    Config, Notifications) {
   var connected = false;
   var reconnecting = false;
-  var socket = new Socket(Config.endpoints.websocket, {
+
+  let url = Config.endpoints.websocket;
+  if (url[0] === '/') {
+    let scheme = (location.protocol === 'https:') ? 'wss' : 'ws';
+    let {host} = location;
+    let path = url;
+    url = `${scheme}://${host}${path}`;
+  }
+
+  var socket = new Socket(url, {
     extractor: extractor,
     maxRetries: 0,
   });
