@@ -5,6 +5,8 @@ import {property, identity} from 'lodash/fp';
 angular.module('tf2stadium.controllers')
   .controller('LobbyCreateController', LobbyCreateController);
 
+const requireMapImage = require.context('../../../../assets/img/maps/lobby-create/', true, /\.jpg$/);
+
 /** @ngInject */
 function LobbyCreateController($document, $state, $scope, $rootScope,
                                $anchorScroll, $location,
@@ -57,12 +59,24 @@ function LobbyCreateController($document, $state, $scope, $rootScope,
   var handler = $rootScope.$on('settings-updated', syncSettings);
   $scope.$on('$destroy', handler);
 
+  function loadMapImage(mapName, imageType) {
+    const allAssets = new Set(requireAsset.keys());
+    let url = `./lobby-create/${mapName}.jpg`;
+    if (!known.has(url)) {
+      url = url.replace(/_(final|rc*|beta*)\.jpg$/, '.jpg');
+    }
+    if (known.has(url)) {
+      return requireAsset(url);
+    }
+
+  }
+
   vm.preloadMaps = function (format) {
     lobbySettingsList
       .maps
       .options
       .filter(map => map[format])
-      .map(map => `/assets/img/maps/lobby-create/${map.value}.jpg`)
+      .map(map => requireMapImage(`./${map.value}.jpg`))
       .forEach(PreloadService.queuePreload);
   };
 
